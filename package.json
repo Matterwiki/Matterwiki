@@ -1,0 +1,19 @@
+{
+  "name": "matterwiki",
+  "version": "0.1.0",
+  "description": "a simple and sexy wiki",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nshntarora/matterwiki.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nshntarora/matterwiki/issues"
+  },
+  "homepage": "https://github.com/nshntarora/matterwiki#readme"
+}
