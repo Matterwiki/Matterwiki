@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -d --watch",
-    "build" : "webpack -p"
+    "build": "webpack -p"
   },
   "bin": {
     "wiki": "./install.js"
@@ -28,6 +28,7 @@
     "express": "^4.14.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-router": "^2.6.1",
     "sqlite3": "^3.1.4",
     "webpack": "^1.13.2"
   }
