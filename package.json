@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "wiki": "./install.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nshntarora/matterwiki.git"
@@ -15,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/nshntarora/matterwiki/issues"
   },
-  "homepage": "https://github.com/nshntarora/matterwiki#readme"
+  "homepage": "https://github.com/nshntarora/matterwiki#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "sqlite3": "^3.1.4"
+  }
 }
