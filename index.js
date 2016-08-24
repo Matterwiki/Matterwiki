@@ -42,7 +42,7 @@ app.get('/articles',function(req,res){
   the error key in the returning object is a boolen which is false if there is no error and true otherwise
   */
   Articles.forge()
-  .fetch()
+  .fetchAll()
     .then(function (collection) {
       res.json({error: false, data: collection.toJSON()});
     })
