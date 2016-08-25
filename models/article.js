@@ -1,10 +1,12 @@
 var bookshelf = require('../bookshelf');
+bookshelf.plugin('registry');
+var Topic = require('./topic');
 
 var Article = bookshelf.Model.extend({
   tableName: 'articles',
-  /*author: function() {
-    return this.belongsTo(Users);
-  }*/
+  topic: function() {
+    return this.hasOne('Topic','topic_id');
+  }
 });
 
-module.exports = Article;
+module.exports = bookshelf.model('Article',Article);
