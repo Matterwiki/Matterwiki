@@ -11,7 +11,7 @@ var Topics = require('../models/topic.js');
 module.exports = function(app) {
 
 
-  app.post('/new/topic',function(req,res){
+  app.post('/api/topics',function(req,res){
     /*
     This endpoint takes the topic name and topic description from the request body.
     It then saves those values in the database using the insert query.
@@ -22,7 +22,7 @@ module.exports = function(app) {
   });
 
 
-  app.get('/topic/:id/articles',function(req,res){
+  app.get('/api/topic/:id/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles that belong to a particular topic (topic of given id param)
     the articles are present in the data object in the returning object.

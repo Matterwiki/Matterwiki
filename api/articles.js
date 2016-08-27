@@ -15,7 +15,7 @@ var Articles = require('../models/article.js');
 module.exports =  function(app){
 
 
-  app.post('/new/article',function(req,res){
+  app.post('/api/articles',function(req,res){
     /*
     This endpoint takes the article title, article body, and topic id from the request body.
     It then saves those values in the database using the insert query.
@@ -28,7 +28,7 @@ module.exports =  function(app){
   });
 
 
-  app.get('/articles',function(req,res){
+  app.get('/api/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles in the articles table
     the articles are present in the data object in the returning object.
