@@ -11,6 +11,7 @@ then move it to the topics endpoints file.
 // Importing the articles model
 var Articles = require('../models/article.js');
 
+var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
 module.exports =  function(app){
 
