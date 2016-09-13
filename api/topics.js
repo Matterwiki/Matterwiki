@@ -41,6 +41,44 @@ module.exports = function(app) {
   });
 
 
+  app.put('/api/topics',function(req,res){
+    /*
+    This is a PUT endpoint for updating a topic information.
+    It takes the id of the topic to be updated and then updates it with the new object.
+    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+
+    TODO: Add updates only for columns that are in the request body. Handle exceptions.
+    */
+    Topics.forge({id: req.body.id})
+    .save({name: req.body.name, description: req.body.description})
+      .then(function() {
+        res.json({ error: false, message: 'ok' });
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
+
+  app.delete('/api/topics',function(req,res){
+    /*
+    This is a DELETE endpoint for delete a complete topic from the database.
+    It takes the id of the topic and then delete that record from the database.
+    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+
+    Topics.forge({id: req.body.id})
+    .destroy()
+      .then(function() {
+        res.json({ error: false, message: 'ok' });
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
+
+
   app.get('/api/topic/:id/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles that belong to a particular topic (topic of given id param)
