@@ -10,6 +10,7 @@ then move it to the topics endpoints file.
 
 // Importing the articles model
 var Articles = require('../models/article.js');
+var Archives = require('../models/archive.js');
 
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
@@ -54,16 +55,26 @@ module.exports =  function(app){
 
     TODO: Add updates only for columns that are in the request body. Handle exceptions.
     */
-
-    Articles.forge({id: req.body.id})
-    .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id})
-      .then(function() {
-        res.json({ error: false, message: 'ok' });
-      })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
-      });
-  });
+    var title = "";
+    var body = "";
+    Articles.forge({id: req.body.id}).fetch().then(function(article){
+        Articles.forge({id: req.body.id})
+          .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id})
+            .then(function() {
+              Archives.forge().save({article_id: req.body.id, title: article.attributes.title, body: article.attributes.body}).then(function(){
+                  res.json({ error: false, message: 'ok' });
+              })
+              .catch(function(err){
+                res.status(500).json({error: true, data: {message: err.message}});
+              })
+            })
+            .catch(function (err) {
+              res.status(500).json({error: true, data: {message: err.message}});
+            });
+    }).catch(function(err){
+      res.status(500).json({error: true, data: {message: err.message}});
+    });
+    });
 
 
   app.delete('/api/articles',function(req,res){

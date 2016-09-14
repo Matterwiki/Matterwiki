@@ -12,7 +12,8 @@ var app = express();
 
 
 // Using the body parser middleware to parse request body
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());  
 
 
 app.get('/api',function(req,res){
