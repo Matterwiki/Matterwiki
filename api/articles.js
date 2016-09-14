@@ -55,8 +55,6 @@ module.exports =  function(app){
 
     TODO: Add updates only for columns that are in the request body. Handle exceptions.
     */
-    var title = "";
-    var body = "";
     Articles.forge({id: req.body.id}).fetch().then(function(article){
         Articles.forge({id: req.body.id})
           .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id})
