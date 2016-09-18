@@ -1,3 +1,4 @@
+
 /*
 This is main file which will contain all of our endpoints.
 Once we have enough endpoints defined we start breaking them into modules for better code readability
@@ -13,7 +14,7 @@ var app = express();
 
 // Using the body parser middleware to parse request body
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());  
+app.use(bodyParser.json());
 
 
 app.get('/api',function(req,res){

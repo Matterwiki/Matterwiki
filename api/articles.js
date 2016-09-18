@@ -10,6 +10,7 @@ then move it to the topics endpoints file.
 
 // Importing the articles model
 var Articles = require('../models/article.js');
+var Topics = require('../models/topic.js');
 var Archives = require('../models/archive.js');
 
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
@@ -86,6 +87,29 @@ module.exports =  function(app){
     .destroy()
       .then(function() {
         res.json({ error: false, message: 'ok' });
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
+
+  app.get('/api/articles/:id/',function(req,res){
+    /*
+    This is a GET endpoint that responds with one article of the specific ID (identified through the ID param)
+    the article is present in the data object in the returning object.
+    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+    Articles.forge({id: req.params.id})
+    .fetch()
+      .then(function (article) {
+        Topics.forge({id: article.attributes.id}).fetch().then(function(topic){
+          articleObj = article.toJSON();
+          topicObj = topic.toJSON();
+          articleObj.topic = topicObj;
+        }).then(function(){
+            res.json({error: false, data: articleObj});
+        })
       })
       .catch(function (err) {
         res.status(500).json({error: true, data: {message: err.message}});
