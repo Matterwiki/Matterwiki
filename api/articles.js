@@ -94,6 +94,36 @@ module.exports =  function(app){
   });
 
 
+  app.get('/api/articles/compare',function(req,res){
+    /*
+    This is a GET endpoint that takes IDs of two articles as parameters.
+    It then returns both the article which could then be compared with each other
+    through diffing which will be done on the front-end.
+    The IDs params names are:
+    article1: id of the first article
+    article2: id of the second article
+    The article with ID article1 is the first object in the Data array.
+    The article with ID article2 is the second object in the Data array.
+    The error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+
+    Articles.forge({id: req.query.article1})
+    .fetch()
+      .then(function (article1) {
+        Articles.forge({id: req.query.article2}).fetch().then(function(article2){
+          result = [];
+          result.push(article1.toJSON());
+          result.push(article2.toJSON());
+        }).then(function(){
+            res.json({error: false, data: result});
+        })
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
+
   app.get('/api/articles/:id/',function(req,res){
     /*
     This is a GET endpoint that responds with one article of the specific ID (identified through the ID param)
@@ -132,6 +162,7 @@ module.exports =  function(app){
         res.status(500).json({error: true, data: {message: err.message}});
     });
   });
+
 
 
 }
