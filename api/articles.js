@@ -117,4 +117,21 @@ module.exports =  function(app){
   });
 
 
+  app.get('/api/articles/:id/history',function(req,res){
+    /*
+    This is a GET endpoint that responds with previous versions of the
+    article of the specific ID (identified through the ID param).
+    The article is present in the data object in the returning object.
+    The error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+
+    Articles.where({id: req.params.id}).fetch({withRelated: ['archives']}).then(function(article) {
+      res.status(200).json(article.related('archives'));
+    })
+    .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+    });
+  });
+
+
 }
