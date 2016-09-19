@@ -28,6 +28,9 @@ require('./api/articles')(app);
 // Importing all endpoints for topics
 require('./api/topics')(app);
 
+// Importing all endpoints for users
+require('./api/users')(app);
+
 app.use(express.static(__dirname + '/client'));
 
 app.listen(5000 || process.env.PORT, function(){
