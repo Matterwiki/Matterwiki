@@ -4,8 +4,8 @@ exports.up = function(knex, Promise) {
     table.increments().primary();
     table.string('title');
     table.text('body');
-    table.timestamp('created_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
-    table.timestamp('updated_at').notNullable().defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+    table.timestamp('created_at').notNullable().defaultTo(knex.raw("(datetime(CURRENT_TIMESTAMP,'localtime'))"));
+    table.timestamp('updated_at').notNullable().defaultTo(knex.raw("(datetime(CURRENT_TIMESTAMP,'localtime'))"));
   })
 };
 
