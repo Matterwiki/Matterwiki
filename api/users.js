@@ -47,4 +47,40 @@ module.exports = function(app) {
       });
   });
 
+
+  app.put('/api/users',function(req,res){
+    /*
+    This is a PUT endpoint which takes the user's ID, name, email, password, and about to create
+    a update the user profile of the given ID.
+    It responds with the updated user object in the data key.
+    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+    Users.forge({id: req.body.id})
+      .save({name: req.body.name, email: req.body.email, password: req.body.password, about: req.body.about})
+      .then(function (collection) {
+        res.json({error: false, data: collection.toJSON()});
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
+
+  app.delete('/api/users',function(req,res){
+    /*
+    This is a DELETE endpoint for delete a user from the database.
+    It takes the id of the user and then deletes that record from the database.
+    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    */
+
+    Users.forge({id: req.body.id})
+    .destroy()
+      .then(function() {
+        res.json({ error: false, message: 'ok' });
+      })
+      .catch(function (err) {
+        res.status(500).json({error: true, data: {message: err.message}});
+      });
+  });
+
 }
