@@ -1,5 +1,5 @@
 /*
-This file contains all the endpoints related to topics.
+This file contains all the endpoints related to users.
 For the method we use to categorize endpoints in file please read the top
 comment in the articles.js (same directory).
 */
@@ -13,7 +13,7 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 module.exports = function(app) {
 
 
-  app.post('/api/users',function(req,res){
+  app.post('/users',function(req,res){
     /*
     This is a POST endpoint which takes the user name, email, password, and about to create
     a new user profile.
@@ -31,7 +31,7 @@ module.exports = function(app) {
   });
 
 
-  app.get('/api/users',function(req,res){
+  app.get('/users',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the topics in the topics table
     the topics are present in the data object in the returning object.
@@ -48,7 +48,7 @@ module.exports = function(app) {
   });
 
 
-  app.put('/api/users',function(req,res){
+  app.put('/users',function(req,res){
     /*
     This is a PUT endpoint which takes the user's ID, name, email, password, and about to create
     a update the user profile of the given ID.
@@ -66,7 +66,7 @@ module.exports = function(app) {
   });
 
 
-  app.delete('/api/users',function(req,res){
+  app.delete('/users',function(req,res){
     /*
     This is a DELETE endpoint for delete a user from the database.
     It takes the id of the user and then deletes that record from the database.

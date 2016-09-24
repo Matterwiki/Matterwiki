@@ -38,3 +38,5 @@ jspm_packages
 
 client/public
 db
+
+config.js

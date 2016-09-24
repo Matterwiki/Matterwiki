@@ -13,7 +13,7 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 module.exports = function(app) {
 
 
-  app.post('/api/topics',function(req,res){
+  app.post('/topics',function(req,res){
     /*
     This endpoint takes the topic name and topic description from the request body.
     It then saves those values in the database using the insert query.
@@ -24,7 +24,7 @@ module.exports = function(app) {
   });
 
 
-  app.get('/api/topics',function(req,res){
+  app.get('/topics',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the topics in the topics table
     the topics are present in the data object in the returning object.
@@ -41,7 +41,7 @@ module.exports = function(app) {
   });
 
 
-  app.put('/api/topics',function(req,res){
+  app.put('/topics',function(req,res){
     /*
     This is a PUT endpoint for updating a topic information.
     It takes the id of the topic to be updated and then updates it with the new object.
@@ -60,7 +60,7 @@ module.exports = function(app) {
   });
 
 
-  app.delete('/api/topics',function(req,res){
+  app.delete('/topics',function(req,res){
     /*
     This is a DELETE endpoint for delete a complete topic from the database.
     It takes the id of the topic and then delete that record from the database.
@@ -79,7 +79,7 @@ module.exports = function(app) {
 
 
 
-  app.get('/api/topic/:id/articles',function(req,res){
+  app.get('/topic/:id/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles that belong to a particular topic (topic of given id param)
     the articles are present in the data object in the returning object.

@@ -18,7 +18,7 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 module.exports =  function(app){
 
 
-  app.post('/api/articles',function(req,res){
+  app.post('/articles',function(req,res){
     /*
     This endpoint takes the article title, article body, and topic id from the request body.
     It then saves those values in the database using the insert query.
@@ -31,7 +31,7 @@ module.exports =  function(app){
   });
 
 
-  app.get('/api/articles',function(req,res){
+  app.get('/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles in the articles table
     the articles are present in the data object in the returning object.
@@ -48,7 +48,7 @@ module.exports =  function(app){
   });
 
 
-  app.put('/api/articles',function(req,res){
+  app.put('/articles',function(req,res){
     /*
     This is a PUT endpoint for updating an article information.
     It takes the id of the topic to be updated and then updates it with the new object.
@@ -76,7 +76,7 @@ module.exports =  function(app){
     });
 
 
-  app.delete('/api/articles',function(req,res){
+  app.delete('/articles',function(req,res){
     /*
     This is a DELETE endpoint for delete a complete article from the database.
     It takes the id of the article and then deletes that record from the database.
@@ -94,7 +94,7 @@ module.exports =  function(app){
   });
 
 
-  app.get('/api/articles/compare',function(req,res){
+  app.get('/articles/compare',function(req,res){
     /*
     This is a GET endpoint that takes IDs of two articles as parameters.
     It then returns both the article which could then be compared with each other
@@ -124,7 +124,7 @@ module.exports =  function(app){
   });
 
 
-  app.get('/api/articles/:id/',function(req,res){
+  app.get('/articles/:id/',function(req,res){
     /*
     This is a GET endpoint that responds with one article of the specific ID (identified through the ID param)
     the article is present in the data object in the returning object.
@@ -147,7 +147,7 @@ module.exports =  function(app){
   });
 
 
-  app.get('/api/articles/:id/history',function(req,res){
+  app.get('/articles/:id/history',function(req,res){
     /*
     This is a GET endpoint that responds with previous versions of the
     article of the specific ID (identified through the ID param).
