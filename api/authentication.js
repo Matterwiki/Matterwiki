@@ -8,15 +8,16 @@ comment in the articles.js (same directory).
 // Importing the topics model
 var Users = require('../models/user.js');
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
 module.exports = function(app) {
 
 
-  app.post('/authenticate',function(req,res){
+  app.post('/api/authenticate',function(req,res){
     /*
-    This is a GET endpoint that takes the email and password and returns the JWT
+    This is a POST endpoint that takes the email and password and returns the JWT
     the token is present in the token key in the data object.
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
@@ -28,16 +29,18 @@ module.exports = function(app) {
         }
         else {
           user = user.toJSON();
-          if(user.password == req.body.password)
-          {
-              var token = jwt.sign(user, app.get('superSecret'), {
-                expiresIn: 86400
-              });
-              res.json({error: false, data: {user: user,token: token}});
-          }
-          else {
-            res.json({error: true, data: {message: "email or password combination wrong"}});
-          }
+          bcrypt.compare(req.body.password, user.password, function(err, result) {
+              if(result==true)
+              {
+                var token = jwt.sign(user, app.get('superSecret'), {
+                              expiresIn: 86400
+                            });
+                res.json({error: false, data: {user: user.email,token: token}});
+              }
+              else {
+                res.json({error: true, data: {message: "email or password combination wrong"}});
+              }
+          });
         }
 
       })

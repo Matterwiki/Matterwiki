@@ -27,6 +27,9 @@ app.get('/api',function(req,res){
   res.send("Hey! You're looking at the matterwiki API");
 });
 
+// Importing all endpoints for authentication
+require('./api/authentication')(app);
+
 apiRoutes.use(function(req, res, next) {
 
   // check header or url parameters or post parameters for token
@@ -64,9 +67,6 @@ require('./api/topics')(apiRoutes);
 
 // Importing all endpoints for users
 require('./api/users')(apiRoutes);
-
-// Importing all endpoints for authentication
-require('./api/authentication')(apiRoutes);
 
 app.use('/api', apiRoutes);
 
