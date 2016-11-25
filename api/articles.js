@@ -25,7 +25,7 @@ module.exports =  function(app){
     After the operation is complete the endpoint returns the success object.
     TODO: create formal guidelines for different object structures and follow that throughout the API.
     */
-    Articles.forge().save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id}).then( function (result) {
+    Articles.forge().save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id, user_id: req.body.user_id, what_changed: req.body.what_changed}).then( function (result) {
         res.json({ success: true, message: 'ok' });     // responds back to request
      })
   });
@@ -58,9 +58,9 @@ module.exports =  function(app){
     */
     Articles.forge({id: req.body.id}).fetch().then(function(article){
         Articles.forge({id: req.body.id})
-          .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id})
+          .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id, what_changed: req.body.what_changed})
             .then(function() {
-              Archives.forge().save({article_id: req.body.id, title: article.attributes.title, body: article.attributes.body}).then(function(){
+              Archives.forge().save({article_id: req.body.id, title: article.attributes.title, body: article.attributes.body, what_changed: article.attributes.what_changed}).then(function(){
                   res.json({ error: false, message: 'ok' });
               })
               .catch(function(err){
