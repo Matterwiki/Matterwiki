@@ -18,8 +18,27 @@ module.exports = function(app) {
     This endpoint takes the topic name and topic description from the request body.
     It then saves those values in the database using the insert query.
     */
-    db('topics').insert({name: req.body.name, description: req.body.description}).then( function (result) {
-        res.json({ success: true, message: 'ok' });     // responds back to request
+    db('topics').insert({name: req.body.name, description: req.body.description}).then( function (topic) {
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B121',
+          data: topic
+        });     // responds back to request
+     })
+     .catch(function(error){
+       res.status(500).json({
+         error: {
+           error: true,
+           message: error.message
+         },
+         code: 'B122',
+         data: {
+
+         }
+       })
      })
   });
 
@@ -33,10 +52,26 @@ module.exports = function(app) {
     Topics.forge()
     .fetchAll()
       .then(function (collection) {
-        res.json({error: false, data: collection.toJSON()});
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B123',
+          data: collection.toJSON()
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B124',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -51,11 +86,27 @@ module.exports = function(app) {
     */
     Topics.forge({id: req.body.id})
     .save({name: req.body.name, description: req.body.description})
-      .then(function() {
-        res.json({ error: false, message: 'ok' });
+      .then(function(topic) {
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B125',
+          data: topic
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B126',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -70,10 +121,28 @@ module.exports = function(app) {
     Topics.forge({id: req.body.id})
     .destroy()
       .then(function() {
-        res.json({ error: false, message: 'ok' });
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B127',
+          data: {
+
+          }
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B128',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -86,7 +155,26 @@ module.exports = function(app) {
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
     Topics.where({id: req.params.id}).fetch({withRelated: ['articles']}).then(function(topic) {
-      res.status(200).json(topic.related('articles'));
+      res.status(200).json({
+        error: {
+          error: false,
+          message: ''
+        },
+        code: 'B129',
+        data: topic.related('articles')
+      });
+    })
+    .catch(function(error){
+      res.status(500).json({
+        error: {
+          error: true,
+          message: error.message
+        },
+        code: 'B130',
+        data: {
+
+        }
+      })
     });
   });
 

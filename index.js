@@ -40,7 +40,16 @@ apiRoutes.use(function(req, res, next) {
     // verifies secret and checks for expiration
     jwt.verify(token, app.get('superSecret'), function(err, decoded) {
       if (err) {
-        return res.json({ error: true, message: 'failed to authenticate token.' });
+        return res.json({
+          error: {
+            error: true,
+            message: 'Failed to authenticate token'
+          },
+          code: 'B101',
+          data: {
+
+          }
+        });
       } else {
         // if everything is good, save to request for use in other routes
         req.decoded = decoded;
@@ -52,8 +61,14 @@ apiRoutes.use(function(req, res, next) {
     // if there is no token
     // return an error
     return res.status(403).json({
+      error: {
         error: true,
-        data: {message: 'No token provided.'}
+        message: 'No token provided'
+      },
+      code: 'B102',
+      data: {
+
+      }
     });
 
   }

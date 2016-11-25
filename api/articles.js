@@ -25,9 +25,34 @@ module.exports =  function(app){
     After the operation is complete the endpoint returns the success object.
     TODO: create formal guidelines for different object structures and follow that throughout the API.
     */
-    Articles.forge().save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id, user_id: req.body.user_id, what_changed: req.body.what_changed}).then( function (result) {
-        res.json({ success: true, message: 'ok' });     // responds back to request
+    Articles.forge().save({
+        title: req.body.title,
+        body: req.body.body,
+        topic_id: req.body.topic_id,
+        user_id: req.body.user_id,
+        what_changed: "Another drop in the ocean of knowledge"
+      }).then( function (article) {
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B103',
+          data: article
+        });     // responds back to request
      })
+     .catch(function (error) {
+       res.status(500).json({
+         error: {
+           error: true,
+           message: error.message
+         },
+         code: 'B104',
+         data: {
+
+         }
+       });
+     });
   });
 
 
@@ -40,10 +65,26 @@ module.exports =  function(app){
     Articles.forge()
     .fetchAll()
       .then(function (collection) {
-        res.json({error: false, data: collection.toJSON()});
+        res.json({
+          error: {
+            error: false,
+            message: ""
+          },
+          code: 'B105',
+          data: collection.toJSON()
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B106',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -58,20 +99,42 @@ module.exports =  function(app){
     */
     Articles.forge({id: req.body.id}).fetch().then(function(article){
         Articles.forge({id: req.body.id})
-          .save({title: req.body.title, body: req.body.body, topic_id: req.body.topic_id, what_changed: req.body.what_changed})
-            .then(function() {
-              Archives.forge().save({article_id: req.body.id, title: article.attributes.title, body: article.attributes.body, what_changed: article.attributes.what_changed}).then(function(){
-                  res.json({ error: false, message: 'ok' });
+          .save({
+            title: req.body.title,
+            body: req.body.body,
+            topic_id: req.body.topic_id,
+            what_changed: req.body.what_changed
+          })
+          .then(function() {
+              Archives.forge().save({
+                article_id: req.body.id,
+                title: article.attributes.title,
+                body: article.attributes.body,
+                what_changed: article.attributes.what_changed
               })
-              .catch(function(err){
-                res.status(500).json({error: true, data: {message: err.message}});
+              .then(function(article){
+                  res.json({
+                    error: {
+                      error: false,
+                      message: ''
+                    },
+                    code: 'B107',
+                    data: article
+                  });
               })
             })
-            .catch(function (err) {
-              res.status(500).json({error: true, data: {message: err.message}});
-            });
-    }).catch(function(err){
-      res.status(500).json({error: true, data: {message: err.message}});
+    })
+    .catch(function(error){
+      res.status(500).json({
+        error: {
+          error: true,
+          message: error.message
+        },
+        code: 'B108',
+        data: {
+
+        }
+      });
     });
     });
 
@@ -86,10 +149,28 @@ module.exports =  function(app){
     Articles.forge({id: req.body.id})
     .destroy()
       .then(function() {
-        res.json({ error: false, message: 'ok' });
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B109',
+          data: {
+
+          }
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B110',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -115,11 +196,27 @@ module.exports =  function(app){
           result.push(article1.toJSON());
           result.push(article2.toJSON());
         }).then(function(){
-            res.json({error: false, data: result});
+            res.json({
+              error: {
+                error: false,
+                message: ''
+              },
+              code: 'B111',
+              data: result
+            });
         })
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B112',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -137,12 +234,29 @@ module.exports =  function(app){
           articleObj = article.toJSON();
           topicObj = topic.toJSON();
           articleObj.topic = topicObj;
-        }).then(function(){
-            res.json({error: false, data: articleObj});
+        })
+        .then(function(){
+            res.json({
+              error: {
+                error: false,
+                message: ''
+              },
+              code: 'B113',
+              data: articleObj
+            });
         })
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B114',
+          data: {
+
+          }
+        });
       });
   });
 
@@ -156,10 +270,26 @@ module.exports =  function(app){
     */
 
     Articles.where({id: req.params.id}).fetch({withRelated: ['archives']}).then(function(article) {
-      res.status(200).json(article.related('archives'));
+      res.status(200).json({
+        error: {
+          error: false,
+          message: ''
+        },
+        code: 'B115',
+        data: article.related('archives')
+      });
     })
-    .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+    .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B116',
+          data: {
+
+          }
+        });
     });
   });
 

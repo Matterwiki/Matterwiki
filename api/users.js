@@ -23,15 +23,35 @@ module.exports = function(app) {
     */
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
       Users.forge()
-        .save({name: req.body.name, email: req.body.email, password: hash, about: req.body.about})
+        .save({
+          name: req.body.name,
+          email: req.body.email,
+          password: hash,
+          about: req.body.about})
         .then(function (collection) {
-          res.json({error: false, data: collection.toJSON()});
+          res.json({
+            error: {
+              error: false,
+              message: ''
+            },
+            code: 'B131',
+            data: collection.toJSON()
+          })
         })
-        .catch(function (err) {
-          res.status(500).json({error: true, data: {message: err.message}});
+        .catch(function (error) {
+          res.status(500).json({
+            error: {
+              error: true,
+              message: error.message
+            },
+            code: 'B132',
+            data: {
+
+            }
+          })
         });
-    });
-  });
+        });
+      });
 
 
   app.get('/users',function(req,res){
@@ -43,12 +63,28 @@ module.exports = function(app) {
     Users.forge()
     .fetchAll()
       .then(function (collection) {
-        res.json({error: false, data: collection.toJSON()});
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B133',
+          data: collection.toJSON()
+        })
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B134',
+          data: {
+
+          }
+        })
       });
-  });
+      });
 
 
   app.put('/users',function(req,res){
@@ -61,13 +97,28 @@ module.exports = function(app) {
     Users.forge({id: req.body.id})
       .save({name: req.body.name, email: req.body.email, password: req.body.password, about: req.body.about})
       .then(function (collection) {
-        res.json({error: false, data: collection.toJSON()});
-      })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
-      });
-  });
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B135',
+          data: collection.toJSON()
+        })
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B136',
+          data: {
 
+          }
+        })
+      });
+      });
+      
 
   app.delete('/users',function(req,res){
     /*
@@ -79,10 +130,27 @@ module.exports = function(app) {
     Users.forge({id: req.body.id})
     .destroy()
       .then(function() {
-        res.json({ error: false, message: 'ok' });
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B137',
+          data: {}
+        });
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B138',
+          data: {
+
+          }
+        })
+      });
       });
   });
 

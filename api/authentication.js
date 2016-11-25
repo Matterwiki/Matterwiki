@@ -25,7 +25,16 @@ module.exports = function(app) {
     .fetch()
       .then(function (user) {
         if(!user){
-          res.json({error: true, data: {message: "the user does not exist"}});
+          res.json({
+            error: {
+              error: true,
+              message: 'User not found'
+            },
+            code: 'B117',
+            data: {
+
+            }
+          });
         }
         else {
           user = user.toJSON();
@@ -35,17 +44,45 @@ module.exports = function(app) {
                 var token = jwt.sign(user, app.get('superSecret'), {
                               expiresIn: 86400
                             });
-                res.json({error: false, data: {user: user.email,token: token}});
+                res.json({
+                  error: {
+                    error: false,
+                    message: ''
+                  },
+                  code: 'B118',
+                  data: {
+                    user: user.email,
+                    token: token
+                  }
+                });
               }
               else {
-                res.json({error: true, data: {message: "email or password combination wrong"}});
+                res.json({
+                  error: {
+                    error: true,
+                    message: 'Email or Password is wrong'
+                  },
+                  code: 'B119',
+                  data: {
+
+                  }
+                });
               }
           });
         }
 
       })
-      .catch(function (err) {
-        res.status(500).json({error: true, data: {message: err.message}});
+      .catch(function (error) {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: 'B120',
+          data: {
+
+          }
+        });
       });
   });
 
