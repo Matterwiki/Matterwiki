@@ -1,0 +1,16 @@
+/*
+Response object structure of the API.
+
+All the responses must follow the below structure
+*/
+
+{
+  "error": {
+    "error": "boolean",
+    "message": "string"
+  },
+  "code": "string",
+  "data": {
+
+  }
+}
