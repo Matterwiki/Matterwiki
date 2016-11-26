@@ -18,7 +18,7 @@ var config = require('./config'); //config file in the app directory which conta
 app.set('superSecret', config.auth_secret); // secret variable
 
 // Using the body parser middleware to parse request body
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 

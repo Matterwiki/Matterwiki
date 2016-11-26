@@ -4,12 +4,10 @@ import {Link} from 'react-router';
 const App = React.createClass({
   render () {
     return(<div>
-      <p>Matterwiki</p>
-      <ul>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/product">Product</Link></li>
-      </ul>
-        <div className="content">
+      <center>
+        <img src="../assets/logo.png" className="primary-logo"></img>
+      </center>
+        <div className="content container">
             {this.props.children}
           </div>
     </div>);

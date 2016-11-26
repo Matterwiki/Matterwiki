@@ -1,0 +1,21 @@
+.primary-logo {
+  height: 5em;
+  margin-top: 5em;
+  margin-bottom: 1em;
+}
+body{
+  background-color: #fff;
+  color: #4d4d4d;
+}
+
+.login-box {
+  max-width: 500px;
+  margin: 0px auto;
+  background-color: transparent;
+  padding: 5em;
+  text-align: center;
+}
+
+.login-header {
+  margin-bottom: 1em;
+}
