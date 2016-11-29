@@ -1,21 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .primary-logo {
-  height: 5em;
-  margin-top: 5em;
+  height: 4em;
+  margin-top: 2em;
   margin-bottom: 1em;
 }
 body{
-  background-color: #fff;
+  background-color: #ffffff;
   color: #4d4d4d;
+}
+
+.content {
+  margin-top: 1em;
 }
 
 .login-box {
   max-width: 500px;
   margin: 0px auto;
   background-color: transparent;
-  padding: 5em;
   text-align: center;
 }
 
 .login-header {
   margin-bottom: 1em;
+}
+
+.topic-list {
+  padding: 6px 20px;
+}
+
+
+.topic-item {
+  margin-bottom: 1em;
+}
+.topic-item-title {
+  font-size: 1.2em;
+}
+
+.topic-item-description {
+  color: #a0a0a0;
+}
+
+.article-list {
+  background-color: #fff;
+  border: 1px solid #a0a0a0c;
+}
+
+.article-item {
+  margin-bottom: 1.5em;
+}
+
+.article-item-title {
+  font-size: 2em;
+}
+
+.article-item-description {
+  color: #a0a0a0;
+}
+
+.list-title {
+  color: #4d4d4d;
+  padding: 6px 20px;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+.page-title {
+  margin-bottom: 2em;
+  font-size: 1.5em;
+  border-bottom: 1px solid #eca100;
+  color: #eca100;
 }

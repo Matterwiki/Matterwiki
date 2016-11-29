@@ -12,6 +12,7 @@ render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Login}/>
+      <Route path="home" component={Home}/>
       <Route path="about" component={About}/>
       <Route path="product" component={Product}/>
 

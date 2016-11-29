@@ -1,5 +1,6 @@
 import React from 'react';
 import Error from './error.jsx';
+import { browserHistory } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -11,18 +12,15 @@ class Login extends React.Component {
     console.log("Login initiated");
     var email = document.getElementById("inputEmail").value;
     var password = document.getElementById("inputPassword").value;
-
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded"
     });
-
-
     var myInit = { method: 'POST',
                headers: myHeaders,
                body: "email="+email+"&password="+password
               };
     var that = this;
-    fetch('/api/authenticate',myInit)
+    /*fetch('/api/authenticate',myInit)
     .then(function(response) {
       console.log(response);
       return response.json();
@@ -30,10 +28,13 @@ class Login extends React.Component {
     .then(function(response) {
       if(response.error.error)
         that.setState({error: response.error.message})
-      else
-        alert("Logged In. Token Received.")
+      else {
+      */
+        browserHistory.push('/home');
+        /*console.log("Logged In. Token Received.")
+      }
       console.log(response);
-    });
+    });*/
   }
 
   render () {
@@ -41,13 +42,13 @@ class Login extends React.Component {
       <div className="col-md-12 col-sm-12">
         <h3>Login</h3>
           <Error error={this.state.error} />
-        <div className="col-sm-12">
+        <div className="col-sm-12 form-group">
           <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
         </div>
-        <div className="col-sm-12">
+        <div className="col-sm-12 form-group">
           <input type="password" className="form-control" id="inputPassword" placeholder="Password" />
         </div>
-        <div className="col-sm-12">
+        <div className="col-sm-12 form-group">
           <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>
         </div>
       </div>
