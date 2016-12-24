@@ -1,6 +1,6 @@
 import React from 'react';
 import Error from './error.jsx';
-
+import {Link, browserHistory} from 'react-router';
 class BrowseArticles extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ class BrowseArticles extends React.Component {
     console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": ""
+        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoaXZhbUBtYXR0ZXJ3aWtpLmNvbSIsImlkIjoyLCJuYW1lIjoiU2hpdmFtIiwicGFzc3dvcmQiOiIkMmEkMTAkYlJpVlRNSE9Lb2JCbTlGNktIR1RVT3hPMEswWWZvbTRYNHRiYUg4aHZSV3J5bFZRTHNqcUsiLCJhYm91dCI6Im5vIGlkZWEiLCJjcmVhdGVkX2F0IjoiMjAxNi0wOS0yNCAxMTozMjowMCIsInVwZGF0ZWRfYXQiOiIyMDE2LTA5LTI0IDExOjMyOjAwIiwiaWF0IjoxNDgyNTY3NTIxLCJleHAiOjE0ODI2NTM5MjF9.88UVanC8JG-qpDOKW5Bu1Dgk6aJfuu0F28KnxPO6vFM"
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -44,7 +44,7 @@ class BrowseArticles extends React.Component {
             {this.state.articles.map(article => (
             <div key={article.id} className="article-item">
               <div className="article-item-title">
-                {article.title}
+                <Link to={"/article/"+article.id} >{article.title}</Link>
               </div>
               <div className="article-item-description">
                 {article.body}

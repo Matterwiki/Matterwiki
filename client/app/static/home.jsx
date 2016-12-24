@@ -5,14 +5,11 @@ import BrowseArticles from './browse_articles.jsx';
 const Home = React.createClass({
   render () {
     return(<div className="row container">
-    <div className="page-title">
-      Browse Articles
-      
-    </div>
-      <div className="col-md-4">
+
+      <div className="col-md-3">
           <BrowseTopics />
       </div>
-      <div className="col-md-8">
+      <div className="col-md-9">
           <BrowseArticles />
       </div>
     </div>);

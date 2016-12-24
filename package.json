@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack -d --watch",
+    "webpack-server": "webpack-dev-server --content-base client/",
     "build": "webpack -p"
   },
   "bin": {
@@ -36,5 +37,8 @@
     "react-router": "^2.6.1",
     "sqlite3": "^3.1.4",
     "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^1.16.2"
   }
 }

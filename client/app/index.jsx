@@ -7,6 +7,7 @@ import Home from './static/home.jsx';
 import Login from './static/login.jsx';
 import About from './static/about.jsx';
 import Product from './static/product.jsx';
+import Article from './static/article.jsx';
 
 render(
   <Router history={browserHistory}>
@@ -15,7 +16,7 @@ render(
       <Route path="home" component={Home}/>
       <Route path="about" component={About}/>
       <Route path="product" component={Product}/>
-
+      <Route path="article/:articleId" component={Article}/>
     </Route>
   </Router>
 , document.body);

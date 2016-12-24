@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
 
 .primary-logo {
   height: 4em;
@@ -8,10 +8,11 @@
 body{
   background-color: #ffffff;
   color: #4d4d4d;
+  letter-spacing: 1px;
 }
 
 .content {
-  margin-top: 1em;
+  margin-top: 3em;
 }
 
 .login-box {
@@ -42,16 +43,26 @@ body{
 }
 
 .article-list {
-  background-color: #fff;
-  border: 1px solid #a0a0a0c;
+  border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+padding: 0em 2em;
 }
 
 .article-item {
-  margin-bottom: 1.5em;
+  margin-bottom: 2.5em;
 }
 
 .article-item-title {
   font-size: 2em;
+  font-weight: 700;
+}
+
+.article-item-title a {
+  color: #4d4d4d;
+}
+
+.article-item-title a:hover {
+  color: #ff0066;
 }
 
 .article-item-description {
@@ -68,6 +79,24 @@ body{
 .page-title {
   margin-bottom: 2em;
   font-size: 1.5em;
-  border-bottom: 1px solid #eca100;
-  color: #eca100;
+  border-bottom: 1px solid #ff0066;
+  color: #ff0066;
+}
+
+.single-article-title {
+  font-weight: 700;
+  font-size: 4em;
+  margin-bottom: 10px;
+}
+.single-article-meta {
+  color: #a0a0a0;
+}
+
+.article-heading {
+  margin-bottom: 2em;
+}
+
+.single-article-body {
+  font-family: "Vollkorn", sans-serif;
+  font-size: 1.5em;
 }
