@@ -13,13 +13,15 @@ const App = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="/s">
+            <a className="navbar-brand" href="/">
               <img src="../assets/logo.png"></img>
             </a>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
+              <Link to="article/new"><button type="button" className="btn btn-default navbar-btn">New Article</button>
+              </Link>
               <button type="button" className="btn btn-default navbar-btn">Logout</button>
             </ul>
           </div>

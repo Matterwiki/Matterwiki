@@ -100,3 +100,39 @@ padding: 0em 2em;
   font-family: "Vollkorn", sans-serif;
   font-size: 1.5em;
 }
+
+.new-article .form-control {
+  border: none;
+}
+.new-article textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+.new-article .input-title {
+    font-weight: 700;
+    font-size: 4em;
+}
+
+.new-article .input-body {
+  font-family: "Vollkorn", sans-serif;
+  font-size: 1.5em;
+}
+
+textarea {
+  resize: none;
+}
+
+.new-article-form {
+  border-right: 1px solid #ccc;
+}
+
+.color-text {
+  color: #ff0066;
+}

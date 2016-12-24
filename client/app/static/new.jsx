@@ -1,4 +1,5 @@
 import React from 'react';
+import autosize from 'autosize';
 var Remarkable = require('remarkable');
 
 
@@ -23,19 +24,16 @@ class NewArticle extends React.Component {
     return { __html: md.render(this.state.title) };
   }
 
-  grow_input(element) {
-    console.log(element);
-    element.style.height = "5px";
-    element.style.height = (element.scrollHeight)+"px";
+  componentDidMount() {
+    autosize(document.querySelectorAll('textarea'));
   }
 
   render() {
     return (
       <div className="new-article">
         <div className="row">
-          <div className="col-md-6">
-            <input
-              type="text"
+          <div className="col-md-6 new-article-form">
+            <textarea
               ref="title"
               className="form-control input-title"
               onChange={this.handleChange}
@@ -50,7 +48,7 @@ class NewArticle extends React.Component {
           </div>
           <div className="col-md-6">
             <div className="article-heading">
-
+              <span className="color-text">Preview</span>
 
             <div
               className="preview-title single-article-title"
