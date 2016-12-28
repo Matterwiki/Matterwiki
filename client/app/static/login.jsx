@@ -1,6 +1,6 @@
 import React from 'react';
 import Error from './error.jsx';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Login extends React.Component {
                body: "email="+email+"&password="+password
               };
     var that = this;
-    /*fetch('/api/authenticate',myInit)
+    fetch('/api/authenticate',myInit)
     .then(function(response) {
       console.log(response);
       return response.json();
@@ -29,15 +29,17 @@ class Login extends React.Component {
       if(response.error.error)
         that.setState({error: response.error.message})
       else {
-      */
-        browserHistory.push('/home');
-        /*console.log("Logged In. Token Received.")
+
+        that.props.userLogin(response.data.user.id,response.data.user.email,response.data.token);
+        hashHistory.push('home');
+        console.log("Logged In. Token Received.")
       }
       console.log(response);
-    });*/
+    });
   }
 
   render () {
+
     return(<div className="container login-box row">
       <div className="col-md-12 col-sm-12">
         <h3>Login</h3>

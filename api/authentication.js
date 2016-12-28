@@ -51,7 +51,10 @@ module.exports = function(app) {
                   },
                   code: 'B118',
                   data: {
-                    user: user.email,
+                    user: {
+                      email: user.email,
+                      id: user.id
+                    },
                     token: token
                   }
                 });

@@ -185,3 +185,9 @@ textarea {
 .modal-fullscreen .col-md-6 {
   float: none;
 }
+
+.navbar-login-logo img {
+  height: 40px;
+  width: auto;
+  margin-top: 3em;
+}

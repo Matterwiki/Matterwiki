@@ -4253,6 +4253,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand > img {
   display: block;
+  width: 100%;
   height: 100%;
 }
 @media (min-width: 768px) {
