@@ -5795,7 +5795,7 @@ button.list-group-item-danger.active:focus {
 }
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 5em;
   font-weight: bold;
   line-height: 1;
   color: #000;
@@ -5888,7 +5888,6 @@ button.close {
 }
 .modal-header {
   padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
 }
 .modal-header .close {
   margin-top: -2px;
