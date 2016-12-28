@@ -117,12 +117,12 @@ input:focus
 
 .new-article .input-title {
     font-weight: 700;
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .new-article .input-body {
-  font-family: "Vollkorn", sans-serif;
-  font-size: 1.5em;
+  font-family: "Courier", sans-serif;
+  font-size: 1.2em;
 }
 
 textarea {

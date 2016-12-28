@@ -7,11 +7,11 @@ class NewArticle extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {title: "", body: ""};
+    this.state = {body: ""};
   }
 
   handleChange() {
-    this.setState({title: this.refs.title.value, body: this.refs.body.value});
+    this.setState({body: this.refs.body.value});
   }
 
   getRawMarkupBody() {
@@ -19,10 +19,6 @@ class NewArticle extends React.Component {
     return { __html: md.render(this.state.body) };
   }
 
-  getRawMarkupTitle() {
-    var md = new Remarkable();
-    return { __html: md.render(this.state.title) };
-  }
 
   componentDidMount() {
     autosize(document.querySelectorAll('textarea'));
@@ -32,13 +28,16 @@ class NewArticle extends React.Component {
     return (
       <div className="new-article">
         <div className="row">
-          <div className="col-md-6 new-article-form">
+          <div className="col-md-12">
             <textarea
               ref="title"
               className="form-control input-title"
-              onChange={this.handleChange}
               placeholder="Enter article title..."
                />
+         </div>
+         </div>
+         <div className="row">
+          <div className="col-md-6 new-article-form">
             <textarea
               onChange={this.handleChange}
               ref="body"
@@ -47,21 +46,21 @@ class NewArticle extends React.Component {
                />
           </div>
           <div className="col-md-6">
-            <div className="article-heading">
-              <span className="color-text">Preview</span>
 
-            <div
-              className="preview-title single-article-title"
-              dangerouslySetInnerHTML={this.getRawMarkupTitle()}
-            />
-          </div>
             <div
               className="preview-body single-article-body"
               dangerouslySetInnerHTML={this.getRawMarkupBody()}
             />
           </div>
         </div>
+        <br/>
+        <br/>
+      <div className="row">
+        <div className="col-md-12">
+          <button className="btn btn-default btn-block btn-lg" >Create Article</button>
+        </div>
       </div>
+    </div>
     );
   }
 }

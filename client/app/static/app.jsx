@@ -20,9 +20,12 @@ const App = React.createClass({
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              <Link to="article/new"><button type="button" className="btn btn-default navbar-btn">New Article</button>
+             <li><Link to="article/new" className="">New Article
               </Link>
-              <button type="button" className="btn btn-default navbar-btn">Logout</button>
+            </li>
+            <li>
+              <a href="" className="">Logout</a>
+            </li>
             </ul>
           </div>
         </div>
