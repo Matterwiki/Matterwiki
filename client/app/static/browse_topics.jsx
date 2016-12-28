@@ -1,9 +1,11 @@
 import React from 'react';
 import Error from './error.jsx';
+import {hashHistory} from 'react-router';
 
 class BrowseTopics extends React.Component {
   constructor(props) {
     super(props);
+    this.topicSelect = this.topicSelect.bind(this);
     this.state = {error: "", topics: []};
   }
   componentDidMount(){
@@ -31,6 +33,13 @@ class BrowseTopics extends React.Component {
       console.log(response);
     });
   }
+
+  topicSelect(id,e) {
+    e.preventDefault();
+    this.props.topicChange(id)
+  }
+
+
   render () {
     if(this.state.error) {
       return <Error error={this.state.error} />
@@ -40,18 +49,12 @@ class BrowseTopics extends React.Component {
     }
     else {
       return(<div>
-            <div className="topic-list">
+        <div className="list-group">
             {this.state.topics.map(topic => (
-            <div key={topic.id} className="topic-item">
-              <div className="topic-item-title">
-                {topic.name}
-              </div>
-              <div className="topic-item-description">
-                {topic.description}
-              </div>
-              <hr/>
-            </div>
-
+              <a key={topic.id} href="#" className="list-group-item" onClick={(e) => this.topicSelect(topic.id,e)}>
+                <h4 className="list-group-item-heading">{topic.name}</h4>
+                <p className="list-group-item-text">{topic.description}</p>
+              </a>
           ))}</div>
       </div>);
     }

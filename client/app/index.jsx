@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
 
 import App from './static/app.jsx';
 import Home from './static/home.jsx';
@@ -14,7 +14,8 @@ import EditArticle from './static/edit.jsx';
 render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRoute path="home" component={Home}/>
+      <IndexRedirect to="home" component={Home}/>
+      <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
       <Route path="about" component={About}/>
       <Route path="product" component={Product}/>

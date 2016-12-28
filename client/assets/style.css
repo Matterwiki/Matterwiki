@@ -191,3 +191,12 @@ textarea {
   width: auto;
   margin-top: 3em;
 }
+
+.list-group a {
+  border: none;
+}
+
+.list-group hr {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}

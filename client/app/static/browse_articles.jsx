@@ -4,9 +4,15 @@ import {Link, browserHistory} from 'react-router';
 class BrowseArticles extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {error: "", articles: []};
+    this.state = {error: "", articles: [], url: "/api/articles"};
   }
-  componentDidMount(){
+
+
+  componentWillReceiveProps(nextProps) {
+    console.log('PREV PROPS');
+    console.log(this.props.topicId);
+    console.log('NEXT PROPS');
+    console.log(nextProps.topicId);
     console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -16,7 +22,12 @@ class BrowseArticles extends React.Component {
                headers: myHeaders,
                };
     var that = this;
-    fetch('/api/articles',myInit)
+    if(nextProps.topicId==null && this.props.topicId==null)
+      var url = '/api/articles';
+    else
+      var url = '/api/topic/'+nextProps.topicId+'/articles';
+    console.log(url);
+    fetch(url,myInit)
     .then(function(response) {
       console.log(response);
       return response.json();
