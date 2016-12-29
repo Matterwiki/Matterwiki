@@ -8,7 +8,8 @@ class BrowseTopics extends React.Component {
     this.topicSelect = this.topicSelect.bind(this);
     this.state = {error: "", topics: []};
   }
-  componentDidMount(){
+
+  componentDidMount() {
     console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",

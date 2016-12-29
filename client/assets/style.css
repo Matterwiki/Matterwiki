@@ -203,3 +203,21 @@ textarea {
   margin-top: 0em;
   margin-bottom: 0em;
 }
+
+.topic-select {
+  background-color: #efefef;
+}
+
+.article-sidebar {
+  background-color: #efefef;
+  padding: 2em 1em;
+}
+
+.sidebar-block {
+  margin-bottom: 3em;
+}
+
+.sidebar-title {
+  border-bottom: 1px solid #a0a0a0;
+  padding: 5px;
+}

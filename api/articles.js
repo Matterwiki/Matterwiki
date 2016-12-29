@@ -231,13 +231,22 @@ module.exports =  function(app){
     Articles.forge({id: req.params.id})
     .fetch()
       .then(function (article) {
-        Topics.forge({id: article.attributes.id}).fetch().then(function(topic){
+        console.log("Found article. Finding topic");
+        Topics.forge({id: article.attributes.topic_id}).fetch().then(function(topic){
+          console.log("Found topic. Finding user");
           articleObj = article.toJSON();
           topicObj = topic.toJSON();
           articleObj.topic = topicObj;
         }).then(function(){
+          console.log("Found user. Moving forward");
           Users.forge({id: articleObj.user_id}).fetch().then(function(user){
-            articleObj.user = user.toJSON();
+            userObj = user.toJSON();
+            articleObj.user = {
+              id: userObj.id,
+              name: userObj.name,
+              email: userObj.email,
+              about: userObj.about
+            };
           })
         .then(function(){
             res.json({
