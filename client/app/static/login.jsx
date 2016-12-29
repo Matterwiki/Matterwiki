@@ -29,10 +29,10 @@ class Login extends React.Component {
       if(response.error.error)
         that.setState({error: response.error.message})
       else {
-
-        that.props.userLogin(response.data.user.id,response.data.user.email,response.data.token);
+        localStorage.setItem('userToken',response.data.token);
         hashHistory.push('home');
-        console.log("Logged In. Token Received.")
+        console.log("Logged In. Token Received.");
+        console.log(localStorage.getItem('userToken'));
       }
       console.log(response);
     });

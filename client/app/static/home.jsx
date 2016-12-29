@@ -20,10 +20,10 @@ class Home extends React.Component {
     return(<div className="row container">
 
       <div className="col-md-3">
-          <BrowseTopics user={this.props.user} topicChange={this.handleUpdate} />
+          <BrowseTopics topicChange={this.handleUpdate} />
       </div>
       <div className="col-md-9">
-          <BrowseArticles user={this.props.user} topicId={this.state.topicId} />
+          <BrowseArticles topicId={this.state.topicId} />
       </div>
     </div>);
   }

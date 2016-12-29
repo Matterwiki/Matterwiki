@@ -12,7 +12,7 @@ class BrowseTopics extends React.Component {
     console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": this.props.user.token
+        "x-access-token": localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,

@@ -14,7 +14,7 @@ import EditArticle from './static/edit.jsx';
 render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRedirect to="home" component={Home}/>
+      <IndexRoute component={Login}/>
       <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
       <Route path="about" component={About}/>
