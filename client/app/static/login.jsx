@@ -44,6 +44,7 @@ class Login extends React.Component {
       <div className="col-md-12 col-sm-12">
         <h3>Login</h3>
           <Error error={this.state.error} />
+          <form>
         <div className="col-sm-12 form-group">
           <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
         </div>
@@ -53,6 +54,7 @@ class Login extends React.Component {
         <div className="col-sm-12 form-group">
           <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>
         </div>
+      </form>
       </div>
     </div>);
   }

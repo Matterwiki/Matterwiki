@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import Error from './error.jsx';
 
 class ViewArticle extends React.Component {
@@ -11,7 +12,7 @@ class ViewArticle extends React.Component {
     console.log(this.props.params.articleId);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": this.props.user.token
+        "x-access-token": localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -43,12 +44,19 @@ class ViewArticle extends React.Component {
             </h1>
             <div className="single-article-meta">
               Last updated on {new Date(this.state.article.updated_at).toDateString()}
-            </div>
           </div>
+        </div>
+        <div className="row">
+          <div className="col-md-9">
             <div className="single-article-body">
             {this.state.article.body}
             </div>
+          </div>
+          <div className="col-md-3">
+            <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
+          </div>
             </div>
+          </div>
             );
     }
     else {

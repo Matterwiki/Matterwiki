@@ -9,7 +9,7 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {error: "",body: ""};
+    this.state = {error: "",body: "",title: ""};
   }
 
   handleChange() {
@@ -31,7 +31,7 @@ class EditArticle extends React.Component {
     console.log(this.props.params.articleId);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNoaXZhbUBtYXR0ZXJ3aWtpLmNvbSIsImlkIjoyLCJuYW1lIjoiU2hpdmFtIiwicGFzc3dvcmQiOiIkMmEkMTAkYlJpVlRNSE9Lb2JCbTlGNktIR1RVT3hPMEswWWZvbTRYNHRiYUg4aHZSV3J5bFZRTHNqcUsiLCJhYm91dCI6Im5vIGlkZWEiLCJjcmVhdGVkX2F0IjoiMjAxNi0wOS0yNCAxMTozMjowMCIsInVwZGF0ZWRfYXQiOiIyMDE2LTA5LTI0IDExOjMyOjAwIiwiaWF0IjoxNDgyNTY3NTIxLCJleHAiOjE0ODI2NTM5MjF9.88UVanC8JG-qpDOKW5Bu1Dgk6aJfuu0F28KnxPO6vFM"
+        "x-access-token": localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -46,7 +46,7 @@ class EditArticle extends React.Component {
       if(response.error.error)
         that.setState({error: response.error.message})
       else {
-        that.setState({body: response.data})
+        that.setState({body: response.data.body, title: response.data.title})
         console.log(that.state.body);
       }
       console.log(response);
@@ -65,7 +65,7 @@ class EditArticle extends React.Component {
             <textarea
               ref="title"
               className="form-control input-title"
-              placeholder="Enter article title..."
+              value={this.state.title}
                />
          </div>
          </div>
@@ -75,7 +75,7 @@ class EditArticle extends React.Component {
               onChange={this.handleChange}
               ref="body"
               className="form-control input-body"
-              placeholder="Start writing here..."
+              value={this.state.body}
                />
           </div>
           <div className="col-md-6">
@@ -90,7 +90,7 @@ class EditArticle extends React.Component {
         <br/>
       <div className="row">
         <div className="col-md-12">
-          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
+          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
         </div>
       </div>
       <div className="modal modal-fullscreen fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -104,10 +104,17 @@ class EditArticle extends React.Component {
               <div className="row">
 
                 <div className="col-md-6 col-sd-12">
-                  <h1><b>Yayyyy!</b></h1><h3>Your article has been published</h3>
+                  <h1><b>One last thing...</b></h1><h4>Just to make it easy for everyone</h4>
                   <br/>
-                  <br/>
-                  <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">That's great</button>
+                  <h3><b>What improvements did you make in this edit?</b></h3>
+                  <textarea
+                    ref="what_changed"
+                    className="form-control"
+                    placeholder="Example: Fixed a typo. It's grammer not grammar"
+                     />
+                   <p className="help-block">Keep it short and descriptive :)</p>
+                   <br/>
+                   <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">Update it!</button>
                 </div>
               </div>
             </center>
