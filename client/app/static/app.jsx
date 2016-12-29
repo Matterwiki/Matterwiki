@@ -9,6 +9,12 @@ class App extends React.Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  componentWillMount() {
+    if(localStorage.getItem('userToken')==null) {
+      hashHistory('login');
+    }
+  }
+
   handleLogout() {
     localStorage.setItem('userToken','');
   }
@@ -30,11 +36,10 @@ class App extends React.Component {
               <Link to='home' className="navbar-brand">
                 <img src="../assets/logo.png"></img>
               </Link>
-
           </div>
           :
           <center>
-          <a className="navbar-login-logo" href="home">
+          <a className="navbar-login-logo" href="#">
             <img src="../assets/logo.png"></img>
           </a>
         </center>
@@ -46,7 +51,7 @@ class App extends React.Component {
               </Link>
             </li>
             <li>
-              <a href="" className="">Logout</a>
+              <a href="" onClick={this.handleLogout} >Logout</a>
             </li>
             </ul>
           </div>
