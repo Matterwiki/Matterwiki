@@ -8,6 +8,13 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {error: ""};
   }
+
+  componentDidMount(){
+    if(localStorage.getItem('userToken')) {
+      hashHistory.push('home');
+    }
+  }
+
   handleSubmit(){
     console.log("Login initiated");
     var email = document.getElementById("inputEmail").value;
