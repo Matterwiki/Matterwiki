@@ -30,6 +30,8 @@ class Login extends React.Component {
         that.setState({error: response.error.message})
       else {
         localStorage.setItem('userToken',response.data.token);
+        localStorage.setItem('userId',response.data.user.id);
+        localStorage.setItem('userEmail',response.data.user.token);
         hashHistory.push('home');
         console.log("Logged In. Token Received.");
         console.log(localStorage.getItem('userToken'));

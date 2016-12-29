@@ -12,6 +12,7 @@ then move it to the topics endpoints file.
 var Articles = require('../models/article.js');
 var Topics = require('../models/topic.js');
 var Archives = require('../models/archive.js');
+var Users = require('../models/user.js');
 
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
@@ -234,7 +235,10 @@ module.exports =  function(app){
           articleObj = article.toJSON();
           topicObj = topic.toJSON();
           articleObj.topic = topicObj;
-        })
+        }).then(function(){
+          Users.forge({id: articleObj.user_id}).fetch().then(function(user){
+            articleObj.user = user.toJSON();
+          })
         .then(function(){
             res.json({
               error: {
@@ -244,6 +248,7 @@ module.exports =  function(app){
               code: 'B113',
               data: articleObj
             });
+        })
         })
       })
       .catch(function (error) {

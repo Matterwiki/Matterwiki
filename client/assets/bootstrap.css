@@ -3044,19 +3044,19 @@ fieldset[disabled] a.btn {
   pointer-events: none;
 }
 .btn-default {
-  color: #ff0066;
-  background-color: #fff;
+  color: #fff;
+  background-color: #ff0066;
   border: 1px solid #ff0066;
 }
 .btn-default:focus,
 .btn-default.focus {
   color: #fff;
-  background-color: #ff0066;
+  background-color: #f20061;
 }
 
 .btn-default:hover {
   color: #fff;
-  background-color: #ff0066;
+  background-color: #f20061;
 }
 .btn-default:active,
 .btn-default.active,
@@ -3964,7 +3964,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:focus {
   text-decoration: none;
   background-color: transparent;
-  border: 1px solid #ff0066;
+  border-bottom: 1px solid #ff0066;
 }
 .nav > li.disabled > a {
   color: #777;
