@@ -85,6 +85,7 @@ class ViewArticle extends React.Component {
             <p>{this.state.article.user.about}</p>
             </div>
             <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
+            <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">History</Link>
           </div>
             </div>
 

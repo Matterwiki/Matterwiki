@@ -83,6 +83,9 @@ require('./api/topics')(apiRoutes);
 // Importing all endpoints for users
 require('./api/users')(apiRoutes);
 
+// Importing all endpoints for archives
+require('./api/archives')(apiRoutes);
+
 app.use('/api', apiRoutes);
 
 app.use(express.static(__dirname + '/client'));

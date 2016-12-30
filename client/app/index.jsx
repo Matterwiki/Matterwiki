@@ -10,6 +10,7 @@ import Product from './static/product.jsx';
 import Article from './static/article.jsx';
 import NewArticle from './static/new.jsx';
 import EditArticle from './static/edit.jsx';
+import ArticleHistory from './static/history.jsx';
 
 render(
   <Router history={hashHistory}>
@@ -21,6 +22,7 @@ render(
       <Route path="product" component={Product}/>
       <Route path="article/new" component={NewArticle}/>
       <Route path="article/edit/:articleId" component={EditArticle}/>
+      <Route path="article/history/:articleId" component={ArticleHistory}/>
       <Route path="article/:articleId" component={Article}/>
     </Route>
   </Router>
