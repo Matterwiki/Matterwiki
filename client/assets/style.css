@@ -261,3 +261,7 @@ textarea {
   padding: 10px;
   margin: 0px auto;
 }
+
+.what_changed {
+  background-color: #efefef;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import autosize from 'autosize';
 import Error from './error.jsx';
+import {hashHistory} from 'react-router';
 var Remarkable = require('remarkable');
 
 
@@ -9,7 +10,7 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {error: "",body: "",title: ""};
+    this.state = {error: "",body: "",title: "", topics: []};
   }
 
   handleChange() {
@@ -18,7 +19,32 @@ class EditArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    $('#myModal').modal('show')
+    var body = this.refs.body.value;
+    var title = this.refs.title.value;
+    var topicId = this.refs.topic.value;
+    var what_changed = this.refs.what_changed.value;
+
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'PUT',
+               headers: myHeaders,
+               body: "id="+this.props.params.articleId+"&title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+localStorage.getItem("userId")+"&what_changed="+what_changed
+               };
+    var that = this;
+    fetch('/api/articles/',myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+          hashHistory.push('article/'+that.props.params.articleId);
+      }
+    });
   }
 
   getRawMarkupBody() {
@@ -51,6 +77,29 @@ class EditArticle extends React.Component {
       }
       console.log(response);
     });
+    console.log("Component Mounted!");
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'GET',
+               headers: myHeaders,
+               };
+    var that = this;
+    fetch('/api/topics',myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+        that.setState({topics: response.data})
+        console.log(that.state.topics);
+      }
+      console.log(response);
+    });
     autosize(document.querySelectorAll('textarea'));
   }
 
@@ -77,9 +126,25 @@ class EditArticle extends React.Component {
               className="form-control input-body"
               value={this.state.body}
                />
+               <br/>
+               <label>Choose topic</label>
+               <select className="form-control topic-select" ref="topic">
+                 {this.state.topics.map(topic => (
+                   <option value={topic.id} key={topic.id}>{topic.name}</option>
+                 ))}
+               </select>
+               <br/>
+               <label>What improvements did you make in this edit?</label>
+               <textarea
+                 ref="what_changed"
+                 className="form-control what_changed"
+                 placeholder="Example: Fixed a typo. It's grammer not grammar"
+                  />
+                <p className="help-block">Keep it short and descriptive :)</p>
+                <br/>
           </div>
           <div className="col-md-6">
-
+            <p className="color-text">Preview</p>
             <div
               className="preview-body single-article-body"
               dangerouslySetInnerHTML={this.getRawMarkupBody()}
@@ -91,36 +156,6 @@ class EditArticle extends React.Component {
       <div className="row">
         <div className="col-md-12">
           <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
-        </div>
-      </div>
-      <div className="modal modal-fullscreen fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div className="modal-body">
-              <center>
-              <div className="row">
-
-                <div className="col-md-6 col-sd-12">
-                  <h1><b>One last thing...</b></h1><h4>Just to make it easy for everyone</h4>
-                  <br/>
-                  <h3><b>What improvements did you make in this edit?</b></h3>
-                  <textarea
-                    ref="what_changed"
-                    className="form-control"
-                    placeholder="Example: Fixed a typo. It's grammer not grammar"
-                     />
-                   <p className="help-block">Keep it short and descriptive :)</p>
-                   <br/>
-                   <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">Update it!</button>
-                </div>
-              </div>
-            </center>
-            </div>
-
-          </div>
         </div>
       </div>
     </div>

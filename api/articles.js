@@ -104,14 +104,16 @@ module.exports =  function(app){
             title: req.body.title,
             body: req.body.body,
             topic_id: req.body.topic_id,
-            what_changed: req.body.what_changed
+            what_changed: req.body.what_changed,
+            user_id: req.body.user_id
           })
           .then(function() {
               Archives.forge().save({
                 article_id: req.body.id,
                 title: article.attributes.title,
                 body: article.attributes.body,
-                what_changed: article.attributes.what_changed
+                what_changed: article.attributes.what_changed,
+                user_id: article.attributes.user_id
               })
               .then(function(article){
                   res.json({

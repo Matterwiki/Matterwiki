@@ -109,7 +109,7 @@ class NewArticle extends React.Component {
                </select>
           </div>
           <div className="col-md-6">
-
+            <p className="color-text">Preview</p>
             <div
               className="preview-body single-article-body"
               dangerouslySetInnerHTML={this.getRawMarkupBody()}
