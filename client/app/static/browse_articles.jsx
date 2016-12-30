@@ -8,6 +8,33 @@ class BrowseArticles extends React.Component {
     this.state = {error: "", articles: [], url: "/api/articles"};
   }
 
+  componentDidMount() {
+    console.log("Component Mounted!");
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'GET',
+               headers: myHeaders,
+               };
+    var that = this;
+    var url = '/api/articles';
+    console.log(url);
+    fetch(url,myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+        that.setState({articles: response.data})
+        console.log(that.state.articles);
+      }
+      console.log(response);
+    });
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log('PREV PROPS');

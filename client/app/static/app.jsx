@@ -23,7 +23,7 @@ class App extends React.Component {
     var that = this;
     return(
       <div>
-      <nav className="navbar container">
+      <nav className="navbar container navbar-default">
         <div className="container-fluid">
           {(localStorage.getItem('userToken')) ?
           <div className="navbar-header">

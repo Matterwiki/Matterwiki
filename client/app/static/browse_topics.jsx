@@ -50,10 +50,18 @@ class BrowseTopics extends React.Component {
       return <Loader />;
     }
     else {
-      return(<div>
-        <div className="list-group">
+      return(
+        <div className="custom-collapse">
+          <div className="visible-xs">
+        <button className="collapse-toggle btn btn-default" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse">
+          View Topics
+         </button>
+        <br/>
+        <br/>
+        </div>
+        <div className="list-group collapse" id="side-menu-collapse">
             {this.state.topics.map(topic => (
-              <a key={topic.id} href="#" className="list-group-item" onClick={(e) => this.topicSelect(topic.id,e)}>
+              <a key={topic.id} href="#" className="list-group-item dropdown-toggle" onClick={(e) => this.topicSelect(topic.id,e)}>
                 <h4 className="list-group-item-heading">{topic.name}</h4>
                 <p className="list-group-item-text">{topic.description}</p>
               </a>

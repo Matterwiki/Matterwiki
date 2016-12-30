@@ -1568,7 +1568,7 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   background-color: #f5f5f5;
-  border: 1px solid #a0a0a0;
+  border: 1px solid #ccc;
 }
 pre code {
   padding: 0;
@@ -2557,7 +2557,7 @@ output {
   color: #4d4d4d;
   background-color: #fff;
   background-image: none;
-  border: 1px solid #a0a0a0;
+  border: 1px solid #ccc;
 }
 .form-control:focus {
   border-color: #a0a0a0;
@@ -3513,7 +3513,7 @@ tbody.collapse.in {
   background-color: #fff;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
-  border: 1px solid #a0a0a0;
+  border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
           box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
@@ -3880,7 +3880,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #555;
   text-align: center;
   background-color: #eee;
-  border: 1px solid #a0a0a0;
+  border: 1px solid #ccc;
 }
 .input-group-addon.input-sm {
   padding: 5px 10px;
@@ -4460,8 +4460,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
-  border-color: #e7e7e7;
+  
 }
 .navbar-default .navbar-brand {
   color: #777;
@@ -6080,7 +6079,7 @@ button.close {
   background-color: #fff;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
-  border: 1px solid #a0a0a0;
+  border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 6px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
