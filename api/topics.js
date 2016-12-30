@@ -154,7 +154,10 @@ module.exports = function(app) {
     the articles are present in the data object in the returning object.
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
-    Topics.where({id: req.params.id}).fetch({withRelated: ['articles']}).then(function(topic) {
+    Topics.where({id: req.params.id}).fetch({withRelated: [{'articles': function(qb) {
+            qb.limit(req.query.count);
+             qb.orderBy("updated_at","DESC");
+         }}]}).then(function(topic) {
       res.status(200).json({
         error: {
           error: false,
