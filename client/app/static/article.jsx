@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import Loader from './loader.jsx';
 import Error from './error.jsx';
 
 class ViewArticle extends React.Component {
@@ -106,7 +107,7 @@ class ViewArticle extends React.Component {
             );
     }
     else {
-      return <div>There are no articles</div>;
+      return <Loader />;
     }
   }
 }

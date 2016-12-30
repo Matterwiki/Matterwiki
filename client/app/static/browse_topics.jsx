@@ -1,5 +1,6 @@
 import React from 'react';
 import Error from './error.jsx';
+import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
 
 class BrowseTopics extends React.Component {
@@ -46,7 +47,7 @@ class BrowseTopics extends React.Component {
       return <Error error={this.state.error} />
     }
     if(this.state.topics.length<1) {
-      return <div>There are no topics</div>;
+      return <Loader />;
     }
     else {
       return(<div>

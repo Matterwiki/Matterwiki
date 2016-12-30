@@ -48,7 +48,6 @@ class Login extends React.Component {
   }
 
   render () {
-
     return(<div className="container login-box row">
       <div className="col-md-12 col-sm-12">
         <h3>Login</h3>

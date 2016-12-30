@@ -1,5 +1,6 @@
 import React from 'react';
 import Error from './error.jsx';
+import Loader from './loader.jsx';
 import {Link, browserHistory} from 'react-router';
 class BrowseArticles extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class BrowseArticles extends React.Component {
       return <Error error={this.state.error} />
     }
     if(this.state.articles.length<1) {
-      return <div>There are no articles</div>;
+      return <Loader />;
     }
     else {
       return(<div>
