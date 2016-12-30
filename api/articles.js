@@ -64,6 +64,9 @@ module.exports =  function(app){
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
     Articles.forge()
+    .query(function(qb) {
+        qb.limit(req.query.count);
+    })
     .fetchAll()
       .then(function (collection) {
         res.json({
