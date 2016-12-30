@@ -8,10 +8,13 @@ class Loader extends React.Component {
 
   componentDidMount() {
     var that = this;
-    setTimeout(function(){
+    this.timeout = setTimeout(function(){
       that.setState({message: "There seems to be a problem in processing your request. Please try again." });
-      console.log("FIRED!");
-    }, 20000);
+    }, 10000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render () {
