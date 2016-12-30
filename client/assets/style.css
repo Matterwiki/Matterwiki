@@ -51,7 +51,7 @@ padding: 0em 2em;
 }
 
 .article-item-title {
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: 700;
 }
 
@@ -83,7 +83,7 @@ padding: 0em 2em;
 
 .single-article-title {
   font-weight: 700;
-  font-size: 4em;
+  font-size: 3.5em;
   margin-bottom: 10px;
 }
 .single-article-meta {
@@ -97,6 +97,8 @@ padding: 0em 2em;
 .single-article-body {
   font-family: "Vollkorn", sans-serif;
   font-size: 1.5em;
+  margin-bottom: 2em;
+padding: 0em 1em;
 }
 
 .new-article .form-control {

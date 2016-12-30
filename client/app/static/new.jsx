@@ -3,6 +3,11 @@ import autosize from 'autosize';
 import Error from './error.jsx';
 import {hashHistory} from 'react-router';
 var Remarkable = require('remarkable');
+var md = new Remarkable({
+html: true,
+breaks: true,
+linkify: true
+});
 
 
 class NewArticle extends React.Component {
@@ -75,7 +80,6 @@ class NewArticle extends React.Component {
 
 
   getRawMarkupBody() {
-    var md = new Remarkable();
     return { __html: md.render(this.state.body) };
   }
 
