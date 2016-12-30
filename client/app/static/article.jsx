@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import Error from './error.jsx';
+var Remarkable = require('remarkable');
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -47,6 +48,13 @@ class ViewArticle extends React.Component {
     console.log(this.props.location.query.new);
 
   }
+
+  getRawMarkupBody() {
+    var md = new Remarkable();
+    return { __html: md.render(this.state.article.body) };
+  }
+
+
   render () {
     if(this.state.error) {
       return <Error error={this.state.error} />
@@ -62,18 +70,18 @@ class ViewArticle extends React.Component {
                   Last updated on {new Date(this.state.article.updated_at).toDateString()}
               </div>
             </div>
-            <div className="single-article-body">
-            {this.state.article.body}
+            <div className="single-article-body"
+              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
             </div>
           </div>
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">
             <div className="sidebar-title">Filed under</div>
-            <h2>{this.state.article.topic.name}</h2>
+            <h2 className="color-text"><b>{this.state.article.topic.name}</b></h2>
             </div>
             <div className="sidebar-block">
             <div className="sidebar-title">Last Updated By</div>
-            <h3>{this.state.article.user.name}</h3>
+            <h3><b>{this.state.article.user.name}</b></h3>
             <p>{this.state.article.user.about}</p>
             </div>
             <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>

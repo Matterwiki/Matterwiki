@@ -60,7 +60,7 @@ class BrowseArticles extends React.Component {
                 <Link to={"/article/"+article.id} >{article.title}</Link>
               </div>
               <div className="article-item-description">
-                {article.body}
+                Last updated on {new Date(article.updated_at).toDateString()}
               </div>
               <hr className="article-separator"></hr>
             </div>

@@ -43,8 +43,6 @@ body{
 }
 
 .article-list {
-  border-left: 1px solid #ccc;
-border-right: 1px solid #ccc;
 padding: 0em 2em;
 }
 
@@ -209,7 +207,7 @@ textarea {
 }
 
 .article-sidebar {
-  background-color: #efefef;
+  background-color: #f6f6f6;
   padding: 2em 1em;
 }
 
@@ -218,8 +216,9 @@ textarea {
 }
 
 .sidebar-title {
-  border-bottom: 1px solid #a0a0a0;
+  border-bottom: 1px solid #ccc;
   padding: 5px;
+  color: #a0a0a0;
 }
 
 @-webkit-keyframes spin {
@@ -264,4 +263,8 @@ textarea {
 
 .what_changed {
   background-color: #efefef;
+}
+
+.list-group-item-heading {
+  font-weight: 700;
 }
