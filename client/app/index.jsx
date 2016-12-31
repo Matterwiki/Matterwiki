@@ -11,6 +11,7 @@ import Article from './static/article.jsx';
 import NewArticle from './static/new.jsx';
 import EditArticle from './static/edit.jsx';
 import ArticleHistory from './static/history.jsx';
+import Admin from './static/admin.jsx';
 
 render(
   <Router history={hashHistory}>
@@ -24,6 +25,7 @@ render(
       <Route path="article/edit/:articleId" component={EditArticle}/>
       <Route path="article/history/:articleId" component={ArticleHistory}/>
       <Route path="article/:articleId" component={Article}/>
+      <Route path="admin" component={Admin}/>
     </Route>
   </Router>
 , document.getElementById('app'));
