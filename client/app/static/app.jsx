@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './login.jsx';
 import {Link, hashHistory} from 'react-router';
+import Alert from 'react-s-alert';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
 
   handleLogout() {
     localStorage.setItem('userToken','');
+    Alert.success("You've been successfully logged out");
   }
 
   render () {
@@ -67,6 +69,7 @@ class App extends React.Component {
         <div className="content container">
           {that.props.children}
           </div>
+           <Alert stack={{limit: 3}} position='bottom'/>
     </div>
 
   );

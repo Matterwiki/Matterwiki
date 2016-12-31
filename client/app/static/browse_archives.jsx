@@ -1,13 +1,13 @@
 import React from 'react';
-import Error from './error.jsx';
 import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
+import Alert from 'react-s-alert';
 
 class BrowseArchives extends React.Component {
   constructor(props) {
     super(props);
     this.archiveSelect = this.archiveSelect.bind(this);
-    this.state = {error: "", archives: []};
+    this.state = { archives: []};
   }
 
   componentDidMount() {
@@ -28,7 +28,7 @@ class BrowseArchives extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({archives: response.data})
         console.log(that.state.archives);
@@ -44,9 +44,6 @@ class BrowseArchives extends React.Component {
 
 
   render () {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
     if(this.state.archives.length<1) {
       return <Loader />;
     }

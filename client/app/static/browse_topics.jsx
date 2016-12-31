@@ -2,12 +2,13 @@ import React from 'react';
 import Error from './error.jsx';
 import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
+import Alert from 'react-s-alert';
 
 class BrowseTopics extends React.Component {
   constructor(props) {
     super(props);
     this.topicSelect = this.topicSelect.bind(this);
-    this.state = {error: "", topics: []};
+    this.state = { topics: []};
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class BrowseTopics extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
         console.log(that.state.topics);
@@ -43,9 +44,6 @@ class BrowseTopics extends React.Component {
 
 
   render () {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
     if(this.state.topics.length<1) {
       return <Loader />;
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import autosize from 'autosize';
 import Error from './error.jsx';
 import {hashHistory} from 'react-router';
+import Alert from 'react-s-alert';
 var Remarkable = require('remarkable');
 var md = new Remarkable({
 html: true,
@@ -39,7 +40,7 @@ class NewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
         console.log(that.state.topics);
@@ -71,8 +72,9 @@ class NewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
+          Alert.success("Article has been successfully saved")
           hashHistory.push('article/'+response.data.id+'?new=true');
       }
     });

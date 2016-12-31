@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
-import Error from './error.jsx';
 var Remarkable = require('remarkable');
+import Alert from 'react-s-alert';
 
 class ViewArticle extends React.Component {
   constructor(props) {
     super(props);
     this.deleteArticle = this.deleteArticle.bind(this);
-    this.state = {error: "", article: {}};
+    this.state = {article: {}};
   }
 
   componentDidUpdate() {
@@ -36,7 +36,7 @@ class ViewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({article: response.data})
         console.log(that.state.article);
@@ -68,9 +68,11 @@ class ViewArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
+        Alert.success("Article has been deleted");
         hashHistory.push('home');
+
       }
     });
   }
@@ -82,9 +84,6 @@ class ViewArticle extends React.Component {
 
 
   render () {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
     if(this.state.article && this.state.article.topic && this.state.article.user) {
       return(<div>
         <div className="row">

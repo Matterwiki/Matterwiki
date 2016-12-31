@@ -2,12 +2,13 @@ import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import Error from './error.jsx';
+import Alert from 'react-s-alert';
 var Remarkable = require('remarkable');
 
 class SimpleArticle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {error: "", article: {}};
+    this.state = { article: {}};
   }
 
   componentWillReceiveProps(nextProps){
@@ -26,7 +27,7 @@ class SimpleArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({article: response.data})
       }

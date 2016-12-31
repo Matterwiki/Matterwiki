@@ -1,12 +1,12 @@
 import React from 'react';
 import Error from './error.jsx';
 import { hashHistory } from 'react-router';
+import Alert from 'react-s-alert';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {error: ""};
   }
 
   componentDidMount(){
@@ -34,12 +34,13 @@ class Login extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         localStorage.setItem('userToken',response.data.token);
         localStorage.setItem('userId',response.data.user.id);
         localStorage.setItem('userEmail',response.data.user.token);
         hashHistory.push('home');
+        Alert.success('You are now logged in');
         console.log("Logged In. Token Received.");
         console.log(localStorage.getItem('userToken'));
       }
@@ -51,7 +52,6 @@ class Login extends React.Component {
     return(<div className="container login-box row">
       <div className="col-md-12 col-sm-12">
         <h3>Login</h3>
-          <Error error={this.state.error} />
           <form>
         <div className="col-sm-12 form-group">
           <input type="email" className="form-control" id="inputEmail" placeholder="Email" />

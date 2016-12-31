@@ -1,11 +1,13 @@
 import React from 'react';
-import Error from './error.jsx';
 import Loader from './loader.jsx';
 import {Link, browserHistory} from 'react-router';
+import Alert from 'react-s-alert';
+
+
 class BrowseArticles extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {error: "", articles: [], url: "/api/articles"};
+    this.state = { articles: [], url: "/api/articles"};
   }
 
   componentDidMount() {
@@ -27,7 +29,7 @@ class BrowseArticles extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({articles: response.data})
         console.log(that.state.articles);
@@ -63,7 +65,7 @@ class BrowseArticles extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({articles: response.data})
         console.log(that.state.articles);
@@ -72,9 +74,6 @@ class BrowseArticles extends React.Component {
     });
   }
   render () {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
     if(this.state.articles.length<1) {
       return <Loader />;
     }

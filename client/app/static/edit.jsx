@@ -2,6 +2,7 @@ import React from 'react';
 import autosize from 'autosize';
 import Error from './error.jsx';
 import {hashHistory} from 'react-router';
+import Alert from 'react-s-alert';
 var Remarkable = require('remarkable');
 var md = new Remarkable({
 html: true,
@@ -15,7 +16,7 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {error: "",body: "",title: "", topics: []};
+    this.state = {body: "",title: "", topics: []};
   }
 
   handleChange() {
@@ -45,8 +46,9 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
+          Alert.success("Article has been successfully saved");
           hashHistory.push('article/'+that.props.params.articleId);
       }
     });
@@ -74,7 +76,7 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({body: response.data.body, title: response.data.title})
         console.log(that.state.body);
@@ -97,7 +99,7 @@ class EditArticle extends React.Component {
     })
     .then(function(response) {
       if(response.error.error)
-        that.setState({error: response.error.message})
+        Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
         console.log(that.state.topics);
