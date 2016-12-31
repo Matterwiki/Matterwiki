@@ -7,6 +7,8 @@ class Admin extends React.Component {
     super(props);
     this.addUser = this.addUser.bind(this);
     this.addTopic = this.addTopic.bind(this);
+    this.deleteTopic = this.deleteTopic.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
     this.state = {users: [], topics: [], error: ""}
   }
 
@@ -118,6 +120,66 @@ class Admin extends React.Component {
     });
   }
 
+  deleteTopic(id,e) {
+    e.preventDefault();
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'DELETE',
+               headers: myHeaders,
+               body: "id="+id
+               };
+    var that = this;
+    fetch('/api/topics/',myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+        topics = that.state.topics
+        var topics = $.grep(topics, function(e){
+           return e.id != id;
+        });
+        that.setState({topics: topics});
+      }
+    });
+  }
+
+
+  deleteUser(id,e) {
+    e.preventDefault();
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'DELETE',
+               headers: myHeaders,
+               body: "id="+id
+               };
+    var that = this;
+    fetch('/api/users/',myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+        users = that.state.users
+        var users = $.grep(users, function(e){
+           return e.id != id;
+        });
+        that.setState({users: users});
+      }
+    });
+  }
+
+
   render () {
     return(
       <div>
@@ -129,6 +191,9 @@ class Admin extends React.Component {
           <div className="list-group bordered-scroll-box">
               {this.state.topics.map(topic => (
                 <a key={topic.id} href="#" className="list-group-item">
+                  <span className="pull-right">
+                    <button className="btn btn-default" type="button"onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
+                  </span>
                   <h4 className="list-group-item-heading">{topic.name}</h4>
                   <p className="list-group-item-text">{topic.description}</p>
                 </a>
@@ -141,6 +206,9 @@ class Admin extends React.Component {
         <div className="list-group bordered-scroll-box">
               {this.state.users.map(user => (
                 <a key={user.id} href="#" className="list-group-item">
+                  {(user.id!=1) ? <span className="pull-right">
+                    <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
+                  </span> : ''}
                   <h4 className="list-group-item-heading">{user.name}</h4>
                   <p className="list-group-item-text">{user.about}</p>
                 </a>

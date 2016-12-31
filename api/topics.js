@@ -18,14 +18,14 @@ module.exports = function(app) {
     This endpoint takes the topic name and topic description from the request body.
     It then saves those values in the database using the insert query.
     */
-    db('topics').insert({name: req.body.name, description: req.body.description}).then( function (topic) {
+    Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
         res.json({
           error: {
             error: false,
             message: ''
           },
           code: 'B121',
-          data: topic
+          data: topic.toJSON()
         });     // responds back to request
      })
      .catch(function(error){

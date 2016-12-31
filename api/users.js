@@ -122,40 +122,41 @@ module.exports = function(app) {
         })
       });
       });
+    });
 
+    app.delete('/users',function(req,res){
+      /*
+      This is a DELETE endpoint for delete a user from the database.
+      It takes the id of the user and then deletes that record from the database.
+      the error key in the returning object is a boolen which is false if there is no error and true otherwise
+      */
 
-  app.delete('/users',function(req,res){
-    /*
-    This is a DELETE endpoint for delete a user from the database.
-    It takes the id of the user and then deletes that record from the database.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
-    */
-
-    Users.forge({id: req.body.id})
-    .destroy()
-      .then(function() {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B137',
-          data: {}
-        });
-      })
-      .catch(function (error) {
-        res.status(500).json({
-          error: {
-            error: true,
-            message: error.message
-          },
-          code: 'B138',
-          data: {
-
-          }
+      Users.forge({id: req.body.id})
+      .destroy()
+        .then(function() {
+          res.json({
+            error: {
+              error: false,
+              message: ''
+            },
+            code: 'B137',
+            data: {}
+          });
         })
-      });
-      });
-  });
+        .catch(function (error) {
+          res.status(500).json({
+            error: {
+              error: true,
+              message: error.message
+            },
+            code: 'B138',
+            data: {
+
+            }
+          })
+        });
+        });
+
+
 
 }
