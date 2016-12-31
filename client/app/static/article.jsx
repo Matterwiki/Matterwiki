@@ -18,9 +18,6 @@ class ViewArticle extends React.Component {
   }
 
   componentDidMount(){
-
-    console.log("Component Mounted!");
-    console.log(this.props.params.articleId);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -31,7 +28,6 @@ class ViewArticle extends React.Component {
     var that = this;
     fetch('/api/articles/'+this.props.params.articleId,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -39,14 +35,8 @@ class ViewArticle extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({article: response.data})
-        console.log(that.state.article);
-        console.log(that.state.article.user);
-        console.log(that.state.article.user.name);
       }
-      console.log(response);
     });
-    console.log("PUB");
-    console.log(this.props.location.query.new);
 
   }
 
@@ -63,7 +53,6 @@ class ViewArticle extends React.Component {
     var that = this;
     fetch('/api/articles/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {

@@ -41,7 +41,6 @@ class EditArticle extends React.Component {
     var that = this;
     fetch('/api/articles/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -60,7 +59,6 @@ class EditArticle extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.params.articleId);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -71,7 +69,6 @@ class EditArticle extends React.Component {
     var that = this;
     fetch('/api/articles/'+this.props.params.articleId,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -79,11 +76,8 @@ class EditArticle extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({body: response.data.body, title: response.data.title})
-        console.log(that.state.body);
       }
-      console.log(response);
     });
-    console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -94,7 +88,6 @@ class EditArticle extends React.Component {
     var that = this;
     fetch('/api/topics',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -102,9 +95,7 @@ class EditArticle extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
-        console.log(that.state.topics);
       }
-      console.log(response);
     });
     autosize(document.querySelectorAll('textarea'));
   }

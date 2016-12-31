@@ -22,7 +22,6 @@ class SimpleArticle extends React.Component {
     var that = this;
     fetch('/api/archives/'+nextProps.archiveId,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -31,7 +30,6 @@ class SimpleArticle extends React.Component {
       else {
         that.setState({article: response.data})
       }
-      console.log(response);
     });
   }
 

@@ -16,7 +16,6 @@ class Login extends React.Component {
   }
 
   handleSubmit(){
-    console.log("Login initiated");
     var email = document.getElementById("inputEmail").value;
     var password = document.getElementById("inputPassword").value;
     var myHeaders = new Headers({
@@ -29,7 +28,6 @@ class Login extends React.Component {
     var that = this;
     fetch('/api/authenticate',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -41,10 +39,7 @@ class Login extends React.Component {
         localStorage.setItem('userEmail',response.data.user.token);
         hashHistory.push('home');
         Alert.success('You are now logged in');
-        console.log("Logged In. Token Received.");
-        console.log(localStorage.getItem('userToken'));
       }
-      console.log(response);
     });
   }
 

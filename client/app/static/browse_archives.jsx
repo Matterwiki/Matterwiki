@@ -11,7 +11,6 @@ class BrowseArchives extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -23,7 +22,6 @@ class BrowseArchives extends React.Component {
     var url = '/api/articles/'+this.props.articleId+'/history';
     fetch(url,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -31,9 +29,7 @@ class BrowseArchives extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({archives: response.data})
-        console.log(that.state.archives);
       }
-      console.log(response);
     });
   }
 

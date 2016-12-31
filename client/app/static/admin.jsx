@@ -24,7 +24,6 @@ class Admin extends React.Component {
     var that = this;
     fetch('/api/topics',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -32,14 +31,11 @@ class Admin extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
-        console.log(that.state.topics);
       }
-      console.log(response);
     });
 
     fetch('/api/users',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -47,9 +43,7 @@ class Admin extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({users: response.data})
-        console.log(that.state.users);
       }
-      console.log(response);
     });
 
   }
@@ -61,7 +55,6 @@ class Admin extends React.Component {
       email: this.refs.user_email.value,
       password: this.refs.user_password.value
     };
-    console.log(user);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -73,7 +66,6 @@ class Admin extends React.Component {
     var that = this;
     fetch('/api/users/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -83,7 +75,6 @@ class Admin extends React.Component {
           $('#addUser').modal('hide');
           var users = that.state.users;
           users.push(response.data);
-          console.log(response.data);
           that.setState({users: users});
           Alert.success('User has been added');
       }
@@ -95,7 +86,6 @@ class Admin extends React.Component {
       name: this.refs.topic_name.value,
       description: this.refs.topic_description.value
     };
-    console.log(topic);
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -107,7 +97,6 @@ class Admin extends React.Component {
     var that = this;
     fetch('/api/topics/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -136,7 +125,6 @@ class Admin extends React.Component {
     var that = this;
     fetch('/api/topics/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -167,7 +155,6 @@ class Admin extends React.Component {
     var that = this;
     fetch('/api/users/',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {

@@ -12,7 +12,6 @@ class BrowseTopics extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -23,7 +22,6 @@ class BrowseTopics extends React.Component {
     var that = this;
     fetch('/api/topics',myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -31,9 +29,7 @@ class BrowseTopics extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({topics: response.data})
-        console.log(that.state.topics);
       }
-      console.log(response);
     });
   }
 

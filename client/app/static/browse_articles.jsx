@@ -11,7 +11,6 @@ class BrowseArticles extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -21,10 +20,8 @@ class BrowseArticles extends React.Component {
                };
     var that = this;
     var url = '/api/articles';
-    console.log(url);
     fetch(url,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -32,18 +29,11 @@ class BrowseArticles extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({articles: response.data})
-        console.log(that.state.articles);
       }
-      console.log(response);
     });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('PREV PROPS');
-    console.log(this.props.topicId);
-    console.log('NEXT PROPS');
-    console.log(nextProps.topicId);
-    console.log("Component Mounted!");
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -57,10 +47,8 @@ class BrowseArticles extends React.Component {
       var url = '/api/articles';
     else
       var url = '/api/topic/'+nextProps.topicId+'/articles';
-    console.log(url);
     fetch(url,myInit)
     .then(function(response) {
-      console.log(response);
       return response.json();
     })
     .then(function(response) {
@@ -68,9 +56,7 @@ class BrowseArticles extends React.Component {
         Alert.error(response.error.message);
       else {
         that.setState({articles: response.data})
-        console.log(that.state.articles);
       }
-      console.log(response);
     });
   }
   render () {
