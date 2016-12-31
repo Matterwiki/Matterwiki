@@ -277,3 +277,9 @@ textarea {
   			display:block;
       }
 }
+
+.bordered-scroll-box {
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  height: 500px;
+}

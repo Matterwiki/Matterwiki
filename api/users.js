@@ -61,6 +61,10 @@ module.exports = function(app) {
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
     Users.forge()
+    .query(function(qb) {
+        qb.select('id','name','about','email');
+        qb.orderBy('created_at','DESC');
+    })
     .fetchAll()
       .then(function (collection) {
         res.json({
@@ -118,7 +122,7 @@ module.exports = function(app) {
         })
       });
       });
-      
+
 
   app.delete('/users',function(req,res){
     /*

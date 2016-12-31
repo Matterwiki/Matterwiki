@@ -47,6 +47,12 @@ class App extends React.Component {
           {(localStorage.getItem('userToken')) ?
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
+              {(localStorage.getItem('userId')==1) ?
+                <li><Link to="admin" className="">Admin
+                  </Link>
+                </li> :
+                ''
+              }
              <li><Link to="article/new" className="">New Article
               </Link>
             </li>
