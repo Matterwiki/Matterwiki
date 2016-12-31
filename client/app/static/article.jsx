@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Error from './error.jsx';
 var Remarkable = require('remarkable');
@@ -7,6 +7,7 @@ var Remarkable = require('remarkable');
 class ViewArticle extends React.Component {
   constructor(props) {
     super(props);
+    this.deleteArticle = this.deleteArticle.bind(this);
     this.state = {error: "", article: {}};
   }
 
@@ -49,6 +50,31 @@ class ViewArticle extends React.Component {
 
   }
 
+  deleteArticle(e) {
+    e.preventDefault();
+    var myHeaders = new Headers({
+        "Content-Type": "application/x-www-form-urlencoded",
+        "x-access-token": localStorage.getItem('userToken')
+    });
+    var myInit = { method: 'DELETE',
+               headers: myHeaders,
+               body: "id="+this.state.article.id
+               };
+    var that = this;
+    fetch('/api/articles/',myInit)
+    .then(function(response) {
+      console.log(response);
+      return response.json();
+    })
+    .then(function(response) {
+      if(response.error.error)
+        that.setState({error: response.error.message})
+      else {
+        hashHistory.push('home');
+      }
+    });
+  }
+
   getRawMarkupBody() {
     var md = new Remarkable();
     return { __html: md.render(this.state.article.body) };
@@ -86,6 +112,8 @@ class ViewArticle extends React.Component {
             </div>
             <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
             <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">History</Link>
+            {(localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>Delete</button>
+          : ''}
           </div>
             </div>
 
