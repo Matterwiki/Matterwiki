@@ -2,6 +2,7 @@ import React from 'react';
 import autosize from 'autosize';
 import Error from './error.jsx';
 import {hashHistory} from 'react-router';
+import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 var Remarkable = require('remarkable');
 var md = new Remarkable({
@@ -16,7 +17,7 @@ class NewArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {body: "", topics: [], error: ""};
+    this.state = {body: "", topics: [], error: "", loading: true};
   }
 
   handleChange() {
@@ -42,6 +43,7 @@ class NewArticle extends React.Component {
       else {
         that.setState({topics: response.data})
       }
+      that.setState({loading: false});
     });
     autosize(document.querySelectorAll('textarea'));
   }
@@ -81,6 +83,9 @@ class NewArticle extends React.Component {
   }
 
   render() {
+    if(this.state.loading)
+      return <Loader/>;
+    else
     return (
       <div className="new-article">
         <Error error={this.state.error} />

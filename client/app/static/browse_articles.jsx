@@ -7,7 +7,7 @@ import Alert from 'react-s-alert';
 class BrowseArticles extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { articles: [], url: "/api/articles"};
+    this.state = { articles: [], url: "/api/articles", loading: true};
   }
 
   componentDidMount() {
@@ -30,10 +30,12 @@ class BrowseArticles extends React.Component {
       else {
         that.setState({articles: response.data})
       }
+      that.setState({loading: false});
     });
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({loading: true});
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": localStorage.getItem('userToken')
@@ -57,11 +59,14 @@ class BrowseArticles extends React.Component {
       else {
         that.setState({articles: response.data})
       }
+      that.setState({loading: false});
     });
   }
   render () {
+    if(this.state.loading)
+      return <Loader/>;
     if(this.state.articles.length<1) {
-      return <Loader />;
+      return <p className="help-block center-align">There are no articles under this topic</p>;
     }
     else {
       return(<div>

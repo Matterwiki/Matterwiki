@@ -1,8 +1,8 @@
 import React from 'react';
 import autosize from 'autosize';
-import Error from './error.jsx';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import Loader from './loader.jsx';
 var Remarkable = require('remarkable');
 var md = new Remarkable({
 html: true,
@@ -16,11 +16,11 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {body: "",title: "", topics: []};
+    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true};
   }
 
   handleChange() {
-    this.setState({body: this.refs.body.value});
+    this.setState({body: this.refs.body.value, title: this.refs.title.value});
   }
 
   handleSubmit(e) {
@@ -75,8 +75,9 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({body: response.data.body, title: response.data.title})
+        that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
       }
+      that.setState({loading: false});
     });
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -101,62 +102,66 @@ class EditArticle extends React.Component {
   }
 
   render() {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
-    return (
-      <div className="new-article">
+    if(this.state.loading)
+      return <Loader/>;
+    if(this.state.body && this.state.title && this.state.topics)
+      return (
+        <div className="new-article">
+          <div className="row">
+            <div className="col-md-12">
+              <textarea
+                onChange={this.handleChange}
+                ref="title"
+                className="form-control input-title"
+                value={this.state.title}
+                 />
+           </div>
+           </div>
+           <div className="row">
+            <div className="col-md-6 new-article-form">
+              <textarea
+                onChange={this.handleChange}
+                ref="body"
+                className="form-control input-body"
+                value={this.state.body}
+                 />
+                 <br/>
+                 <label>Choose topic</label>
+                 <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>
+                   {this.state.topics.map(topic => (
+                     <option value={topic.id} key={topic.id}>{topic.name}</option>
+                   ))}
+                 </select>
+                 <br/>
+                 <label>What improvements did you make in this edit?</label>
+                 <textarea
+                   ref="what_changed"
+                   className="form-control what_changed"
+                   placeholder="Example: Fixed a typo. It's grammer not grammar"
+                    />
+                  <p className="help-block">Keep it short and descriptive :)</p>
+                  <br/>
+            </div>
+            <div className="col-md-6">
+              <p className="color-text">Preview</p>
+              <div
+                className="preview-body single-article-body"
+                dangerouslySetInnerHTML={this.getRawMarkupBody()}
+              />
+            </div>
+          </div>
+          <br/>
+          <br/>
         <div className="row">
           <div className="col-md-12">
-            <textarea
-              ref="title"
-              className="form-control input-title"
-              value={this.state.title}
-               />
-         </div>
-         </div>
-         <div className="row">
-          <div className="col-md-6 new-article-form">
-            <textarea
-              onChange={this.handleChange}
-              ref="body"
-              className="form-control input-body"
-              value={this.state.body}
-               />
-               <br/>
-               <label>Choose topic</label>
-               <select className="form-control topic-select" ref="topic">
-                 {this.state.topics.map(topic => (
-                   <option value={topic.id} key={topic.id}>{topic.name}</option>
-                 ))}
-               </select>
-               <br/>
-               <label>What improvements did you make in this edit?</label>
-               <textarea
-                 ref="what_changed"
-                 className="form-control what_changed"
-                 placeholder="Example: Fixed a typo. It's grammer not grammar"
-                  />
-                <p className="help-block">Keep it short and descriptive :)</p>
-                <br/>
+            <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
           </div>
-          <div className="col-md-6">
-            <p className="color-text">Preview</p>
-            <div
-              className="preview-body single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}
-            />
-          </div>
-        </div>
-        <br/>
-        <br/>
-      <div className="row">
-        <div className="col-md-12">
-          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
         </div>
       </div>
-    </div>
-    );
+      );
+    else {
+      return <p className="help-block center-align">There was a problem loading this article</p>
+    }
   }
 }
 

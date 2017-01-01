@@ -8,7 +8,7 @@ class BrowseTopics extends React.Component {
   constructor(props) {
     super(props);
     this.topicSelect = this.topicSelect.bind(this);
-    this.state = { topics: []};
+    this.state = { topics: [], loading: true};
   }
 
   componentDidMount() {
@@ -30,6 +30,7 @@ class BrowseTopics extends React.Component {
       else {
         that.setState({topics: response.data})
       }
+    that.setState({loading: false});
     });
   }
 
@@ -40,8 +41,10 @@ class BrowseTopics extends React.Component {
 
 
   render () {
+    if(this.state.loading)
+      return <Loader/>;
     if(this.state.topics.length<1) {
-      return <Loader />;
+      return <p className="help-block center-align">There are no topics created yet</p>;
     }
     else {
       return(

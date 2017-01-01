@@ -1,6 +1,7 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import Loader from './loader.jsx';
 
 class Admin extends React.Component {
 
@@ -10,7 +11,7 @@ class Admin extends React.Component {
     this.addTopic = this.addTopic.bind(this);
     this.deleteTopic = this.deleteTopic.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-    this.state = {users: [], topics: [], error: ""}
+    this.state = {loading_topics: true, loading_users: true, users: [], topics: [], error: ""}
   }
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class Admin extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({topics: response.data})
+        that.setState({topics: response.data, loading_topics: false})
       }
     });
 
@@ -42,7 +43,7 @@ class Admin extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({users: response.data})
+        that.setState({users: response.data, loading_users: false})
       }
     });
 
@@ -173,115 +174,118 @@ class Admin extends React.Component {
 
 
   render () {
-    return(
-      <div>
-        <div className="row container">
-      <div className="col-md-6">
-        <button className="btn btn-default" data-toggle="modal" data-target="#addTopic">Add Topic</button>
-        <br/>
-        <br/>
-          <div className="list-group bordered-scroll-box">
-              {this.state.topics.map(topic => (
-                <a key={topic.id} href="#" className="list-group-item">
-                  <span className="pull-right">
-                    <button className="btn btn-default" type="button"onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
-                  </span>
-                  <h4 className="list-group-item-heading">{topic.name}</h4>
-                  <p className="list-group-item-text">{topic.description}</p>
-                </a>
-            ))}</div>
-      </div>
-      <div className="col-md-6">
-        <button className="btn btn-default" data-toggle="modal" data-target="#addUser">Add User</button>
-        <br/>
-        <br/>
-        <div className="list-group bordered-scroll-box">
-              {this.state.users.map(user => (
-                <a key={user.id} href="#" className="list-group-item">
-                  {(user.id!=1) ? <span className="pull-right">
-                    <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
-                  </span> : ''}
-                  <h4 className="list-group-item-heading">{user.name}</h4>
-                  <p className="list-group-item-text">{user.about}</p>
-                </a>
-            ))}</div>
-      </div>
-      </div>
-
-      <div className="modal modal-fullscreen fade" id="addUser" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div className="modal-body">
-              <center>
-              <div className="row">
-
-                <div className="col-md-6 col-sd-12">
-                  <h1><b>Add User</b></h1>
-                  <br/>
-                    <form>
-                      <div className="col-sm-12 form-group">
-                        <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" />
-                      </div>
-                      <div className="col-sm-12 form-group">
-                        <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" />
-                      </div>
-                  <div className="col-sm-12 form-group">
-                    <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder="Email" />
-                  </div>
-                  <div className="col-sm-12 form-group">
-                    <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
-                  </div>
-                  <div className="col-sm-12 form-group">
-                    <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">Add User</button>
-                  </div>
-                </form>
-                </div>
-              </div>
-            </center>
-            </div>
-
+    if(this.state.loading_users && this.state.loading_users)
+      return <Loader />
+    else
+        return(
+          <div>
+            <div className="row container">
+          <div className="col-md-6">
+            <button className="btn btn-default" data-toggle="modal" data-target="#addTopic">Add Topic</button>
+            <br/>
+            <br/>
+              <div className="list-group bordered-scroll-box">
+                  {this.state.topics.map(topic => (
+                    <a key={topic.id} href="#" className="list-group-item">
+                      <span className="pull-right">
+                        <button className="btn btn-default" type="button"onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
+                      </span>
+                      <h4 className="list-group-item-heading">{topic.name}</h4>
+                      <p className="list-group-item-text">{topic.description}</p>
+                    </a>
+                ))}</div>
           </div>
-        </div>
-      </div>
-
-
-      <div className="modal modal-fullscreen fade" id="addTopic" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div className="modal-body">
-              <center>
-              <div className="row">
-
-                <div className="col-md-6 col-sd-12">
-                  <h1><b>Add Topic</b></h1>
-                  <br/>
-                    <form>
-                      <div className="col-sm-12 form-group">
-                        <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder="Name" />
-                      </div>
-                      <div className="col-sm-12 form-group">
-                        <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder="Description" />
-                      </div>
-                  <div className="col-sm-12 form-group">
-                    <button onClick={this.addTopic} className="btn btn-default btn-block btn-lg">Add Topic</button>
-                  </div>
-                </form>
-                </div>
-              </div>
-            </center>
-            </div>
-
+          <div className="col-md-6">
+            <button className="btn btn-default" data-toggle="modal" data-target="#addUser">Add User</button>
+            <br/>
+            <br/>
+            <div className="list-group bordered-scroll-box">
+                  {this.state.users.map(user => (
+                    <a key={user.id} href="#" className="list-group-item">
+                      {(user.id!=1) ? <span className="pull-right">
+                        <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
+                      </span> : ''}
+                      <h4 className="list-group-item-heading">{user.name}</h4>
+                      <p className="list-group-item-text">{user.about}</p>
+                    </a>
+                ))}</div>
           </div>
-        </div>
-      </div>
+          </div>
 
-    </div>);
+          <div className="modal modal-fullscreen fade" id="addUser" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div className="modal-body">
+                  <center>
+                  <div className="row">
+
+                    <div className="col-md-6 col-sd-12">
+                      <h1><b>Add User</b></h1>
+                      <br/>
+                        <form>
+                          <div className="col-sm-12 form-group">
+                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" />
+                          </div>
+                          <div className="col-sm-12 form-group">
+                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" />
+                          </div>
+                      <div className="col-sm-12 form-group">
+                        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder="Email" />
+                      </div>
+                      <div className="col-sm-12 form-group">
+                        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
+                      </div>
+                      <div className="col-sm-12 form-group">
+                        <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">Add User</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </center>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div className="modal modal-fullscreen fade" id="addTopic" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div className="modal-body">
+                  <center>
+                  <div className="row">
+
+                    <div className="col-md-6 col-sd-12">
+                      <h1><b>Add Topic</b></h1>
+                      <br/>
+                        <form>
+                          <div className="col-sm-12 form-group">
+                            <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder="Name" />
+                          </div>
+                          <div className="col-sm-12 form-group">
+                            <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder="Description" />
+                          </div>
+                      <div className="col-sm-12 form-group">
+                        <button onClick={this.addTopic} className="btn btn-default btn-block btn-lg">Add Topic</button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </center>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>);
   }
 }
 

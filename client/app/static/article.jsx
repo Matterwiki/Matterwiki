@@ -8,7 +8,7 @@ class ViewArticle extends React.Component {
   constructor(props) {
     super(props);
     this.deleteArticle = this.deleteArticle.bind(this);
-    this.state = {article: {}};
+    this.state = {article: {}, loading: true};
   }
 
   componentDidUpdate() {
@@ -36,6 +36,7 @@ class ViewArticle extends React.Component {
       else {
         that.setState({article: response.data})
       }
+      that.setState({loading: false})
     });
 
   }
@@ -73,7 +74,9 @@ class ViewArticle extends React.Component {
 
 
   render () {
-    if(this.state.article && this.state.article.topic && this.state.article.user) {
+    if(this.state.loading)
+      return <Loader/>;
+    else if(this.state.article && this.state.article.topic && this.state.article.user) {
       return(<div>
         <div className="row">
           <div className="col-md-9">
@@ -130,9 +133,6 @@ class ViewArticle extends React.Component {
               </div>
           </div>
             );
-    }
-    else {
-      return <Loader />;
     }
   }
 }

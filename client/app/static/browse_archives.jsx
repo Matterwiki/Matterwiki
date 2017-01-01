@@ -7,7 +7,7 @@ class BrowseArchives extends React.Component {
   constructor(props) {
     super(props);
     this.archiveSelect = this.archiveSelect.bind(this);
-    this.state = { archives: []};
+    this.state = { archives: [], loading: true};
   }
 
   componentDidMount() {
@@ -30,6 +30,7 @@ class BrowseArchives extends React.Component {
       else {
         that.setState({archives: response.data})
       }
+      that.setState({loading: false});
     });
   }
 
@@ -40,8 +41,10 @@ class BrowseArchives extends React.Component {
 
 
   render () {
+    if(this.state.loading)
+      return <Loader/>;
     if(this.state.archives.length<1) {
-      return <Loader />;
+      return <p className="help-block center-align">There are no archives for this article</p>;
     }
     else {
       return(

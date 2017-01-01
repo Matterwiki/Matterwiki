@@ -11,7 +11,11 @@ class ArticleHistory extends React.Component {
   constructor(props) {
     super(props);
     this.archiveUpdate = this.archiveUpdate.bind(this);
-    this.state = {archive_id: ""};
+    this.state = {archive_id: "", loading: true};
+  }
+
+  componentDidMount() {
+    this.setState({loading: false});
   }
 
 
@@ -20,6 +24,9 @@ class ArticleHistory extends React.Component {
   }
 
   render () {
+    if(this.state.loading)
+      return <Loader/>;
+    else
       return(
         <div className="row">
           <div className="col-md-3">
