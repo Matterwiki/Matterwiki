@@ -417,3 +417,8 @@ textarea {
     visibility: hidden;
     position: fixed;
 }
+
+
+.center-align {
+  text-align: center;
+}
