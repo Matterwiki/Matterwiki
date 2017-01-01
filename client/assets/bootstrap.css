@@ -1189,7 +1189,7 @@ h6,
 .h6 {
   font-family: inherit;
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.5;
   color: inherit;
 }
 h1 small,
@@ -4460,7 +4460,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  
+
 }
 .navbar-default .navbar-brand {
   color: #777;

@@ -31,6 +31,9 @@ app.get('/api',function(req,res){
 // Importing all endpoints for authentication
 require('./api/authentication')(app);
 
+// Importing the setup endpoint
+require('./api/setup')(app);
+
 apiRoutes.use(function(req, res, next) {
 
   // check header or url parameters or post parameters for token
