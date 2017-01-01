@@ -146,41 +146,6 @@ module.exports =  function(app){
     });
 
 
-  app.delete('/articles',function(req,res){
-    /*
-    This is a DELETE endpoint for delete a complete article from the database.
-    It takes the id of the article and then deletes that record from the database.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
-    */
-
-    Articles.forge({id: req.body.id})
-    .destroy()
-      .then(function() {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B109',
-          data: {
-
-          }
-        });
-      })
-      .catch(function (error) {
-        res.status(500).json({
-          error: {
-            error: true,
-            message: error.message
-          },
-          code: 'B110',
-          data: {
-
-          }
-        });
-      });
-  });
-
 
   app.get('/articles/compare',function(req,res){
     /*

@@ -11,6 +11,7 @@ var bodyParser = require('body-parser'); //body parser to parse the request body
 var db = require('./db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 var app = express();
 var apiRoutes = express.Router();
+var apiRoutesAdmin = express.Router();
 var jwt = require('jsonwebtoken');
 var misc = require('./misc.js');
 var config = require('./config'); //config file in the app directory which contains the JWT key
@@ -74,6 +75,66 @@ apiRoutes.use(function(req, res, next) {
   }
 });
 
+
+apiRoutesAdmin.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+    // verifies secret and checks for expiration
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+      if (err) {
+        return res.json({
+          error: {
+            error: true,
+            message: 'Failed to authenticate token'
+          },
+          code: 'B101',
+          data: {
+
+          }
+        });
+      } else {
+        if(decoded.id == 1) {
+          // if everything is good, save to request for use in other routes
+          req.decoded = decoded;
+          next();
+        }
+        else {
+          return res.status(403).json({
+            error: {
+              error: true,
+              message: 'You are not authorized to perform this action'
+            },
+            code: 'BNOTADMIN',
+            data: {
+
+            }
+          });
+        }
+      }
+    });
+
+  } else {
+    // if there is no token
+    // return an error
+    return res.status(403).json({
+      error: {
+        error: true,
+        message: 'No token provided'
+      },
+      code: 'B102',
+      data: {
+
+      }
+    });
+
+  }
+});
+
+
 // Importing all endpoints for articles
 require('./api/articles')(apiRoutes);
 
@@ -81,12 +142,17 @@ require('./api/articles')(apiRoutes);
 require('./api/topics')(apiRoutes);
 
 // Importing all endpoints for users
-require('./api/users')(apiRoutes);
+require('./api/users')(apiRoutesAdmin);
 
 // Importing all endpoints for archives
 require('./api/archives')(apiRoutes);
 
+// Importing all endpoints which are only admin accessible
+require('./api/admin')(apiRoutesAdmin);
+
+
 app.use('/api', apiRoutes);
+app.use('/api', apiRoutesAdmin);
 
 app.use(express.static(__dirname + '/client'));
 
