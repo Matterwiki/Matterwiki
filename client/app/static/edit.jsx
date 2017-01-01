@@ -104,7 +104,7 @@ class EditArticle extends React.Component {
   render() {
     if(this.state.loading)
       return <Loader/>;
-    if(this.state.body && this.state.title && this.state.topics)
+    else
       return (
         <div className="new-article">
           <div className="row">
@@ -159,9 +159,6 @@ class EditArticle extends React.Component {
         </div>
       </div>
       );
-    else {
-      return <p className="help-block center-align">There was a problem loading this article</p>
-    }
   }
 }
 
