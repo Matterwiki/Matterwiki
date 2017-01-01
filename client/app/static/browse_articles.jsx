@@ -27,6 +27,12 @@ class BrowseArticles extends React.Component {
     .then(function(response) {
       if(response.error.error)
         Alert.error(response.error.message);
+        // If we have an unauthorized token, we remove the token from localStorage
+        // and redirect to the login page so the user could generate another token.
+        if(response.code = 'B101') {
+          localStorage.setItem('userToken','');
+          hashHistory('/');
+        }
       else {
         that.setState({articles: response.data})
       }
