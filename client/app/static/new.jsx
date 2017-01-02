@@ -3,6 +3,7 @@ import autosize from 'autosize';
 import Error from './error.jsx';
 import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
+import Markdown from './markdown.jsx';
 import Alert from 'react-s-alert';
 var Remarkable = require('remarkable');
 var md = new Remarkable({
@@ -126,8 +127,27 @@ class NewArticle extends React.Component {
         <br/>
         <br/>
       <div className="row">
+        <button className="btn btn-default" data-toggle="modal" data-target="#myModal">Markdown Help</button>
+        <br/>
+        <br/>
         <div className="col-md-12">
           <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
+        </div>
+      </div>
+      <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h1><b>Markdown Guide</b></h1>
+            </div>
+            <div className="modal-body">
+              <center>
+                  <Markdown />
+              </center>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
