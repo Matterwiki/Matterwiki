@@ -39,5 +39,3 @@ jspm_packages
 client/public
 db
 db/matterwiki.sqlite
-
-config.js
