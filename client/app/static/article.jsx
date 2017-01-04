@@ -20,7 +20,7 @@ class ViewArticle extends React.Component {
   componentDidMount(){
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -45,7 +45,7 @@ class ViewArticle extends React.Component {
     e.preventDefault();
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'DELETE',
                headers: myHeaders,
@@ -107,7 +107,7 @@ class ViewArticle extends React.Component {
             </div>
             <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
             <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">History</Link>
-            {(localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>Delete</button>
+            {(window.localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>Delete</button>
           : ''}
           </div>
             </div>

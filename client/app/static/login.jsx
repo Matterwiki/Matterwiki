@@ -10,12 +10,13 @@ class Login extends React.Component {
   }
 
   componentDidMount(){
-    if(localStorage.getItem('userToken')) {
+    if(window.localStorage.getItem('userToken')) {
       hashHistory.push('home');
     }
   }
 
-  handleSubmit(){
+  handleSubmit(e){
+    e.preventDefault();
     var email = document.getElementById("inputEmail").value;
     var password = document.getElementById("inputPassword").value;
     var myHeaders = new Headers({
@@ -34,9 +35,9 @@ class Login extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        localStorage.setItem('userToken',response.data.token);
-        localStorage.setItem('userId',response.data.user.id);
-        localStorage.setItem('userEmail',response.data.user.token);
+        window.localStorage.setItem('userToken',response.data.token);
+        window.localStorage.setItem('userId',response.data.user.id);
+        window.localStorage.setItem('userEmail',response.data.user.token);
         hashHistory.push('home');
         Alert.success('You are now logged in');
       }

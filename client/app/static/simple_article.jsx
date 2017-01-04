@@ -14,7 +14,7 @@ class SimpleArticle extends React.Component {
   componentWillReceiveProps(nextProps){
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,

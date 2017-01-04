@@ -210,8 +210,8 @@ textarea {
 }
 
 .article-sidebar {
-  background-color: #f6f6f6;
   padding: 2em 1em;
+  border-left: 1px solid #efefef;
 }
 
 .sidebar-block {

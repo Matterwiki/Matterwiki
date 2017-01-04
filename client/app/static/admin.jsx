@@ -17,7 +17,7 @@ class Admin extends React.Component {
   componentDidMount() {
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -58,7 +58,7 @@ class Admin extends React.Component {
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'POST',
                headers: myHeaders,
@@ -89,7 +89,7 @@ class Admin extends React.Component {
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'POST',
                headers: myHeaders,
@@ -117,7 +117,7 @@ class Admin extends React.Component {
     e.preventDefault();
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'DELETE',
                headers: myHeaders,
@@ -147,7 +147,7 @@ class Admin extends React.Component {
     e.preventDefault();
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'DELETE',
                headers: myHeaders,

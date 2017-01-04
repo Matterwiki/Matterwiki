@@ -11,13 +11,13 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    if(localStorage.getItem('userToken')==null) {
-      hashHistory('login');
+    if(window.localStorage.getItem('userToken')==null) {
+      hashHistory.push('login');
     }
   }
 
   handleLogout() {
-    localStorage.setItem('userToken','');
+    window.localStorage.setItem('userToken','');
     Alert.success("You've been successfully logged out");
   }
 
@@ -27,7 +27,7 @@ class App extends React.Component {
       <div>
       <nav className="navbar container navbar-default">
         <div className="container-fluid">
-          {(localStorage.getItem('userToken')) ?
+          {(window.localStorage.getItem('userToken')) ?
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span className="sr-only">Toggle navigation</span>
@@ -46,10 +46,10 @@ class App extends React.Component {
           </a>
         </center>
         }
-          {(localStorage.getItem('userToken')) ?
+          {(window.localStorage.getItem('userToken')) ?
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              {(localStorage.getItem('userId')==1) ?
+              {(window.localStorage.getItem('userId')==1) ?
                 <li><Link to="admin" className="">Admin
                   </Link>
                 </li> :

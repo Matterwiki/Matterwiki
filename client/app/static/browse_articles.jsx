@@ -1,6 +1,6 @@
 import React from 'react';
 import Loader from './loader.jsx';
-import {Link, browserHistory} from 'react-router';
+import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
 
@@ -13,7 +13,7 @@ class BrowseArticles extends React.Component {
   componentDidMount() {
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -38,7 +38,7 @@ class BrowseArticles extends React.Component {
     this.setState({loading: true});
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,

@@ -33,11 +33,11 @@ class EditArticle extends React.Component {
 
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'PUT',
                headers: myHeaders,
-               body: "id="+this.props.params.articleId+"&title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+localStorage.getItem("userId")+"&what_changed="+what_changed
+               body: "id="+this.props.params.articleId+"&title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
                };
     var that = this;
     fetch('/api/articles/',myInit)
@@ -62,7 +62,7 @@ class EditArticle extends React.Component {
   componentDidMount() {
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -82,7 +82,7 @@ class EditArticle extends React.Component {
     });
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,

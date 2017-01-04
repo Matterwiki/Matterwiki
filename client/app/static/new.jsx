@@ -28,7 +28,7 @@ class NewArticle extends React.Component {
   componentDidMount() {
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'GET',
                headers: myHeaders,
@@ -57,11 +57,11 @@ class NewArticle extends React.Component {
 
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": localStorage.getItem('userToken')
+        "x-access-token": window.localStorage.getItem('userToken')
     });
     var myInit = { method: 'POST',
                headers: myHeaders,
-               body: "title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+localStorage.getItem("userId")
+               body: "title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
                };
     var that = this;
     fetch('/api/articles/',myInit)
