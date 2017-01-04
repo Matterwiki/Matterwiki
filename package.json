@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -d --watch",
-    "webpack-server": "webpack-dev-server --content-base client/",
-    "build": "webpack -p"
+    "dev": "./node_modules/.bin/webpack -d --watch",
+    "webpack-server": "./node_modules/.bin/webpack-dev-server --content-base client/",
+    "build": "./node_modules/.bin/webpack -p"
   },
   "bin": {
     "wiki": "./install.js"
