@@ -12,6 +12,9 @@
   "bin": {
     "wiki": "./install.js"
   },
+  "engines": {
+    "node": "~0.12.0 || ^4.2.0 || ^6.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nshntarora/matterwiki.git"
