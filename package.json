@@ -24,6 +24,7 @@
   "homepage": "https://github.com/nshntarora/matterwiki#readme",
   "dependencies": {
     "autosize": "^3.0.20",
+    "babel-core": "^6.21.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
