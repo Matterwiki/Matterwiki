@@ -10,6 +10,7 @@ The above users endpoints are not present in this file as they are all the users
 endpoints this API has, they are present in a separate file, users.js
 All those still come under the ADMIN endpoints
 
+POST /topics
 PUT /topics
 DELETE /topics
 DELETE /articles
@@ -23,6 +24,35 @@ var Articles = require('../models/article.js');
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
 module.exports = function(app) {
+
+  app.post('/topics',function(req,res){
+    /*
+    This endpoint takes the topic name and topic description from the request body.
+    It then saves those values in the database using the insert query.
+    */
+    Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
+        res.json({
+          error: {
+            error: false,
+            message: ''
+          },
+          code: 'B121',
+          data: topic.toJSON()
+        });     // responds back to request
+     })
+     .catch(function(error){
+       res.status(500).json({
+         error: {
+           error: true,
+           message: error.message
+         },
+         code: 'B122',
+         data: {
+
+         }
+       })
+     })
+  });
 
   app.put('/topics',function(req,res){
     /*
