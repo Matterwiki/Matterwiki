@@ -1,5 +1,10 @@
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
+
+<img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/header-image.png?raw=true" />
+
+
+
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/header-tagline.png?raw=true" />
 
 People use it to store documentation, notes, culture guidelines, employee onboarding content and everything else they want to.
