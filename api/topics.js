@@ -13,36 +13,6 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 module.exports = function(app) {
 
 
-  app.post('/topics',function(req,res){
-    /*
-    This endpoint takes the topic name and topic description from the request body.
-    It then saves those values in the database using the insert query.
-    */
-    Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B121',
-          data: topic.toJSON()
-        });     // responds back to request
-     })
-     .catch(function(error){
-       res.status(500).json({
-         error: {
-           error: true,
-           message: error.message
-         },
-         code: 'B122',
-         data: {
-
-         }
-       })
-     })
-  });
-
-
   app.get('/topics',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the topics in the topics table

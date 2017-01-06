@@ -1,9 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
-import Error from './error.jsx';
 import Alert from 'react-s-alert';
-var Remarkable = require('remarkable');
 
 class SimpleArticle extends React.Component {
   constructor(props) {
@@ -34,15 +32,11 @@ class SimpleArticle extends React.Component {
   }
 
   getRawMarkupBody() {
-    var md = new Remarkable();
-    return { __html: md.render(this.state.article.body) };
+    return { __html: this.state.article.body };
   }
 
 
   render () {
-    if(this.state.error) {
-      return <Error error={this.state.error} />
-    }
     if(this.state.article && this.state.article.user) {
       return(<div className="row">
           <div className="col-md-12">

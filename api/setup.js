@@ -7,6 +7,7 @@ comment in the articles.js (same directory).
 
 // Importing the topics model
 var Users = require('../models/user.js');
+var Topics = require('../models/topic.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
@@ -30,15 +31,16 @@ module.exports = function(app) {
           about: req.body.about
         })
         .then(function (collection) {
-          res.json({
-            error: {
-              error: false,
-              message: ''
-            },
-            code: 'B131',
-            data: collection.toJSON()
+          Topics.forge().save({name: "general", description: "knowledge for everyone"}).then(function(topic){
+            res.json({
+              error: {
+                error: false,
+                message: ''
+              },
+              code: 'B131',
+              data: collection.toJSON()
+            });
           })
-        })
         .catch(function (error) {
           res.status(500).json({
             error: {
@@ -51,6 +53,7 @@ module.exports = function(app) {
             }
           })
         });
+      });
         });
       });
 
