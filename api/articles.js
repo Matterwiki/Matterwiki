@@ -255,7 +255,7 @@ module.exports =  function(app){
     */
 
     Articles.where({id: req.params.id}).fetch({withRelated: [{'archives': function(qb) {
-             qb.orderBy("created_at","DESC");
+             qb.orderBy("updated_at","DESC");
          }}]}).then(function(article) {
       res.status(200).json({
         error: {
