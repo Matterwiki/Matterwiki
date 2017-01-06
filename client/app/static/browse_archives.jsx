@@ -51,12 +51,12 @@ class BrowseArchives extends React.Component {
         <div className="custom-collapse">
           <div className="visible-xs">
         <button className="collapse-toggle btn btn-default" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse">
-          View Topics
+          View Archives
          </button>
         <br/>
         <br/>
         </div>
-        <div className="list-group collapse" id="side-menu-collapse">
+        <div className="list-group collapse archive-list" id="side-menu-collapse">
             {this.state.archives.map(archive => (
               <a key={archive.id} href="#" className="list-group-item dropdown-toggle" onClick={(e) => this.archiveSelect(archive.id,e)}>
                 <h4 className="list-group-item-heading">{new Date(archive.updated_at).toDateString()}</h4>
