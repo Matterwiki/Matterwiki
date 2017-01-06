@@ -254,7 +254,9 @@ module.exports =  function(app){
     The error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
 
-    Articles.where({id: req.params.id}).fetch({withRelated: ['archives']}).then(function(article) {
+    Articles.where({id: req.params.id}).fetch({withRelated: [{'archives': function(qb) {
+             qb.orderBy("created_at","DESC");
+         }}]}).then(function(article) {
       res.status(200).json({
         error: {
           error: false,
