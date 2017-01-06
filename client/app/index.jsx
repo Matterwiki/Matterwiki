@@ -18,8 +18,8 @@ render(
       <IndexRoute component={Login}/>
       <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
-      <Route path="article/new" component={NewArticle}/>
-      <Route path="article/edit/:articleId" component={EditArticle}/>
+        <Route path="article/new" component={NewArticle}/>
+        <Route path="article/edit/:articleId" component={EditArticle}/>
       <Route path="article/history/:articleId" component={ArticleHistory}/>
       <Route path="article/:articleId" component={Article}/>
       <Route path="admin" component={Admin}/>

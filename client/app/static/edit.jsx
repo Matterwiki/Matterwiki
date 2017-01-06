@@ -110,7 +110,7 @@ class EditArticle extends React.Component {
         <div className="new-article">
           <div className="row">
             <div className="col-md-12">
-              <textarea
+              <input
                 onChange={this.handleChange}
                 ref="title"
                 className="form-control input-title"
@@ -118,14 +118,12 @@ class EditArticle extends React.Component {
                  />
            </div>
            </div>
+           <br/>
            <div className="row">
-            <div className="col-md-6 new-article-form">
-              <textarea
-                onChange={this.handleChange}
-                ref="body"
-                className="form-control input-body"
-                value={this.state.body}
-                 />
+            <div className="col-md-12 new-article-form">
+              <trix-toolbar id="my_toolbar"></trix-toolbar>
+          <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
+          <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
                  <br/>
                  <label>Choose topic</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>
@@ -143,38 +141,13 @@ class EditArticle extends React.Component {
                   <p className="help-block">Keep it short and descriptive :)</p>
                   <br/>
             </div>
-            <div className="col-md-6">
-              <p className="color-text">Preview</p>
-              <div
-                className="preview-body single-article-body"
-                dangerouslySetInnerHTML={this.getRawMarkupBody()}
-              />
-            </div>
-          </div>
+
         <div className="row">
-          <button className="btn btn-default" data-toggle="modal" data-target="#myModal">Markdown Help</button>
-          <br/>
-          <br/>
           <div className="col-md-12">
             <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
           </div>
         </div>
-        <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1><b>Markdown Guide</b></h1>
-              </div>
-              <div className="modal-body">
-                <center>
-                    <Markdown />
-                </center>
-              </div>
-
-            </div>
-          </div>
-        </div>
+      </div>
       </div>
       );
   }

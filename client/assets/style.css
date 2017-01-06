@@ -119,11 +119,16 @@ input:focus
 .new-article .input-title {
     font-weight: 700;
     font-size: 3em;
+    height: auto;
+
 }
 
 .new-article .input-body {
-  font-family: "Courier", sans-serif;
-  font-size: 1.2em;
+  font-family: "Vollkorn", serif;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  border-left: 1px solid #efefef;
+  border-right: 1px solid #efefef;
 }
 
 textarea {
@@ -131,7 +136,6 @@ textarea {
 }
 
 .new-article-form {
-  border-right: 1px solid #ccc;
 }
 
 .color-text {
@@ -442,4 +446,11 @@ font-size: 1.5em;
 .setup-form {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+.fixed {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+
 }

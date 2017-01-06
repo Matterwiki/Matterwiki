@@ -68,8 +68,7 @@ class ViewArticle extends React.Component {
   }
 
   getRawMarkupBody() {
-    var md = new Remarkable();
-    return { __html: md.render(this.state.article.body) };
+    return { __html: this.state.article.body };
   }
 
 
