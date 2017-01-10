@@ -42,7 +42,7 @@
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
     "remarkable": "1.7.1",
-    "sqlite3": "3.1.4",
+    "sqlite3": "^3.1.4",
     "webpack": "1.13.2"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@ module.exports = {
       filename: "./db/matterwiki.sqlite"
     },
     useNullAsDefault: true,
-    debug: true
+    debug: false
     }
   }
 

@@ -53,7 +53,8 @@ module.exports = function(app) {
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
     Topics.where({id: req.params.id}).fetch({withRelated: [{'articles': function(qb) {
-            qb.limit(req.query.count);
+            if(req.query.count)
+                qb.limit(req.query.count);
              qb.orderBy("updated_at","DESC");
          }}]}).then(function(topic) {
       res.status(200).json({

@@ -65,7 +65,8 @@ module.exports =  function(app){
     */
     Articles.forge()
     .query(function(qb) {
-        qb.limit(req.query.count);
+        if(req.query.count)
+          qb.limit(req.query.count);
         qb.orderBy('updated_at','DESC');
     })
     .fetchAll()
