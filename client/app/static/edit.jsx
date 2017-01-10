@@ -30,28 +30,32 @@ class EditArticle extends React.Component {
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
-
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'PUT',
-               headers: myHeaders,
-               body: "id="+this.props.params.articleId+"&title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
-               };
-    var that = this;
-    fetch('/api/articles/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          Alert.success("Article has been successfully saved");
-          hashHistory.push('article/'+that.props.params.articleId);
-      }
-    });
+    if(body && title && topicId && what_changed) {
+          var myHeaders = new Headers({
+              "Content-Type": "application/x-www-form-urlencoded",
+              "x-access-token": window.localStorage.getItem('userToken')
+          });
+          var myInit = { method: 'PUT',
+                     headers: myHeaders,
+                     body: "id="+this.props.params.articleId+"&title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
+                     };
+          var that = this;
+          fetch('/api/articles/',myInit)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(response) {
+            if(response.error.error)
+              Alert.error(response.error.message);
+            else {
+                Alert.success("Article has been successfully saved");
+                hashHistory.push('article/'+that.props.params.articleId);
+            }
+          });
+    }
+    else {
+      Alert.error("Article Body, Title, Topic and Change Info is required.");
+    }
   }
 
   getRawMarkupBody() {

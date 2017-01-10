@@ -44,28 +44,32 @@ class NewArticle extends React.Component {
     var body = this.refs.body.value;
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
-
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'POST',
-               headers: myHeaders,
-               body: "title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
-               };
-    var that = this;
-    fetch('/api/articles/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          Alert.success("Article has been successfully saved")
-          hashHistory.push('article/'+response.data.id+'?new=true');
+    if(body && title && topicId) {
+        var myHeaders = new Headers({
+            "Content-Type": "application/x-www-form-urlencoded",
+            "x-access-token": window.localStorage.getItem('userToken')
+        });
+        var myInit = { method: 'POST',
+                   headers: myHeaders,
+                   body: "title="+title+"&body="+body+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
+                   };
+        var that = this;
+        fetch('/api/articles/',myInit)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          if(response.error.error)
+            Alert.error(response.error.message);
+          else {
+              Alert.success("Article has been successfully saved")
+              hashHistory.push('article/'+response.data.id+'?new=true');
+          }
+        });
       }
-    });
+    else {
+      Alert.error("Article Body, Title and Topic Information is required.");
+    }
   }
 
 
