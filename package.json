@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/webpack -d --watch",
     "webpack-server": "./node_modules/.bin/webpack-dev-server --content-base client/",
-    "build": "./node_modules/.bin/webpack -p"
+    "build": "./node_modules/.bin/webpack -p",
+    "start": "node index"
   },
   "bin": {
     "wiki": "./install.js"
