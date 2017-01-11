@@ -3046,17 +3046,17 @@ fieldset[disabled] a.btn {
 .btn-default {
   color: #fff;
   background-color: #ff0066;
-  border: 1px solid #ff0066;
+  border: 1px solid #da045a;
 }
 .btn-default:focus,
 .btn-default.focus {
   color: #fff;
-  background-color: #f20061;
+  background-color: #da045a;
 }
 
 .btn-default:hover {
   color: #fff;
-  background-color: #f20061;
+  background-color: #da045a;
 }
 .btn-default:active,
 .btn-default.active,
