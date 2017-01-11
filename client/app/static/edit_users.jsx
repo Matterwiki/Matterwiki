@@ -85,13 +85,13 @@ class EditUser extends React.Component {
                             <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" value={this.state.name} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="Description" value={this.state.about} onChange={this.handleChange}/>
+                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" value={this.state.about} onChange={this.handleChange}/>
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_email" id="inputUserName" placeholder="Name" value={this.state.email} onChange={this.handleChange} />
+                            <input type="text" className="form-control" ref="user_email" id="inputUserName" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder="Name" value={this.state.password} onChange={this.handleChange} />
+                            <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
                           </div>
                       <div className="col-sm-12 form-group">
                         <button onClick={this.editUser} className="btn btn-default btn-block btn-lg">Update User</button>
