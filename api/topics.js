@@ -46,6 +46,39 @@ module.exports = function(app) {
   });
 
 
+  app.get('/topics/:id',function(req,res){
+      /*
+      This is a GET endpoint that responds with the topic which has the given ID
+      the topic is present in the data object in the returning object.
+      the error key in the returning object is a boolen which is false if there is no error and true otherwise
+      */
+      Topics.forge({id: req.params.id})
+      .fetch()
+        .then(function (topic) {
+          res.json({
+            error: {
+              error: false,
+              message: ''
+            },
+            code: 'B123',
+            data: topic.toJSON()
+          });
+        })
+        .catch(function (error) {
+          res.status(500).json({
+            error: {
+              error: true,
+              message: error.message
+            },
+            code: 'B124',
+            data: {
+
+            }
+          });
+        });
+    });
+
+
   app.get('/topic/:id/articles',function(req,res){
     /*
     This is a GET endpoint that responds with the list of all the articles that belong to a particular topic (topic of given id param)

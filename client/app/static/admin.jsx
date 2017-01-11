@@ -1,5 +1,5 @@
 import React from 'react';
-import {hashHistory} from 'react-router';
+import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 
@@ -186,13 +186,14 @@ class Admin extends React.Component {
             <br/>
               <div className="list-group bordered-scroll-box">
                   {this.state.topics.map(topic => (
-                    <a key={topic.id} href="#" className="list-group-item">
+                    <div key={topic.id} href="#" className="list-group-item">
                       <span className="pull-right">
-                        <button className="btn btn-default" type="button"onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
+                        <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
+                        <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
                       </span>
                       <h4 className="list-group-item-heading">{topic.name}</h4>
                       <p className="list-group-item-text">{topic.description}</p>
-                    </a>
+                    </div>
                 ))}</div>
           </div>
           <div className="col-md-6">
