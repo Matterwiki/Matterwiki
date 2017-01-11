@@ -203,14 +203,11 @@ module.exports =  function(app){
     Articles.forge({id: req.params.id})
     .fetch()
       .then(function (article) {
-        console.log("Found article. Finding topic");
         Topics.forge({id: article.attributes.topic_id}).fetch().then(function(topic){
-          console.log("Found topic. Finding user");
           articleObj = article.toJSON();
           topicObj = topic.toJSON();
           articleObj.topic = topicObj;
         }).then(function(){
-          console.log("Found user. Moving forward");
           Users.forge({id: articleObj.user_id}).fetch().then(function(user){
             userObj = user.toJSON();
             articleObj.user = {

@@ -19,8 +19,6 @@ module.exports =  function(app){
     Archives.forge({id: req.params.id})
     .fetch()
       .then(function (archive) {
-        console.log("ARCHIVE=================================");
-        console.log(archive);
         Users.forge({id: archive.attributes.user_id}).fetch().then(function(user){
           archiveObj = archive.toJSON();
           userObj = user.toJSON();
