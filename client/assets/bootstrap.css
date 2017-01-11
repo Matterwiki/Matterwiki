@@ -2550,7 +2550,7 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   padding: 10px 20px;
   font-size: 20px;
   line-height: 1.42857143;

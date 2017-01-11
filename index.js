@@ -10,6 +10,7 @@ var express = require('express');
 var bodyParser = require('body-parser'); //body parser to parse the request body
 var db = require('./db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 var app = express();
+var fs = require('fs');
 var apiRoutes = express.Router();
 var apiRoutesAdmin = express.Router();
 var jwt = require('jsonwebtoken');

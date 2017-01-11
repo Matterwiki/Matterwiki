@@ -25,8 +25,7 @@ class App extends React.Component {
     var that = this;
     return(
       <div>
-      <nav className="navbar container navbar-default">
-        <div className="container-fluid">
+      <nav className="navbar container-fluid navbar-default">
           {(window.localStorage.getItem('userToken')) ?
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -64,7 +63,6 @@ class App extends React.Component {
             </ul>
           </div>
           : <div/>}
-        </div>
       </nav>
         <div className="content container">
           {that.props.children}

@@ -25,7 +25,7 @@ class Home extends React.Component {
     if(this.state.loading)
       return <Loader/>;
     else
-    return(<div className="row container">
+    return(<div className="row">
 
       <div className="col-md-3">
           <BrowseTopics topicChange={this.handleUpdate} />

@@ -12,7 +12,6 @@ body{
 }
 
 .content {
-  margin-top: 3em;
   margin-bottom: 3em;
 }
 
@@ -44,7 +43,7 @@ body{
 }
 
 .article-list {
-padding: 0em 2em;
+padding: 10px 20px;
 }
 
 .article-item {
@@ -195,7 +194,7 @@ textarea {
 }
 
 .navbar-login-logo img {
-  height: 40px;
+  max-height: 70px;
   width: auto;
   margin-top: 3em;
 }
@@ -287,6 +286,10 @@ textarea {
   overflow-y: scroll;
   border: 1px solid #ccc;
   height: 500px;
+}
+
+.bordered-box {
+  border: 1px solid #ccc;
 }
 
 
