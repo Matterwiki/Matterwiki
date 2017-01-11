@@ -98,8 +98,14 @@ module.exports = function(app) {
     It responds with the updated user object in the data key.
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
+    if(req.body.password){
+      userObj = {name: req.body.name, email: req.body.email, password: req.body.password, about: req.body.about}
+    }
+    else {
+      userObj = {name: req.body.name, email: req.body.email, about: req.body.about}
+    }
     Users.forge({id: req.body.id})
-      .save({name: req.body.name, email: req.body.email, password: req.body.password, about: req.body.about})
+      .save(userObj)
       .then(function (collection) {
         res.json({
           error: {
@@ -156,6 +162,42 @@ module.exports = function(app) {
           })
         });
         });
+
+
+        app.get('/users/:id',function(req,res){
+          /*
+          This is a GET endpoint that responds with the user (with the given id)
+          the user is present in the data object in the returning object.
+          the error key in the returning object is a boolen which is false if there is no error and true otherwise
+          */
+          Users.forge({id: req.params.id})
+          .query(function(qb) {
+              qb.select('id','name','about','email');
+          })
+          .fetch()
+            .then(function (user) {
+              res.json({
+                error: {
+                  error: false,
+                  message: ''
+                },
+                code: 'B133',
+                data: user.toJSON()
+              })
+            })
+            .catch(function (error) {
+              res.status(500).json({
+                error: {
+                  error: true,
+                  message: error.message
+                },
+                code: 'B134',
+                data: {
+
+                }
+              })
+            });
+            });
 
 
 

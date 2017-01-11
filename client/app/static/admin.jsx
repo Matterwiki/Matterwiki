@@ -202,13 +202,14 @@ class Admin extends React.Component {
             <br/>
             <div className="list-group bordered-scroll-box">
                   {this.state.users.map(user => (
-                    <a key={user.id} href="#" className="list-group-item">
+                    <div key={user.id} href="#" className="list-group-item">
                       {(user.id!=1) ? <span className="pull-right">
+                        <Link to={'user/edit/'+user.id} className="btn btn-default">Edit</Link>
                         <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
                       </span> : ''}
                       <h4 className="list-group-item-heading">{user.name}</h4>
                       <p className="list-group-item-text">{user.about}</p>
-                    </a>
+                    </div>
                 ))}</div>
           </div>
           </div>
