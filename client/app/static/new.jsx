@@ -36,7 +36,6 @@ class NewArticle extends React.Component {
       }
       that.setState({loading: false});
     });
-    autosize(document.querySelectorAll('textarea'));
   }
 
   handleSubmit(e) {
@@ -70,11 +69,6 @@ class NewArticle extends React.Component {
     else {
       Alert.error("Article Body, Title and Topic Information is required.");
     }
-  }
-
-
-  getRawMarkupBody() {
-    return { __html: md.render(this.state.body) };
   }
 
   render() {

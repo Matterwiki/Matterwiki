@@ -1,5 +1,4 @@
 import React from 'react';
-import Error from './error.jsx';
 import { hashHistory } from 'react-router';
 import Alert from 'react-s-alert';
 

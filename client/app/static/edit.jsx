@@ -1,16 +1,7 @@
 import React from 'react';
-import autosize from 'autosize';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
-import Markdown from './markdown.jsx';
-var Remarkable = require('remarkable');
-var md = new Remarkable({
-html: true,
-breaks: true,
-linkify: true
-});
-
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -58,10 +49,6 @@ class EditArticle extends React.Component {
     }
   }
 
-  getRawMarkupBody() {
-    return { __html: md.render(this.state.body) };
-  }
-
 
   componentDidMount() {
     var myHeaders = new Headers({
@@ -103,7 +90,6 @@ class EditArticle extends React.Component {
         that.setState({topics: response.data})
       }
     });
-    autosize(document.querySelectorAll('textarea'));
   }
 
   render() {

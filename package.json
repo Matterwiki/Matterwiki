@@ -1,12 +1,11 @@
 {
-  "name": "matterwiki",
+  "name": "Matterwiki",
   "version": "0.1.0",
-  "description": "a simple and sexy wiki",
+  "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/webpack -d --watch",
-    "webpack-server": "./node_modules/.bin/webpack-dev-server --content-base client/",
     "build": "./node_modules/.bin/webpack -p",
     "start": "node index"
   },
@@ -18,16 +17,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nshntarora/matterwiki.git"
+    "url": "git+https://github.com/Matterwiki/Matterwiki.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Nishant Arora (@nshntarora)",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nshntarora/matterwiki/issues"
+    "url": "https://github.com/Matterwiki/Matterwiki/issues"
   },
-  "homepage": "https://github.com/nshntarora/matterwiki#readme",
+  "homepage": "http://matterwiki.com",
   "dependencies": {
-    "autosize": "3.0.20",
     "babel-core": "6.21.0",
     "babel-loader": "6.2.5",
     "babel-preset-es2015": "6.13.2",
@@ -43,11 +41,7 @@
     "react-dom": "15.3.0",
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
-    "remarkable": "1.7.1",
     "sqlite3": "^3.1.4",
     "webpack": "1.13.2"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "1.16.2"
   }
 }

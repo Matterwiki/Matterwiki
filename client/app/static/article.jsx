@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
-var Remarkable = require('remarkable');
 import Alert from 'react-s-alert';
 
 class ViewArticle extends React.Component {
