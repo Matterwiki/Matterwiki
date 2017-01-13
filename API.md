@@ -306,3 +306,18 @@ id (article ID in URL)
 
 Access Token
 ```
+
+
+## POST `/api/logo` (ADMIN ONLY)
+
+Takes an image as a file and the access token of the user.
+If the user is an admin, updates the logo image in the assets folder with the new image.
+Else, returns an error.
+
+**Required Params:**
+
+```
+Logo File
+
+Access Token
+```
