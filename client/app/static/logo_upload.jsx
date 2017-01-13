@@ -11,10 +11,8 @@ class LogoUpload extends React.Component {
   handleUpload(e) {
     e.preventDefault();
     var logo = this.refs.logo.files[0];
-    console.log(logo);
     var formData = new FormData();
     formData.append('logo', logo);
-    console.log(formData);
     var myHeaders = new Headers({
         "x-access-token": window.localStorage.getItem('userToken')
     });
