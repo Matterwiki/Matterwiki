@@ -1,12 +1,9 @@
 module.exports = {
-  development: {
     client: 'sqlite3',
     connection: {
       filename: "./db/matterwiki.sqlite"
     },
-    useNullAsDefault: true,
-    debug: false
-    }
+    useNullAsDefault: true
   }
 
 /*

@@ -30,7 +30,50 @@ You need to have `Node` and `npm` installed on your system.
 7. Login with your new admin account and head to the Admin dashboard.
 8. Create topics and add users to your Wiki.
 
-### Under the hood
+
+**NOTE - Using MySQL**
+<hr/>
+By default Matterwiki uses **Sqlite**, which is a lightweight database management system perfect for an internal wiki.
+If your team size is huge and you need a concurrent and flexible DBMS you can change the config to use **MySQL**.
+As we use `Knex` as a query builder all you have to do use MySQL is to change the db object in `knexfile.js` (found the app root directory).
+
+1. First [setup MySQL](http://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
+
+2. Install mysql from `npm`
+
+   ```
+   npm install mysql
+   ```
+
+3. Change the object from
+
+```
+module.exports = {
+  client: 'sqlite3',
+  connection: {
+    filename: "./db/matterwiki.sqlite"
+  },
+  useNullAsDefault: true
+}
+```
+
+to
+
+```
+module.exports: {
+  client: 'mysql',
+  connection: {
+    host : '127.0.0.1',
+    user : 'your_database_user',
+    password : 'your_database_password',
+    database : 'myapp_test'
+  },
+  useNullAsDefault: true
+}
+```
+
+
+## Under the hood
 
 Matterwiki uses a Node.js API with a React.js front-end and Sqlite3 for the database.
 
@@ -39,19 +82,19 @@ Matterwiki uses a Node.js API with a React.js front-end and Sqlite3 for the data
 As the app is built atop a JSON API, it is simple to integrate your Wiki with your mobile app or blog.
 For more, read the [API documentation](https://github.com/matterwiki/matterwiki/blob/master/API.md).
 
-### Like it?
+## Like it?
 
 :star: this repo
 
-### Found a bug?
+## Found a bug?
 
 Raise an issue!
 
-### Want to contribute?
+## Want to contribute?
 
 We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone.
 
-### Screenshots
+## Screenshots
 
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/screenshot1.png?raw=true" />
 <hr/>
