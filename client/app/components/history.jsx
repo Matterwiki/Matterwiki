@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import BrowseArchives from './browse_archives.jsx';
 import SimpleArticle from './simple_article.jsx';
-var Remarkable = require('remarkable');
 
 class ArticleHistory extends React.Component {
 
