@@ -23,7 +23,7 @@ You need to have `Node` and `npm` installed on your system.
 3. Edit `config.js` (present in the project root) and change the `auth_secret` value with any secret phrase.
   **NOTE: This phrase will be used to encode and decode your access tokens. Keep it safe and private**
 4. run `npm run build`
-5. run `node index`
+5. run `npm start`
 6. Head to `yoururl.com/#/setup` and create the Admin account.
 
   _Replace yoururl.com with your URL. If you're running locally, replace with `localhost:5000`_
