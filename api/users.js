@@ -115,6 +115,7 @@ module.exports = function(app) {
           code: 'B135',
           data: collection.toJSON()
         })
+      })
       .catch(function (error) {
         res.status(500).json({
           error: {
@@ -126,7 +127,6 @@ module.exports = function(app) {
 
           }
         })
-      });
       });
     });
 
