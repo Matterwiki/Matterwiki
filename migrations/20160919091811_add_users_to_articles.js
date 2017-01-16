@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
   return knex.schema.table('articles', function (table) {
-    table.integer('user_id').references('users.id');
+    table.integer('user_id',10).unsigned().references('users.id');
   })
 };
 
