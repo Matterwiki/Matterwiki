@@ -14,6 +14,21 @@ Wiki softwares are too complicated for small teams. Matterwiki is just that, a s
 People use it to store documentation, notes, culture guidelines, employee onboarding content and everything else they want to.
 
 
+## Running in Docker
+
+To quickly try Matterwiki running in [Docker](https://www.docker.com/):
+
+1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
+2. Edit `config.js` (present in the project root) and change the `auth_secret` value with any secret phrase.
+3. Run `docker build -t matterwiki/matterwiki .`
+4. Make a volume folder to store the matterwiki database. Run `mkdir -p ~/matterwiki/db`
+4. Run `docker run -p 5000:5000 -v ~/matterwiki/db:/usr/src/app/db -t matterwiki/matterwiki`
+5. Head to `yoururl.com/#/setup` and create the Admin account.
+
+  _Replace yoururl.com with your URL. If you're running locally, replace with `localhost:5000`_
+6. Login with your new admin account and head to the Admin dashboard.
+7. Create topics and add users to your Wiki.
+
 ## Setup Instructions:
 
 You need to have `Node` and `npm` installed on your system.
