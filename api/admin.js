@@ -39,166 +39,69 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 module.exports = function(app) {
 
   app.post('/topics',function(req,res){
-    /*
-    This endpoint takes the topic name and topic description from the request body.
-    It then saves those values in the database using the insert query.
-    */
-    Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B121',
-          data: topic.toJSON()
-        });     // responds back to request
-     })
-     .catch(function(error){
-       res.status(500).json({
-         error: {
-           error: true,
-           message: error.message
-         },
-         code: 'B122',
-         data: {
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
 
-         }
-       })
-     })
+      }
+    });
   });
 
   app.put('/topics',function(req,res){
-    /*
-    This is a PUT endpoint for updating a topic information.
-    It takes the id of the topic to be updated and then updates it with the new object.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
 
-    TODO: Add updates only for columns that are in the request body. Handle exceptions.
-    */
-    Topics.forge({id: req.body.id})
-    .save({name: req.body.name, description: req.body.description})
-      .then(function(topic) {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B125',
-          data: topic
-        });
-      })
-      .catch(function (error) {
-        res.status(500).json({
-          error: {
-            error: true,
-            message: error.message
-          },
-          code: 'B126',
-          data: {
-
-          }
-        });
-      });
+      }
+    });
   });
 
 
   app.delete('/topics',function(req,res){
-    /*
-    This is a DELETE endpoint for delete a complete topic from the database.
-    It takes the id of the topic and then delete that record from the database.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
-    */
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
 
-    Topics.forge({id: req.body.id})
-    .destroy()
-      .then(function() {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B127',
-          data: {
-
-          }
-        });
-      })
-      .catch(function (error) {
-        res.status(500).json({
-          error: {
-            error: true,
-            message: error.message
-          },
-          code: 'B128',
-          data: {
-
-          }
-        });
-      });
+      }
+    });
   });
 
 
     app.delete('/articles',function(req,res){
-      /*
-      This is a DELETE endpoint for delete a complete article from the database.
-      It takes the id of the article and then deletes that record from the database.
-      the error key in the returning object is a boolen which is false if there is no error and true otherwise
-      */
+      res.status(500).json({
+        error: {
+          error: true,
+          message: "Blocked demo Feature"
+        },
+        code: 'B132',
+        data: {
 
-      Articles.forge({id: req.body.id})
-      .destroy()
-        .then(function() {
-          res.json({
-            error: {
-              error: false,
-              message: ''
-            },
-            code: 'B109',
-            data: {
-
-            }
-          });
-        })
-        .catch(function (error) {
-          res.status(500).json({
-            error: {
-              error: true,
-              message: error.message
-            },
-            code: 'B110',
-            data: {
-
-            }
-          });
-        });
+        }
+      });
     });
 
     app.post('/logo', function (req, res) {
-      upload(req, res, function (err) {
-          if(err) {
-            res.json({
-              error: {
-                error: true,
-                message: "There was a problem uploading the logo"
-              },
-              code: 'LOGODIDNTUPLOAD',
-              data: {
+      res.status(500).json({
+        error: {
+          error: true,
+          message: "Blocked demo Feature"
+        },
+        code: 'B132',
+        data: {
 
-              }
-            });
-          }
-          else {
-            res.json({
-              error: {
-                error: false,
-                message: ''
-              },
-              code: 'LOGOUPLOADED',
-              data: {
-
-              }
-            });
-          }
+        }
       });
     });
 

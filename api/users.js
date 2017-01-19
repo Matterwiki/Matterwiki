@@ -15,43 +15,18 @@ module.exports = function(app) {
 
 
   app.post('/users',function(req,res){
-    /*
-    This is a POST endpoint which takes the user name, email, password, and about to create
-    a new user profile.
-    It responds with the created user object in the data key.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
-    */
-    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-      Users.forge()
-        .save({
-          name: req.body.name,
-          email: req.body.email,
-          password: hash,
-          about: req.body.about})
-        .then(function (collection) {
-          res.json({
-            error: {
-              error: false,
-              message: ''
-            },
-            code: 'B131',
-            data: collection.toJSON()
-          })
-        })
-        .catch(function (error) {
-          res.status(500).json({
-            error: {
-              error: true,
-              message: error.message
-            },
-            code: 'B132',
-            data: {
 
-            }
-          })
-        });
-        });
-      });
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
+
+      }
+    });
+  });
 
 
   app.get('/users',function(req,res){
@@ -92,28 +67,52 @@ module.exports = function(app) {
 
 
   app.put('/users',function(req,res){
+
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
+
+      }
+    });
+  });
+
+  app.delete('/users',function(req,res){
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
+
+      }
+    });
+  });
+
+
+  app.get('/users/:id',function(req,res){
     /*
-    This is a PUT endpoint which takes the user's ID, name, email, password, and about to create
-    a update the user profile of the given ID.
-    It responds with the updated user object in the data key.
+    This is a GET endpoint that responds with the user (with the given id)
+    the user is present in the data object in the returning object.
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
-    if(req.body.password){
-      userObj = {name: req.body.name, email: req.body.email, password: req.body.password, about: req.body.about}
-    }
-    else {
-      userObj = {name: req.body.name, email: req.body.email, about: req.body.about}
-    }
-    Users.forge({id: req.body.id})
-      .save(userObj)
-      .then(function (collection) {
+    Users.forge({id: req.params.id})
+    .query(function(qb) {
+        qb.select('id','name','about','email');
+    })
+    .fetch()
+      .then(function (user) {
         res.json({
           error: {
             error: false,
             message: ''
           },
-          code: 'B135',
-          data: collection.toJSON()
+          code: 'B133',
+          data: user.toJSON()
         })
       })
       .catch(function (error) {
@@ -122,82 +121,13 @@ module.exports = function(app) {
             error: true,
             message: error.message
           },
-          code: 'B136',
+          code: 'B134',
           data: {
 
           }
         })
       });
-    });
-
-    app.delete('/users',function(req,res){
-      /*
-      This is a DELETE endpoint for delete a user from the database.
-      It takes the id of the user and then deletes that record from the database.
-      the error key in the returning object is a boolen which is false if there is no error and true otherwise
-      */
-
-      Users.forge({id: req.body.id})
-      .destroy()
-        .then(function() {
-          res.json({
-            error: {
-              error: false,
-              message: ''
-            },
-            code: 'B137',
-            data: {}
-          });
-        })
-        .catch(function (error) {
-          res.status(500).json({
-            error: {
-              error: true,
-              message: error.message
-            },
-            code: 'B138',
-            data: {
-
-            }
-          })
-        });
-        });
-
-
-        app.get('/users/:id',function(req,res){
-          /*
-          This is a GET endpoint that responds with the user (with the given id)
-          the user is present in the data object in the returning object.
-          the error key in the returning object is a boolen which is false if there is no error and true otherwise
-          */
-          Users.forge({id: req.params.id})
-          .query(function(qb) {
-              qb.select('id','name','about','email');
-          })
-          .fetch()
-            .then(function (user) {
-              res.json({
-                error: {
-                  error: false,
-                  message: ''
-                },
-                code: 'B133',
-                data: user.toJSON()
-              })
-            })
-            .catch(function (error) {
-              res.status(500).json({
-                error: {
-                  error: true,
-                  message: error.message
-                },
-                code: 'B134',
-                data: {
-
-                }
-              })
-            });
-            });
+  });
 
 
 
