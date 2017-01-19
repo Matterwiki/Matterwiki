@@ -42,6 +42,7 @@
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
     "sqlite3": "^3.1.4",
-    "webpack": "1.13.2"
+    "webpack": "1.13.2",
+    "whatwg-fetch": "^2.0.1"
   }
 }
