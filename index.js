@@ -160,6 +160,6 @@ app.use('/api', apiRoutesAdmin);
 
 app.use(express.static(__dirname + '/client'));
 
-app.listen(5000 || process.env.PORT, function(){
+app.listen(process.env.PORT || 5000, function(){
   console.log("The magic is happening on port 5000");
 });
