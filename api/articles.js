@@ -20,40 +20,16 @@ module.exports =  function(app){
 
 
   app.post('/articles',function(req,res){
-    /*
-    This endpoint takes the article title, article body, and topic id from the request body.
-    It then saves those values in the database using the insert query.
-    After the operation is complete the endpoint returns the success object.
-    TODO: create formal guidelines for different object structures and follow that throughout the API.
-    */
-    Articles.forge().save({
-        title: req.body.title,
-        body: req.body.body,
-        topic_id: req.body.topic_id,
-        user_id: req.body.user_id,
-        what_changed: "Another drop in the ocean of knowledge"
-      }).then( function (article) {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B103',
-          data: article
-        });     // responds back to request
-     })
-     .catch(function (error) {
-       res.status(500).json({
-         error: {
-           error: true,
-           message: error.message
-         },
-         code: 'B104',
-         data: {
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
 
-         }
-       });
-     });
+      }
+    });
   });
 
 
@@ -96,55 +72,17 @@ module.exports =  function(app){
 
 
   app.put('/articles',function(req,res){
-    /*
-    This is a PUT endpoint for updating an article information.
-    It takes the id of the topic to be updated and then updates it with the new object.
-    the error key in the returning object is a boolen which is false if there is no error and true otherwise
+    res.status(500).json({
+      error: {
+        error: true,
+        message: "Blocked demo Feature"
+      },
+      code: 'B132',
+      data: {
 
-    TODO: Add updates only for columns that are in the request body. Handle exceptions.
-    */
-    Articles.forge({id: req.body.id}).fetch().then(function(article){
-        Articles.forge({id: req.body.id})
-          .save({
-            title: req.body.title,
-            body: req.body.body,
-            topic_id: req.body.topic_id,
-            what_changed: req.body.what_changed,
-            user_id: req.body.user_id
-          })
-          .then(function() {
-              Archives.forge().save({
-                article_id: req.body.id,
-                title: article.attributes.title,
-                body: article.attributes.body,
-                what_changed: article.attributes.what_changed,
-                user_id: article.attributes.user_id
-              })
-              .then(function(article){
-                  res.json({
-                    error: {
-                      error: false,
-                      message: ''
-                    },
-                    code: 'B107',
-                    data: article
-                  });
-              })
-            })
-    })
-    .catch(function(error){
-      res.status(500).json({
-        error: {
-          error: true,
-          message: error.message
-        },
-        code: 'B108',
-        data: {
-
-        }
-      });
+      }
     });
-    });
+  });
 
 
 
