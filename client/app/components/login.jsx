@@ -58,6 +58,18 @@ class Login extends React.Component {
           <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>
         </div>
       </form>
+      <div className="col-sm-12 text-left">
+        <h3>For a demo <b>regular user</b> use:</h3>
+        <p>Email: <b>demo@matterwiki.com</b> <br />
+           <small>and</small> <br />
+           Password: <b>demo</b></p>
+      </div>
+      <div className="col-sm-12 text-left">
+        <h3>For a demo <b>admin user</b> use:</h3>
+        <p>Email: <b>admin@matterwiki.com</b> <br />
+           <small>and</small> <br />
+           Password: <b>@admin&&</b></p>
+      </div>
       </div>
     </div>);
   }
