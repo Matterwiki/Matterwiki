@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Loader from './loader.jsx';
-import BrowseArchives from './browse_archives.jsx';
-import SimpleArticle from './simple_article.jsx';
+import Loader from './loader';
+import BrowseArchives from './browse_archives';
+import SimpleArticle from './simple_article';
 
 class ArticleHistory extends React.Component {
 

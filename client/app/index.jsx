@@ -2,17 +2,17 @@ import React from 'react';
 import {render} from 'react-dom';
 import { Router, Route, IndexRoute, IndexRedirect, hashHistory } from 'react-router';
 
-import App from './components/app.jsx';
-import Home from './components/home.jsx';
-import Login from './components/login.jsx';
-import Article from './components/article.jsx';
-import NewArticle from './components/new.jsx';
-import EditArticle from './components/edit.jsx';
-import ArticleHistory from './components/history.jsx';
-import Admin from './components/admin.jsx';
-import Setup from './components/setup.jsx';
-import EditTopic from './components/edit_topics.jsx';
-import EditUser from './components/edit_users.jsx';
+import App from './components/app';
+import Home from './components/home';
+import Login from './components/login';
+import Article from './components/article';
+import NewArticle from './components/new';
+import EditArticle from './components/edit';
+import ArticleHistory from './components/history';
+import Admin from './components/admin';
+import Setup from './components/setup';
+import EditTopic from './components/edit_topics';
+import EditUser from './components/edit_users';
 
 render(
   <Router history={hashHistory}>

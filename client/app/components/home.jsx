@@ -1,8 +1,8 @@
 import React from 'react';
-import BrowseTopics from './browse_topics.jsx';
-import BrowseArticles from './browse_articles.jsx';
+import BrowseTopics from './browse_topics';
+import BrowseArticles from './browse_articles';
 import {hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from './loader';
 
 class Home extends React.Component {
 
