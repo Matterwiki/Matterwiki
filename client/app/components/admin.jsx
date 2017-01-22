@@ -188,10 +188,10 @@ class Admin extends React.Component {
               <div className="list-group bordered-scroll-box">
                   {this.state.topics.map(topic => (
                     <div key={topic.id} href="#" className="list-group-item">
-                      <span className="pull-right">
-                        <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
-                        <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
-                      </span>
+                      {(topic.id !== 1)? <span className="pull-right">
+                      <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
+                      <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
+                      </span>: ''}
                       <h4 className="list-group-item-heading">{topic.name}</h4>
                       <p className="list-group-item-text">{topic.description}</p>
                     </div>
