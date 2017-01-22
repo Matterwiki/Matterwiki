@@ -43,28 +43,50 @@ module.exports = function(app) {
     This endpoint takes the topic name and topic description from the request body.
     It then saves those values in the database using the insert query.
     */
-    Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B121',
-          data: topic.toJSON()
-        });     // responds back to request
-     })
-     .catch(function(error){
-       res.status(500).json({
+    Topics.where({name: req.body.name}).fetch({require: true}).then((topic) => {
+      res.json({
          error: {
            error: true,
-           message: error.message
+           message: `Topic ${topic.get('name')} exists!`
          },
-         code: 'B122',
-         data: {
-
-         }
+         code: '',
+         data: {}
        })
-     })
+    })
+    .catch((error) => {
+      if (error.message === 'EmptyResponse') {
+        Topics.forge().save({name: req.body.name, description: req.body.description}).then( function (topic) {
+          res.json({
+            error: {
+              error: false,
+              message: ''
+            },
+            code: 'B121',
+            data: topic.toJSON()
+          });
+        })
+        .catch(function(error){
+          res.status(500).json({
+            error: {
+              error: true,
+              message: error.message
+            },
+            code: 'B122',
+            data: {}
+          })
+        })
+      }
+      else {
+        res.status(500).json({
+          error: {
+            error: true,
+            message: error.message
+          },
+          code: '',
+          data: {}
+        })
+      } 
+    })
   });
 
   app.put('/topics',function(req,res){
