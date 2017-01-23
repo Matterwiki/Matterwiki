@@ -17,7 +17,7 @@ Thank you for taking the time to contribute! :tada::+1:
 *  The `api/` directory contains code for the node backend. [Look at the API guide for more information](https://github.com/matterwiki/matterwiki/blob/master/API.md).
 *  The `client/` directory contains the React `jsx` files and basically all the frontend code powering this app.
 *  The `models/` directory has the bookshelf models associated with the SQLite DB.
-*  For the production version, run `npm start build` and start `index.js` with a process manager like [PM2](http://pm2.keymetrics.io/). 
+*  For the production version, run `npm start`. 
 
 ## Features
 * The dev setup has webpack's Hot Module Replacement (HMR) enabled, which ([according to the docs](https://webpack.js.org/concepts/hot-module-replacement/)), 
