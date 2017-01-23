@@ -9,13 +9,14 @@ Thank you for taking the time to contribute! :tada::+1:
 * Create a pull request
 
 ## Local dev setup
-Once you've forked this repo and `clone`d your fork, you would have to run `npm install`.  The development server can then be started with `npm run dev`.
+* Once you've forked this repo and `clone`d your fork, you would have to run `npm install`.  
+* The development server can then be started with `npm run dev`  which serves the JS files, assets and of course, index.html. The default `localhost` URL is [`http://localhost:5000`](http://localhost:5000).
+
 
 ## The code
-*  The `api/` directory contains code for the node backend
-*  The `client/` directory contains the React jsx files and basically all the frontend code powering this app
-*  The `models/` directory has the bookshelf models associated with the SQLite DB
-*  `node ./index.js` , starts the server, which serves the JS files, assets and of course, index.html.  
+*  The `api/` directory contains code for the node backend. [Look at the API guide for more information](https://github.com/matterwiki/matterwiki/blob/master/API.md).
+*  The `client/` directory contains the React `jsx` files and basically all the frontend code powering this app.
+*  The `models/` directory has the bookshelf models associated with the SQLite DB.
 *  For the production version, run `npm start build` and start `index.js` with a process manager like [PM2](http://pm2.keymetrics.io/). 
 
 ## Features
