@@ -16,10 +16,10 @@ People use it to store documentation, notes, culture guidelines, employee onboar
 
 ## Setup Instructions:
 
-You need to have `Node` and `npm` installed on your system.
+You need to have `Node`, `npm` and [Yarn](https://yarnpkg.com) installed on your system.
 
 1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
-2. Run `npm install`
+2. Run `yarn install`
 3. Edit `config.js` (present in the project root) and change the `auth_secret` value with any secret phrase.
   **NOTE: This phrase will be used to encode and decode your access tokens. Keep it safe and private**
 4. run `npm run build`

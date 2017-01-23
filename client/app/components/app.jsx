@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './login.jsx';
+import Login from './login';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
