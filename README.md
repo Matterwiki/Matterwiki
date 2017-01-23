@@ -28,7 +28,7 @@ You need to have `Node` and `npm` installed on your system.
   ```
   NODE_ENV=production PORT=8000 pm2 start index.js --name "matterwiki"
   ```
-  `NODE_ENV` has two values at this point, `dev` and `production`. Make sure you checkout the [amazing API of PM2](http://pm2.keymetrics.io/docs/usage/cluster-mode/) for full control of this setup. However, if you're just looking to test this, `node index.js` should do the trick.
+  `NODE_ENV` could take one of these two values, `dev` and `production`. Make sure you checkout the [API of PM2](http://pm2.keymetrics.io/docs/usage/cluster-mode/) for full control of this setup. However, if you're just looking to test this, `node index.js` should do the trick.
 6. Head to `yoururl.com/#/setup` and create the Admin account.
 
   _Replace yoururl.com with your URL. If you're running locally, replace with `localhost:5000`_
