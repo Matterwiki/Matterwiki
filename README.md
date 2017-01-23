@@ -72,6 +72,17 @@ module.exports = {
 }
 ```
 
+## Run with Docker:
+
+You can run MatterWiki with Docker.
+
+1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
+2. Run `docker build -t matterwiki .`
+3. Start a docker container with `docker run --name=matterwiki -p 5000:5000 matterwiki`
+
+You can add `-v /<path>/db:/server/db` to store the db on the host filesystem, and `-v /<path>/config.js:/server/config.js`
+to specify your own JWT secret configuration. Add `--restart=always -d` options to run it as a daemon.
+
 
 ## Under the hood
 
