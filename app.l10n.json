@@ -7,7 +7,7 @@
             "logout": "Abmelden",
             "powered-by": "Unterstützt von ",
     },
-    "en-US": {
+    "en-EN": {
             "loggedout": "You've been successfully logged out",
             "toggle-navigation": "Toggle navigation",
             "admin": "Admin",
