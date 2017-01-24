@@ -1,0 +1,10 @@
+{
+    "de-DE": {
+                "edited_by": "Bearbeitet von ",
+                "select_archive": "Bitte wähle das Archiv aus"
+    },
+    "en-EN": {
+                "edited_by": "Edited by ",
+                "select_archive": "Please select the archive"
+    }
+}

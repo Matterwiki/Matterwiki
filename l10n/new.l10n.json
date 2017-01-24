@@ -1,0 +1,18 @@
+{
+    "de-DE": {
+                "alert_success": "Eintrag wurde erfolgreich abgespeichert",
+                "alert_error": "Es werden Informationen zum Inhalt, Titel und Thema benötigt",
+                "placeholder_title": "Bitte Titel angeben...",
+                "placeholder_editor": "Schreibe etwas...",
+                "choose_topic": "Wähle ein Thema",
+                "button_submit": "Eintrag erstellen"
+    },
+    "en-EN": {
+                "alert_success": "Article has been successfully saved",
+                "alert_error": "Article Body, Title and Topic Information is required.",
+                "placeholder_title": "Enter article title...",
+                "placeholder_editor": "Start writing here....",
+                "choose_topic": "Choose topic",
+                "button_submit": "Create Article"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "de-DE": {
+                "alert_success": "Du bist jetzt angemeldet",
+                "login": "Anmeldung",
+                "placeholder_email": "E-Mail",
+                "placeholder_pw": "Passwort",
+                "button_signin": "Anmelden"
+    },
+    "en-EN": {
+                "alert_success": "You are now logged in",
+                "login": "Login",
+                "placeholder_email": "Email",
+                "placeholder_pw": "Password",
+                "button_signin": "Sign in"
+    }
+}
