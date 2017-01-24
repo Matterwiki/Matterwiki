@@ -1,0 +1,10 @@
+{
+    "de-DE": {
+            "no-topics": "Es gibt noch keine Themen",
+            "view-topics": "Themen anzeigen"
+    },
+    "en-EN": {
+            "no-topics": "There are no topics created yet",
+            "view-topics": "View Topics"
+    }
+}
