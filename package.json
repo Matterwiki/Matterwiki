@@ -6,7 +6,9 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "dev": "node index.js",
-    "start" : "npm run build && cross-env NODE_ENV=production node index.js"
+    "start": "npm run build && cross-env NODE_ENV=production node index.js",
+    "testcafe": "testcafe chrome tests/e2e/tests/*.js --app \"npm run dev\" --app-init-delay 10000",
+    "test": "npm run build && npm run testcafe"
   },
   "bin": {
     "wiki": "./install.js"
@@ -50,6 +52,7 @@
     "webpack": "2.2.0",
     "webpack-dev-middleware": "1.9.0",
     "webpack-dev-server": "2.2.0",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack-hot-middleware": "2.15.0",
+    "testcafe": "^0.12.1"
   }
 }
