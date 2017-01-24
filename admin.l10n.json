@@ -1,0 +1,32 @@
+{
+    "de-DE": {
+            "add_user": "Benutzer hinzufügen",
+            "add_topic": "Thema hinzufügen",
+            "edit": "bearbeiten",
+            "delete": "löschen",
+            "name": "Name",
+            "about": "Über",
+            "description": "Beschreibung",
+            "email": "E-Mail",
+            "password": "Passwort",
+            "user_added": "Benutzer wurde erstellt",
+            "user_deleted": "Benutzer wurde gelöscht",
+            "topic_added": "Thema wurde erstellt",
+            "topic_deleted": "Thema wurde gelöscht"
+    },
+    "en-US": {
+            "add_user": "Add User",
+            "add_topic": "Add Topic",
+            "edit": "Edit",
+            "delete": "Delete",
+            "name": "Name",
+            "about": "About",
+            "description": "Description",
+            "email": "Email",
+            "password": "Password",
+            "user_added": "User has been added",
+            "user_deleted": "User has been deleted",
+            "topic_added": "Topic has been added",
+            "topic_deleted": "Topic has been deleted"
+    }
+}
