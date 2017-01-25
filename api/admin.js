@@ -122,16 +122,28 @@ module.exports = function(app) {
       Topics.forge({id: req.body.id})
       .destroy()
       .then(function() {
-        res.json({
-          error: {
-            error: false,
-            message: ''
-          },
-          code: 'B127',
-          data: {
-
-          }
-        });
+        Articles.forge().where({topic_id: req.body.id})
+        .save({topic_id: 1}, {patch: true})
+        .then(() => {
+          res.json({
+            error: {
+              error: false,
+              message: ''
+            },
+            code: 'B127',
+            data: {}
+          });
+        })
+        .catch((error) => {
+          res.status(500).json({
+            error: {
+              error: true,
+              message: error.message
+            },
+            code: '',
+            data: {}
+          });
+        })
       })
       .catch(function (error) {
         res.status(500).json({
