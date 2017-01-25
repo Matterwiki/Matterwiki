@@ -1,5 +1,6 @@
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
+<hr/>
 
 ## What is a wiki?
 A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
@@ -113,6 +114,12 @@ Raise an issue!
 ## Want to contribute?
 
 We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone. Take a look at our [contributing document](https://github.com/Matterwiki/Matterwiki/blob/master/CONTRIBUTING.md) for understanding local development setup and the code base.
+
+## Feature requests?
+
+Before you create a new feature request please check our [public roadmap](https://trello.com/b/OktmtAve/feature-roadmap). It lists the features we're working on and the ones we will be working on.
+If you see we're already working on your feature, head to the issue relating to that and give a thumbs up.
+If your feature is something that hasn't been requested yet, please create an issue.
 
 ## Screenshots
 
