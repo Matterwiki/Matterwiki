@@ -94,6 +94,10 @@ You can add `-v /<path>/db:/server/db` to store the db on the host filesystem, a
 to specify your own JWT secret configuration. Add `--restart=always -d` options to run it as a daemon.
 
 
+## Demo
+You can check a live demo of Matterwiki here: https://matterwiki.herokuapp.com
+
+
 ## Under the hood
 
 Matterwiki uses a Node.js API with a React.js front-end and Sqlite3 for the database.

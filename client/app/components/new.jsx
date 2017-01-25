@@ -50,7 +50,7 @@ class NewArticle extends React.Component {
         });
         var myInit = { method: 'POST',
                    headers: myHeaders,
-                   body: "title="+title+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
+                   body: "title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
                    };
         var that = this;
         fetch('/api/articles/',myInit)
