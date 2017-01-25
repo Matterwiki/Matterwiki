@@ -23,7 +23,16 @@ You need to have `Node` and `npm` installed on your system.
 3. Edit `config.js` (present in the project root) and change the `auth_secret` value with any secret phrase.
   **NOTE: This phrase will be used to encode and decode your access tokens. Keep it safe and private**
 4. run `npm run build`
-5. run `npm start`
+5. At this point, running this with a process manager like [PM2](http://pm2.keymetrics.io/) would ensure that this is a background process and doesn't die out.  A sample way of starting the app would be:
+
+  ```
+  NODE_ENV=production PORT=8000 pm2 start index.js --name "matterwiki"
+  ```
+  Some points to note here :
+  * `NODE_ENV` could take one of these two values, `dev` or `production`. 
+  * `PORT` is optional. If it is not specified, then `5000` would be used.
+  
+  However, if you do not need all this, running `npm start` should boot up the production build of the app.
 6. Head to `yoururl.com/#/setup` and create the Admin account.
 
   _Replace yoururl.com with your URL. If you're running locally, replace with `localhost:5000`_
@@ -103,7 +112,7 @@ Raise an issue!
 
 ## Want to contribute?
 
-We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone.
+We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone. Take a look at our [contributing document](https://github.com/Matterwiki/Matterwiki/blob/master/CONTRIBUTING.md) for understanding local development setup and the code base.
 
 ## Screenshots
 
