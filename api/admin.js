@@ -108,9 +108,19 @@ module.exports = function(app) {
     It takes the id of the topic and then delete that record from the database.
     the error key in the returning object is a boolen which is false if there is no error and true otherwise
     */
-
-    Topics.forge({id: req.body.id})
-    .destroy()
+    if(+req.body.id === 1) {
+      res.status(403).json({
+        error: {
+          error: true,
+          message: 'Can not delete default topic!'
+        },
+        code: '',
+        data: {}
+      })
+    }
+    else {
+      Topics.forge({id: req.body.id})
+      .destroy()
       .then(function() {
         res.json({
           error: {
@@ -135,6 +145,7 @@ module.exports = function(app) {
           }
         });
       });
+    }
   });
 
 
