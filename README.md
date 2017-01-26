@@ -1,6 +1,8 @@
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
 <hr/>
+[![OpenCollective](https://opencollective.com/matterwiki/backers/badge.svg)](#backers) 
+[![OpenCollective](https://opencollective.com/matterwiki/sponsors/badge.svg)](#sponsors)
 
 ## What is a wiki?
 A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
@@ -120,6 +122,76 @@ We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, 
 Before you create a new feature request please check our [public roadmap](https://trello.com/b/OktmtAve/feature-roadmap). It lists the features we're working on and the ones we will be working on.
 If you see we're already working on your feature, head to the issue relating to that and give a thumbs up.
 If your feature is something that hasn't been requested yet, please create an issue.
+
+## Support
+
+### Backers
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/Matterwiki#backer)]
+
+<a href="https://opencollective.com/Matterwiki/backer/0/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/1/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/2/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/3/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/4/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/5/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/6/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/7/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/8/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/9/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/10/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/11/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/12/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/13/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/14/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/15/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/16/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/17/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/18/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/19/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/20/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/21/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/22/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/23/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/24/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/25/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/26/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/27/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/28/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/backer/29/website" target="_blank"><img src="https://opencollective.com/Matterwiki/backer/29/avatar.svg"></a>
+
+### Sponsors
+Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/Matterwiki#sponsor)]
+
+<a href="https://opencollective.com/Matterwiki/sponsor/0/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/1/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/2/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/3/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/4/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/5/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/6/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/7/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/8/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/9/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/10/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/10/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/11/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/11/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/12/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/12/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/13/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/13/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/14/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/14/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/15/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/15/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/16/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/16/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/17/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/17/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/18/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/18/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/19/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/19/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/20/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/20/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/21/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/21/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/22/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/22/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/23/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/23/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/24/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/24/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/25/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/25/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/26/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/26/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/27/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/27/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/28/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/28/avatar.svg"></a>
+<a href="https://opencollective.com/Matterwiki/sponsor/29/website" target="_blank"><img src="https://opencollective.com/Matterwiki/sponsor/29/avatar.svg"></a>
 
 ## Screenshots
 
