@@ -5,7 +5,7 @@
 A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
 
 ## Why do you need a wiki?
-As your company grows it becomes difficult to keep track of all the knowledge in your team. It is difficult to communicate every detail about company policies to new team members. Things get lost in Slack channels. It becomes difficult to keep things in context.
+As your company grows it becomes difficult to keep track of all the knowledge in your team. It is difficult to communicate every detail about the company policies to new team members. Things get lost in Slack channels. It becomes difficult to keep things in context.
 
 A wiki helps you keep track of all this information. Every article is filed under a topic to keep things organised among departments. Everything is transparent, who made what changes to which document and when.
 
@@ -71,6 +71,17 @@ module.exports = {
   useNullAsDefault: true
 }
 ```
+
+## Run with Docker:
+
+You can run MatterWiki with Docker.
+
+1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
+2. Run `docker build -t matterwiki .`
+3. Start a docker container with `docker run --name=matterwiki -p 5000:5000 matterwiki`
+
+You can add `-v /<path>/db:/server/db` to store the db on the host filesystem, and `-v /<path>/config.js:/server/config.js`
+to specify your own JWT secret configuration. Add `--restart=always -d` options to run it as a daemon.
 
 
 ## Under the hood

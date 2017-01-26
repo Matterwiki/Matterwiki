@@ -8,7 +8,7 @@ comment in the articles.js (same directory).
 // Importing the topics model
 var Users = require('../models/user.js');
 var Topics = require('../models/topic.js');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
