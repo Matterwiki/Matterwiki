@@ -1,0 +1,10 @@
+{
+    "de-DE": {
+                "message": "Lade...",
+                "message_timeout": "Es scheint bei deiner Anfrage ein Problem zu geben, versuche es bitte noch einmal."
+    },
+    "en-EN": {
+                "message": "Loading...",
+                "message_timeout": "There seems to be a problem in processing your request. Please try again."
+    }
+}

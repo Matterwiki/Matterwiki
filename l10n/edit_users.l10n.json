@@ -1,0 +1,20 @@
+{
+    "de-DE": {
+                "alert_success": "Benutzer erfolgreich geändert",
+                "update_user": "Benutzer aktualisieren",
+                "placeholder_name": "Name",
+                "placeholder_about": "Über mich",
+                "placeholder_email": "E-Mail",
+                "placeholder_pw": "Passwort",
+                "button_update": "Benutzer aktualisieren"
+    },
+    "en-EN": {
+                "alert_success": "User has been edited.",
+                "update_user": "Update User",
+                "placeholder_name": "Name",
+                "placeholder_about": "About",
+                "placeholder_email": "Email",
+                "placeholder_pw": "Password",
+                "button_update": "Update User"
+    }
+}
