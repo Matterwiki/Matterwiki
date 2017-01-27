@@ -3,7 +3,7 @@
 <hr/>
 
 ## What is a wiki?
-A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
+A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: [Wikipedia](https://en.wikipedia.org/)
 
 ## Why do you need a wiki?
 As your company grows it becomes difficult to keep track of all the knowledge in your team. It is difficult to communicate every detail about the company policies to new team members. Things get lost in Slack channels. It becomes difficult to keep things in context.
