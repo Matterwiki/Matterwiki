@@ -63,6 +63,12 @@ class Search extends React.Component {
 
   render () {
       return(<div>
+            <div className="result-info">
+              <p className="help-block">
+                We found {this.state.articles.length} articles for your query
+              </p>
+            </div>
+            {(this.state.articles.length>0) ?
             <div className="article-list">
             {this.state.articles.map(article => (
             <div key={article.id} className="article-item">
@@ -76,6 +82,13 @@ class Search extends React.Component {
             </div>
 
           ))}</div>
+        :
+        <div className="no-results">
+          <i className="fa fa-frown-o"></i>
+          <p>Please try again with another query</p>
+        </div>
+
+        }
       </div>);
     }
 }
