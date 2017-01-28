@@ -61,6 +61,14 @@ class App extends React.Component {
               <a href="" onClick={this.handleLogout} >Logout</a>
             </li>
             </ul>
+            <div className="search-form-wrapper">
+            <form className="navbar-form navbar-right">
+              <div className="form-group">
+                <input type="text" className="form-control search-input" placeholder="Search" />
+              </div>
+              <button type="submit" className="btn search-button"><i className="fa fa-search"></i></button>
+            </form>
+            </div>
           </div>
           : <div/>}
       </nav>
