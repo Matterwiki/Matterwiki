@@ -13,6 +13,7 @@ import Admin from './components/admin.jsx';
 import Setup from './components/setup.jsx';
 import EditTopic from './components/edit_topics.jsx';
 import EditUser from './components/edit_users.jsx';
+import Search from './components/search.jsx';
 
 render(
   <Router history={hashHistory}>
@@ -27,6 +28,7 @@ render(
       <Route path="admin" component={Admin}/>
       <Route path="topic/edit/:topicId" component={EditTopic}/>
       <Route path="user/edit/:userId" component={EditUser}/>
+      <Route path="search" component={Search}/>
       <Route path="setup" component={Setup}/>
     </Route>
   </Router>

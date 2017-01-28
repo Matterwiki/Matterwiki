@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './login.jsx';
+import SearchForm from './searchform.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
@@ -61,14 +62,7 @@ class App extends React.Component {
               <a href="" onClick={this.handleLogout} >Logout</a>
             </li>
             </ul>
-            <div className="search-form-wrapper">
-            <form className="navbar-form navbar-right">
-              <div className="form-group">
-                <input type="text" className="form-control search-input" placeholder="Search" />
-              </div>
-              <button type="submit" className="btn search-button"><i className="fa fa-search"></i></button>
-            </form>
-            </div>
+            <SearchForm />
           </div>
           : <div/>}
       </nav>
