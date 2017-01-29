@@ -21,6 +21,10 @@ module.exports = {
   module : {
     loaders : [
       {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
         test : /\.jsx?/,
         loader : 'babel-loader',
         include : APP_DIR,

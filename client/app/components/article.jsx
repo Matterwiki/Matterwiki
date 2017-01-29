@@ -2,6 +2,19 @@ import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import ReactMarkdown from 'react-markdown';
+
+function Viewer({article }) {
+  return article.type == 'HTML' ? (
+    <div className="single-article-body"
+      dangerouslySetInnerHTML={{ __html: article.body }}>
+    </div>
+  ) : (
+    <div className="single-article-body">
+      <ReactMarkdown source={article.body} />
+    </div>
+  )
+}
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -85,9 +98,7 @@ class ViewArticle extends React.Component {
                   Last updated on {new Date(this.state.article.updated_at).toDateString()}
               </div>
             </div>
-            <div className="single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
-            </div>
+            <Viewer article={this.state.article}/>
           </div>
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">

@@ -3,22 +3,40 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 
+function Editor({type, body, onChange}) {
+  return (type == 'HTML') ? (
+    <div>
+    <trix-toolbar id="my_toolbar" />
+    <trix-editor id="trix-editor" toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body" />
+    <input id="my_input" type="hidden" value={body}/>
+    </div>
+  ) : (
+  <textarea className="markdown-editor form-control" rows={10} onChange={onChange} value={body}/>
+  )
+}
+
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true};
+    this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true, type: 'HTML'};
   }
 
-  handleChange() {
-    this.setState({body: this.refs.body.value, title: this.refs.title.value});
+  handleTitleChange(ev) {
+    this.setState({title: ev.target.value});
+  }
+
+  handleBodyChange(ev) {
+    this.setState({body: ev.target.value})
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.refs.body.value;
-    var title = this.refs.title.value;
+    // I don't like how this.state.body isn't synched in HTML, only in MD...
+    var body = this.state.type == 'HTML' ? document.querySelector("#trix-editor").value : this.state.body;
+    var title = this.state.title;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
     if(body && title && topicId && what_changed) {
@@ -67,7 +85,7 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
+        that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id, type: response.data.type})
       }
       that.setState({loading: false});
     });
@@ -101,7 +119,7 @@ class EditArticle extends React.Component {
           <div className="row">
             <div className="col-md-12">
               <input
-                onChange={this.handleChange}
+                onChange={this.handleTitleChange}
                 ref="title"
                 className="form-control input-title"
                 value={this.state.title}
@@ -111,9 +129,7 @@ class EditArticle extends React.Component {
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-              <trix-toolbar id="my_toolbar"></trix-toolbar>
-          <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
-          <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
+              <Editor type={this.state.type} body={this.state.body} onChange={this.handleBodyChange} />
                  <br/>
                  <label>Choose topic</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>

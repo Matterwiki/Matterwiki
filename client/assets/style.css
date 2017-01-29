@@ -463,3 +463,7 @@ font-size: 1.5em;
 overflow-y: scroll;
 border: 1px solid #efefef;
 }
+
+.markdown-editor {
+  border: 1px solid #efefef !important;
+}
