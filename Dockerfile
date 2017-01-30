@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:7.4.0-alpine
 
 RUN mkdir -p /server
 WORKDIR /server
@@ -18,6 +18,6 @@ RUN npm run build
 
 EXPOSE 5000
 
-VOLUME db
+VOLUME /server/db
 
 CMD [ "npm", "start" ]
