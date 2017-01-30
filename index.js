@@ -17,6 +17,15 @@ var jwt = require('jsonwebtoken');
 var misc = require('./misc.js');
 var config = require('./config'); //config file in the app directory which contains the JWT key
 
+process.env.PORT = process.env.PORT || 5000;
+
+console.log(process.env.NODE_ENV);
+
+if(process.env.NODE_ENV !== 'production') {
+  // add some patchwork for the devserver to work!
+  require('./webpack-middleware')(app);
+}
+
 app.set('superSecret', config.auth_secret); // secret variable
 
 // Using the body parser middleware to parse request body
@@ -160,6 +169,6 @@ app.use('/api', apiRoutesAdmin);
 
 app.use(express.static(__dirname + '/client'));
 
-app.listen(5000 || process.env.PORT, function(){
-  console.log("The magic is happening on port 5000");
+app.listen(process.env.PORT, function(){
+  console.log("The magic is happening on port %s", process.env.PORT);
 });
