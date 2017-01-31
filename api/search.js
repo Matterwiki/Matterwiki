@@ -23,7 +23,7 @@ module.exports = function(app) {
     var SearchQuery = req.query.query;
     SearchQuery = "%"+SearchQuery+"%";
     Articles.query(function(qb) {
-            qb.where('title', 'LIKE', SearchQuery);
+            qb.where('title', 'LIKE', SearchQuery).orWhere('body','LIKE',SearchQuery);
         }).fetchAll()
         .then(function (collection) {
             res.json({
