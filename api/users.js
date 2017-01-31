@@ -7,6 +7,7 @@ comment in the articles.js (same directory).
 
 // Importing the topics model
 var Users = require('../models/user.js');
+var Articles = require('../models/article.js');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
@@ -136,20 +137,34 @@ module.exports = function(app) {
       It takes the id of the user and then deletes that record from the database.
       the error key in the returning object is a boolen which is false if there is no error and true otherwise
       */
-
-      Users.forge({id: req.body.id})
-      .destroy()
-        .then(function() {
-          res.json({
-            error: {
-              error: false,
-              message: ''
-            },
-            code: 'B137',
-            data: {}
+      Users.where({id: req.body.id}).fetch({withRelated: ['articles']}).then(function(user) {
+        var user = user.toJSON();
+        var articles = user.articles;
+        for(var i=0; i<articles.length; i++)
+        {
+          Articles.forge({id: articles[i].id}).save({
+            title: articles[i].title,
+            body: articles[i].body,
+            topic_id: articles[i].topic_id,
+            what_changed: articles[i].what_changed,
+            user_id: 1
           });
-        })
-        .catch(function (error) {
+        }
+      }).then(function(){
+        Users.forge({id: req.body.id})
+        .destroy()
+          .then(function() {
+            res.json({
+              error: {
+                error: false,
+                message: ''
+              },
+              code: 'B137',
+              data: {}
+            });
+          })
+      })
+      .catch(function (error) {
           res.status(500).json({
             error: {
               error: true,
@@ -161,7 +176,7 @@ module.exports = function(app) {
             }
           })
         });
-        });
+      });
 
 
         app.get('/users/:id',function(req,res){
