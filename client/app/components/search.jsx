@@ -62,6 +62,9 @@ class Search extends React.Component {
   }
 
   render () {
+    if(this.state.loading)
+      return <Loader/>;
+    else
       return(<div>
             <div className="result-info">
               <p className="help-block">
