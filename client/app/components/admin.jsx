@@ -102,8 +102,10 @@ class Admin extends React.Component {
       return response.json();
     })
     .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
+      if(response.error.error) {
+         $('#addTopic').modal('hide');
+         Alert.error(response.error.message);
+      }
       else {
           $('#addTopic').modal('hide');
           var topics = that.state.topics;
