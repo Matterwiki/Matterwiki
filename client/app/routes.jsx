@@ -8,6 +8,7 @@ import Article from './components/article.jsx';
 import NewArticle from './components/new.jsx';
 import EditArticle from './components/edit.jsx';
 import ArticleHistory from './components/history.jsx';
+import Search from './components/search.jsx';
 import Admin from './components/admin.jsx';
 import Setup from './components/setup.jsx';
 import EditTopic from './components/edit_topics.jsx';
@@ -27,8 +28,8 @@ export default function () {
 		  <Route path="admin" component={Admin}/>
 		  <Route path="topic/edit/:topicId" component={EditTopic}/>
 		  <Route path="user/edit/:userId" component={EditUser}/>
+			<Route path="search" component={Search}/>
 		  <Route path="setup" component={Setup}/>
 		</Route>
 	);
 };
-

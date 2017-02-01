@@ -11,7 +11,7 @@ const renderApp = (appRoutes) => {
       <Router history={hashHistory}>
         {appRoutes()}
       </Router>
-    </AppContainer>, 
+    </AppContainer>,
     document.getElementById('app')
   )
 };

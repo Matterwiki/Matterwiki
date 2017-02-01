@@ -160,6 +160,9 @@ require('./api/users')(apiRoutesAdmin);
 // Importing all endpoints for archives
 require('./api/archives')(apiRoutes);
 
+// Importing the search endpoint
+require('./api/search')(apiRoutes);
+
 // Importing all endpoints which are only admin accessible
 require('./api/admin')(apiRoutesAdmin);
 

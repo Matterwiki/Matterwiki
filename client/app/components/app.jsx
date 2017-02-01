@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from './login.jsx';
+import SearchForm from './searchform.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
@@ -61,6 +62,7 @@ class App extends React.Component {
               <a href="" onClick={this.handleLogout} >Logout</a>
             </li>
             </ul>
+            <SearchForm />
           </div>
           : <div/>}
       </nav>
