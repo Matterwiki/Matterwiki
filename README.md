@@ -1,11 +1,12 @@
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
+<hr/>
 
 ## What is a wiki?
 A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
 
 ## Why do you need a wiki?
-As your company grows it becomes difficult to keep track of all the knowledge in your team. It is difficult to communicate every detail about company policies to new team members. Things get lost in Slack channels. It becomes difficult to keep things in context.
+As your company grows it becomes difficult to keep track of all the knowledge in your team. It is difficult to communicate every detail about the company policies to new team members. Things get lost in Slack channels. It becomes difficult to keep things in context.
 
 A wiki helps you keep track of all this information. Every article is filed under a topic to keep things organised among departments. Everything is transparent, who made what changes to which document and when.
 
@@ -23,7 +24,16 @@ You need to have `Node` and `npm` installed on your system.
 3. Edit `config.js` (present in the project root) and change the `auth_secret` value with any secret phrase.
   **NOTE: This phrase will be used to encode and decode your access tokens. Keep it safe and private**
 4. run `npm run build`
-5. run `npm start`
+5. At this point, running this with a process manager like [PM2](http://pm2.keymetrics.io/) would ensure that this is a background process and doesn't die out.  A sample way of starting the app would be:
+
+  ```
+  NODE_ENV=production PORT=8000 pm2 start index.js --name "matterwiki"
+  ```
+  Some points to note here :
+  * `NODE_ENV` could take one of these two values, `dev` or `production`. 
+  * `PORT` is optional. If it is not specified, then `5000` would be used.
+  
+  However, if you do not need all this, running `npm start` should boot up the production build of the app.
 6. Head to `yoururl.com/#/setup` and create the Admin account.
 
   _Replace yoururl.com with your URL. If you're running locally, replace with `localhost:5000`_
@@ -72,6 +82,17 @@ module.exports = {
 }
 ```
 
+## Run with Docker:
+
+You can run MatterWiki with Docker.
+
+1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
+2. Run `docker build -t matterwiki .`
+3. Start a docker container with `docker run --name=matterwiki -p 5000:5000 matterwiki`
+
+You can add `-v /<path>/db:/server/db` to store the db on the host filesystem, and `-v /<path>/config.js:/server/config.js`
+to specify your own JWT secret configuration. Add `--restart=always -d` options to run it as a daemon.
+
 
 ## Under the hood
 
@@ -92,7 +113,13 @@ Raise an issue!
 
 ## Want to contribute?
 
-We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone.
+We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, or some refactoring, or an even an entire UI overhaul. So help us improve Matterwiki for everyone. Take a look at our [contributing document](https://github.com/Matterwiki/Matterwiki/blob/master/CONTRIBUTING.md) for understanding local development setup and the code base.
+
+## Feature requests?
+
+Before you create a new feature request please check our [public roadmap](https://trello.com/b/OktmtAve/feature-roadmap). It lists the features we're working on and the ones we will be working on.
+If you see we're already working on your feature, head to the issue relating to that and give a thumbs up.
+If your feature is something that hasn't been requested yet, please create an issue.
 
 ## Screenshots
 
