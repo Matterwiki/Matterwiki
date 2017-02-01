@@ -53,6 +53,7 @@ padding: 10px 20px;
 .article-item-title {
   font-size: 2.5em;
   font-weight: 700;
+  word-wrap: break-word;
 }
 
 .article-item-title a {

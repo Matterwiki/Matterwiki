@@ -148,31 +148,34 @@ class Admin extends React.Component {
 
   deleteUser(id,e) {
     e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+id
-               };
-    var that = this;
-    fetch('/api/users/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        users = that.state.users
-        var users = $.grep(users, function(e){
-           return e.id != id;
+    var del = confirm("Deleting the user will move all of his/her articles to the Admin. Are you sure?");
+    if(del==true) {
+        var myHeaders = new Headers({
+            "Content-Type": "application/x-www-form-urlencoded",
+            "x-access-token": window.localStorage.getItem('userToken')
         });
-        that.setState({users: users});
-        Alert.success('User has been deleted');
-      }
-    });
+        var myInit = { method: 'DELETE',
+                   headers: myHeaders,
+                   body: "id="+id
+                   };
+        var that = this;
+        fetch('/api/users/',myInit)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          if(response.error.error)
+            Alert.error(response.error.message);
+          else {
+            users = that.state.users
+            var users = $.grep(users, function(e){
+               return e.id != id;
+            });
+            that.setState({users: users});
+            Alert.success('User has been deleted');
+          }
+        });
+    }
   }
 
 
