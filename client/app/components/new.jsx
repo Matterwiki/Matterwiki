@@ -89,10 +89,7 @@ class NewArticle extends React.Component {
          <br/>
          <div className="row">
           <div className="col-md-12 new-article-form">
-                <trix-toolbar id="my_toolbar"></trix-toolbar>
-            <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
-            <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>
-               <br/>
+               
                <label>Choose topic</label>
                <select className="form-control topic-select" ref="topic">
                  {this.state.topics.map(topic => (
