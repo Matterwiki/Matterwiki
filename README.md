@@ -133,3 +133,13 @@ If your feature is something that hasn't been requested yet, please create an is
 <hr/>
 
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/footer-img.png?raw=true" />
+
+## Prior art
+If you want to explore alternatives here are some other Wikis we love.
+
+*We're also referring to them for inspiration as we go along.*
+
+1. [Tettra](https://tettra.co), another simple wiki (comes with Slack integration) [PAID].
+2. [Jingo](https://github.com/claudioc/jingo), another Node.js based Wiki based on Git.
+3. [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki), the code that powers Wikipedia.
+4. [Dokuwiki](https://www.dokuwiki.org/), simple text file based wiki
