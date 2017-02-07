@@ -25,5 +25,19 @@
             "h3-article-published": "Your article has been published",
             "great": "That's great"
 
+    },
+    "zh-CN": {
+            "article-deleted": "文章已删除",
+            "last-updated": "最后修改于 ",
+            "filed-under": "文件位于 ",
+            "last-updated-by": "最后修改者 ",
+            "what-changed": "最后修改内容",
+            "no-info": "没有有效信息",
+            "edit": "编辑",
+            "history": "历史",
+            "h1-article-published": "Yayyyy!",
+            "h3-article-published": "您的文章已发布",
+            "great": "真棒"
+
     }
 }

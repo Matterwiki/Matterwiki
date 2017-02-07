@@ -5,7 +5,7 @@
             "admin": "Admin",
             "new-article": "Neuer Artikel",
             "logout": "Abmelden",
-            "powered-by": "Unterstützt von ",
+            "powered-by": "Unterstützt von "
     },
     "en-EN": {
             "loggedout": "You've been successfully logged out",
@@ -13,6 +13,14 @@
             "admin": "Admin",
             "new-article": "New Article",
             "logout": "Logout",
-            "powered-by": "Powered by ",
+            "powered-by": "Powered by "
+    },
+    "zh-CN": {
+            "loggedout": "您已成功注销",
+            "toggle-navigation": "切换导航",
+            "admin": "管理员",
+            "new-article": "新增文章",
+            "logout": "注销",
+            "powered-by": "提供者 by "
     }
 }

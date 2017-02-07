@@ -6,5 +6,9 @@
     "en-EN": {
             "no-archive-for-article": "There are no archives for this article",
             "view-archives": "View Archives"
+    },
+    "zh-CN": {
+            "no-archive-for-article": "此文章没有可用归档",
+            "view-archives": "查看归档"
     }
 }

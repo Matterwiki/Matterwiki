@@ -16,5 +16,14 @@
                 "placeholder_email": "Email",
                 "placeholder_pw": "Password",
                 "button_update": "Update User"
+    },
+    "zh-CN": {
+                "alert_success": "用户信息已更新.",
+                "update_user": "更新用户",
+                "placeholder_name": "用户名",
+                "placeholder_about": "简介",
+                "placeholder_email": "Email",
+                "placeholder_pw": "密码",
+                "button_update": "更新信息"
     }
 }

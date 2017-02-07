@@ -14,5 +14,13 @@
                 "placeholder_editor": "Start writing here....",
                 "choose_topic": "Choose topic",
                 "button_submit": "Create Article"
+    },
+    "zh-CN": {
+                "alert_success": "文章已保存成功",
+                "alert_error": "请填写文章标题、正文和主题信息。",
+                "placeholder_title": "填写文章标题...",
+                "placeholder_editor": "在这里输入正文...",
+                "choose_topic": "选择主题",
+                "button_submit": "生成文章"
     }
 }

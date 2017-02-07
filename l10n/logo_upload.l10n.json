@@ -10,5 +10,11 @@
                 "change_logo": "Change Logo",
                 "help_block": "Please reload the page for the changes to reflect throughout the site.",
                 "button_submit": "Upload Logo"
+    },
+    "zh-CN": {
+                "alert_success": "您的Logo已更新",
+                "change_logo": "更换Logo",
+                "help_block": "请刷新页面以查看完整效果.",
+                "button_submit": "更换Logo"
     }
 }
