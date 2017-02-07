@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "dev": "node index.js",
-    "start" : "npm run build && cross-env NODE_ENV=production node index.js"
+    "start": "npm run build && cross-env NODE_ENV=production node index.js"
   },
   "bin": {
     "wiki": "./install.js"
@@ -28,6 +28,8 @@
     "bcryptjs": "2.4.0",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.0",
+    "draft-js": "^0.10.0",
+    "draft-js-utils": "^0.1.7",
     "express": "4.14.0",
     "jsonwebtoken": "7.1.9",
     "knex": "0.11.10",
