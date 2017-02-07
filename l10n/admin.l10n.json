@@ -28,5 +28,20 @@
             "user_deleted": "User has been deleted",
             "topic_added": "Topic has been added",
             "topic_deleted": "Topic has been deleted"
+    },
+    "zh-CN": {
+            "add_user": "新增用户",
+            "add_topic": "新增主题",
+            "edit": "编辑",
+            "delete": "删除",
+            "name": "用户名",
+            "about": "简介",
+            "description": "描述",
+            "email": "Email",
+            "password": "密码",
+            "user_added": "用户已新增",
+            "user_deleted": "用户已删除",
+            "topic_added": "主题已新增",
+            "topic_deleted": "主题已删除"
     }
 }
