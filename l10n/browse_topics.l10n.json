@@ -6,5 +6,9 @@
     "en-EN": {
             "no-topics": "There are no topics created yet",
             "view-topics": "View Topics"
+    },
+    "zh-CN": {
+            "no-topics": "尚未创建主题",
+            "view-topics": "浏览主题"
     }
 }

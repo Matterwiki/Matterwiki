@@ -6,5 +6,9 @@
     "en-EN": {
                 "message": "Loading...",
                 "message_timeout": "There seems to be a problem in processing your request. Please try again."
+    },
+    "zh-CN": {
+                "message": "加载中...",
+                "message_timeout": "请求出错, 请重试。"
     }
 }

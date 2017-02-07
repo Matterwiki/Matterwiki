@@ -20,5 +20,16 @@
                 "placeholder_email": "Email",
                 "placeholder_pw": "Password",
                 "button_signup": "Setup My Account"
+    },
+    "zh-CN": {
+                "alert_success": "管理员用户已生成",
+                "welcome_h1": "欢迎,",
+                "welcome_h3": "Matterwiki 是一个为团队打造的简约型Wiki",
+                "welcome_h4": "人们用它来储存文档、笔记、文化指南、员工信息和他们想存的任何东西",
+                "placeholder_name": "姓名",
+                "placeholder_about": "简介",
+                "placeholder_email": "Email",
+                "placeholder_pw": "姓名",
+                "button_signup": "建立我的账号"
     }
 }

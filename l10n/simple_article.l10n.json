@@ -6,5 +6,9 @@
     "en-EN": {
                 "edited_by": "Edited by ",
                 "select_archive": "Please select the archive"
+    },
+    "zh-CN": {
+                "edited_by": "编辑: ",
+                "select_archive": "请选择归档"
     }
 }

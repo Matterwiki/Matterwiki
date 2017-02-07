@@ -12,5 +12,12 @@
                 "placeholder_email": "Email",
                 "placeholder_pw": "Password",
                 "button_signin": "Sign in"
+    },
+    "zh-CN": {
+                "alert_success": "您已登录",
+                "login": "登录",
+                "placeholder_email": "Email",
+                "placeholder_pw": "密码",
+                "button_signin": "登录"
     }
 }

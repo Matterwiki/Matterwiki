@@ -6,5 +6,9 @@
     "en-EN": {
             "no-article-for-topic": "There are no articles under this topic",
             "last-updated-on": "Last updated on "
+    },
+    "zh-CN": {
+            "no-article-for-topic": "此主题下没有可用文章",
+            "last-updated-on": "最后修改于 "
     }
 }
