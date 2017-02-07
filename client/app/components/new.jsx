@@ -3,6 +3,9 @@ import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 
+
+import WikiEditor from './WikiEditor/index.jsx';
+
 class NewArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -86,10 +89,10 @@ class NewArticle extends React.Component {
                />
          </div>
          </div>
+         <WikiEditor />
          <br/>
          <div className="row">
-          <div className="col-md-12 new-article-form">
-               
+          <div className="col-md-12 new-article-form">               
                <label>Choose topic</label>
                <select className="form-control topic-select" ref="topic">
                  {this.state.topics.map(topic => (
