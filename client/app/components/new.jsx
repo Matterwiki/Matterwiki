@@ -81,18 +81,21 @@ class NewArticle extends React.Component {
     return (
       <div className="new-article">
         <div className="row">
-          <div className="col-md-12">
+
             <input
               ref="title"
               className="form-control input-title"
               placeholder="Enter article title..."
                />
-         </div>
-         </div>
-         <WikiEditor />
+
+       </div>
+       <br/>
+       <div className="row">
+          <WikiEditor />
+       </div>
          <br/>
          <div className="row">
-          <div className="col-md-12 new-article-form">               
+          <div className="col-md-12 new-article-form">
                <label>Choose topic</label>
                <select className="form-control topic-select" ref="topic">
                  {this.state.topics.map(topic => (
@@ -103,9 +106,11 @@ class NewArticle extends React.Component {
         </div>
         <br/>
         <br/>
+        <div className="row">
         <div className="col-md-12">
           <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
         </div>
+      </div>
       </div>
     );
   }

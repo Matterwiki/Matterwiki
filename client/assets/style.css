@@ -509,3 +509,28 @@ border: 1px solid #efefef;
 
 /* for the editor */
 /* TODO : MUST clean up after implementing everything */
+
+.DraftEditor-toolbar {
+  margin-bottom: 1em;
+  overflow: auto;
+}
+
+.DraftEditor-toolbar .btn-group .toolbar-button {
+  background: #fff;
+  outline: none;
+  border: none;
+  color : #4d4d4d;
+  box-shadow: none;
+}
+
+.DraftEditor-toolbar .btn-group .toolbar-button.active {
+  background: #efefef;
+}
+
+.DraftEditor-root {
+  font-family: "Vollkorn", serif;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  min-height: 7em;
+  outline: none;
+}

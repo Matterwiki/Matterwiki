@@ -26,10 +26,10 @@ class WikiEditor extends Component {
 	_handleKeyCommand (cmd) {
 		const {editorState} = this.state;
 
-		const newState = RichUtils.handleKeyCommand(editorState, cmd);
+		const newState = RichUtils.handleKeyCommand(editorState, cmd)
 
 		if(newState) {
-			this.onChange(newState); 
+			this.onChange(newState);
 			return true;
 		}
 
@@ -43,17 +43,17 @@ class WikiEditor extends Component {
 
 		return (
 			<div>
-				<Toolbar 
-					editorState={editorState} 
+				<Toolbar
+					editorState={editorState}
 					onChange={this.onChange}
 				/>
-				<Editor 
+				<Editor
 					ref="editor"
 					customStyleMap={styleMap}
 					editorState={editorState}
 					onChange={this.onChange}
 					handleKeyCommand={this.handleKeyCommand}
-					placeholder="Start writing here"
+					placeholder="Start writing here...."
 				/>
 			</div>
 		)

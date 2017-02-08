@@ -14,8 +14,8 @@ const InlineControls = ({editorState, onToggle}) => {
 
 	return (
 		<div className="btn-group" role="group">
-			{INLINE_TYPES.map(type => 
-				<ToolbarButton 
+			{INLINE_TYPES.map(type =>
+				<ToolbarButton
 					key={type.label}
 					active={currentStyle.has(type.style)}
 					onToggle={onToggle}
@@ -32,23 +32,24 @@ const InlineControls = ({editorState, onToggle}) => {
 const BLOCK_TYPES = [
 	{label: 'Heading', fa: 'fa-header', style: 'header-one'},
 	{label: 'Blockquote', fa: 'fa-quote-right', style: 'blockquote'},
-	{label: 'Code Block', fa: 'fa-code', style: 'code-block'},	 
-  	{label: 'UL', fa: 'fa-list-ul', style: 'unordered-list-item'},
-  	{label: 'OL', fa: 'fa-list-ol', style: 'ordered-list-item'},
+	{label: 'Code Block', fa: 'fa-code', style: 'code-block'},
+  {label: 'UL', fa: 'fa-list-ul', style: 'unordered-list-item'},
+  {label: 'OL', fa: 'fa-list-ol', style: 'ordered-list-item'},
 ];
 
 const BlockControls = ({editorState, onToggle}) => {
 
 	const selection = editorState.getSelection();
-	// get the blockType of the block the cursor/selection is currently in 
+	// get the blockType of the block the cursor/selection is currently in
 	const blockType = editorState
-								.getCurrentContent()
-								.getBlockForKey(selection.getStartKey())
-								.getType();
+											.getCurrentContent()
+											.getBlockForKey(selection.getStartKey())
+											.getType();
+
 	return (
 		<div className="btn-group" role="group">
-			{BLOCK_TYPES.map(type => 
-				<ToolbarButton 
+			{BLOCK_TYPES.map(type =>
+				<ToolbarButton
 					key={type.label}
 					active={blockType === type.style}
 					onToggle={onToggle}
@@ -75,7 +76,7 @@ export default class Toolbar extends Component {
 
 	_toggleBlockType(blockType) {
 		const {onChange, editorState} = this.props;
-		
+
 		onChange(
 			RichUtils.toggleBlockType(
 				editorState,
@@ -101,11 +102,10 @@ export default class Toolbar extends Component {
 		const {editorState} = this.props;
 
 		return (
-			<div className="btn-toolbar" role="toolbar">
+			<div className="btn-toolbar DraftEditor-toolbar" role="toolbar">
 				<InlineControls editorState={editorState} onToggle={this.toggleInlineStyle}/>
 				<BlockControls editorState={editorState}  onToggle={this.toggleBlockType}/>
 			</div>
 		);
 	}
 }
-
