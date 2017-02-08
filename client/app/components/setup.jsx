@@ -2,6 +2,9 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/setup.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class Setup extends React.Component {
 
@@ -33,7 +36,7 @@ class Setup extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-          Alert.success('Admin user generated');
+          Alert.success(language.alert_success);
           hashHistory.push('login');
       }
     });
@@ -46,29 +49,28 @@ class Setup extends React.Component {
       <div className="row">
 
         <div className="col-md-6">
-          <h1><b>Welcome,</b></h1>
-          <h3>Matterwiki is a simple wiki for teams</h3><br/>
-          <h4>People use it to store documentation, notes, culture guidelines, employee onboarding content
-          and everything they want to.</h4><br/>
+          <h1><b>{language.welcome_h1}</b></h1>
+          <h3>{language.welcome_h3}</h3><br/>
+          <h4>{language.welcome_h4}</h4><br/>
 
 
         </div>
       <div className="col-md-6">
         <form>
           <div className="col-sm-12 form-group">
-            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" />
+            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder={language.placeholder_name} />
           </div>
           <div className="col-sm-12 form-group">
-            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" />
+            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder={language.placeholder_about} />
           </div>
       <div className="col-sm-12 form-group">
-        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder="Email" />
+        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder={language.placeholder_email} />
       </div>
       <div className="col-sm-12 form-group">
-        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
+        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder={language.placeholder_pw} />
       </div>
       <div className="col-sm-12 form-group">
-        <button onClick={this.handleSignUp} className="btn btn-default btn-block btn-lg">Setup My Account</button>
+        <button onClick={this.handleSignUp} className="btn btn-default btn-block btn-lg">{language.button_signup}</button>
       </div>
     </form>
       </div>

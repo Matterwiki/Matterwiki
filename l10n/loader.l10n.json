@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
                 "message": "Lade...",
                 "message_timeout": "Es scheint bei deiner Anfrage ein Problem zu geben, versuche es bitte noch einmal."

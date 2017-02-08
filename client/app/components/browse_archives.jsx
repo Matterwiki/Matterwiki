@@ -2,6 +2,9 @@ import React from 'react';
 import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/browse_archives.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class BrowseArchives extends React.Component {
   constructor(props) {
@@ -44,14 +47,14 @@ class BrowseArchives extends React.Component {
     if(this.state.loading)
       return <Loader/>;
     if(this.state.archives.length<1) {
-      return <p className="help-block center-align">There are no archives for this article</p>;
+      return <p className="help-block center-align">{language.no_archive_for_article}</p>;
     }
     else {
       return(
         <div className="custom-collapse">
           <div className="visible-xs">
         <button className="collapse-toggle btn btn-default" type="button" data-toggle="collapse" data-parent="custom-collapse" data-target="#side-menu-collapse">
-          View Archives
+          {language.view_archives}
          </button>
         <br/>
         <br/>

@@ -1,10 +1,13 @@
 module.exports = {
     "de-DE": {
                 "alert_success": "Eintrag wurde erfolgreich abgespeichert",
-                "alert_error": "Es werden Informationen zum Inhalt, Titel und Thema benötigt",
+                "alert_error": "Es werden Informationen zum Inhalt, Titel, Thema, und Info ändern benötigt",
                 "placeholder_title": "Bitte Titel angeben...",
                 "placeholder_editor": "Schreibe etwas...",
                 "choose_topic": "Wähle ein Thema",
+                "what_improvements": "Welche Verbesserungen haben Sie in dieser Bearbeitung gemacht?",
+                "placeholder_what_improvements": "",
+                "what_improvements_tip": "Halten Sie es kurz und beschreibend",
                 "button_submit": "Eintrag erstellen"
     },
     "en-EN": {
@@ -13,6 +16,9 @@ module.exports = {
                 "placeholder_title": "Enter article title...",
                 "placeholder_editor": "Start writing here....",
                 "choose_topic": "Choose topic",
+                "what_improvements": "What improvements did you make in this edit?",
+                "placeholder_what_improvements": "Example: Fixed a typo. It's grammer not grammar",
+                "what_improvements_tip": "Keep it short and descriptive",
                 "button_submit": "Create Article"
     }
 }

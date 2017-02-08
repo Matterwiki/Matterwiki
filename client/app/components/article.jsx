@@ -2,6 +2,9 @@ import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/article.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -59,7 +62,7 @@ class ViewArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        Alert.success("Article has been deleted");
+        Alert.success(language.article_deleted);
         hashHistory.push('home');
 
       }
@@ -82,7 +85,7 @@ class ViewArticle extends React.Component {
                 <h1 className="single-article-title">{this.state.article.title}
                 </h1>
                 <div className="single-article-meta">
-                  Last updated on {new Date(this.state.article.updated_at).toDateString()}
+                  {language.last_updated} {new Date(this.state.article.updated_at).toDateString()}
               </div>
             </div>
             <div className="single-article-body"
@@ -91,21 +94,21 @@ class ViewArticle extends React.Component {
           </div>
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">
-            <div className="sidebar-title">Filed under</div>
+            <div className="sidebar-title">{language.filed_under}</div>
             <h2 className="color-text"><b>{this.state.article.topic.name}</b></h2>
             </div>
             <div className="sidebar-block">
-            <div className="sidebar-title">Last Updated By</div>
+            <div className="sidebar-title">{language.last_updated_by}</div>
             <h3><b>{this.state.article.user.name}</b></h3>
             <p>{this.state.article.user.about}</p>
             </div>
             <div className="sidebar-block">
-            <div className="sidebar-title">What Changed in last edit</div>
-            {(this.state.article.what_changed) ? <h4>{this.state.article.what_changed}</h4> : <h4>No information available</h4>}
+            <div className="sidebar-title">{language.what_changed}</div>
+            {(this.state.article.what_changed) ? <h4>{this.state.article.what_changed}</h4> : <h4>{language.no_info}</h4>}
             </div>
-            <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
-            <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">History</Link>
-            {(window.localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>Delete</button>
+            <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">{language.edit}</Link>
+            <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">{language.history}</Link>
+            {(window.localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>{language.delete}</button>
           : ''}
           </div>
             </div>
@@ -121,10 +124,10 @@ class ViewArticle extends React.Component {
                       <div className="row">
 
                         <div className="col-md-6 col-sd-12">
-                          <h1><b>Yayyyy!</b></h1><h3>Your article has been published</h3>
+                          <h1><b>{language.h1_article_published}</b></h1><h3>{language.h3_article_published}</h3>
                           <br/>
                           <br/>
-                          <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">That's great</button>
+                          <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">{language.great}</button>
                         </div>
                       </div>
                     </center>

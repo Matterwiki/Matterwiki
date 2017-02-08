@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
                 "alert_success": "Benutzer erfolgreich geändert",
                 "update_user": "Benutzer aktualisieren",
@@ -9,7 +9,7 @@
                 "button_update": "Benutzer aktualisieren"
     },
     "en-EN": {
-                "alert_success": "User has been edited.",
+                "alert_success": "User has been edited",
                 "update_user": "Update User",
                 "placeholder_name": "Name",
                 "placeholder_about": "About",

@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
             "add_user": "Benutzer hinzufügen",
             "add_topic": "Thema hinzufügen",

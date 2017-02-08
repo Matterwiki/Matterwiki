@@ -1,0 +1,16 @@
+module.exports = {
+    "de-DE": {
+                "alert_success": "Thema erfolgreich geändert",
+                "update_topic": "Thema aktualisieren",
+                "placeholder_name": "Name",
+                "placeholder_description": "Beschreibung",
+                "button_update": "Thema aktualisieren"
+    },
+    "en-EN": {
+                "alert_success": "Topic has been edited",
+                "update_topic": "Update Topic",
+                "placeholder_name": "Name",
+                "placeholder_description": "Password",
+                "button_update": "Update User"
+    }
+}

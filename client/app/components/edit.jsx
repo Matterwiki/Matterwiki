@@ -2,6 +2,10 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import translations from '../../../l10n/edit.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
+
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -39,13 +43,13 @@ class EditArticle extends React.Component {
             if(response.error.error)
               Alert.error(response.error.message);
             else {
-                Alert.success("Article has been successfully saved");
+                Alert.success(language.alert_success);
                 hashHistory.push('article/'+that.props.params.articleId);
             }
           });
     }
     else {
-      Alert.error("Article Body, Title, Topic and Change Info is required.");
+      Alert.error(language.alert_error);
     }
   }
 
@@ -104,6 +108,7 @@ class EditArticle extends React.Component {
                 onChange={this.handleChange}
                 ref="title"
                 className="form-control input-title"
+                placeholder={language.placeholder_title}
                 value={this.state.title}
                  />
            </div>
@@ -112,29 +117,29 @@ class EditArticle extends React.Component {
            <div className="row">
             <div className="col-md-12 new-article-form">
               <trix-toolbar id="my_toolbar"></trix-toolbar>
-          <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
+          <trix-editor toolbar="my_toolbar" input="my_input" placeholder={language.editor} class="input-body"></trix-editor>
           <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
                  <br/>
-                 <label>Choose topic</label>
+                 <label>{language.choose_topic}</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>
                    {this.state.topics.map(topic => (
                      <option value={topic.id} key={topic.id}>{topic.name}</option>
                    ))}
                  </select>
                  <br/>
-                 <label>What improvements did you make in this edit?</label>
+                 <label>{language.what_improvements}</label>
                  <textarea
                    ref="what_changed"
                    className="form-control what_changed"
-                   placeholder="Example: Fixed a typo. It's grammer not grammar"
+                   placeholder={language.placeholder_what_improvements}
                     />
-                  <p className="help-block">Keep it short and descriptive :)</p>
+                  <p className="help-block">{language.what_improvements_tip} :)</p>
                   <br/>
             </div>
 
         <div className="row">
           <div className="col-md-12">
-            <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
+            <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>{language.button_submit}</button>
           </div>
         </div>
       </div>

@@ -2,6 +2,9 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import translations from '../../../l10n/edit_users.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class EditUser extends React.Component {
 
@@ -63,7 +66,7 @@ class EditUser extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-          Alert.success('User has been edited');
+          Alert.success(language.alert_success);
           hashHistory.push('admin');
       }
     });
@@ -78,23 +81,23 @@ class EditUser extends React.Component {
           <div>
                   <div className="row">
                     <div className="col-md-12 col-sd-12">
-                      <h1><b>Update User</b></h1>
+                      <h1><b>{language.update_user}</b></h1>
                       <br/>
                         <form>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" value={this.state.name} onChange={this.handleChange} />
+                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder={language.placeholder_name} value={this.state.name} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" value={this.state.about} onChange={this.handleChange}/>
+                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder={language.placeholder_about} value={this.state.about} onChange={this.handleChange}/>
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_email" id="inputUserName" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
+                            <input type="text" className="form-control" ref="user_email" id="inputUserName" placeholder={language.placeholder_email} value={this.state.email} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+                            <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder={language.placeholder_pw} value={this.state.password} onChange={this.handleChange} />
                           </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.editUser} className="btn btn-default btn-block btn-lg">Update User</button>
+                        <button onClick={this.editUser} className="btn btn-default btn-block btn-lg">{language.button_update}</button>
                       </div>
                     </form>
                     </div>

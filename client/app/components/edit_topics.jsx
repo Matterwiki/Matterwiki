@@ -2,6 +2,9 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import translations from '../../../l10n/edit_topics.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class EditTopic extends React.Component {
 
@@ -61,7 +64,7 @@ class EditTopic extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-          Alert.success('Topic has been edited');
+          Alert.success(language.alert_success);
           hashHistory.push('admin');
       }
     });
@@ -76,17 +79,17 @@ class EditTopic extends React.Component {
           <div>
                   <div className="row">
                     <div className="col-md-12 col-sd-12">
-                      <h1><b>Update Topic</b></h1>
+                      <h1><b>{language.update_topic}</b></h1>
                       <br/>
                         <form>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder="Name" value={this.state.name} onChange={this.handleChange} />
+                            <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder={language.placeholder_name} value={this.state.name} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
+                            <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder={language.placeholder_description} value={this.state.description} onChange={this.handleChange}/>
                           </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.editTopic} className="btn btn-default btn-block btn-lg">Update Topic</button>
+                        <button onClick={this.editTopic} className="btn btn-default btn-block btn-lg">{language.button_update}</button>
                       </div>
                     </form>
                     </div>

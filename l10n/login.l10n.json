@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
                 "alert_success": "Du bist jetzt angemeldet",
                 "login": "Anmeldung",

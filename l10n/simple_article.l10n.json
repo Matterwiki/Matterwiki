@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
                 "edited_by": "Bearbeitet von ",
                 "select_archive": "Bitte wähle das Archiv aus"

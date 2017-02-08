@@ -1,4 +1,4 @@
-{
+module.exports = {
     "de-DE": {
                 "alert_success": "Administrator erstellt",
                 "welcome_h1": "Willkommen",

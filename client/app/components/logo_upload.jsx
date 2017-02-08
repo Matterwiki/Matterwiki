@@ -1,5 +1,8 @@
 import React from 'react';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/logo_upload.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class LogoUpload extends React.Component {
 
@@ -30,7 +33,7 @@ class LogoUpload extends React.Component {
         Alert.error(response.error.message);
       }
       else {
-        Alert.success("Your logo has been successfully updated.")
+        Alert.success(language.alert_success)
       }
     });
   }
@@ -39,13 +42,13 @@ class LogoUpload extends React.Component {
     return(
       <div className="row">
         <div className="col-md-6 col-sd-12">
-        <h2><b>Change Logo</b></h2>
+        <h2><b>{language.change_logo}</b></h2>
         <hr/>
         <form method="POST" encType="multipart/form-data" onSubmit={this.handleUpload}>
             <input type="file" name="logo" ref="logo" className="form-control"/>
-            <p className="help-block">Please reload the page for the changes to reflect throughout the site.</p>
+            <p className="help-block">{language.help_block}</p>
             <br/>
-            <input type="submit" value="Upload Logo" className="btn btn-default btn-block btn-lg"/>
+            <button type="submit" className="btn btn-default btn-block btn-lg">{language.button_submit}</button>
         </form>
         </div>
       </div>

@@ -2,6 +2,9 @@ import React from 'react';
 import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/simple_article.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class SimpleArticle extends React.Component {
   constructor(props) {
@@ -44,7 +47,7 @@ class SimpleArticle extends React.Component {
                 <h1 className="single-article-title">{this.state.article.title}
                 </h1>
                 <div className="single-article-meta">
-                  Edited by <b>{this.state.article.user.name}</b>
+                  {language.edited_by} <b>{this.state.article.user.name}</b>
               </div>
             </div>
             <div className="single-article-body"
@@ -55,7 +58,7 @@ class SimpleArticle extends React.Component {
             );
     }
     else {
-      return <center><p className="help-block">Please select the archive</p></center>;
+      return <center><p className="help-block">{language.select_archive}</p></center>;
     }
   }
 }
