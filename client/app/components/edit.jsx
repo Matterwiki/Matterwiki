@@ -32,7 +32,7 @@ class EditArticle extends React.Component {
           });
           var myInit = { method: 'PUT',
                      headers: myHeaders,
-                     body: "id="+this.props.params.articleId+"&title="+title+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
+                     body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
                      };
           var that = this;
           fetch('/api/articles/',myInit)

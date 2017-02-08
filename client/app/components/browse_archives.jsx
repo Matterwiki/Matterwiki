@@ -62,7 +62,7 @@ class BrowseArchives extends React.Component {
         <div className="list-group collapse archive-list" id="side-menu-collapse">
             {this.state.archives.map(archive => (
               <a key={archive.id} href="#" className="list-group-item dropdown-toggle" onClick={(e) => this.archiveSelect(archive.id,e)}>
-                <h4 className="list-group-item-heading">{new Date(archive.updated_at).toDateString()}</h4>
+                <h4 className="list-group-item-heading">{new Date(archive.updated_at.replace(' ','T')).toDateString()}</h4>
                 <p className="list-group-item-text">{archive.what_changed}</p>
               </a>
           ))}</div>

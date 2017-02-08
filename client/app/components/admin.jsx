@@ -105,8 +105,10 @@ class Admin extends React.Component {
       return response.json();
     })
     .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
+      if(response.error.error) {
+         $('#addTopic').modal('hide');
+         Alert.error(response.error.message);
+      }
       else {
           $('#addTopic').modal('hide');
           var topics = that.state.topics;
@@ -149,31 +151,34 @@ class Admin extends React.Component {
 
   deleteUser(id,e) {
     e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+id
-               };
-    var that = this;
-    fetch('/api/users/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        users = that.state.users
-        var users = $.grep(users, function(e){
-           return e.id != id;
+    var del = confirm("Deleting the user will move all of his/her articles to the Admin. Are you sure?");
+    if(del==true) {
+        var myHeaders = new Headers({
+            "Content-Type": "application/x-www-form-urlencoded",
+            "x-access-token": window.localStorage.getItem('userToken')
         });
-        that.setState({users: users});
-        Alert.success(language.user);
-      }
-    });
+        var myInit = { method: 'DELETE',
+                   headers: myHeaders,
+                   body: "id="+id
+                   };
+        var that = this;
+        fetch('/api/users/',myInit)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          if(response.error.error)
+            Alert.error(response.error.message);
+          else {
+            users = that.state.users
+            var users = $.grep(users, function(e){
+               return e.id != id;
+            });
+            that.setState({users: users});
+            Alert.success('User has been deleted');
+          }
+        });
+    }
   }
 
 
@@ -191,10 +196,10 @@ class Admin extends React.Component {
               <div className="list-group bordered-scroll-box">
                   {this.state.topics.map(topic => (
                     <div key={topic.id} href="#" className="list-group-item">
-                      <span className="pull-right">
-                        <Link to={'topic/edit/'+topic.id} className="btn btn-default">{language.edit}</Link>
-                        <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>{language.delete}</button>
-                      </span>
+                      {(topic.id !== 1)? <span className="pull-right">
+                      <Link to={'topic/edit/'+topic.id} className="btn btn-default">{language.edit}</Link>
+                      <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>{language.delete}</button>
+                      </span>: ''}
                       <h4 className="list-group-item-heading">{topic.name}</h4>
                       <p className="list-group-item-text">{topic.description}</p>
                     </div>

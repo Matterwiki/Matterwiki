@@ -1,12 +1,11 @@
 var bookshelf = require('../bookshelf');
 bookshelf.plugin('registry');
-
-var Articles = require('./article.js');
+var Article = require('./article');
 
 var User = bookshelf.Model.extend({
   tableName: 'users',
   articles: function(){
-    return this.hasMany('Articles');
+    return this.hasMany('Article');
   }
 });
 
