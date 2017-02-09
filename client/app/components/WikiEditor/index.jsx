@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Editor, EditorState, RichUtils} from 'draft-js';
 
-import Toolbar from './Toolbar.jsx';
+import Toolbar from './Toolbar/index.jsx';
 
 const styleMap = {
   STRIKETHROUGH : {
@@ -19,7 +19,7 @@ class WikiEditor extends Component {
 		}
 
 		this.handleKeyCommand = (command) => this._handleKeyCommand(command);
-    	this.focus = () => this.refs.editor.focus();
+    this.focus = () => this.refs.editor.focus();
 		this.onChange = (editorState) => this.setState({editorState});
 	}
 
