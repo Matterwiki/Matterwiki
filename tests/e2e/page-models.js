@@ -30,17 +30,54 @@ class ArticlePublishedModal extends Modal {
     }
 }
 
+class SetupPage {
+    constructor () {
+        this.name     = Selector('#inputUserName');
+        this.about    = Selector('#inputUserAbout');
+        this.email    = Selector('#inputUserEmail');
+        this.password = Selector('#inputUserPassword');
+        this.setupBtn = Selector('button').withText('Setup My Account');
+    }
+
+    async performSetup (t) {
+        await t
+            .typeText(this.name, testUser.name)
+            .typeText(this.about, testUser.about)
+            .typeText(this.email, testUser.email)
+            .typeText(this.password, testUser.password)
+            .click(this.setupBtn);
+    }
+}
+
 export class LoginPage {
     constructor () {
         this.email    = Selector('#inputEmail');
         this.password = Selector('#inputPassword');
         this.signIn   = Selector('button').withText('Sign in');
+        
+        this.userNotFoundAlert = Selector('.s-alert-error', { visibilityCheck: true }).withText('User not found');
+    }
+
+    async _tryToLogin (t) {
+        await t
+            .typeText(this.email, testUser.email)
+            .typeText(this.password, testUser.password)
+            .click(this.signIn);
     }
 
     async performLogin (t) {
-        await t.typeText(this.email, testUser.email)
-            .typeText(this.password, testUser.password)
-            .click(this.signIn);
+        // Try to login. If failed, perform setup and login again
+        await this._tryToLogin(t);
+
+        if(await this.userNotFoundAlert.exists) {
+            const setupPage = new SetupPage();
+            const url       = await t.eval(() => window.location.toString());
+            
+            await t.navigateTo('./#/setup');
+            await setupPage.performSetup(t);
+            await t.navigateTo(url);
+            await this._tryToLogin(t);
+        }
     }
 }
 

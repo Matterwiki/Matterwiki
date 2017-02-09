@@ -38,3 +38,4 @@ jspm_packages
 
 client/public
 db/matterwiki.sqlite
+tests/e2e/db/matterwiki.sqlite
