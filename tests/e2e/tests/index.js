@@ -3,7 +3,7 @@ import { LoginPage, HomePage, NewArticlePage } from '../page-models';
 const loginPage = new LoginPage();
 
 fixture `Create article`
-    .page('http://localhost:5000')
+    .page('http://localhost:5000/#/login')
     .beforeEach(async t => {
         await loginPage.performLogin(t);
     });
