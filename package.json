@@ -29,7 +29,7 @@
     "body-parser": "1.15.2",
     "bookshelf": "0.10.0",
     "draft-js": "^0.10.0",
-    "draft-js-utils": "^0.1.7",
+    "draftjs-utils": "^0.1.7",
     "express": "4.14.0",
     "jsonwebtoken": "7.1.9",
     "knex": "0.11.10",
@@ -39,7 +39,6 @@
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
     "sqlite3": "^3.1.4",
-    "webpack": "1.13.2",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
