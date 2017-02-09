@@ -534,3 +534,11 @@ border: 1px solid #efefef;
   min-height: 7em;
   outline: none;
 }
+
+/* This has been kept here to override bootstrap's styling of <pre/> tags */
+/* TODO there must be a better way to do this */
+.public-DraftStyleDefault-pre pre {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
