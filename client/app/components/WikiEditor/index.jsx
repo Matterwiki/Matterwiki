@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, CompositeDecorator} from 'draft-js';
 
 import Toolbar from './Toolbar/index.jsx';
 
@@ -9,13 +9,42 @@ const styleMap = {
   }
 };
 
+const getLinkEntities = (contentBlock, callback, contentState) => {
+  contentBlock.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity();
+
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'LINK'
+      );
+    },
+    callback
+  );
+}
+
+const Link = (props) => {
+  const {url} = props.contentState.getEntity(props.entityKey).getData();
+  return (
+    <a href={url}>
+      {props.children || url}
+    </a>
+  );
+}
 
 class WikiEditor extends Component {
 	constructor(...args) {
 		super(...args);
 
+    const decorator = new CompositeDecorator([
+      {
+        strategy : getLinkEntities,
+        component : Link
+      }
+    ]);
+
 		this.state = {
-			editorState : EditorState.createEmpty()
+			editorState : EditorState.createEmpty(decorator)
 		}
 
 		this.handleKeyCommand = (command) => this._handleKeyCommand(command);

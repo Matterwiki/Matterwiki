@@ -515,7 +515,7 @@ border: 1px solid #efefef;
   overflow: auto;
 }
 
-.DraftEditor-toolbar .btn-group .toolbar-button {
+.btn-group .toolbar-button, .btn-group .toolbar-button:focus  {
   background: #fff;
   outline: none;
   border: none;
@@ -523,7 +523,7 @@ border: 1px solid #efefef;
   box-shadow: none;
 }
 
-.DraftEditor-toolbar .btn-group .toolbar-button.active {
+.btn-group .toolbar-button.active {
   background: #efefef;
 }
 
@@ -541,4 +541,8 @@ border: 1px solid #efefef;
   margin: 0;
   padding: 0;
   border: none;
+}
+
+.popover.bottom {
+  max-width : 500px;
 }
