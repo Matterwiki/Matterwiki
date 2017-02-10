@@ -35,6 +35,7 @@
     "knex": "0.11.10",
     "multer": "^1.2.1",
     "react": "15.3.0",
+    "react-bootstrap": "^0.30.7",
     "react-dom": "15.3.0",
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
