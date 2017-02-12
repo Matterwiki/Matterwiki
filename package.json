@@ -1,6 +1,6 @@
 {
   "name": "Matterwiki",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
     "sqlite3": "3.1.4",
-    "whatwg-fetch": "^2.0.1"
+    "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
     "babel-cli": "6.22.2",
