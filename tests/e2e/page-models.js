@@ -54,7 +54,7 @@ export class LoginPage {
         this.email    = Selector('#inputEmail');
         this.password = Selector('#inputPassword');
         this.signIn   = Selector('button').withText('Sign in');
-        
+
         this.userNotFoundAlert = Selector('.s-alert-error', { visibilityCheck: true }).withText('User not found');
     }
 
@@ -72,7 +72,7 @@ export class LoginPage {
         if(await this.userNotFoundAlert.exists) {
             const setupPage = new SetupPage();
             const url       = await t.eval(() => window.location.toString());
-            
+
             await t.navigateTo('./#/setup');
             await setupPage.performSetup(t);
             await t.navigateTo(url);
@@ -92,8 +92,17 @@ class BaseLayoutPage {
 export class HomePage extends BaseLayoutPage {
     constructor () {
         super();
+        this.articleTitle = Selector('.article-item-title a');
     }
 }
+
+export class ArticlePage extends BaseLayoutPage {
+    constructor () {
+        super();
+        this.articleTitle = Selector('.single-article-title');
+    }
+}
+
 
 export class NewArticlePage extends BaseLayoutPage {
     constructor () {

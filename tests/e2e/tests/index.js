@@ -1,4 +1,4 @@
-import { LoginPage, HomePage, NewArticlePage } from '../page-models';
+import { LoginPage, HomePage, NewArticlePage, ArticlePage } from '../page-models';
 
 const loginPage = new LoginPage();
 
@@ -10,6 +10,7 @@ fixture `Create article`
 
 const homePage       = new HomePage();
 const newArticlePage = new NewArticlePage();
+const articlePage    = new ArticlePage();
 
 test('basic', async t => {
     await t.click(homePage.navbar.newArticleLink)
@@ -24,4 +25,9 @@ test('validation', async t => {
     await t.click(homePage.navbar.newArticleLink)
         .click(newArticlePage.createArticleBtn)
         .expect(newArticlePage.alert.textContent).contains('Article Body, Title and Topic Information is required.');
+});
+
+test('view article', async t => {
+    await t.click(homePage.articleTitle)
+        .expect(articlePage.articleTitle.textContent).contains('title');
 });
