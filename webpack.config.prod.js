@@ -5,10 +5,10 @@ const BUILD_DIR = path.resolve(__dirname, 'client/public');
 const APP_DIR = path.resolve(__dirname, 'client/app');
 
 module.exports = {
-  entry: [    
+  entry: [
     // polyfill for fetch API (Safari)
     // TODO a better way to handle this, maybe?
-    'whatwg-fetch', 
+    'whatwg-fetch',
     // entry point
     APP_DIR + '/index.jsx'
   ],
@@ -28,6 +28,16 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
       }
     ]
   },

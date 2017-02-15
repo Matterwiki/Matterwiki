@@ -1,6 +1,6 @@
 
-/* 
- * TODO extract common chunks from dev and production configs 
+/*
+ * TODO extract common chunks from dev and production configs
  * and use something like webpack-merge to put them all together for the environment needed
  * Ref : http://survivejs.com/webpack/developing-with-webpack/splitting-configuration/
  */
@@ -21,13 +21,13 @@ module.exports = {
 
     // polyfill for fetch API (Safari)
     // TODO a better way to handle this, maybe?
-    'whatwg-fetch', 
+    'whatwg-fetch',
 
     // entry point
     APP_DIR + '/index.jsx'
   ],
   output: {
-    path: BUILD_DIR,    
+    path: BUILD_DIR,
     publicPath : '/public/',
     filename: 'bundle.js'
   },
@@ -57,6 +57,10 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: [ 'style', 'css', 'sass' ]
       }
     ]
   }

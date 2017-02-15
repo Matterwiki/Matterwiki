@@ -54,6 +54,10 @@
     "webpack-dev-middleware": "1.9.0",
     "webpack-dev-server": "2.2.0",
     "webpack-hot-middleware": "2.15.0",
+    "style-loader": "0.13.1",
+    "css-loader": "0.26.1",
+    "sass-loader": "6.0.0",
+    "node-sass": "4.5.0",
     "testcafe": "^0.12.1"
   }
 }

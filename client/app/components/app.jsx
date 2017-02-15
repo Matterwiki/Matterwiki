@@ -4,6 +4,8 @@ import SearchForm from './searchform.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
+require('./../../assets/bootstrap.scss');
+
 class App extends React.Component {
 
   constructor(props) {
