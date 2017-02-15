@@ -279,5 +279,60 @@ module.exports =  function(app){
   });
 
 
-
+  app.post('/articles/revert',function(req,res){
+    /*
+    This endpoint takes the archive ID and the article ID and replaces the
+    currently live version of the article with the content of the archive article
+    The current flow creates a new article and then adds another record in the archive.
+    Same as the POST /articles endpoint but with a predefined what_changed
+    It takes the following parameters in the request body
+        archive_id
+        user_id
+    */
+    Archives.forge({id: req.body.archive_id}).fetch().then(function(archive){
+      archive = archive.toJSON();
+      Articles.forge({id: archive.article_id})
+        .fetch()
+          .then(function(article){
+            article = article.toJSON();
+            Archives.forge()
+              .save({
+                article_id: article.id,
+                title: article.title,
+                body: article.body,
+                user_id: article.user_id,
+                what_changed: article.what_changed
+              })
+              .then(function(){
+                Articles.forge({id: archive.article_id}).save({
+                  title: archive.title,
+                  body: archive.body,
+                  topic_id: article.topic_id,
+                  user_id: req.body.user_id,
+                  what_changed: "Reverted from Archive #"+archive.id
+                })
+                .then(function(){
+                  res.status(200).json({
+                    error: {
+                      error: false,
+                      message: ''
+                    },
+                    code: 'ARTCILEREVERTED',
+                    data: {}
+                  });
+              });
+          });
+      });
+    })
+    .catch(function(){
+      res.status(500).json({
+        error: {
+          error: true,
+          message: error.message
+        },
+        code: 'REVERTFAILED',
+        data: {}
+      });
+    });
+  });
 }
