@@ -100,6 +100,7 @@ export class ArticlePage extends BaseLayoutPage {
     constructor () {
         super();
         this.articleTitle = Selector('.single-article-title');
+        this.editButton   = this.appContainer.find('a').withText('Edit');
     }
 }
 
@@ -112,5 +113,16 @@ export class NewArticlePage extends BaseLayoutPage {
         this.editor                = Selector('trix-editor');
         this.createArticleBtn      = Selector('button').withText('Create Article');
         this.articlePublishedModal = new ArticlePublishedModal();
+    }
+}
+
+export class EditArticlePage extends BaseLayoutPage {
+    constructor () {
+        super();
+
+        this.title                 = Selector('.new-article .input-title');
+        this.editor                = Selector('trix-editor');
+        this.what_changed          = Selector('.what_changed');
+        this.updateButton          = Selector('.btn-default');
     }
 }
