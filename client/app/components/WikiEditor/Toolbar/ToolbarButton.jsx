@@ -16,7 +16,7 @@ export default class Toolbar extends Component {
 	render() {
 		const activeClass = (this.props.active ? "active" : "");
 		const toolbarButtonClass = `btn btn-default ${activeClass} btn-lg toolbar-button`;
-		const fontIcon = "fa " + this.props.fa;
+		const fontIcon = `fa ${this.props.fa}`;
 
 		return (
 			<a className={toolbarButtonClass} href="#" onClick={this.onToggle} title={this.props.label}>

@@ -19,8 +19,9 @@ class LinkControl extends Component {
 
 
     this.handleLinkChange = (e) => this._handleLinkChange(e);
-    this.handleOnEnter = (e) => this._handleOnEnter(e);
-    this.confirmLinkSave = (e) => this._confirmLinkSave(e);
+    this.handleLinkPopup = (e) => this._handleLinkPopup(e);
+    this.handleLinkSave = (e) => this._handleLinkSave(e);
+    this.handleLinkRemove = (e) => this._handleLinkRemove(e);
   }
 
   _handleLinkChange(e) {
@@ -29,30 +30,36 @@ class LinkControl extends Component {
     });
   }
 
-  _handleOnEnter(e) {
-    const {editorState} = this.props;
-    const selection = editorState.getSelection();
-    if (!selection.isCollapsed()) {
-        const contentState = editorState.getCurrentContent();
-        const startKey = editorState.getSelection().getStartKey();
-        const startOffset = editorState.getSelection().getStartOffset();
-        const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
-        const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
+  _handleLinkPopup() {
 
-        let url = '';
-        if (linkKey) {
-          const linkInstance = contentState.getEntity(linkKey);
-          url = linkInstance.getData().url;
-        }
-        console.log(0)
-        this.setState({url});
+    const {editorState} = this.props;
+
+    const contentState = editorState.getCurrentContent();
+    const startKey = editorState.getSelection().getStartKey();
+    const startOffset = editorState.getSelection().getStartOffset();
+    const blockWithEntity = contentState.getBlockForKey(startKey);
+    const linkKey = blockWithEntity.getEntityAt(startOffset);
+
+    let url = '';
+    if (linkKey) {
+       const linkInstance = contentState.getEntity(linkKey);
+       url = linkInstance.getData().url;
     }
 
+    this.setState({url});
   }
 
-  _confirmLinkSave (e) {
+  _handleLinkSave (e) {
     e.preventDefault();
-    this.props.onToggle(this.state.url);
+    this.props.onAddLink(this.state.url);
+    setTimeout(() => this.setState({
+      url : ''
+    }), 0);
+  }
+
+  _handleLinkRemove (e) {
+    e.preventDefault();
+    this.props.onRemoveLink();
     setTimeout(() => this.setState({
       url : ''
     }), 0);
@@ -61,7 +68,6 @@ class LinkControl extends Component {
 
 
   render() {
-
     const popover = (
         <Popover id="link-popover">
           <input type="text"
@@ -69,17 +75,19 @@ class LinkControl extends Component {
                   value={this.state.url}
                   onChange={this.handleLinkChange} />
           <ButtonGroup className="pull-right">
-              <Button className="btn-sm toolbar-button" onClick={this.confirmLinkSave}>Link</Button>
-              <Button className="btn-sm toolbar-button">Unlink</Button>
+              <Button className="btn-sm toolbar-button" onClick={this.handleLinkSave}>Link</Button>
+              <Button className="btn-sm toolbar-button" onClick={this.handleLinkRemove}>Unlink</Button>
           </ButtonGroup>
         </Popover>
     );
 
-
-
     return (
       <div className="btn-group" role="group">
-        <OverlayTrigger trigger="click" placement="bottom" onEnter={this.handleOnEnter} overlay={popover} rootClose={true}>
+        <OverlayTrigger trigger="click"
+                        placement="bottom"
+                        onEnter={this.handleLinkPopup}
+                        overlay={popover}
+                        rootClose={true}>
             <Button className="btn-default btn-lg toolbar-button" >
               <i className="fa fa-link"></i>
             </Button>

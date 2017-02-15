@@ -12,7 +12,8 @@ export default class Toolbar extends Component {
 
 		this.toggleBlockType = (blockType) => this._toggleBlockType(blockType);
 		this.toggleInlineStyle = (inlineStyle) => this._toggleInlineStyle(inlineStyle);
-		this.toggleLink = (linkData) => this._toggleLink(linkData);
+		this.addLink = (linkData) => this._addLink(linkData);
+		this.removeLink = () => this._removeLink();
 	}
 
 
@@ -41,7 +42,7 @@ export default class Toolbar extends Component {
 		);
 	}
 
-	_toggleLink(url) {
+	_addLink(url) {
 		const {editorState, onChange} = this.props;
 		const contentState = editorState.getCurrentContent();
 
@@ -75,6 +76,20 @@ export default class Toolbar extends Component {
 
 	}
 
+	_removeLink() {
+		const {editorState, onChange} = this.props;
+
+		onChange(
+			RichUtils.toggleLink(
+				editorState,
+				editorState.getSelection(),
+				null
+			)
+		);
+
+
+	}
+
 	render() {
 
 		const {editorState, focusEditor} = this.props;
@@ -82,7 +97,7 @@ export default class Toolbar extends Component {
 		return (
 			<div className="btn-toolbar DraftEditor-toolbar" role="toolbar">
 				<InlineControls editorState={editorState} onToggle={this.toggleInlineStyle}/>
-				<LinkControl editorState={editorState} onToggle={this.toggleLink}/>
+				<LinkControl editorState={editorState} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
 				<BlockControls editorState={editorState}  onToggle={this.toggleBlockType}/>
 			</div>
 		);
