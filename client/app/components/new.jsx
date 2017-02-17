@@ -11,7 +11,12 @@ class NewArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeHtml = (html) => this._onChangeHtml(html);
     this.state = {body: "", topics: [], error: "", loading: true};
+  }
+
+  _onChangeHtml(html) {
+    this.setState({body : html});
   }
 
   handleChange() {
@@ -43,7 +48,7 @@ class NewArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.refs.body.value;
+    var body = this.state.body;
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     if(body && title && topicId) {
@@ -91,7 +96,9 @@ class NewArticle extends React.Component {
        </div>
        <br/>
        <div className="row">
-          <WikiEditor />
+          <WikiEditor
+            onChangeHtml={this.onChangeHtml}
+            />
        </div>
          <br/>
          <div className="row">

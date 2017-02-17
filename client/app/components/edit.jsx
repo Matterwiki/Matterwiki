@@ -3,21 +3,28 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 
+import WikiEditor from './WikiEditor/index.jsx';
+
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChangeHtml = (html) => this._onChangeHtml(html);
     this.state = {body: "",title: "", topic_id: "", topics: [], loading: true};
   }
 
+  _onChangeHtml(html) {
+    this.setState({body : html});
+  }
+
   handleChange() {
-    this.setState({body: this.refs.body.value, title: this.refs.title.value});
+    this.setState({ title: this.refs.title.value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.refs.body.value;
+    var body = this.state.body;
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
@@ -67,7 +74,7 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
+        that.setState({html :response.data.body, body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
       }
       that.setState({loading: false});
     });
@@ -111,9 +118,10 @@ class EditArticle extends React.Component {
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-              <trix-toolbar id="my_toolbar"></trix-toolbar>
-          <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
-          <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
+                 <WikiEditor
+                   onChangeHtml={this.onChangeHtml}
+                   rawHtml={this.state.html}
+                   />
                  <br/>
                  <label>Choose topic</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>

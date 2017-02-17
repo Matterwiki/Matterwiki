@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Editor, EditorState, RichUtils, CompositeDecorator} from 'draft-js';
+import {Editor, EditorState, RichUtils, CompositeDecorator, convertToRaw, ContentState} from 'draft-js';
+
+// Couldn't we just save JSON instead?
+// TODO must think about this
+
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
 import Toolbar from './Toolbar/index.jsx';
 
@@ -43,14 +49,29 @@ class WikiEditor extends Component {
       }
     ]);
 
+    let editorState = EditorState.createEmpty(decorator);
+
+    if(this.props.rawHtml) {
+      const blocksFromHTML = htmlToDraft(this.props.rawHtml);
+      const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+      editorState = EditorState.createWithContent(contentState, decorator);
+    }
+
 		this.state = {
-			editorState : EditorState.createEmpty(decorator)
+			editorState
 		}
 
 		this.handleKeyCommand = (command) => this._handleKeyCommand(command);
     this.focus = () => this.refs.editor.focus();
-		this.onChange = (editorState) => this.setState({editorState});
+		this.onChange = (editorState) => this._onChange(editorState);
 	}
+
+  _onChange(editorState) {
+    this.setState({editorState});
+    const rawContent = convertToRaw(editorState.getCurrentContent());
+    const rawHtml = draftToHtml(rawContent);
+    this.props.onChangeHtml(rawHtml);
+  }
 
 	_handleKeyCommand (cmd) {
 		const {editorState} = this.state;
