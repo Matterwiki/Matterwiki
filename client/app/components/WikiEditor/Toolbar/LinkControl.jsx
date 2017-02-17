@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {RichUtils, EditorState} from 'draft-js';
+import {RichUtils, EditorState, SelectionState} from 'draft-js';
 // TODO transition this to the entire codebase. react-bootstrap FTW!
 import { Popover, OverlayTrigger, Button, ButtonGroup } from 'react-bootstrap';
 
@@ -81,6 +81,26 @@ class LinkControl extends Component {
         </Popover>
     );
 
+    const {editorState} = this.props;
+
+    // The logic here seems redundant..
+    // TODO Find a way to combine this logic with `handleLinkPopup()`
+
+    const contentState = editorState.getCurrentContent();
+    const startKey = editorState.getSelection().getStartKey();
+    const startOffset = editorState.getSelection().getStartOffset();
+    const blockWithEntity = contentState.getBlockForKey(startKey);
+    const linkKey = blockWithEntity.getEntityAt(startOffset);
+
+    let active = false;
+    if (linkKey) {
+       const linkInstance = contentState.getEntity(linkKey);
+       active = (linkInstance.getType() === 'LINK');
+    }
+
+    const activeClass = (active ? "active" : "");
+    const toolbarButtonClass = `btn-default ${activeClass} btn-lg toolbar-button`;
+
     return (
       <div className="btn-group" role="group">
         <OverlayTrigger trigger="click"
@@ -88,7 +108,7 @@ class LinkControl extends Component {
                         onEnter={this.handleLinkPopup}
                         overlay={popover}
                         rootClose={true}>
-            <Button className="btn-default btn-lg toolbar-button" >
+            <Button className={toolbarButtonClass} >
               <i className="fa fa-link"></i>
             </Button>
         </OverlayTrigger>
