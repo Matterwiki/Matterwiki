@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {RichUtils, EditorState, SelectionState} from 'draft-js';
+import {RichUtils, EditorState} from 'draft-js';
 // TODO transition this to the entire codebase. react-bootstrap FTW!
 import { Popover, OverlayTrigger, Button, ButtonGroup } from 'react-bootstrap';
 
 // InlineControls & BlockControls are stateless components, but this one is.
 // TODO how do we get over this? How do we make this stateless as well?
+
+// TODO some code cleanup due. LinkControl stuff are all over the place
 
 // this doesn't use the ToolbarButton component.
 // TODO find a unified way to do this
@@ -32,7 +34,7 @@ class LinkControl extends Component {
 
   _handleLinkPopup() {
 
-    const {editorState} = this.props;
+    const {editorState, onChange} = this.props;
 
     const contentState = editorState.getCurrentContent();
     const startKey = editorState.getSelection().getStartKey();

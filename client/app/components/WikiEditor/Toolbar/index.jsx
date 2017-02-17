@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {RichUtils, EditorState, Modifier} from 'draft-js';
-import {changeDepth} from 'draftjs-utils';
+import {changeDepth, getEntityRange} from 'draftjs-utils';
 import InlineControls from './InlineControls.jsx';
 import BlockControls from './BlockControls.jsx';
 import LinkControl from './LinkControl.jsx';
@@ -79,25 +79,45 @@ export default class Toolbar extends Component {
 	_removeLink() {
 		const {editorState, onChange} = this.props;
 
-		onChange(
-			RichUtils.toggleLink(
-				editorState,
-				editorState.getSelection(),
-				null
-			)
-		);
+		const contentState = editorState.getCurrentContent();
+		const startKey = editorState.getSelection().getStartKey();
+		const startOffset = editorState.getSelection().getStartOffset();
+		const blockWithEntity = contentState.getBlockForKey(startKey);
+		const currentEntity = blockWithEntity.getEntityAt(startOffset);
+
+		if(currentEntity) {
+			let selection = editorState.getSelection();
+			const entityRange = getEntityRange(editorState, currentEntity);
+
+			selection = selection.merge({
+				anchorOffset : entityRange.start,
+				focusOffset : entityRange.end
+			});
+
+			onChange(
+				RichUtils.toggleLink(
+					editorState,
+					selection,
+					null
+				)
+			);
+
+		}
+
+
+
 
 
 	}
 
 	render() {
 
-		const {editorState, focusEditor} = this.props;
+		const {editorState, onChange} = this.props;
 
 		return (
 			<div className="btn-toolbar DraftEditor-toolbar" role="toolbar">
 				<InlineControls editorState={editorState} onToggle={this.toggleInlineStyle}/>
-				<LinkControl editorState={editorState} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
+				<LinkControl editorState={editorState} onChange={onChange} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
 				<BlockControls editorState={editorState}  onToggle={this.toggleBlockType}/>
 			</div>
 		);
