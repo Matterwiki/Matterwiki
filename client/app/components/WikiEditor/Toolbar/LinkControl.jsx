@@ -34,7 +34,7 @@ class LinkControl extends Component {
 
   _handleLinkPopup() {
 
-    const {editorState, onChange} = this.props;
+    const {editorState} = this.props;
 
     const contentState = editorState.getCurrentContent();
     const startKey = editorState.getSelection().getStartKey();
@@ -86,7 +86,7 @@ class LinkControl extends Component {
     const {editorState} = this.props;
 
     // The logic here seems redundant..
-    // TODO Find a way to combine this logic with `handleLinkPopup()`
+    // TODO Find a way to combine this logic with `handleLinkPopup()`.. maybe store the current Entity's ID?
 
     const contentState = editorState.getCurrentContent();
     const startKey = editorState.getSelection().getStartKey();

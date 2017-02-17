@@ -4,6 +4,7 @@ import {changeDepth, getEntityRange} from 'draftjs-utils';
 import InlineControls from './InlineControls.jsx';
 import BlockControls from './BlockControls.jsx';
 import LinkControl from './LinkControl.jsx';
+import HistoryControls from './HistoryControls.jsx';
 
 export default class Toolbar extends Component {
 
@@ -14,6 +15,9 @@ export default class Toolbar extends Component {
 		this.toggleInlineStyle = (inlineStyle) => this._toggleInlineStyle(inlineStyle);
 		this.addLink = (linkData) => this._addLink(linkData);
 		this.removeLink = () => this._removeLink();
+
+		this.onUndo = () => this._onUndo();
+		this.onRedo = () => this._onRedo();
 	}
 
 
@@ -103,10 +107,34 @@ export default class Toolbar extends Component {
 			);
 
 		}
+	}
 
+	_onUndo() {
+		const {editorState, onChange} = this.props;
 
+		const newState = EditorState.undo(editorState);
 
+		if(newState) {
+			onChange(newState);
 
+			return true;
+		}
+
+		return false;
+	}
+
+	_onRedo() {
+		const {editorState, onChange} = this.props;
+
+		const newState = EditorState.redo(editorState);
+
+		if(newState) {
+			onChange(newState);
+
+			return true;
+		}
+
+		return false;
 
 	}
 
@@ -117,8 +145,9 @@ export default class Toolbar extends Component {
 		return (
 			<div className="btn-toolbar DraftEditor-toolbar" role="toolbar">
 				<InlineControls editorState={editorState} onToggle={this.toggleInlineStyle}/>
-				<LinkControl editorState={editorState} onChange={onChange} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
+				<LinkControl editorState={editorState} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
 				<BlockControls editorState={editorState}  onToggle={this.toggleBlockType}/>
+				<HistoryControls editorState={editorState} onUndo={this.onUndo} onRedo={this.onRedo} />
 			</div>
 		);
 	}
