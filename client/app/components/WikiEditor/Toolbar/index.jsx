@@ -6,10 +6,13 @@ import BlockControls from './BlockControls.jsx';
 import LinkControl from './LinkControl.jsx';
 import HistoryControls from './HistoryControls.jsx';
 
+
 export default class Toolbar extends Component {
 
 	constructor(...args) {
 		super(...args);
+
+		// TODO move these functions one level up, into the WikiEditor component
 
 		this.toggleBlockType = (blockType) => this._toggleBlockType(blockType);
 		this.toggleInlineStyle = (inlineStyle) => this._toggleInlineStyle(inlineStyle);

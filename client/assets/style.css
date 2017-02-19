@@ -546,3 +546,8 @@ border: 1px solid #efefef;
 .popover.bottom {
   max-width : 500px;
 }
+
+.single-article-body .DraftEditor-root {
+  font-size: 1em;
+  padding: 0;
+}
