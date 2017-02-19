@@ -10,12 +10,12 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onChangeHtml = (html) => this._onChangeHtml(html);
-    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true};
+    this.onContentChange = this._onContentChange.bind(this);
+    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true, isHtml : false};
   }
 
-  _onChangeHtml(html) {
-    this.setState({body : html});
+  _onContentChange(rawContent) {
+    this.setState({body : rawContent});
   }
 
   handleChange() {
@@ -24,7 +24,7 @@ class EditArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.state.body;
+    var body = JSON.stringify(this.state.body);
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
@@ -62,9 +62,10 @@ class EditArticle extends React.Component {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": window.localStorage.getItem('userToken')
     });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
+    var myInit = {
+      method: 'GET',
+      headers: myHeaders,
+    };
     var that = this;
     fetch('/api/articles/'+this.props.params.articleId,myInit)
     .then(function(response) {
@@ -74,7 +75,18 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({html :response.data.body, body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
+        // Some hacks to maintain backward compatibility
+        // TODO Remove this after a few releases
+
+        that.setState({ body: JSON.parse(response.data.body_json), title: response.data.title, topic_id: response.data.topic_id})
+
+        if(response.data.body && !response.data.body_json) {
+          // a flag to check if there is still someone stuck using HTML Markup for the Wiki Articles
+          that.setState({
+            isHtml : true,
+            body : response.data.body
+          })
+        }
       }
       that.setState({loading: false});
     });
@@ -119,8 +131,9 @@ class EditArticle extends React.Component {
            <div className="row">
             <div className="col-md-12 new-article-form">
                  <WikiEditor
-                   onChangeHtml={this.onChangeHtml}
-                   rawHtml={this.state.html}
+                   onContentChange={this.onContentChange}
+                   rawContent={this.state.body}
+                   isHtml={this.state.isHtml}
                    />
                  <br/>
                  <label>Choose topic</label>

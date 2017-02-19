@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Editor, EditorState, RichUtils, CompositeDecorator, convertToRaw, ContentState} from 'draft-js';
-
-// Couldn't we just save JSON instead?
-// TODO must think about this
-
-import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import {Editor,
+        EditorState,
+        RichUtils,
+        CompositeDecorator,
+        convertToRaw,
+        convertFromRaw,
+        convertFromHTML,
+        ContentState} from 'draft-js';
 
 import Toolbar from './Toolbar/index.jsx';
 
@@ -51,9 +52,24 @@ class WikiEditor extends Component {
 
     let editorState = EditorState.createEmpty(decorator);
 
-    if(this.props.rawHtml) {
-      const blocksFromHTML = htmlToDraft(this.props.rawHtml);
-      const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+    // was invoked via "edit" article, not when an article is created
+    if(this.props.rawContent) {
+
+      let contentState = null;
+
+      // for backward compatibility
+      // TODO remove this later
+      if(this.props.isHtml) {
+        const blocksFromHTML = convertFromHTML(this.props.rawContent);
+        contentState = ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap
+        );
+
+      } else {
+        contentState = convertFromRaw(this.props.rawContent)
+      }
+
       editorState = EditorState.createWithContent(contentState, decorator);
     }
 
@@ -68,9 +84,10 @@ class WikiEditor extends Component {
 
   _onChange(editorState) {
     this.setState({editorState});
+    // saving the content after every change event doesn't look efficient
+    // TODO make this better
     const rawContent = convertToRaw(editorState.getCurrentContent());
-    const rawHtml = draftToHtml(rawContent);
-    this.props.onChangeHtml(rawHtml);
+    this.props.onContentChange(rawContent);
   }
 
 	_handleKeyCommand (cmd) {
@@ -90,21 +107,38 @@ class WikiEditor extends Component {
 	render() {
 
 		const {editorState} = this.state;
+    const editorProps = {
+      ref: "editor",
+      customStyleMap: styleMap,
+      editorState: editorState,
+      onChange: this.onChange,
+      handleKeyCommand: this.handleKeyCommand,
+      placeholder: "Start writing here...."
+    }
+    let ToolbarComponent = (
+      <Toolbar editorState={editorState} onChange={this.onChange}/>
+    );
+
+    let EditorComponent = (
+      <Editor
+        {...editorProps}
+      />
+    );
+
+    if(this.props.readOnly) {
+      ToolbarComponent = null;
+      EditorComponent = (
+   				<Editor
+            readOnly
+            {...editorProps}
+				  />
+      );
+    }
 
 		return (
 			<div>
-				<Toolbar
-					editorState={editorState}
-					onChange={this.onChange}
-				/>
-				<Editor
-					ref="editor"
-					customStyleMap={styleMap}
-					editorState={editorState}
-					onChange={this.onChange}
-					handleKeyCommand={this.handleKeyCommand}
-					placeholder="Start writing here...."
-				/>
+        {ToolbarComponent}
+        {EditorComponent}
 			</div>
 		)
 
