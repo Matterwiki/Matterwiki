@@ -19,7 +19,7 @@ export default class Toolbar extends Component {
 		const fontIcon = `fa ${this.props.fa}`;
 
 		return (
-			<a className={toolbarButtonClass} href="#" onClick={this.onToggle} title={this.props.label}>
+			<a className={toolbarButtonClass} onMouseDown={this.onToggle} title={this.props.label}>
     			<i className={fontIcon} ></i>
   			</a>
 		);

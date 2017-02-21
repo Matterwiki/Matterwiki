@@ -116,29 +116,46 @@ class WikiEditor extends Component {
       placeholder: "Start writing here...."
     }
     let ToolbarComponent = (
-      <Toolbar editorState={editorState} onChange={this.onChange}/>
+      <Toolbar
+        editorState={editorState}
+        onChange={this.onChange}
+        />
     );
 
     let EditorComponent = (
-      <Editor
-        {...editorProps}
-      />
+      <Editor {...editorProps} />
     );
 
     if(this.props.readOnly) {
       ToolbarComponent = null;
       EditorComponent = (
+        <div className="readonly">
    				<Editor
             readOnly
             {...editorProps}
 				  />
+        </div>
       );
     }
 
+    // If the user changes block type before entering any text, we can
+    // either style the placeholder or hide it. Let's just hide it now.
+    let className = 'WikiEditor-editor';
+    var contentState = editorState.getCurrentContent();
+    if (!contentState.hasText()) {
+      if (contentState.getBlockMap().first().getType() !== 'unstyled') {
+        className += ' WikiEditor-hidePlaceholder';
+      }
+    }
+
 		return (
-			<div>
-        {ToolbarComponent}
-        {EditorComponent}
+			<div className="WikiEditor-root">
+        <div className="WikiEditor-toolbar">
+          {ToolbarComponent}
+        </div>
+        <div className={className} onClick={this.focus}>
+          {EditorComponent}
+        </div>
 			</div>
 		)
 

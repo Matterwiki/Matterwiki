@@ -133,7 +133,6 @@ export default class Toolbar extends Component {
 
 		if(newState) {
 			onChange(newState);
-
 			return true;
 		}
 
@@ -146,7 +145,7 @@ export default class Toolbar extends Component {
 		const {editorState, onChange} = this.props;
 
 		return (
-			<div className="btn-toolbar DraftEditor-toolbar" role="toolbar">
+			<div className="btn-toolbar" role="toolbar">
 				<InlineControls editorState={editorState} onToggle={this.toggleInlineStyle}/>
 				<LinkControl editorState={editorState} onAddLink={this.addLink} onRemoveLink={this.removeLink}/>
 				<BlockControls editorState={editorState}  onToggle={this.toggleBlockType}/>

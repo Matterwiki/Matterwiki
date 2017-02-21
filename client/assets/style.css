@@ -510,9 +510,15 @@ border: 1px solid #efefef;
 /* for the editor */
 /* TODO : MUST clean up after implementing everything */
 
-.DraftEditor-toolbar {
-  margin-bottom: 1em;
-  overflow: auto;
+
+.WikiEditor-root {
+  font-size: 1.5em;
+}
+
+/* toolbar styles */
+.WikiEditor-toolbar {
+  margin-bottom: 0.2em;
+  user-select:none;
 }
 
 .btn-group .toolbar-button, .btn-group .toolbar-button:focus  {
@@ -527,13 +533,25 @@ border: 1px solid #efefef;
   background: #efefef;
 }
 
-.DraftEditor-root {
-  font-family: "Vollkorn", serif;
-  font-size: 1.5em;
-  padding: 10px 20px;
-  min-height: 7em;
-  outline: none;
+/* for the link */
+.popover.bottom {
+  max-width : 500px;
 }
+
+/* editor styles */
+.WikiEditor-editor {
+  padding: 10px 20px;
+  cursor: text;
+}
+
+.WikiEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
+  display: none;
+}
+
+.WikiEditor-editor .public-DraftEditor-content {
+  min-height: 7em;
+}
+
 
 /* This has been kept here to override bootstrap's styling of <pre/> tags */
 /* TODO there must be a better way to do this */
@@ -543,11 +561,11 @@ border: 1px solid #efefef;
   border: none;
 }
 
-.popover.bottom {
-  max-width : 500px;
-}
 
-.single-article-body .DraftEditor-root {
-  font-size: 1em;
+/* read-only editor */
+
+.WikiEditor-editor .readonly {
+  font-size: 0.7em;
   padding: 0;
+  cursor: default;
 }
