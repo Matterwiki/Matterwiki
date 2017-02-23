@@ -124,7 +124,7 @@ class EditArticle extends React.Component {
                 ref="title"
                 className="form-control input-title"
                 value={this.state.title}
-                 />
+              />
            </div>
            </div>
            <br/>

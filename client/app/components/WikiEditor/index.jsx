@@ -43,6 +43,7 @@ class WikiEditor extends Component {
     const {rawContent, isHtml} = this.props;
 
 		this.state = {
+      // `convertToEditorState` contains some logic to preserve backward compatibility
 			editorState : convertToEditorState(rawContent, isHtml, decorator),
       currentEntityKey : null
     }
@@ -52,7 +53,7 @@ class WikiEditor extends Component {
 		this.onChange = (editorState) => this._onChange(editorState);
 
 
-    // toolbar related stuff 
+    // These actions are triggered from the toolbar
     this.toggleBlockType = (blockType) => this._toggleBlockType(blockType);
     this.toggleInlineStyle = (inlineStyle) => this._toggleInlineStyle(inlineStyle);
     this.onAddLink = (linkData) => this._onAddLink(linkData);
@@ -137,22 +138,28 @@ class WikiEditor extends Component {
 
     const selection = editorState.getSelection();
     if(selection.isCollapsed()) {
+      // insert the URL as entity text
       contentStateWithEntity = Modifier.insertText(contentStateWithEntity, selection, url, null, entityKey);
     }
 
     // create a new EditorState
-    const newEditorState = EditorState.set(editorState, {
+    const editorStateWithEntity = EditorState.set(editorState, {
       currentContent : contentStateWithEntity
     });
+
+    // to move cursor to after entity text
+    const editorStateWithSelection = EditorState.moveSelectionToEnd(editorStateWithEntity);
 
 
     this.onChange(
         RichUtils.toggleLink(
-          newEditorState,
-          newEditorState.getSelection(),
+          editorStateWithSelection,
+          editorStateWithSelection.getSelection(),
           entityKey
         )
     );
+
+    setTimeout(() => this.focus(), 0);
 
   }
 
@@ -204,7 +211,6 @@ class WikiEditor extends Component {
     }
 
     return false;
-
   }
 
 
@@ -268,7 +274,7 @@ class WikiEditor extends Component {
         <div className="WikiEditor-toolbar">
           {ToolbarComponent}
         </div>
-        <div className={className} onClick={this.focus}>
+        <div className={className}>
           {EditorComponent}
         </div>
 			</div>
