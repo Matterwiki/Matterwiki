@@ -67,7 +67,7 @@ class WikiEditor extends Component {
     this.setState({editorState});
 
     // saving the content after every change event doesn't look efficient
-    // TODO make this better
+    // TODO make this better (Wait for Redux)
     const rawContent = convertToRaw(editorState.getCurrentContent());
     this.props.onContentChange(rawContent);
 

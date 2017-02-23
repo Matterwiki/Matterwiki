@@ -30,14 +30,14 @@ export const convertToEditorState = (rawContent, isHtml, decorator) => {
       // for backward compatibility
       // TODO remove this later
       if(isHtml) {
-        const blocksFromHTML = convertFromHTML(this.props.rawContent);
+        const blocksFromHTML = convertFromHTML(rawContent);
         contentState = ContentState.createFromBlockArray(
           blocksFromHTML.contentBlocks,
           blocksFromHTML.entityMap
         );
 
       } else {
-        contentState = convertFromRaw(this.props.rawContent)
+        contentState = convertFromRaw(rawContent)
       }
 
       editorState = EditorState.createWithContent(contentState, decorator);
