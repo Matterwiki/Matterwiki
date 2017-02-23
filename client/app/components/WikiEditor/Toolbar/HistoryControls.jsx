@@ -6,12 +6,12 @@ const HistoryControls = ({onUndo, onRedo}) => {
 	return (
 		<div className="btn-group" role="group">
 
-				<ToolbarButton
-					key='Undo'
-					onToggle={onUndo}
-					label='Undo'
-					fa='fa-undo'
-				/>
+		<ToolbarButton
+			key='Undo'
+			onToggle={onUndo}
+			label='Undo'
+			fa='fa-undo'
+		/>
         <ToolbarButton
           key='Redo'
           onToggle={onRedo}

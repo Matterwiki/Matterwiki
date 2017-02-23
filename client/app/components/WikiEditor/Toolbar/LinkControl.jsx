@@ -3,13 +3,10 @@ import {RichUtils, EditorState} from 'draft-js';
 // TODO transition this to the entire codebase. react-bootstrap FTW!
 import { Popover, OverlayTrigger, Button, ButtonGroup } from 'react-bootstrap';
 
-// InlineControls & BlockControls are stateless components, but this one is.
+// InlineControls & BlockControls are stateless components, but this one isnt.
 // TODO how do we get over this? How do we make this stateless as well?
+import ToolbarButton from './ToolbarButton.jsx';
 
-// TODO some code cleanup due. LinkControl stuff are all over the place
-
-// this doesn't use the ToolbarButton component.
-// TODO find a unified way to do this
 class LinkControl extends Component {
 
   constructor(...args) {
@@ -21,7 +18,7 @@ class LinkControl extends Component {
 
 
     this.handleLinkChange = (e) => this._handleLinkChange(e);
-    this.handleLinkPopup = (e) => this._handleLinkPopup(e);
+    this.handleLinkPopupOpen = (e) => this._handleLinkPopupOpen(e);
     this.handleLinkSave = (e) => this._handleLinkSave(e);
     this.handleLinkRemove = (e) => this._handleLinkRemove(e);
   }
@@ -32,20 +29,13 @@ class LinkControl extends Component {
     });
   }
 
-  _handleLinkPopup() {
+  _handleLinkPopupOpen() {
 
-    const {editorState} = this.props;
-
-    const contentState = editorState.getCurrentContent();
-    const startKey = editorState.getSelection().getStartKey();
-    const startOffset = editorState.getSelection().getStartOffset();
-    const blockWithEntity = contentState.getBlockForKey(startKey);
-    const linkKey = blockWithEntity.getEntityAt(startOffset);
+    const {editorState, currentEntity} = this.props;
 
     let url = '';
-    if (linkKey) {
-       const linkInstance = contentState.getEntity(linkKey);
-       url = linkInstance.getData().url;
+    if(currentEntity) {
+       url = currentEntity.getData().url;
     }
 
     this.setState({url});
@@ -54,27 +44,32 @@ class LinkControl extends Component {
   _handleLinkSave (e) {
     e.preventDefault();
     this.props.onAddLink(this.state.url);
-    setTimeout(() => this.setState({
+    this.setState({
       url : ''
-    }), 0);
+    });
   }
 
   _handleLinkRemove (e) {
     e.preventDefault();
     this.props.onRemoveLink();
-    setTimeout(() => this.setState({
+    this.setState({
       url : ''
-    }), 0);
+    });
   }
 
 
 
   render() {
+
+    const {editorState, currentEntity} = this.props;
+    const {url} = this.state;
+
     const popover = (
         <Popover id="link-popover">
-          <input type="text"
+          <input 
+                  type="text"
                   placeholder="Enter a URL.."
-                  value={this.state.url}
+                  value={url}
                   onChange={this.handleLinkChange} />
           <ButtonGroup className="pull-right">
               <Button className="btn-sm toolbar-button" onClick={this.handleLinkSave}>Link</Button>
@@ -83,38 +78,24 @@ class LinkControl extends Component {
         </Popover>
     );
 
-    const {editorState} = this.props;
-
-    // The logic here seems redundant..
-    // TODO Find a way to combine this logic with `handleLinkPopup()`.. maybe store the current Entity's ID?
-
-    const contentState = editorState.getCurrentContent();
-    const startKey = editorState.getSelection().getStartKey();
-    const startOffset = editorState.getSelection().getStartOffset();
-    const blockWithEntity = contentState.getBlockForKey(startKey);
-    const linkKey = blockWithEntity.getEntityAt(startOffset);
-
-    let active = false;
-    if (linkKey) {
-       const linkInstance = contentState.getEntity(linkKey);
-       active = (linkInstance.getType() === 'LINK');
-    }
-
-    const activeClass = (active ? "active" : "");
+    
+    const isLinkEntity = (currentEntity && currentEntity.getType() === 'LINK') || false;
+    const activeClass = (isLinkEntity ? "active" : "");
     const toolbarButtonClass = `btn-default ${activeClass} btn-lg toolbar-button`;
-
+ 
     return (
-      <div className="btn-group" role="group">
-        <OverlayTrigger trigger="click"
-                        placement="bottom"
-                        onEnter={this.handleLinkPopup}
-                        overlay={popover}
-                        rootClose={true}>
-            <Button className={toolbarButtonClass} >
+      <ButtonGroup>
+        <OverlayTrigger 
+            trigger="click"
+            placement="bottom"
+            onEnter={this.handleLinkPopupOpen}
+            overlay={popover}
+            rootClose={true}>
+           <Button className={toolbarButtonClass} >
               <i className="fa fa-link"></i>
-            </Button>
+          </Button>    
         </OverlayTrigger>
-      </div>
+      </ButtonGroup>
     );
   }
 }

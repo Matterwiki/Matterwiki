@@ -11,14 +11,11 @@ const BLOCK_TYPES = [
 	{label: 'Outdent', fa: 'fa-outdent', style: 'outdent'},
 ];
 
-const BlockControls = ({editorState, onToggle}) => {
+const BlockControls = ({editorState, toggleBlockType}) => {
 
 	const selection = editorState.getSelection();
 	// get the blockType of the block the cursor/selection is currently in
-	const blockType = editorState
-											.getCurrentContent()
-											.getBlockForKey(selection.getStartKey())
-											.getType();
+	const blockType = editorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType();
 
 	return (
 		<div className="btn-group" role="group">
@@ -26,7 +23,7 @@ const BlockControls = ({editorState, onToggle}) => {
 				<ToolbarButton
 					key={type.label}
 					active={blockType === type.style}
-					onToggle={onToggle}
+					onToggle={toggleBlockType}
 					label={type.label}
 					style={type.style}
 					fa={type.fa}

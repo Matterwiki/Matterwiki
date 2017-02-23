@@ -7,7 +7,7 @@ const INLINE_TYPES = [
 	{label: 'Strikethrough', fa: 'fa-strikethrough', style: 'STRIKETHROUGH'},
 ];
 
-const InlineControls = ({editorState, onToggle}) => {
+const InlineControls = ({editorState, toggleInlineStyle}) => {
 
 	let currentStyle = editorState.getCurrentInlineStyle();
 
@@ -17,7 +17,7 @@ const InlineControls = ({editorState, onToggle}) => {
 				<ToolbarButton
 					key={type.label}
 					active={currentStyle.has(type.style)}
-					onToggle={onToggle}
+					onToggle={toggleInlineStyle}
 					label={type.label}
 					style={type.style}
 					fa={type.fa}
