@@ -17,7 +17,7 @@ People use it to store documentation, notes, culture guidelines, employee onboar
 
 ## Setup Instructions:
 
-You need to have `Node` and `npm` installed on your system.
+You need to have `Node` (version 7 or above) and `npm` installed on your system.
 
 1. Clone this repository `git clone http://github.com/matterwiki/matterwiki`
 2. Run `npm install`
@@ -45,7 +45,7 @@ You need to have `Node` and `npm` installed on your system.
 <hr/>
 By default Matterwiki uses **Sqlite**, which is a lightweight database management system perfect for an internal wiki.
 If your team size is huge and you need a concurrent and flexible DBMS you can change the config to use **MySQL**.
-As we use `Knex` as a query builder all you have to do use MySQL is to change the db object in `knexfile.js` (found the app root directory).
+As we use `Knex` as a query builder all you have to do use MySQL is to change the db object in `knexfile.js` (found the app root directory). Using MySQL requires MySQL 5.6.5 as a minimum.
 
 1. First [setup MySQL](http://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
 
