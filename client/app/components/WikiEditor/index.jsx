@@ -230,6 +230,7 @@ class WikiEditor extends Component {
     const currentEntity = currentEntityKey ? 
                           editorState.getCurrentContent()
                                       .getEntity(currentEntityKey) : null;
+
     const editorProps = {
       ref: "editor",
       customStyleMap: styleMap,
