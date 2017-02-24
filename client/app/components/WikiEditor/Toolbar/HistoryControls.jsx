@@ -2,9 +2,6 @@ import React from 'react';
 import ToolbarButton from './ToolbarButton.jsx';
 
 const HistoryControls = ({editorState, onUndo, onRedo}) => {
-
-
-
 	return (
 		<div className="btn-group" role="group">
 

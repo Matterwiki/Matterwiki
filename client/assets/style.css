@@ -521,7 +521,9 @@ border: 1px solid #efefef;
   user-select:none;
 }
 
-.btn-group .toolbar-button, .btn-group .toolbar-button:focus  {
+.btn-group .toolbar-button, 
+.btn-group .toolbar-button:focus, 
+.btn-group .toolbar-button:active  {
   background: #fff;
   outline: none;
   border: none;
@@ -531,6 +533,7 @@ border: 1px solid #efefef;
 
 .btn-group .toolbar-button.active {
   background: #efefef;
+  color : #4d4d4d;
 }
 
 /* for the link */

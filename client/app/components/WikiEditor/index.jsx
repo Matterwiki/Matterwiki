@@ -11,7 +11,8 @@ import {Editor,
 
 import {changeDepth, getEntityRange} from 'draftjs-utils';
 import Toolbar from './Toolbar/index.jsx';
-import {getLinkEntities, convertToEditorState} from './utils.js';
+import {getLinkEntities, 
+    convertToEditorState, shouldHidePlaceholder} from './utils.js';
 
 const styleMap = {
   STRIKETHROUGH : {
@@ -187,6 +188,7 @@ class WikiEditor extends Component {
   _toggleBlockType(blockType) {
     const newState = RichUtils.toggleBlockType(this.state.editorState, blockType);
     this.onChange(newState);
+    setTimeout(() => this.focus(), 0);
   }
 
 
@@ -227,9 +229,8 @@ class WikiEditor extends Component {
 	render() {
 
 		const {editorState, currentEntityKey} = this.state;
-    const currentEntity = currentEntityKey ? 
-                          editorState.getCurrentContent()
-                                      .getEntity(currentEntityKey) : null;
+    const contentState = editorState.getCurrentContent();
+    const currentEntity = currentEntityKey ? contentState.getEntity(currentEntityKey) : null;
 
     const editorProps = {
       ref: "editor",
@@ -275,12 +276,7 @@ class WikiEditor extends Component {
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     let className = 'WikiEditor-editor';
-    var contentState = editorState.getCurrentContent();
-    if (!contentState.hasText()) {
-      if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        className += ' WikiEditor-hidePlaceholder';
-      }
-    }
+    className += shouldHidePlaceholder(contentState) ? ' WikiEditor-hidePlaceholder' : '';
 
 		return (
 			<div className="WikiEditor-root">

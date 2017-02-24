@@ -46,6 +46,18 @@ export const convertToEditorState = (rawContent, isHtml, decorator) => {
     return editorState;
 }
 
+
+export const shouldHidePlaceholder = (contentState) => {
+  if (!contentState.hasText()) {
+    if (contentState.getBlockMap().first().getType() !== 'unstyled') {
+      return true;
+    }
+  }
+
+  return false;
+} 
+
+
 // TODO must refactor this
 export const getDisabledLevelButtons = (editorState) => {
   const selection = editorState.getSelection();

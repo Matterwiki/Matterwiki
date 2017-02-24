@@ -7,7 +7,6 @@ import HistoryControls from './HistoryControls.jsx';
 
 
 const Toolbar = (props) => {
-
 	return (
 		<div className="btn-toolbar" role="toolbar">
 			<InlineControls {...props}/>
