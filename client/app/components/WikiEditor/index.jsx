@@ -12,7 +12,8 @@ import {Editor,
 import {changeDepth, getEntityRange} from 'draftjs-utils';
 import Toolbar from './Toolbar/index.jsx';
 import {getLinkEntities, 
-    convertToEditorState, shouldHidePlaceholder} from './utils.js';
+        convertToEditorState, 
+        shouldHidePlaceholder} from './utils.js';
 
 const styleMap = {
   STRIKETHROUGH : {
