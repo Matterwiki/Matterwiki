@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 
 export default class Toolbar extends Component {
 
@@ -7,7 +8,6 @@ export default class Toolbar extends Component {
 
 		this.onToggle = (evt) => {
 			evt.preventDefault();
-
 			this.props.onToggle(this.props.style);
 		}
 	}
@@ -15,13 +15,20 @@ export default class Toolbar extends Component {
 
 	render() {
 		const activeClass = (this.props.active ? "active" : "");
-		const toolbarButtonClass = `btn btn-default ${activeClass} btn-lg toolbar-button`;
+		const toolbarButtonClass = `${activeClass} toolbar-button`;
 		const fontIcon = `fa ${this.props.fa}`;
 
+
 		return (
-			<a className={toolbarButtonClass} onMouseDown={this.onToggle} title={this.props.label}>
+			<Button 
+				bsStyle="default" 
+				bsSize="lg" 
+				className={toolbarButtonClass} 
+				onMouseDown={this.onToggle} 
+				title={this.props.label}
+				disabled={this.props.disabled}>
     			<i className={fontIcon} ></i>
-  			</a>
+  			</Button>
 		);
 	}
 }

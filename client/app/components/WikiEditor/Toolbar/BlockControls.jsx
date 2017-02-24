@@ -6,9 +6,7 @@ const BLOCK_TYPES = [
 	{label: 'Blockquote', fa: 'fa-quote-right', style: 'blockquote'},
 	{label: 'Code Block', fa: 'fa-code', style: 'code-block'},
 	{label: 'UL', fa: 'fa-list-ul', style: 'unordered-list-item'},
-	{label: 'OL', fa: 'fa-list-ol', style: 'ordered-list-item'},
-	{label: 'Indent', fa: 'fa-indent', style: 'indent'},
-	{label: 'Outdent', fa: 'fa-outdent', style: 'outdent'},
+	{label: 'OL', fa: 'fa-list-ol', style: 'ordered-list-item'}
 ];
 
 const BlockControls = ({editorState, toggleBlockType}) => {

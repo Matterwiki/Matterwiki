@@ -50,21 +50,31 @@ class WikiEditor extends Component {
 
 		this.handleKeyCommand = (command) => this._handleKeyCommand(command);
     this.focus = () => this.refs.editor.focus();
+    this.onTab = (e) => this._onTab(e);
 		this.onChange = (editorState) => this._onChange(editorState);
 
+    // Handlers for `Toolbar` components. 
+    // TODO Should this be placed elsewhere?
 
-    // These actions are triggered from the toolbar
-    this.toggleBlockType = (blockType) => this._toggleBlockType(blockType);
+    // `InlineControls`
     this.toggleInlineStyle = (inlineStyle) => this._toggleInlineStyle(inlineStyle);
+
+    // `LinkControl`
     this.onAddLink = (linkData) => this._onAddLink(linkData);
     this.onRemoveLink = () => this._onRemoveLink();
+
+    // `BlockControls`    
+    this.toggleBlockType = (blockType) => this._toggleBlockType(blockType);
+
+    // `LevelControls`
+    this.toggleLevelType = (adjustment) => this._toggleLevelType(adjustment);
+
+    // `HistoryControls`
     this.onUndo = () => this._onUndo();
     this.onRedo = () => this._onRedo();
-
 	}
 
   _onChange(editorState) {
-
     this.setState({editorState});
 
     // saving the content after every change event doesn't look efficient
@@ -84,6 +94,11 @@ class WikiEditor extends Component {
     })
   }
 
+  _onTab(e) {
+    const maxDepth = 4;
+    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
+  }
+
 	_handleKeyCommand (cmd) {
 		const {editorState} = this.state;
 
@@ -96,21 +111,6 @@ class WikiEditor extends Component {
 
 		return false;
 	}
-
-
-
-
-  _toggleBlockType(blockType) {
-
-    const {editorState} = this.state;
-
-    const newState =
-          blockType === 'indent' ? changeDepth(editorState, 1, 4) :
-          blockType === 'outdent' ? changeDepth(editorState, -1, 4) :
-          RichUtils.toggleBlockType(editorState, blockType);
-
-    this.onChange(newState);
-  }
 
   _toggleInlineStyle(inlineStyle) {
     const {editorState} = this.state;
@@ -160,7 +160,6 @@ class WikiEditor extends Component {
     );
 
     setTimeout(() => this.focus(), 0);
-
   }
 
   _onRemoveLink() {
@@ -182,8 +181,20 @@ class WikiEditor extends Component {
           null
         )
       );
-
     }
+  }
+
+  _toggleBlockType(blockType) {
+    const newState = RichUtils.toggleBlockType(this.state.editorState, blockType);
+    this.onChange(newState);
+  }
+
+
+  _toggleLevelType(adjustment) {
+    // adjustment = 1 for indent
+    // adjustment = -1 for outdent
+   const newState = changeDepth(this.state.editorState, adjustment, 4);
+   this.onChange(newState);         
   }
 
   _onUndo() {
@@ -193,7 +204,6 @@ class WikiEditor extends Component {
 
     if(newState) {
       this.onChange(newState);
-
       return true;
     }
 
@@ -218,13 +228,14 @@ class WikiEditor extends Component {
 
 		const {editorState, currentEntityKey} = this.state;
     const currentEntity = currentEntityKey ? 
-                            editorState.getCurrentContent()
+                          editorState.getCurrentContent()
                                       .getEntity(currentEntityKey) : null;
     const editorProps = {
       ref: "editor",
       customStyleMap: styleMap,
       editorState: editorState,
       onChange: this.onChange,
+      onTab : this.onTab,
       handleKeyCommand: this.handleKeyCommand,
       placeholder: "Start writing here...."
     }
@@ -235,6 +246,7 @@ class WikiEditor extends Component {
         toggleInlineStyle: this.toggleInlineStyle,
         onAddLink: this.onAddLink,
         onRemoveLink: this.onRemoveLink,
+        toggleLevelType: this.toggleLevelType,      
         onUndo: this.onUndo,
         onRedo: this.onRedo
     }
