@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {RichUtils, EditorState} from 'draft-js';
-// TODO transition this to the entire codebase. react-bootstrap FTW!
+// TODO transition this to the entire codebase.
 import { Popover, Overlay, Button, ButtonGroup } from 'react-bootstrap';
 
-// InlineControls & BlockControls are stateless components, but this one isnt.
-// TODO how do we get over this? How do we make this stateless as well?
 // TODO Make this use <ToolbarButton /> component
 
 class LinkControl extends Component {

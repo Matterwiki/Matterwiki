@@ -5,7 +5,6 @@ import LevelControls from './LevelControls.jsx';
 import LinkControl from './LinkControl.jsx';
 import HistoryControls from './HistoryControls.jsx';
 
-
 const Toolbar = (props) => {
 	return (
 		<div className="btn-toolbar" role="toolbar">
@@ -17,7 +16,6 @@ const Toolbar = (props) => {
 		</div>
 	);
 }
-
 
 export default Toolbar;
 
