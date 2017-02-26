@@ -144,24 +144,22 @@ class WikiEditor extends Component {
       contentStateWithEntity = Modifier.insertText(contentStateWithEntity, selection, url, null, entityKey);
     }
 
-    // create a new EditorState
+    //  create a new EditorState
     const editorStateWithEntity = EditorState.set(editorState, {
       currentContent : contentStateWithEntity
     });
 
-    // to move cursor to after entity text
-    const editorStateWithSelection = EditorState.moveSelectionToEnd(editorStateWithEntity);
-
-
     this.onChange(
         RichUtils.toggleLink(
-          editorStateWithSelection,
-          editorStateWithSelection.getSelection(),
+          editorStateWithEntity,
+          editorStateWithEntity.getSelection(),
           entityKey
         )
     );
 
-    setTimeout(() => this.focus(), 0);
+    //  TODO move cursor to after entity text and focus. The code below does this, but creates problems with Link addition. FIX THIS
+    //  const editorStateWithSelection = EditorState.moveSelectionToEnd(editorStateWithEntity);
+    //  setTimeout(() => this.focus(), 0);
   }
 
   _onRemoveLink() {
