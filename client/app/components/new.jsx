@@ -3,12 +3,20 @@ import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 
+
+import WikiEditor from './WikiEditor/index.jsx';
+
 class NewArticle extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onContentChange = this._onContentChange.bind(this);
     this.state = {body: "", topics: [], error: "", loading: true};
+  }
+
+  _onContentChange(rawContent) {
+    this.setState({body : rawContent});
   }
 
   handleChange() {
@@ -40,7 +48,7 @@ class NewArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.refs.body.value;
+    var body = JSON.stringify(this.state.body);
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     if(body && title && topicId) {
@@ -78,21 +86,23 @@ class NewArticle extends React.Component {
     return (
       <div className="new-article">
         <div className="row">
-          <div className="col-md-12">
+
             <input
               ref="title"
               className="form-control input-title"
               placeholder="Enter article title..."
                />
-         </div>
-         </div>
+
+       </div>
+       <br/>
+       <div className="row">
+          <WikiEditor
+            onContentChange={this.onContentChange}
+            />
+       </div>
          <br/>
          <div className="row">
           <div className="col-md-12 new-article-form">
-                <trix-toolbar id="my_toolbar"></trix-toolbar>
-            <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
-            <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>
-               <br/>
                <label>Choose topic</label>
                <select className="form-control topic-select" ref="topic">
                  {this.state.topics.map(topic => (
@@ -103,9 +113,11 @@ class NewArticle extends React.Component {
         </div>
         <br/>
         <br/>
+        <div className="row">
         <div className="col-md-12">
           <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
         </div>
+      </div>
       </div>
     );
   }
