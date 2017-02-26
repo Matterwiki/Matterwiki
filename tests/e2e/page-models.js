@@ -119,7 +119,6 @@ export class NewArticlePage extends BaseLayoutPage {
 export class EditArticlePage extends BaseLayoutPage {
     constructor () {
         super();
-
         this.title                 = Selector('.new-article .input-title');
         this.editor                = Selector('trix-editor');
         this.what_changed          = Selector('.what_changed');
