@@ -69,21 +69,21 @@ export const getDisabledLevelButtons = (editorState) => {
   let disableIndent = true;
   let disableOutdent = true;
 
-  // could become a regex soon!
+
   const currentBlockDepth = currentBlock? currentBlock.getDepth() : null;
   const previousBlockDepth = previousBlock? previousBlock.getDepth() : null;
   const currentBlockType = currentBlock ? currentBlock.getType() : null;
   const previousBlockType = previousBlock ? previousBlock.getType() : null;
 
-
-  if( currentBlockType === 'unordered-list-item' || 
+  // could become a regex soon!
+  if (currentBlockType === 'unordered-list-item' || 
     currentBlockType === 'ordered-list-item') {
     
-    if(previousBlockType === currentBlockType) {
+    if (previousBlockType === currentBlockType) {
       disableIndent = false;
       disableOutdent = true;
 
-      if(previousBlockDepth !== currentBlockDepth && currentBlockDepth !== 0) {
+      if (previousBlockDepth !== currentBlockDepth && currentBlockDepth !== 0) {
         disableOutdent = false;
         disableIndent = true;
       } else if(previousBlockDepth === currentBlockDepth && currentBlockDepth !==0) {

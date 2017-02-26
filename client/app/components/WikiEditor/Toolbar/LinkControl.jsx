@@ -102,8 +102,18 @@ class LinkControl extends Component {
             value={url}
             onChange={this.onURLChange} />
           <ButtonGroup className="pull-right">
-              <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkSave}>Link</Button>
-              <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkRemove}>Unlink</Button>
+              <Button 
+                bsSize="sm" 
+                className="toolbar-button" 
+                onClick={this.handleLinkSave}>
+                Link
+              </Button>
+              <Button 
+                bsSize="sm" 
+                className="toolbar-button" 
+                onClick={this.handleLinkRemove}>
+                Unlink
+              </Button>
           </ButtonGroup>
         </Popover>
       </Overlay>
