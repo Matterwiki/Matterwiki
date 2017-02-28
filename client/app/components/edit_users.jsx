@@ -40,11 +40,11 @@ class EditUser extends React.Component {
 
   editUser(e) {
     var user = {
-      name: this.refs.user_name.value,
-      about: this.refs.user_about.value,
-      email: this.refs.user_email.value,
-      password: this.refs.user_password.value,
-      id: this.props.params.userId
+      name: encodeURIComponent(this.refs.user_name.value),
+      about: encodeURIComponent(this.refs.user_about.value),
+      email: encodeURIComponent(this.refs.user_email.value),
+      password: encodeURIComponent(this.refs.user_password.value),
+      id: encodeURIComponent(this.props.params.userId)
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",

@@ -52,10 +52,10 @@ class Admin extends React.Component {
 
   addUser(e) {
     var user = {
-      name: this.refs.user_name.value,
-      about: this.refs.user_about.value,
-      email: this.refs.user_email.value,
-      password: this.refs.user_password.value
+      name: encodeURIComponent(this.refs.user_name.value),
+      about: encodeURIComponent(this.refs.user_about.value),
+      email: encodeURIComponent(this.refs.user_email.value),
+      password: encodeURIComponent(this.refs.user_password.value)
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -85,8 +85,8 @@ class Admin extends React.Component {
 
   addTopic(e) {
     var topic = {
-      name: this.refs.topic_name.value,
-      description: this.refs.topic_description.value
+      name: encodeURIComponent(this.refs.topic_name.value),
+      description: encodeURIComponent(this.refs.topic_description.value)
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
