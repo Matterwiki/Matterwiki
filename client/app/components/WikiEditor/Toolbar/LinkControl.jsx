@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {RichUtils, EditorState} from 'draft-js';
+import classNames from 'classnames';
 // TODO transition this to the entire codebase.
 import { Popover, Overlay, Button, ButtonGroup } from 'react-bootstrap';
 
-// TODO Make this use <ToolbarButton /> component
 
 class LinkControl extends Component {
 
@@ -121,8 +120,9 @@ class LinkControl extends Component {
 
     
     const isLinkEntity = (currentEntity && currentEntity.getType() === 'LINK') || false;
-    const activeClass = (isLinkEntity ? "active" : "");
-    const toolbarButtonClass = `${activeClass} toolbar-button`;
+    const toolbarButtonClass = classNames({
+      'active' : isLinkEntity
+    }, 'toolbar-button');
  
     return (
       <div>

@@ -10,6 +10,8 @@ import {Editor,
         ContentState} from 'draft-js';
 
 import {changeDepth, getEntityRange} from 'draftjs-utils';
+import classNames from 'classnames';
+
 import Toolbar from './Toolbar/index.jsx';
 import {getLinkEntities, 
         convertToEditorState, 
@@ -274,8 +276,9 @@ class WikiEditor extends Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    let className = 'WikiEditor-editor';
-    className += shouldHidePlaceholder(contentState) ? ' WikiEditor-hidePlaceholder' : '';
+    let className = classNames('WikiEditor-editor', {
+      'WikiEditor-hidePlaceholder' : shouldHidePlaceholder(contentState) 
+    });
 
 		return (
 			<div className="WikiEditor-root">
