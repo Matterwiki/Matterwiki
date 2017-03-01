@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import Toolbar from './Toolbar/index.jsx';
 import {getLinkEntities, 
         convertToEditorState, 
+        getCurrentEntityKey,
         shouldHidePlaceholder} from './utils.js';
 
 const styleMap = {
@@ -88,13 +89,8 @@ class WikiEditor extends Component {
 
     // get the currentEntity
     // TODO, again, is inefficient
-    const contentState = editorState.getCurrentContent();
-    const startKey = editorState.getSelection().getStartKey();
-    const startOffset = editorState.getSelection().getStartOffset();
-    const blockWithEntity = contentState.getBlockForKey(startKey);
-    const linkKey = blockWithEntity.getEntityAt(startOffset);
     this.setState({
-      currentEntityKey : linkKey
+      currentEntityKey : getCurrentEntityKey(editorState)
     })
   }
 
