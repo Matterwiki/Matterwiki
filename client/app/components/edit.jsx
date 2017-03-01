@@ -10,12 +10,7 @@ class EditArticle extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onContentChange = this._onContentChange.bind(this);
     this.state = {body: "",title: "", topic_id: "", topics: [], loading: true, isHtml : false};
-  }
-
-  _onContentChange(rawContent) {
-    this.setState({body : rawContent});
   }
 
   handleChange() {
@@ -24,7 +19,12 @@ class EditArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = JSON.stringify(this.state.body);
+
+    // get the rawContent from refs
+    const rawContent = this.refs.editor.getRawContent();
+    this.setState({body : rawContent});
+
+    var body = JSON.stringify(rawContent);
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
@@ -33,10 +33,11 @@ class EditArticle extends React.Component {
               "Content-Type": "application/x-www-form-urlencoded",
               "x-access-token": window.localStorage.getItem('userToken')
           });
-          var myInit = { method: 'PUT',
-                     headers: myHeaders,
-                     body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
-                     };
+          var myInit = { 
+            method: 'PUT',
+            headers: myHeaders,
+            body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
+          };
           var that = this;
           fetch('/api/articles/',myInit)
           .then(function(response) {
@@ -131,7 +132,7 @@ class EditArticle extends React.Component {
            <div className="row">
             <div className="col-md-12 new-article-form">
                  <WikiEditor
-                   onContentChange={this.onContentChange}
+                   ref='editor'
                    rawContent={this.state.body}
                    isHtml={this.state.isHtml}
                    />
