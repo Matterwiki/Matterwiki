@@ -10,7 +10,7 @@ module.exports = {
     // TODO a better way to handle this, maybe?
     'whatwg-fetch', 
     // entry point
-    APP_DIR + '/index.jsx'
+    APP_DIR + '/index.js'
   ],
   output: {
     path: BUILD_DIR,
