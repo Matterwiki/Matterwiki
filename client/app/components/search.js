@@ -1,16 +1,16 @@
 import React from 'react';
-import Loader from './loader.jsx';
+import Loader from './loader';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 
 
-class BrowseArticles extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { articles: [], url: "/api/articles", loading: true};
+    this.state = { articles: [], loading: true};
   }
 
-  componentDidMount() {
+  componentWillMount() {
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": window.localStorage.getItem('userToken')
@@ -19,8 +19,7 @@ class BrowseArticles extends React.Component {
                headers: myHeaders,
                };
     var that = this;
-    var url = '/api/articles';
-    fetch(url,myInit)
+    fetch('/api/search?query='+encodeURIComponent(this.props.location.query.query),myInit)
     .then(function(response) {
       return response.json();
     })
@@ -35,7 +34,6 @@ class BrowseArticles extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({loading: true});
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": window.localStorage.getItem('userToken')
@@ -44,32 +42,36 @@ class BrowseArticles extends React.Component {
                headers: myHeaders,
                };
     var that = this;
-    var url = '/api/articles';
-    if(nextProps.topicId==null && this.props.topicId==null)
-      var url = '/api/articles';
-    else
-      var url = '/api/topic/'+nextProps.topicId+'/articles';
-    fetch(url,myInit)
+    fetch('/api/search?query='+nextProps.location.query.query,myInit)
     .then(function(response) {
       return response.json();
     })
     .then(function(response) {
-      if(response.error.error)
+      if(response.error.error){
         Alert.error(response.error.message);
+      }
       else {
-        that.setState({articles: response.data})
+          that.setState({articles: response.data});
       }
       that.setState({loading: false});
     });
   }
+
+  componentWillUnmount() {
+    this.setState({articles: []});
+  }
+
   render () {
     if(this.state.loading)
       return <Loader/>;
-    if(this.state.articles.length<1) {
-      return <p className="help-block center-align">There are no articles under this topic</p>;
-    }
-    else {
+    else
       return(<div>
+            <div className="result-info">
+              <p className="help-block">
+                We found {this.state.articles.length} articles for your query
+              </p>
+            </div>
+            {(this.state.articles.length>0) ?
             <div className="article-list">
             {this.state.articles.map(article => (
             <div key={article.id} className="article-item">
@@ -77,15 +79,21 @@ class BrowseArticles extends React.Component {
                 <Link to={"/article/"+article.id} >{article.title}</Link>
               </div>
               <div className="article-item-description">
-                Last updated on {new Date(article.updated_at.replace(' ','T')).toDateString()}
+                Last updated on {new Date(article.updated_at).toDateString()}
               </div>
               <hr className="article-separator"></hr>
             </div>
 
           ))}</div>
+        :
+        <div className="no-results">
+          <i className="fa fa-frown-o"></i>
+          <p>Please try again with another query</p>
+        </div>
+
+        }
       </div>);
     }
-  }
 }
 
-export default BrowseArticles;
+export default Search;
