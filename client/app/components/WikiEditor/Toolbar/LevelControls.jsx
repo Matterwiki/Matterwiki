@@ -1,6 +1,6 @@
 import React from 'react';
 import ToolbarButton from './ToolbarButton.jsx';
-import {getDisabledLevelButtons} from '../utils.js';
+import {getDisabledLevelButtons} from '../helpers/index.js';
 
 
 const LevelControls = ({editorState, toggleLevelType}) => {

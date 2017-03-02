@@ -16,7 +16,7 @@ import Toolbar from './Toolbar/index.jsx';
 import {getLinkEntities, 
         convertToEditorState, 
         getCurrentEntityKey,
-        shouldHidePlaceholder} from './utils.js';
+        shouldHidePlaceholder} from './helpers/index.js';
 
 const styleMap = {
   STRIKETHROUGH : {
