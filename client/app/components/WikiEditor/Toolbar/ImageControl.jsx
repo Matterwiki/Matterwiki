@@ -1,14 +1,18 @@
 import React from 'react';
-import ToolbarButton from './ToolbarButton.jsx';
+import {Button} from 'react-bootstrap';
 
 const ImageControl = (props) => { 
+
+	// a hack to make the label look like a toolbar button 
+	const classNames = "custom-file-upload custom-file-upload toolbar-button btn btn-lg btn-default";
+
 	return (
 		<div className="btn-group" role="group">
-			<ToolbarButton
-				key='image-control'
-				label='Upload image'
-				fa='fa-picture-o'
-			/>
+			<label 
+				className={classNames}>              
+    			<input type="file"/>
+    			<i className="fa fa-picture-o"></i>
+            </label> 
 		</div>
 	);
 }

@@ -537,6 +537,18 @@ border: 1px solid #efefef;
   color : #4d4d4d;
 }
 
+/* for the image upload button */
+.custom-file-upload {
+  cursor: pointer;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+
+
+
 /* for the link */
 .popover.bottom {
   max-width : 500px;
