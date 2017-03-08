@@ -1,6 +1,9 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/login.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class Login extends React.Component {
   constructor(props) {
@@ -46,16 +49,16 @@ class Login extends React.Component {
   render () {
     return(<div className="container login-box row">
       <div className="col-md-12 col-sm-12">
-        <h3>Login</h3>
+        <h3>{language.login}</h3>
           <form>
         <div className="col-sm-12 form-group">
-          <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
+          <input type="email" className="form-control" id="inputEmail" placeholder={language.placeholder_email} />
         </div>
         <div className="col-sm-12 form-group">
-          <input type="password" className="form-control" id="inputPassword" placeholder="Password" />
+          <input type="password" className="form-control" id="inputPassword" placeholder={language.placeholder_pw} />
         </div>
         <div className="col-sm-12 form-group">
-          <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>
+          <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">{language.button_signin}</button>
         </div>
       </form>
       </div>

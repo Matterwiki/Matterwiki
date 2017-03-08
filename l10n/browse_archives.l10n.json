@@ -1,0 +1,10 @@
+module.exports = {
+    "de-DE": {
+            "no_archive_for_article": "Es gibt keine Archive für diesen Artikel",
+            "view_archives": "Archiv anzeigen"
+    },
+    "en-EN": {
+            "no_archive_for_article": "There are no archives for this article",
+            "view_archives": "View Archives"
+    }
+}

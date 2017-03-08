@@ -3,6 +3,9 @@ import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import LogoUpload from './logo_upload.jsx';
+import translations from '../../../l10n/admin.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class Admin extends React.Component {
 
@@ -78,7 +81,7 @@ class Admin extends React.Component {
           var users = that.state.users;
           users.push(response.data);
           that.setState({users: users});
-          Alert.success('User has been added');
+          Alert.success(language.user_added);
       }
     });
   }
@@ -111,7 +114,7 @@ class Admin extends React.Component {
           var topics = that.state.topics;
           topics.push(response.data);
           that.setState({topics: topics});
-          Alert.success('Topic has been added');
+          Alert.success(language.topic_added);
       }
     });
   }
@@ -140,7 +143,7 @@ class Admin extends React.Component {
            return e.id != id;
         });
         that.setState({topics: topics});
-        Alert.success('Topic has been deleted');
+        Alert.success(language.topic_deleted);
       }
     });
   }
@@ -187,15 +190,15 @@ class Admin extends React.Component {
           <div>
             <div className="row container">
           <div className="col-md-6">
-            <button className="btn btn-default" data-toggle="modal" data-target="#addTopic">Add Topic</button>
+            <button className="btn btn-default" data-toggle="modal" data-target="#addTopic">{language.add_topic}</button>
             <br/>
             <br/>
               <div className="list-group bordered-scroll-box">
                   {this.state.topics.map(topic => (
                     <div key={topic.id} href="#" className="list-group-item">
                       {(topic.id !== 1)? <span className="pull-right">
-                      <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
-                      <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
+                      <Link to={'topic/edit/'+topic.id} className="btn btn-default">{language.edit}</Link>
+                      <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>{language.delete}</button>
                       </span>: ''}
                       <h4 className="list-group-item-heading">{topic.name}</h4>
                       <p className="list-group-item-text">{topic.description}</p>
@@ -203,15 +206,15 @@ class Admin extends React.Component {
                 ))}</div>
           </div>
           <div className="col-md-6">
-            <button className="btn btn-default" data-toggle="modal" data-target="#addUser">Add User</button>
+            <button className="btn btn-default" data-toggle="modal" data-target="#addUser">{language.add_user}</button>
             <br/>
             <br/>
             <div className="list-group bordered-scroll-box">
                   {this.state.users.map(user => (
                     <div key={user.id} href="#" className="list-group-item">
                       {(user.id!=1) ? <span className="pull-right">
-                        <Link to={'user/edit/'+user.id} className="btn btn-default">Edit</Link>
-                        <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
+                        <Link to={'user/edit/'+user.id} className="btn btn-default">{language.edit}</Link>
+                        <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>{language.delete}</button>
                       </span> : ''}
                       <h4 className="list-group-item-heading">{user.name}</h4>
                       <p className="list-group-item-text">{user.about}</p>
@@ -231,23 +234,23 @@ class Admin extends React.Component {
                   <div className="row">
 
                     <div className="col-md-6 col-sd-12">
-                      <h1><b>Add User</b></h1>
+                      <h1><b>{language.add_user}</b></h1>
                       <br/>
                         <form>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" />
+                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder={language.name} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" />
+                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder={language.about} />
                           </div>
                       <div className="col-sm-12 form-group">
-                        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder="Email" />
+                        <input type="email" className="form-control" ref="user_email" id="inputUserEmail" placeholder={language.email} />
                       </div>
                       <div className="col-sm-12 form-group">
-                        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
+                        <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder={language.password} />
                       </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">Add User</button>
+                        <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">{language.add_user}</button>
                       </div>
                     </form>
                     </div>
@@ -271,17 +274,17 @@ class Admin extends React.Component {
                   <div className="row">
 
                     <div className="col-md-6 col-sd-12">
-                      <h1><b>Add Topic</b></h1>
+                      <h1><b>{language.add_topic}</b></h1>
                       <br/>
                         <form>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder="Name" />
+                            <input type="text" className="form-control" ref="topic_name" id="inputTopicName" placeholder={language.name} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder="Description" />
+                            <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder={language.description} />
                           </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.addTopic} className="btn btn-default btn-block btn-lg">Add Topic</button>
+                        <button onClick={this.addTopic} className="btn btn-default btn-block btn-lg">{language.add_topic}</button>
                       </div>
                     </form>
                     </div>

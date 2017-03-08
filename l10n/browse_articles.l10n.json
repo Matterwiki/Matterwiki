@@ -1,0 +1,10 @@
+module.exports = {
+    "de-DE": {
+            "no_article_for_topic": "Es gibt keine Artikel zu diesem Thema",
+            "last_updated_on": "Zuletzt aktualisiert am "
+    },
+    "en-EN": {
+            "no_article_for_topic": "There are no articles under this topic",
+            "last_updated_on": "Last updated on "
+    }
+}

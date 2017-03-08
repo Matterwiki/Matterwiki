@@ -1,0 +1,24 @@
+module.exports = {
+    "de-DE": {
+                "alert_success": "Administrator erstellt",
+                "welcome_h1": "Willkommen",
+                "welcome_h3": "Matterwiki ist ein simples Wiki für Teams",
+                "welcome_h4": "Es kann für das Speichern von Dokumentationen, Notizen, Verfahrensanweisungen, Einführungen für neue Mitarbeiter*innen und so ziemlich alles andere genutzt werden",
+                "placeholder_name": "Name",
+                "placeholder_about": "Über mich",
+                "placeholder_email": "E-Mail",
+                "placeholder_pw": "Passwort",
+                "button_signup": "Konto erstellen"
+    },
+    "en-EN": {
+                "alert_success": "Admin user generated",
+                "welcome_h1": "Welcome,",
+                "welcome_h3": "Matterwiki is a simple wiki for teams",
+                "welcome_h4": "People use it to store documentation, notes, culture guidelines, employee onboarding content and everything they want to.",
+                "placeholder_name": "Name",
+                "placeholder_about": "About",
+                "placeholder_email": "Email",
+                "placeholder_pw": "Password",
+                "button_signup": "Setup My Account"
+    }
+}

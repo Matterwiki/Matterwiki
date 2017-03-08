@@ -1,0 +1,31 @@
+module.exports = {
+    "de-DE": {
+            "article_deleted": "Artikel wurde gelöscht",
+            "last_updated": "Zuletzt aktualisiert am ",
+            "filed_under": "Abgelegt unter ",
+            "last_updated_by": "Zuletzt aktualisiert von ",
+            "what_changed": "Was sich zuletzt geändert hat",
+            "no_info": "Keine Informationen verfügbar",
+            "edit": "Bearbeiten",
+            "history": "Verlauf",
+            "delete": "Löschen",
+            "h1_article_published": "Yayyyy!",
+            "h3_article_published": "Dein Artikel wurde veröffentlicht",
+            "great": "Das ist großartig"
+    },
+    "en-EN": {
+            "article_deleted": "Article has been deleted",
+            "last_updated": "Last updated on ",
+            "filed_under": "Filed under ",
+            "last_updated_by": "Last Updated By ",
+            "what_changed": "What Changed in last edit",
+            "no_info": "No information available",
+            "edit": "Edit",
+            "history": "History",
+            "delete": "Delete",
+            "h1_article_published": "Yayyyy!",
+            "h3_article_published": "Your article has been published",
+            "great": "That's great"
+
+    }
+}

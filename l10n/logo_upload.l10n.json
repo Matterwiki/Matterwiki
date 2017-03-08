@@ -1,0 +1,14 @@
+module.exports = {
+    "de-DE": {
+                "alert_success": "Dein Logo wurde erfolgreich geändert",
+                "change_logo": "Logo ändern",
+                "help_block": "Bitte die Seite aktualisieren, um die Änderungen für alle Seiten sichtbar zu machen",
+                "button_submit": "Logo hochladen"
+    },
+    "en-EN": {
+                "alert_success": "Your logo has been successfully updated",
+                "change_logo": "Change Logo",
+                "help_block": "Please reload the page for the changes to reflect throughout the site",
+                "button_submit": "Upload Logo"
+    }
+}

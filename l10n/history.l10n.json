@@ -1,0 +1,10 @@
+module.exports = {
+    "de-DE": {
+                "archives": "Archiv",
+                "view_articles": "Aussicht Artikel"
+    },
+    "en-EN": {
+                "archives": "Archives",
+                "view_articles": "View Articles"
+    }
+}

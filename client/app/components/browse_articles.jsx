@@ -2,6 +2,9 @@ import React from 'react';
 import Loader from './loader.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/browse_articles.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 
 class BrowseArticles extends React.Component {
@@ -66,7 +69,7 @@ class BrowseArticles extends React.Component {
     if(this.state.loading)
       return <Loader/>;
     if(this.state.articles.length<1) {
-      return <p className="help-block center-align">There are no articles under this topic</p>;
+      return <p className="help-block center-align">{language.no_article_for_topic}</p>;
     }
     else {
       return(<div>
@@ -77,7 +80,7 @@ class BrowseArticles extends React.Component {
                 <Link to={"/article/"+article.id} >{article.title}</Link>
               </div>
               <div className="article-item-description">
-                Last updated on {new Date(article.updated_at.replace(' ','T')).toDateString()}
+                {language.last_updated_on} {new Date(article.updated_at.replace(' ','T')).toDateString()}
               </div>
               <hr className="article-separator"></hr>
             </div>

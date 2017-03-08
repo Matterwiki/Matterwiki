@@ -1,15 +1,18 @@
 import React from 'react';
+import translations from '../../../l10n/loader.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class Loader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {message: "Loading..."};
+    this.state = {message: language.message};
   }
 
   componentDidMount() {
     var that = this;
     this.timeout = setTimeout(function(){
-      that.setState({message: "There seems to be a problem in processing your request. Please try again." });
+      that.setState({message: language.message_timeout });
     }, 10000);
   }
 

@@ -2,6 +2,9 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import translations from '../../../l10n/new.l10n.json';
+import config from '../../../customization.json';
+var language = translations[config.language];
 
 class NewArticle extends React.Component {
   constructor(props) {
@@ -61,13 +64,13 @@ class NewArticle extends React.Component {
           if(response.error.error)
             Alert.error(response.error.message);
           else {
-              Alert.success("Article has been successfully saved")
+              Alert.success(language.alert_success)
               hashHistory.push('article/'+response.data.id+'?new=true');
           }
         });
       }
     else {
-      Alert.error("Article Body, Title and Topic Information is required.");
+      Alert.error(language.alert_error);
     }
   }
 
@@ -82,7 +85,7 @@ class NewArticle extends React.Component {
             <input
               ref="title"
               className="form-control input-title"
-              placeholder="Enter article title..."
+              placeholder={language.placeholder_title}
                />
          </div>
          </div>
@@ -90,10 +93,10 @@ class NewArticle extends React.Component {
          <div className="row">
           <div className="col-md-12 new-article-form">
                 <trix-toolbar id="my_toolbar"></trix-toolbar>
-            <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
+            <trix-editor toolbar="my_toolbar" input="my_input" placeholder={language.placeholder_editor} class="input-body"></trix-editor>
             <input id="my_input" type="hidden" value="" ref="body" onChange={this.handleChange}/>
                <br/>
-               <label>Choose topic</label>
+               <label>{language.choose_topic}</label>
                <select className="form-control topic-select" ref="topic">
                  {this.state.topics.map(topic => (
                    <option value={topic.id} key={topic.id}>{topic.name}</option>
@@ -104,7 +107,7 @@ class NewArticle extends React.Component {
         <br/>
         <br/>
         <div className="col-md-12">
-          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
+          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>{language.button_submit}</button>
         </div>
       </div>
     );

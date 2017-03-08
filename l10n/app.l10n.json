@@ -1,0 +1,18 @@
+module.exports = {
+    "de-DE": {
+            "loggedout": "Du wurdest erfolgreich abgemeldet",
+            "toggle_navigation": "Navigation wechseln",
+            "admin": "Admin",
+            "new_article": "Neuer Artikel",
+            "logout": "Abmelden",
+            "powered_by": "Unterstützt von ",
+    },
+    "en-EN": {
+            "loggedout": "You've been successfully logged out",
+            "toggle_navigation": "Toggle navigation",
+            "admin": "Admin",
+            "new_article": "New Article",
+            "logout": "Logout",
+            "powered_by": "Powered by ",
+    }
+}

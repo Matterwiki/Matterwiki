@@ -1,0 +1,10 @@
+module.exports = {
+    "de-DE": {
+            "no_topics": "Es gibt noch keine Themen",
+            "view_topics": "Themen anzeigen"
+    },
+    "en-EN": {
+            "no_topics": "There are no topics created yet",
+            "view_topics": "View Topics"
+    }
+}
