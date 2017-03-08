@@ -12,7 +12,7 @@ const newArticlePage  = new NewArticlePage();
 const articlePage     = new ArticlePage();
 const editArticlePage = new EditArticlePage();
 
-/*
+
 fixture `Create Article`
     .page('http://localhost:5000/#/login')
     .beforeEach(async t => {
@@ -40,7 +40,7 @@ test('present on show page', async t => {
         .expect(articlePage.articleTitle.textContent).contains('title');
 });
 
-*/
+
 fixture `Edit Article`
         .page('http://localhost:5000/#/home')
         .beforeEach(async t => {
