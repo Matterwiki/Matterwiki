@@ -101,6 +101,7 @@ export class ArticlePage extends BaseLayoutPage {
         super();
         this.articleTitle = Selector('.single-article-title');
         this.editButton   = this.appContainer.find('a').withText('Edit');
+        this.deleteButton = this.appContainer.find('button').withText('Delete');
     }
 }
 

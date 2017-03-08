@@ -59,7 +59,7 @@ fixture `Edit Article`
         .page('http://localhost:5000/#/home')
         .beforeEach(async t => {
             await loginPage.performLogin(t);
-        });;
+        });
 
 test('present on show page', async t => {
     await t.click(homePage.articleTitle)
@@ -82,4 +82,18 @@ test('unsuccessful edit on validation failure WHAT CHANGED', async t => {
         .click(articlePage.editButton)
         .click(editArticlePage.updateButton)
         .expect(editArticlePage.alert.textContent).contains('Article Body, Title, Topic and Change Info is required');
+});
+
+
+fixture `Delete Article`
+        .page('http://localhost:5000/#/home')
+        .beforeEach(async t => {
+            await loginPage.performLogin(t);
+        });
+
+test('successful delete', async t => {
+    await t
+        .click(homePage.articleTitle)
+        .click(articlePage.deleteButton)
+        .expect(editArticlePage.alert.textContent).contains('Article has been deleted');
 });
