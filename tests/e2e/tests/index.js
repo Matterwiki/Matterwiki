@@ -29,9 +29,23 @@ test('successful submission', async t => {
         .expect(newArticlePage.articlePublishedModal.details.textContent).eql('Your article has been published');
 });
 
-test('denied on validation failure', async t => {
+test('denied on validation failure TITLE AND BODY', async t => {
     await t.click(homePage.navbar.newArticleLink)
         .click(newArticlePage.createArticleBtn)
+        .expect(newArticlePage.alert.textContent).contains('Article Body, Title and Topic Information is required.');
+});
+
+test('denied on validation failure TITLE', async t => {
+    await t.click(homePage.navbar.newArticleLink)
+        .click(newArticlePage.createArticleBtn)
+        .typeText(newArticlePage.editor, 'content')
+        .expect(newArticlePage.alert.textContent).contains('Article Body, Title and Topic Information is required.');
+});
+
+test('denied on validation failure BODY', async t => {
+    await t.click(homePage.navbar.newArticleLink)
+        .click(newArticlePage.createArticleBtn)
+        .typeText(newArticlePage.title, 'title')
         .expect(newArticlePage.alert.textContent).contains('Article Body, Title and Topic Information is required.');
 });
 
@@ -53,11 +67,19 @@ test('present on show page', async t => {
 });
 
 test('successful edit', async t => {
-    await t//.debug()
+    await t
         .click(homePage.articleTitle)
         .click(articlePage.editButton)
         .typeText(editArticlePage.what_changed, 'hello')
         .typeText(editArticlePage.editor, 'hello')
         .click(editArticlePage.updateButton)
         .expect(editArticlePage.alert.textContent).contains('Article has been successfully saved');
+});
+
+test('unsuccessful edit on validation failure WHAT CHANGED', async t => {
+    await t
+        .click(homePage.articleTitle)
+        .click(articlePage.editButton)
+        .click(editArticlePage.updateButton)
+        .expect(editArticlePage.alert.textContent).contains('Article Body, Title, Topic and Change Info is required');
 });
