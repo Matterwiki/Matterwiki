@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
+import classNames from 'classnames';
 
 export default class Toolbar extends Component {
 
@@ -14,10 +15,10 @@ export default class Toolbar extends Component {
 
 
 	render() {
-		const activeClass = (this.props.active ? "active" : "");
-		const toolbarButtonClass = `${activeClass} toolbar-button`;
+		const toolbarButtonClass = classNames({
+			'active' : this.props.active
+		}, 'toolbar-button');
 		const fontIcon = `fa ${this.props.fa}`;
-
 
 		return (
 			<Button 

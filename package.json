@@ -31,6 +31,7 @@
     "bcryptjs": "2.4.0",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.0",
+    "classnames": "^2.2.5",
     "draft-js": "^0.10.0",
     "draftjs-utils": "^0.5.1",
     "express": "4.14.0",

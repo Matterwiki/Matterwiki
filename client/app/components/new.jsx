@@ -48,7 +48,12 @@ class NewArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = JSON.stringify(this.state.body);
+
+    // get the rawContent from refs
+    const rawContent = this.refs.editor.getRawContent();
+    this.setState({body : rawContent});
+
+    var body = JSON.stringify(rawContent);
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     if(body && title && topicId) {
@@ -58,6 +63,7 @@ class NewArticle extends React.Component {
         });
         var myInit = { method: 'POST',
                    headers: myHeaders,
+                   // TODO use JSON.stringify or something over here
                    body: "title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")
                    };
         var that = this;
@@ -98,6 +104,7 @@ class NewArticle extends React.Component {
        <div className="row">
           <WikiEditor
             onContentChange={this.onContentChange}
+            ref='editor'
             />
        </div>
          <br/>
