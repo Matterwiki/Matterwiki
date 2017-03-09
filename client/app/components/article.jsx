@@ -3,6 +3,9 @@ import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 
+
+import WikiEditor from './WikiEditor/index.jsx';
+
 class ViewArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +36,11 @@ class ViewArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({article: response.data})
+
+        that.setState({
+          article: response.data,
+          isHtml : response.data.body && !response.data.body_json ? true : false
+        });
       }
       that.setState({loading: false})
     });
@@ -85,8 +92,12 @@ class ViewArticle extends React.Component {
                   Last updated on {new Date(this.state.article.updated_at.replace(' ','T')).toDateString()}
               </div>
             </div>
-            <div className="single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
+            <div className="single-article-body">
+              <WikiEditor
+                readOnly={true}
+                rawContent={this.state.article.body || JSON.parse(this.state.article.body_json)}
+                isHtml={this.state.isHtml}
+                />
             </div>
           </div>
           <div className="col-md-3 article-sidebar">

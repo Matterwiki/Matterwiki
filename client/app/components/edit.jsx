@@ -3,21 +3,28 @@ import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 
+import WikiEditor from './WikiEditor/index.jsx';
+
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true};
+    this.state = {body: "",title: "", topic_id: "", topics: [], loading: true, isHtml : false};
   }
 
   handleChange() {
-    this.setState({body: this.refs.body.value, title: this.refs.title.value});
+    this.setState({ title: this.refs.title.value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    var body = this.refs.body.value;
+
+    // get the rawContent from refs
+    const rawContent = this.refs.editor.getRawContent();
+    this.setState({body : rawContent});
+
+    var body = JSON.stringify(rawContent);
     var title = this.refs.title.value;
     var topicId = this.refs.topic.value;
     var what_changed = this.refs.what_changed.value;
@@ -26,10 +33,11 @@ class EditArticle extends React.Component {
               "Content-Type": "application/x-www-form-urlencoded",
               "x-access-token": window.localStorage.getItem('userToken')
           });
-          var myInit = { method: 'PUT',
-                     headers: myHeaders,
-                     body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
-                     };
+          var myInit = { 
+            method: 'PUT',
+            headers: myHeaders,
+            body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
+          };
           var that = this;
           fetch('/api/articles/',myInit)
           .then(function(response) {
@@ -55,9 +63,10 @@ class EditArticle extends React.Component {
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": window.localStorage.getItem('userToken')
     });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
+    var myInit = {
+      method: 'GET',
+      headers: myHeaders,
+    };
     var that = this;
     fetch('/api/articles/'+this.props.params.articleId,myInit)
     .then(function(response) {
@@ -67,7 +76,18 @@ class EditArticle extends React.Component {
       if(response.error.error)
         Alert.error(response.error.message);
       else {
-        that.setState({body: response.data.body, title: response.data.title, topic_id: response.data.topic_id})
+        // Some hacks to maintain backward compatibility
+        // TODO Remove this after a few releases
+
+        that.setState({ body: JSON.parse(response.data.body_json), title: response.data.title, topic_id: response.data.topic_id})
+
+        if(response.data.body && !response.data.body_json) {
+          // a flag to check if there is still someone stuck using HTML Markup for the Wiki Articles
+          that.setState({
+            isHtml : true,
+            body : response.data.body
+          })
+        }
       }
       that.setState({loading: false});
     });
@@ -105,15 +125,17 @@ class EditArticle extends React.Component {
                 ref="title"
                 className="form-control input-title"
                 value={this.state.title}
-                 />
+              />
            </div>
            </div>
            <br/>
            <div className="row">
             <div className="col-md-12 new-article-form">
-              <trix-toolbar id="my_toolbar"></trix-toolbar>
-          <trix-editor toolbar="my_toolbar" input="my_input" placeholder="Start writing here...." class="input-body"></trix-editor>
-          <input id="my_input" type="hidden" value={this.state.body} ref="body" onChange={this.handleChange}/>
+                 <WikiEditor
+                   ref='editor'
+                   rawContent={this.state.body}
+                   isHtml={this.state.isHtml}
+                   />
                  <br/>
                  <label>Choose topic</label>
                  <select className="form-control topic-select" ref="topic" defaultValue={this.state.topic_id}>
