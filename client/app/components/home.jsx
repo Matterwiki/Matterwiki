@@ -11,7 +11,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.state = {topicId: '1', articles: [], topics: [], loading: true, articlesloading: false};
+    this.state = {articles: [], topics: [], loading: true, articlesloading: false};
   }
 
   handleUpdate(id) {
