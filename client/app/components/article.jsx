@@ -4,6 +4,9 @@ import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 import MatterwikiAPI from '../../../api/MatterwikiAPI.js'
 
+
+import WikiEditor from './WikiEditor/index.jsx';
+
 class ViewArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,11 @@ class ViewArticle extends React.Component {
     var id = this.props.params.articleId;
     MatterwikiAPI.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
     .then(function(article) {
-        that.setState({article: article.data, loading: false});
+        that.setState({
+          article: response.data,
+          isHtml : response.data.body && !response.data.body_json ? true : false,
+          loading: false
+        });
       })
       .catch(function(err){
         //Alert.error(err);
@@ -61,8 +68,12 @@ class ViewArticle extends React.Component {
                   Last updated on {new Date(this.state.article.updated_at.replace(' ','T')).toDateString()}
               </div>
             </div>
-            <div className="single-article-body"
-              dangerouslySetInnerHTML={this.getRawMarkupBody()}>
+            <div className="single-article-body">
+              <WikiEditor
+                readOnly={true}
+                rawContent={this.state.article.body || JSON.parse(this.state.article.body_json)}
+                isHtml={this.state.isHtml}
+                />
             </div>
           </div>
           <div className="col-md-3 article-sidebar">

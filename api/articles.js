@@ -28,7 +28,7 @@ module.exports =  function(app){
     */
     Articles.forge().save({
         title: req.body.title,
-        body: req.body.body,
+        body_json: req.body.body,
         topic_id: req.body.topic_id,
         user_id: req.body.user_id,
         what_changed: "Another drop in the ocean of knowledge"
@@ -107,7 +107,7 @@ module.exports =  function(app){
         Articles.forge({id: req.body.id})
           .save({
             title: req.body.title,
-            body: req.body.body,
+            body_json: req.body.body,
             topic_id: req.body.topic_id,
             what_changed: req.body.what_changed,
             user_id: req.body.user_id
@@ -116,7 +116,8 @@ module.exports =  function(app){
               Archives.forge().save({
                 article_id: req.body.id,
                 title: article.attributes.title,
-                body: article.attributes.body,
+                body: '',
+                body_json: article.attributes.body,
                 what_changed: article.attributes.what_changed,
                 user_id: article.attributes.user_id
               })
