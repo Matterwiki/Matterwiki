@@ -3,37 +3,55 @@ import {Link} from 'react-router';
 import Loader from './loader.jsx';
 import BrowseArchives from './browse_archives.jsx';
 import SimpleArticle from './simple_article.jsx';
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
 
 class ArticleHistory extends React.Component {
 
   constructor(props) {
     super(props);
     this.archiveUpdate = this.archiveUpdate.bind(this);
-    this.state = {archive_id: "", loading: true};
+    this.state = {archives: [], article: {}, loading: true, articleloading: false};
   }
 
   componentDidMount() {
-    this.setState({loading: false});
+    var that = this;
+    MatterwikiAPI.call("articles/"+this.props.params.articleId+"/history","GET",window.localStorage.getItem('userToken'))
+    .then(function(articles){
+        that.setState({archives: articles.data, loading: false});
+    })
+    .catch(function(err){
+        //Alert.error(err)
+    })
   }
 
 
   archiveUpdate(id) {
-    this.setState({archive_id: id});
+    this.setState({ articleloading: true });
+    var that = this;
+    MatterwikiAPI.call("archives/"+id,"GET",window.localStorage.getItem('userToken'))
+    .then(function(archive){
+        that.setState({ article: archive.data,
+          isHtml : archive.data.body && !archive.data.body_json ? true : false,
+          articleloading: false })
+    })
+    .catch(function(err){
+        //Alert.error(err)
+    })
   }
 
   render () {
-    if(this.state.loading)
-      return <Loader/>;
-    else
+     if(this.state.loading)
+       return <Loader/>;
+     else
       return(
         <div className="row">
           <div className="col-md-3">
             <label>Archives</label>
-          <BrowseArchives archiveChange={this.archiveUpdate} articleId={this.props.params.articleId} />
+          <BrowseArchives archives={this.state.archives} archiveChange={this.archiveUpdate} articleId={this.props.params.articleId} />
           </div>
           <div className="col-md-9">
             <label>View Article</label>
-          <SimpleArticle archiveId={this.state.archive_id} />
+          <SimpleArticle article={this.state.article} loading={this.state.articleloading} isHtml={this.state.isHtml}/>
           </div>
         </div>
             );

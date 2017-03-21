@@ -26,19 +26,6 @@ function API() {
 
       console.log("Sending a "+type+" request to "+endpoint);
 
-      // var query = "";
-      // // Convert JSON body into Form encoded
-      // if(body){
-      //   console.log("Getting into for");
-      //   for(var key in body) {
-      //       console.log("Inside for");
-      //       console.log(key);
-      //       console.log(query);
-      //       query += encodeURIComponent(key)+"="+encodeURIComponent(body[key]);
-      //   }
-      //   console.log("New Body = "+query);
-      // }
-
       request({
         url: endpoint, //URL to hit
         method: type, //Specify the method

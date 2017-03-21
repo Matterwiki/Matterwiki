@@ -26,8 +26,8 @@ class ViewArticle extends React.Component {
     MatterwikiAPI.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
     .then(function(article) {
         that.setState({
-          article: response.data,
-          isHtml : response.data.body && !response.data.body_json ? true : false,
+          article: article.data,
+          isHtml : article.data.body && !response.data.body_json ? true : false,
           loading: false
         });
       })
