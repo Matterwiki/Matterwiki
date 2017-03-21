@@ -85,7 +85,7 @@ module.exports = function(app) {
           code: '',
           data: {}
         })
-      } 
+      }
     })
   });
 
@@ -207,7 +207,7 @@ module.exports = function(app) {
       the error key in the returning object is a boolen which is false if there is no error and true otherwise
       */
 
-      Articles.forge({id: req.body.id})
+      Articles.forge({id: req.query.id})
       .destroy()
         .then(function() {
           res.json({

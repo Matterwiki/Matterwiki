@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js'
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -17,53 +18,28 @@ class ViewArticle extends React.Component {
   }
 
   componentDidMount(){
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
     var that = this;
-    fetch('/api/articles/'+this.props.params.articleId,myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({article: response.data})
-      }
-      that.setState({loading: false})
-    });
-
+    var id = this.props.params.articleId;
+    MatterwikiAPI.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
+    .then(function(article) {
+        that.setState({article: article.data, loading: false});
+      })
+      .catch(function(err){
+        //Alert.error(err);
+      });
   }
 
   deleteArticle(e) {
     e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+this.state.article.id
-               };
     var that = this;
-    fetch('/api/articles/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
+    MatterwikiAPI.call("articles?id="+this.state.article.id,"DELETE",window.localStorage.getItem('userToken'))
+    .then(function(article) {
         Alert.success("Article has been deleted");
         hashHistory.push('home');
-
-      }
-    });
+      })
+      .catch(function(err){
+        //Alert.error(err);
+      });
   }
 
   getRawMarkupBody() {
