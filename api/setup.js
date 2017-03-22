@@ -26,7 +26,7 @@ module.exports = function(app) {
         .save({
           id: 1,
           name: req.body.name,
-          email: req.body.email,
+          email: decodeURIComponent(req.body.email),
           password: hash,
           about: req.body.about
         })

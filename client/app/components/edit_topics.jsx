@@ -2,6 +2,7 @@ import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
 
 class EditTopic extends React.Component {
 
@@ -17,53 +18,30 @@ class EditTopic extends React.Component {
   }
 
   componentDidMount() {
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
     var that = this;
-    fetch('/api/topics/'+this.props.params.topicId,myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("topics/"+this.props.params.topicId,"GET",window.localStorage.getItem('userToken'))
+    .then(function(topic){
+        that.setState({name: topic.data.name, description: topic.data.description, loading: false})
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({name: response.data.name, description: response.data.description, loading: false})
-      }
+    .catch(function(err){
+        //Alert.error(err);
     });
   }
 
   editTopic(e) {
+    var that = this;
     var topic = {
       name: encodeURIComponent(this.refs.topic_name.value),
       description: encodeURIComponent(this.refs.topic_description.value),
       id: this.props.params.topicId
     };
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'PUT',
-               headers: myHeaders,
-               body: "name="+topic.name+"&description="+topic.description+"&id="+topic.id
-               };
-    var that = this;
-    fetch('/api/topics/',myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("topics","PUT",window.localStorage.getItem('userToken'),topic)
+    .then(function(topic){
+        Alert.success('Topic has been edited');
+        hashHistory.push('admin');
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          Alert.success('Topic has been edited');
-          hashHistory.push('admin');
-      }
+    .catch(function(err){
+        //Alert.error(err);
     });
   }
 

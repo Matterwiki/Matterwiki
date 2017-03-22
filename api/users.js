@@ -26,7 +26,7 @@ module.exports = function(app) {
       Users.forge()
         .save({
           name: req.body.name,
-          email: req.body.email,
+          email: decodeURIComponent(req.body.email),
           password: hash,
           about: req.body.about})
         .then(function (collection) {
@@ -102,7 +102,7 @@ module.exports = function(app) {
     if(req.body.password!=null){
       bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         Users.forge({id: req.body.id})
-          .save({name: req.body.name, email: req.body.email, password: hash, about: req.body.about})
+          .save({name: req.body.name, email: decodeURIComponent(req.body.email), password: hash, about: req.body.about})
           .then(function (collection) {
             res.json({
               error: {
@@ -133,7 +133,7 @@ module.exports = function(app) {
     }
     else {
       Users.forge({id: req.body.id})
-        .save({name: req.body.name, email: req.body.email, about: req.body.about})
+        .save({name: req.body.name, email: decodeURIComponent(req.body.email), about: req.body.about})
         .then(function (collection) {
           res.json({
             error: {
