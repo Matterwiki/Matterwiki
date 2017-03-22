@@ -21,7 +21,7 @@ class EditTopic extends React.Component {
     var that = this;
     MatterwikiAPI.call("topics/"+this.props.params.topicId,"GET",window.localStorage.getItem('userToken'))
     .then(function(topic){
-        that.setState({name: topic.data.name, description: topic.data.description, loading: false})
+        that.setState({name: decodeURIComponent(topic.data.name), description: decodeURIComponent(topic.data.description), loading: false})
     })
     .catch(function(err){
         //Alert.error(err);

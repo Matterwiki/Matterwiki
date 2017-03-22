@@ -197,8 +197,8 @@ class Admin extends React.Component {
                       <Link to={'topic/edit/'+topic.id} className="btn btn-default">Edit</Link>
                       <button className="btn btn-default" type="button" onClick={(e) => this.deleteTopic(topic.id,e)}>Delete</button>
                       </span>: ''}
-                      <h4 className="list-group-item-heading">{topic.name}</h4>
-                      <p className="list-group-item-text">{topic.description}</p>
+                      <h4 className="list-group-item-heading">{decodeURIComponent(topic.name)}</h4>
+                      <p className="list-group-item-text">{decodeURIComponent(topic.description)}</p>
                     </div>
                 ))}</div>
           </div>
@@ -213,8 +213,8 @@ class Admin extends React.Component {
                         <Link to={'user/edit/'+user.id} className="btn btn-default">Edit</Link>
                         <button className="btn btn-default" type="button"onClick={(e) => this.deleteUser(user.id,e)}>Delete</button>
                       </span> : ''}
-                      <h4 className="list-group-item-heading">{user.name}</h4>
-                      <p className="list-group-item-text">{user.about}</p>
+                      <h4 className="list-group-item-heading">{decodeURIComponent(user.name)}</h4>
+                      <p className="list-group-item-text">{decodeURIComponent(user.about)}</p>
                     </div>
                 ))}</div>
           </div>
