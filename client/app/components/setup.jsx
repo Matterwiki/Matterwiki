@@ -12,10 +12,10 @@ class Setup extends React.Component {
 
   handleSignUp() {
     var user = {
-      name: this.refs.user_name.value,
-      about: this.refs.user_about.value,
-      email: this.refs.user_email.value,
-      password: this.refs.user_password.value
+      name: encodeURIComponent(this.refs.user_name.value),
+      about: encodeURIComponent(this.refs.user_about.value),
+      email: encodeURIComponent(this.refs.user_email.value),
+      password: encodeURIComponent(this.refs.user_password.value)
     };
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded"
