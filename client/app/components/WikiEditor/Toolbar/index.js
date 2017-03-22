@@ -1,10 +1,10 @@
 import React from 'react';
-import InlineControls from './InlineControls.jsx';
-import BlockControls from './BlockControls.jsx';
-import LevelControls from './LevelControls.jsx';
-import LinkControl from './LinkControl.jsx';
-import HistoryControls from './HistoryControls.jsx';
-import ImageControl from './ImageControl.jsx';
+import InlineControls from './InlineControls.js';
+import BlockControls from './BlockControls.js';
+import LevelControls from './LevelControls.js';
+import LinkControl from './LinkControl.js';
+import HistoryControls from './HistoryControls.js';
+import ImageControl from './ImageControl.js';
 
 const Toolbar = (props) => {
 	// TODO perhaps group LinkControl and InlineControl as `EntityControls`?
@@ -21,6 +21,3 @@ const Toolbar = (props) => {
 }
 
 export default Toolbar;
-
-
-
