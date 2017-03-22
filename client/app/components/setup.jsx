@@ -3,6 +3,8 @@ import {hashHistory} from 'react-router';
 import Loader from './loader.jsx';
 import Alert from 'react-s-alert';
 
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+
 class Setup extends React.Component {
 
   constructor(props) {
@@ -12,31 +14,20 @@ class Setup extends React.Component {
 
   handleSignUp() {
     var user = {
-      name: this.refs.user_name.value,
-      about: this.refs.user_about.value,
-      email: this.refs.user_email.value,
-      password: this.refs.user_password.value
+      name: encodeURIComponent(this.refs.user_name.value),
+      about: encodeURIComponent(this.refs.user_about.value),
+      email: encodeURIComponent(this.refs.user_email.value),
+      password: encodeURIComponent(this.refs.user_password.value)
     };
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded"
-    });
-    var myInit = { method: 'POST',
-               headers: myHeaders,
-               body: "name="+user.name+"&about="+user.about+"&email="+user.email+"&password="+user.password
-               };
     var that = this;
-    fetch('/setup',myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("setup","POST","",user)
+    .then(function(user){
+      Alert.success('Admin user generated');
+      hashHistory.push('login');
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          Alert.success('Admin user generated');
-          hashHistory.push('login');
-      }
-    });
+    .catch(function(err){
+      Alert.error(err);
+    })
   }
 
 

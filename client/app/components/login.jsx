@@ -2,6 +2,8 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import Alert from 'react-s-alert';
 
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -16,30 +18,22 @@ class Login extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
-    var email = document.getElementById("inputEmail").value;
-    var password = document.getElementById("inputPassword").value;
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded"
-    });
-    var myInit = { method: 'POST',
-               headers: myHeaders,
-               body: "email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password)
-              };
     var that = this;
-    fetch('/api/authenticate',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        window.localStorage.setItem('userToken',response.data.token);
-        window.localStorage.setItem('userId',response.data.user.id);
-        window.localStorage.setItem('userEmail',response.data.user.token);
+    var auth = {
+      email: encodeURIComponent(this.refs.email.value),
+      password: encodeURIComponent(this.refs.password.value)
+    }
+    console.log(auth);
+    MatterwikiAPI.call("authenticate","POST","",auth)
+    .then(function(user){
+        window.localStorage.setItem('userToken',user.data.token);
+        window.localStorage.setItem('userId',user.data.user.id);
+        window.localStorage.setItem('userEmail',user.data.user.token);
         hashHistory.push('home');
         Alert.success('You are now logged in');
-      }
+    })
+    .catch(function(err){
+        Alert.error(err);
     });
   }
 
@@ -49,10 +43,10 @@ class Login extends React.Component {
         <h3>Login</h3>
           <form>
         <div className="col-sm-12 form-group">
-          <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
+          <input type="email" className="form-control" id="inputEmail" placeholder="Email" ref="email" />
         </div>
         <div className="col-sm-12 form-group">
-          <input type="password" className="form-control" id="inputPassword" placeholder="Password" />
+          <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref="password" />
         </div>
         <div className="col-sm-12 form-group">
           <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>

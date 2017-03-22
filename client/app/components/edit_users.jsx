@@ -22,7 +22,7 @@ class EditUser extends React.Component {
     var that = this;
     MatterwikiAPI.call("users/"+this.props.params.userId,"GET",window.localStorage.getItem('userToken'))
     .then(function(user){
-        that.setState({name: user.data.name, about: user.data.about, email: user.data.email, loading: false})
+        that.setState({name: user.data.name, about: user.data.about, email: decodeURIComponent(user.data.email), loading: false})
     })
     .catch(function(err){
         //Alert.error(err);
