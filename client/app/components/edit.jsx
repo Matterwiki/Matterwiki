@@ -5,6 +5,8 @@ import Loader from './loader.jsx';
 
 import WikiEditor from './WikiEditor/index.jsx';
 
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+
 class EditArticle extends React.Component {
   constructor(props) {
     super(props);
@@ -19,38 +21,27 @@ class EditArticle extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    var that = this;
     // get the rawContent from refs
     const rawContent = this.refs.editor.getRawContent();
     this.setState({body : rawContent});
-
-    var body = JSON.stringify(rawContent);
-    var title = this.refs.title.value;
-    var topicId = this.refs.topic.value;
-    var what_changed = this.refs.what_changed.value;
-    if(body && title && topicId && what_changed) {
-          var myHeaders = new Headers({
-              "Content-Type": "application/x-www-form-urlencoded",
-              "x-access-token": window.localStorage.getItem('userToken')
-          });
-          var myInit = { 
-            method: 'PUT',
-            headers: myHeaders,
-            body: "id="+this.props.params.articleId+"&title="+encodeURIComponent(title)+"&body="+encodeURIComponent(body)+"&topic_id="+topicId+"&user_id="+window.localStorage.getItem("userId")+"&what_changed="+what_changed
-          };
-          var that = this;
-          fetch('/api/articles/',myInit)
-          .then(function(response) {
-            return response.json();
+    var article = {
+        id: this.props.params.articleId,
+        body: JSON.stringify(rawContent),
+        title: encodeURIComponent(this.refs.title.value),
+        topic_id: encodeURIComponent(this.refs.topic.value),
+        user_id: window.localStorage.getItem("userId"),
+        what_changed: encodeURIComponent(this.refs.what_changed.value)
+    }
+    if(article.body && article.title && article.topic_id && article.what_changed) {
+          MatterwikiAPI.call("articles","PUT",window.localStorage.getItem('userToken'),article)
+          .then(function(article){
+              Alert.success("Article has been successfully saved");
+              hashHistory.push('article/'+that.props.params.articleId);
           })
-          .then(function(response) {
-            if(response.error.error)
+          .catch(function(err){
               Alert.error(response.error.message);
-            else {
-                Alert.success("Article has been successfully saved");
-                hashHistory.push('article/'+that.props.params.articleId);
-            }
-          });
+          })
     }
     else {
       Alert.error("Article Body, Title, Topic and Change Info is required.");
@@ -59,57 +50,32 @@ class EditArticle extends React.Component {
 
 
   componentDidMount() {
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = {
-      method: 'GET',
-      headers: myHeaders,
-    };
     var that = this;
-    fetch('/api/articles/'+this.props.params.articleId,myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        // Some hacks to maintain backward compatibility
-        // TODO Remove this after a few releases
+    MatterwikiAPI.call("articles/"+this.props.params.articleId,"GET",window.localStorage.getItem('userToken'))
+    .then(function(articles){
+      MatterwikiAPI.call("topics","GET",window.localStorage.getItem('userToken'))
+      .then(function(topics){
 
-        that.setState({ body: JSON.parse(response.data.body_json), title: response.data.title, topic_id: response.data.topic_id})
+      // Some hacks to maintain backward compatibility
+      // TODO Remove this after a few releases
 
-        if(response.data.body && !response.data.body_json) {
-          // a flag to check if there is still someone stuck using HTML Markup for the Wiki Articles
-          that.setState({
-            isHtml : true,
-            body : response.data.body
-          })
-        }
+      that.setState({ body: JSON.parse(articles.data.body_json), title: articles.data.title, topic_id: articles.data.topic_id, topics: topics.data, loading: false})
+
+      if(articles.data.body && !articles.data.body_json) {
+        // a flag to check if there is still someone stuck using HTML Markup for the Wiki Articles
+        that.setState({
+          isHtml : true,
+          body : articles.data.body,
+          loading: false
+        })
       }
-      that.setState({loading: false});
-    });
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
-    var that = this;
-    fetch('/api/topics',myInit)
-    .then(function(response) {
-      return response.json();
+    }).catch(function(err){
+        Alert.error(err)
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({topics: response.data})
-      }
-    });
+    })
+    .catch(function(err){
+        Alert.error(err);
+    })
   }
 
   render() {
