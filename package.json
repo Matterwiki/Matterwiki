@@ -1,6 +1,6 @@
 {
   "name": "Matterwiki",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
