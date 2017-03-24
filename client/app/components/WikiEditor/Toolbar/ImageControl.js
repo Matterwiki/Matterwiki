@@ -10,10 +10,10 @@ class ImageControl extends Component {
     _onImageChange(e) {
         e.preventDefault();
 
-        const { handleImageUpload } = this.props;
+        const { onUploadImage } = this.props;
         const file = e.target.files[0];
 
-        handleImageUpload(file);
+        onUploadImage(file);
     }
 
     render() {

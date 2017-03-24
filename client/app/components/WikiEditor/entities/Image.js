@@ -1,8 +1,11 @@
-const Image = (props) => {
-  const {src, alt} = props.contentState.getEntity(props.entityKey).getData();
-  return (
-    <img src={src} alt={alt} />
-  );
-}
+import React from "react";
+
+const Image = props => {
+    const { src, alt } = props.contentState
+        .getEntity(props.block.getEntityAt(0))
+        .getData();
+    const imgStyle = { width: "100%" };
+    return <img src={src} alt={alt} style={imgStyle} />;
+};
 
 export default Image;

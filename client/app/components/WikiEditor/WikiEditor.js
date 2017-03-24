@@ -8,7 +8,8 @@ import {
   convertToRaw,
   convertFromRaw,
   convertFromHTML,
-  ContentState
+  ContentState,
+  AtomicBlockUtils
 } from "draft-js";
 
 import { changeDepth, getEntityRange } from "draftjs-utils";
@@ -30,22 +31,29 @@ const styleMap = {
   }
 };
 
+// TODO make this more adaptable to different media, once we allow video uploads and other stuff
+// This example will come in handy then: https://github.com/facebook/draft-js/tree/master/examples/draft-0-10-0/media
+const blockRendererFn = block => {
+    if (block.getType() === "atomic") {
+      return {
+        component: Image,
+        editable: false
+      }
+    }
+};
+
+
 class WikiEditor extends Component {
   constructor(...args) {
     super(...args);
 
     // "customize" the getEntities to match entityType
     const getLinkEntities = getEntities("LINK");
-    const getImageEntities = getEntities("IMAGE");
 
     const decorator = new CompositeDecorator([
       {
         strategy: getLinkEntities,
         component: Link
-      },
-      {
-        strategy: getImageEntities,
-        component: Image
       }
     ]);
 
@@ -76,6 +84,9 @@ class WikiEditor extends Component {
     // `LinkControl`
     this.onAddLink = linkData => this._onAddLink(linkData);
     this.onRemoveLink = () => this._onRemoveLink();
+
+    // `ImageControl`
+    this.onUploadImage = file => this._onUploadImage(file);
 
     // `BlockControls`
     this.toggleBlockType = blockType => this._toggleBlockType(blockType);
@@ -191,8 +202,51 @@ class WikiEditor extends Component {
     }
   }
 
-  _onAddImage() {
-    
+  _onUploadImage(file) {
+    // upload image
+
+    let data = new FormData();
+    data.append("file", file);
+
+    fetch(`/api/assets`, {
+      method: "POST",
+      headers: {
+        "x-access-token": window.localStorage.getItem("userToken")
+      },
+      body: data
+    })
+      .then(response => response.json())
+      .then(data => {
+        // create entity
+        const { editorState } = this.state;
+        const { path, filename } = data;
+        const contentState = editorState.getCurrentContent();
+
+        // create the entity. returns a new ContentState object that must be pushed back into the editor
+        let contentStateWithEntity = contentState.createEntity(
+          "IMAGE",
+          "IMMUTABLE",
+          {
+            src: path,
+            alt: filename
+          }
+        );
+
+        const entityKey = contentState.getLastCreatedEntityKey();
+
+        //  create a new EditorState with the entity
+        const editorStateWithEntity = EditorState.set(editorState, {
+          currentContent: contentStateWithEntity
+        });
+
+        const editorStateWithBlock = AtomicBlockUtils.insertAtomicBlock(
+          editorStateWithEntity,
+          entityKey,
+          " "
+        );
+
+        this.onChange(editorStateWithBlock);
+      });
   }
 
   _toggleBlockType(blockType) {
@@ -238,6 +292,16 @@ class WikiEditor extends Component {
   }
 
   render() {
+    const {
+      toggleBlockType,
+      toggleInlineStyle,
+      onAddLink,
+      onRemoveLink,
+      onUploadImage,
+      toggleLevelType,
+      onUndo,
+      onRedo
+    } = this;
     const { editorState, currentEntityKey } = this.state;
     const contentState = editorState.getCurrentContent();
     const currentEntity = currentEntityKey
@@ -250,19 +314,21 @@ class WikiEditor extends Component {
       editorState: editorState,
       onChange: this.onChange,
       onTab: this.onTab,
+      blockRendererFn,
       handleKeyCommand: this.handleKeyCommand,
       placeholder: "Start writing here...."
     };
     const toolbarProps = {
       editorState,
       currentEntity,
-      toggleBlockType: this.toggleBlockType,
-      toggleInlineStyle: this.toggleInlineStyle,
-      onAddLink: this.onAddLink,
-      onRemoveLink: this.onRemoveLink,
-      toggleLevelType: this.toggleLevelType,
-      onUndo: this.onUndo,
-      onRedo: this.onRedo
+      toggleBlockType,
+      toggleInlineStyle,
+      onAddLink,
+      onRemoveLink,
+      onUploadImage,
+      toggleLevelType,
+      onUndo,
+      onRedo
     };
 
     let ToolbarComponent = <Toolbar {...toolbarProps} />;
