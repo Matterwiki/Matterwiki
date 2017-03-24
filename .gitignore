@@ -38,3 +38,5 @@ jspm_packages
 
 client/public
 db/matterwiki.sqlite
+
+wiki_assets/
