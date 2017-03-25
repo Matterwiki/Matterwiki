@@ -4,6 +4,8 @@ import Alert from 'react-s-alert';
 import Loader from './loader.jsx';
 import LogoUpload from './logo_upload.jsx';
 
+import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+
 class Admin extends React.Component {
 
   constructor(props) {
@@ -12,136 +14,80 @@ class Admin extends React.Component {
     this.addTopic = this.addTopic.bind(this);
     this.deleteTopic = this.deleteTopic.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-    this.state = {loading_topics: true, loading_users: true, users: [], topics: [], error: ""}
+    this.state = {loading: true, users: [], topics: [], error: ""}
   }
 
   componentDidMount() {
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
     var that = this;
-    fetch('/api/topics',myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("topics","GET",window.localStorage.getItem('userToken'))
+    .then(function(topics){
+      MatterwikiAPI.call("users","GET",window.localStorage.getItem('userToken'))
+      .then(function(users){
+        that.setState({topics: topics.data, users: users.data, loading: false})
+      }).catch(function(err){
+        //Alert.error(err);
+      }).catch(function(err){
+        //Alert.error(err);
+      })
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({topics: response.data, loading_topics: false})
-      }
-    });
-
-    fetch('/api/users',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({users: response.data, loading_users: false})
-      }
-    });
-
   }
 
   addUser(e) {
+    e.preventDefault();
     var user = {
       name: encodeURIComponent(this.refs.user_name.value),
       about: encodeURIComponent(this.refs.user_about.value),
       email: encodeURIComponent(this.refs.user_email.value),
       password: encodeURIComponent(this.refs.user_password.value)
     };
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'POST',
-               headers: myHeaders,
-               body: "name="+user.name+"&about="+user.about+"&email="+user.email+"&password="+user.password
-               };
     var that = this;
-    fetch('/api/users/',myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("users","POST",window.localStorage.getItem("userToken"),user)
+    .then(function(user){
+        $('#addUser').modal('hide');
+        var users = that.state.users;
+        users.push(user.data);
+        that.setState({users: users});
+        Alert.success('User has been added');
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          $('#addUser').modal('hide');
-          var users = that.state.users;
-          users.push(response.data);
-          that.setState({users: users});
-          Alert.success('User has been added');
-      }
-    });
+    .catch(function(err){
+      //Alert.error(err);
+    })
   }
 
   addTopic(e) {
+    e.preventDefault();
     var topic = {
       name: encodeURIComponent(this.refs.topic_name.value),
       description: encodeURIComponent(this.refs.topic_description.value)
     };
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'POST',
-               headers: myHeaders,
-               body: "name="+topic.name+"&description="+topic.description
-               };
     var that = this;
-    fetch('/api/topics/',myInit)
-    .then(function(response) {
-      return response.json();
+    MatterwikiAPI.call("topics","POST",window.localStorage.getItem("userToken"),topic)
+    .then(function(topic){
+      $('#addTopic').modal('hide');
+      var topics = that.state.topics;
+      topics.push(topic.data);
+      that.setState({topics: topics});
+      Alert.success('Topic has been added');
     })
-    .then(function(response) {
-      if(response.error.error) {
-         $('#addTopic').modal('hide');
-         Alert.error(response.error.message);
-      }
-      else {
-          $('#addTopic').modal('hide');
-          var topics = that.state.topics;
-          topics.push(response.data);
-          that.setState({topics: topics});
-          Alert.success('Topic has been added');
-      }
+    .catch(function(err){
+      $('#addTopic').modal('hide');
+      //Alert.error(err);
     });
   }
 
   deleteTopic(id,e) {
     e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+id
-               };
     var that = this;
-    fetch('/api/topics/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        topics = that.state.topics
-        var topics = $.grep(topics, function(e){
-           return e.id != id;
-        });
-        that.setState({topics: topics});
-        Alert.success('Topic has been deleted');
-      }
+    MatterwikiAPI.call("topics?id="+id,"DELETE",window.localStorage.getItem('userToken'))
+    .then(function(topic){
+      topics = that.state.topics
+      var topics = $.grep(topics, function(e){
+         return e.id != id;
+      });
+      that.setState({topics: topics});
+      Alert.success('Topic has been deleted');
+    }).catch(function(err){
+      //Alert.error(err);
     });
   }
 
@@ -150,37 +96,23 @@ class Admin extends React.Component {
     e.preventDefault();
     var del = confirm("Deleting the user will move all of his/her articles to the Admin. Are you sure?");
     if(del==true) {
-        var myHeaders = new Headers({
-            "Content-Type": "application/x-www-form-urlencoded",
-            "x-access-token": window.localStorage.getItem('userToken')
-        });
-        var myInit = { method: 'DELETE',
-                   headers: myHeaders,
-                   body: "id="+id
-                   };
         var that = this;
-        fetch('/api/users/',myInit)
-        .then(function(response) {
-          return response.json();
+        MatterwikiAPI.call("users?id="+id,"DELETE",window.localStorage.getItem("userToken"))
+        .then(function(user){
+          users = that.state.users
+          var users = $.grep(users, function(e){
+             return e.id != id;
+          });
+          that.setState({users: users});
+          Alert.success('User has been deleted');
         })
-        .then(function(response) {
-          if(response.error.error)
-            Alert.error(response.error.message);
-          else {
-            users = that.state.users
-            var users = $.grep(users, function(e){
-               return e.id != id;
-            });
-            that.setState({users: users});
-            Alert.success('User has been deleted');
-          }
-        });
     }
   }
 
 
   render () {
-    if(this.state.loading_users && this.state.loading_users)
+     console.log(this.state);
+    if(this.state.loading)
       return <Loader />
     else
         return(
