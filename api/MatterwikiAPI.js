@@ -6,7 +6,6 @@ promise with the response.
 var Promise = require("bluebird");
 var os = require("os");
 var hostname = os.hostname();
-import unirest from "unirest";
 import request from "request";
 
 const MatterwikiAPI = new API()
@@ -19,18 +18,12 @@ function API() {
       // Create the endpoint URL
       endpoint = "http://"+hostname+":"+(process.env.PORT||5000).toString()+"/api/"+endpoint;
 
-      var headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": token
-      };
-
       console.log("Sending a "+type+" request to "+endpoint);
 
       request({
-        url: endpoint, //URL to hit
-        method: type, //Specify the method
-        headers: { //We can define headers too
-            'Content-Type': 'application/json',
+        url: endpoint,
+        method: type,
+        headers: {
             'x-access-token': token
         },
         body: body,
