@@ -79,12 +79,12 @@ class ViewArticle extends React.Component {
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">
             <div className="sidebar-title">Filed under</div>
-            <h2 className="color-text"><b>{this.state.article.topic.name}</b></h2>
+            <h2 className="color-text"><b>{decodeURIComponent(this.state.article.topic.name)}</b></h2>
             </div>
             <div className="sidebar-block">
             <div className="sidebar-title">Last Updated By</div>
-            <h3><b>{this.state.article.user.name}</b></h3>
-            <p>{this.state.article.user.about}</p>
+            <h3><b>{decodeURIComponent(this.state.article.user.name)}</b></h3>
+            <p>{decodeURIComponent(this.state.article.user.about)}</p>
             </div>
             <div className="sidebar-block">
             <div className="sidebar-title">What Changed in last edit</div>
