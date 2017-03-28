@@ -1,6 +1,19 @@
 <img src="https://github.com/Matterwiki/matterwiki.github.io/blob/master/assets/logo-header.png?raw=true" />
 
-<hr/>
+<pre>
+<b>Warning</b>
+
+Expect some things to be broken as we're actively working on a stable release.
+Although the master branch is expected to work fine,
+we'd suggest you to wait until everything is completed.
+
+If you'd like to help,
+drop in on any of the issues or pull requests,
+or email na[dot]nishantarora[at]gmail[dot]com.
+
+You can also get look at the next version on the v0.3.0 branch
+</pre>
+
 
 ## What is a wiki?
 A website or database developed collaboratively by a community of users, allowing any user to add and edit content. Example: Wikipedia
