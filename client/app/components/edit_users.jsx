@@ -43,9 +43,9 @@ class EditUser extends React.Component {
 
   createQueryStringFromUserMap(userMap) {
     const result = [];
-    for (let user in userMap) {
-      if (userMap.hasOwnProperty(user) && userMap[user].length > 0) {
-        result.push(`${user}=${encodeURIComponent(userMap[user])}`);
+    for (let key in userMap) {
+      if (userMap.hasOwnProperty(key) && userMap[key].length > 0) {
+        result.push(`${key}=${encodeURIComponent(userMap[key])}`);
       }
     }
     return result.join('&');
