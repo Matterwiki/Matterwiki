@@ -44,7 +44,8 @@ class EditUser extends React.Component {
   createQueryStringFromUserMap(userMap) {
     const result = [];
     for (let key in userMap) {
-      if (userMap.hasOwnProperty(key) && userMap[key].length > 0) {
+      // Make sure there is a value for all fields except "about" which should be able to be cleared
+      if (userMap.hasOwnProperty(key) && ( userMap[key].length > 0 || key === 'about' )) {
         result.push(`${key}=${encodeURIComponent(userMap[key])}`);
       }
     }
