@@ -19,8 +19,8 @@ class AddTopic extends React.Component {
   handleChange() {
 
     this.setState({
-      name: encodeURIComponent(this.refs.topic_name.value),
-      description: encodeURIComponent(this.refs.topic_description.value)
+      name: this.refs.topic_name.value,
+      description: this.refs.topic_description.value
     });
 
   }
@@ -30,11 +30,13 @@ class AddTopic extends React.Component {
     e.preventDefault();
 
     var topic = {
-      name: this.state.name,
-      description: this.state.description
+      name: encodeURIComponent(this.state.name),
+      description: encodeURIComponent(this.state.description)
     };
 
     this.props.addTopic(topic);
+
+    this.setState({ name: "", description: "" });
 
   }
 
