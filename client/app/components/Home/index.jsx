@@ -2,9 +2,9 @@ import React from 'react';
 import BrowseTopics from './browse_topics.jsx';
 import BrowseArticles from './browse_articles.jsx';
 import {hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import Alert from 'react-s-alert';
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class Home extends React.Component {
 
@@ -17,7 +17,7 @@ class Home extends React.Component {
   handleUpdate(id) {
     var that = this;
     this.setState({articlesloading: true});
-    MatterwikiAPI.call("topic/"+id+"/articles","GET",window.localStorage.getItem('userToken'))
+    API.call("topic/"+id+"/articles","GET",window.localStorage.getItem('userToken'))
     .then(function(articles){
       console.log("Response from topic/id/articles");
       console.log(articles);
@@ -28,9 +28,9 @@ class Home extends React.Component {
   componentDidMount() {
     var that = this;
     this.setState({loading: false});
-    MatterwikiAPI.call("articles","GET",window.localStorage.getItem('userToken'))
+    API.call("articles","GET",window.localStorage.getItem('userToken'))
     .then(function(articles){
-      MatterwikiAPI.call("topics","GET",window.localStorage.getItem('userToken'))
+      API.call("topics","GET",window.localStorage.getItem('userToken'))
       .then(function(topics){
         that.setState({articles: articles.data, topics: topics.data, loading: false})
       }).catch(function(err){

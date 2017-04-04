@@ -1,11 +1,11 @@
 import React from 'react';
 import {Link, hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import Alert from 'react-s-alert';
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js'
+import API from 'api/wrapper.js';
 
 
-import WikiEditor from './WikiEditor/index.jsx';
+import WikiEditor from 'WikiEditor/index.jsx';
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class ViewArticle extends React.Component {
   componentDidMount(){
     var that = this;
     var id = this.props.params.articleId;
-    MatterwikiAPI.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
+    API.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
     .then(function(article) {
         that.setState({
           article: article.data,
@@ -39,7 +39,7 @@ class ViewArticle extends React.Component {
   deleteArticle(e) {
     e.preventDefault();
     var that = this;
-    MatterwikiAPI.call("articles?id="+this.state.article.id,"DELETE",window.localStorage.getItem('userToken'))
+    API.call("articles?id="+this.state.article.id,"DELETE",window.localStorage.getItem('userToken'))
     .then(function(article) {
         Alert.success("Article has been deleted");
         hashHistory.push('home');

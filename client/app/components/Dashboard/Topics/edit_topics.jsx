@@ -1,8 +1,8 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from './loader.jsx';
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import Loader from 'Loader/loader.jsx';
+import API from 'api/wrapper.js';
 
 class EditTopic extends React.Component {
 
@@ -19,7 +19,7 @@ class EditTopic extends React.Component {
 
   componentDidMount() {
     var that = this;
-    MatterwikiAPI.call("topics/"+this.props.params.topicId,"GET",window.localStorage.getItem('userToken'))
+    API.call("topics/"+this.props.params.topicId,"GET",window.localStorage.getItem('userToken'))
     .then(function(topic){
         that.setState({name: decodeURIComponent(topic.data.name), description: decodeURIComponent(topic.data.description), loading: false})
     })
@@ -35,7 +35,7 @@ class EditTopic extends React.Component {
       description: encodeURIComponent(this.refs.topic_description.value),
       id: this.props.params.topicId
     };
-    MatterwikiAPI.call("topics","PUT",window.localStorage.getItem('userToken'),topic)
+    API.call("topics","PUT",window.localStorage.getItem('userToken'),topic)
     .then(function(topic){
         Alert.success('Topic has been edited');
         hashHistory.push('admin');

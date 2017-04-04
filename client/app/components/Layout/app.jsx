@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './login.jsx';
-import SearchForm from './searchform.jsx';
+import Login from 'Authentication/login.jsx';
+import SearchForm from './Search/searchform.jsx';
 import {Link, hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 

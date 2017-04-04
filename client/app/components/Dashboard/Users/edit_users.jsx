@@ -1,9 +1,9 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class EditUser extends React.Component {
 
@@ -20,7 +20,7 @@ class EditUser extends React.Component {
 
   componentDidMount() {
     var that = this;
-    MatterwikiAPI.call("users/"+this.props.params.userId,"GET",window.localStorage.getItem('userToken'))
+    API.call("users/"+this.props.params.userId,"GET",window.localStorage.getItem('userToken'))
     .then(function(user){
         that.setState({
           name: decodeURIComponent(user.data.name),
@@ -42,7 +42,7 @@ class EditUser extends React.Component {
       password: encodeURIComponent(this.refs.user_password.value),
       id: encodeURIComponent(this.props.params.userId)
     };
-    MatterwikiAPI.call("users","PUT",window.localStorage.getItem('userToken'),user)
+    API.call("users","PUT",window.localStorage.getItem('userToken'),user)
     .then(function(user){
         Alert.success('User has been edited');
         hashHistory.push('admin');

@@ -2,7 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import Alert from 'react-s-alert';
 
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Login extends React.Component {
       password: encodeURIComponent(this.refs.password.value)
     }
     console.log(auth);
-    MatterwikiAPI.call("authenticate","POST","",auth)
+    API.call("authenticate","POST","",auth)
     .then(function(user){
         window.localStorage.setItem('userToken',user.data.token);
         window.localStorage.setItem('userId',user.data.user.id);

@@ -1,9 +1,9 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import Alert from 'react-s-alert';
 
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class Setup extends React.Component {
 
@@ -20,7 +20,7 @@ class Setup extends React.Component {
       password: encodeURIComponent(this.refs.user_password.value)
     };
     var that = this;
-    MatterwikiAPI.call("setup","POST","",user)
+    API.call("setup","POST","",user)
     .then(function(user){
       Alert.success('Admin user generated');
       hashHistory.push('login');

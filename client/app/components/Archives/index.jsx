@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import BrowseArchives from './browse_archives.jsx';
 import SimpleArticle from './simple_article.jsx';
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class ArticleHistory extends React.Component {
 
@@ -15,7 +15,7 @@ class ArticleHistory extends React.Component {
 
   componentDidMount() {
     var that = this;
-    MatterwikiAPI.call("articles/"+this.props.params.articleId+"/history","GET",window.localStorage.getItem('userToken'))
+    API.call("articles/"+this.props.params.articleId+"/history","GET",window.localStorage.getItem('userToken'))
     .then(function(articles){
         that.setState({archives: articles.data, loading: false});
     })
@@ -28,7 +28,7 @@ class ArticleHistory extends React.Component {
   archiveUpdate(id) {
     this.setState({ articleloading: true });
     var that = this;
-    MatterwikiAPI.call("archives/"+id,"GET",window.localStorage.getItem('userToken'))
+    API.call("archives/"+id,"GET",window.localStorage.getItem('userToken'))
     .then(function(archive){
         that.setState({ article: archive.data,
           isHtml : archive.data.body && !archive.data.body_json ? true : false,

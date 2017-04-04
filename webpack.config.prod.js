@@ -5,10 +5,10 @@ const BUILD_DIR = path.resolve(__dirname, 'client/public');
 const APP_DIR = path.resolve(__dirname, 'client/app');
 
 module.exports = {
-  entry: [    
+  entry: [
     // polyfill for fetch API (Safari)
     // TODO a better way to handle this, maybe?
-    'whatwg-fetch', 
+    'whatwg-fetch',
     // entry point
     APP_DIR + '/index.jsx'
   ],
@@ -41,5 +41,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
-  ]
+  ],
+
+  resolve: {
+    modules: [
+      path.resolve('./'),
+      path.resolve('./client/app/components'),
+      path.resolve('./node_modules')
+    ]
+  },
 };

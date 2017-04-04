@@ -1,11 +1,11 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 
-import WikiEditor from './WikiEditor/index.jsx';
+import WikiEditor from 'WikiEditor/index.jsx';
 
-import MatterwikiAPI from '../../../api/MatterwikiAPI.js';
+import API from 'api/wrapper.js';
 
 class EditArticle extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class EditArticle extends React.Component {
         what_changed: encodeURIComponent(this.refs.what_changed.value)
     }
     if(article.body && article.title && article.topic_id && article.what_changed) {
-          MatterwikiAPI.call("articles","PUT",window.localStorage.getItem('userToken'),article)
+          API.call("articles","PUT",window.localStorage.getItem('userToken'),article)
           .then(function(article){
               Alert.success("Article has been successfully saved");
               hashHistory.push('article/'+that.props.params.articleId);
@@ -51,9 +51,9 @@ class EditArticle extends React.Component {
 
   componentDidMount() {
     var that = this;
-    MatterwikiAPI.call("articles/"+this.props.params.articleId,"GET",window.localStorage.getItem('userToken'))
+    API.call("articles/"+this.props.params.articleId,"GET",window.localStorage.getItem('userToken'))
     .then(function(articles){
-      MatterwikiAPI.call("topics","GET",window.localStorage.getItem('userToken'))
+      API.call("topics","GET",window.localStorage.getItem('userToken'))
       .then(function(topics){
 
       // Some hacks to maintain backward compatibility

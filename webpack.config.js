@@ -65,6 +65,14 @@ module.exports = {
     ]
   },
 
+  resolve: {
+    modules: [
+      path.resolve('./'),
+      path.resolve('./client/app/components'),
+      path.resolve('./node_modules')
+    ]
+  },
+
   node: {
     fs: 'empty',
     net: 'empty',
