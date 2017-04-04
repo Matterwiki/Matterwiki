@@ -587,3 +587,15 @@ border: 1px solid #efefef;
   padding: 0;
   cursor: default;
 }
+
+.nav-tabs li:hover{
+  cursor: pointer;
+}
+
+.admin-nav {
+  margin-bottom: 20px;
+}
+
+.list-group .btn {
+  font-size: 10px;
+}

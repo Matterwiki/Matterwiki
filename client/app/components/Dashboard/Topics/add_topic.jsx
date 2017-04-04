@@ -47,30 +47,31 @@ class AddTopic extends React.Component {
         <div>
           <div className="row">
             <div className="col-md-12 col-sd-12">
-              <h1><b>Add Topic</b></h1>
-              <form>
-                <div className="col-sm-12 form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    ref="topic_name"
-                    id="inputTopicName"
-                    placeholder="Name"
-                    value={this.state.name}
-                    onChange={this.handleChange} />
+              <form className="tabform">
+                <div className="row">
+                  <div className="col-sm-12 form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      ref="topic_name"
+                      id="inputTopicName"
+                      placeholder="Name"
+                      value={this.state.name}
+                      onChange={this.handleChange} />
+                  </div>
+                  <div className="col-sm-12 form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      ref="topic_description"
+                      id="inputTopicAbout"
+                      placeholder="Description"
+                      value={this.state.description}
+                      onChange={this.handleChange}/>
+                  </div>
                 </div>
                 <div className="col-sm-12 form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    ref="topic_description"
-                    id="inputTopicAbout"
-                    placeholder="Description"
-                    value={this.state.description}
-                    onChange={this.handleChange}/>
-                </div>
-                <div className="col-sm-12 form-group">
-                  <button onClick={this.addTopic} className="btn btn-default btn-block btn-lg">Add Topic</button>
+                  <button onClick={this.addTopic} className="btn btn-default btn-block ">Add Topic</button>
                 </div>
               </form>
             </div>

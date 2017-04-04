@@ -64,7 +64,7 @@ class EditTopic extends React.Component {
                             <input type="text" className="form-control" ref="topic_description" id="inputTopicAbout" placeholder="Description" value={this.state.description} onChange={this.handleChange}/>
                           </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.editTopic} className="btn btn-default btn-block btn-lg">Update Topic</button>
+                        <button onClick={this.editTopic} className="btn btn-default btn-block ">Update Topic</button>
                       </div>
                     </form>
                     </div>

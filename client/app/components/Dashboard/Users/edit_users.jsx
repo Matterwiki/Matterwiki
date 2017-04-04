@@ -77,7 +77,7 @@ class EditUser extends React.Component {
                             <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
                           </div>
                       <div className="col-sm-12 form-group">
-                        <button onClick={this.editUser} className="btn btn-default btn-block btn-lg">Update User</button>
+                        <button onClick={this.editUser} className="btn btn-default btn-block ">Update User</button>
                       </div>
                     </form>
                     </div>

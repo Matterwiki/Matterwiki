@@ -59,7 +59,7 @@ class Setup extends React.Component {
         <input type="password" className="form-control" ref="user_password" id="inputUserPassword" placeholder="Password" />
       </div>
       <div className="col-sm-12 form-group">
-        <button onClick={this.handleSignUp} className="btn btn-default btn-block btn-lg">Setup My Account</button>
+        <button onClick={this.handleSignUp} className="btn btn-default btn-block ">Setup My Account</button>
       </div>
     </form>
       </div>

@@ -125,7 +125,7 @@ class EditArticle extends React.Component {
 
         <div className="row">
           <div className="col-md-12">
-            <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Update Article</button>
+            <button className="btn btn-default btn-block " onClick={this.handleSubmit}>Update Article</button>
           </div>
         </div>
       </div>

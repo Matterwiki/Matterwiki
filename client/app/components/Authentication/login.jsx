@@ -33,14 +33,13 @@ class Login extends React.Component {
         Alert.success('You are now logged in');
     })
     .catch(function(err){
-        Alert.error(err);
+        //Alert.error(err);
     });
   }
 
   render () {
     return(<div className="container login-box row">
       <div className="col-md-12 col-sm-12">
-        <h3>Login</h3>
           <form>
         <div className="col-sm-12 form-group">
           <input type="email" className="form-control" id="inputEmail" placeholder="Email" ref="email" />
@@ -49,7 +48,7 @@ class Login extends React.Component {
           <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref="password" />
         </div>
         <div className="col-sm-12 form-group">
-          <button onClick={this.handleSubmit} className="btn btn-default btn-block btn-lg">Sign in</button>
+          <button onClick={this.handleSubmit} className="btn btn-default btn-block ">Sign in</button>
         </div>
       </form>
       </div>

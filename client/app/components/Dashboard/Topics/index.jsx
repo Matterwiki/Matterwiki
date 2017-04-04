@@ -112,9 +112,13 @@ class Topics extends React.Component {
     else
 
       return(
-        <div className="topics">
-            <AddTopic addTopic={this.addTopic} />
-            <ListTopics topics={this.state.topics} deleteTopic={this.deleteTopic} />
+        <div className="topics row">
+            <div className="col-sm-12 col-md-4">
+              <AddTopic addTopic={this.addTopic} />
+            </div>
+            <div className="col-sm-12 col-md-8">
+              <ListTopics topics={this.state.topics} deleteTopic={this.deleteTopic} />
+            </div>
         </div>
       );
   }

@@ -90,9 +90,9 @@ class ViewArticle extends React.Component {
             <div className="sidebar-title">What Changed in last edit</div>
             {(this.state.article.what_changed) ? <h4>{this.state.article.what_changed}</h4> : <h4>No information available</h4>}
             </div>
-            <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block btn-lg">Edit</Link>
-            <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block btn-lg">History</Link>
-            {(window.localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block btn-lg" onClick={this.deleteArticle}>Delete</button>
+            <Link to={'/article/edit/'+this.state.article.id} className="btn btn-default btn-block ">Edit</Link>
+            <Link to={'/article/history/'+this.state.article.id} className="btn btn-default btn-block ">History</Link>
+            {(window.localStorage.getItem('userId')==1) ? <button className="btn btn-default btn-block " onClick={this.deleteArticle}>Delete</button>
           : ''}
           </div>
             </div>
@@ -111,7 +111,7 @@ class ViewArticle extends React.Component {
                           <h1><b>Yayyyy!</b></h1><h3>Your article has been published</h3>
                           <br/>
                           <br/>
-                          <button type="button" className="btn btn-default btn-block btn-lg" data-dismiss="modal">That's great</button>
+                          <button type="button" className="btn btn-default btn-block " data-dismiss="modal">That's great</button>
                         </div>
                       </div>
                     </center>

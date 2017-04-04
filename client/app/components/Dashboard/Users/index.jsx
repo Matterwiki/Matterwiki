@@ -77,7 +77,7 @@ class Users extends React.Component {
 
       });
     }
-    
+
   }
 
   addUser(user) {
@@ -118,8 +118,12 @@ class Users extends React.Component {
 
       return(
         <div className="users">
+          <div className="col-sm-12 col-md-4">
             <AddUser addUser={this.addUser} />
+          </div>
+          <div className="col-sm-12 col-md-8">
             <ListUsers users={this.state.users} deleteUser={this.deleteUser} />
+          </div>
         </div>
       );
   }

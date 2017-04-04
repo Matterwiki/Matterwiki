@@ -122,7 +122,7 @@ class NewArticle extends React.Component {
         <br/>
         <div className="row">
         <div className="col-md-12">
-          <button className="btn btn-default btn-block btn-lg" onClick={this.handleSubmit}>Create Article</button>
+          <button className="btn btn-default btn-block " onClick={this.handleSubmit}>Create Article</button>
         </div>
       </div>
       </div>

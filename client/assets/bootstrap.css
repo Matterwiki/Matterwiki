@@ -1745,9 +1745,8 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  min-height: 50px;
-  padding: 10px 20px;
-  font-size: 20px;
+  padding: 10px 16px;
+  font-size: 16px;
   line-height: 1.42857143;
   color: #4d4d4d;
   background-color: #fff;
@@ -2188,7 +2187,8 @@ select[multiple].input-lg {
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
-  font-weight: normal;
+  text-transform: uppercase;
+  font-weight: 700;
   line-height: 1.42857143;
   text-align: center;
   white-space: nowrap;
@@ -2630,6 +2630,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-block {
   display: block;
   width: 100%;
+  padding: 15px 5px;
 }
 .btn-block + .btn-block {
   margin-top: 5px;

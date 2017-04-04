@@ -51,50 +51,51 @@ class AddUser extends React.Component {
         <div>
           <div className="row">
             <div className="col-md-12 col-sd-12">
-              <h1><b>Add User</b></h1>
-                <form>
-                  <div className="col-sm-12 form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      ref="user_name"
-                      id="inputUserName"
-                      placeholder="Name"
-                      value={this.state.name}
-                      onChange={this.handleChange} />
+                <form className="tabform">
+                  <div className="row">
+                    <div className="col-sm-12 form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        ref="user_name"
+                        id="inputUserName"
+                        placeholder="Name"
+                        value={this.state.name}
+                        onChange={this.handleChange} />
+                    </div>
+                    <div className="col-sm-12 form-group">
+                      <input
+                        type="text"
+                        className="form-control"
+                        ref="user_about"
+                        id="inputUserAbout"
+                        placeholder="About"
+                        value={this.state.about}
+                        onChange={this.handleChange} />
+                    </div>
+                    <div className="col-sm-12 form-group">
+                      <input
+                        type="email"
+                        className="form-control"
+                        ref="user_email"
+                        id="inputUserEmail"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={this.handleChange} />
+                    </div>
+                    <div className="col-sm-12 form-group">
+                      <input
+                        type="password"
+                        className="form-control"
+                        ref="user_password"
+                        id="inputUserPassword"
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChange={this.handleChange} />
+                    </div>
                   </div>
                   <div className="col-sm-12 form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      ref="user_about"
-                      id="inputUserAbout"
-                      placeholder="About"
-                      value={this.state.about}
-                      onChange={this.handleChange} />
-                  </div>
-                  <div className="col-sm-12 form-group">
-                    <input
-                      type="email"
-                      className="form-control"
-                      ref="user_email"
-                      id="inputUserEmail"
-                      placeholder="Email"
-                      value={this.state.email}
-                      onChange={this.handleChange} />
-                  </div>
-                  <div className="col-sm-12 form-group">
-                    <input
-                      type="password"
-                      className="form-control"
-                      ref="user_password"
-                      id="inputUserPassword"
-                      placeholder="Password"
-                      value={this.state.password}
-                      onChange={this.handleChange} />
-                  </div>
-                  <div className="col-sm-12 form-group">
-                    <button onClick={this.addUser} className="btn btn-default btn-block btn-lg">Add User</button>
+                    <button onClick={this.addUser} className="btn btn-default btn-block ">Add User</button>
                   </div>
                 </form>
             </div>
