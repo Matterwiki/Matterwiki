@@ -3217,10 +3217,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .nav-tabs.nav-justified > li {
   float: none;
+  background-color: #f5f5f5;
 }
 .nav-tabs.nav-justified > li > a {
   margin-bottom: 5px;
   text-align: center;
+  color: #555;
 }
 .nav-tabs.nav-justified > .dropdown .dropdown-menu {
   top: auto;
