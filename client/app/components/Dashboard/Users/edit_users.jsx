@@ -1,7 +1,9 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
+
+import API from 'api/wrapper.js';
 
 class EditUser extends React.Component {
 
@@ -17,28 +19,22 @@ class EditUser extends React.Component {
   }
 
   componentDidMount() {
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
     var that = this;
-    fetch('/api/users/'+this.props.params.userId,myInit)
-    .then(function(response) {
-      return response.json();
+    API.call("users/"+this.props.params.userId,"GET",window.localStorage.getItem('userToken'))
+    .then(function(user){
+        that.setState({
+          name: decodeURIComponent(user.data.name),
+          about: decodeURIComponent(user.data.about),
+          email: decodeURIComponent(user.data.email),
+          loading: false})
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-        that.setState({name: response.data.name, about: response.data.about, email: response.data.email, loading: false})
-      }
-    });
+    .catch(function(err){
+        //Alert.error(err);
+    })
   }
 
   editUser(e) {
+    var that = this;
     var user = {
       name: encodeURIComponent(this.refs.user_name.value),
       about: encodeURIComponent(this.refs.user_about.value),
@@ -46,27 +42,14 @@ class EditUser extends React.Component {
       password: encodeURIComponent(this.refs.user_password.value),
       id: encodeURIComponent(this.props.params.userId)
     };
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'PUT',
-               headers: myHeaders,
-               body: "name="+user.name+"&about="+user.about+"&email="+user.email+"&password="+user.password+"&id="+user.id
-               };
-    var that = this;
-    fetch('/api/users/',myInit)
-    .then(function(response) {
-      return response.json();
+    API.call("users","PUT",window.localStorage.getItem('userToken'),user)
+    .then(function(user){
+        Alert.success('User has been edited');
+        hashHistory.push('admin');
     })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-          Alert.success('User has been edited');
-          hashHistory.push('admin');
-      }
-    });
+    .catch(function(err){
+        //Alert.error(err);
+    })
   }
 
 

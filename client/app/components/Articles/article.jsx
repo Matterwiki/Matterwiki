@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link, hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import Alert from 'react-s-alert';
+import API from 'api/wrapper.js';
 
 
-import WikiEditor from './WikiEditor/index.jsx';
+import WikiEditor from 'WikiEditor/index.jsx';
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -20,57 +21,32 @@ class ViewArticle extends React.Component {
   }
 
   componentDidMount(){
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'GET',
-               headers: myHeaders,
-               };
     var that = this;
-    fetch('/api/articles/'+this.props.params.articleId,myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
-
+    var id = this.props.params.articleId;
+    API.call("articles/"+id,"GET",window.localStorage.getItem('userToken'))
+    .then(function(article) {
         that.setState({
-          article: response.data,
-          isHtml : response.data.body && !response.data.body_json ? true : false
+          article: article.data,
+          isHtml : article.data.body && !response.data.body_json ? true : false,
+          loading: false
         });
-      }
-      that.setState({loading: false})
-    });
-
+      })
+      .catch(function(err){
+        //Alert.error(err);
+      });
   }
 
   deleteArticle(e) {
     e.preventDefault();
-    var myHeaders = new Headers({
-        "Content-Type": "application/x-www-form-urlencoded",
-        "x-access-token": window.localStorage.getItem('userToken')
-    });
-    var myInit = { method: 'DELETE',
-               headers: myHeaders,
-               body: "id="+this.state.article.id
-               };
     var that = this;
-    fetch('/api/articles/',myInit)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(response) {
-      if(response.error.error)
-        Alert.error(response.error.message);
-      else {
+    API.call("articles?id="+this.state.article.id,"DELETE",window.localStorage.getItem('userToken'))
+    .then(function(article) {
         Alert.success("Article has been deleted");
         hashHistory.push('home');
-
-      }
-    });
+      })
+      .catch(function(err){
+        //Alert.error(err);
+      });
   }
 
   getRawMarkupBody() {
@@ -103,12 +79,12 @@ class ViewArticle extends React.Component {
           <div className="col-md-3 article-sidebar">
             <div className="sidebar-block">
             <div className="sidebar-title">Filed under</div>
-            <h2 className="color-text"><b>{this.state.article.topic.name}</b></h2>
+            <h2 className="color-text"><b>{decodeURIComponent(this.state.article.topic.name)}</b></h2>
             </div>
             <div className="sidebar-block">
             <div className="sidebar-title">Last Updated By</div>
-            <h3><b>{this.state.article.user.name}</b></h3>
-            <p>{this.state.article.user.about}</p>
+            <h3><b>{decodeURIComponent(this.state.article.user.name)}</b></h3>
+            <p>{decodeURIComponent(this.state.article.user.about)}</p>
             </div>
             <div className="sidebar-block">
             <div className="sidebar-title">What Changed in last edit</div>

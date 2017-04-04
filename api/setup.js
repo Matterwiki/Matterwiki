@@ -14,7 +14,7 @@ var db = require('../db.js'); //this file contains the knex file import. it's eq
 
 module.exports = function(app) {
 
-  app.post('/setup',function(req,res){
+  app.post('/api/setup',function(req,res){
     /*
     This is a POST endpoint which takes the user name, email, password, and about to create
     a new user profile.

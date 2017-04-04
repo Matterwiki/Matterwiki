@@ -3,7 +3,7 @@ import React from 'react';
 class Loader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {message: "Loading..."};
+    this.state = {message: ""};
   }
 
   componentDidMount() {

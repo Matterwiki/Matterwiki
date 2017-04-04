@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from './components/app.jsx';
-import Home from './components/home.jsx';
-import Login from './components/login.jsx';
-import Article from './components/article.jsx';
-import NewArticle from './components/new.jsx';
-import EditArticle from './components/edit.jsx';
-import ArticleHistory from './components/history.jsx';
-import Search from './components/search.jsx';
-import Admin from './components/admin.jsx';
-import Setup from './components/setup.jsx';
-import EditTopic from './components/edit_topics.jsx';
-import EditUser from './components/edit_users.jsx';
+import App from './components/Layout/app.jsx';
+import Home from './components/Home/index.jsx';
+import Login from './components/Authentication/login.jsx';
+import Article from './components/Articles/article.jsx';
+import NewArticle from './components/Articles/new.jsx';
+import EditArticle from './components/Articles/edit.jsx';
+import Archives from './components/Archives/index.jsx';
+import Search from './components/Layout/Search/search.jsx';
+import Admin from './components/Dashboard/index.jsx';
+import Setup from './components/Setup/index.jsx';
+import EditTopic from './components/Dashboard/Topics/edit_topics.jsx';
+import EditUser from './components/Dashboard/Users/edit_users.jsx';
 
 
 export default function () {
@@ -23,7 +23,7 @@ export default function () {
 		  <Route path="login" component={Login}/>
 		    <Route path="article/new" component={NewArticle}/>
 		    <Route path="article/edit/:articleId" component={EditArticle}/>
-		  <Route path="article/history/:articleId" component={ArticleHistory}/>
+		  <Route path="article/history/:articleId" component={Archives}/>
 		  <Route path="article/:articleId" component={Article}/>
 		  <Route path="admin" component={Admin}/>
 		  <Route path="topic/edit/:topicId" component={EditTopic}/>

@@ -1,10 +1,10 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import Loader from './loader.jsx';
+import Loader from 'Loader/loader.jsx';
 import Alert from 'react-s-alert';
 
 
-import WikiEditor from './WikiEditor/index.jsx';
+import WikiEditor from 'WikiEditor/index.jsx';
 
 class NewArticle extends React.Component {
   constructor(props) {

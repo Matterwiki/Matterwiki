@@ -165,7 +165,7 @@ module.exports = function(app) {
       It takes the id of the user and then deletes that record from the database.
       the error key in the returning object is a boolen which is false if there is no error and true otherwise
       */
-      Users.where({id: req.body.id}).fetch({withRelated: ['articles']}).then(function(user) {
+      Users.where({id: req.query.id}).fetch({withRelated: ['articles']}).then(function(user) {
         var user = user.toJSON();
         var articles = user.articles;
         for(var i=0; i<articles.length; i++)
@@ -179,7 +179,7 @@ module.exports = function(app) {
           });
         }
       }).then(function(){
-        Users.forge({id: req.body.id})
+        Users.forge({id: req.query.id})
         .destroy()
           .then(function() {
             res.json({

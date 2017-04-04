@@ -521,8 +521,8 @@ border: 1px solid #efefef;
   user-select:none;
 }
 
-.btn-group .toolbar-button, 
-.btn-group .toolbar-button:focus, 
+.btn-group .toolbar-button,
+.btn-group .toolbar-button:focus,
 .btn-group .toolbar-button:active,
 .btn-group .toolbar-button:disabled  {
   background: #fff;
@@ -549,7 +549,7 @@ border: 1px solid #efefef;
 }
 
 /* adds walls around the editor */
-/* 
+/*
 .WikiEditor-editor .DraftEditor-root {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -575,10 +575,15 @@ border: 1px solid #efefef;
 }
 
 
+.WikiEditor-editor {
+  font-family: "Merriweather", "Georgia", serif;
+}
+
 /* read-only editor */
 
 .WikiEditor-editor .readonly {
-  font-size: 0.7em;
+  font-size: 0.5em;
+  line-height: 1.6em;
   padding: 0;
   cursor: default;
 }

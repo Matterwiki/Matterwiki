@@ -117,7 +117,7 @@ module.exports =  function(app){
                 article_id: req.body.id,
                 title: article.attributes.title,
                 body: '',
-                body_json: article.attributes.body,
+                body_json: article.attributes.body_json,
                 what_changed: article.attributes.what_changed,
                 user_id: article.attributes.user_id
               })
