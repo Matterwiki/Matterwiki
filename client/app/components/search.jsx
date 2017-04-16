@@ -19,7 +19,7 @@ class Search extends React.Component {
                headers: myHeaders,
                };
     var that = this;
-    fetch('/api/search?query='+this.props.location.query.query,myInit)
+    fetch('/api/search?query='+encodeURIComponent(this.props.location.query.query),myInit)
     .then(function(response) {
       return response.json();
     })

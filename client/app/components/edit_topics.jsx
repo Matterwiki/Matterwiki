@@ -40,8 +40,8 @@ class EditTopic extends React.Component {
 
   editTopic(e) {
     var topic = {
-      name: this.refs.topic_name.value,
-      description: this.refs.topic_description.value,
+      name: encodeURIComponent(this.refs.topic_name.value),
+      description: encodeURIComponent(this.refs.topic_description.value),
       id: this.props.params.topicId
     };
     var myHeaders = new Headers({

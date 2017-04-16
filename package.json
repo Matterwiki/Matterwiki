@@ -1,12 +1,15 @@
 {
   "name": "Matterwiki",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "dev": "node index.js",
-    "start": "npm run build && cross-env NODE_ENV=production node index.js"
+    "dev-testing": "cross-env TESTING=true node index.js",
+    "start": "npm run build && cross-env NODE_ENV=production node index.js",
+    "testcafe": "testcafe chrome tests/e2e/tests/*.js --app \"npm run dev-testing\" --app-init-delay 10000",
+    "test": "npm run build && npm run testcafe"
   },
   "bin": {
     "wiki": "./install.js"
@@ -40,20 +43,21 @@
     "react-dom": "15.3.0",
     "react-router": "2.8.1",
     "react-s-alert": "1.2.2",
-    "sqlite3": "^3.1.4",
-    "whatwg-fetch": "^2.0.1"
+    "sqlite3": "3.1.4",
+    "whatwg-fetch": "2.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.22.0",
-    "cross-env": "^3.1.4",
-    "react-hot-loader": "^3.0.0-beta.6",
-    "webpack": "^2.2.0",
-    "webpack-dev-middleware": "^1.9.0",
-    "webpack-dev-server": "^2.2.0",
-    "webpack-hot-middleware": "^2.15.0"
+    "babel-cli": "6.22.2",
+    "babel-core": "6.22.1",
+    "babel-loader": "6.2.10",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.22.0",
+    "cross-env": "3.1.4",
+    "react-hot-loader": "3.0.0-beta.6",
+    "webpack": "2.2.0",
+    "webpack-dev-middleware": "1.9.0",
+    "webpack-dev-server": "2.2.0",
+    "webpack-hot-middleware": "2.15.0",
+    "testcafe": "0.13.0"
   }
 }

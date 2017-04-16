@@ -1,7 +1,7 @@
 module.exports = {
     client: 'sqlite3',
     connection: {
-      filename: "./db/matterwiki.sqlite"
+      filename: process.env.TESTING ? "./tests/e2e/db/matterwiki.sqlite" : "./db/matterwiki.sqlite"
     },
     useNullAsDefault: true
   }

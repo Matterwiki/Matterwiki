@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 
 .primary-logo {
   height: 4em;
@@ -96,7 +96,7 @@ padding: 10px 20px;
 }
 
 .single-article-body {
-  font-family: "Vollkorn", sans-serif;
+  font-family: "Merriweather", sans-serif;
   font-size: 1.5em;
   margin-bottom: 2em;
 padding: 0em 1em;
@@ -124,7 +124,7 @@ input:focus
 }
 
 .new-article .input-body {
-  font-family: "Vollkorn", serif;
+  font-family: "Merriweather", serif;
   font-size: 1.5em;
   padding: 10px 20px;
   border-left: 1px solid #efefef;
@@ -195,7 +195,7 @@ textarea {
 }
 
 .navbar-login-logo img {
-  max-height: 70px;
+  max-height: 50px;
   width: auto;
   margin-top: 3em;
 }

@@ -23,7 +23,7 @@ class Login extends React.Component {
     });
     var myInit = { method: 'POST',
                headers: myHeaders,
-               body: "email="+email+"&password="+password
+               body: "email="+encodeURIComponent(email)+"&password="+encodeURIComponent(password)
               };
     var that = this;
     fetch('/api/authenticate',myInit)

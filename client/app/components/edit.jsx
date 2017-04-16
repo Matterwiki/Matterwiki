@@ -144,13 +144,16 @@ class EditArticle extends React.Component {
                    ))}
                  </select>
                  <br/>
+                 <div className="whatwrapper">
                  <label>What improvements did you make in this edit?</label>
                  <textarea
                    ref="what_changed"
-                   className="form-control what_changed"
+                   className="form-control what_changed what"
+                   id="what"
                    placeholder="Example: Fixed a typo. It's grammer not grammar"
                     />
                   <p className="help-block">Keep it short and descriptive :)</p>
+                  </div>
                   <br/>
             </div>
 
