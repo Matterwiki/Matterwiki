@@ -1,6 +1,7 @@
 
 /* 
  * TODO extract common chunks from dev and production configs 
+ * I'm going to start now! A good project needs a good webpack config :)
  * and use something like webpack-merge to put them all together for the environment needed
  * Ref : http://survivejs.com/webpack/developing-with-webpack/splitting-configuration/
  */
