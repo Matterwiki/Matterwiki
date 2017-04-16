@@ -23,7 +23,7 @@ import {
   shouldHidePlaceholder
 } from "./helpers/";
 
-import { Link, Image } from "./entities/";
+import { Link, Image } from "./elements/";
 
 const styleMap = {
   STRIKETHROUGH: {
@@ -34,14 +34,13 @@ const styleMap = {
 // TODO make this more adaptable to different media, once we allow video uploads and other stuff
 // This example will come in handy then: https://github.com/facebook/draft-js/tree/master/examples/draft-0-10-0/media
 const blockRendererFn = block => {
-    if (block.getType() === "atomic") {
-      return {
-        component: Image,
-        editable: false
-      }
-    }
+  if (block.getType() === "atomic") {
+    return {
+      component: Image,
+      editable: false
+    };
+  }
 };
-
 
 class WikiEditor extends Component {
   constructor(...args) {
@@ -203,6 +202,37 @@ class WikiEditor extends Component {
   }
 
   _onUploadImage(file) {
+    // create an image block with a loading state
+    const { editorState } = this.state;
+
+    let contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+
+    // create the entity. returns a new ContentState object that must be pushed back into the editor
+    let contentStateWithEntity = contentState.createEntity(
+      "IMAGE",
+      "IMMUTABLE",
+      {
+        src: null,
+        alt: null
+      }
+    );
+
+    const entityKey = contentState.getLastCreatedEntityKey();
+
+    //  create a new EditorState with the entity
+    let editorStateWithEntity = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity
+    });
+
+    const editorStateWithBlock = AtomicBlockUtils.insertAtomicBlock(
+      editorStateWithEntity,
+      entityKey,
+      " "
+    );
+
+    this.onChange(editorStateWithBlock);
+
     // upload image
 
     let data = new FormData();
@@ -217,35 +247,24 @@ class WikiEditor extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        // create entity
-        const { editorState } = this.state;
         const { path, filename } = data;
-        const contentState = editorState.getCurrentContent();
+        const { editorState } = this.state;
 
-        // create the entity. returns a new ContentState object that must be pushed back into the editor
-        let contentStateWithEntity = contentState.createEntity(
-          "IMAGE",
-          "IMMUTABLE",
-          {
-            src: path,
-            alt: filename
-          }
-        );
+        contentState = editorState.getCurrentContent();
 
-        const entityKey = contentState.getLastCreatedEntityKey();
-
-        //  create a new EditorState with the entity
-        const editorStateWithEntity = EditorState.set(editorState, {
-          currentContent: contentStateWithEntity
+        contentState.mergeEntityData(entityKey, {
+          src: path,
+          alt: filename
         });
 
-        const editorStateWithBlock = AtomicBlockUtils.insertAtomicBlock(
-          editorStateWithEntity,
-          entityKey,
-          " "
+        // Retrigger an update to the Editor - without this the updated entity wont show up
+        // TODO - remove this when v0.11 is released
+        const forcedEditorState = EditorState.forceSelection(
+          editorState,
+          editorState.getSelection()
         );
 
-        this.onChange(editorStateWithBlock);
+        this.onChange(forcedEditorState);
       });
   }
 
@@ -346,6 +365,7 @@ class WikiEditor extends Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
+
     let className = classNames("WikiEditor-editor", {
       "WikiEditor-hidePlaceholder": shouldHidePlaceholder(contentState)
     });

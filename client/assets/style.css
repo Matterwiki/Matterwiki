@@ -594,3 +594,9 @@ border: 1px solid #efefef;
   padding: 0;
   cursor: default;
 }
+
+/* for the Image block */
+figure figcaption {
+  font-style: italic;
+  font-size: 17px;
+}
