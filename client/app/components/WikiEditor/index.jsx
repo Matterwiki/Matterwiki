@@ -1,2 +1,2 @@
-import WikiEditor from './WikiEditor.jsx'
+import WikiEditor from './WikiEditor'
 export default WikiEditor;

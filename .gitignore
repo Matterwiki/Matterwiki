@@ -38,4 +38,8 @@ jspm_packages
 
 client/public
 db/matterwiki.sqlite
+
+# the directory that stores wiki's media
+wiki_assets/
+
 tests/e2e/db/matterwiki.sqlite
