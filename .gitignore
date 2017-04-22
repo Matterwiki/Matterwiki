@@ -37,6 +37,7 @@ jspm_packages
 .node_repl_history
 
 client/public
+dist/
 db/matterwiki.sqlite
 
 # the directory that stores wiki's media
