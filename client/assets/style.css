@@ -15,12 +15,7 @@ body{
   margin-bottom: 3em;
 }
 
-.login-box {
-  max-width: 500px;
-  margin: 0px auto;
-  background-color: transparent;
-  text-align: center;
-}
+
 
 .login-header {
   margin-bottom: 1em;
@@ -447,10 +442,6 @@ font-size: 1.5em;
   text-align: center;
 }
 
-.setup-form {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
 
 .fixed {
   position: fixed;

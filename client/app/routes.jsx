@@ -3,14 +3,14 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/Layout/app.jsx';
 import Home from './components/Home/index.jsx';
-import Login from './components/Authentication/login.jsx';
+import Login from './components/Login/';
 import Article from './components/Articles/article.jsx';
 import NewArticle from './components/Articles/new.jsx';
 import EditArticle from './components/Articles/edit.jsx';
 import Archives from './components/Archives/index.jsx';
 import Search from './components/Layout/Search/search.jsx';
 import Admin from './components/Dashboard/index.jsx';
-import Setup from './components/Setup/index.jsx';
+import Setup from './components/Setup/';
 import EditTopic from './components/Dashboard/Topics/edit_topics.jsx';
 import EditUser from './components/Dashboard/Users/edit_users.jsx';
 

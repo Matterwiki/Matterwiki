@@ -8,37 +8,48 @@ var os = require("os");
 var hostname = os.hostname();
 import request from "request";
 
-const MatterwikiAPI = new API()
+const MatterwikiAPI = new API();
 
 function API() {
-
-  this.call = function(endpoint,type,token=null,body=null,query=null) {
-    return new Promise(function(resolve,reject){
-
+  this.call = function(
+    endpoint,
+    type,
+    token = null,
+    body = null,
+    query = null
+  ) {
+    return new Promise(function(resolve, reject) {
       // Create the endpoint URL
-      endpoint = "http://"+hostname+":"+(process.env.PORT||5000).toString()+"/api/"+endpoint;
+      endpoint = 
+        "http://" +
+        hostname +
+        ":" +
+        (process.env.PORT || 5000).toString() +
+        "/api/" +
+        endpoint;
 
-      console.log("Sending a "+type+" request to "+endpoint);
+      console.log("Sending a " + type + " request to " + endpoint);
 
-      request({
-        url: endpoint,
-        method: type,
-        headers: {
-            'x-access-token': token
+      request(
+        {
+          url: endpoint,
+          method: type,
+          headers: {
+            "x-access-token": token
+          },
+          body: body,
+          json: true
         },
-        body: body,
-        json: true,
-      },
-        function(error,response,body) {
-            if(body.error.error) {
-                reject(body.error.message);
-            }
-            else {
-                resolve(body);
-            }
-          });
+        function(error, response, body) {
+          if (body.error.error) {
+            reject(body.error.message);
+          } else {
+            resolve(body);
+          }
+        }
+      );
     });
-  }
+  };
 }
 
 export default MatterwikiAPI;
