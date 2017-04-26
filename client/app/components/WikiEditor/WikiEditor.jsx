@@ -12,7 +12,7 @@ import {Editor,
 import {changeDepth, getEntityRange} from 'draftjs-utils';
 import classNames from 'classnames';
 
-import Toolbar from './Toolbar/index.jsx';
+import Toolbar from './Toolbar/index';
 import {getLinkEntities, 
         convertToEditorState, 
         getCurrentEntityKey,

@@ -20,7 +20,7 @@ function API() {
   ) {
     return new Promise(function(resolve, reject) {
       // Create the endpoint URL
-      endpoint = 
+      endpoint =
         "http://" +
         hostname +
         ":" +
