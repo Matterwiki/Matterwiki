@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-import SearchForm from "Search/searchform.jsx";
+import SearchForm from "./SearchForm";
 
 const LinkNavItem = props => (
   <LinkContainer to={props.to}>

@@ -1,5 +1,5 @@
 // TODO there are two components that use forms as of now. Make them generic if there is more!
-// I could have done when I started this, but http://wiki.c2.com/?PrematureOptimization
+// I could have done it when I started this, but http://wiki.c2.com/?PrematureOptimization
 
 import React from "react";
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";

@@ -9,7 +9,6 @@ import { Row, Col } from "react-bootstrap";
 import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "../WikiEditor/index.jsx";
 import ArticleSidebar from "./ArticleSidebar";
-import ArticleModal from "./ArticleModal";
 
 class ViewArticle extends React.Component {
   constructor(props) {

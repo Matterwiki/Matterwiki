@@ -11,8 +11,7 @@ const ArticlesListItem = props => {
         <Link to={articleLink}>{decodeURIComponent(article.title)}</Link>
       </div>
       <div className="article-item-description">
-        Last updated on
-        {new Date(article.updated_at.replace(" ", "T")).toDateString()}
+        {`Last updated on ${new Date(article.updated_at.replace(" ", "T")).toDateString()}`}
       </div>
       <hr className="article-separator" />
     </div>

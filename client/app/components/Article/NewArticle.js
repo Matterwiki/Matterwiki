@@ -32,7 +32,8 @@ class NewArticle extends React.Component {
         title: "",
         topic_id: 1
       },
-      topics: []
+      topics: [],
+      loading: true
     };
   }
 

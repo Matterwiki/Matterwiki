@@ -9,20 +9,21 @@ import ViewArticle from "./components/Article/ViewArticle";
 import NewArticle from "./components/Article/NewArticle";
 import EditArticle from "./components/Article/EditArticle";
 import Archives from "./components/Archives/index.jsx";
-import Search from "./components/Search/search.jsx";
-import Admin from "./components/Dashboard/index.jsx";
+import Search from "./components/Search/index";
+import Admin from "./components/Admin/index.jsx";
 import Setup from "./components/Setup/index";
 import EditTopic from "./components/Dashboard/Topics/edit_topics.jsx";
 import EditUser from "./components/Dashboard/Users/edit_users.jsx";
 
 export default function() {
+  // Note: The order in which article:new and article:articleId is declared is important
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Login} />
       <Route path="home" component={Home} />
       <Route path="login" component={Login} />
-      <Route path="article/:articleId" component={ViewArticle} />
       <Route path="article/new" component={NewArticle} />
+      <Route path="article/:articleId" component={ViewArticle} />
       <Route path="article/edit/:articleId" component={EditArticle} />
       <Route path="article/history/:articleId" component={Archives} />
       <Route path="admin" component={Admin} />

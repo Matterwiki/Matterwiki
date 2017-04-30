@@ -3,7 +3,7 @@ import { hashHistory } from "react-router";
 import { Grid, Row, Col } from "react-bootstrap";
 
 import TopicsList from "./TopicsList/index";
-import ArticlesList from "./ArticlesList/index";
+import ArticlesList from "../ArticlesList/index";
 import API from "api/wrapper.js";
 
 class Home extends React.Component {
