@@ -12,10 +12,10 @@ const TopicsListItem = props => {
 
   return (
     <ListGroupItem
-      header={name}
+      header={decodeURIComponent(name)}
       onClick={onTopicClick}
       href="#">
-      {description}
+      {decodeURIComponent(description)}
     </ListGroupItem>
   );
 };

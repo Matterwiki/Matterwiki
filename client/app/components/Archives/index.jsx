@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import Loader from "Loader/loader.jsx";
+import Loader from "Loader/index";
 import BrowseArchives from "./browse_archives.jsx";
 import SimpleArticle from "./simple_article.jsx";
 import API from "api/wrapper.js";

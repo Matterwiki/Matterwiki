@@ -1,7 +1,7 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 import API from 'api/wrapper.js';
 
 class EditTopic extends React.Component {

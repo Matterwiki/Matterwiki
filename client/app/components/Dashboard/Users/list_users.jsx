@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 
 class ListUsers extends React.Component {
 

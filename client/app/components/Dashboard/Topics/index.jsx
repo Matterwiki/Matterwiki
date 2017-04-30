@@ -2,7 +2,7 @@ import React from 'react';
 import {hashHistory, Link} from 'react-router';
 
 import Alert from 'react-s-alert';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 
 import ListTopics from './list_topics.jsx';
 import AddTopic from './add_topic.jsx';

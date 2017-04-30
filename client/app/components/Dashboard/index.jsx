@@ -1,7 +1,7 @@
 import React from 'react';
 import {hashHistory, Link} from 'react-router';
 import Alert from 'react-s-alert';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 
 import CurrentTab from './current_tab.jsx';
 

@@ -1,0 +1,17 @@
+.loading {
+  border-radius: 50%;
+  margin: 0px auto;
+  width: 30px;
+  height: 30px;
+  border: 0.25rem solid #ff0066;
+  border-top-color: white;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}
+
+.loader {
+  text-align: center;
+  max-width: 300px;
+  padding: 10px;
+  margin: 0px auto;
+}

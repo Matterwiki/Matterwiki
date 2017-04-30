@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 
 class ListTopics extends React.Component {
 

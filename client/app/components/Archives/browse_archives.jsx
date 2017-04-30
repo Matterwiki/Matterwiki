@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from 'Loader/loader.jsx';
+import Loader from 'Loader/index';
 import {hashHistory} from 'react-router';
 import Alert from 'react-s-alert';
 import API from 'api/wrapper.js';

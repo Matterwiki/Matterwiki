@@ -1,6 +1,6 @@
 import React from "react";
 import { hashHistory } from "react-router";
-import Loader from "Loader/loader.jsx";
+import Loader from "Loader/index";
 import Alert from "react-s-alert";
 
 import { Grid, Row, Col } from "react-bootstrap";
