@@ -8,7 +8,7 @@ const TopicChooser = props => {
     <div>
       <ControlLabel>Choose topic</ControlLabel>
       <FormControl
-        name="topicId"
+        name="topic_id"
         componentClass="select"
         className="topic-select"
         value={value}

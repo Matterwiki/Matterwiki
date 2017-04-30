@@ -2,3 +2,8 @@
     margin-bottom: 3em;
 }
 
+.footer {
+    position: fixed;
+    bottom: 0;
+}
+

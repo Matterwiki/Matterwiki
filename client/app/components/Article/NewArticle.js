@@ -16,6 +16,7 @@ import API from "api/wrapper.js";
 import WikiEditor from "../WikiEditor/index.jsx";
 import TopicChooser from "./TopicChooser";
 
+// TODO EditArticle & ViewArticle are one and the same - make it into one component
 class NewArticle extends React.Component {
   constructor(...args) {
     super(...args);
@@ -27,10 +28,11 @@ class NewArticle extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      title: "",
-      topicId: 1,
-      topics: [],
-      error: ""
+      article: {
+        title: "",
+        topic_id: 1
+      },
+      topics: []
     };
   }
 
@@ -55,7 +57,9 @@ class NewArticle extends React.Component {
     const { name, value } = e.target;
 
     this.setState({
-      [name]: value
+      article: Object.assign({}, this.state.article, {
+        [name]: value
+      })
     });
   }
 
@@ -69,16 +73,16 @@ class NewArticle extends React.Component {
     // get the rawContent from refs
     // TODO this will change when we use Redux! :)
     const body = this.getStringifiedEditorContent();
-    const { title, topicId } = this.state;
+    const { title, topic_id } = this.state.article;
 
-    if (body && title && topicId) {
+    if (body && title && topic_id) {
       const userId = window.localStorage.getItem("userId");
       const userToken = window.localStorage.getItem("userToken");
       // TODO DO SOMETHING ABOUT THIS! It's getting out of hand! x(
       const payload = {
         title: encodeURIComponent(title),
         body: encodeURIComponent(body),
-        topic_id: topicId,
+        topic_id: topic_id,
         user_id: userId
       };
 
@@ -92,7 +96,7 @@ class NewArticle extends React.Component {
   }
 
   render() {
-    const { loading, topics, title, topicId } = this.state;
+    const { loading, topics, article } = this.state;
 
     return (
       (loading && <Loader />) ||
@@ -104,7 +108,7 @@ class NewArticle extends React.Component {
               name="title"
               className="input-title"
               placeholder="Enter article title..."
-              value={title}
+              value={article.title}
               onChange={this.onChange}
             />
           </FormGroup>
@@ -115,7 +119,7 @@ class NewArticle extends React.Component {
             <TopicChooser
               onChange={this.onChange}
               topics={topics}
-              value={topicId}
+              value={article.topic_id}
             />
           </FormGroup>
         </Col>

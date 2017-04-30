@@ -78,7 +78,6 @@ class ViewArticle extends React.Component {
                 <WikiEditor
                   readOnly={true}
                   rawContent={JSON.parse(decodeURIComponent(article.body_json))}
-                  isHtml={isHtml}
                 />
               </div>
             </Col>
