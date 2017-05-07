@@ -1,81 +1,80 @@
 import React from "react";
 import Alert from "react-s-alert";
+import {
+  Grid,
+  Row,
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  FormControl,
+  HelpBlock
+} from "react-bootstrap";
 
 import API from "api/wrapper.js";
 
+/* TODO FOR SOME REASON LOGO UPLOAD IS BROKEN */
+
 class LogoUpload extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
+      logo: null
+    };
+
     this.handleUpload = this.handleUpload.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      logo: e.target.files[0]
+    });
   }
 
   handleUpload(e) {
     e.preventDefault();
-    var logo = this.refs.logo.files[0];
-    var formData = new FormData();
-    formData.append("logo", logo);
-    console.log(logo);
-    console.log(formData);
-    console.log(formData.get("logo"));
-    // API.call("logo","POST",window.localStorage.getItem('userToken'),formData)
-    // .then(function(logo){
-    //   console.log(logo);
-    //   Alert.success("Your logo has been successfully updated.")
-    // })
-    // .catch(function(err){
-    //   //Alert.error(err);
-    // });
 
-    var myHeaders = new Headers({
-      "x-access-token": window.localStorage.getItem("userToken")
+    const formData = new FormData();
+    formData.append("logo", this.state.logo);
+
+    API.call(
+      "logo",
+      "POST",
+      window.localStorage.getItem("userToken"),
+      formData
+    ).then(function(logo) {
+      console.log(logo);
+      Alert.success("Your logo has been successfully updated.");
     });
-
-    var myInit = {
-      method: "POST",
-      headers: myHeaders,
-      body: formData
-    };
-    var that = this;
-    fetch("/api/logo/", myInit)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(response) {
-        if (response.error.error) {
-          Alert.error(response.error.message);
-        } else {
-          Alert.success("Your logo has been successfully updated.");
-        }
-      });
   }
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-sd-12">
-          <h4><b>Change Logo</b></h4>
-          <form
-            method="POST"
-            encType="multipart/form-data"
-            onSubmit={this.handleUpload}>
-            <input
-              type="file"
-              name="logo"
-              ref="logo"
-              className="form-control"
-            />
-            <p className="help-block">
-              Please reload the page for the changes to reflect throughout the site.
-            </p>
-            <br />
-            <input
-              type="submit"
-              value="Upload Logo"
-              className="btn btn-default btn-block "
-            />
-          </form>
-        </div>
-      </div>
+      <Grid>
+        <Row>
+          <Col md={6} sm={12}>
+            <h4><b>Change Logo</b></h4>
+            <Form onSubmit={this.handleUpload}>
+              <FormGroup>
+                <FormControl
+                  className="form-control"
+                  onChange={this.handleChange}
+                  type="file"
+                  name="logo"
+                />
+              </FormGroup>
+              <HelpBlock>
+                Please reload the page for the changes to reflect throughout the site.
+              </HelpBlock>
+              <Button type="submit" block>
+                Upload Logo
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
