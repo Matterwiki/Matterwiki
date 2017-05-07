@@ -3,7 +3,7 @@ import { AppContainer } from 'react-hot-loader';
 import {render} from 'react-dom';
 import { Router, hashHistory } from 'react-router';
 
-import routes from './routes.jsx';
+import routes from './routes.js';
 
 const renderApp = (appRoutes) => {
   render(
@@ -21,8 +21,8 @@ renderApp(routes);
 
 // react HMR
 if(module.hot) {
-  module.hot.accept('./routes.jsx', () => {
-    const routeChanges = require('./routes.jsx').default;
+  module.hot.accept('./routes.js', () => {
+    const routeChanges = require('./routes.js').default;
     renderApp(routeChanges);
   })
 }

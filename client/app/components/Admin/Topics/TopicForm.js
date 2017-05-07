@@ -4,14 +4,12 @@ import { hashHistory } from "react-router";
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 
 // TODO move these fellas to a nice consts file
-const USER_FORM_FIELDS = [
+const TOPIC_FORM_FIELDS = [
   { name: "name", type: "text" },
-  { name: "about", type: "text" },
-  { name: "email", type: "email" },
-  { name: "password", type: "password" }
+  { name: "description", type: "text" }
 ];
 
-class UserForm extends React.Component {
+class TopicForm extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -23,9 +21,9 @@ class UserForm extends React.Component {
   }
 
   _initState() {
-    this.state = USER_FORM_FIELDS.reduce((state, formField) => {
-      state[formField.name] = this.props.user
-        ? decodeURIComponent(this.props.user[formField.name])
+    this.state = TOPIC_FORM_FIELDS.reduce((state, formField) => {
+      state[formField.name] = this.props.topic
+        ? decodeURIComponent(this.props.topic[formField.name])
         : "";
       return state;
     }, {});
@@ -49,7 +47,7 @@ class UserForm extends React.Component {
   render() {
     return (
       <Form className="tabform" onSubmit={this.onSubmit}>
-        {USER_FORM_FIELDS.map(formField => (
+        {TOPIC_FORM_FIELDS.map(formField => (
           <Col sm={12} key={formField.name}>
             <FormGroup>
               <FormControl
@@ -64,7 +62,7 @@ class UserForm extends React.Component {
         ))}
         <Col sm={12}>
           <Button type="submit" block={true}>
-            {this.props.user ? "Update User" : "Add User"}
+            {this.props.topic ? "Update Topic" : "Add Topic"}
           </Button>
         </Col>
       </Form>
@@ -72,4 +70,4 @@ class UserForm extends React.Component {
   }
 }
 
-export default UserForm;
+export default TopicForm;

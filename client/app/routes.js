@@ -10,9 +10,9 @@ import NewArticle from "./components/Article/NewArticle";
 import EditArticle from "./components/Article/EditArticle";
 import Archives from "./components/Archives/index.jsx";
 import Search from "./components/Search/index";
-import Admin from "./components/Admin/index.js";
+import Admin from "./components/Admin/index";
 import Setup from "./components/Setup/index";
-import EditTopic from "./components/Admin/Topics/edit_topics.jsx";
+import EditTopic from "./components/Admin/Topics/EditTopic";
 import EditUser from "./components/Admin/Users/EditUser";
 
 export default function() {

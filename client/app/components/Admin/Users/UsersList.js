@@ -4,7 +4,7 @@ import { ListGroup } from "react-bootstrap";
 import UsersListItem from './UsersListItem';
 
 const UsersList = props => {
-  const { users, onEditClick, onDeleteClick } = props;
+  const { users, onDeleteClick } = props;
 
   return (
     <div className="users">
@@ -13,7 +13,6 @@ const UsersList = props => {
           <UsersListItem
             key={user.id}
             user={user}
-            onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
           />
         ))}

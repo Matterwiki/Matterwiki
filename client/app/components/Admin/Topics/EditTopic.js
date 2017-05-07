@@ -2,18 +2,16 @@ import React from "react";
 import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
-import UserForm from "./UserForm";
 import Loader from "Loader/index";
-
 import API from "api/wrapper.js";
 
-class EditUser extends React.Component {
+import TopicForm from "./TopicForm";
+
+class EditTopic extends React.Component {
   constructor(props) {
     super(props);
-    this.editUser = this.editUser.bind(this);
-    this.state = {
-      user: null
-    };
+    this.editTopic = this.editTopic.bind(this);
+    this.state = { topic: null };
   }
 
   componentDidMount() {
@@ -21,32 +19,30 @@ class EditUser extends React.Component {
       loading: true
     });
     API.call(
-      `users/${this.props.params.userId}`,
+      `topics/${this.props.params.topicId}`,
       "GET",
       window.localStorage.getItem("userToken")
-    ).then(user => {
+    ).then(topic => {
       this.setState({
-        user: user.data,
+        topic: topic.data,
         loading: false
       });
     });
   }
 
-  editUser(user) {
-    user = {
-      name: encodeURIComponent(user.name),
-      about: encodeURIComponent(user.about),
-      email: encodeURIComponent(user.email),
-      password: encodeURIComponent(user.password),
-      id: encodeURIComponent(this.props.params.userId)
+  editTopic(topic) {
+    topic = {
+      name: encodeURIComponent(topic.name),
+      description: encodeURIComponent(topic.description),
+      id: this.props.params.topicId
     };
     API.call(
-      "users",
+      "topics",
       "PUT",
       window.localStorage.getItem("userToken"),
-      user
-    ).then(user => {
-      Alert.success("User has been edited");
+      topic
+    ).then(function(topic) {
+      Alert.success("Topic has been edited");
       hashHistory.push("admin");
     });
   }
@@ -58,9 +54,9 @@ class EditUser extends React.Component {
         <Grid>
           <Row>
             <Col md={12} sm={12}>
-              <h1><b>Update User</b></h1>
+              <h1><b>Update Topic</b></h1>
               <br />
-              <UserForm user={this.state.user} onSubmit={this.editUser} />
+              <TopicForm topic={this.state.topic} onSubmit={this.editTopic} />
             </Col>
           </Row>
         </Grid>
@@ -68,4 +64,4 @@ class EditUser extends React.Component {
   }
 }
 
-export default EditUser;
+export default EditTopic;

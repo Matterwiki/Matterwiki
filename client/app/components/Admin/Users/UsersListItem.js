@@ -2,7 +2,7 @@ import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { ListGroupItem, Button } from "react-bootstrap";
 
-const UsersListItem = ({ user, onEditClick, onDeleteClick }) => {
+const UsersListItem = ({ user, onDeleteClick }) => {
   const handleDeleteClick = e => {
     e.preventDefault();
     onDeleteClick(user.id);

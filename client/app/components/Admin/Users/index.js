@@ -83,7 +83,6 @@ class Users extends React.Component {
                 </Col>
               </Row>
             </Col>
-            <br /><br />
             <Col sm={12} md={8}>
               <UsersList
                 users={this.state.users}
