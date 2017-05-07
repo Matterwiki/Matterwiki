@@ -10,10 +10,10 @@ import NewArticle from "./components/Article/NewArticle";
 import EditArticle from "./components/Article/EditArticle";
 import Archives from "./components/Archives/index.jsx";
 import Search from "./components/Search/index";
-import Admin from "./components/Admin/index.jsx";
+import Admin from "./components/Admin/index.js";
 import Setup from "./components/Setup/index";
-import EditTopic from "./components/Dashboard/Topics/edit_topics.jsx";
-import EditUser from "./components/Dashboard/Users/edit_users.jsx";
+import EditTopic from "./components/Admin/Topics/edit_topics.jsx";
+import EditUser from "./components/Admin/Users/EditUser";
 
 export default function() {
   // Note: The order in which article:new and article:articleId is declared is important

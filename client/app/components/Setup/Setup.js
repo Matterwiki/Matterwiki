@@ -10,14 +10,13 @@ import SetupForm from "./SetupForm";
 import API from "api/wrapper.js";
 
 class Setup extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
     this.handleSignUp = this._handleSignUp.bind(this);
   }
 
   _handleSignUp(user) {
-
-    for(var f in user) {
+    for (var f in user) {
       user[f] = encodeURIComponent(user[f]);
     }
 
