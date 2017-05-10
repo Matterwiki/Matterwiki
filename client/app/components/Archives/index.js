@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router";
 import { Row, Col, Grid } from "react-bootstrap";
 import Loader from "Loader/index";
-import BrowseArchives from "./browse_archives.jsx";
-import SimpleArticle from "./simple_article.jsx";
+import BrowseArchives from "./BrowseArchives";
+import SimpleArticle from "./SimpleArticle";
 import API from "api/wrapper.js";
 
 class ArticleHistory extends React.Component {
