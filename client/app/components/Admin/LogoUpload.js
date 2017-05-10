@@ -13,8 +13,6 @@ import {
 
 import API from "api/wrapper.js";
 
-/* TODO FOR SOME REASON LOGO UPLOAD IS BROKEN */
-
 class LogoUpload extends React.Component {
   constructor(...args) {
     super(...args);
@@ -35,20 +33,33 @@ class LogoUpload extends React.Component {
 
   handleUpload(e) {
     e.preventDefault();
+    
+    var logo = this.state.logo;
+    var formData = new FormData();
+    formData.append("logo", logo);
 
-    const formData = new FormData();
-    formData.append("logo", this.state.logo);
-
-    API.call(
-      "logo",
-      "POST",
-      window.localStorage.getItem("userToken"),
-      formData
-    ).then(function(logo) {
-      console.log(logo);
-      Alert.success("Your logo has been successfully updated.");
+    var myHeaders = new Headers({
+      "x-access-token": window.localStorage.getItem("userToken")
     });
+
+    var myInit = {
+      method: "POST",
+      headers: myHeaders,
+      body: formData
+    };
+
+    fetch("/api/logo/", myInit)
+      .then(response => response.json())
+      .then(serverData => {
+        if (serverData.error.error) {
+          Alert.error(serverData.error.message);
+        } else {
+          Alert.success("Your logo has been successfully updated.");
+        }
+      });
   }
+
+
 
   render() {
     return (
