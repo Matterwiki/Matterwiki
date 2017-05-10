@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import { Row, Col, Grid } from "react-bootstrap";
 import Loader from "Loader/index";
 import BrowseArchives from "./browse_archives.jsx";
 import SimpleArticle from "./simple_article.jsx";
@@ -52,24 +53,26 @@ class ArticleHistory extends React.Component {
     if (this.state.loading) return <Loader />;
     else
       return (
-        <div className="row">
-          <div className="col-md-3">
-            <label>Archives</label>
-            <BrowseArchives
-              archives={this.state.archives}
-              archiveChange={this.archiveUpdate}
-              articleId={this.props.params.articleId}
-            />
-          </div>
-          <div className="col-md-9">
-            <label>View Article</label>
-            <SimpleArticle
-              article={this.state.article}
-              loading={this.state.articleloading}
-              isHtml={this.state.isHtml}
-            />
-          </div>
-        </div>
+        <Grid>
+          <Row>
+            <Col md={3}>
+              <label>Archives</label>
+              <BrowseArchives
+                archives={this.state.archives}
+                archiveChange={this.archiveUpdate}
+                articleId={this.props.params.articleId}
+              />
+            </Col>
+            <Col md={9}>
+              <label>View Article</label>
+              <SimpleArticle
+                article={this.state.article}
+                loading={this.state.articleloading}
+                isHtml={this.state.isHtml}
+              />
+            </Col>
+          </Row>
+        </Grid>
       );
   }
 }
