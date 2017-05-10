@@ -8,7 +8,7 @@ import Login from "./components/Login/index";
 import ViewArticle from "./components/Article/ViewArticle";
 import NewArticle from "./components/Article/NewArticle";
 import EditArticle from "./components/Article/EditArticle";
-import Archives from "./components/Archives/index.jsx";
+import Archives from "./components/Archives/index";
 import Search from "./components/Search/index";
 import Admin from "./components/Admin/index";
 import Setup from "./components/Setup/index";
