@@ -15,7 +15,7 @@ function API() {
     endpoint,
     type,
     token = null,
-    body = null,
+    body = {},
     query = null
   ) {
     return new Promise(function(resolve, reject) {

@@ -4,7 +4,7 @@ import Loader from "Loader/index";
 import Alert from "react-s-alert";
 import API from "api/wrapper.js";
 
-import { Row, Col } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 
 import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "../WikiEditor/index.jsx";
