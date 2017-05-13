@@ -13,7 +13,7 @@ import Loader from "Loader/index";
 import Alert from "react-s-alert";
 import API from "api/wrapper.js";
 
-import WikiEditor from "../WikiEditor/index.jsx";
+import WikiEditor from "../WikiEditor/index";
 import TopicChooser from "./TopicChooser";
 
 // TODO EditArticle & ViewArticle are one and the same - make it into one component

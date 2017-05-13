@@ -23,7 +23,7 @@ module.exports = {
     "whatwg-fetch",
 
     // entry point
-    APP_DIR + "/index.jsx"
+    APP_DIR + "/index.js"
   ],
   output: {
     path: BUILD_DIR,

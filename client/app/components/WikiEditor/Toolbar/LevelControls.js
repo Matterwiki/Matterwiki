@@ -1,5 +1,5 @@
 import React from 'react';
-import ToolbarButton from './ToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton';
 import {getDisabledLevelButtons} from '../helpers/index.js';
 
 

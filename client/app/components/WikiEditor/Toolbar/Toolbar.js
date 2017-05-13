@@ -1,9 +1,9 @@
 import React from 'react';
-import InlineControls from './InlineControls.jsx';
-import BlockControls from './BlockControls.jsx';
-import LevelControls from './LevelControls.jsx';
-import LinkControl from './LinkControl.jsx';
-import HistoryControls from './HistoryControls.jsx';
+import InlineControls from './InlineControls';
+import BlockControls from './BlockControls';
+import LevelControls from './LevelControls';
+import LinkControl from './LinkControl';
+import HistoryControls from './HistoryControls';
 
 const Toolbar = (props) => {
 	return (

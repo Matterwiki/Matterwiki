@@ -1,5 +1,5 @@
 import React from 'react';
-import ToolbarButton from './ToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton';
 
 const HistoryControls = ({editorState, onUndo, onRedo}) => {
 	return (

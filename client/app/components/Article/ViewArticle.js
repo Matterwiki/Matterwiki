@@ -7,7 +7,7 @@ import API from "api/wrapper.js";
 import { Grid, Row, Col } from "react-bootstrap";
 
 import ArticleHeading from "./ArticleHeading";
-import WikiEditor from "../WikiEditor/index.jsx";
+import WikiEditor from "../WikiEditor/index";
 import ArticleSidebar from "./ArticleSidebar";
 
 class ViewArticle extends React.Component {

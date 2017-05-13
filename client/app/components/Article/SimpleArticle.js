@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Row, Col, HelpBlock } from "react-bootstrap";
 
 import ArticleHeading from "./ArticleHeading";
-import WikiEditor from "WikiEditor/index.jsx";
+import WikiEditor from "WikiEditor/index";
 
 const SimpleArticle = props => {
   if (props.loading) return <Loader />;

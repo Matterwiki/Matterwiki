@@ -1,5 +1,5 @@
 import React from 'react';
-import ToolbarButton from './ToolbarButton.jsx';
+import ToolbarButton from './ToolbarButton';
 
 const INLINE_TYPES = [
 	{label: 'Bold', fa: 'fa-bold', style: 'BOLD'},

@@ -13,7 +13,7 @@ import {
   FormControl
 } from "react-bootstrap";
 
-import WikiEditor from "WikiEditor/index.jsx";
+import WikiEditor from "WikiEditor/index";
 import TopicChooser from "./TopicChooser";
 import WhatChanged from "./WhatChanged";
 
