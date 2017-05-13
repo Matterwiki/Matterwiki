@@ -12,7 +12,7 @@ const SimpleArticle = props => {
       <Grid fluid={true}>
         <Row>
           <Col md={12}>
-            <ArticleHeading editedBy={props.article.user.name}>
+            <ArticleHeading editedBy={decodeURIComponent(props.article.user.name)}>
               {decodeURIComponent(props.article.title)}
             </ArticleHeading>
             <div className="single-article-body">

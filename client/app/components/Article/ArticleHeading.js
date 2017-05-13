@@ -9,7 +9,7 @@ const LastUpdatedDate = props => (
 
 const EditedBy = props => (
   <div className="single-article-meta">
-    Edited by <b>{props.editedBy}</b>
+    Edited by <b>{props.name}</b>
   </div>
 );
 
