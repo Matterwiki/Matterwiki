@@ -4,7 +4,7 @@ import { Route, IndexRoute } from "react-router";
 import App from "./components/App/App";
 import Home from "./components/Home/index";
 import Login from "./components/Login/index";
-// TODO try to abstract common `Article` component with different children ie., New, Edit, View
+// TODO try to abstract common `Article` component with different children ie., New, Edit, View, History
 import ViewArticle from "./components/Article/ViewArticle";
 import NewArticle from "./components/Article/NewArticle";
 import EditArticle from "./components/Article/EditArticle";

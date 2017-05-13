@@ -1,57 +1,56 @@
 import React from "react";
 import { Link } from "react-router";
-import { Row, Col, Grid } from "react-bootstrap";
+import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
 import Loader from "Loader/index";
 import BrowseArchives from "./BrowseArchives";
-import SimpleArticle from "./SimpleArticle";
+import SimpleArticle from "../Article/SimpleArticle";
 import API from "api/wrapper.js";
 
 class ArticleHistory extends React.Component {
-  constructor(props) {
-    super(props);
-    this.archiveUpdate = this.archiveUpdate.bind(this);
+  constructor(...args) {
+    super(...args);
+    this.getArchive = this.getArchive.bind(this);
     this.state = {
       archives: [],
-      article: {},
-      loading: true,
-      articleloading: false
+      article: {}
     };
   }
 
   componentDidMount() {
-    var that = this;
+    this.setState({
+      loading: true
+    });
     API.call(
-      "articles/" + this.props.params.articleId + "/history",
+      `articles/${this.props.params.articleId}/history`,
       "GET",
       window.localStorage.getItem("userToken")
-    )
-      .then(function(articles) {
-        that.setState({ archives: articles.data, loading: false });
-      })
-      .catch(function(err) {
-        //Alert.error(err)
+    ).then(articles => {
+      this.setState({
+        archives: articles.data,
+        loading: false
       });
+    });
   }
 
-  archiveUpdate(id) {
-    this.setState({ articleloading: true });
-    var that = this;
-    API.call("archives/" + id, "GET", window.localStorage.getItem("userToken"))
-      .then(function(archive) {
-        that.setState({
-          article: archive.data,
-          isHtml: archive.data.body && !archive.data.body_json ? true : false,
-          articleloading: false
-        });
-      })
-      .catch(function(err) {
-        //Alert.error(err)
+  getArchive(id) {
+    this.setState({
+      loading: true
+    });
+    API.call(
+      `archives/${id}`,
+      "GET",
+      window.localStorage.getItem("userToken")
+    ).then(archive => {
+      this.setState({
+        article: archive.data,
+        loading: false
       });
+    });
   }
 
   render() {
     if (this.state.loading) return <Loader />;
-    else
+    else if (this.state.article && this.state.archives.length) {
       return (
         <Grid>
           <Row>
@@ -59,21 +58,26 @@ class ArticleHistory extends React.Component {
               <label>Archives</label>
               <BrowseArchives
                 archives={this.state.archives}
-                archiveChange={this.archiveUpdate}
+                onArchiveChosen={this.getArchive}
                 articleId={this.props.params.articleId}
               />
             </Col>
             <Col md={9}>
-              <label>View Article</label>
-              <SimpleArticle
-                article={this.state.article}
-                loading={this.state.articleloading}
-                isHtml={this.state.isHtml}
-              />
+              <SimpleArticle article={this.state.article} />
             </Col>
           </Row>
         </Grid>
       );
+    } else {
+      return (
+        <Row>
+          <HelpBlock className="center-align">
+            There are no archives for this article &nbsp;&nbsp;&nbsp;
+            <Link to={`/article/${this.props.params.articleId}`}>Go back</Link>
+          </HelpBlock>
+        </Row>
+      );
+    }
   }
 }
 

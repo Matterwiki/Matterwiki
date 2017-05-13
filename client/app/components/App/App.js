@@ -3,8 +3,10 @@ import Alert from "react-s-alert";
 import { hashHistory } from "react-router";
 import { Header, Footer, Container } from "./Layout/index";
 
-import 'react-s-alert/dist/s-alert-default.css';
-import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import "react-s-alert/dist/s-alert-default.css";
+import "react-s-alert/dist/s-alert-css-effects/slide.css";
+
+import API from "api/wrapper";
 
 // TODO refactor the Auth logic into a HOC
 class App extends React.Component {
@@ -15,9 +17,18 @@ class App extends React.Component {
 
   componentWillMount() {
     // TODO Make this check stronger
-    if (window.localStorage.getItem("userToken") == "") {
-      hashHistory.push("login");
-    }
+    // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
+
+    const token = window.localStorage.getItem("userToken");
+
+    if (!token) hashHistory.push("login");
+
+    API.call("articles", "GET", token).catch(err => {
+      if (err.code === "B101") {
+        window.localStorage.setItem("userToken", "");
+        hashHistory.push("login");
+      }
+    });
   }
 
   handleLogout() {

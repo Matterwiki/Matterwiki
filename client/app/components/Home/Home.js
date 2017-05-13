@@ -42,15 +42,16 @@ class Home extends React.Component {
       API.call("articles", "GET", token),
       // call topics
       API.call("topics", "GET", token)
-    ]).then(responses => {
-      const articles = responses[0].data;
-      const topics = responses[1].data;
+    ])
+      .then(responses => {
+        const articles = responses[0].data;
+        const topics = responses[1].data;
 
-      this.setState({
-        articles,
-        topics
+        this.setState({
+          articles,
+          topics
+        });
       });
-    });
   }
 
   render() {

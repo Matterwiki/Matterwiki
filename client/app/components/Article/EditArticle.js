@@ -94,6 +94,8 @@ class EditArticle extends React.Component {
         const article = responses[0].data;
         const topics = responses[1].data;
 
+        article.what_changed = "";
+
         this.setState({
           article,
           topics,
@@ -125,7 +127,7 @@ class EditArticle extends React.Component {
           <FormGroup>
             <WikiEditor
               ref="editor"
-              rawContent={JSON.parse(decodeURIComponent(article.body_json))}
+              rawContent={JSON.parse(decodeURIComponent(article.body))}
             />
           </FormGroup>
           <FormGroup>

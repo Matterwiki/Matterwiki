@@ -34,7 +34,6 @@ class ViewArticle extends React.Component {
     ).then(article => {
       this.setState({
         article: article.data,
-        isHtml: article.data.body && !response.data.body_json ? true : false,
         loading: false
       });
     });
@@ -53,7 +52,8 @@ class ViewArticle extends React.Component {
     API.call(
       `articles?id=${this.state.article.id}`,
       "DELETE",
-      window.localStorage.getItem("userToken")
+      window.localStorage.getItem("userToken"),
+      {}
     ).then(article => {
       Alert.success("Article has been deleted");
       hashHistory.push("home");
@@ -67,7 +67,7 @@ class ViewArticle extends React.Component {
     if (loading) return <Loader />;
     else if (article) {
       return (
-        <div>
+        <Grid fluid={true}>
           <Row>
             <Col md={9}>
               <ArticleHeading date={article.updated_at}>
@@ -76,7 +76,7 @@ class ViewArticle extends React.Component {
               <div className="single-article-body">
                 <WikiEditor
                   readOnly={true}
-                  rawContent={JSON.parse(decodeURIComponent(article.body_json))}
+                  rawContent={JSON.parse(decodeURIComponent(article.body))}
                 />
               </div>
             </Col>
@@ -90,7 +90,7 @@ class ViewArticle extends React.Component {
               />
             </Col>
           </Row>
-        </div>
+        </Grid>
       );
     }
   }

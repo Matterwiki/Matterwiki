@@ -42,7 +42,7 @@ function API() {
         },
         function(error, response, body) {
           if (body.error.error) {
-            reject(body.error.message);
+            reject(body);
           } else {
             resolve(body);
           }
