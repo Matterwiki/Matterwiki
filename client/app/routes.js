@@ -5,9 +5,11 @@ import App from "./components/App/App";
 import Home from "./components/Home/index";
 import Login from "./components/Login/index";
 // TODO try to abstract common `Article` component with different children ie., New, Edit, View, History
-import ViewArticle from "./components/Article/ViewArticle";
-import NewArticle from "./components/Article/NewArticle";
-import EditArticle from "./components/Article/EditArticle";
+import {
+  ViewArticle,
+  NewArticle,
+  EditArticle
+} from "./components/Article/index";
 import Archives from "./components/Archives/index";
 import Search from "./components/Search/index";
 import Admin from "./components/Admin/index";

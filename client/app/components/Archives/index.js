@@ -3,8 +3,10 @@ import { Link } from "react-router";
 import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
 import Loader from "Loader/index";
 import BrowseArchives from "./BrowseArchives";
-import SimpleArticle from "../Article/SimpleArticle";
+import { SimpleArticle } from "../Article/index";
 import API from "api/wrapper.js";
+
+import "./Archives.css";
 
 class ArticleHistory extends React.Component {
   constructor(...args) {

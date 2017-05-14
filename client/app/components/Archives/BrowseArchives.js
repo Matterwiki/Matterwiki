@@ -6,6 +6,7 @@ const BrowseArchives = props => {
     e.preventDefault();
     props.onArchiveChosen(id);
   };
+
   if (!props.archives.length) {
     return (
       <HelpBlock className="center-align">

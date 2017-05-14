@@ -2,8 +2,9 @@
     margin-bottom: 3em;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-}
 
+.navbar-login-logo img {
+    max-height: 50px;
+    width: auto;
+    margin-top: 3em;
+}

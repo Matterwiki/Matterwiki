@@ -3,8 +3,12 @@ import Alert from "react-s-alert";
 import { hashHistory } from "react-router";
 import { Header, Footer, Container } from "./Layout/index";
 
+import "font-awesome/css/font-awesome.min.css";
 import "react-s-alert/dist/s-alert-default.css";
-import "react-s-alert/dist/s-alert-css-effects/slide.css";
+
+// bunch of styles that are needed globally
+import "./bootstrap.css";
+import "./style.css";
 
 import API from "api/wrapper";
 
@@ -17,12 +21,11 @@ class App extends React.Component {
 
   componentWillMount() {
     // TODO Make this check stronger
-    // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
-
     const token = window.localStorage.getItem("userToken");
 
     if (!token) hashHistory.push("login");
 
+    // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
     API.call("articles", "GET", token).catch(err => {
       if (err.code === "B101") {
         window.localStorage.setItem("userToken", "");

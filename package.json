@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
     "dev": "node index.js",
-    "dev:debug" : "node  --inspect index.js",
+    "dev:debug": "node  --inspect index.js",
     "dev-testing": "cross-env TESTING=true node index.js",
     "start": "npm run build && cross-env NODE_ENV=production node index.js",
     "testcafe": "testcafe chrome tests/e2e/tests/*.js --app \"npm run dev-testing\" --app-init-delay 10000",
@@ -36,6 +36,8 @@
     "draft-js": "^0.10.0",
     "draftjs-utils": "^0.7.4",
     "express": "4.14.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
     "json-loader": "0.5.4",
     "jsonwebtoken": "7.1.9",
     "knex": "0.11.10",
@@ -57,11 +59,12 @@
     "babel-preset-es2015": "6.22.0",
     "babel-preset-react": "6.22.0",
     "cross-env": "3.1.4",
+    "file-loader": "^0.11.1",
     "react-hot-loader": "3.0.0-beta.6",
+    "testcafe": "0.13.0",
     "webpack": "2.2.0",
     "webpack-dev-middleware": "1.9.0",
     "webpack-dev-server": "2.2.0",
-    "webpack-hot-middleware": "2.15.0",
-    "testcafe": "0.13.0"
+    "webpack-hot-middleware": "2.15.0"
   }
 }

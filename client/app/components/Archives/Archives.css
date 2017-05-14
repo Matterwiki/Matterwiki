@@ -1,0 +1,5 @@
+.archive-list {
+    max-height: 600px;
+    overflow-y: scroll;
+    border: 1px solid #efefef;
+}

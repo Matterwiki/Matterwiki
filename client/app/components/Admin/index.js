@@ -1,4 +1,5 @@
 import React from "react";
+import "./Admin.css";
 
 import AdminNavBar from './AdminNavBar';
 import CurrentTab from "./CurrentTab";
