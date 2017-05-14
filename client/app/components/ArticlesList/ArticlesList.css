@@ -1,0 +1,25 @@
+.article-list {
+    padding: 10px 20px;
+}
+
+.article-item {
+  margin-bottom: 2.5em;
+}
+
+.article-item-title {
+  font-size: 2.5em;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.article-item-title a {
+  color: #4d4d4d;
+}
+
+.article-item-title a:hover {
+  color: #ff0066;
+}
+
+.article-item-description {
+  color: #a0a0a0;
+}
