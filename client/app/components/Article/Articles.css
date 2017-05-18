@@ -22,12 +22,7 @@
 .new-article .form-control {
     border: none;
 }
-.new-article textarea:hover,
-input:hover,
-textarea:active,
-input:active,
-textarea:focus,
-input:focus {
+.new-article textarea:hover {
     outline: 0px !important;
     -webkit-appearance: none;
 }

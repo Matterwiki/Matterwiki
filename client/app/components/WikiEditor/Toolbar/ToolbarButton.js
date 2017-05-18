@@ -18,7 +18,7 @@ export default class Toolbar extends Component {
 		const toolbarButtonClass = classNames({
 			'active' : this.props.active
 		}, 'toolbar-button');
-		const fontIcon = `fa ${this.props.fa}`;
+		const FontIcon = this.props.fa;
 
 		return (
 			<Button 
@@ -28,7 +28,7 @@ export default class Toolbar extends Component {
 				onMouseDown={this.onToggle} 
 				title={this.props.label}
 				disabled={this.props.disabled}>
-    			<i className={fontIcon} ></i>
+    			<FontIcon/>
   			</Button>
 		);
 	}

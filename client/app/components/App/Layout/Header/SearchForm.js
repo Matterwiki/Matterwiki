@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import { hashHistory } from "react-router";
+import FaSearch from "react-icons/fa/search";
 
 class SearchForm extends React.Component {
   constructor(...args) {
@@ -39,7 +40,7 @@ class SearchForm extends React.Component {
             />
           </FormGroup>
           <Button type="submit" className="search-button">
-            <i className="fa fa-search" />
+            <FaSearch />
           </Button>
         </Form>
       </Navbar.Form>

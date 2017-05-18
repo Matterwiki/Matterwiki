@@ -2,6 +2,31 @@
     margin-bottom: 3em;
 }
 
+.navbar-form {
+    padding: 10px 15px;
+    margin-right: 0px;
+}
+.search-button {
+    height: 100%;
+    max-height: 30px;
+    padding: 5px;
+    color: #a0a0a0;
+    background-color: #ccc;
+    border: 1px solid transparent;
+}
+.search-button:hover,
+.search-button:active,
+.search-button:focus {
+    color: #ccc;
+    background-color: #a0a0a0;
+}
+.search-input {
+    width: 100%;
+    min-height: 0px;
+    height: 30px;
+    padding: 6px 12px;
+    font-size: inherit;
+}
 
 .navbar-login-logo img {
     max-height: 50px;

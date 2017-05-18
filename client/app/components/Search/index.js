@@ -2,13 +2,13 @@ import React from "react";
 import Loader from "Loader/index";
 import { Link, hashHistory } from "react-router";
 import Alert from "react-s-alert";
-import "./Search.css";
-
+import FaFrownO from "react-icons/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
 
 import API from "api/wrapper.js";
-
 import ArticlesList from "../ArticlesList/index";
+
+import "./Search.css";
 
 class Search extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class Search extends React.Component {
           </div>
           {!this.state.articles.length
             ? <div className="no-results">
-                <i className="fa fa-frown-o" />
+                <FaFrownO size={100}/>
                 <p>Please try again with another query</p>
               </div>
             : <ArticlesList articles={articles} />}

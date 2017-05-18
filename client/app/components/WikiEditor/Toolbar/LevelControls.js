@@ -1,4 +1,5 @@
 import React from 'react';
+import {FaIndent, FaDedent} from "react-icons/lib/fa"
 import ToolbarButton from './ToolbarButton';
 import {getDisabledLevelButtons} from '../helpers/index.js';
 
@@ -16,14 +17,14 @@ const LevelControls = ({editorState, toggleLevelType}) => {
 				disabled={disableOutdent}
 				label='Decrease Level'
 				style='outdent'
-				fa='fa-outdent'
+				fa={FaDedent}
 			/>
 			<ToolbarButton
 				onToggle={onIncreaseLevel}
 				disabled={disableIndent}
 				label='Increase Level'
 				style='indent'
-				fa='fa-indent'
+				fa={FaIndent}
 			/>
 		</div>
 	)

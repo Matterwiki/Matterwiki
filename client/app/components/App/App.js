@@ -1,12 +1,11 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { hashHistory } from "react-router";
-import { Header, Footer, Container } from "./Layout/index";
+import Layout from "./Layout/index";
 
-import "font-awesome/css/font-awesome.min.css";
 import "react-s-alert/dist/s-alert-default.css";
 
-// bunch of styles that are needed globally
+// bunch of custom styles that are needed globally
 import "./bootstrap.css";
 import "./style.css";
 
@@ -20,18 +19,22 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    // TODO Make this check stronger
-    const token = window.localStorage.getItem("userToken");
+    // Hack to move away from here if going to setup
+    // TODO move the auth stuff elsewhere
+    if (!this.props.location.pathname.includes("setup")) {
+      // TODO Make this check stronger
+      const token = window.localStorage.getItem("userToken");
 
-    if (!token) hashHistory.push("login");
+      if (!token) hashHistory.push("login");
 
-    // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
-    API.call("articles", "GET", token).catch(err => {
-      if (err.code === "B101") {
-        window.localStorage.setItem("userToken", "");
-        hashHistory.push("login");
-      }
-    });
+      // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
+      API.call("articles", "GET", token).catch(err => {
+        if (err.code === "B101") {
+          window.localStorage.setItem("userToken", "");
+          hashHistory.push("login");
+        }
+      });
+    }
   }
 
   handleLogout() {
@@ -49,11 +52,9 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header {...headerProps} />
-        <Container>
+        <Layout {...headerProps}>
           {this.props.children}
-        </Container>
-        <Footer />
+        </Layout>
         <Alert stack={{ limit: 1 }} position="bottom" />
       </div>
     );

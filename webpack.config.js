@@ -58,6 +58,13 @@ module.exports = {
         }
       },
       {
+        test: /react-icons\/(.)*(.js)$/,
+        loader: "babel-loader",
+        query: {
+          presets: ["es2015", "react"]
+        }
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
