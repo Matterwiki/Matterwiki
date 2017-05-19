@@ -20,7 +20,6 @@ class App extends React.Component {
 
   componentWillMount() {
     // Hack to move away from here if going to setup
-    // TODO move the auth stuff elsewhere
     if (!this.props.location.pathname.includes("setup")) {
       // TODO Make this check stronger
       const token = window.localStorage.getItem("userToken");

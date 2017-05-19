@@ -1,6 +1,6 @@
-import WikiEditor from './WikiEditor.js'
+import WikiEditor from "./WikiEditor.js";
+import "./WikiEditor.css";
 
 import "draft-js/dist/Draft.css";
-import './WikiEditor.css';
 
 export default WikiEditor;

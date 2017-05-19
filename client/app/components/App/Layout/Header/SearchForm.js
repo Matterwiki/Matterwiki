@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import { hashHistory } from "react-router";
-import FaSearch from "react-icons/fa/search";
+import FaSearch from "react-icons/lib/fa/search";
 
 class SearchForm extends React.Component {
   constructor(...args) {
@@ -23,7 +23,15 @@ class SearchForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    hashHistory.push(`/search?query=${this.state.searchText}`);
+
+    this.setState(prevState => {
+      const { searchText } = this.state;
+      hashHistory.push(`/search?query=${searchText}`);
+
+      return {
+        searchText: ""
+      };
+    });
   }
 
   render() {

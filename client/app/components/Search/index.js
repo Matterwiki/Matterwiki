@@ -2,7 +2,7 @@ import React from "react";
 import Loader from "Loader/index";
 import { Link, hashHistory } from "react-router";
 import Alert from "react-s-alert";
-import FaFrownO from "react-icons/fa/frown-o";
+import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
 
 import API from "api/wrapper.js";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
-import FaExternalLink from "react-icons/fa/external-link";
+import FaExternalLink from "react-icons/lib/fa/external-link";
 // TODO transition this to the entire codebase.
 import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
 

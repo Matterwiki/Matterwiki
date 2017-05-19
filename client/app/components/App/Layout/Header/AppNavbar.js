@@ -35,7 +35,10 @@ const AppNavbar = props => {
             New Article
           </LinkNavItem>
           <NavItem onClick={handleLogoutClick}> Logout </NavItem>
-          <SearchForm />
+          {/* hack to ensure uniform rendering */}
+          <li role="presentation">
+            <SearchForm />
+          </li>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

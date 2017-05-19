@@ -2,6 +2,11 @@
     margin-bottom: 3em;
 }
 
+.navbar-nav li.active a {
+    background-color: #fff !important;
+    border-bottom: 1px solid #ff0066;
+}
+
 .navbar-form {
     padding: 10px 15px;
     margin-right: 0px;
