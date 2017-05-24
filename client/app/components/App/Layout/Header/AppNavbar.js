@@ -15,6 +15,7 @@ const LinkNavItem = props => (
 const AppNavbar = props => {
   const { isAdmin, handleLogoutClick } = props;
 
+  // TODO Fix an unknown prop warning
   return (
     <Navbar>
       <Navbar.Header>
@@ -35,7 +36,6 @@ const AppNavbar = props => {
             New Article
           </LinkNavItem>
           <NavItem onClick={handleLogoutClick}> Logout </NavItem>
-          {/* hack to ensure uniform rendering */}
           <li role="presentation">
             <SearchForm />
           </li>

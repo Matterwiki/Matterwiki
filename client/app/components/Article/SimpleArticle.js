@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Row, Col, HelpBlock } from "react-bootstrap";
 
-import ArticleHeading from "./ArticleHeading";
+import ArticleHeading from "./common/ArticleHeading";
 import WikiEditor from "WikiEditor/index";
 
 const SimpleArticle = props => {

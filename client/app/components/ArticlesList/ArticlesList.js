@@ -19,9 +19,9 @@ const ArticlesList = props => {
   } else {
     return (
       <div className="article-list">
-        {articles.map(article => (
-          <ArticlesListItem key={article.id} article={article} />
-        ))}
+        {articles.map(
+            article => <ArticlesListItem key={article.id} article={article} />
+        )}
       </div>
     );
   }

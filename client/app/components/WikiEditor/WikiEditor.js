@@ -96,12 +96,11 @@ class WikiEditor extends Component {
   }
 
   _onChange(editorState) {
-    this.setState({ editorState });
-
     // get the currentEntity
     // TODO, again, is inefficient
     this.setState({
-      currentEntityKey: getCurrentEntityKey(editorState)
+      currentEntityKey: getCurrentEntityKey(editorState),
+      editorState
     });
   }
 

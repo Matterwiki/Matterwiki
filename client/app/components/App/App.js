@@ -24,13 +24,13 @@ class App extends React.Component {
       // TODO Make this check stronger
       const token = window.localStorage.getItem("userToken");
 
-      if (!token) hashHistory.push("login");
+      if (!token) return hashHistory.push("login");
 
       // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
       API.call("articles", "GET", token).catch(err => {
         if (err.code === "B101") {
           window.localStorage.setItem("userToken", "");
-          hashHistory.push("login");
+          return hashHistory.push("login");
         }
       });
     }

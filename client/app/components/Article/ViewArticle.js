@@ -6,9 +6,9 @@ import API from "api/wrapper.js";
 
 import { Grid, Row, Col } from "react-bootstrap";
 
-import ArticleHeading from "./ArticleHeading";
+import ArticleHeading from "./common/ArticleHeading";
 import WikiEditor from "../WikiEditor/index";
-import ArticleSidebar from "./ArticleSidebar";
+import ArticleSidebar from "./common/ArticleSidebar";
 
 class ViewArticle extends React.Component {
   constructor(props) {
@@ -20,8 +20,7 @@ class ViewArticle extends React.Component {
 
     this.state = {
       loading: true,
-      article: {},
-      isHtml: null
+      article: {}
     };
   }
 

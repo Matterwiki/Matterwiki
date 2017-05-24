@@ -39,7 +39,7 @@ class Login extends React.Component {
         Alert.success("You are now logged in");
       })
       .catch(function(err) {
-        //Alert.error(err);
+        Alert.error(err.error.message);
       });
   }
 

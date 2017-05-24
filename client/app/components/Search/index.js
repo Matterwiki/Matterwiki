@@ -65,7 +65,7 @@ class Search extends React.Component {
         <div>
           <div className="result-info">
             <HelpBlock>
-              We found {articles.length} articles for your query
+              We found {articles.length} articles for {query}
             </HelpBlock>
           </div>
           {!this.state.articles.length
