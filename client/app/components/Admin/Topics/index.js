@@ -8,7 +8,7 @@ import Loader from "Loader/index";
 import TopicsList from "./TopicsList";
 import TopicForm from "./TopicForm";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class Topics extends React.Component {
   constructor(props) {
@@ -25,13 +25,9 @@ class Topics extends React.Component {
 
   handleUpdate() {
     this.setState({ loading: true });
-    API.call(
-      "topics",
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(topics => {
+    APIProvider.get("topics").then(topics => {
       this.setState({
-        topics: topics.data,
+        topics,
         loading: false
       });
     });
@@ -42,23 +38,14 @@ class Topics extends React.Component {
   }
 
   deleteTopic(id) {
-    API.call(
-      `topics?id=${id}`,
-      "DELETE",
-      window.localStorage.getItem("userToken")
-    ).then(topic => {
+    APIProvider.delete(`topics?id=${id}`).then(topic => {
       Alert.success("Topic has been deleted");
       this.handleUpdate();
     });
   }
 
   addTopic(topic) {
-    API.call(
-      "topics",
-      "POST",
-      window.localStorage.getItem("userToken"),
-      topic
-    ).then(topic => {
+    APIProvider.post("topics", topic).then(topic => {
       Alert.success("Topic has been added");
       this.handleUpdate();
     });

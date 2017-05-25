@@ -26,8 +26,7 @@ class ArticleForm extends React.Component {
         topic_id: 1
       };
     } else {
-      const title = decodeURIComponent(article.title);
-      const { topic_id, what_changed } = article;
+      const { topic_id, title, what_changed } = article;
 
       this.state = {
         edit: true,
@@ -66,19 +65,13 @@ class ArticleForm extends React.Component {
       ? body && title && topic_id && what_changed
       : body && title && topic_id;
 
-    const errorMessage = `Article Body, Title${edit ? ", Change info": ""} and Topic Information is required.`; 
+    const changeInfo = edit ? ", Change info" : "";
+    const errorMessage = `Article Body, Title${changeInfo} and Topic Information is required.`;
 
     if (canSubmit) {
-      const userId = window.localStorage.getItem("userId");
-      // TODO DO SOMETHING ABOUT THIS! It's getting out of hand! x(
-      const formData = {
-        title: encodeURIComponent(title),
-        body: encodeURIComponent(body),
-        topic_id: topic_id,
-        user_id: userId
-      };
-
-      if(edit) formData.what_changed = what_changed;
+      const user_id = window.localStorage.getItem("userId");
+      const formData = { title, body, topic_id, user_id };
+      if (edit) formData.what_changed = what_changed;
 
       this.props.onSubmit(formData);
     } else {
@@ -87,12 +80,12 @@ class ArticleForm extends React.Component {
   }
 
   render() {
-    let WikiEditorProps = { ref: "editor" };
-    if (this.props.article) {
-      WikiEditorProps.rawContent = JSON.parse(
-        decodeURIComponent(this.props.article.body)
-      );
-    }
+    const { edit } = this.state;
+    const WikiEditorProps = Object.assign(
+      {},
+      { ref: "editor" },
+      edit ? { rawContent: JSON.parse(this.props.article.body) } : {}
+    );
 
     return (
       <Form className="new-article" onSubmit={this.onSubmit}>
@@ -128,7 +121,7 @@ class ArticleForm extends React.Component {
         <br />
         <Col sm={12}>
           <Button type="submit" block={true}>
-            Create Article
+            {`${edit ? "Update" : "Create"} Article`}
           </Button>
         </Col>
       </Form>

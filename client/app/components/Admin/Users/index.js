@@ -7,7 +7,7 @@ import Alert from "react-s-alert";
 import UsersList from "./UsersList";
 import UserForm from "./UserForm";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class Users extends React.Component {
   constructor(...args) {
@@ -26,13 +26,9 @@ class Users extends React.Component {
     this.setState({
       loading: true
     });
-    API.call(
-      "users",
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(users => {
+    APIProvider.get("users").then(users => {
       this.setState({
-        users: users.data,
+        users,
         loading: false
       });
     });
@@ -43,15 +39,12 @@ class Users extends React.Component {
   }
 
   deleteUser(id) {
-    const deleteText =
-      "Deleting the user will move all of his/her articles to the Admin. Are you sure?";
+    const canDelete = confirm(
+      "Deleting the user will move all of his/her articles to the Admin. Are you sure?"
+    );
 
-    if (confirm(deleteText)) {
-      API.call(
-        "users?id=" + id,
-        "DELETE",
-        window.localStorage.getItem("userToken")
-      ).then(user => {
+    if (canDelete) {
+      APIProvider.delete(`users?id=${id}`).then(a => {
         Alert.success("User has been deleted");
         this.handleUpdate();
       });
@@ -59,12 +52,7 @@ class Users extends React.Component {
   }
 
   addUser(user) {
-    API.call(
-      "users",
-      "POST",
-      window.localStorage.getItem("userToken"),
-      user
-    ).then(user => {
+    APIProvider.post("users", user).then(user => {
       Alert.success("User has been added");
       this.handleUpdate();
     });

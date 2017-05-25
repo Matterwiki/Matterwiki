@@ -3,7 +3,7 @@ import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
 import Loader from "Loader/index";
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 import TopicForm from "./TopicForm";
 
@@ -18,30 +18,18 @@ class EditTopic extends React.Component {
     this.setState({
       loading: true
     });
-    API.call(
-      `topics/${this.props.params.topicId}`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(topic => {
+    APIProvider.get(`topics/${this.props.params.topicId}`).then(topic => {
       this.setState({
-        topic: topic.data,
+        topic,
         loading: false
       });
     });
   }
 
   editTopic(topic) {
-    topic = {
-      name: encodeURIComponent(topic.name),
-      description: encodeURIComponent(topic.description),
-      id: this.props.params.topicId
-    };
-    API.call(
-      "topics",
-      "PUT",
-      window.localStorage.getItem("userToken"),
-      topic
-    ).then(function(topic) {
+    topic.id = this.props.params.topicId;
+
+    APIProvider.put("topics", topic).then(function(topic) {
       Alert.success("Topic has been edited");
       hashHistory.push("admin");
     });

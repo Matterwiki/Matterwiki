@@ -15,7 +15,6 @@ const LinkNavItem = props => (
 const AppNavbar = props => {
   const { isAdmin, handleLogoutClick } = props;
 
-  // TODO Fix an unknown prop warning
   return (
     <Navbar>
       <Navbar.Header>
@@ -27,6 +26,7 @@ const AppNavbar = props => {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
+        <SearchForm />
         <Nav pullRight>
           {isAdmin &&
             <LinkNavItem to="admin">
@@ -36,9 +36,6 @@ const AppNavbar = props => {
             New Article
           </LinkNavItem>
           <NavItem onClick={handleLogoutClick}> Logout </NavItem>
-          <li role="presentation">
-            <SearchForm />
-          </li>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

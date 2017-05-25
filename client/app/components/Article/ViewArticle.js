@@ -2,7 +2,7 @@ import React from "react";
 import { browserHistory, hashHistory } from "react-router";
 import Loader from "Loader/index";
 import Alert from "react-s-alert";
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 import { Grid, Row, Col } from "react-bootstrap";
 
@@ -26,13 +26,9 @@ class ViewArticle extends React.Component {
 
   componentDidMount() {
     var id = this.props.params.articleId;
-    API.call(
-      `articles/${id}`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(article => {
+    APIProvider.get(`articles/${id}`).then(article => {
       this.setState({
-        article: article.data,
+        article,
         loading: false
       });
     });
@@ -48,19 +44,14 @@ class ViewArticle extends React.Component {
 
   handleDeleteClick(e) {
     e.preventDefault();
-    API.call(
-      `articles?id=${this.state.article.id}`,
-      "DELETE",
-      window.localStorage.getItem("userToken"),
-      {}
-    ).then(article => {
+    APIProvider.delete(`articles?id=${this.state.article.id}`).then(article => {
       Alert.success("Article has been deleted");
       hashHistory.push("home");
     });
   }
 
   render() {
-    const { loading, article, isHtml } = this.state;
+    const { loading, article } = this.state;
     const isAdmin = parseInt(window.localStorage.getItem("userId")) === 1;
 
     if (loading) return <Loader />;
@@ -70,12 +61,12 @@ class ViewArticle extends React.Component {
           <Row>
             <Col md={9}>
               <ArticleHeading date={article.updated_at}>
-                {decodeURIComponent(article.title)}
+                {article.title}
               </ArticleHeading>
               <div className="single-article-body">
                 <WikiEditor
                   readOnly={true}
-                  rawContent={JSON.parse(decodeURIComponent(article.body))}
+                  rawContent={JSON.parse(article.body)}
                 />
               </div>
             </Col>

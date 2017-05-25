@@ -23,7 +23,7 @@ class TopicForm extends React.Component {
   _initState() {
     this.state = TOPIC_FORM_FIELDS.reduce((state, formField) => {
       state[formField.name] = this.props.topic
-        ? decodeURIComponent(this.props.topic[formField.name])
+        ? this.props.topic[formField.name]
         : "";
       return state;
     }, {});

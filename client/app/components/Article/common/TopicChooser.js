@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, ControlLabel } from "react-bootstrap";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class TopicChooser extends React.Component {
   constructor(...args) {
@@ -13,15 +13,7 @@ class TopicChooser extends React.Component {
   }
 
   componentDidMount() {
-    API.call(
-      "topics",
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(response => {
-      this.setState({
-        topics: response.data
-      });
-    });
+    APIProvider.get("topics").then(topics => this.setState({ topics }));
   }
 
   render() {

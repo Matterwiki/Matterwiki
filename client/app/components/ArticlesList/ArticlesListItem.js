@@ -8,7 +8,7 @@ const ArticlesListItem = props => {
   return (
     <div className="article-item">
       <div className="article-item-title">
-        <Link to={articleLink}>{decodeURIComponent(article.title)}</Link>
+        <Link to={articleLink}>{article.title}</Link>
       </div>
       <div className="article-item-description">
         {`Last updated on ${new Date(article.updated_at.replace(" ", "T")).toDateString()}`}

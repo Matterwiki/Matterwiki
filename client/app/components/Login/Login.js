@@ -5,7 +5,7 @@ import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class Login extends React.Component {
   constructor(props) {
@@ -21,25 +21,21 @@ class Login extends React.Component {
   }
 
   _handleSubmit(user) {
-    for (var f in user) {
-      user[f] = encodeURIComponent(user[f]);
-    }
-
-    API.call("authenticate", "POST", "", user)
+    APIProvider.post("authenticate", user)
       .then(function(loggedInUser) {
-        window.localStorage.setItem("userToken", loggedInUser.data.token);
-        window.localStorage.setItem("userId", loggedInUser.data.user.id);
+        window.localStorage.setItem("userToken", loggedInUser.token);
+        window.localStorage.setItem("userId", loggedInUser.user.id);
 
         // TODO some weird `.`s going on here.
         // The API Wrapper should have to take care of this and just return data
-        window.localStorage.setItem("userEmail", loggedInUser.data.user.token);
+        window.localStorage.setItem("userEmail", loggedInUser.user.token);
 
         hashHistory.push("home");
 
         Alert.success("You are now logged in");
       })
       .catch(function(err) {
-        Alert.error(err.error.message);
+        Alert.error(err.message);
       });
   }
 

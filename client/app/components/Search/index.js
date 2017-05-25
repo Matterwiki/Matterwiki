@@ -5,7 +5,7 @@ import Alert from "react-s-alert";
 import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 import ArticlesList from "../ArticlesList/index";
 
 import "./Search.css";
@@ -29,24 +29,20 @@ class Search extends React.Component {
       loading: true
     });
 
-    return API.call(
-      `/search?query=${query}`,
-      "GET",
-      userToken
-    ).then(response => {
+    return APIProvider.get(`/search?query=${query}`).then(articles => {
       this.setState({
-        articles: response.data,
+        articles,
         loading: false
       });
     });
   }
 
   componentWillMount() {
-    this.getSearchResults(encodeURIComponent(this.props.location.query.query));
+    this.getSearchResults(this.props.location.query.query);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getSearchResults(encodeURIComponent(this.props.location.query.query));
+    this.getSearchResults(this.props.location.query.query);
   }
 
   componentWillUnmount() {
@@ -70,7 +66,7 @@ class Search extends React.Component {
           </div>
           {!this.state.articles.length
             ? <div className="no-results">
-                <FaFrownO size={100}/>
+                <FaFrownO size={100} />
                 <p>Please try again with another query</p>
               </div>
             : <ArticlesList articles={articles} />}

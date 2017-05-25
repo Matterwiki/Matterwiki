@@ -11,7 +11,7 @@ import {
   HelpBlock
 } from "react-bootstrap";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class LogoUpload extends React.Component {
   constructor(...args) {
@@ -31,6 +31,7 @@ class LogoUpload extends React.Component {
     });
   }
 
+  // TODO - still uses fetch API. Make it use APIProvider
   handleUpload(e) {
     e.preventDefault();
     

@@ -4,7 +4,7 @@ import Alert from "react-s-alert";
 import Loader from "Loader/index";
 import ArticleForm from "./common/ArticleForm";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class EditArticle extends React.Component {
   constructor(...args) {
@@ -19,17 +19,15 @@ class EditArticle extends React.Component {
 
   handleSubmit(article) {
     const articleId = this.props.params.articleId;
-    const userToken = window.localStorage.getItem("userToken");
 
     article.id = articleId;
 
-    API.call("articles", "PUT", userToken, article)
+    APIProvider.put("articles", article)
       .then(article => {
         Alert.success("Article has been successfully saved");
         hashHistory.push(`article/${articleId}`);
       })
       .catch(err => {
-        console.log(err);
         Alert.error(response.error.message);
       });
   }
@@ -40,10 +38,8 @@ class EditArticle extends React.Component {
     });
 
     const articleId = this.props.params.articleId;
-    const userToken = window.localStorage.getItem("userToken");
 
-    API.call(`articles/${articleId}`, "GET", userToken).then(response => {
-      const article = response.data;
+    APIProvider.get(`articles/${articleId}`).then(article => {
       article.what_changed = "";
 
       this.setState({

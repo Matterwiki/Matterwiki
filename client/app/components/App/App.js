@@ -9,7 +9,7 @@ import "react-s-alert/dist/s-alert-default.css";
 import "./bootstrap.css";
 import "./style.css";
 
-import API from "api/wrapper";
+import APIProvider from "utils/APIProvider";
 
 // TODO refactor the Auth logic into a HOC
 class App extends React.Component {
@@ -27,7 +27,7 @@ class App extends React.Component {
       if (!token) return hashHistory.push("login");
 
       // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
-      API.call("articles", "GET", token).catch(err => {
+      APIProvider.get("articles").catch(err => {
         if (err.code === "B101") {
           window.localStorage.setItem("userToken", "");
           return hashHistory.push("login");

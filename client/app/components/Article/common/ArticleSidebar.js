@@ -3,27 +3,35 @@ import { Button } from "react-bootstrap";
 import ArticleSidebarItem from "./ArticleSidebarItem";
 
 const ArticleSidebar = props => {
-  const { article, onEditClick, onHistoryClick, onDeleteClick } = props;
+  const {
+    article,
+    isAdmin,
+    onEditClick,
+    onHistoryClick,
+    onDeleteClick
+  } = props;
+  
+  const { topic, user, what_changed } = article;
 
   return (
     <div className="article-sidebar">
       <ArticleSidebarItem title="Filed under">
         <h2 className="color-text">
-          <b>{decodeURIComponent(article.topic.name)}</b>
+          <b>{topic.name}</b>
         </h2>
       </ArticleSidebarItem>
       <ArticleSidebarItem title="Last Updated By">
         <h3>
-          <b>{decodeURIComponent(article.user.name)}</b>
+          <b>{user.name}</b>
         </h3>
-        <p>{decodeURIComponent(article.user.about)}</p>
+        <p>{user.about}</p>
       </ArticleSidebarItem>
       <ArticleSidebarItem title="What Changed in last edit">
-        {article.what_changed || <h4>No information available</h4>}
+        {what_changed || <h4>No information available</h4>}
       </ArticleSidebarItem>
       <Button onClick={onEditClick} block={true}>Edit</Button>
       <Button onClick={onHistoryClick} block={true}>History</Button>
-      {props.isAdmin &&
+      {isAdmin &&
         <Button block={true} onClick={onDeleteClick}>
           Delete
         </Button>}

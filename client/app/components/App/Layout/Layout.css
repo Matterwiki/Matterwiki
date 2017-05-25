@@ -10,6 +10,7 @@
 .navbar-form {
     padding: 10px 15px;
     margin-right: 0px;
+    margin-top: 1.6% !important;
 }
 .search-button {
     height: 100%;

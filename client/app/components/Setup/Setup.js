@@ -7,7 +7,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 
 import SetupForm from "./SetupForm";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class Setup extends React.Component {
   constructor(...args) {
@@ -16,11 +16,7 @@ class Setup extends React.Component {
   }
 
   _handleSignUp(user) {
-    for (var f in user) {
-      user[f] = encodeURIComponent(user[f]);
-    }
-
-    API.call("setup", "POST", "", user)
+    APIProvider.post("setup", user)
       .then(function(user) {
         Alert.success("Admin user generated");
         hashHistory.push("login");

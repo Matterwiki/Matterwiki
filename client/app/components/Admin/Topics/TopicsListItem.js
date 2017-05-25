@@ -9,8 +9,8 @@ const TopicsListItem = ({ topic, onDeleteClick }) => {
   };
 
   return (
-    <ListGroupItem header={decodeURIComponent(topic.name)}>
-      {decodeURIComponent(topic.description) || "-"}
+    <ListGroupItem header={topic.name}>
+      {topic.description || "-"}
       <span className="pull-right">
         <LinkContainer to={`topic/edit/${topic.id}`}>
           <Button>Edit</Button>

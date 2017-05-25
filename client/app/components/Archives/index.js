@@ -4,7 +4,7 @@ import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
 import Loader from "Loader/index";
 import BrowseArchives from "./BrowseArchives";
 import { SimpleArticle } from "../Article/index";
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider.js";
 
 import "./Archives.css";
 
@@ -22,13 +22,11 @@ class ArticleHistory extends React.Component {
     this.setState({
       loading: true
     });
-    API.call(
-      `articles/${this.props.params.articleId}/history`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(articles => {
+    APIProvider.get(
+      `articles/${this.props.params.articleId}/history`
+    ).then(archives => {
       this.setState({
-        archives: articles.data,
+        archives,
         loading: false
       });
     });
@@ -36,15 +34,12 @@ class ArticleHistory extends React.Component {
 
   getArchive(id) {
     this.setState({
+      archive: null,
       loading: true
     });
-    API.call(
-      `archives/${id}`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(archive => {
+    APIProvider.get(`archives/${id}`).then(article => {
       this.setState({
-        article: archive.data,
+        article,
         loading: false
       });
     });
@@ -74,7 +69,7 @@ class ArticleHistory extends React.Component {
       return (
         <Row>
           <HelpBlock className="center-align">
-            There are no archives for this article &nbsp;&nbsp;&nbsp;
+            There are no archives for this article {`   `}
             <Link to={`/article/${this.props.params.articleId}`}>Go back</Link>
           </HelpBlock>
         </Row>

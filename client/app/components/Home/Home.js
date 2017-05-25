@@ -4,7 +4,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 
 import TopicsList from "./TopicsList/index";
 import ArticlesList from "../ArticlesList/index";
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class Home extends React.Component {
   constructor(props) {
@@ -23,35 +23,24 @@ class Home extends React.Component {
       articles: null
     });
 
-    API.call(
-      `topic/${id}/articles`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(response => {
-      this.setState({
-        articles: response.data
-      });
-    });
+    APIProvider.get(`topic/${id}/articles`).then(articles =>
+      this.setState({ articles })
+    );
   }
 
   componentDidMount() {
-    const token = window.localStorage.getItem("userToken");
-
     Promise.all([
-      // call articles
-      API.call("articles", "GET", token),
-      // call topics
-      API.call("topics", "GET", token)
-    ])
-      .then(responses => {
-        const articles = responses[0].data;
-        const topics = responses[1].data;
+      APIProvider.get("articles"),
+      APIProvider.get("topics")
+    ]).then(responses => {
+      const articles = responses[0];
+      const topics = responses[1];
 
-        this.setState({
-          articles,
-          topics
-        });
+      this.setState({
+        articles,
+        topics
       });
+    });
   }
 
   render() {

@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 import UserForm from "./UserForm";
 import Loader from "Loader/index";
 
-import API from "api/wrapper.js";
+import APIProvider from "utils/APIProvider";
 
 class EditUser extends React.Component {
   constructor(props) {
@@ -20,32 +20,18 @@ class EditUser extends React.Component {
     this.setState({
       loading: true
     });
-    API.call(
-      `users/${this.props.params.userId}`,
-      "GET",
-      window.localStorage.getItem("userToken")
-    ).then(user => {
+    APIProvider.get(`users/${this.props.params.userId}`).then(user => {
       this.setState({
-        user: user.data,
+        user,
         loading: false
       });
     });
   }
 
   editUser(user) {
-    user = {
-      name: encodeURIComponent(user.name),
-      about: encodeURIComponent(user.about),
-      email: encodeURIComponent(user.email),
-      password: encodeURIComponent(user.password),
-      id: encodeURIComponent(this.props.params.userId)
-    };
-    API.call(
-      "users",
-      "PUT",
-      window.localStorage.getItem("userToken"),
-      user
-    ).then(user => {
+    user.id = this.props.params.userId;
+
+    APIProvider.put("users", user).then(user => {
       Alert.success("User has been edited");
       hashHistory.push("admin");
     });

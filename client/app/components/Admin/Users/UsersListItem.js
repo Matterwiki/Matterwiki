@@ -9,8 +9,8 @@ const UsersListItem = ({ user, onDeleteClick }) => {
   };
 
   return (
-    <ListGroupItem header={decodeURIComponent(user.name)}>
-      {decodeURIComponent(user.about) || "-"}
+    <ListGroupItem header={user.name}>
+      {user.about || "-"}
       <span className="pull-right">
         <LinkContainer to={`user/edit/${user.id}`}>
           <Button>Edit</Button>

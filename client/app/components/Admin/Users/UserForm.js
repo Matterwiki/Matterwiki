@@ -25,7 +25,7 @@ class UserForm extends React.Component {
   _initState() {
     this.state = USER_FORM_FIELDS.reduce((state, formField) => {
       state[formField.name] = this.props.user
-        ? decodeURIComponent(this.props.user[formField.name])
+        ? this.props.user[formField.name]
         : "";
       return state;
     }, {});

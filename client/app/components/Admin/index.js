@@ -4,8 +4,6 @@ import "./Admin.css";
 import AdminNavBar from './AdminNavBar';
 import CurrentTab from "./CurrentTab";
 
-import API from "api/wrapper.js";
-
 class Admin extends React.Component {
   constructor(...args) {
     super(...args);

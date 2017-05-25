@@ -7,13 +7,13 @@ import WikiEditor from "WikiEditor/index";
 const SimpleArticle = props => {
   if (props.loading) return <Loader />;
   if (props.article && props.article.user) {
-    const rawContent = JSON.parse(decodeURIComponent(props.article.body));
+    const rawContent = JSON.parse(props.article.body);
     return (
       <Grid fluid={true}>
         <Row>
           <Col md={12}>
-            <ArticleHeading editedBy={decodeURIComponent(props.article.user.name)}>
-              {decodeURIComponent(props.article.title)}
+            <ArticleHeading editedBy={props.article.user.name}>
+              {props.article.title}
             </ArticleHeading>
             <div className="single-article-body">
               <WikiEditor readOnly={true} rawContent={rawContent} />
