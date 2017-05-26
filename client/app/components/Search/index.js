@@ -10,6 +10,7 @@ import ArticlesList from "../ArticlesList/index";
 
 import "./Search.css";
 
+// TODO - fix an encoding problem when the query param contains symbols and other weird stuff
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +30,7 @@ class Search extends React.Component {
       loading: true
     });
 
-    return APIProvider.get(`/search?query=${query}`).then(articles => {
+    return APIProvider.query("search", { query }).then(articles => {
       this.setState({
         articles,
         loading: false
@@ -42,7 +43,7 @@ class Search extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getSearchResults(this.props.location.query.query);
+    this.getSearchResults(nextProps.location.query.query);
   }
 
   componentWillUnmount() {

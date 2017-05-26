@@ -1,7 +1,6 @@
 import axios from "axios";
 
 // TODO Add better error handling
-
 const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
   baseURL: "api/",
@@ -30,6 +29,8 @@ function prepareResponse(response) {
  */
 const APIProvider = {
   get: endpoint => axiosInstance.get(endpoint).then(prepareResponse),
+  query: (endpoint, queryParams) =>
+    axiosInstance.get(endpoint, { params: queryParams }).then(prepareResponse),
   post: (endpoint, payload) =>
     axiosInstance.post(endpoint, payload).then(prepareResponse),
   put: (endpoint, payload) =>
