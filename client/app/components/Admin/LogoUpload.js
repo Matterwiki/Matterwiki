@@ -31,36 +31,19 @@ class LogoUpload extends React.Component {
     });
   }
 
-  // TODO - still uses fetch API. Make it use APIProvider
   handleUpload(e) {
     e.preventDefault();
-    
+
     var logo = this.state.logo;
     var formData = new FormData();
     formData.append("logo", logo);
 
-    var myHeaders = new Headers({
-      "x-access-token": window.localStorage.getItem("userToken")
-    });
-
-    var myInit = {
-      method: "POST",
-      headers: myHeaders,
-      body: formData
-    };
-
-    fetch("/api/logo/", myInit)
-      .then(response => response.json())
-      .then(serverData => {
-        if (serverData.error.error) {
-          Alert.error(serverData.error.message);
-        } else {
-          Alert.success("Your logo has been successfully updated.");
-        }
-      });
+    APIProvider.post("logo", formData)
+      .then(serverData =>
+        Alert.success("Your logo has been successfully updated.")
+      )
+      .catch(error => Alert.error(error.message));
   }
-
-
 
   render() {
     return (

@@ -18,10 +18,6 @@ module.exports = {
     "webpack-hot-middleware/client?http://localhost:5000/",
     "webpack/hot/dev-server",
 
-    // polyfill for fetch API (Safari)
-    // TODO a better way to handle this, maybe?
-    "whatwg-fetch",
-
     // entry point
     APP_DIR + "/index.js"
   ],
