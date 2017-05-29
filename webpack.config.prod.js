@@ -2,12 +2,12 @@ const webpack = require("webpack");
 const path = require("path");
 
 const BUILD_DIR = path.resolve(__dirname, "client/public");
-const APP_DIR = path.resolve(__dirname, "client/app");
+const APP_DIR = path.resolve(__dirname, "client/src");
 
 module.exports = {
   entry: [
     // entry point
-    APP_DIR + "/index.jsx"
+    APP_DIR + "/index.js"
   ],
   output: {
     path: BUILD_DIR,
@@ -50,7 +50,7 @@ module.exports = {
   resolve: {
     modules: [
       path.resolve("./"),
-      path.resolve("./client/app/components"),
+      path.resolve("./client/src"),
       path.resolve("./node_modules")
     ]
   }
