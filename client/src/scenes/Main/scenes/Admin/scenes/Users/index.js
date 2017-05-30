@@ -4,12 +4,20 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
 
 import Loader from "components/Loader/index";
-import UsersList from "./UsersList";
-import UserForm from "./UserForm";
+import ItemList from "../../components/ItemList";
+import ItemForm from "../../components/ItemForm";
 
 import APIProvider from "utils/APIProvider";
 
-class Users extends React.Component {
+// TODO move these fellas to a nice consts file
+const USER_FORM_FIELDS = [
+  { name: "name", type: "text" },
+  { name: "about", type: "text" },
+  { name: "email", type: "email" },
+  { name: "password", type: "password" }
+];
+
+class ManageUsers extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -63,17 +71,22 @@ class Users extends React.Component {
     else {
       return (
         <Grid>
-          <Row className="users">
+          <Row>
             <Col sm={12} md={4}>
               <Row>
                 <Col md={12} sm={12}>
-                  <UserForm onSubmit={this.addUser} />
+                  <ItemForm
+                    itemFormFields={USER_FORM_FIELDS}
+                    itemName="user"
+                    onSubmit={this.addUser}
+                  />
                 </Col>
               </Row>
             </Col>
             <Col sm={12} md={8}>
-              <UsersList
-                users={this.state.users}
+               <ItemList
+                items={this.state.users}
+                itemName="user"
                 onDeleteClick={this.deleteUser}
               />
             </Col>
@@ -84,4 +97,4 @@ class Users extends React.Component {
   }
 }
 
-export default Users;
+export default ManageUsers;

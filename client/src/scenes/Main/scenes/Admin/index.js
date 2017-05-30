@@ -1,8 +1,8 @@
 import React from "react";
 import "./Admin.css";
+import { hashHistory } from "react-router";
 
-import AdminNavBar from './components/AdminNavBar';
-import CurrentTab from "./components/CurrentTab/index";
+import AdminNavBar from "./components/AdminNavBar";
 
 class Admin extends React.Component {
   constructor(...args) {
@@ -10,29 +10,33 @@ class Admin extends React.Component {
 
     this.updateTab = this.updateTab.bind(this);
 
+    // Hack to decide the chosen tab based on the URL.
+    // TODO There must be a better way to do this. Fix when moving to RR v4
+    const pathArray = this.props.location.pathname.split("/");
+    const currentTab = pathArray.length === 3 && !!pathArray[2]
+      ? pathArray[pathArray.length - 1]
+      : "users";
+
     this.state = {
-      tab: "users"
+      tab: currentTab
     };
   }
 
   updateTab(name) {
+    hashHistory.push(`admin/${name}`);
     this.setState({
       tab: name
     });
   }
 
   render() {
-    if (this.state.loading) return <Loader />;
-    else
-      return (
-        <div>
-          <AdminNavBar
-            handleSelect={this.updateTab}
-            activeTab={this.state.tab}
-          />
-          <CurrentTab tab={this.state.tab} />
-        </div>
-      );
+    return (
+      (this.state.loading && <Loader />) ||
+      <div>
+        <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
+        {this.props.children}
+      </div>
+    );
   }
 }
 

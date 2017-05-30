@@ -3,13 +3,7 @@ import { hashHistory } from "react-router";
 
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 
-// TODO move these fellas to a nice consts file
-const TOPIC_FORM_FIELDS = [
-  { name: "name", type: "text" },
-  { name: "description", type: "text" }
-];
-
-class TopicForm extends React.Component {
+class ItemForm extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -21,9 +15,9 @@ class TopicForm extends React.Component {
   }
 
   _initState() {
-    this.state = TOPIC_FORM_FIELDS.reduce((state, formField) => {
-      state[formField.name] = this.props.topic
-        ? this.props.topic[formField.name]
+    this.state = this.props.itemFormFields.reduce((state, formField) => {
+      state[formField.name] = this.props.item
+        ? this.props.item[formField.name]
         : "";
       return state;
     }, {});
@@ -45,9 +39,10 @@ class TopicForm extends React.Component {
   }
 
   render() {
+    const { item, itemName, itemFormFields } = this.props;
     return (
       <Form className="tabform" onSubmit={this.onSubmit}>
-        {TOPIC_FORM_FIELDS.map(formField => (
+        {itemFormFields.map(formField => (
           <Col sm={12} key={formField.name}>
             <FormGroup>
               <FormControl
@@ -62,7 +57,7 @@ class TopicForm extends React.Component {
         ))}
         <Col sm={12}>
           <Button type="submit" block={true}>
-            {this.props.topic ? "Update Topic" : "Add Topic"}
+            {item ? `Update ${itemName}` : `Add ${itemName}`}
           </Button>
         </Col>
       </Form>
@@ -70,4 +65,4 @@ class TopicForm extends React.Component {
   }
 }
 
-export default TopicForm;
+export default ItemForm;

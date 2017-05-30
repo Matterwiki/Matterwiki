@@ -5,12 +5,18 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/index";
 
-import TopicsList from "./components/TopicsList";
-import TopicForm from "./components/TopicForm";
+import ItemList from "../../components/ItemList";
+import ItemForm from "../../components/ItemForm";
 
 import APIProvider from "utils/APIProvider";
 
-class Topics extends React.Component {
+// TODO move these fellas to a nice consts file
+const TOPIC_FORM_FIELDS = [
+  { name: "name", type: "text" },
+  { name: "description", type: "text" }
+];
+
+class ManageTopics extends React.Component {
   constructor(props) {
     super(props);
 
@@ -56,17 +62,22 @@ class Topics extends React.Component {
     else
       return (
         <Grid>
-          <Row className="topics">
+          <Row>
             <Col sm={12} md={4}>
               <Row>
                 <Col md={12} sm={12}>
-                  <TopicForm onSubmit={this.addTopic} />
+                  <ItemForm
+                    itemFormFields={TOPIC_FORM_FIELDS}
+                    itemName="topic"
+                    onSubmit={this.addTopic}
+                  />
                 </Col>
               </Row>
             </Col>
             <Col sm={12} md={8}>
-              <TopicsList
-                topics={this.state.topics}
+              <ItemList
+                items={this.state.topics}
+                itemName="topic"
                 onDeleteClick={this.deleteTopic}
               />
             </Col>
@@ -76,4 +87,4 @@ class Topics extends React.Component {
   }
 }
 
-export default Topics;
+export default ManageTopics;

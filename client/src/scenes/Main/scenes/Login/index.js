@@ -5,7 +5,7 @@ import { Grid, Row, Col } from "react-bootstrap";
 
 import LoginForm from "./components/LoginForm";
 
-import APIProvider from "services/APIProvider";
+import APIProvider from "utils/APIProvider";
 
 import './Login.css';
 
@@ -27,10 +27,7 @@ class Login extends React.Component {
       .then(function(loggedInUser) {
         window.localStorage.setItem("userToken", loggedInUser.token);
         window.localStorage.setItem("userId", loggedInUser.user.id);
-
-        // TODO some weird `.`s going on here.
-        // The API Wrapper should have to take care of this and just return data
-        window.localStorage.setItem("userEmail", loggedInUser.user.token);
+        window.localStorage.setItem("userEmail", loggedInUser.user.email);
 
         hashHistory.push("home");
 

@@ -16,6 +16,12 @@ function prepareResponse(response) {
   const serverResponse = response.data;
   const code = serverResponse.code;
 
+  // if login, edit the axiosInstance
+  if (code === "B118") {
+    axiosInstance.defaults.headers["x-access-token"] =
+      serverResponse.data.token;
+  }
+
   if (serverResponse.error.error) {
     const error = Object.assign({}, { code }, serverResponse.error);
     return Promise.reject(error);

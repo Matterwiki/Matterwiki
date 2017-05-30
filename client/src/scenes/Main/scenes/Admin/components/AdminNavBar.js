@@ -15,7 +15,7 @@ const AdminNavBar = props => {
       <NavItem role="presentation" eventKey="topics">
         Topics
       </NavItem>
-      <NavItem role="presentation" eventKey="Design">
+      <NavItem role="presentation" eventKey="design">
         Design
       </NavItem>
     </Nav>
