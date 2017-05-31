@@ -9,7 +9,7 @@ const path = require("path");
 
 // TODO separate files for constants?
 const BUILD_DIR = path.resolve(__dirname, "client/public");
-const APP_DIR = path.resolve(__dirname, "client/app");
+const APP_DIR = path.resolve(__dirname, "client/src");
 
 module.exports = {
   entry: [
@@ -17,10 +17,6 @@ module.exports = {
     "react-hot-loader/patch",
     "webpack-hot-middleware/client?http://localhost:5000/",
     "webpack/hot/dev-server",
-
-    // polyfill for fetch API (Safari)
-    // TODO a better way to handle this, maybe?
-    "whatwg-fetch",
 
     // entry point
     APP_DIR + "/index.js"
@@ -58,6 +54,13 @@ module.exports = {
         }
       },
       {
+        test: /react-icons\/(.)*(.js)$/,
+        loader: "babel-loader",
+        query: {
+          presets: ["es2015", "react"]
+        }
+      },
+      {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
@@ -75,7 +78,7 @@ module.exports = {
   resolve: {
     modules: [
       path.resolve("./"),
-      path.resolve("./client/app/components"),
+      path.resolve("./client/src"),
       path.resolve("./node_modules")
     ]
   },

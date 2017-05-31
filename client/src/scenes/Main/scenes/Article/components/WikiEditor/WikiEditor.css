@@ -1,0 +1,72 @@
+/* for the editor */
+/* TODO : MUST clean up after implementing everything */
+
+.WikiEditor-root {
+    font-size: 1.5em;
+}
+/* toolbar styles */
+
+.WikiEditor-toolbar {
+    margin-bottom: 0.2em;
+    user-select: none;
+}
+.btn-group .toolbar-button,
+.btn-group .toolbar-button:focus,
+.btn-group .toolbar-button:active,
+.btn-group .toolbar-button:disabled {
+    background: #fff;
+    outline: none;
+    border: none;
+    color: #4d4d4d;
+    box-shadow: none;
+}
+.btn-group .toolbar-button.active {
+    background: #efefef;
+    color: #4d4d4d;
+}
+/* for the link */
+
+.popover.bottom {
+    max-width: 500px;
+}
+/* editor styles */
+
+.WikiEditor-editor {
+    padding-top: 20px;
+    cursor: text;
+}
+/* adds walls around the editor */
+/*
+.WikiEditor-editor .DraftEditor-root {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+*/
+
+.WikiEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
+    display: none;
+}
+.WikiEditor-editor .public-DraftEditor-content {
+    min-height: 7em;
+}
+/* This has been kept here to override bootstrap's styling of <pre/> tags */
+/* TODO there must be a better way to do this */
+
+.public-DraftStyleDefault-pre pre {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.WikiEditor-editor {
+    font-family: "Merriweather", "Georgia", serif;
+}
+/* read-only editor */
+
+.WikiEditor-editor .readonly {
+    font-size: 0.5em;
+    line-height: 1.6em;
+    padding: 0;
+    cursor: default;
+}

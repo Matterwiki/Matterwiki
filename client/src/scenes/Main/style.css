@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+.primary-logo {
+    height: 4em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+body {
+    background-color: #ffffff;
+    color: #4d4d4d;
+    letter-spacing: 1px;
+}
+
+textarea {
+    resize: none;
+}
+
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+}
+
+.list-group-item {
+    border: none;
+}
+.list-group hr {
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+.list-group-item-heading {
+    font-weight: 700;
+}
+@media screen and (min-width: 768px) {
+    .custom-collapse .collapse {
+        display: block;
+    }
+}
+
+.center-align {
+    text-align: center;
+}
+
+
+
+

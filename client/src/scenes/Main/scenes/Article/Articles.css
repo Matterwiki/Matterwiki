@@ -1,0 +1,66 @@
+.new-article-form .color-text {
+    color: #ff0066;
+}
+
+.single-article-title {
+    font-weight: 700;
+    font-size: 3.5em;
+    margin-bottom: 10px;
+}
+.single-article-meta {
+    color: #a0a0a0;
+}
+.article-heading {
+    margin-bottom: 2em;
+}
+.single-article-body {
+    font-family: "Merriweather", sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 2em;
+}
+.new-article .form-control {
+    border: none;
+}
+.new-article textarea:hover {
+    outline: 0px !important;
+    -webkit-appearance: none;
+}
+.new-article .input-title {
+    font-weight: 700;
+    font-size: 3em;
+    height: auto;
+}
+.new-article .input-body {
+    font-family: "Merriweather", serif;
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border-left: 1px solid #efefef;
+    border-right: 1px solid #efefef;
+}
+
+.article-sidebar {
+    padding: 2em 1em;
+    border-left: 1px solid #efefef;
+}
+.sidebar-block {
+    margin-bottom: 3em;
+}
+.sidebar-title {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    color: #a0a0a0;
+}
+
+.topic-select {
+    background-color: #efefef;
+}
+
+/* this could be used for sidebar-title too!*/
+.date-text {
+     color: #a0a0a0;
+}
+
+.what_changed {
+    background-color: #efefef;
+}
+

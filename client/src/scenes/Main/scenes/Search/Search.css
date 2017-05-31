@@ -1,0 +1,9 @@
+.result-info {
+    border-bottom: 1px solid #efefef;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+.no-results {
+    color: #a0a0a0;
+    text-align: center;
+}
