@@ -16,6 +16,7 @@ const TOPIC_FORM_FIELDS = [
   { name: "description", type: "text" }
 ];
 
+// TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageTopics extends React.Component {
   constructor(props) {
     super(props);

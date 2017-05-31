@@ -23,6 +23,7 @@ const EDIT_USER_FORM_FIELDS = [
   { name: "email", type: "email" }
 ];
 
+// TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageUsers extends React.Component {
   constructor(...args) {
     super(...args);
