@@ -10,26 +10,32 @@ import Home from "./scenes/Main/scenes/Home/index";
 
 // Article routes
 import Article from "./scenes/Main/scenes/Article/index";
-import NewArticle from "./scenes/Main/scenes/Article/scenes/NewArticle";
-import ViewArticle from "./scenes/Main/scenes/Article/scenes/ViewArticle";
-import EditArticle from "./scenes/Main/scenes/Article/scenes/EditArticle";
-import Archives from "./scenes/Main/scenes/Article/scenes/Archives/index";
+import {
+  NewArticle,
+  ViewArticle,
+  EditArticle,
+  Archives
+} from "./scenes/Main/scenes/Article/scenes/index";
 
 // Admin routes
 import Admin from "./scenes/Main/scenes/Admin/index";
-import ManageTopics from "./scenes/Main/scenes/Admin/scenes/Topics/index";
-import ManageUsers from "./scenes/Main/scenes/Admin/scenes/Users/index";
-import LogoUpload from "./scenes/Main/scenes/Admin/scenes/LogoUpload";
+import {
+  ManageTopics,
+  ManageUsers,
+  LogoUpload
+} from "./scenes/Main/scenes/Admin/scenes/index";
 
 const routes = () => (
   <Route path="/" component={Main}>
     <IndexRoute component={Login} />
     <Route path="home" component={Home} />
     <Route path="login" component={Login} />
-    <Route path="article/new" component={NewArticle} />
-    <Route path="article/:articleId" component={ViewArticle} />
-    <Route path="article/edit/:articleId" component={EditArticle} />
-    <Route path="article/history/:articleId" component={Archives} />
+    <Route path="article" component={Article}>
+      <Route path="new" component={NewArticle} />
+      <Route path=":articleId" component={ViewArticle} />
+      <Route path="edit/:articleId" component={EditArticle} />
+      <Route path="history/:articleId" component={Archives} />
+    </Route>
     <Route path="admin" component={Admin}>
       <IndexRoute component={ManageUsers} />
       <Route path="topics" component={ManageTopics} />

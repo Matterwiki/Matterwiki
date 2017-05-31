@@ -11,14 +11,16 @@ class ItemForm extends React.Component {
     this.onChange = this._onChange.bind(this);
     this.onSubmit = this._onSubmit.bind(this);
 
-    this.initState();
+    this.initState(this.props);
   }
 
-  _initState() {
-    this.state = this.props.itemFormFields.reduce((state, formField) => {
-      state[formField.name] = this.props.item
-        ? this.props.item[formField.name]
-        : "";
+  componentWillReceiveProps(nextProps) {
+    this.initState(nextProps);
+  }
+
+  _initState({ itemFormFields, item }) {
+    this.state = itemFormFields.reduce((state, formField) => {
+      state[formField.name] = item ? item[formField.name] : "";
       return state;
     }, {});
   }

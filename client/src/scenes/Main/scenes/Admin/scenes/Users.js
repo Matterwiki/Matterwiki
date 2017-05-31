@@ -4,8 +4,8 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
 
 import Loader from "components/Loader/index";
-import ItemList from "../../components/ItemList";
-import ItemForm from "../../components/ItemForm";
+import ItemList from "../components/ItemList";
+import ItemForm from "../components/ItemForm";
 
 import APIProvider from "utils/APIProvider";
 
@@ -17,16 +17,25 @@ const USER_FORM_FIELDS = [
   { name: "password", type: "password" }
 ];
 
+const EDIT_USER_FORM_FIELDS = [
+  { name: "name", type: "text" },
+  { name: "about", type: "text" },
+  { name: "email", type: "email" }
+];
+
 class ManageUsers extends React.Component {
   constructor(...args) {
     super(...args);
 
     this.addUser = this.addUser.bind(this);
+    this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
 
     this.state = {
-      users: []
+      users: [],
+      currentUser: null
     };
   }
 
@@ -38,6 +47,14 @@ class ManageUsers extends React.Component {
       this.setState({
         users,
         loading: false
+      });
+    });
+  }
+
+  handleEditClick(id) {
+    APIProvider.get(`users/${id}`).then(currentUser => {
+      this.setState({
+        currentUser
       });
     });
   }
@@ -59,6 +76,17 @@ class ManageUsers extends React.Component {
     }
   }
 
+  updateUser(user) {
+    user.id = this.state.currentUser.id;
+    APIProvider.put("users", user).then(user => {
+      Alert.success("User has been edited");
+      this.setState({
+        currentUser: null
+      });
+      this.handleUpdate();
+    });
+  }
+
   addUser(user) {
     APIProvider.post("users", user).then(user => {
       Alert.success("User has been added");
@@ -69,6 +97,10 @@ class ManageUsers extends React.Component {
   render() {
     if (this.state.loading) return <Loader />;
     else {
+      const onSubmit = this.state.currentUser ? this.updateUser : this.addUser;
+      const itemFormFields = this.state.currentUser
+        ? EDIT_USER_FORM_FIELDS
+        : USER_FORM_FIELDS;
       return (
         <Grid>
           <Row>
@@ -76,18 +108,20 @@ class ManageUsers extends React.Component {
               <Row>
                 <Col md={12} sm={12}>
                   <ItemForm
-                    itemFormFields={USER_FORM_FIELDS}
+                    itemFormFields={itemFormFields}
+                    item={this.state.currentUser}
                     itemName="user"
-                    onSubmit={this.addUser}
+                    onSubmit={onSubmit}
                   />
                 </Col>
               </Row>
             </Col>
             <Col sm={12} md={8}>
-               <ItemList
+              <ItemList
                 items={this.state.users}
                 itemName="user"
                 onDeleteClick={this.deleteUser}
+                onEditClick={this.handleEditClick}
               />
             </Col>
           </Row>

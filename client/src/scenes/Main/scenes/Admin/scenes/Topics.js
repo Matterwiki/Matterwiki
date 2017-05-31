@@ -5,8 +5,8 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/index";
 
-import ItemList from "../../components/ItemList";
-import ItemForm from "../../components/ItemForm";
+import ItemList from "../components/ItemList";
+import ItemForm from "../components/ItemForm";
 
 import APIProvider from "utils/APIProvider";
 
@@ -21,11 +21,14 @@ class ManageTopics extends React.Component {
     super(props);
 
     this.addTopic = this.addTopic.bind(this);
+    this.updateTopic = this.updateTopic.bind(this);
     this.deleteTopic = this.deleteTopic.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
+
     this.state = {
-      loading: true,
-      topics: []
+      topics: [],
+      currentTopic: null
     };
   }
 
@@ -35,6 +38,14 @@ class ManageTopics extends React.Component {
       this.setState({
         topics,
         loading: false
+      });
+    });
+  }
+
+  handleEditClick(id) {
+    APIProvider.get(`topics/${id}`).then(currentTopic => {
+      this.setState({
+        currentTopic
       });
     });
   }
@@ -50,6 +61,17 @@ class ManageTopics extends React.Component {
     });
   }
 
+  updateTopic(topic) {
+    topic.id = this.state.currentTopic.id;
+    APIProvider.put("topics", topic).then(topic => {
+      Alert.success("Topic has been edited");
+      this.setState({
+        currentTopic: null
+      });
+      this.handleUpdate();
+    });
+  }
+
   addTopic(topic) {
     APIProvider.post("topics", topic).then(topic => {
       Alert.success("Topic has been added");
@@ -59,7 +81,10 @@ class ManageTopics extends React.Component {
 
   render() {
     if (this.state.loading) return <Loader />;
-    else
+    else {
+      const onSubmit = this.state.currentTopic
+        ? this.updateTopic
+        : this.addTopic;
       return (
         <Grid>
           <Row>
@@ -69,7 +94,8 @@ class ManageTopics extends React.Component {
                   <ItemForm
                     itemFormFields={TOPIC_FORM_FIELDS}
                     itemName="topic"
-                    onSubmit={this.addTopic}
+                    item={this.state.currentTopic}
+                    onSubmit={onSubmit}
                   />
                 </Col>
               </Row>
@@ -79,11 +105,13 @@ class ManageTopics extends React.Component {
                 items={this.state.topics}
                 itemName="topic"
                 onDeleteClick={this.deleteTopic}
+                onEditClick={this.handleEditClick}
               />
             </Col>
           </Row>
         </Grid>
       );
+    }
   }
 }
 
