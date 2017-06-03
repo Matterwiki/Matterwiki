@@ -7,16 +7,16 @@
 const webpack = require("webpack");
 const path = require("path");
 
-// TODO separate files for constants?
+// TODO BUILD_DIR should ideally point to a `dist/` folder.
+// This might require a little restructuring of directories
 const BUILD_DIR = path.resolve(__dirname, "client/public");
 const APP_DIR = path.resolve(__dirname, "client/src");
 
 module.exports = {
   entry: [
-    // react HMR specific stuff
+    // make sure this is at the top
     "react-hot-loader/patch",
-    "webpack-hot-middleware/client?http://localhost:5000/",
-    "webpack/hot/dev-server",
+    "webpack-hot-middleware/client?reload=true",
 
     // entry point
     APP_DIR + "/index.js"
@@ -28,16 +28,10 @@ module.exports = {
   },
   // enabling sourcemaps for easier debugging
   devtool: "inline-source-map",
-  // again for react HMR
-  devServer: {
-    hot: true,
-    inline: true,
-    contentBase: BUILD_DIR,
-    publicPath: "/public/"
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("dev")
     })
@@ -60,7 +54,10 @@ module.exports = {
       },
       {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: "file-loader?name=fonts/[name].[ext]"
+        loader: "file-loader",
+        query: {
+          name: "fonts/[name].[ext]"
+        }
       },
       {
         test: /\.json$/,

@@ -50,22 +50,22 @@
     "sqlite3": "^3.1.4"
   },
   "devDependencies": {
-    "babel-cli": "6.22.2",
-    "babel-core": "6.22.1",
-    "babel-loader": "6.2.10",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.5.1",
-    "babel-preset-react": "6.22.0",
+    "babel-preset-react": "^6.24.1",
     "cross-env": "3.1.4",
     "css-loader": "^0.28.1",
     "file-loader": "^0.11.1",
     "json-loader": "0.5.4",
-    "react-hot-loader": "3.0.0-beta.6",
+    "react-hot-loader": "^3.0.0-beta.7",
     "style-loader": "^0.17.0",
     "testcafe": "0.13.0",
-    "webpack": "2.2.0",
-    "webpack-dev-middleware": "1.9.0",
-    "webpack-dev-server": "2.2.0",
-    "webpack-hot-middleware": "2.15.0"
+    "webpack": "^2.6.1",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }
