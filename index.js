@@ -149,7 +149,7 @@ require("./api/admin")(apiRoutesAdmin);
 app.use("/api", apiRoutes);
 app.use("/api", apiRoutesAdmin);
 
-app.use(express.static(__dirname + "/client"));
+app.use(express.static(__dirname + "/src/client/"));
 
 app.listen(process.env.PORT, function() {
   console.log("The magic is happening on port %s", process.env.PORT);

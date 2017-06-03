@@ -7,10 +7,12 @@
 const webpack = require("webpack");
 const path = require("path");
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 // TODO BUILD_DIR should ideally point to a `dist/` folder.
 // This might require a little restructuring of directories
-const BUILD_DIR = path.resolve(__dirname, "client/public");
-const APP_DIR = path.resolve(__dirname, "client/src");
+const BUILD_DIR = path.resolve(__dirname, "dist/");
+const APP_DIR = path.resolve(__dirname, "src/client");
 
 module.exports = {
   entry: [
@@ -23,7 +25,7 @@ module.exports = {
   ],
   output: {
     path: BUILD_DIR,
-    publicPath: "/public/",
+    publicPath: "/",
     filename: "bundle.js"
   },
   // enabling sourcemaps for easier debugging
@@ -32,6 +34,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(APP_DIR, "index.html")
+    }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("dev")
     })
@@ -39,11 +44,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.js$/,
         loader: "babel-loader",
         include: APP_DIR,
         exclude: /node_modules/
       },
+      // TODO include only `node_modules/react-icons` and exclude everything else in `node_modules`
       {
         test: /react-icons\/(.)*(.js)$/,
         loader: "babel-loader"
@@ -53,9 +59,16 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
+        test: /\.(jpg|png|svg)$/,
+        loader: "url-loader",
+        options: {
+          limit: 25000
+        }
+      },
+      {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: "file-loader",
-        query: {
+        options: {
           name: "fonts/[name].[ext]"
         }
       },
@@ -69,7 +82,7 @@ module.exports = {
   resolve: {
     modules: [
       path.resolve("./"),
-      path.resolve("./client/src"),
+      path.resolve("./src/client"),
       path.resolve("./node_modules")
     ]
   },
