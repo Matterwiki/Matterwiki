@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
+import Logo from "assets/logo.png";
 import SearchForm from "./components/SearchForm";
 
 const LinkNavItem = props => (
@@ -20,7 +21,7 @@ const AppNavbar = props => {
       <Navbar.Header>
         <Navbar.Brand>
           <Link to="home" className="navbar-brand">
-            <img src="../../assets/logo.png" />
+            <img src={Logo} />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle />

@@ -13,6 +13,7 @@ const BUILD_DIR = path.resolve(__dirname, "dist/");
 const APP_DIR = path.resolve(__dirname, "src/client");
 
 module.exports = {
+  context: BUILD_DIR,
   entry: [
     // make sure this is at the top
     "react-hot-loader/patch",
@@ -55,7 +56,8 @@ module.exports = {
         test: /\.(jpg|png|svg)$/,
         loader: "url-loader",
         options: {
-          limit: 25000
+          limit: 25000,
+          name: "./assets/[name].[ext]"
         }
       },
       {

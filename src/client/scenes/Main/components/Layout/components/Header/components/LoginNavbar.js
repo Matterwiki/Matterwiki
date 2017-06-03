@@ -1,11 +1,12 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
+import Logo from "assets/logo.png";
 
 const LoginNavbar = () => (
   <Navbar>
     <center>
       <a className="navbar-login-logo" href="#">
-        <img src="assets/logo.png" />
+        <img src={Logo} />
       </a>
     </center>
   </Navbar>

@@ -4,7 +4,7 @@
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack.config.prod.js --progress --profile --colors",
+    "build": "cross-env NODE_ENV=production webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
     "dev": "node index.js",
     "dev:debug": "node  --inspect index.js",
     "dev-testing": "cross-env TESTING=true node index.js",
@@ -56,6 +56,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.5.1",
     "babel-preset-react": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
     "cross-env": "3.1.4",
     "css-loader": "^0.28.1",
     "file-loader": "^0.11.1",
