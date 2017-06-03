@@ -7,13 +7,7 @@ import APIProvider from "utils/APIProvider";
 import ArticleForm from "../components/ArticleForm";
 
 class NewArticle extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(article) {
+  handleSubmit = (article) => {
     APIProvider.post("articles", article).then(response => {
       Alert.success("Article has been successfully saved");
       hashHistory.push(`article/${response.id}`);

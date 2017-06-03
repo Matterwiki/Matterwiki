@@ -14,24 +14,17 @@ import {
 import APIProvider from "utils/APIProvider";
 
 class LogoUpload extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    logo: null
+  };
 
-    this.state = {
-      logo: null
-    };
-
-    this.handleUpload = this.handleUpload.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
+  handleChange = e => {
     this.setState({
       logo: e.target.files[0]
     });
-  }
+  };
 
-  handleUpload(e) {
+  handleUpload = e => {
     e.preventDefault();
 
     var logo = this.state.logo;
@@ -43,7 +36,7 @@ class LogoUpload extends React.Component {
         Alert.success("Your logo has been successfully updated.")
       )
       .catch(error => Alert.error(error.message));
-  }
+  };
 
   render() {
     return (

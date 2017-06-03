@@ -4,13 +4,9 @@ import { FormControl, ControlLabel } from "react-bootstrap";
 import APIProvider from "utils/APIProvider";
 
 class TopicChooser extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.state = {
-      topics: []
-    };
-  }
+  state = {
+    topics: []
+  };
 
   componentDidMount() {
     APIProvider.get("topics").then(topics => this.setState({ topics }));

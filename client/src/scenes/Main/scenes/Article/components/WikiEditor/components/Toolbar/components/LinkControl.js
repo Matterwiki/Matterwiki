@@ -6,32 +6,18 @@ import FaExternalLink from "react-icons/lib/fa/external-link";
 import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
 
 class LinkControl extends Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    url: "",
+    showPopup: null
+  };
 
-    this.state = {
-      url: "",
-      showPopup: null
-    };
-
-    // for the URL change
-    this.onURLChange = e => this._onURLChange(e);
-
-    this.handleLinkPopupOpen = e => this._handleLinkPopupOpen(e);
-    this.resetPopoverState = () => this._resetPopoverState();
-
-    // Link and Unlink buttons
-    this.handleLinkSave = e => this._handleLinkSave(e);
-    this.handleLinkRemove = e => this._handleLinkRemove(e);
-  }
-
-  _onURLChange(e) {
+  onURLChange = e => {
     this.setState({
       url: e.target.value
     });
-  }
+  };
 
-  _handleLinkPopupOpen() {
+  handleLinkPopupOpen = () => {
     const { currentEntity } = this.props;
     const { showPopup } = this.state;
 
@@ -49,9 +35,9 @@ class LinkControl extends Component {
     setTimeout(() => {
       this.linkURL.focus();
     }, 0);
-  }
+  };
 
-  _handleLinkSave(e) {
+  handleLinkSave = e => {
     e.preventDefault();
 
     const { url, showPopup } = this.state;
@@ -59,23 +45,23 @@ class LinkControl extends Component {
 
     onAddLink(url);
     this.resetPopoverState();
-  }
+  };
 
-  _handleLinkRemove(e) {
+  handleLinkRemove = e => {
     e.preventDefault();
 
     const { onRemoveLink } = this.props;
 
     onRemoveLink();
     this.resetPopoverState();
-  }
+  };
 
-  _resetPopoverState() {
+  resetPopoverState = () => {
     this.setState({
       url: "",
       showPopup: false
     });
-  }
+  };
 
   render() {
     const { editorState, currentEntity } = this.props;

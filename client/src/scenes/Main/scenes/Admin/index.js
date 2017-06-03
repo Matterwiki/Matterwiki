@@ -7,9 +7,6 @@ import AdminNavBar from "./components/AdminNavBar";
 class Admin extends React.Component {
   constructor(...args) {
     super(...args);
-
-    this.updateTab = this.updateTab.bind(this);
-
     // Hack to decide the chosen tab based on the URL.
     // TODO There must be a better way to do this. Fix when moving to RR v4
     const pathArray = this.props.location.pathname.split("/");
@@ -22,12 +19,12 @@ class Admin extends React.Component {
     };
   }
 
-  updateTab(name) {
+  updateTab = name => {
     hashHistory.push(`admin/${name}`);
     this.setState({
       tab: name
     });
-  }
+  };
 
   render() {
     return (

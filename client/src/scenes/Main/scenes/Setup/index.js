@@ -13,12 +13,7 @@ import APIProvider from "utils/APIProvider";
 import "./Setup.css";
 
 class Setup extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.handleSignUp = this._handleSignUp.bind(this);
-  }
-
-  _handleSignUp(user) {
+  handleSignUp = user => {
     APIProvider.post("setup", user)
       .then(function(user) {
         Alert.success("Admin user generated");
@@ -27,7 +22,7 @@ class Setup extends React.Component {
       .catch(function(err) {
         Alert.error(err);
       });
-  }
+  };
 
   render() {
     return (

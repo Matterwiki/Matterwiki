@@ -48,17 +48,11 @@ module.exports = {
         test: /\.jsx?/,
         loader: "babel-loader",
         include: APP_DIR,
-        exclude: /node_modules/,
-        query: {
-          presets: ["es2015", "react"]
-        }
+        exclude: /node_modules/
       },
       {
         test: /react-icons\/(.)*(.js)$/,
-        loader: "babel-loader",
-        query: {
-          presets: ["es2015", "react"]
-        }
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,

@@ -35,25 +35,21 @@ class ArticleForm extends React.Component {
         what_changed
       };
     }
-
-    this.getEditorContent = this.getEditorContent.bind(this);
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  getEditorContent() {
+  getEditorContent = () => {
     return JSON.stringify(this.refs.editor.getRawContent());
-  }
+  };
 
-  onChange(e) {
+  onChange = e => {
     const { name, value } = e.target;
 
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     // get the rawContent from refs
@@ -77,7 +73,7 @@ class ArticleForm extends React.Component {
     } else {
       Alert.error(errorMessage);
     }
-  }
+  };
 
   render() {
     const { edit } = this.state;

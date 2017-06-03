@@ -1,6 +1,7 @@
 import React from "react";
 import { HelpBlock, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
+// TODO Componentize further?
 const BrowseArchives = props => {
   const archiveClick = (id, e) => {
     e.preventDefault();

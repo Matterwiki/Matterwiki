@@ -1,5 +1,5 @@
 import React from "react";
-import {ControlLabel, FormControl, HelpBlock} from "react-bootstrap";
+import { ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
 
 const WhatChanged = props => (
   <div>

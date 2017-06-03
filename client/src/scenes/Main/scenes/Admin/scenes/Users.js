@@ -25,22 +25,12 @@ const EDIT_USER_FORM_FIELDS = [
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageUsers extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    users: [],
+    currentUser: null
+  };
 
-    this.addUser = this.addUser.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-    this.deleteUser = this.deleteUser.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-
-    this.state = {
-      users: [],
-      currentUser: null
-    };
-  }
-
-  handleUpdate() {
+  handleUpdate = () => {
     this.setState({
       loading: true
     });
@@ -50,21 +40,21 @@ class ManageUsers extends React.Component {
         loading: false
       });
     });
-  }
+  };
 
-  handleEditClick(id) {
+  handleEditClick = id => {
     APIProvider.get(`users/${id}`).then(currentUser => {
       this.setState({
         currentUser
       });
     });
-  }
+  };
 
   componentDidMount() {
     this.handleUpdate();
   }
 
-  deleteUser(id) {
+  deleteUser = id => {
     const canDelete = confirm(
       "Deleting the user will move all of his/her articles to the Admin. Are you sure?"
     );
@@ -75,9 +65,9 @@ class ManageUsers extends React.Component {
         this.handleUpdate();
       });
     }
-  }
+  };
 
-  updateUser(user) {
+  updateUser = user => {
     user.id = this.state.currentUser.id;
     APIProvider.put("users", user).then(user => {
       Alert.success("User has been edited");
@@ -86,14 +76,14 @@ class ManageUsers extends React.Component {
       });
       this.handleUpdate();
     });
-  }
+  };
 
-  addUser(user) {
+  addUser = user => {
     APIProvider.post("users", user).then(user => {
       Alert.success("User has been added");
       this.handleUpdate();
     });
-  }
+  };
 
   render() {
     if (this.state.loading) return <Loader />;

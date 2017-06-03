@@ -25,7 +25,6 @@ import {
 import "./WikiEditor.css";
 import "draft-js/dist/Draft.css";
 
-
 const styleMap = {
   STRIKETHROUGH: {
     textDecoration: "line-through"
@@ -59,61 +58,33 @@ class WikiEditor extends Component {
       editorState: convertToEditorState(rawContent, isHtml, decorator),
       currentEntityKey: null
     };
-
-    this.handleKeyCommand = command => this._handleKeyCommand(command);
-    this.focus = () => this.refs.editor.focus();
-    this.onTab = e => this._onTab(e);
-    this.onChange = editorState => this._onChange(editorState);
-
-    // to get the rawContent when the Save button in the parent is clicked.
-    // invoked via ref
-    this.getRawContent = () => this._getRawContent();
-
-    // Handlers for `Toolbar` components.
-    // TODO Should this be placed elsewhere?
-
-    // `InlineControls`
-    this.toggleInlineStyle = inlineStyle =>
-      this._toggleInlineStyle(inlineStyle);
-
-    // `LinkControl`
-    this.onAddLink = linkData => this._onAddLink(linkData);
-    this.onRemoveLink = () => this._onRemoveLink();
-
-    // `BlockControls`
-    this.toggleBlockType = blockType => this._toggleBlockType(blockType);
-
-    // `LevelControls`
-    this.toggleLevelType = adjustment => this._toggleLevelType(adjustment);
-
-    // `HistoryControls`
-    this.onUndo = () => this._onUndo();
-    this.onRedo = () => this._onRedo();
   }
 
-  _getRawContent() {
+  // to get the rawContent when the Save button in the parent is clicked.
+  // invoked via ref
+  getRawContent = () => {
     // TODO REDUX will remove this from here, in the future!
     const { editorState } = this.state;
     const rawContent = convertToRaw(editorState.getCurrentContent());
 
     return rawContent;
-  }
+  };
 
-  _onChange(editorState) {
+  onChange = editorState => {
     // get the currentEntity
     // TODO, again, is inefficient
     this.setState({
       currentEntityKey: getCurrentEntityKey(editorState),
       editorState
     });
-  }
+  };
 
-  _onTab(e) {
+  onTab = e => {
     const maxDepth = 4;
     this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
-  }
+  };
 
-  _handleKeyCommand(cmd) {
+  handleKeyCommand = cmd => {
     const { editorState } = this.state;
 
     const newState = RichUtils.handleKeyCommand(editorState, cmd);
@@ -124,15 +95,20 @@ class WikiEditor extends Component {
     }
 
     return false;
-  }
+  };
 
-  _toggleInlineStyle(inlineStyle) {
+  // Handlers for `Toolbar` components.
+  // TODO Should this be placed elsewhere?
+
+  // `InlineControls`
+  toggleInlineStyle = inlineStyle => {
     const { editorState } = this.state;
 
     this.onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
-  }
+  };
 
-  _onAddLink(url) {
+  // `LinkControl`
+  onAddLink = url => {
     const { editorState } = this.state;
     const contentState = editorState.getCurrentContent();
 
@@ -175,9 +151,9 @@ class WikiEditor extends Component {
     //  TODO move cursor to after entity text and focus. The code below does this, but creates problems with Link addition. FIX THIS
     //  const editorStateWithSelection = EditorState.moveSelectionToEnd(editorStateWithEntity);
     //  setTimeout(() => this.focus(), 0);
-  }
-
-  _onRemoveLink() {
+  };
+  // `LinkControl`
+  onRemoveLink = () => {
     const { editorState, currentEntityKey } = this.state;
 
     if (currentEntityKey) {
@@ -191,25 +167,27 @@ class WikiEditor extends Component {
 
       this.onChange(RichUtils.toggleLink(editorState, selection, null));
     }
-  }
+  };
 
-  _toggleBlockType(blockType) {
+  // `BlockControls`
+  toggleBlockType = blockType => {
     const newState = RichUtils.toggleBlockType(
       this.state.editorState,
       blockType
     );
     this.onChange(newState);
     setTimeout(() => this.focus(), 0);
-  }
+  };
 
-  _toggleLevelType(adjustment) {
+  // `LevelControls`
+  toggleLevelType = adjustment => {
     // adjustment = 1 for indent
     // adjustment = -1 for outdent
     const newState = changeDepth(this.state.editorState, adjustment, 4);
     this.onChange(newState);
-  }
-
-  _onUndo() {
+  };
+  // `HistoryControls`
+  onUndo = () => {
     const { editorState } = this.state;
 
     const newState = EditorState.undo(editorState);
@@ -220,9 +198,9 @@ class WikiEditor extends Component {
     }
 
     return false;
-  }
-
-  _onRedo() {
+  };
+  // `HistoryControls`
+  onRedo = () => {
     const { editorState } = this.state;
 
     const newState = EditorState.redo(editorState);
@@ -233,7 +211,7 @@ class WikiEditor extends Component {
     }
 
     return false;
-  }
+  };
 
   render() {
     const { editorState, currentEntityKey } = this.state;

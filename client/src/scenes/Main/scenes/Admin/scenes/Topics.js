@@ -18,22 +18,12 @@ const TOPIC_FORM_FIELDS = [
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageTopics extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    topics: [],
+    currentTopic: null
+  };
 
-    this.addTopic = this.addTopic.bind(this);
-    this.updateTopic = this.updateTopic.bind(this);
-    this.deleteTopic = this.deleteTopic.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-
-    this.state = {
-      topics: [],
-      currentTopic: null
-    };
-  }
-
-  handleUpdate() {
+  handleUpdate = () => {
     this.setState({ loading: true });
     APIProvider.get("topics").then(topics => {
       this.setState({
@@ -41,28 +31,28 @@ class ManageTopics extends React.Component {
         loading: false
       });
     });
-  }
+  };
 
-  handleEditClick(id) {
+  handleEditClick = id => {
     APIProvider.get(`topics/${id}`).then(currentTopic => {
       this.setState({
         currentTopic
       });
     });
-  }
+  };
 
   componentDidMount() {
     this.handleUpdate();
   }
 
-  deleteTopic(id) {
+  deleteTopic = id => {
     APIProvider.delete(`topics?id=${id}`).then(topic => {
       Alert.success("Topic has been deleted");
       this.handleUpdate();
     });
-  }
+  };
 
-  updateTopic(topic) {
+  updateTopic = topic => {
     topic.id = this.state.currentTopic.id;
     APIProvider.put("topics", topic).then(topic => {
       Alert.success("Topic has been edited");
@@ -71,14 +61,14 @@ class ManageTopics extends React.Component {
       });
       this.handleUpdate();
     });
-  }
+  };
 
-  addTopic(topic) {
+  addTopic = topic => {
     APIProvider.post("topics", topic).then(topic => {
       Alert.success("Topic has been added");
       this.handleUpdate();
     });
-  }
+  };
 
   render() {
     if (this.state.loading) return <Loader />;

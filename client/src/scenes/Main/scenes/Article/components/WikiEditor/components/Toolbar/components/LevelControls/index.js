@@ -1,5 +1,5 @@
 import React from "react";
-import {ButtonGroup} from "react-bootstrap";
+import { ButtonGroup } from "react-bootstrap";
 import { FaIndent, FaDedent } from "react-icons/lib/fa";
 import ToolbarButton from "../ToolbarButton";
 import getDisabledLevelButtons from "./utils/getDisabledLevelButtons";

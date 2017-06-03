@@ -13,11 +13,6 @@ import "./style.css";
 
 // TODO refactor the Auth logic into a HOC
 class Main extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
   componentWillMount() {
     // Hack to move away from here if going to setup
     if (!this.props.location.pathname.includes("setup")) {
@@ -36,11 +31,11 @@ class Main extends React.Component {
     }
   }
 
-  handleLogout() {
+  handleLogout = () => {
     window.localStorage.setItem("userToken", "");
     Alert.success("You've been successfully logged out");
     hashHistory.push("login");
-  }
+  };
 
   render() {
     const headerProps = {

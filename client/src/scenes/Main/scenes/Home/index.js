@@ -7,18 +7,12 @@ import ArticlesList from "components/ArticlesList/index";
 import APIProvider from "utils/APIProvider";
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    articles: null,
+    topics: []
+  };
 
-    this.state = {
-      articles: null,
-      topics: []
-    };
-
-    this.handleTopicClick = this._handleTopicClick.bind(this);
-  }
-
-  _handleTopicClick(id) {
+  handleTopicClick = id => {
     this.setState({
       articles: null
     });
@@ -26,7 +20,7 @@ class Home extends React.Component {
     APIProvider.get(`topic/${id}/articles`).then(articles =>
       this.setState({ articles })
     );
-  }
+  };
 
   componentDidMount() {
     Promise.all([

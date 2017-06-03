@@ -11,18 +11,10 @@ import Loader from "components/Loader/index";
 import APIProvider from "utils/APIProvider";
 
 class ViewArticle extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleEditClick = this.handleEditClick.bind(this);
-    this.handleHistoryClick = this.handleHistoryClick.bind(this);
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-
-    this.state = {
-      loading: true,
-      article: {}
-    };
-  }
+  state = {
+    loading: true,
+    article: {}
+  };
 
   componentDidMount() {
     var id = this.props.params.articleId;
@@ -34,21 +26,21 @@ class ViewArticle extends React.Component {
     });
   }
 
-  handleEditClick(e) {
+  handleEditClick = e => {
     hashHistory.push(`article/edit/${this.state.article.id}`);
-  }
+  };
 
-  handleHistoryClick(e) {
+  handleHistoryClick = e => {
     hashHistory.push(`article/history/${this.state.article.id}`);
-  }
+  };
 
-  handleDeleteClick(e) {
+  handleDeleteClick = e => {
     e.preventDefault();
     APIProvider.delete(`articles?id=${this.state.article.id}`).then(article => {
       Alert.success("Article has been deleted");
       hashHistory.push("home");
     });
-  }
+  };
 
   render() {
     const { loading, article } = this.state;

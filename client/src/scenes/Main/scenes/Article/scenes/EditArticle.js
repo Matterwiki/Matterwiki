@@ -7,17 +7,11 @@ import ArticleForm from "../components/ArticleForm";
 import APIProvider from "utils/APIProvider";
 
 class EditArticle extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    loading: true
+  };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      loading: true
-    };
-  }
-
-  handleSubmit(article) {
+  handleSubmit = article => {
     const articleId = this.props.params.articleId;
 
     article.id = articleId;
@@ -30,7 +24,7 @@ class EditArticle extends React.Component {
       .catch(err => {
         Alert.error(response.error.message);
       });
-  }
+  };
 
   componentDidMount() {
     this.setState({

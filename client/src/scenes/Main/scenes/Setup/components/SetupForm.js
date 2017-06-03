@@ -1,5 +1,3 @@
-// TODO there are two components that use forms as of now. Make them generic if there is more!
-
 import React from "react";
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 
@@ -15,35 +13,26 @@ const SETUP_FORM_FIELDS = [
 // TODO maybe use this approach for further improving forms in general:
 // https://bartj.com/posts/2016-11-07-managing-form-validation-in-react.html
 class SetupForm extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = SETUP_FORM_FIELDS.reduce((state, formField) => {
+    state[formField.name] = "";
+    return state;
+  }, {});
 
-    // Setup state
-    this.state = SETUP_FORM_FIELDS.reduce((state, formField) => {
-      state[formField.name] = "";
-      return state;
-    }, {});
-
-    this.onChange = this._onChange.bind(this);
-    this.onSubmit = this._onSubmit.bind(this);
-  }
-
-  _onChange(e) {
+  onChange = e => {
     const { name, value } = e.target;
 
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  _onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     this.props.onSubmit(this.state);
-  }
+  };
 
   render() {
-
     return (
       <Form onSubmit={this.onSubmit}>
         {SETUP_FORM_FIELDS.map(formField => (
@@ -60,9 +49,7 @@ class SetupForm extends React.Component {
           </Col>
         ))}
         <Col sm={12}>
-          <Button
-            type="submit" 
-            block={true}>
+          <Button type="submit" block={true}>
             Setup My Account
           </Button>
         </Col>

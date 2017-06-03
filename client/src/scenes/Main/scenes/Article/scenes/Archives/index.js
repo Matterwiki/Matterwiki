@@ -10,14 +10,10 @@ import SimpleArticle from "../../components/SimpleArticle";
 import "./Archives.css";
 
 class ArticleHistory extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.getArchive = this.getArchive.bind(this);
-    this.state = {
-      archives: [],
-      article: {}
-    };
-  }
+  state = {
+    archives: [],
+    article: {}
+  };
 
   componentDidMount() {
     this.setState({
@@ -33,7 +29,7 @@ class ArticleHistory extends React.Component {
     });
   }
 
-  getArchive(id) {
+  getArchive = id => {
     this.setState({
       archive: null,
       loading: true
@@ -44,7 +40,7 @@ class ArticleHistory extends React.Component {
         loading: false
       });
     });
-  }
+  };
 
   render() {
     if (this.state.loading) return <Loader />;

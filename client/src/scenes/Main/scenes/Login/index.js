@@ -7,22 +7,16 @@ import LoginForm from "./components/LoginForm";
 
 import APIProvider from "utils/APIProvider";
 
-import './Login.css';
+import "./Login.css";
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSubmit = this._handleSubmit.bind(this);
-  }
-
   componentDidMount() {
     if (window.localStorage.getItem("userToken")) {
       hashHistory.push("home");
     }
   }
 
-  _handleSubmit(user) {
+  handleSubmit = user => {
     APIProvider.post("authenticate", user)
       .then(function(loggedInUser) {
         window.localStorage.setItem("userToken", loggedInUser.token);
@@ -36,7 +30,7 @@ class Login extends React.Component {
       .catch(function(err) {
         Alert.error(err.message);
       });
-  }
+  };
 
   render() {
     return (

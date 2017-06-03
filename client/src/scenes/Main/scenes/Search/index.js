@@ -12,18 +12,12 @@ import "./Search.css";
 
 // TODO - fix an encoding problem when the query param contains symbols and other weird stuff
 class Search extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    articles: [],
+    loading: true
+  };
 
-    this.getSearchResults = this.getSearchResults.bind(this);
-
-    this.state = {
-      articles: [],
-      loading: true
-    };
-  }
-
-  getSearchResults(query) {
+  getSearchResults = query => {
     const userToken = window.localStorage.getItem("userToken");
 
     this.setState({
@@ -36,7 +30,7 @@ class Search extends React.Component {
         loading: false
       });
     });
-  }
+  };
 
   componentWillMount() {
     this.getSearchResults(this.props.location.query.query);

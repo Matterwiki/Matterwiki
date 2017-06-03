@@ -4,40 +4,33 @@ import { hashHistory } from "react-router";
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 
 class ItemForm extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.initState = this._initState.bind(this);
-    this.onChange = this._onChange.bind(this);
-    this.onSubmit = this._onSubmit.bind(this);
-
-    this.initState(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.initState(nextProps);
-  }
-
-  _initState({ itemFormFields, item }) {
+  initState = ({ itemFormFields, item }) => {
     this.state = itemFormFields.reduce((state, formField) => {
       state[formField.name] = item ? item[formField.name] : "";
       return state;
     }, {});
-  }
+  };
 
-  _onChange(e) {
+  onChange = e => {
     const { name, value } = e.target;
 
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  _onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     this.props.onSubmit(this.state);
     this.initState();
+  };
+
+  componentWillMount() {
+    this.initState(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.initState(nextProps);
   }
 
   render() {
