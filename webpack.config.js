@@ -9,8 +9,6 @@ const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// TODO BUILD_DIR should ideally point to a `dist/` folder.
-// This might require a little restructuring of directories
 const BUILD_DIR = path.resolve(__dirname, "dist/");
 const APP_DIR = path.resolve(__dirname, "src/client");
 
@@ -49,11 +47,6 @@ module.exports = {
         include: APP_DIR,
         exclude: /node_modules/
       },
-      // TODO include only `node_modules/react-icons` and exclude everything else in `node_modules`
-      {
-        test: /react-icons\/(.)*(.js)$/,
-        loader: "babel-loader"
-      },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
@@ -71,10 +64,6 @@ module.exports = {
         options: {
           name: "fonts/[name].[ext]"
         }
-      },
-      {
-        test: /\.json$/,
-        loader: "json-loader"
       }
     ]
   },
