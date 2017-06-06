@@ -25,7 +25,7 @@ import {
 import "./WikiEditor.css";
 import "draft-js/dist/Draft.css";
 
-const styleMap = {
+const customStyleMap = {
   STRIKETHROUGH: {
     textDecoration: "line-through"
   }
@@ -222,8 +222,8 @@ class WikiEditor extends Component {
 
     const editorProps = {
       ref: "editor",
-      customStyleMap: styleMap,
-      editorState: editorState,
+      customStyleMap,
+      editorState,
       onChange: this.onChange,
       onTab: this.onTab,
       handleKeyCommand: this.handleKeyCommand,

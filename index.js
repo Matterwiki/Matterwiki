@@ -149,7 +149,6 @@ require("./api/admin")(apiRoutesAdmin);
 app.use("/api", apiRoutes);
 app.use("/api", apiRoutesAdmin);
 
-//app.use(express.static("client"));
 app.use(express.static("dist"));
 
 app.listen(process.env.PORT, function() {

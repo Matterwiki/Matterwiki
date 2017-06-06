@@ -1,11 +1,8 @@
-/*
- * TODO extract common chunks from dev and production configs
- * and use something like webpack-merge to put them all together for the environment needed
- * Ref : http://survivejs.com/webpack/developing-with-webpack/splitting-configuration/
- */
+ // TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
 
 const webpack = require("webpack");
 const path = require("path");
+
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
