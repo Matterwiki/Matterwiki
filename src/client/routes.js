@@ -3,13 +3,16 @@ import { Route, IndexRoute } from "react-router";
 
 // TODO Main route is the parent of all routes. Find another way to do this!
 import Main from "./scenes/Main/index";
-import Login from "./scenes/Main/scenes/Login/index";
-import Setup from "./scenes/Main/scenes/Setup/index";
-import Search from "./scenes/Main/scenes/Search/index";
-import Home from "./scenes/Main/scenes/Home/index";
+import {
+  Login,
+  Setup,
+  Search,
+  Home,
+  Article,
+  Admin
+} from "./scenes/Main/scenes/index";
 
 // Article routes
-import Article from "./scenes/Main/scenes/Article/index";
 import {
   NewArticle,
   ViewArticle,
@@ -18,7 +21,6 @@ import {
 } from "./scenes/Main/scenes/Article/scenes/index";
 
 // Admin routes
-import Admin from "./scenes/Main/scenes/Admin/index";
 import {
   ManageTopics,
   ManageUsers,
