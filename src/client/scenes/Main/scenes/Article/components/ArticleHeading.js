@@ -1,25 +1,25 @@
 import React from "react";
 
-const LastUpdatedDate = props => (
+const LastUpdatedDate = ({ date }) => (
   <div className="single-article-meta">
     Last updated on {" "}
-    {new Date(props.date.replace(" ", "T")).toDateString()}
+    {new Date(date.replace(" ", "T")).toDateString()}
   </div>
 );
 
-const EditedBy = props => (
+const EditedBy = ({ name }) => (
   <div className="single-article-meta">
-    Edited by <b>{props.name}</b>
+    Edited by <b>{name}</b>
   </div>
 );
 
-const ArticleHeading = props => (
+const ArticleHeading = ({ children, date, editedBy }) => (
   <div className="article-heading">
     <h1 className="single-article-title">
-      {props.children}
+      {children}
     </h1>
-    {props.date && <LastUpdatedDate date={props.date} />}
-    {props.editedBy && <EditedBy name={props.editedBy} />}
+    {date && <LastUpdatedDate date={date} />}
+    {editedBy && <EditedBy name={editedBy} />}
   </div>
 );
 

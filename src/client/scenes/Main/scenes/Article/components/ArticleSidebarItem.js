@@ -1,9 +1,9 @@
 import React from "react";
 
-const ArticleSidebarItem = props => (
+const ArticleSidebarItem = ({ title, children }) => (
   <div className="sidebar-block">
-    <div className="sidebar-title">{props.title}</div>
-    {props.children}
+    <div className="sidebar-title">{title}</div>
+    {children}
   </div>
 );
 

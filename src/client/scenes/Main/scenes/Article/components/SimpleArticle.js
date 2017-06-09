@@ -4,16 +4,16 @@ import { Grid, Row, Col, HelpBlock } from "react-bootstrap";
 import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "./WikiEditor/index";
 
-const SimpleArticle = props => {
-  if (props.loading) return <Loader />;
-  if (props.article && props.article.user) {
-    const rawContent = JSON.parse(props.article.body);
+const SimpleArticle = ({ loading, article }) => {
+  if (loading) return <Loader />;
+  if (article && article.user) {
+    const rawContent = JSON.parse(article.body);
     return (
       <Grid fluid={true}>
         <Row>
           <Col md={12}>
-            <ArticleHeading editedBy={props.article.user.name}>
-              {props.article.title}
+            <ArticleHeading editedBy={article.user.name}>
+              {article.title}
             </ArticleHeading>
             <div className="single-article-body">
               <WikiEditor readOnly={true} rawContent={rawContent} />

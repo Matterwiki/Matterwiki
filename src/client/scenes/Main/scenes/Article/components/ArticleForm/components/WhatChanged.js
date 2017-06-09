@@ -1,7 +1,7 @@
 import React from "react";
 import { ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
 
-const WhatChanged = props => (
+const WhatChanged = ({ value, onChange }) => (
   <div>
     <ControlLabel>
       What improvements did you make in this edit?
@@ -11,8 +11,8 @@ const WhatChanged = props => (
       className="what_changed"
       name="what_changed"
       placeholder="Example: Fixed a typo. It's grammer not grammar"
-      value={props.value}
-      onChange={props.onChange}
+      value={value}
+      onChange={onChange}
     />
     <HelpBlock>
       Keep it short and descriptive :)

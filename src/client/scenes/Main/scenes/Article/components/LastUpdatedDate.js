@@ -1,9 +1,9 @@
 import React from "react";
 
-const LastUpdatedDate = props => (
+const LastUpdatedDate = ({ date }) => (
   <div className="single-article-meta">
     Last updated on
-    {new Date(props.date.replace(" ", "T")).toDateString()}
+    {new Date(date.replace(" ", "T")).toDateString()}
   </div>
 );
 

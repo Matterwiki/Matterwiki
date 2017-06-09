@@ -2,13 +2,13 @@ import React from "react";
 import { HelpBlock, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
 // TODO Componentize further?
-const BrowseArchives = props => {
+const BrowseArchives = ({onArchiveChosen, archives}) => {
   const archiveClick = (id, e) => {
     e.preventDefault();
-    props.onArchiveChosen(id);
+    onArchiveChosen(id);
   };
 
-  if (!props.archives.length) {
+  if (!archives.length) {
     return (
       <HelpBlock className="center-align">
         There are no archives for this article
@@ -29,7 +29,7 @@ const BrowseArchives = props => {
           <br />
         </div>
         <ListGroup id="side-menu-collapse" className="collapse archive-list">
-          {props.archives.map(archive => {
+          {archives.map(archive => {
             const lastUpdated = new Date(
               archive.updated_at.replace(" ", "T")
             ).toDateString();
