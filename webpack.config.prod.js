@@ -1,4 +1,4 @@
- // TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
+// TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
 
 const webpack = require("webpack");
 const path = require("path");
@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: BUILD_DIR,
     publicPath: "/",
-    filename: "bundle.js"
+    filename: "[name].js"
   },
   devtool: "source-map",
   plugins: [
@@ -32,6 +32,12 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production")
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      minChunks: function(module) {
+        return module.context && module.context.indexOf("node_modules") !== -1;
+      }
     })
   ],
   module: {
@@ -49,6 +55,7 @@ module.exports = {
       {
         test: /\.(jpg|png|svg)$/,
         loader: "file-loader",
+        exclude: /node_modules/,
         options: {
           name: "./assets/[name].[ext]"
         }

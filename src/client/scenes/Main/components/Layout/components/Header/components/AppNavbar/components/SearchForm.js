@@ -4,24 +4,17 @@ import { hashHistory } from "react-router";
 import FaSearch from "react-icons/lib/fa/search";
 
 class SearchForm extends React.Component {
-  constructor(...args) {
-    super(...args);
+  state = {
+    searchText: ""
+  };
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    this.state = {
-      searchText: ""
-    };
-  }
-
-  onChange(e) {
+  onChange = e => {
     this.setState({
       searchText: e.target.value
     });
-  }
+  };
 
-  onSubmit(e) {
+  onSubmit = e => {
     e.preventDefault();
 
     this.setState(prevState => {
@@ -32,7 +25,7 @@ class SearchForm extends React.Component {
         searchText: ""
       };
     });
-  }
+  };
 
   render() {
     return (

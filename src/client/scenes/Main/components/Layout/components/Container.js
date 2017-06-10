@@ -1,8 +1,8 @@
 import React from "react";
 
-const Container = (props) => (
+const Container = ({children}) => (
   <div className="container content">
-    {props.children}
+    {children}
   </div>
 );
 

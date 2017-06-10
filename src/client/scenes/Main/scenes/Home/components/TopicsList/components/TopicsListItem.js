@@ -2,16 +2,17 @@ import React from "react";
 
 import { ListGroupItem } from "react-bootstrap";
 
-const TopicsListItem = props => {
-  const { id, name, description } = props.topic;
+const TopicsListItem = ({ topic, onTopicClick }) => {
+  const { id, name, description } = topic;
+
   // TODO wrap these into generic HOCs
-  const onTopicClick = e => {
+  const handleTopicClick = e => {
     e.preventDefault();
-    props.onTopicClick(id);
+    onTopicClick(id);
   };
 
   return (
-    <ListGroupItem header={name} onClick={onTopicClick} href="#">
+    <ListGroupItem header={name} onClick={handleTopicClick} href="#">
       {description}
     </ListGroupItem>
   );

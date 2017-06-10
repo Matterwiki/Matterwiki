@@ -5,11 +5,11 @@ import Footer from "./components/Footer";
 
 import "./Layout.css";
 
-const Layout = props => (
+const Layout = ({children, ...props}) => (
   <div>
     <Header {...props} />
     <Container>
-      {props.children}
+      {children}
     </Container>
     <Footer />
   </div>

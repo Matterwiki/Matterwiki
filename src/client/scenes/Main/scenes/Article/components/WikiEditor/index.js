@@ -31,8 +31,8 @@ const customStyleMap = {
   }
 };
 
-const Link = props => {
-  const { url } = props.contentState.getEntity(props.entityKey).getData();
+const Link = ({ contentState }) => {
+  const { url } = contentState.getEntity(props.entityKey).getData();
   return (
     <a href={url}>
       {props.children || url}

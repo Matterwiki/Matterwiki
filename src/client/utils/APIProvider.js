@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // TODO Add better error handling
+// TODO use something light weight like `unfetch`
 const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
   baseURL: "api/",
