@@ -19,7 +19,7 @@ const ArticleSidebar = ({
       <h3>
         <b>{article.user.name}</b>
       </h3>
-      <p>{user.about}</p>
+      <p>{article.user.about}</p>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="What Changed in last edit">
       {article.what_changed || <h4>No information available</h4>}

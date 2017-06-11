@@ -31,11 +31,11 @@ const customStyleMap = {
   }
 };
 
-const Link = ({ contentState }) => {
-  const { url } = contentState.getEntity(props.entityKey).getData();
+const Link = ({ contentState, entityKey, children }) => {
+  const { url } = contentState.getEntity(entityKey).getData();
   return (
     <a href={url}>
-      {props.children || url}
+      {children || url}
     </a>
   );
 };
