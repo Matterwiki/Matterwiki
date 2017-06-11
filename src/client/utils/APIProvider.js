@@ -2,6 +2,7 @@ import axios from "axios";
 
 // TODO Add better error handling
 // TODO use something light weight like `unfetch`
+// TODO Polyfill `Promise` API for older browsers
 const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
   baseURL: "api/",
@@ -10,7 +11,6 @@ const axiosInstance = axios.create({
 
 /**
  * Takes care of user created errors, returns a promise which could be handled at the component side
- * TODO use interceptors for this
  */
 function prepareResponse(response) {
   if (!response.data) return;

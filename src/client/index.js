@@ -5,6 +5,9 @@ import { Router, hashHistory } from 'react-router';
 
 import routes from './routes.js';
 
+// For `Promise`, Array.from and other fun stuff
+import "babel-polyfill";
+
 const renderApp = (appRoutes) => {
   render(
     <AppContainer>
