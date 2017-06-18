@@ -1,5 +1,5 @@
 {
-  "name": "Matterwiki",
+  "name": "matterwiki",
   "version": "0.2.1",
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
