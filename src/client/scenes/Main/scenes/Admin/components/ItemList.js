@@ -2,11 +2,6 @@ import React from "react";
 import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
 
 class ResourceListItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
-  }
   handleDeleteClick = (item, e) => {
     e.preventDefault();
     this.props.onDeleteClick(item.id);
