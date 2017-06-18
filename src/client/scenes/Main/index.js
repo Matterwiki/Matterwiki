@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { hashHistory } from "react-router";
-import NotificationsWrapper from '../../components/Notifications/NotificationsWrapper.js';
+import NotificationsWrapper from 'components/Notifications/NotificationsWrapper.js';
 
 import Layout from "./components/Layout/index";
 import APIProvider from "utils/APIProvider";
