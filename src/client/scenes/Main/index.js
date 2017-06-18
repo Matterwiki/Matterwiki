@@ -1,11 +1,10 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { hashHistory } from "react-router";
+import NotificationsWrapper from '../../components/Notifications/NotificationsWrapper.js';
 
 import Layout from "./components/Layout/index";
 import APIProvider from "utils/APIProvider";
-
-import "react-s-alert/dist/s-alert-default.css";
 
 // bunch of custom styles that are needed globally
 import "./bootstrap.css";
@@ -49,7 +48,7 @@ class Main extends React.Component {
         <Layout {...headerProps}>
           {this.props.children}
         </Layout>
-        <Alert stack={{ limit: 1 }} position="bottom" />
+        <NotificationsWrapper />
       </div>
     );
   }
