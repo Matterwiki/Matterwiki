@@ -26,6 +26,11 @@ class ItemForm extends React.Component {
     this.initState();
   };
 
+  cancelUpdate = e => {
+    e.preventDefault();
+    this.props.onCancelUpdate();
+  };
+
   componentWillMount() {
     this.initState(this.props);
   }
@@ -35,27 +40,42 @@ class ItemForm extends React.Component {
 
   render() {
     const { item, itemName, itemFormFields } = this.props;
+    const currentlyEditing = () => {
+      if (item) {
+        return (
+          <p className="editing-heading">You're currently editing a {itemName}</p>
+        );
+      }
+    }
     return (
-      <Form className="tabform" onSubmit={this.onSubmit}>
-        {itemFormFields.map(formField => (
-          <Col sm={12} key={formField.name}>
-            <FormGroup>
-              <FormControl
-                type={formField.type}
-                placeholder={formField.name}
-                name={formField.name}
-                value={this.state[formField.name]}
-                onChange={this.onChange}
-              />
-            </FormGroup>
+      <div>
+        { currentlyEditing() }
+        <Form className="tabform" onSubmit={this.onSubmit}>
+          {itemFormFields.map(formField => (
+            <Col sm={12} key={formField.name}>
+              <FormGroup>
+                <FormControl
+                  type={formField.type}
+                  placeholder={formField.name}
+                  name={formField.name}
+                  value={this.state[formField.name]}
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+            </Col>
+          ))}
+          <Col sm={12}>
+            <Button type="submit" block={true}>
+              {item ? `Update ${itemName}` : `Add ${itemName}`}
+            </Button>
+            { (item) ? 
+              <Button block={true} onClick={this.cancelUpdate}>
+                Cancel
+              </Button> : ''
+            }
           </Col>
-        ))}
-        <Col sm={12}>
-          <Button type="submit" block={true}>
-            {item ? `Update ${itemName}` : `Add ${itemName}`}
-          </Button>
-        </Col>
-      </Form>
+        </Form>
+      </div>
     );
   }
 }

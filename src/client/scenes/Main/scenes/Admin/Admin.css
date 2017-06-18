@@ -5,3 +5,8 @@
 .list-group .btn {
     font-size: 10px;
 }
+
+.editing-heading {
+    text-align: center;
+    padding: 10px;
+}

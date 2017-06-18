@@ -70,6 +70,10 @@ class ManageTopics extends React.Component {
     });
   };
 
+  emptyCurrentTopicState = () => {
+    this.setState({ currentTopic: null });
+  };
+
   render() {
     if (this.state.loading) return <Loader />;
     else {
@@ -87,6 +91,7 @@ class ManageTopics extends React.Component {
                     itemName="topic"
                     item={this.state.currentTopic}
                     onSubmit={onSubmit}
+                    onCancelUpdate={this.emptyCurrentTopicState}
                   />
                 </Col>
               </Row>
