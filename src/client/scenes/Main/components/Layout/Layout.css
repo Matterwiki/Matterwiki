@@ -30,7 +30,7 @@
     width: 100%;
     min-height: 0px;
     height: 30px;
-    padding: 6px 12px;
+    padding: 6px 12px !important;
     font-size: inherit;
 }
 

@@ -1,5 +1,5 @@
 {
-  "name": "Matterwiki",
+  "name": "matterwiki",
   "version": "0.2.1",
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/Matterwiki/Matterwiki.git"
   },
-  "author": "Nishant Arora (@nshntarora)",
+  "author": "Krishna Gopinath (@krishnagopinath) and Nishant Arora (@nshntarora)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Matterwiki/Matterwiki/issues"

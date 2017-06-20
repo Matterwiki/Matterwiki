@@ -85,6 +85,10 @@ class ManageUsers extends React.Component {
     });
   };
 
+  emptyCurrentUserState = () => {
+    this.setState({ currentUser: null });
+  };
+
   render() {
     if (this.state.loading) return <Loader />;
     else {
@@ -103,6 +107,7 @@ class ManageUsers extends React.Component {
                     item={this.state.currentUser}
                     itemName="user"
                     onSubmit={onSubmit}
+                    onCancelUpdate={this.emptyCurrentUserState}
                   />
                 </Col>
               </Row>
