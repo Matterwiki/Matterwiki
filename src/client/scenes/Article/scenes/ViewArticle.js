@@ -17,7 +17,7 @@ class ViewArticle extends React.Component {
   };
 
   componentDidMount() {
-    var id = this.props.params.articleId;
+    var id = this.props.match.params.articleId;
     APIProvider.get(`articles/${id}`).then(article => {
       this.setState({
         article,

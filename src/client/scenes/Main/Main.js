@@ -64,12 +64,12 @@ class Main extends React.Component {
           {/*{this.props.children}*/}
           { (this.props.location.pathname === '/') ? <Redirect to="/home" /> : "" }
           <Switch>
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/article" component={Article} />
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/search" component={Search} />
-            <Route exact path="/setup" component={Setup} />
+            <Route path="/home" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/article" component={Article} />
+            <Route path="/admin" component={Admin} />
+            <Route path="/search" component={Search} />
+            <Route path="/setup" component={Setup} />
           </Switch>
         </Layout>
         <NotificationsWrapper />
