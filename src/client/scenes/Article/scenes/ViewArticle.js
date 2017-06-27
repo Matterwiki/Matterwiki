@@ -27,18 +27,18 @@ class ViewArticle extends React.Component {
   }
 
   handleEditClick = e => {
-    // hashHistory.push(`article/edit/${this.state.article.id}`);
+    this.props.history.push(`/article/edit/${this.state.article.id}`);
   };
 
   handleHistoryClick = e => {
-    // hashHistory.push(`article/history/${this.state.article.id}`);
+    this.props.history.push(`/article/history/${this.state.article.id}`);
   };
 
   handleDeleteClick = e => {
     e.preventDefault();
     APIProvider.delete(`articles?id=${this.state.article.id}`).then(article => {
       Alert.success("Article has been deleted");
-      // hashHistory.push("home");
+      this.props.history.push("/home");
     });
   };
 
