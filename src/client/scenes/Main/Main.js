@@ -26,19 +26,18 @@ import "./style.css";
 class Main extends React.Component {
   componentWillMount() {
     // Hack to move away from here if going to setup
-    console.log('component will mount');
     if (!this.props.location.pathname.includes("setup")) {
       // TODO Make this check stronger
 
       const token = window.localStorage.getItem("userToken");
 
-      if (!token) return this.props.history.push("login");
+      if (!token) return this.props.history.push("/login");
 
       // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
       APIProvider.get("articles").catch(err => {
         if (err.code === "B101") {
           window.localStorage.setItem("userToken", "");
-          return this.props.history.push("login");
+  -       this.props.history.push("/login");
         }
       });
     }
@@ -47,7 +46,7 @@ class Main extends React.Component {
   handleLogout = () => {
     window.localStorage.setItem("userToken", "");
     Alert.success("You've been successfully logged out");
-    // hashHistory.push("login");
+    this.props.history.push("/login");
   };
 
   render() {
@@ -58,11 +57,20 @@ class Main extends React.Component {
       handleLogoutClick: this.handleLogout
     };
 
+    const loggedInRedirectHandler = () => {
+      if (this.props.location.pathname === '/') {
+        if (window.localStorage.getItem('userToken')) {
+          <Redirect to="/home" />
+        } else {
+          <Redirect to="/login" />
+        }
+      }
+    }
+
     return (
       <div>
         <Layout {...headerProps}>
-          {/*{this.props.children}*/}
-          { (this.props.location.pathname === '/') ? <Redirect to="/home" /> : "" }
+          {loggedInRedirectHandler()}
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
