@@ -32,10 +32,12 @@ class Admin extends React.Component {
   };
 
   updateTab = name => {
-    this.props.history.push(`/admin/${name}`);
     this.setState({
       tab: name
     });
+    if (name != this.getCurrentTab()) {
+      this.props.history.push(`/admin/${name}`);
+    }
   };
 
   render() {
