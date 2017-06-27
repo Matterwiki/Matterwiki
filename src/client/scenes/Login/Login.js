@@ -12,18 +12,19 @@ import "./Login.css";
 class Login extends React.Component {
   componentDidMount() {
     if (window.localStorage.getItem("userToken")) {
-      // hashHistory.push("home");
+      this.props.history.push("home");
     }
   }
 
   handleSubmit = user => {
+    const that = this;
     APIProvider.post("authenticate", user)
       .then(function(loggedInUser) {
         window.localStorage.setItem("userToken", loggedInUser.token);
         window.localStorage.setItem("userId", loggedInUser.user.id);
         window.localStorage.setItem("userEmail", loggedInUser.user.email);
 
-        // hashHistory.push("home");
+        that.props.history.push("home");
 
         Alert.success("You are now logged in");
       })

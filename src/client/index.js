@@ -11,7 +11,7 @@ const renderApp = () => {
   render(
     <AppContainer>
       <HashRouter>
-        <Route exact path="/" component={Main} />
+        <Route path="/" component={Main} />
       </HashRouter>
     </AppContainer>,
     document.getElementById('app')
