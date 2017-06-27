@@ -50,7 +50,6 @@ class Main extends React.Component {
   };
 
   render() {
-    console.log('rendering now', this.props);
     const headerProps = {
       isAdmin: parseInt(window.localStorage.getItem("userId")) === 1,
       isLoggedIn: window.localStorage.getItem("userToken") ? true : false,
