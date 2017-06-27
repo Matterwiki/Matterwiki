@@ -17,7 +17,7 @@ class Setup extends React.Component {
     APIProvider.post("setup", user)
       .then(function(user) {
         Alert.success("Admin user generated");
-        // hashHistory.push("login");
+        this.props.history.push("/login");
       })
       .catch(function(err) {
         Alert.error(err);

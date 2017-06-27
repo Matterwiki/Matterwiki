@@ -19,7 +19,7 @@ class SearchForm extends React.Component {
 
     this.setState(prevState => {
       const { searchText } = this.state;
-      // hashHistory.push(`/search?query=${searchText}`);
+      this.props.history.push(`/search?query=${searchText}`);
 
       return {
         searchText: ""

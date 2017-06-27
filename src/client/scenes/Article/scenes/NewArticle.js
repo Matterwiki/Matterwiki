@@ -10,7 +10,7 @@ class NewArticle extends React.Component {
   handleSubmit = (article) => {
     APIProvider.post("articles", article).then(response => {
       Alert.success("Article has been successfully saved");
-      // hashHistory.push(`article/${response.id}`);
+      this.props.history.push(`/article/${response.id}`);
     });
   }
 

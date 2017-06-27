@@ -19,7 +19,7 @@ class EditArticle extends React.Component {
     APIProvider.put("articles", article)
       .then(article => {
         Alert.success("Article has been successfully saved");
-        // hashHistory.push(`article/${articleId}`);
+        this.props.history.push(`/article/${articleId}`);
       })
       .catch(err => {
         Alert.error(response.error.message);
