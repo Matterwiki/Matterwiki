@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, hashHistory } from "react-router";
+// import { Link, hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Admin.css";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
+import { Switch, Route } from "react-router-dom";
 
 import AdminNavBar from "./components/AdminNavBar";
 
@@ -25,18 +26,23 @@ class Admin extends React.Component {
   };
 
   updateTab = name => {
-    hashHistory.push(`admin/${name}`);
+    // hashHistory.push(`admin/${name}`);
     this.setState({
       tab: name
     });
   };
 
-  render() {
+  render({ match }) {
     return (
       (this.state.loading && <Loader />) ||
       <div>
         <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
-        {this.props.children}
+        {/*{this.props.children}*/}
+        <Switch>
+          <Route exact path={`${match.url}/topics`} component={ManageTopics} />
+          <Route exact path={`${match.url}/users`} component={ManageUsers} />
+          <Route exact path={`${match.url}/design`} component={LogoUpload} />
+        </Switch>
       </div>
     );
   }

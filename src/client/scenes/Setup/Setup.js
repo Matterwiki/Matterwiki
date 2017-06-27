@@ -1,5 +1,5 @@
 import React from "react";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
 
@@ -17,7 +17,7 @@ class Setup extends React.Component {
     APIProvider.post("setup", user)
       .then(function(user) {
         Alert.success("Admin user generated");
-        hashHistory.push("login");
+        // hashHistory.push("login");
       })
       .catch(function(err) {
         Alert.error(err);

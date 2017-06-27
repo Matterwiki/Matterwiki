@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
 import FaSearch from "react-icons/lib/fa/search";
 
 class SearchForm extends React.Component {
@@ -19,7 +19,7 @@ class SearchForm extends React.Component {
 
     this.setState(prevState => {
       const { searchText } = this.state;
-      hashHistory.push(`/search?query=${searchText}`);
+      // hashHistory.push(`/search?query=${searchText}`);
 
       return {
         searchText: ""

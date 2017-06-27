@@ -1,28 +1,30 @@
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 import {render} from 'react-dom';
-import { Router, hashHistory } from 'react-router';
+import { HashRouter, Route } from 'react-router-dom';
 
-import routes from './routes.js';
+import Main from "./scenes/Main/Main";
 
-const renderApp = (appRoutes) => {
+// import routes from './routes.js';
+
+const renderApp = () => {
   render(
     <AppContainer>
-      <Router history={hashHistory}>
-        {appRoutes()}
-      </Router>  
+      <HashRouter>
+        <Route exact path="/" component={Main} />
+      </HashRouter>
     </AppContainer>,
     document.getElementById('app')
   )
 };
 
 
-renderApp(routes);
+renderApp();
 
 // react HMR
-if(module.hot) {
-  module.hot.accept('./routes.js', () => {
-    const routeChanges = require('./routes.js').default;
-    renderApp(routeChanges);
-  })
-}
+// if(module.hot) {
+//   module.hot.accept('./routes.js', () => {
+//     const routeChanges = require('./routes.js').default;
+//     renderApp(routeChanges);
+//   })
+// }

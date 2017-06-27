@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
 import Loader from "components/Loader/Loader";
 import APIProvider from "utils/APIProvider.js";

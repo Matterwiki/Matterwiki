@@ -1,5 +1,5 @@
 import React from "react";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
 
@@ -12,7 +12,7 @@ import "./Login.css";
 class Login extends React.Component {
   componentDidMount() {
     if (window.localStorage.getItem("userToken")) {
-      hashHistory.push("home");
+      // hashHistory.push("home");
     }
   }
 
@@ -23,7 +23,7 @@ class Login extends React.Component {
         window.localStorage.setItem("userId", loggedInUser.user.id);
         window.localStorage.setItem("userEmail", loggedInUser.user.email);
 
-        hashHistory.push("home");
+        // hashHistory.push("home");
 
         Alert.success("You are now logged in");
       })

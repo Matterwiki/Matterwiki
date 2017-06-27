@@ -1,5 +1,5 @@
 import React from "react";
-import { browserHistory, hashHistory } from "react-router";
+// import { browserHistory, hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
 
@@ -27,18 +27,18 @@ class ViewArticle extends React.Component {
   }
 
   handleEditClick = e => {
-    hashHistory.push(`article/edit/${this.state.article.id}`);
+    // hashHistory.push(`article/edit/${this.state.article.id}`);
   };
 
   handleHistoryClick = e => {
-    hashHistory.push(`article/history/${this.state.article.id}`);
+    // hashHistory.push(`article/history/${this.state.article.id}`);
   };
 
   handleDeleteClick = e => {
     e.preventDefault();
     APIProvider.delete(`articles?id=${this.state.article.id}`).then(article => {
       Alert.success("Article has been deleted");
-      hashHistory.push("home");
+      // hashHistory.push("home");
     });
   };
 

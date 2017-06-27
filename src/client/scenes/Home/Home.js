@@ -1,5 +1,5 @@
 import React from "react";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
 import { Grid, Row, Col } from "react-bootstrap";
 
 import TopicsList from "./components/TopicsList/TopicsList";

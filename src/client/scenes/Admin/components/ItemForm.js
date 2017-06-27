@@ -1,5 +1,4 @@
 import React from "react";
-import { hashHistory } from "react-router";
 
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 

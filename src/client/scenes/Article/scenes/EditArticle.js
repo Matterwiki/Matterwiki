@@ -1,5 +1,5 @@
 import React from "react";
-import { hashHistory } from "react-router";
+// import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 import ArticleForm from "../components/ArticleForm/ArticleForm";
@@ -19,7 +19,7 @@ class EditArticle extends React.Component {
     APIProvider.put("articles", article)
       .then(article => {
         Alert.success("Article has been successfully saved");
-        hashHistory.push(`article/${articleId}`);
+        // hashHistory.push(`article/${articleId}`);
       })
       .catch(err => {
         Alert.error(response.error.message);

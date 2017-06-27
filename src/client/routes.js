@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, IndexRoute } from "react-router";
+import { Route } from "react-router-dom";
 
 // TODO Main route is the parent of all routes. Find another way to do this!
 import Main from "./scenes/Main/Main";
