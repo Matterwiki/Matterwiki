@@ -12,7 +12,7 @@ class EditArticle extends React.Component {
   };
 
   handleSubmit = article => {
-    const articleId = this.props.params.articleId;
+    const articleId = this.props.match.params.articleId;
 
     article.id = articleId;
 
@@ -31,7 +31,7 @@ class EditArticle extends React.Component {
       loading: true
     });
 
-    const articleId = this.props.params.articleId;
+    const articleId = this.props.match.params.articleId;
 
     APIProvider.get(`articles/${articleId}`).then(article => {
       article.what_changed = "";

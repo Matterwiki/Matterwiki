@@ -20,7 +20,7 @@ class ArticleHistory extends React.Component {
       loading: true
     });
     APIProvider.get(
-      `articles/${this.props.params.articleId}/history`
+      `articles/${this.props.match.params.articleId}/history`
     ).then(archives => {
       this.setState({
         archives,
@@ -53,7 +53,7 @@ class ArticleHistory extends React.Component {
               <BrowseArchives
                 archives={this.state.archives}
                 onArchiveChosen={this.getArchive}
-                articleId={this.props.params.articleId}
+                articleId={this.props.match.params.articleId}
               />
             </Col>
             <Col md={9}>
@@ -67,7 +67,7 @@ class ArticleHistory extends React.Component {
         <Row>
           <HelpBlock className="center-align">
             There are no archives for this article {`   `}
-            <Link to={`/article/${this.props.params.articleId}`}>Go back</Link>
+            <Link to={`/article/${this.props.match.params.articleId}`}>Go back</Link>
           </HelpBlock>
         </Row>
       );

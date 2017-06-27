@@ -1,9 +1,15 @@
 import React from "react";
 import "./Admin.css";
 // import { hashHistory } from "react-router";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import AdminNavBar from "./components/AdminNavBar";
+
+import {
+  ManageTopics,
+  ManageUsers,
+  LogoUpload
+} from "./scenes/AllScenesAdmin";
 
 class Admin extends React.Component {
   constructor(...args) {
@@ -26,22 +32,23 @@ class Admin extends React.Component {
   };
 
   updateTab = name => {
-    // hashHistory.push(`admin/${name}`);
+    this.props.history.push(`/admin/${name}`);
     this.setState({
       tab: name
     });
   };
 
-  render({ match }) {
+  render() {
     return (
       (this.state.loading && <Loader />) ||
       <div>
         <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
         {/*{this.props.children}*/}
+        { (this.props.location.pathname === '/admin') ? <Redirect to={`${this.props.match.url}/users`} /> : ""}
         <Switch>
-          <Route exact path={`${match.url}/topics`} component={ManageTopics} />
-          <Route exact path={`${match.url}/users`} component={ManageUsers} />
-          <Route exact path={`${match.url}/design`} component={LogoUpload} />
+          <Route path={`${this.props.match.url}/topics`} component={ManageTopics} />
+          <Route path={`${this.props.match.url}/users`} component={ManageUsers} />
+          <Route path={`${this.props.match.url}/design`} component={LogoUpload} />
         </Switch>
       </div>
     );
