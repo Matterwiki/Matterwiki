@@ -34,7 +34,13 @@ class Main extends React.Component {
       if (!token) return this.props.history.push("/login");
 
       // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
-      APIProvider.get("articles").catch(err => {
+      APIProvider.get("articles")
+      // .then(response => {
+      //   if (this.props.history.pathname === "/") {
+      //     this.props.history.push("/home");
+      //   }
+      // })
+      .catch(err => {
         if (err.code === "B101") {
           window.localStorage.setItem("userToken", "");
   -       this.props.history.push("/login");
@@ -56,20 +62,18 @@ class Main extends React.Component {
       handleLogoutClick: this.handleLogout
     };
 
-    const loggedInRedirectHandler = () => {
-      if (this.props.location.pathname === '/') {
-        if (window.localStorage.getItem('userToken')) {
-          <Redirect to="/home" />
-        } else {
-          <Redirect to="/login" />
-        }
+
+    if (this.props.location.pathname === '/') {
+      if (window.localStorage.getItem('userToken')) {
+        return <Redirect to="/home" />
+      } else {
+        return <Redirect to="/login" />
       }
     }
 
     return (
       <div>
         <Layout {...headerProps}>
-          {loggedInRedirectHandler()}
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
