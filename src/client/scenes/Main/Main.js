@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
 // import { hashHistory } from "react-router";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import NotificationsWrapper from 'components/Notifications/NotificationsWrapper.js';
 
 import Layout from "components/Layout/Layout";
@@ -51,7 +51,7 @@ class Main extends React.Component {
   };
 
   render() {
-    console.log('rendering now');
+    console.log('rendering now', this.props);
     const headerProps = {
       isAdmin: parseInt(window.localStorage.getItem("userId")) === 1,
       isLoggedIn: window.localStorage.getItem("userToken") ? true : false,
@@ -62,6 +62,7 @@ class Main extends React.Component {
       <div>
         <Layout {...headerProps}>
           {/*{this.props.children}*/}
+          { (this.props.location.pathname === '/') ? <Redirect to="/home" /> : "" }
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />

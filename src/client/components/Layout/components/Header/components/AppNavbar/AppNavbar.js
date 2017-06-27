@@ -17,7 +17,7 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <Link to="home" className="navbar-brand">
+        <Link to="/home" className="navbar-brand">
           <img src={Logo} />
         </Link>
       </Navbar.Brand>
@@ -27,10 +27,10 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) => (
       <SearchForm />
       <Nav pullRight>
         {isAdmin &&
-          <LinkNavItem to="admin">
+          <LinkNavItem to="/admin">
             Admin
           </LinkNavItem>}
-        <LinkNavItem to="article/new">
+        <LinkNavItem to="/article/new">
           New Article
         </LinkNavItem>
         <NavItem onClick={handleLogoutClick}> Logout </NavItem>
