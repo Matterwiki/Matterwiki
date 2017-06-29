@@ -14,7 +14,8 @@ import {
   Search,
   Home,
   Article,
-  Admin
+  Admin,
+  NotFoundError
 } from "./AllScenesMain";
 
 
@@ -81,6 +82,7 @@ class Main extends React.Component {
             <Route path="/admin" component={Admin} />
             <Route path="/search" component={Search} />
             <Route path="/setup" component={Setup} />
+            <Route path="*" component={NotFoundError} />
           </Switch>
         </Layout>
         <NotificationsWrapper />
