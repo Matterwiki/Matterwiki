@@ -7,7 +7,7 @@ const ArchiveModel = db.model(
   "Archive",
   db.Model.extend({
     tableName: "archives",
-    articles: function() {
+    articles() {
       return this.belongsTo("Articles", "article_id");
     }
   })

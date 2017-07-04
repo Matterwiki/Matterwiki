@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
 
 import Loader from "components/Loader/Loader";
+import APIProvider from "utils/APIProvider";
+
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
-
-import APIProvider from "utils/APIProvider";
 
 // TODO move these fellas to a nice consts file
 const USER_FORM_FIELDS = [
@@ -30,6 +29,10 @@ class ManageUsers extends React.Component {
     currentUser: null
   };
 
+  componentDidMount() {
+    this.handleUpdate();
+  }
+
   handleUpdate = () => {
     this.setState({
       loading: true
@@ -50,17 +53,13 @@ class ManageUsers extends React.Component {
     });
   };
 
-  componentDidMount() {
-    this.handleUpdate();
-  }
-
   deleteUser = id => {
     const canDelete = confirm(
       "Deleting the user will move all of his/her articles to the Admin. Are you sure?"
     );
 
     if (canDelete) {
-      APIProvider.delete(`users/${id}`).then(a => {
+      APIProvider.delete(`users/${id}`).then(() => {
         Alert.success("User has been deleted");
         this.handleUpdate();
       });
@@ -69,7 +68,7 @@ class ManageUsers extends React.Component {
 
   updateUser = user => {
     const id = this.state.currentUser.id;
-    APIProvider.put(`users/${id}`, user).then(user => {
+    APIProvider.put(`users/${id}`, user).then(() => {
       Alert.success("User has been edited");
       this.setState({
         currentUser: null
@@ -79,7 +78,7 @@ class ManageUsers extends React.Component {
   };
 
   addUser = user => {
-    APIProvider.post("users", user).then(user => {
+    APIProvider.post("users", user).then(() => {
       Alert.success("User has been added");
       this.handleUpdate();
     });
@@ -90,40 +89,41 @@ class ManageUsers extends React.Component {
   };
 
   render() {
-    if (this.state.loading) return <Loader />;
-    else {
-      const onSubmit = this.state.currentUser ? this.updateUser : this.addUser;
-      const itemFormFields = this.state.currentUser
-        ? EDIT_USER_FORM_FIELDS
-        : USER_FORM_FIELDS;
-      return (
-        <Grid>
-          <Row>
-            <Col sm={12} md={4}>
-              <Row>
-                <Col md={12} sm={12}>
-                  <ItemForm
-                    itemFormFields={itemFormFields}
-                    item={this.state.currentUser}
-                    itemName="user"
-                    onSubmit={onSubmit}
-                    onCancelUpdate={this.emptyCurrentUserState}
-                  />
-                </Col>
-              </Row>
-            </Col>
-            <Col sm={12} md={8}>
-              <ItemList
-                items={this.state.users}
-                itemName="user"
-                onDeleteClick={this.deleteUser}
-                onEditClick={this.handleEditClick}
-              />
-            </Col>
-          </Row>
-        </Grid>
-      );
+    if (this.state.loading) {
+      return <Loader />;
     }
+
+    const onSubmit = this.state.currentUser ? this.updateUser : this.addUser;
+    const itemFormFields = this.state.currentUser
+      ? EDIT_USER_FORM_FIELDS
+      : USER_FORM_FIELDS;
+    return (
+      <Grid>
+        <Row>
+          <Col sm={12} md={4}>
+            <Row>
+              <Col md={12} sm={12}>
+                <ItemForm
+                  itemFormFields={itemFormFields}
+                  item={this.state.currentUser}
+                  itemName="user"
+                  onSubmit={onSubmit}
+                  onCancelUpdate={this.emptyCurrentUserState}
+                />
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={12} md={8}>
+            <ItemList
+              items={this.state.users}
+              itemName="user"
+              onDeleteClick={this.deleteUser}
+              onEditClick={this.handleEditClick}
+            />
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
 }
 

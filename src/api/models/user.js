@@ -7,7 +7,7 @@ const UserModel = db.model(
   "User",
   db.Model.extend({
     tableName: "users",
-    articles: function() {
+    articles() {
       return this.hasMany("Article");
     }
   })

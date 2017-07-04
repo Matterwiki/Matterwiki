@@ -19,7 +19,6 @@ class LinkControl extends Component {
 
   handleLinkPopupOpen = () => {
     const { currentEntity } = this.props;
-    const { showPopup } = this.state;
 
     let url = "";
     if (currentEntity) {
@@ -40,7 +39,7 @@ class LinkControl extends Component {
   handleLinkSave = e => {
     e.preventDefault();
 
-    const { url, showPopup } = this.state;
+    const { url } = this.state;
     const { onAddLink } = this.props;
 
     onAddLink(url);
@@ -64,7 +63,7 @@ class LinkControl extends Component {
   };
 
   render() {
-    const { editorState, currentEntity } = this.props;
+    const { currentEntity } = this.props;
     const { url, showPopup } = this.state;
 
     // TODO make this a separate component
@@ -72,9 +71,9 @@ class LinkControl extends Component {
       <Overlay
         show={showPopup}
         placement="bottom"
-        target={() => ReactDOM.findDOMNode(this.refs.target)}
+        target={() => ReactDOM.findDOMNode(this.targetButton)}
         onHide={this.resetPopoverState}
-        rootClose={true}>
+        rootClose>
         <Popover id="link-popover">
           <input
             type="text"
@@ -114,7 +113,7 @@ class LinkControl extends Component {
       <div>
         <ButtonGroup>
           <Button
-            ref="target"
+            ref={_ref => (this.targetButton = _ref)}
             bsStyle="default"
             bsSize="lg"
             className={toolbarButtonClass}

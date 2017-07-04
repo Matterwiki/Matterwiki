@@ -9,13 +9,13 @@ let ArticleModel = db.model(
   "Article",
   db.Model.extend({
     tableName: "articles",
-    topic: function() {
+    topic() {
       return this.belongsTo("Topic", "topic_id");
     },
-    user: function() {
+    user() {
       return this.belongsTo("User", "user_id");
     },
-    archives: function() {
+    archives() {
       return this.hasMany("Archives");
     }
   })
@@ -25,11 +25,13 @@ ArticleModel = buildDbModel(ArticleModel);
 
 // override so we could use query and add some extra stuff
 // TODO there must be a better way to do this?
-ArticleModel.getAllArticles = function(params = {}, count) {
+ArticleModel.getAllArticles = function getAllArticles(params = {}, count) {
   return this.model
     .query({ where: params })
-    .query(function(qb) {
-      if (count) qb.limit(count);
+    .query(qb => {
+      if (count) {
+        qb.limit(count);
+      }
       qb.orderBy("updated_at", "DESC");
     })
     .fetchAll();
@@ -37,13 +39,15 @@ ArticleModel.getAllArticles = function(params = {}, count) {
 
 // One-off for searching..
 // TODO Generalize this further when the need arises
-ArticleModel.search = function(query) {
+ArticleModel.search = function search(query) {
   // TODO :( :( Security issues?
-  query = `%${query}%`;
+  const searchQuery = `%${query}%`;
 
   return this.model
-    .query(function(qb) {
-      qb.where("title", "LIKE", query).orWhere("body", "LIKE", query);
+    .query(qb => {
+      qb
+        .where("title", "LIKE", searchQuery)
+        .orWhere("body", "LIKE", searchQuery);
     })
     .fetchAll();
 };

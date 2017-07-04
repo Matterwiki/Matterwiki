@@ -27,14 +27,12 @@ class LogoUpload extends React.Component {
   handleUpload = e => {
     e.preventDefault();
 
-    var logo = this.state.logo;
-    var formData = new FormData();
+    const logo = this.state.logo;
+    const formData = new FormData();
     formData.append("logo", logo);
 
     APIProvider.post("uploads/logo", formData)
-      .then(serverData =>
-        Alert.success("Your logo has been successfully updated.")
-      )
+      .then(() => Alert.success("Your logo has been successfully updated."))
       .catch(error => Alert.error(error.message));
   };
 
@@ -43,7 +41,9 @@ class LogoUpload extends React.Component {
       <Grid>
         <Row>
           <Col md={6} sm={12}>
-            <h4><b>Change Logo</b></h4>
+            <h4>
+              <b>Change Logo</b>
+            </h4>
             <Form onSubmit={this.handleUpload}>
               <FormGroup>
                 <FormControl
@@ -54,7 +54,8 @@ class LogoUpload extends React.Component {
                 />
               </FormGroup>
               <HelpBlock>
-                Please reload the page for the changes to reflect throughout the site.
+                Please reload the page for the changes to reflect throughout the
+                site.
               </HelpBlock>
               <Button type="submit" block>
                 Upload Logo

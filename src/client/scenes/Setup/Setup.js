@@ -1,12 +1,11 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
+// import services
+import APIProvider from "utils/APIProvider";
 
 // import needed components
 import SetupForm from "./components/SetupForm";
-
-// import services
-import APIProvider from "utils/APIProvider";
 
 // import CSS
 import "./Setup.css";
@@ -14,7 +13,7 @@ import "./Setup.css";
 class Setup extends React.Component {
   handleSignUp = user => {
     APIProvider.post("setup", user)
-      .then(user => {
+      .then(() => {
         Alert.success("Admin user generated");
         this.props.history.push("/login");
       })

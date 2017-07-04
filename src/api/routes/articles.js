@@ -30,8 +30,9 @@ const fetchArticleById = async (req, res, next) => {
   try {
     let article = await articleModel.get({ id });
 
-    if (!article)
+    if (!article) {
       return next(NOT_FOUND);
+    }
 
     article = article.toJSON();
 
@@ -113,8 +114,9 @@ const fetchArchivesByArticle = async (req, res, next) => {
   try {
     const articles = await archiveModel.getAll({ article_id: id });
 
-    if (!articles)
+    if (!articles) {
       return next(NOT_FOUND);
+    }
 
     res.status(200).json(articles);
   } catch (err) {
@@ -127,12 +129,9 @@ const fetchArchiveById = async (req, res, next) => {
   try {
     let archive = await archiveModel.get({ id: archiveId, article_id: id });
 
-    if (!archive)
-      return next({
-        status: 404,
-        code: NOT_FOUND.code,
-        message: NOT_FOUND.message
-      });
+    if (!archive) {
+      return next(NOT_FOUND);
+    }
 
     archive = archive.toJSON();
 

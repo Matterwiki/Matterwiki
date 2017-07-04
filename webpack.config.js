@@ -1,4 +1,4 @@
- // TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
+// TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
 
 const webpack = require("webpack");
 const path = require("path");
@@ -12,11 +12,10 @@ module.exports = {
   context: BUILD_DIR,
   entry: [
     // make sure this is at the top
-    "react-hot-loader/patch",
     "webpack-hot-middleware/client?reload=true",
 
     // entry point
-    APP_DIR + "/index.js"
+    `${APP_DIR}/index.js`
   ],
   output: {
     path: BUILD_DIR,

@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
     }
   } catch (err) {
     // TODO can't we do something with `err` that catch gives us?
-    
+
     // invalid token, send 401
     return next(INVALID_TOKEN);
   }

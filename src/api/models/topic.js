@@ -7,7 +7,7 @@ const TopicModel = db.model(
   "Topic",
   db.Model.extend({
     tableName: "topics",
-    articles: function() {
+    articles() {
       return this.hasMany("Article");
     }
   })

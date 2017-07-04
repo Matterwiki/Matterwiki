@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
+import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
 import Loader from "components/Loader/Loader";
-import APIProvider from "utils/APIProvider.js";
+import APIProvider from "utils/APIProvider";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
@@ -12,23 +12,20 @@ import "./Archives.css";
 class ArticleHistory extends React.Component {
   state = {
     archives: [],
-    article: {}
+    article: {},
+    loading: true
   };
 
   componentDidMount() {
-    this.setState({
-      loading: true
-    });
-
-    const {articleId} = this.props.match.params;
-    APIProvider.get(
-      `articles/${articleId}/archives`
-    ).then(archives => {
-      this.setState({
-        archives,
-        loading: false
-      });
-    });
+    const { articleId } = this.props.match.params;
+    APIProvider.get(`articles/${articleId}/archives`)
+      .then(archives => {
+        this.setState({
+          archives,
+          loading: false
+        });
+      })
+      .catch(() => this.setState({ archives: [], loading: false }));
   }
 
   getArchive = id => {
@@ -46,8 +43,7 @@ class ArticleHistory extends React.Component {
   };
 
   render() {
-
-    const {loading, article, archives} = this.state;
+    const { loading, article, archives } = this.state;
 
     if (loading) return <Loader />;
     else if (article && archives.length) {
@@ -55,7 +51,7 @@ class ArticleHistory extends React.Component {
         <Grid>
           <Row>
             <Col md={3}>
-              <label>Archives</label>
+              <span>Archives</span>
               <BrowseArchives
                 archives={archives}
                 onArchiveChosen={this.getArchive}
@@ -68,16 +64,17 @@ class ArticleHistory extends React.Component {
           </Row>
         </Grid>
       );
-    } else {
-      return (
-        <Row>
-          <HelpBlock className="center-align">
-            There are no archives for this article {`   `}
-            <Link to={`/article/${this.props.match.params.articleId}`}>Go back</Link>
-          </HelpBlock>
-        </Row>
-      );
     }
+    return (
+      <Row>
+        <HelpBlock className="center-align">
+          There are no archives for this article {`   `}
+          <Link to={`/article/${this.props.match.params.articleId}`}>
+            Go back
+          </Link>
+        </HelpBlock>
+      </Row>
+    );
   }
 }
 

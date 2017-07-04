@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { Switch, Route, Redirect } from "react-router-dom";
-import NotificationsWrapper from "components/Notifications/NotificationsWrapper.js";
+import NotificationsWrapper from "components/Notifications/NotificationsWrapper";
 
 import Layout from "components/Layout/Layout";
 import APIProvider from "utils/APIProvider";
@@ -46,17 +46,16 @@ class Main extends React.Component {
 
   render() {
     const headerProps = {
-      isAdmin: parseInt(window.localStorage.getItem("userId")) === 1,
-      isLoggedIn: window.localStorage.getItem("userToken") ? true : false,
+      isAdmin: parseInt(window.localStorage.getItem("userId"), 10) === 1,
+      isLoggedIn: !!window.localStorage.getItem("userToken"),
       handleLogoutClick: this.handleLogout
     };
 
     if (this.props.location.pathname === "/") {
       if (window.localStorage.getItem("userToken")) {
         return <Redirect to="/home" />;
-      } else {
-        return <Redirect to="/login" />;
       }
+      return <Redirect to="/login" />;
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from "react";
-import Alert from "react-s-alert";
 import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
+import "url-search-params-polyfill";
 
 import APIProvider from "utils/APIProvider";
 import ArticlesList from "components/ArticlesList/ArticlesList";
@@ -16,11 +16,28 @@ class Search extends React.Component {
     loading: true
   };
 
-  getSearchResults = query => {
-    const userToken = window.localStorage.getItem("userToken");
+  componentWillMount() {
+    this.getSearchResults();
+  }
+
+  componentWillReceiveProps() {
+    this.getSearchResults();
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      articles: []
+    });
+  }
+
+  getSearchResults = () => {
+    const { search } = this.props.location;
+    const params = new URLSearchParams(search);
+    const query = params.get("query");
 
     this.setState({
-      loading: true
+      loading: true,
+      query
     });
 
     return APIProvider.query("search", { query }).then(articles => {
@@ -31,42 +48,24 @@ class Search extends React.Component {
     });
   };
 
-  componentWillMount() {
-    // this.getSearchResults(this.props.location.query.query);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // this.getSearchResults(nextProps.location.query.query);
-  }
-
-  componentWillUnmount() {
-    this.setState({
-      articles: []
-    });
-  }
-
   render() {
-    console.log(this.props);
-    const { articles, loading } = this.state;
-    // const query = this.props.location.query.query;
-    const query = "";
+    const { articles, loading, query } = this.state;
     if (loading) return <Loader message={`Looking up ${query}`} />;
-    else
-      return (
-        <div>
-          <div className="result-info">
-            <HelpBlock>
-              We found {articles.length} articles for {query}
-            </HelpBlock>
-          </div>
-          {!this.state.articles.length
-            ? <div className="no-results">
-                <FaFrownO size={100} />
-                <p>Please try again with another query</p>
-              </div>
-            : <ArticlesList articles={articles} />}
+    return (
+      <div>
+        <div className="result-info">
+          <HelpBlock>
+            We found {articles.length} articles for {query}
+          </HelpBlock>
         </div>
-      );
+        {!this.state.articles.length
+          ? <div className="no-results">
+              <FaFrownO size={100} />
+              <p>Please try again with another query</p>
+            </div>
+          : <ArticlesList articles={articles} />}
+      </div>
+    );
   }
 }
 

@@ -12,7 +12,9 @@ const axiosInstance = axios.create({
  * Takes care of user created errors, returns a promise which could be handled at the component side 
  */
 function prepareResponse(response) {
-  if (!response.data) return;
+  if (!response.data) {
+    return;
+  }
 
   const { url } = response.config;
   const { data } = response;

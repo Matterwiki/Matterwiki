@@ -6,14 +6,13 @@ import LevelControls from "./components/LevelControls/index";
 import LinkControl from "./components/LinkControl";
 import HistoryControls from "./components/HistoryControls";
 
-const Toolbar = props => (
+const Toolbar = props =>
   <ButtonToolbar>
     <InlineControls {...props} />
     <LinkControl {...props} />
     <BlockControls {...props} />
     <LevelControls {...props} />
     <HistoryControls {...props} />
-  </ButtonToolbar>
-);
+  </ButtonToolbar>;
 
 export default Toolbar;

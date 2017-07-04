@@ -6,7 +6,7 @@ const app = express();
 app.use(helmet());
 
 // Sample API endpoint
-app.get("/api", function(req, res) {
+app.get("/api", (req, res) => {
   res.send("Hey! You're looking at the Matterwiki API");
 });
 

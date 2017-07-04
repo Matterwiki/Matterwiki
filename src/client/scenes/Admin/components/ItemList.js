@@ -19,18 +19,28 @@ class ResourceListItem extends React.Component {
           a schema level change is inevitable */}
         {item.description || item.about || "-"}
         <span className="pull-right">
-          <Button onClick={(e) => { this.handleEditClick(item, e) } }>Edit</Button>
-          {item.id != 1 &&
-            <Button onClick={(e) => { this.handleDeleteClick(item, e) } }>Delete</Button>}
+          <Button
+            onClick={e => {
+              this.handleEditClick(item, e);
+            }}>
+            Edit
+          </Button>
+          {item.id !== 1 &&
+            <Button
+              onClick={e => {
+                this.handleDeleteClick(item, e);
+              }}>
+              Delete
+            </Button>}
         </span>
       </ListGroupItem>
     );
   }
 }
 
-const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
+const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) =>
   <ListGroup>
-    {items.map(item => (
+    {items.map(item =>
       <ResourceListItem
         key={item.id}
         item={item}
@@ -38,8 +48,7 @@ const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
         onEditClick={onEditClick}
         onDeleteClick={onDeleteClick}
       />
-    ))}
-  </ListGroup>
-);
+    )}
+  </ListGroup>;
 
 export default ResourceList;

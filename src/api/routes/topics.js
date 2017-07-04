@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 
 const { JSONParser } = require("../middleware/bodyParser");
@@ -40,7 +41,7 @@ const createTopic = async (req, res, next) => {
       description
     };
 
-    newUser = await topicModel.post(newTopic);
+    newTopic = await topicModel.post(newTopic);
     res.status(200).json(newTopic);
   } catch (err) {
     next(err);
@@ -68,8 +69,9 @@ const updateTopic = async (req, res, next) => {
 const deleteTopic = async (req, res, next) => {
   const { id } = req.params;
 
-  if (id === 1)
+  if (id === 1) {
     return next(DELETE_DEFAULT_TOPIC);
+  }
 
   try {
     await topicModel.delete({ id });

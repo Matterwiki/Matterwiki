@@ -21,9 +21,9 @@ const orm = {
 };
 
 // TODO for lack of a better name
-const buildDbModel = function(model) {
+function buildDbModel(model) {
   const withOrm = Object.create(orm);
   return withOrm.init(model);
-};
+}
 
 module.exports = buildDbModel;

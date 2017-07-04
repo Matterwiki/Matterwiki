@@ -7,7 +7,7 @@ module.exports = (filePath, fileName) => {
       cb(null, fileName);
     }
   });
-  const upload = multer({ storage: storage });
+  const upload = multer({ storage });
 
   return upload;
 };

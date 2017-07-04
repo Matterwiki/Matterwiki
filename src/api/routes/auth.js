@@ -30,7 +30,7 @@ const loginUser = async (req, res, next) => {
 
     // credentials wrong, kick user out
     if (!userValid) {
-      return next(err);
+      return next(CREDS_WRONG);
     }
 
     // Everything is fine and dandy (Phew..)
@@ -49,11 +49,11 @@ const loginUser = async (req, res, next) => {
     // send away!
     res.status(200).json(payloadUser);
   } catch (err) {
-    next(err);
+    next(CREDS_WRONG);
   }
 };
 
-const finishCheck = (req, res, next) => res.status(200).json({});
+const finishCheck = (req, res) => res.status(200).json({});
 
 router.post("/login", JSONParser, loginUser);
 router.get("/check", checkAuth, finishCheck);
