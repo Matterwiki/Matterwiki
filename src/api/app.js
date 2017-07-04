@@ -14,7 +14,14 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/articles", require("./routes/articles"));
 app.use("/api/topics", require("./routes/topics"));
 app.use("/api/users", require("./routes/users"));
+
+// util routes
+
+// handles all upload endpoints
 app.use("/api/uploads", require("./routes/uploads"));
+
+// handles all search endpoints
+app.use("/api/search", require("./routes/search"));
 
 // TODO Good error handling, validation, etc
 // https://www.joyent.com/node-js/production/design/errors

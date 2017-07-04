@@ -35,4 +35,17 @@ ArticleModel.getAllArticles = function(params = {}, count) {
     .fetchAll();
 };
 
+// One-off for searching..
+// TODO Generalize this further when the need arises
+ArticleModel.search = function(query) {
+  // TODO :( :( Security issues?
+  query = `%${query}%`;
+
+  return this.model
+    .query(function(qb) {
+      qb.where("title", "LIKE", query).orWhere("body", "LIKE", query);
+    })
+    .fetchAll();
+};
+
 module.exports = ArticleModel;
