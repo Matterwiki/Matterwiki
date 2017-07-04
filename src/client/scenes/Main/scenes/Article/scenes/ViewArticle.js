@@ -36,7 +36,7 @@ class ViewArticle extends React.Component {
 
   handleDeleteClick = e => {
     e.preventDefault();
-    APIProvider.delete(`articles?id=${this.state.article.id}`).then(article => {
+    APIProvider.delete(`articles/${this.state.article.id}`).then(article => {
       Alert.success("Article has been deleted");
       hashHistory.push("home");
     });

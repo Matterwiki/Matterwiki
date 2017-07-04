@@ -1,3 +1,6 @@
+# misc
+.vscode
+
 # Logs
 logs
 *.log
@@ -17,8 +20,8 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# db stuff
-knexfile.js
+# configuration
+config.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt

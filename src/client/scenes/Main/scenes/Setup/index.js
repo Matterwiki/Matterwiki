@@ -20,7 +20,7 @@ class Setup extends React.Component {
         hashHistory.push("login");
       })
       .catch(function(err) {
-        Alert.error(err);
+        Alert.error(err.message);
       });
   };
 

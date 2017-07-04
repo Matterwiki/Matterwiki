@@ -12,12 +12,12 @@ class Home extends React.Component {
     topics: []
   };
 
-  handleTopicClick = id => {
+  handleTopicClick = topicId => {
     this.setState({
       articles: null
     });
 
-    APIProvider.get(`topic/${id}/articles`).then(articles =>
+    APIProvider.get(`topics/${topicId}/articles`).then(articles =>
       this.setState({ articles })
     );
   };

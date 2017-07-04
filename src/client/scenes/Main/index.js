@@ -15,14 +15,12 @@ class Main extends React.Component {
   componentWillMount() {
     // Hack to move away from here if going to setup
     if (!this.props.location.pathname.includes("setup")) {
-      // TODO Make this check stronger
       const token = window.localStorage.getItem("userToken");
 
       if (!token) return hashHistory.push("login");
 
-      // TODO Setup a separate "verifyJWT" route to kick the user out to the login page
-      APIProvider.get("articles").catch(err => {
-        if (err.code === "B101") {
+      APIProvider.get("auth/check").catch(err => {
+        if (err.status === 401) {
           window.localStorage.setItem("userToken", "");
           return hashHistory.push("login");
         }

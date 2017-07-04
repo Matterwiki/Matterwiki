@@ -17,11 +17,12 @@ class Login extends React.Component {
   }
 
   handleSubmit = user => {
-    APIProvider.post("authenticate", user)
+    APIProvider.post("auth/login", user)
       .then(function(loggedInUser) {
+        
         window.localStorage.setItem("userToken", loggedInUser.token);
-        window.localStorage.setItem("userId", loggedInUser.user.id);
-        window.localStorage.setItem("userEmail", loggedInUser.user.email);
+        window.localStorage.setItem("userId", loggedInUser.id);
+        window.localStorage.setItem("userEmail", loggedInUser.email);
 
         hashHistory.push("home");
 
