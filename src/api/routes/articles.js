@@ -7,7 +7,6 @@ const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
 const { NOT_FOUND } = require("../utils/constants").ERRORS;
-const { ADMIN } = require("../utils/constants").ROLES;
 
 const articleModel = require("../models/article");
 const userModel = require("../models/user");
@@ -86,7 +85,7 @@ const updateArticle = async (req, res, next) => {
       }
     );
 
-    // TODO Doesn't seem RESTful for some reason
+    // TODO Doesn't seem RESTful
     await archiveModel.post({
       article_id: id,
       title,

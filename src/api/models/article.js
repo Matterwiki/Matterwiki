@@ -27,7 +27,7 @@ ArticleModel = buildDbModel(ArticleModel);
 // TODO there must be a better way to do this?
 ArticleModel.getAllArticles = function(params = {}, count) {
   return this.model
-    .forge(params)
+    .query({ where: params })
     .query(function(qb) {
       if (count) qb.limit(count);
       qb.orderBy("updated_at", "DESC");

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
-    "dev": "cross-env NODE_ENV=develop nodemon --config nodemon.json ./src/server/index.js",
-    "dev:debug": "cross-env NODE_ENV=develop nodemon --config nodemon.json  --inspect=5858 ./src/server/index.js",
-    "start": "npm run build && cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=develop nodemon --config nodemon.json ./src/api/server.js",
+    "dev:debug": "cross-env NODE_ENV=develop nodemon --config nodemon.json  --inspect=5858 ./src/api/server.js",
+    "start": "npm run build && cross-env NODE_ENV=production node ./src/api/server.js",
     "db:migrate": "knex migrate:latest",
     "db:seed": "knex seed:run"
   },

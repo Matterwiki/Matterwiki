@@ -12,21 +12,21 @@ const { DUPLICATE_ADMIN_USER } = require("../utils/constants").ERRORS;
 const userModel = require("../models/user");
 
 const setupAdminUser = async (req, res, next) => {
-  const { name, email, about } = req.body;
-
-  // hash password
-  const password = await bcrypt.hash(req.body.password, SALT_ROUNDS);
-
-  // create the admin user
-  const adminUser = {
-    id: ADMIN_ID,
-    name,
-    email,
-    password,
-    about
-  };
+  const { name, email, about, password } = req.body;
 
   try {
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+
+    // create the admin user
+    const adminUser = {
+      id: ADMIN_ID,
+      name,
+      email,
+      password: hashedPassword,
+      about
+    };
+
     const newUser = await userModel.post(adminUser);
     res.status(200).json(newUser);
   } catch (err) {

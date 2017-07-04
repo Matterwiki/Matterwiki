@@ -4,9 +4,10 @@ const ADMIN_ID = 1;
 const ROLES = {
   ADMIN: "ADMIN",
   USER: "USER"
-}
+};
 
 // TODO could be its own file in the future
+// TODO error codes could go here as well, so that we could just do `next(NO_TOKEN)`, for example
 const ERRORS = {
   DUPLICATE_ADMIN_USER: {
     code: "ER_DUP_ENTRY",
@@ -36,6 +37,10 @@ const ERRORS = {
   NOT_FOUND: {
     code: "NOT_FOUND",
     message: "Resource was not found"
+  },
+  DELETE_DEFAULT_TOPIC: {
+    code: "DELETE_DEFAULT_TOPIC",
+    message: "Can not delete default topic!"
   }
 };
 
