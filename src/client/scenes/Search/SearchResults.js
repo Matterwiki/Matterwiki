@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link, hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
@@ -33,11 +32,11 @@ class Search extends React.Component {
   };
 
   componentWillMount() {
-    this.getSearchResults(this.props.location.query.query);
+    // this.getSearchResults(this.props.location.query.query);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getSearchResults(nextProps.location.query.query);
+    // this.getSearchResults(nextProps.location.query.query);
   }
 
   componentWillUnmount() {
@@ -47,9 +46,10 @@ class Search extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { articles, loading } = this.state;
-    const query = this.props.location.query.query;
-
+    // const query = this.props.location.query.query;
+    const query = "";
     if (loading) return <Loader message={`Looking up ${query}`} />;
     else
       return (

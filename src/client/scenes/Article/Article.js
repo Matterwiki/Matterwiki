@@ -7,11 +7,10 @@ import {
   ViewArticle,
   EditArticle,
   Archives
-} from "./scenes/AllScenesArticle";
+} from "./scenes/ArticleScenes";
 
 const Article = ({match}) =>
   <div>
-    {/*{children}*/}
     <Switch>
       <Route exact path={`${match.url}/new`} component={NewArticle} />
       <Route exact path={`${match.url}/:articleId`} component={ViewArticle} />

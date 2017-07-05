@@ -1,5 +1,4 @@
 import React from "react";
-// import { hashHistory } from "react-router";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 import ArticleForm from "../components/ArticleForm/ArticleForm";

@@ -1,6 +1,4 @@
 import React from "react";
-// import { hashHistory } from "react-router";
-
 import Alert from "react-s-alert";
 import APIProvider from "utils/APIProvider";
 

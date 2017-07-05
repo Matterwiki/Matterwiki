@@ -30,7 +30,6 @@
   "homepage": "http://matterwiki.com",
   "dependencies": {
     "axios": "^0.16.1",
-    "babel-helpers": "^6.24.1",
     "bcryptjs": "2.4.0",
     "body-parser": "1.15.2",
     "bookshelf": "0.10.0",

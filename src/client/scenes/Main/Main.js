@@ -1,6 +1,5 @@
 import React from "react";
 import Alert from "react-s-alert";
-// import { hashHistory } from "react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
 import NotificationsWrapper from 'components/Notifications/NotificationsWrapper.js';
 
@@ -16,7 +15,7 @@ import {
   Article,
   Admin,
   NotFoundError
-} from "./AllScenesMain";
+} from "./MainScenes";
 
 
 // bunch of custom styles that are needed globally

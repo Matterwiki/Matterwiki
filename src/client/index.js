@@ -22,9 +22,9 @@ const renderApp = () => {
 renderApp();
 
 // react HMR
-// if(module.hot) {
-//   module.hot.accept('./routes.js', () => {
-//     const routeChanges = require('./routes.js').default;
-//     renderApp(routeChanges);
-//   })
-// }
+if (module.hot) {
+  module.hot.accept('./scenes/Main/Main.js', () => {
+    const NextRootContainer = require('./scenes/Main/Main.js').default;
+    renderApp(NextRootContainer);
+  })
+}

@@ -1,5 +1,4 @@
 import React from "react";
-// import { hashHistory, Link } from "react-router";
 import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap";
 import Alert from "react-s-alert";
