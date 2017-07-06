@@ -69,11 +69,7 @@ const deleteTopic = async (req, res, next) => {
   const { id } = req.params;
 
   if (id === 1)
-    return next({
-      status: 403,
-      code: DELETE_DEFAULT_TOPIC.code,
-      message: DELETE_DEFAULT_TOPIC.message
-    });
+    return next(DELETE_DEFAULT_TOPIC);
 
   try {
     await topicModel.delete({ id });

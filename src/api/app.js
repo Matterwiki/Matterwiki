@@ -1,7 +1,9 @@
 const express = require("express");
+const helmet = require("helmet");
+
 const app = express();
 
-// TODO Add helmet
+app.use(helmet());
 
 // Sample API endpoint
 app.get("/api", function(req, res) {

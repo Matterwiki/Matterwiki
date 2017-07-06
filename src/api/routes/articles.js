@@ -31,11 +31,7 @@ const fetchArticleById = async (req, res, next) => {
     let article = await articleModel.get({ id });
 
     if (!article)
-      return next({
-        status: 404,
-        code: NOT_FOUND.code,
-        message: NOT_FOUND.message
-      });
+      return next(NOT_FOUND);
 
     article = article.toJSON();
 
@@ -118,11 +114,7 @@ const fetchArchivesByArticle = async (req, res, next) => {
     const articles = await archiveModel.getAll({ article_id: id });
 
     if (!articles)
-      return next({
-        status: 404,
-        code: NOT_FOUND.code,
-        message: NOT_FOUND.message
-      });
+      return next(NOT_FOUND);
 
     res.status(200).json(articles);
   } catch (err) {

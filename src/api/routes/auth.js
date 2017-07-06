@@ -10,7 +10,7 @@ const checkAuth = require("../middleware/checkAuth");
 const { authSecret } = require("../utils/config");
 
 // Pick out the errors
-const { USER_NOT_FOUND, CREDS_WRONG } = require("../utils/constants").ERRORS;
+const { CREDS_WRONG } = require("../utils/constants").ERRORS;
 
 const userModel = require("../models/user");
 
@@ -22,12 +22,7 @@ const loginUser = async (req, res, next) => {
 
     // user not found, kick user out
     if (!user) {
-      const err = {
-        status: 401,
-        code: USER_NOT_FOUND.code,
-        message: USER_NOT_FOUND.message
-      };
-      return next(err);
+      return next(CREDS_WRONG);
     }
 
     user = user.toJSON();
@@ -35,24 +30,24 @@ const loginUser = async (req, res, next) => {
 
     // credentials wrong, kick user out
     if (!userValid) {
-      const err = {
-        status: 401,
-        code: CREDS_WRONG.code,
-        message: CREDS_WRONG.message
-      };
-
       return next(err);
     }
 
     // Everything is fine and dandy (Phew..)
 
-    // make token
-    user.token = jwt.sign(user, authSecret, {
+    const payloadUser = user;
+
+    // dont hash the password
+    delete payloadUser.password;
+
+    // make token and attach it to user
+    payloadUser.token = jwt.sign(payloadUser, authSecret, {
+      // TODO setup better timeout value
       expiresIn: 86400
     });
 
     // send away!
-    res.status(200).json(user);
+    res.status(200).json(payloadUser);
   } catch (err) {
     next(err);
   }

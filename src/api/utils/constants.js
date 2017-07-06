@@ -7,38 +7,35 @@ const ROLES = {
 };
 
 // TODO could be its own file in the future
-// TODO error codes could go here as well, so that we could just do `next(NO_TOKEN)`, for example
 const ERRORS = {
   DUPLICATE_ADMIN_USER: {
+    status: 409,
     code: "ER_DUP_ENTRY",
     message:
       "There was an error creating the admin user. Chances are you've already set up"
   },
-  USER_NOT_FOUND: {
-    code: "USER_NOT_FOUND",
-    message: "User not found"
-  },
   CREDS_WRONG: {
+    status: 401,
     code: "CREDS_WRONG",
     message: "Email or Password is wrong"
   },
-  NO_TOKEN: {
-    code: "NO_TOKEN",
-    message: "No token provided"
-  },
   INVALID_TOKEN: {
+    status: 401,
     code: "INVALID_TOKEN",
     message: "Failed to authenticate token"
   },
   NO_ACCESS: {
+    status: 403,
     code: "NO_ACCESS",
     message: "You are not authorized to perform this action"
   },
   NOT_FOUND: {
+    status: 404,
     code: "NOT_FOUND",
     message: "Resource was not found"
   },
   DELETE_DEFAULT_TOPIC: {
+    status: 403,
     code: "DELETE_DEFAULT_TOPIC",
     message: "Can not delete default topic!"
   }

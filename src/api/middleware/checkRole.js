@@ -6,13 +6,7 @@ const checkRole = roleToCheck => (req, res, next) => {
     // You'd check something else if there were multiple admins in the future
     if (req.user.id === 1) next();
     else {
-      const err = {
-        status: 403,
-        code: NO_ACCESS.code,
-        message: NO_ACCESS.message
-      };
-
-      next(err);
+      next(NO_ACCESS);
     }
   }
 };
