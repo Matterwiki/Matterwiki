@@ -31,7 +31,7 @@ class LogoUpload extends React.Component {
     var formData = new FormData();
     formData.append("logo", logo);
 
-    APIProvider.post("logo", formData)
+    APIProvider.post("uploads/logo", formData)
       .then(serverData =>
         Alert.success("Your logo has been successfully updated.")
       )

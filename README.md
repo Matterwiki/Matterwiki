@@ -41,46 +41,7 @@ You need to have `Node` and `npm` installed on your system.
 8. Create topics and add users to your Wiki.
 
 
-**NOTE - Using MySQL**
-<hr/>
-By default Matterwiki uses **Sqlite**, which is a lightweight database management system perfect for an internal wiki.
-If your team size is huge and you need a concurrent and flexible DBMS you can change the config to use **MySQL**.
-As we use `Knex` as a query builder all you have to do use MySQL is to change the db object in `knexfile.js` (found the app root directory).
-
-1. First [setup MySQL](http://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
-
-2. Install mysql from `npm`
-
-   ```
-   npm install mysql
-   ```
-
-3. Change the object from
-
-```
-module.exports = {
-  client: 'sqlite3',
-  connection: {
-    filename: "./db/matterwiki.sqlite"
-  },
-  useNullAsDefault: true
-}
-```
-
-to
-
-```
-module.exports = {
-  client: 'mysql',
-  connection: {
-    host : '127.0.0.1',
-    user : 'your_database_user',
-    password : 'your_database_password',
-    database : 'myapp_test'
-  },
-  useNullAsDefault: true
-}
-```
+## TODO MySQL setup
 
 ## Run with Docker:
 

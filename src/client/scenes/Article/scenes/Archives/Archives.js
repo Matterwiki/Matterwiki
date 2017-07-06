@@ -19,8 +19,10 @@ class ArticleHistory extends React.Component {
     this.setState({
       loading: true
     });
+
+    const {articleId} = this.props.match.params;
     APIProvider.get(
-      `articles/${this.props.match.params.articleId}/history`
+      `articles/${articleId}/archives`
     ).then(archives => {
       this.setState({
         archives,
@@ -34,7 +36,8 @@ class ArticleHistory extends React.Component {
       archive: null,
       loading: true
     });
-    APIProvider.get(`archives/${id}`).then(article => {
+    const { articleId } = this.props.match.params;
+    APIProvider.get(`articles/${articleId}/archives/${id}`).then(article => {
       this.setState({
         article,
         loading: false
@@ -43,21 +46,24 @@ class ArticleHistory extends React.Component {
   };
 
   render() {
-    if (this.state.loading) return <Loader />;
-    else if (this.state.article && this.state.archives.length) {
+
+    const {loading, article, archives} = this.state;
+
+    if (loading) return <Loader />;
+    else if (article && archives.length) {
       return (
         <Grid>
           <Row>
             <Col md={3}>
               <label>Archives</label>
               <BrowseArchives
-                archives={this.state.archives}
+                archives={archives}
                 onArchiveChosen={this.getArchive}
                 articleId={this.props.match.params.articleId}
               />
             </Col>
             <Col md={9}>
-              <SimpleArticle article={this.state.article} />
+              <SimpleArticle article={article} />
             </Col>
           </Row>
         </Grid>

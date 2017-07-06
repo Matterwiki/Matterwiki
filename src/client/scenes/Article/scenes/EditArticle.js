@@ -13,9 +13,7 @@ class EditArticle extends React.Component {
   handleSubmit = article => {
     const articleId = this.props.match.params.articleId;
 
-    article.id = articleId;
-
-    APIProvider.put("articles", article)
+    APIProvider.put(`articles/${articleId}`, article)
       .then(article => {
         Alert.success("Article has been successfully saved");
         this.props.history.push(`/article/${articleId}`);

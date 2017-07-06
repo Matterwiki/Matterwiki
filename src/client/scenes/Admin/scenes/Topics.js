@@ -46,15 +46,15 @@ class ManageTopics extends React.Component {
   }
 
   deleteTopic = id => {
-    APIProvider.delete(`topics?id=${id}`).then(topic => {
+    APIProvider.delete(`topics/${id}`).then(topic => {
       Alert.success("Topic has been deleted");
       this.handleUpdate();
     });
   };
 
   updateTopic = topic => {
-    topic.id = this.state.currentTopic.id;
-    APIProvider.put("topics", topic).then(topic => {
+    const id = this.state.currentTopic.id;
+    APIProvider.put(`topics/${id}`, topic).then(topic => {
       Alert.success("Topic has been edited");
       this.setState({
         currentTopic: null

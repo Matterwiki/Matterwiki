@@ -14,12 +14,12 @@ import "./Setup.css";
 class Setup extends React.Component {
   handleSignUp = user => {
     APIProvider.post("setup", user)
-      .then(function(user) {
+      .then(user => {
         Alert.success("Admin user generated");
         this.props.history.push("/login");
       })
-      .catch(function(err) {
-        Alert.error(err);
+      .catch(err => {
+        Alert.error(err.message);
       });
   };
 
@@ -28,12 +28,16 @@ class Setup extends React.Component {
       <Grid bsClass="setup-container">
         <Row>
           <Col md={6}>
-            <h1><b>Welcome,</b></h1>
-            <h3>Matterwiki is a simple wiki for teams</h3><br />
+            <h1>
+              <b>Welcome,</b>
+            </h1>
+            <h3>Matterwiki is a simple wiki for teams</h3>
+            <br />
             <h4>
-              People use it to store documentation, notes, culture guidelines, employee onboarding content
-              and everything they want to.
-            </h4><br />
+              People use it to store documentation, notes, culture guidelines,
+              employee onboarding content and everything they want to.
+            </h4>
+            <br />
           </Col>
           <Col md={6}>
             <SetupForm onSubmit={this.handleSignUp} />

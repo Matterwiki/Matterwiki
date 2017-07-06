@@ -60,7 +60,7 @@ class ManageUsers extends React.Component {
     );
 
     if (canDelete) {
-      APIProvider.delete(`users?id=${id}`).then(a => {
+      APIProvider.delete(`users/${id}`).then(a => {
         Alert.success("User has been deleted");
         this.handleUpdate();
       });
@@ -68,8 +68,8 @@ class ManageUsers extends React.Component {
   };
 
   updateUser = user => {
-    user.id = this.state.currentUser.id;
-    APIProvider.put("users", user).then(user => {
+    const id = this.state.currentUser.id;
+    APIProvider.put(`users/${id}`, user).then(user => {
       Alert.success("User has been edited");
       this.setState({
         currentUser: null

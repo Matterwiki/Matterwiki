@@ -21,8 +21,12 @@ class ItemForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state);
-    this.initState();
+    const { onSubmit, itemFormFields } = this.props;
+
+    onSubmit(this.state);
+    this.initState({
+      itemFormFields
+    });
   };
 
   cancelUpdate = e => {
