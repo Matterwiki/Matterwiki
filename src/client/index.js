@@ -1,32 +1,34 @@
 import React from 'react';
 import { AppContainer } from 'react-hot-loader';
 import {render} from 'react-dom';
-import { Router, hashHistory } from 'react-router';
+import { HashRouter, Route } from 'react-router-dom';
 
-import routes from './routes.js';
+import Main from "./scenes/Main/Main";
 
 // For `Promise`, Array.from and other fun stuff
 // TODO replace this with core-js and use the stuff you just need
 import "babel-polyfill";
 
-const renderApp = (appRoutes) => {
+const renderApp = () => {
   render(
     <AppContainer>
-      <Router history={hashHistory}>
-        {appRoutes()}
-      </Router>  
+      <HashRouter>
+        <Route path="/" component={Main} />
+      </HashRouter>
     </AppContainer>,
     document.getElementById('app')
   )
 };
 
 
-renderApp(routes);
+renderApp();
 
-// react HMR
-if(module.hot) {
-  module.hot.accept('./routes.js', () => {
-    const routeChanges = require('./routes.js').default;
-    renderApp(routeChanges);
+// TODO react HMR
+/*
+if (module.hot) {
+  module.hot.accept('./scenes/Main/Main.js', () => {
+    const NextRootContainer = require('./scenes/Main/Main.js').default;
+    renderApp(NextRootContainer);
   })
 }
+*/

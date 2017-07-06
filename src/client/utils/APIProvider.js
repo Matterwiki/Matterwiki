@@ -4,7 +4,7 @@ import axios from "axios";
 // TODO use something light weight like `unfetch`
 const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
-  baseURL: "api/",
+  baseURL: "/api/",
   headers: { "x-access-token": token }
 });
 
@@ -25,7 +25,7 @@ function prepareResponse(response) {
   return data;
 }
 
-function prepareError({response}) {
+function prepareError({ response }) {
   return Promise.reject({
     status: response.status,
     ...response.data
