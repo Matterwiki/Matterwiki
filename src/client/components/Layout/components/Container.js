@@ -1,12 +1,8 @@
 import React from "react";
 
-const Container = ({children}) => (
+const Container = ({ children }) =>
   <div className="container content">
     {children}
-  </div>
-);
+  </div>;
 
 export default Container;
-
-
-

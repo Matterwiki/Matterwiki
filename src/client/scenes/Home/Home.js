@@ -1,24 +1,15 @@
 import React from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import ArticlesList from "components/ArticlesList/ArticlesList";
+
+import APIProvider from "utils/APIProvider";
 
 import TopicsList from "./components/TopicsList/TopicsList";
-import ArticlesList from "components/ArticlesList/ArticlesList";
-import APIProvider from "utils/APIProvider";
 
 class Home extends React.Component {
   state = {
     articles: null,
     topics: []
-  };
-
-  handleTopicClick = id => {
-    this.setState({
-      articles: null
-    });
-
-    APIProvider.get(`topic/${id}/articles`).then(articles =>
-      this.setState({ articles })
-    );
   };
 
   componentDidMount() {
@@ -35,6 +26,16 @@ class Home extends React.Component {
       });
     });
   }
+
+  handleTopicClick = topicId => {
+    this.setState({
+      articles: null
+    });
+
+    APIProvider.get(`topics/${topicId}/articles`).then(articles =>
+      this.setState({ articles })
+    );
+  };
 
   render() {
     const { topics, articles } = this.state;

@@ -9,13 +9,13 @@ const TopicsList = ({ topics, onTopicClick }) =>
         There are no topics created yet
       </HelpBlock>
     : <ListGroup>
-        {topics.map(topic => (
+        {topics.map(topic =>
           <TopicsListItem
             key={topic.id}
             topic={topic}
             onTopicClick={onTopicClick}
           />
-        ))}
+        )}
       </ListGroup>;
 
 export default TopicsList;

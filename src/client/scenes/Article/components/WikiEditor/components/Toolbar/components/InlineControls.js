@@ -9,9 +9,9 @@ const INLINE_TYPES = [
   { label: "Strikethrough", fa: FaStrikethrough, style: "STRIKETHROUGH" }
 ];
 
-const InlineControls = ({ editorState, toggleInlineStyle }) => (
+const InlineControls = ({ editorState, toggleInlineStyle }) =>
   <ButtonGroup>
-    {INLINE_TYPES.map(type => (
+    {INLINE_TYPES.map(type =>
       <ToolbarButton
         key={type.label}
         active={editorState.getCurrentInlineStyle().has(type.style)}
@@ -20,8 +20,7 @@ const InlineControls = ({ editorState, toggleInlineStyle }) => (
         style={type.style}
         fa={type.fa}
       />
-    ))}
-  </ButtonGroup>
-);
+    )}
+  </ButtonGroup>;
 
 export default InlineControls;

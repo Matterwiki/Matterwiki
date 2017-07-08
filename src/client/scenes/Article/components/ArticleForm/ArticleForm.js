@@ -37,10 +37,6 @@ class ArticleForm extends React.Component {
     }
   }
 
-  getEditorContent = () => {
-    return JSON.stringify(this.refs.editor.getRawContent());
-  };
-
   onChange = e => {
     const { name, value } = e.target;
 
@@ -67,7 +63,9 @@ class ArticleForm extends React.Component {
     if (canSubmit) {
       const user_id = window.localStorage.getItem("userId");
       const formData = { title, body, topic_id, user_id };
-      if (edit) formData.what_changed = what_changed;
+      if (edit) {
+        formData.what_changed = what_changed;
+      }
 
       this.props.onSubmit(formData);
     } else {
@@ -75,11 +73,13 @@ class ArticleForm extends React.Component {
     }
   };
 
+  getEditorContent = () => JSON.stringify(this.editor.getRawContent());
+
   render() {
     const { edit } = this.state;
     const WikiEditorProps = Object.assign(
       {},
-      { ref: "editor" },
+      { ref: _editor => (this.editor = _editor) },
       edit ? { rawContent: JSON.parse(this.props.article.body) } : {}
     );
 
@@ -116,7 +116,7 @@ class ArticleForm extends React.Component {
         <Clearfix />
         <br />
         <Col sm={12}>
-          <Button type="submit" block={true}>
+          <Button type="submit" block>
             {`${edit ? "Update" : "Create"} Article`}
           </Button>
         </Col>

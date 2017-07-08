@@ -5,14 +5,13 @@ import Footer from "./components/Footer";
 
 import "./Layout.css";
 
-const Layout = ({children, ...props}) => (
+const Layout = ({ children, ...props }) =>
   <div>
     <Header {...props} />
     <Container>
       {children}
     </Container>
     <Footer />
-  </div>
-);
+  </div>;
 
 export default Layout;

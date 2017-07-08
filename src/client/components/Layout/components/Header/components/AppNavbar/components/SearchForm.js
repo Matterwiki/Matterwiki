@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import FaSearch from "react-icons/lib/fa/search";
+import { withRouter } from "react-router-dom";
 
 class SearchForm extends React.Component {
   state = {
@@ -15,12 +16,10 @@ class SearchForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.setState(prevState => {
-      const { searchText } = this.state;
-      console.log(this.props);
-      console.log(this);
-      // that.props.history.push(`/search?query=${searchText}`);
 
+    this.setState(() => {
+      const { searchText } = this.state;
+      this.props.history.push(`/search?query=${searchText}`);
       return {
         searchText: ""
       };
@@ -49,4 +48,4 @@ class SearchForm extends React.Component {
   }
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);

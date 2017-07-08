@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Grid, HelpBlock, Button } from "react-bootstrap";
+import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
 import Loader from "components/Loader/Loader";
-import APIProvider from "utils/APIProvider.js";
+import APIProvider from "utils/APIProvider";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
@@ -12,21 +12,20 @@ import "./Archives.css";
 class ArticleHistory extends React.Component {
   state = {
     archives: [],
-    article: {}
+    article: {},
+    loading: true
   };
 
   componentDidMount() {
-    this.setState({
-      loading: true
-    });
-    APIProvider.get(
-      `articles/${this.props.match.params.articleId}/history`
-    ).then(archives => {
-      this.setState({
-        archives,
-        loading: false
-      });
-    });
+    const { articleId } = this.props.match.params;
+    APIProvider.get(`articles/${articleId}/archives`)
+      .then(archives => {
+        this.setState({
+          archives,
+          loading: false
+        });
+      })
+      .catch(() => this.setState({ archives: [], loading: false }));
   }
 
   getArchive = id => {
@@ -34,7 +33,8 @@ class ArticleHistory extends React.Component {
       archive: null,
       loading: true
     });
-    APIProvider.get(`archives/${id}`).then(article => {
+    const { articleId } = this.props.match.params;
+    APIProvider.get(`articles/${articleId}/archives/${id}`).then(article => {
       this.setState({
         article,
         loading: false
@@ -43,35 +43,38 @@ class ArticleHistory extends React.Component {
   };
 
   render() {
-    if (this.state.loading) return <Loader />;
-    else if (this.state.article && this.state.archives.length) {
+    const { loading, article, archives } = this.state;
+
+    if (loading) return <Loader />;
+    else if (article && archives.length) {
       return (
         <Grid>
           <Row>
             <Col md={3}>
-              <label>Archives</label>
+              <span>Archives</span>
               <BrowseArchives
-                archives={this.state.archives}
+                archives={archives}
                 onArchiveChosen={this.getArchive}
                 articleId={this.props.match.params.articleId}
               />
             </Col>
             <Col md={9}>
-              <SimpleArticle article={this.state.article} />
+              <SimpleArticle article={article} />
             </Col>
           </Row>
         </Grid>
       );
-    } else {
-      return (
-        <Row>
-          <HelpBlock className="center-align">
-            There are no archives for this article {`   `}
-            <Link to={`/article/${this.props.match.params.articleId}`}>Go back</Link>
-          </HelpBlock>
-        </Row>
-      );
     }
+    return (
+      <Row>
+        <HelpBlock className="center-align">
+          There are no archives for this article {`   `}
+          <Link to={`/article/${this.props.match.params.articleId}`}>
+            Go back
+          </Link>
+        </HelpBlock>
+      </Row>
+    );
   }
 }
 

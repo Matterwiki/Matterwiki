@@ -9,41 +9,64 @@ const axiosInstance = axios.create({
 });
 
 /**
- * Takes care of user created errors, returns a promise which could be handled at the component side
- * TODO use interceptors for this
+ * Takes care of user created errors, returns a promise which could be handled at the component side 
  */
 function prepareResponse(response) {
-  if (!response.data) return;
+  if (!response.data) {
+    return;
+  }
 
-  const serverResponse = response.data;
-  const code = serverResponse.code;
+  const { url } = response.config;
+  const { data } = response;
 
   // if login, edit the axiosInstance
-  if (code === "B118") {
-    axiosInstance.defaults.headers["x-access-token"] =
-      serverResponse.data.token;
+  if (url.includes("login")) {
+    axiosInstance.defaults.headers["x-access-token"] = data.token;
   }
 
-  if (serverResponse.error.error) {
-    const error = Object.assign({}, { code }, serverResponse.error);
-    return Promise.reject(error);
-  } else {
-    return Promise.resolve(serverResponse.data);
-  }
+  return data;
 }
+
+function prepareError({ response }) {
+  return Promise.reject({
+    status: response.status,
+    ...response.data
+  });
+}
+
+const get = endpoint =>
+  axiosInstance.get(endpoint).then(prepareResponse).catch(prepareError);
+
+const query = (endpoint, queryParams) =>
+  axiosInstance
+    .get(endpoint, { params: queryParams })
+    .then(prepareResponse)
+    .catch(prepareError);
+
+const post = (endpoint, payload) =>
+  axiosInstance
+    .post(endpoint, payload)
+    .then(prepareResponse)
+    .catch(prepareError);
+
+const put = (endpoint, payload) =>
+  axiosInstance
+    .put(endpoint, payload)
+    .then(prepareResponse)
+    .catch(prepareError);
+
+const deleteReq = endpoint =>
+  axiosInstance.delete(endpoint).catch(prepareError);
 
 /**
  * Main export
  */
 const APIProvider = {
-  get: endpoint => axiosInstance.get(endpoint).then(prepareResponse),
-  query: (endpoint, queryParams) =>
-    axiosInstance.get(endpoint, { params: queryParams }).then(prepareResponse),
-  post: (endpoint, payload) =>
-    axiosInstance.post(endpoint, payload).then(prepareResponse),
-  put: (endpoint, payload) =>
-    axiosInstance.put(endpoint, payload).then(prepareResponse),
-  delete: endpoint => axiosInstance.delete(endpoint)
+  get,
+  query,
+  post,
+  put,
+  delete: deleteReq
 };
 
 export default APIProvider;

@@ -13,9 +13,9 @@ const SETUP_FORM_FIELDS = [
 // TODO maybe use this approach for further improving forms in general:
 // https://bartj.com/posts/2016-11-07-managing-form-validation-in-react.html
 class SetupForm extends React.Component {
-  state = SETUP_FORM_FIELDS.reduce((state, formField) => {
-    state[formField.name] = "";
-    return state;
+  state = SETUP_FORM_FIELDS.reduce((acc, formField) => {
+    acc[formField.name] = "";
+    return acc;
   }, {});
 
   onChange = e => {
@@ -35,7 +35,7 @@ class SetupForm extends React.Component {
   render() {
     return (
       <Form onSubmit={this.onSubmit}>
-        {SETUP_FORM_FIELDS.map(formField => (
+        {SETUP_FORM_FIELDS.map(formField =>
           <Col sm={12} key={formField.name}>
             <FormGroup>
               <FormControl
@@ -47,9 +47,9 @@ class SetupForm extends React.Component {
               />
             </FormGroup>
           </Col>
-        ))}
+        )}
         <Col sm={12}>
-          <Button type="submit" block={true}>
+          <Button type="submit" block>
             Setup My Account
           </Button>
         </Col>

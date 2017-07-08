@@ -1,11 +1,9 @@
 import React from "react";
 import { ControlLabel, FormControl, HelpBlock } from "react-bootstrap";
 
-const WhatChanged = ({ value, onChange }) => (
+const WhatChanged = ({ value, onChange }) =>
   <div>
-    <ControlLabel>
-      What improvements did you make in this edit?
-    </ControlLabel>
+    <ControlLabel>What improvements did you make in this edit?</ControlLabel>
     <FormControl
       componentClass="textarea"
       className="what_changed"
@@ -14,10 +12,7 @@ const WhatChanged = ({ value, onChange }) => (
       value={value}
       onChange={onChange}
     />
-    <HelpBlock>
-      Keep it short and descriptive :)
-    </HelpBlock>
-  </div>
-);
+    <HelpBlock>Keep it short and descriptive :)</HelpBlock>
+  </div>;
 
 export default WhatChanged;

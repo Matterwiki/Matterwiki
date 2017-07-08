@@ -27,7 +27,9 @@ class Loader extends React.Component {
     return (
       <div className="loader">
         <div className="loading" />
-        <p className="help-block">{this.state.message}</p>
+        <p className="help-block">
+          {this.state.message}
+        </p>
       </div>
     );
   }

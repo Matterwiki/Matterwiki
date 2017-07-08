@@ -1,0 +1,7 @@
+dist/*
+seeds/*
+migrations/*
+tests/*
+
+knexfile.js
+install.js

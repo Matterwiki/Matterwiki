@@ -5,14 +5,13 @@ import {
   RichUtils,
   Modifier,
   CompositeDecorator,
-  convertToRaw,
-  convertFromRaw,
-  convertFromHTML,
-  ContentState
+  convertToRaw
 } from "draft-js";
 
 import { changeDepth, getEntityRange } from "draftjs-utils";
 import classNames from "classnames";
+
+import "draft-js/dist/Draft.css";
 
 import Toolbar from "./components/Toolbar/index";
 import {
@@ -23,7 +22,6 @@ import {
 } from "./utils/index";
 
 import "./WikiEditor.css";
-import "draft-js/dist/Draft.css";
 
 const customStyleMap = {
   STRIKETHROUGH: {
@@ -31,11 +29,11 @@ const customStyleMap = {
   }
 };
 
-const Link = ({ contentState }) => {
-  const { url } = contentState.getEntity(props.entityKey).getData();
+const Link = ({ contentState, entityKey, children }) => {
+  const { url } = contentState.getEntity(entityKey).getData();
   return (
     <a href={url}>
-      {props.children || url}
+      {children || url}
     </a>
   );
 };
@@ -60,16 +58,6 @@ class WikiEditor extends Component {
     };
   }
 
-  // to get the rawContent when the Save button in the parent is clicked.
-  // invoked via ref
-  getRawContent = () => {
-    // TODO REDUX will remove this from here, in the future!
-    const { editorState } = this.state;
-    const rawContent = convertToRaw(editorState.getCurrentContent());
-
-    return rawContent;
-  };
-
   onChange = editorState => {
     // get the currentEntity
     // TODO, again, is inefficient
@@ -79,22 +67,14 @@ class WikiEditor extends Component {
     });
   };
 
-  onTab = e => {
-    const maxDepth = 4;
-    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
-  };
-
-  handleKeyCommand = cmd => {
+  // to get the rawContent when the Save button in the parent is clicked.
+  // invoked via ref
+  getRawContent = () => {
+    // TODO REDUX will remove this from here, in the future!
     const { editorState } = this.state;
+    const rawContent = convertToRaw(editorState.getCurrentContent());
 
-    const newState = RichUtils.handleKeyCommand(editorState, cmd);
-
-    if (newState) {
-      this.onChange(newState);
-      return true;
-    }
-
-    return false;
+    return rawContent;
   };
 
   // Handlers for `Toolbar` components.
@@ -256,7 +236,7 @@ class WikiEditor extends Component {
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    let className = classNames("WikiEditor-editor", {
+    const className = classNames("WikiEditor-editor", {
       "WikiEditor-hidePlaceholder": shouldHidePlaceholder(contentState)
     });
 
