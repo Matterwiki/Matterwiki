@@ -1,5 +1,10 @@
 // TODO Needs more fine tuning - https://12factor.net/config
-const config = require("dotenv").config({ path: "config.env" });
+const config = require("dotenv").config({
+  // process.env.NODE_ENV = dev|test|prod;
+  path: `config.${process.env.NODE_ENV}.env`
+});
+
+console.info(`Environment chosen: ${process.env.NODE_ENV}`);
 
 // Config probably not found!
 // TODO Customize this error

@@ -7,8 +7,5 @@
   "events": {
     "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
   },
-  "watch": ["src/api/"],
-  "env": {
-    "NODE_ENV": "develop"
-  }
+  "watch": ["src/api/"]
 }

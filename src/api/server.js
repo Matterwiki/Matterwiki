@@ -6,7 +6,7 @@ const app = require("./app");
 console.info("Starting the Matterwiki DB..");
 require("./utils/db");
 
-if (process.env.NODE_ENV === "develop") {
+if (process.env.NODE_ENV === "dev") {
   console.info("Dev environment detected, starting webpack-dev-server..");
 
   // add some patchwork for the devserver to work!

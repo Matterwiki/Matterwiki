@@ -1,4 +1,8 @@
-require("dotenv").config({ path: "config.env" });
+const config = require("dotenv").config({
+  path: `config.${process.env.NODE_ENV}.env`
+});
+
+console.info(`DB Environment chosen: ${process.env.NODE_ENV}`);
 
 const connection = {
   host: process.env.DB_HOST || "localhost",
