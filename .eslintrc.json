@@ -33,6 +33,7 @@
 
         "no-unused-vars": 1,
         "camelcase": 1,
-        "consistent-return": 1
+        "consistent-return": 1,
+        "no-console": 0
     }
 }

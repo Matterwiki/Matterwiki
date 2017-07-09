@@ -7,7 +7,7 @@ const router = express.Router();
 const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 
-const { authSecret } = require("../utils/config");
+const { authSecret } = require("../config");
 
 // Pick out the errors
 const { CREDS_WRONG } = require("../utils/constants").ERRORS;

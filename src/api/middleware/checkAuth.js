@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { authSecret } = require("../utils/config");
+const { authSecret } = require("../config");
 const { INVALID_TOKEN } = require("../utils/constants").ERRORS;
 
 module.exports = (req, res, next) => {
