@@ -16,7 +16,7 @@ module.exports = {
   client: "mysql",
   connection,
   seeds: {
-    directory: "./db/migrations"
+    directory: "./db/seeds/"
   },
   migrations: {
     directory: "./db/migrations/"
