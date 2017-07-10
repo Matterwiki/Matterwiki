@@ -11,6 +11,8 @@ const app = express();
 
 app.use(helmet());
 
+// TODO for perf reasons, https://www.npmjs.com/package/compression 
+
 // Sample API endpoint
 app.get("/api", (req, res) => {
   res.send("Hey! You're looking at the Matterwiki API");
