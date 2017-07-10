@@ -30,7 +30,7 @@ class ViewArticle extends React.Component {
   };
 
   handleHistoryClick = () => {
-    this.props.history.push(`/article/history/${this.state.article.id}`);
+    this.props.history.push(`/article/${this.state.article.id}/history`);
   };
 
   handleDeleteClick = e => {

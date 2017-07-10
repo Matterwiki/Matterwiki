@@ -1,6 +1,6 @@
 const express = require("express");
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const { NOT_FOUND } = require("../../utils/constants").ERRORS;
 
@@ -11,6 +11,7 @@ const fetchArchivesByArticle = async (req, res, next) => {
   const { id } = req.params;
 
   try {
+    // TODO Orderby Date descending
     const articles = await archiveModel.getAll({ article_id: id });
 
     if (!articles) {
@@ -24,9 +25,12 @@ const fetchArchivesByArticle = async (req, res, next) => {
 };
 
 const fetchArchiveById = async (req, res, next) => {
-  const { id, archiveId } = req.params;
+  const { id: articleId, archiveId } = req.params;
   try {
-    let archive = await archiveModel.get({ id: archiveId, article_id: id });
+    let archive = await archiveModel.get({
+      id: archiveId,
+      article_id: articleId
+    });
 
     if (!archive) {
       return next(NOT_FOUND);

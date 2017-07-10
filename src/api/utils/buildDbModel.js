@@ -7,7 +7,7 @@ const orm = {
     return this.model.forge(params).fetch();
   },
   getAll(params = {}) {
-    return this.model.forge(params).fetchAll();
+    return this.model.forge().where(params).fetchAll();
   },
   post(data) {
     return this.model.forge().save(data);

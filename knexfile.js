@@ -14,5 +14,11 @@ const connection = {
 
 module.exports = {
   client: "mysql",
-  connection
+  connection,
+  seeds: {
+    directory: "./db/migrations"
+  },
+  migrations: {
+    directory: "./db/migrations/"
+  }
 };

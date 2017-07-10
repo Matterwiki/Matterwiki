@@ -28,13 +28,15 @@ class ArticleHistory extends React.Component {
       .catch(() => this.setState({ archives: [], loading: false }));
   }
 
-  getArchive = id => {
+  getArchive = archiveId => {
     this.setState({
       archive: null,
       loading: true
     });
     const { articleId } = this.props.match.params;
-    APIProvider.get(`articles/${articleId}/archives/${id}`).then(article => {
+    APIProvider.get(
+      `articles/${articleId}/archives/${archiveId}`
+    ).then(article => {
       this.setState({
         article,
         loading: false

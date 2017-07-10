@@ -21,7 +21,7 @@ const Article = ({ match }) =>
       />
       <Route
         exact
-        path={`${match.url}/history/:articleId`}
+        path={`${match.url}/:articleId/history/`}
         component={Archives}
       />
     </Switch>

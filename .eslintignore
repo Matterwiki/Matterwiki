@@ -1,6 +1,6 @@
 dist/*
-seeds/*
-migrations/*
+db/migrations/*
+db/seeds/*
 tests/*
 
 knexfile.js
