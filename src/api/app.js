@@ -11,7 +11,8 @@ const app = express();
 
 app.use(helmet());
 
-// TODO for perf reasons, https://www.npmjs.com/package/compression 
+// TODO for perf reasons, https://www.npmjs.com/package/compression
+// TODO setup task runner for easier management: https://github.com/lukeed/taskr
 
 // Sample API endpoint
 app.get("/api", (req, res) => {
