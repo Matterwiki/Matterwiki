@@ -40,6 +40,7 @@ const fetchArchiveById = async (req, res, next) => {
 
     // NOTE This is not RESTful. Generally, articles endpoints should ONLY return articles.
     // TODO Make the client request for these resources
+    // TODO Use `withRelated`
     archive.user = await userModel.get({ id: archive.user_id });
 
     res.status(200).json(archive);

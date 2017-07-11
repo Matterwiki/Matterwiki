@@ -40,6 +40,7 @@ const fetchArticleById = async (req, res, next) => {
 
     // NOTE This is not RESTful. Generally, articles endpoints should ONLY return articles.
     // TODO Make the client request for these resources
+    // TODO Use `withRelated`
     article.topic = await topicModel.get({ id: article.topic_id });
     article.user = await userModel.get({ id: article.user_id });
 
@@ -85,6 +86,7 @@ const updateArticle = async (req, res, next) => {
     );
 
     // TODO Doesn't seem RESTful
+    // TODO Use `withRelated`
     await archiveModel.post({
       article_id: id,
       title,

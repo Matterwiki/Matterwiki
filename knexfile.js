@@ -1,8 +1,14 @@
 const config = require("dotenv").config({
-  path: `config.${process.env.NODE_ENV}.env`
+  path: `config.${process.env.NODE_ENV || env}.env`
 });
 
 console.info(`DB Environment chosen: ${process.env.NODE_ENV}`);
+
+// Config probably not found!
+// TODO Customize this error
+if (config.error) {
+  throw new Error(config.error);
+}
 
 const connection = {
   host: process.env.DB_HOST || "localhost",
