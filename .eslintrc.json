@@ -13,7 +13,8 @@
     ],
     "env": {
         "browser": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "settings": {
         // For the resolves specified in webpack.config to work properly

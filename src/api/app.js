@@ -1,11 +1,13 @@
 const express = require("express");
 const helmet = require("helmet");
 
-const setupRouter = require("./routes/setup");
-const authRouter = require("./routes/auth");
-const articleRouter = require("./routes/articles/articles");
-const topicsRouter = require("./routes/topics");
-const userRouter = require("./routes/users");
+const setupRouter = require("./routes/setupRouter");
+const authRouter = require("./routes/authRouter");
+const articleRouter = require("./routes/articlesRouter/articlesRouter");
+const topicsRouter = require("./routes/topicsRouter");
+const userRouter = require("./routes/usersRouter");
+const uploadsRouter = require("./routes/uploadsRouter");
+const searchRouter = require("./routes/searchRouter");
 
 const app = express();
 
@@ -13,6 +15,7 @@ app.use(helmet());
 
 // TODO for perf reasons, https://www.npmjs.com/package/compression
 // TODO setup task runner for easier management: https://github.com/lukeed/taskr
+// TODO Maybe use lerna and split client and api dirs into subapps in a mono repo!
 
 // Sample API endpoint
 app.get("/api", (req, res) => {
@@ -31,10 +34,10 @@ app.use("/api/users", userRouter);
 // util routes
 
 // handles all upload endpoints
-app.use("/api/uploads", require("./routes/uploads"));
+app.use("/api/uploads", uploadsRouter);
 
 // handles all search endpoints
-app.use("/api/search", require("./routes/search"));
+app.use("/api/search", searchRouter);
 
 // TODO Good error handling, validation, etc
 // https://www.joyent.com/node-js/production/design/errors

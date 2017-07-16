@@ -1,8 +1,10 @@
+const env = process.env.NODE_ENV || "dev";
 const config = require("dotenv").config({
-  path: `config.${process.env.NODE_ENV || env}.env`
+  path: `config.${env}.env`
 });
 
-console.info(`DB Environment chosen: ${process.env.NODE_ENV}`);
+console.info(`DB Environment chosen: ${env}`);
+console.info(`DB to be created: ${process.env.DB_NAME}${env}`);
 
 // Config probably not found!
 // TODO Customize this error
@@ -14,7 +16,8 @@ const connection = {
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  // make env specific database
+  database: `${process.env.DB_NAME}${env}`,
   debug: !!process.env.DB_DEBUGINFO
 };
 

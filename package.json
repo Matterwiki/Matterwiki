@@ -9,9 +9,12 @@
     "dev": "cross-env NODE_ENV=dev nodemon --config nodemon.json ./src/api/server.js",
     "dev:debug": "cross-env NODE_ENV=dev nodemon --config nodemon.json  --inspect=5858 ./src/api/server.js",
     "db:migrate": "knex migrate:latest",
+    "db:migrate_make": "knex migrate:make",
     "db:seed": "knex seed:run",
+    "db:seed_make": "knex seed:make",
     "lint": "eslint ./src/**",
     "format": "prettier --write --jsx-bracket-same-line \"src/**/*.js\"",
+    "test": "cross-env NODE_ENV=test jest",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -51,6 +54,7 @@
     "helmet": "^3.6.1",
     "jsonwebtoken": "^7.4.1",
     "knex": "^0.13.0",
+    "knex-db-manager": "^0.3.0",
     "multer": "1.2.1",
     "mysql": "^2.13.0",
     "react": "15.3.0",
@@ -60,6 +64,8 @@
     "react-router-bootstrap": "^0.24.2",
     "react-router-dom": "4.1.1",
     "react-s-alert": "1.2.2",
+    "superagent": "^3.5.2",
+    "supertest": "^3.0.0",
     "url-search-params-polyfill": "^2.0.0"
   },
   "devDependencies": {
@@ -85,6 +91,7 @@
     "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.14.2",
+    "jest": "^20.0.4",
     "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",
     "prettier": "^1.5.2",

@@ -8,7 +8,7 @@ const { checkIfAdmin } = require("../../middleware/checkRole");
 
 const { NOT_FOUND } = require("../../utils/constants").ERRORS;
 
-const archivesRouter = require("./archives.js");
+const archivesRouter = require("./archivesRouter.js");
 
 const articleModel = require("../../models/article");
 const userModel = require("../../models/user");
