@@ -48,7 +48,7 @@ const createUser = async (req, res, next) => {
     };
 
     newUser = await userModel.post(newUser);
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (err) {
     next(err);
   }
@@ -83,7 +83,9 @@ const deleteUser = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    await userModel.delete({ id });
+    if (parseInt(id, 10) !== 1) {
+      await userModel.delete({ id });
+    }
     res.status(200).json({});
   } catch (err) {
     next(err);

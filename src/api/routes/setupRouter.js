@@ -15,6 +15,10 @@ const setupAdminUser = async (req, res, next) => {
   const { name, email, about, password } = req.body;
 
   try {
+    const adminUserFromDb = await userModel.get({ id: 1 });
+
+    if (adminUserFromDb) next(DUPLICATE_ADMIN_USER);
+
     // hash password
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
@@ -28,14 +32,8 @@ const setupAdminUser = async (req, res, next) => {
     };
 
     const newUser = await userModel.post(adminUser);
-    res.status(200).json(newUser);
+    res.status(201).json(newUser);
   } catch (err) {
-    if (err.code === DUPLICATE_ADMIN_USER.code) {
-      err.message = DUPLICATE_ADMIN_USER.message;
-      // http://stackoverflow.com/a/3826024/1217785
-      err.status = 409;
-    }
-
     next(err);
   }
 };

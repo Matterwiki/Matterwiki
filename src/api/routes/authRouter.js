@@ -11,6 +11,7 @@ const { authSecret } = require("../config");
 
 // Pick out the errors
 const { CREDS_WRONG } = require("../utils/constants").ERRORS;
+const { TOKEN_EXPIRATION } = require("../utils/constants").TOKEN_EXPIRATION;
 
 const userModel = require("../models/user");
 
@@ -42,12 +43,11 @@ const loginUser = async (req, res, next) => {
 
     // make token and attach it to user
     payloadUser.token = jwt.sign(payloadUser, authSecret, {
-      // TODO setup better timeout value
-      expiresIn: 86400
+      expiresIn: TOKEN_EXPIRATION
     });
 
     // send away!
-    res.status(200).json(payloadUser);
+    res.status(201).json(payloadUser);
   } catch (err) {
     next(CREDS_WRONG);
   }

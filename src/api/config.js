@@ -4,8 +4,6 @@ const config = require("dotenv").config({
   path: `config.${process.env.NODE_ENV}.env`
 });
 
-console.info(`Environment chosen: ${process.env.NODE_ENV}`);
-
 // Config probably not found!
 // TODO Customize this error
 if (config.error) {

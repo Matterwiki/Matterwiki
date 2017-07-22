@@ -3,9 +3,6 @@ const app = require("./app");
 
 // TODO use morgan or something for logging
 
-console.info("Starting the Matterwiki DB..");
-require("./utils/db");
-
 if (process.env.NODE_ENV === "dev") {
   console.info("Dev environment detected, starting webpack-dev-server..");
 

@@ -25,6 +25,7 @@
         "prettier/prettier": [2, {
             "jsxBracketSameLine": true
         }],
+        "import/no-extraneous-dependencies": [2, {"devDependencies": true}],
         // TODO :(
         "react/prop-types": 0,
         "react/sort-comp": 1,
@@ -34,7 +35,7 @@
 
         "no-unused-vars": 1,
         "camelcase": 1,
-        "consistent-return": 1,
+        "consistent-return": 0,
         "no-console": 0
     }
 }

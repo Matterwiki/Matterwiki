@@ -18,6 +18,7 @@ const orm = {
   delete(params = {}) {
     return this.model.forge(params).destroy();
   }
+  // TODO exists(id)
 };
 
 // TODO for lack of a better name

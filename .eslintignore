@@ -1,5 +1,2 @@
 dist/*
 tests/*
-
-knexfile.js
-install.js

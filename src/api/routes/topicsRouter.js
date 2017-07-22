@@ -11,16 +11,16 @@ const { DELETE_DEFAULT_TOPIC } = require("../utils/constants").ERRORS;
 const topicModel = require("../models/topic");
 const articleModel = require("../models/article");
 
-const fetchTopics = async (req, res, next) => {
+async function fetchTopics(req, res, next) {
   try {
     const topics = await topicModel.getAll();
     res.status(200).json(topics);
   } catch (err) {
     next(err);
   }
-};
+}
 
-const fetchTopicsById = async (req, res, next) => {
+async function fetchTopicsById(req, res, next) {
   const { id } = req.params;
   try {
     const topic = await topicModel.get({ id });
@@ -28,10 +28,10 @@ const fetchTopicsById = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
 // TODO Duplicate checks - One way would be set the name to be a unique field in the DB
-const createTopic = async (req, res, next) => {
+async function createTopic(req, res, next) {
   const { name, description } = req.body;
 
   try {
@@ -42,13 +42,13 @@ const createTopic = async (req, res, next) => {
     };
 
     newTopic = await topicModel.post(newTopic);
-    res.status(200).json(newTopic);
+    res.status(201).json(newTopic);
   } catch (err) {
     next(err);
   }
-};
+}
 
-const updateTopic = async (req, res, next) => {
+async function updateTopic(req, res, next) {
   const { id } = req.params;
   const { name, description } = req.body;
 
@@ -64,9 +64,9 @@ const updateTopic = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
-const deleteTopic = async (req, res, next) => {
+async function deleteTopic(req, res, next) {
   const { id } = req.params;
 
   if (id === 1) {
@@ -79,9 +79,9 @@ const deleteTopic = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
-const fetchArticlesByTopic = async (req, res, next) => {
+async function fetchArticlesByTopic(req, res, next) {
   const { topicId } = req.params;
   const { limit } = req.query;
 
@@ -97,7 +97,7 @@ const fetchArticlesByTopic = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
 router.use(checkAuth);
 

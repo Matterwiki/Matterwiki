@@ -1,6 +1,9 @@
 const SALT_ROUNDS = 10;
 const ADMIN_ID = 1;
 
+// TODO setup better timeout value
+const TOKEN_EXPIRATION = 86400;
+
 const ROLES = {
   ADMIN: "ADMIN",
   USER: "USER"
@@ -12,7 +15,7 @@ const ERRORS = {
     status: 409,
     code: "ER_DUP_ENTRY",
     message:
-      "There was an error creating the admin user. Chances are you've already set up"
+      "There was an error creating the admin user. Chances are you're already set up"
   },
   CREDS_WRONG: {
     status: 401,
@@ -41,4 +44,4 @@ const ERRORS = {
   }
 };
 
-module.exports = { SALT_ROUNDS, ADMIN_ID, ERRORS, ROLES };
+module.exports = { SALT_ROUNDS, ADMIN_ID, TOKEN_EXPIRATION, ERRORS, ROLES };
