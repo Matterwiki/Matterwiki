@@ -12,8 +12,11 @@ class EditUser extends React.Component {
     this.state = {loading: true, name: "", about: "", email: "", password: ""}
   }
 
-  handleChange() {
-    this.setState({name: this.refs.user_name.value, about: this.refs.user_about.value, email: this.refs.user_email.value, password: this.refs.user_password.value});
+  handleChange(event) {
+    const {value, name} = event.target;
+    this.setState({
+      [name]: value
+    });
   }
 
   componentDidMount() {
@@ -38,24 +41,41 @@ class EditUser extends React.Component {
     });
   }
 
-  editUser(e) {
+  createQueryStringFromUserMap(userMap) {
+    const result = [];
+    for (let key in userMap) {
+      // Make sure there is a value for all fields except "about" which should be able to be cleared
+      if (userMap.hasOwnProperty(key) && ( userMap[key].length > 0 || key === 'about' )) {
+        result.push(`${key}=${encodeURIComponent(userMap[key])}`);
+      }
+    }
+    return result.join('&');
+  }
+
+  editUser(event) {
+
+    event.preventDefault();
+
     var user = {
-      name: encodeURIComponent(this.refs.user_name.value),
-      about: encodeURIComponent(this.refs.user_about.value),
-      email: encodeURIComponent(this.refs.user_email.value),
-      password: encodeURIComponent(this.refs.user_password.value),
-      id: encodeURIComponent(this.props.params.userId)
+      name: this.state.name,
+      about: this.state.about,
+      email: this.state.email,
+      password: this.state.password,
+      id: this.props.params.userId
     };
+
     var myHeaders = new Headers({
         "Content-Type": "application/x-www-form-urlencoded",
         "x-access-token": window.localStorage.getItem('userToken')
     });
-    var myInit = { method: 'PUT',
-               headers: myHeaders,
-               body: "name="+user.name+"&about="+user.about+"&email="+user.email+"&password="+user.password+"&id="+user.id
-               };
-    var that = this;
-    fetch('/api/users/',myInit)
+
+    var myInit = {
+      method: 'PUT',
+      headers: myHeaders,
+      body: this.createQueryStringFromUserMap(user)
+    };
+
+    fetch('/api/users/', myInit)
     .then(function(response) {
       return response.json();
     })
@@ -82,16 +102,16 @@ class EditUser extends React.Component {
                       <br/>
                         <form>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_name" id="inputUserName" placeholder="Name" value={this.state.name} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="name" id="inputUserName" placeholder="Name" value={this.state.name} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_about" id="inputUserAbout" placeholder="About" value={this.state.about} onChange={this.handleChange}/>
+                            <input type="text" className="form-control" name="about" id="inputUserAbout" placeholder="About" value={this.state.about} onChange={this.handleChange}/>
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="text" className="form-control" ref="user_email" id="inputUserName" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
+                            <input type="text" className="form-control" name="email" id="inputUserName" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
                           </div>
                           <div className="col-sm-12 form-group">
-                            <input type="password" className="form-control" ref="user_password" id="inputUserName" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+                            <input type="password" className="form-control" name="password" id="inputUserName" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
                           </div>
                       <div className="col-sm-12 form-group">
                         <button onClick={this.editUser} className="btn btn-default btn-block btn-lg">Update User</button>
