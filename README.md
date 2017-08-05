@@ -127,9 +127,10 @@ We welcome all kinds of contributions. It doesn't matter if it's a grammar fix, 
 
 ## Feature requests?
 
-Before you create a new feature request please check our [public roadmap](https://trello.com/b/OktmtAve/feature-roadmap). It lists the features we're working on and the ones we will be working on.
-If you see we're already working on your feature, head to the issue relating to that and give a thumbs up.
-If your feature is something that hasn't been requested yet, please create an issue.
+Before you create a new feature request please check our [public roadmap](https://github.com/Matterwiki/Matterwiki/projects/1) for the v0.3.0 release. It lists the features we're currently working on. The issues [tagged with the `backlog` label](https://github.com/Matterwiki/Matterwiki/issues?q=is%3Aissue+is%3Aopen+label%3Abacklog) are next in line. 
+
+* If you see we're already working on your feature, head to the issue relating to that and give a thumbs up.
+* If your feature is something that hasn't been requested yet, please create an issue.
 
 ## Screenshots
 
