@@ -4,8 +4,8 @@ const router = express.Router({ mergeParams: true });
 
 const { NOT_FOUND } = require("../../utils/constants").ERRORS;
 
-const archiveModel = require("../../models/archive");
-const userModel = require("../../models/user");
+const archiveModel = require("../../models/articleHistoryModel");
+const userModel = require("../../models/userModel");
 
 const fetchArchivesByArticle = async (req, res, next) => {
   const { id } = req.params;

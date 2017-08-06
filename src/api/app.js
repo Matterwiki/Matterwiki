@@ -1,6 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 
+// Sets up the DB, starts the knex connection
 require("./utils/db");
 
 const setupRouter = require("./routes/setupRouter");

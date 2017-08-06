@@ -9,7 +9,7 @@ const { checkIfAdmin } = require("../middleware/checkRole");
 
 const { SALT_ROUNDS } = require("../utils/constants");
 
-const userModel = require("../models/user");
+const userModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {

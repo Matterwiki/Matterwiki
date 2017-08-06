@@ -1,7 +1,8 @@
-exports.seed = (knex, Promise) =>
-  knex("topics").del().then(() =>
-    // Inserts seed entries
-    knex("topics").insert([
-      { name: "general", description: "knowledge for everyone" }
-    ])
-  );
+exports.seed = knex =>
+  knex("topic")
+    .del()
+    .then(() =>
+      knex("topic").insert([
+        { name: "general", description: "knowledge for everyone" }
+      ])
+    );

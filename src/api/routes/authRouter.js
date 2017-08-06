@@ -13,7 +13,7 @@ const { authSecret } = require("../config");
 const { CREDS_WRONG } = require("../utils/constants").ERRORS;
 const { TOKEN_EXPIRATION } = require("../utils/constants").TOKEN_EXPIRATION;
 
-const userModel = require("../models/user");
+const userModel = require("../models/userModel");
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;

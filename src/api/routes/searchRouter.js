@@ -4,7 +4,7 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/checkAuth");
 
-const articleModel = require("../models/article");
+const articleModel = require("../models/articleModel");
 
 const searchArticles = async (req, res, next) => {
   const { query } = req.query;

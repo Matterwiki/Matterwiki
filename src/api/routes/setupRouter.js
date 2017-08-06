@@ -9,7 +9,7 @@ const { SALT_ROUNDS, ADMIN_ID } = require("../utils/constants");
 // Pick out the errors
 const { DUPLICATE_ADMIN_USER } = require("../utils/constants").ERRORS;
 
-const userModel = require("../models/user");
+const userModel = require("../models/userModel");
 
 const setupAdminUser = async (req, res, next) => {
   const { name, email, about, password } = req.body;

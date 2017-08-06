@@ -8,8 +8,8 @@ const { checkIfAdmin } = require("../middleware/checkRole");
 
 const { DELETE_DEFAULT_TOPIC } = require("../utils/constants").ERRORS;
 
-const topicModel = require("../models/topic");
-const articleModel = require("../models/article");
+const topicModel = require("../models/topicModel");
+const articleModel = require("../models/articleModel");
 
 async function fetchTopics(req, res, next) {
   try {

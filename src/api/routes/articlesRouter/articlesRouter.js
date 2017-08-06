@@ -10,10 +10,10 @@ const { NOT_FOUND } = require("../../utils/constants").ERRORS;
 
 const archivesRouter = require("./archivesRouter.js");
 
-const articleModel = require("../../models/article");
-const userModel = require("../../models/user");
-const topicModel = require("../../models/topic");
-const archiveModel = require("../../models/archive");
+const articleModel = require("../../models/articleModel");
+const userModel = require("../../models/userModel");
+const topicModel = require("../../models/topicModel");
+const archiveModel = require("../../models/articleHistoryModel");
 
 const fetchArticles = async (req, res, next) => {
   const { limit } = req.query;
