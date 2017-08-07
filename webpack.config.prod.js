@@ -45,7 +45,14 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         include: APP_DIR,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          presets: [["env", { modules: false }], "react"],
+          plugins: [
+            "transform-class-properties",
+            "transform-object-rest-spread"
+          ]
+        }
       },
       {
         test: /\.css$/,

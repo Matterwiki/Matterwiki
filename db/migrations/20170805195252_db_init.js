@@ -3,17 +3,9 @@ exports.up = knex => {
    * Helper to add meta fields to table
    */
   const addMetaFieldsTo = table => {
-    table
-      .integer("created_by_id")
-      .unsigned()
-      .references("user.id")
-      .notNullable();
-    table
-      .integer("modified_by_id")
-      .unsigned()
-      .references("user.id")
-      .notNullable();
-    table.boolean("is_active").notNullable();
+    table.integer("created_by_id").unsigned().references("user.id");
+    table.integer("modified_by_id").unsigned().references("user.id");
+    table.boolean("is_active").notNullable().defaultTo(true);
     table.timestamp("created_at").defaultTo(knex.fn.now()).notNullable();
     table.timestamp("modified_at").defaultTo(knex.fn.now()).notNullable();
   };
@@ -25,8 +17,8 @@ exports.up = knex => {
       table.string("email").notNullable();
       table.string("password").notNullable();
       table.string("about").notNullable();
-      table.string("role").notNullable();
-      table.boolean("is_active").notNullable();
+      table.enu("role", ["ADMIN", "USER"]).notNullable();
+      table.boolean("is_active").notNullable().default(true);
       table.timestamp("created_at").defaultTo(knex.fn.now()).notNullable();
       table.timestamp("modified_at").defaultTo(knex.fn.now()).notNullable();
     });

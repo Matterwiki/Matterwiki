@@ -21,13 +21,12 @@ function createDbIfNotExists() {
 
 /**
  * Cleans up test db between tests
+ * Provides options to keep or destroy user table
  */
-function truncateDb() {
-  return (
-    dbManager
-      // wasteful to `makeTestUsers` before every test
-      .truncateDb(["users"])
-  );
+function truncateDb(keepUsers = true) {
+  // wasteful to `makeTestUsers` before every test
+  const ignoreList = keepUsers ? ["user"] : [];
+  return dbManager.truncateDb(ignoreList);
 }
 
 /**

@@ -12,6 +12,6 @@ module.exports = {
       .generateRnd(numberOfUsers)
       .output();
 
-    return users;
+    return users.map(user => Object.assign({}, user, { role: "USER" }));
   }
 };
