@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 
 const userFactory = require("../factories/userFactory");
-const Model = require("objection").Model;
+const { knexInstance: knex } = require("../../utils/db");
 
 const { ADMIN_ID, SALT_ROUNDS } = require("../../utils/constants");
 const { DEFAULT_PASSWORD } = require("./testConstants");
@@ -12,9 +12,9 @@ async function createUser(user) {
     password
   });
 
-  return Model.knex("users")
+  return knex("user")
     .insert(userWithHash)
-    .then(id => Model.knex("users").where("id", id));
+    .then(id => knex("user").where("id", id));
 }
 
 function makeTestUsers(numberOfUsers = 2) {

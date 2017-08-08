@@ -7,6 +7,7 @@ class UserModel extends Model {
   }
 
   static get relationMappings() {
+    // this is in here to prevent circular deps
     const TopicModel = require("./topicModel").Model;
     const ArticleHistoryModel = require("./articleHistoryModel").Model;
     const ArticleModel = require("./articleModel").Model;
@@ -64,7 +65,7 @@ class UserModel extends Model {
   }
 }
 
-module.exports = Object.assign({}, withDbHelpers(UserModel), {
+const extraHelpers = {
   // Does a simple `WHERE LIKE` query on model
   // Models have to implement their own search methods with the fields that need to be used
   search: searchString => {
@@ -76,4 +77,6 @@ module.exports = Object.assign({}, withDbHelpers(UserModel), {
       .orWhere("email", "like", escapedString)
       .orWhere("about", "like", escapedString);
   }
-});
+};
+
+module.exports = withDbHelpers(UserModel, extraHelpers);

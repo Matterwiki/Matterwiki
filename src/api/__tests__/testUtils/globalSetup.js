@@ -5,7 +5,8 @@ const {
   seedDb
 } = require("./dbHelpers");
 
-const { makeUsers, makeJwt } = require("./userHelpers");
+const { makeUsers } = require("./userHelpers");
+const makeJwt = require("./makeJwt");
 const { userHolder, tokenHolder } = require("./modelHolder");
 
 /**
