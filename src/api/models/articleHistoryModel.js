@@ -6,32 +6,38 @@ class ArticleHistoryModel extends Model {
     return "article_history";
   }
 
-  static relationMappings = {
-    articles: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: `${__dirname}/ArticleModel`,
-      join: {
-        from: "article_history.article_id",
-        to: "article.id"
+  static get relationMappings() {
+    const TopicModel = require("./topicModel").Model;
+    const UserModel = require("./userModel").Model;
+    const ArticleModel = require("./articleModel").Model;
+
+    return {
+      article: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ArticleModel,
+        join: {
+          from: "article_history.article_id",
+          to: "article.id"
+        }
+      },
+      createdUser: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: UserModel,
+        join: {
+          from: "topic.created_by_id",
+          to: "user.id"
+        }
+      },
+      modifiedUser: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: UserModel,
+        join: {
+          from: "topic.modified_by_id",
+          to: "user.id"
+        }
       }
-    },
-    createdUser: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: `${__dirname}/UserModel`,
-      join: {
-        from: "topic.created_by_id",
-        to: "user.id"
-      }
-    },
-    modifiedUser: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: `${__dirname}/UserModel`,
-      join: {
-        from: "topic.modified_by_id",
-        to: "user.id"
-      }
-    }
-  };
+    };
+  }
 }
 
 module.exports = withDBHelpers(ArticleHistoryModel);

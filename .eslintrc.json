@@ -36,6 +36,7 @@
         "no-unused-vars": 1,
         "camelcase": 1,
         "consistent-return": 0,
-        "no-console": 0
+        "no-console": 0,
+        "global-require": 1
     }
 }

@@ -7,10 +7,14 @@ class UserModel extends Model {
   }
 
   static get relationMappings() {
+    const TopicModel = require("./topicModel").Model;
+    const ArticleHistoryModel = require("./articleHistoryModel").Model;
+    const ArticleModel = require("./articleModel").Model;
+
     return {
       createdArticle: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/articleModel`,
+        modelClass: ArticleModel,
         join: {
           from: `user.id`,
           to: `article.created_by_id`
@@ -18,7 +22,7 @@ class UserModel extends Model {
       },
       modifiedArticle: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/articleModel`,
+        modelClass: ArticleModel,
         join: {
           from: `user.id`,
           to: `article.modified_by_id`
@@ -26,7 +30,7 @@ class UserModel extends Model {
       },
       createdTopic: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/topicModel`,
+        modelClass: TopicModel,
         join: {
           from: `user.id`,
           to: `topic.created_by_id`
@@ -34,7 +38,7 @@ class UserModel extends Model {
       },
       modifiedTopic: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/topicModel`,
+        modelClass: TopicModel,
         join: {
           from: `user.id`,
           to: `topic.modified_by_id`
@@ -42,7 +46,7 @@ class UserModel extends Model {
       },
       createdArticleHistory: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/articleHistory`,
+        modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
           to: `article_history.created_by_id`
@@ -50,7 +54,7 @@ class UserModel extends Model {
       },
       modifiedArticleHistory: {
         relation: Model.HasManyRelation,
-        modelClass: `${__dirname}/topicModel`,
+        modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
           to: `article_history.modified_by_id`
@@ -60,4 +64,16 @@ class UserModel extends Model {
   }
 }
 
-module.exports = withDbHelpers(UserModel);
+module.exports = Object.assign({}, withDbHelpers(UserModel), {
+  // Does a simple `WHERE LIKE` query on model
+  // Models have to implement their own search methods with the fields that need to be used
+  search: searchString => {
+    // TODO :(
+    const escapedString = `%${searchString}%`;
+
+    return UserModel.query()
+      .where("name", "like", escapedString)
+      .orWhere("email", "like", escapedString)
+      .orWhere("about", "like", escapedString);
+  }
+});
