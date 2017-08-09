@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const userFactory = require("../factories/userFactory");
 const { knexInstance: knex } = require("../../utils/db");
 
-const { ADMIN_ID, SALT_ROUNDS } = require("../../utils/constants");
+const { ROLES, SALT_ROUNDS } = require("../../utils/constants");
 const { DEFAULT_PASSWORD } = require("./testConstants");
 
 async function createUser(user) {
@@ -26,7 +26,9 @@ function makeTestUsers(numberOfUsers = 2) {
 
 // TODO Change if we make more than one admin in the future
 async function makeTestAdmin() {
-  const adminUser = Object.assign({}, userFactory.build(1), { id: ADMIN_ID });
+  const adminUser = Object.assign({}, userFactory.build(1), {
+    role: ROLES.ADMIN
+  });
   return createUser(adminUser);
 }
 

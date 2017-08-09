@@ -40,4 +40,13 @@ describe("Topic model tests", () => {
 
     expect(dbTopic).toEqual(expectedTopic);
   });
+
+  test("Gets all topics", async () => {
+    const expectedTopics = dbTopics;
+    const allDbTopics = await TopicModel.getAll();
+
+    allDbTopics.forEach((dbTopic, i) => {
+      expect(dbTopic).toEqual(expectedTopics[i]);
+    });
+  });
 });

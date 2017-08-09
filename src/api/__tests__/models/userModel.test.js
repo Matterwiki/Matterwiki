@@ -5,7 +5,7 @@ const {
   destroyTestDb,
   truncateDb
 } = require("../testUtils/dbHelpers");
-
+const { ROLES } = require("../../utils/constants");
 const { user: userFactory } = require("../factories/factories");
 
 const UserModel = require("../../models/userModel");
@@ -18,7 +18,10 @@ describe("User model tests", () => {
 
   beforeEach(() => truncateDb(false));
   beforeEach(() => {
-    const newUsers = [userFactory.build(1, "ADMIN"), ...userFactory.build(2)];
+    const newUsers = [
+      userFactory.build(1, ROLES.ADMIN),
+      ...userFactory.build(2)
+    ];
 
     return knex("user")
       .insert(newUsers)
@@ -45,8 +48,8 @@ describe("User model tests", () => {
   });
 
   test("Gets all users filtered by query params", async () => {
-    const expectedUsers = dbUsers.filter(user => user.role === "USER");
-    const filteredDbUsers = await UserModel.getAll({ role: "USER" });
+    const expectedUsers = dbUsers.filter(user => user.role === ROLES.USER);
+    const filteredDbUsers = await UserModel.getAll({ role: ROLES.USER });
 
     filteredDbUsers.forEach((dbUser, i) => {
       expect(dbUser).toEqual(expectedUsers[i]);
@@ -54,7 +57,7 @@ describe("User model tests", () => {
   });
 
   test("Inserts user and returns inserted user", async () => {
-    const userToInsert = userFactory.build(1, "ADMIN");
+    const userToInsert = userFactory.build(1, ROLES.ADMIN);
     const dbUser = await UserModel.insert(userToInsert);
 
     expect(dbUser).toBeInstanceOf(UserModel.Model);
@@ -101,19 +104,19 @@ describe("User model tests", () => {
   });
 
   test("Gets only active users", async () => {
-    const expectedUsers = dbUsers.filter(user => user.role === "USER");
+    const expectedUsers = dbUsers.filter(user => user.role === ROLES.USER);
 
     const { id } = expectedUsers[0];
 
     await UserModel.delete(id);
 
-    const filteredDbUsers = await UserModel.getAll({ role: "USER" });
+    const filteredDbUsers = await UserModel.getAll({ role: ROLES.USER });
 
     expect(filteredDbUsers.map(user => user.id)).not.toContain(id);
   });
 
   test("Gets inactive user if `is_active` param is passed in", async () => {
-    const expectedUsers = dbUsers.filter(user => user.role === "USER");
+    const expectedUsers = dbUsers.filter(user => user.role === ROLES.USER);
 
     const { id } = expectedUsers[0];
 
