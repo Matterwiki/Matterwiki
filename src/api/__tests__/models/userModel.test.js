@@ -98,7 +98,7 @@ describe("User model tests", () => {
 
     await UserModel.delete(id);
 
-    const deletedDbUser = await UserModel.get(id);
+    const deletedDbUser = await knex("user").where("id", id);
 
     expect(deletedDbUser.is_active).toBeFalsy();
   });
@@ -134,9 +134,14 @@ describe("User model tests", () => {
     beforeEach(() => {
       // update users to something we know
       const updateName = () =>
-        UserModel.update(dbUsers[0].id, { name: "jolly ladwig fell" });
+        knex("user")
+          .where("id", dbUsers[0].id)
+          .update({ name: "jolly ladwig fell" });
+
       const updateAbout = () =>
-        UserModel.update(dbUsers[1].id, { about: "funky nosed fella" });
+        knex("user")
+          .where("id", dbUsers[1].id)
+          .update({ about: "funky nosed fella" });
 
       return Promise.all([updateAbout(), updateName()]);
     });

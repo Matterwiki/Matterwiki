@@ -29,7 +29,11 @@ async function makeTestAdmin() {
   const adminUser = Object.assign({}, userFactory.build(1), {
     role: ROLES.ADMIN
   });
-  return createUser(adminUser);
+  return (
+    createUser(adminUser)
+      // `createUser` gives us an array - let's pick out the only item in there
+      .then(dbAdmin => dbAdmin[0])
+  );
 }
 
 async function makeUsers() {
