@@ -54,6 +54,9 @@ function destroyTestDb() {
   return dbManager.createDbOwnerIfNotExist().then(() => dbManager.dropDb());
 }
 
+/**
+ * This file houses all the helpers involving knex-db-manager, generally used in setup and teardown
+ */
 module.exports = {
   initTestDb,
   destroyTestDb,

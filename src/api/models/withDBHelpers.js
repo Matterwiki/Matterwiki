@@ -12,31 +12,55 @@ const Promise = require("bluebird");
  * - insertMany
  * - update
  * - delete
+ * - TODO search
+ * 
+ * Methods with relations `withRels`
+ * - get
+ * - getAll
+ * 
+ * @param {any} Model 
+ * @param {any} extras 
+ * @param {any} [options={ 
+ *    relations - the relations to use for the model
+ * }] 
+ * @returns 
  */
-module.exports = (Model, extras) =>
-  Object.assign(
-    {},
-    {
-      Model,
-      get: id => Model.query().findById(id),
+module.exports = (Model, extras, options = { relations: "" }) => {
+  const { relations } = options;
 
-      // NOTE: does not get inactive items by default.
-      getAll: (params = {}) => {
-        // But, if `is_active`: false is passed as a query param, default will be overriden
-        const paramsWithActive = Object.assign({}, { is_active: true }, params);
-        return Model.query().where(paramsWithActive);
-      },
+  /**
+   * GENERAL QUERIES
+   */
+  const queryMethods = {
+    get: id => Model.query().findById(id),
 
-      insert: item => Model.query().insertAndFetch(item),
-
-      // NOTE: not really performant; O(n) for insert
-      insertMany: items =>
-        Promise.mapSeries(items, item => Model.query().insertAndFetch(item)),
-
-      update: (id, item) => Model.query().updateAndFetchById(id, item),
-
-      // NOTE: doesn't quite delete, just sets item's `is_active` col to false
-      delete: id => Model.query().update({ is_active: false }).where("id", id)
+    // NOTE: does not get inactive items by default.
+    getAll: (params = {}) => {
+      // But, if `is_active`: false is passed as a query param, default will be overriden
+      const paramsWithActive = Object.assign({}, { is_active: true }, params);
+      return Model.query().where(paramsWithActive);
     },
-    extras
-  );
+
+    insert: item => Model.query().insertAndFetch(item),
+
+    // NOTE: not really performant; O(n) for insert
+    insertMany: items =>
+      Promise.mapSeries(items, item => Model.query().insertAndFetch(item)),
+
+    update: (id, item) => Model.query().updateAndFetchById(id, item),
+
+    // NOTE: doesn't quite delete, just sets item's `is_active` value to false
+    delete: id => Model.query().update({ is_active: false }).where("id", id)
+  };
+
+  /**
+    * QUERIES THAT INCLUDE RELATIONS - Uses the relations provided as options
+    */
+  const queryMethodsWithRels = {
+    getWithRels: id => Model.query().findById(id).eager(relations),
+    getAllWithRels: () => Model.query().eager(relations)
+  };
+
+  // Mush em all together cos we like to over-use Object.assign ;)
+  return Object.assign({ Model }, queryMethods, queryMethodsWithRels, extras);
+};

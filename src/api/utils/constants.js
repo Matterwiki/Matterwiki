@@ -4,9 +4,16 @@ const ADMIN_ID = 1;
 // TODO setup better timeout value
 const TOKEN_EXPIRATION = 86400;
 
+// TODO The stuff that follow are ENUMS on the database. Could put them elsewhere when there's more
 const ROLES = {
   ADMIN: "ADMIN",
   USER: "USER"
+};
+
+const ARTICLE_HISTORY_TYPES = {
+  CREATE: "CREATE",
+  UPDATE: "UPDATE",
+  DELETE: "DELETE"
 };
 
 // TODO could be its own file in the future
@@ -44,4 +51,11 @@ const ERRORS = {
   }
 };
 
-module.exports = { SALT_ROUNDS, ADMIN_ID, TOKEN_EXPIRATION, ERRORS, ROLES };
+module.exports = {
+  SALT_ROUNDS,
+  ADMIN_ID,
+  TOKEN_EXPIRATION,
+  ERRORS,
+  ROLES,
+  ARTICLE_HISTORY_TYPES
+};

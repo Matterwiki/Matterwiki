@@ -24,7 +24,7 @@ class ArticleHistoryModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
-          from: "topic.created_by_id",
+          from: "article_history.created_by_id",
           to: "user.id"
         }
       },
@@ -32,7 +32,7 @@ class ArticleHistoryModel extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
-          from: "topic.modified_by_id",
+          from: "article_history.modified_by_id",
           to: "user.id"
         }
       }

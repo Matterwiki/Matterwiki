@@ -5,8 +5,8 @@ module.exports = {
     const articles = dream
       .schema({
         title: "word",
-        body: "paragraph",
-        what_changed: "sentence"
+        content: "paragraph",
+        change_log: "sentence"
       })
       .generateRnd(numberOfArticles)
       .output();

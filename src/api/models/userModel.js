@@ -65,18 +65,4 @@ class UserModel extends Model {
   }
 }
 
-const extraHelpers = {
-  // Does a simple `WHERE LIKE` query on model
-  // Models have to implement their own search methods with the fields that need to be used
-  search: searchString => {
-    // TODO :(
-    const escapedString = `%${searchString}%`;
-
-    return UserModel.query()
-      .where("name", "like", escapedString)
-      .orWhere("email", "like", escapedString)
-      .orWhere("about", "like", escapedString);
-  }
-};
-
-module.exports = withDbHelpers(UserModel, extraHelpers);
+module.exports = withDbHelpers(UserModel);
