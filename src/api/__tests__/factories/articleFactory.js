@@ -5,6 +5,7 @@ module.exports = {
     const articles = dream
       .schema({
         title: "word",
+        // TODO mock out a draft JSON object for this
         content: "paragraph",
         change_log: "sentence"
       })

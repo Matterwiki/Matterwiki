@@ -6,7 +6,6 @@ const { assign } = require("lodash");
  * These are pretty basic, they could be extended for more flexibility in the models
  * Also mushes in anything extra that this brought it in from the model file (eg. search)
  * 
- * TODO extras could have the fn signature that looks like this: Model => (...args) => {}; this way extras could reuse the methods defined here
  * 
  * Supported methods:
  * - get
@@ -23,9 +22,7 @@ const { assign } = require("lodash");
  * 
  * @param {any} Model 
  * @param {any} extras 
- * @param {any} [options={ 
- *    relations - the relations to use for the model
- * }] 
+ * @param {string} [options={ relations: "" }] 
  * @returns 
  */
 module.exports = (Model, extras, options = { relations: "" }) => {
@@ -57,13 +54,13 @@ module.exports = (Model, extras, options = { relations: "" }) => {
   };
 
   /**
-    * QUERIES THAT INCLUDE RELATIONS - Uses the relations provided as options
-    */
+   * QUERIES THAT INCLUDE RELATIONS - Uses the relations provided as options
+   */
   const queryMethodsWithRels = {
     getWithRels: id => Model.query().findById(id).eager(relations),
     getAllWithRels: () => Model.query().eager(relations)
   };
 
-  // Mush em all together cos we like to over-use `Object.assign` ;)
+  // Mush em all together cos we like to over-use `assign` ;)
   return assign({ Model }, queryMethods, queryMethodsWithRels, extras);
 };
