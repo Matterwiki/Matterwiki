@@ -1,4 +1,5 @@
 const Promise = require("bluebird");
+const { assign } = require("lodash");
 const { knexInstance: knex } = require("../../utils/db");
 const {
   setupAll,
@@ -11,6 +12,9 @@ const { userHolder } = require("../testUtils/modelHolder");
 const { article: articleFactory } = require("../factories/factories");
 
 const ArticleModel = require("../../models/articleModel");
+const ArticleHistoryModel = require("../../models/articleHistoryModel");
+
+const { ARTICLE_HISTORY_TYPES } = require("../../utils/constants");
 
 describe("Article Model", () => {
   let dbArticles = null;
@@ -25,7 +29,7 @@ describe("Article Model", () => {
     topicId = 1;
 
     const newArticles = articleFactory.build(3).map(article =>
-      Object.assign({}, article, {
+      assign({}, article, {
         created_by_id: userHolder.getAdmin().id,
         modified_by_id: userHolder.getAdmin().id,
         topic_id: topicId
@@ -80,7 +84,7 @@ describe("Article Model", () => {
         knex("user").where("id", dbArticle.created_by_id),
         knex("topic").where("id", dbArticle.topic_id)
       ]).then(([user, topic]) =>
-        Object.assign({}, dbArticle, {
+        assign({}, dbArticle, {
           createdUser: user[0],
           topic: topic[0]
         })
@@ -94,8 +98,8 @@ describe("Article Model", () => {
     });
   });
 
-  test("Inserts article and returns inserted article", async () => {
-    const articleToInsert = Object.assign({}, articleFactory.build(1), {
+  test("Inserts and returns article", async () => {
+    const articleToInsert = assign({}, articleFactory.build(1), {
       created_by_id: userHolder.getAdmin().id,
       modified_by_id: userHolder.getAdmin().id,
       topic_id: topicId
@@ -113,11 +117,44 @@ describe("Article Model", () => {
     expect(dbArticle.is_active).toBeTruthy();
   });
 
-  test("Inserts article with archive and returns inserted article and archive");
+  test("Inserts with history and returns article with history", async () => {
+    const articleToInsert = assign({}, articleFactory.build(1), {
+      created_by_id: userHolder.getAdmin().id,
+      modified_by_id: userHolder.getAdmin().id,
+      topic_id: topicId
+    });
+
+    const dbArticle = await ArticleModel.insertWithHistory(articleToInsert);
+    const dbHistory = dbArticle.articleHistory[0];
+
+    // check article
+    expect(dbArticle).toBeInstanceOf(ArticleModel.Model);
+    expect(dbArticle.title).toEqual(articleToInsert.title);
+    expect(dbArticle.content).toEqual(articleToInsert.content);
+    expect(dbArticle.change_log).toEqual(articleToInsert.change_log);
+    expect(dbArticle.topic_id).toEqual(topicId);
+    expect(dbArticle.created_by_id).toEqual(userHolder.getAdmin().id);
+    expect(dbArticle.modified_by_id).toEqual(userHolder.getAdmin().id);
+    expect(dbArticle.is_active).toBeTruthy();
+
+    // check if history is correctly "linked" to parent article
+    expect(dbHistory).toBeInstanceOf(ArticleHistoryModel.Model);
+    expect(dbHistory.article_id).toEqual(dbArticle.id);
+    expect(dbHistory.type).toEqual(ARTICLE_HISTORY_TYPES.CREATE);
+
+    // check if history got the right article values
+    expect(dbHistory.title).toEqual(articleToInsert.title);
+    expect(dbHistory.content).toEqual(articleToInsert.content);
+    expect(dbHistory.change_log).toEqual(articleToInsert.change_log);
+    expect(dbHistory.topic_id).toEqual(topicId);
+    expect(dbHistory.created_by_id).toEqual(userHolder.getAdmin().id);
+    expect(dbHistory.modified_by_id).toEqual(userHolder.getAdmin().id);
+    expect(dbHistory.is_active).toBeTruthy();
+  });
 
   test("Inserts array of articles", async () => {
     const articlesToInsert = articleFactory.build(3).map(article =>
-      Object.assign({}, article, {
+      assign({}, article, {
         created_by_id: userHolder.getAdmin().id,
         modified_by_id: userHolder.getAdmin().id,
         topic_id: topicId
@@ -151,6 +188,35 @@ describe("Article Model", () => {
     expect(updatedDbArticle.is_active).toBeTruthy();
   });
 
+  test("Updates article by ID and creates new history item", async () => {
+    // make an article first
+    const articleToInsert = assign({}, articleFactory.build(1), {
+      created_by_id: userHolder.getAdmin().id,
+      modified_by_id: userHolder.getAdmin().id,
+      topic_id: topicId
+    });
+
+    const dbArticle = await ArticleModel.insertWithHistory(articleToInsert);
+
+    // update created article
+    const updatedDbArticle = await ArticleModel.updateWithHistory(
+      dbArticle.id,
+      {
+        title: "New funky name"
+      }
+    );
+
+    const updatedDbHistory = updatedDbArticle.articleHistory;
+
+    // check if history is correctly "linked" to parent article
+    expect(updatedDbHistory).toBeInstanceOf(ArticleHistoryModel.Model);
+    expect(updatedDbHistory.article_id).toEqual(dbArticle.id);
+    expect(updatedDbHistory.type).toEqual(ARTICLE_HISTORY_TYPES.UPDATE);
+
+    // check if history has the article update
+    expect(updatedDbHistory.title).toEqual("New funky name");
+  });
+
   test("Soft-deletes article by ID (sets to inactive)", async () => {
     const { id } = dbArticles[1];
 
@@ -159,6 +225,29 @@ describe("Article Model", () => {
     const deletedDbArticle = await knex("article").where("id", id);
 
     expect(deletedDbArticle.is_active).toBeFalsy();
+  });
+
+  test("Soft-deletes article by ID and makes history entry", async () => {
+    // make an article first
+    const articleToInsert = assign({}, articleFactory.build(1), {
+      created_by_id: userHolder.getAdmin().id,
+      modified_by_id: userHolder.getAdmin().id,
+      topic_id: topicId
+    });
+
+    const dbArticle = await ArticleModel.insertWithHistory(articleToInsert);
+
+    await ArticleModel.deleteWithHistory(dbArticle.id);
+
+    const deletedDbArticle = await knex("article").where("id", dbArticle.id);
+
+    const deletedDbHistory = await knex("article_history").where({
+      article_id: dbArticle.id,
+      type: ARTICLE_HISTORY_TYPES.DELETE
+    });
+
+    expect(deletedDbArticle.is_active).toBeFalsy();
+    expect(deletedDbHistory).toBeTruthy();
   });
 
   test("Gets only active articles", async () => {
@@ -235,8 +324,16 @@ describe("Article Model", () => {
       expect(filteredDbItems[2].content).toContain("ell");
     });
 
-    test("Returns no users when search string does not match any User", async () => {
+    test("Returns no articles when search string does not match any User", async () => {
       const filteredDbItems = await ArticleModel.search("fewfgiuweghell");
+
+      expect(filteredDbItems).toHaveLength(0);
+    });
+
+    test("should not return inactive results", async () => {
+      await ArticleModel.delete(dbArticles[0].id);
+
+      const filteredDbItems = await ArticleModel.search("jolly");
 
       expect(filteredDbItems).toHaveLength(0);
     });

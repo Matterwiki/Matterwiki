@@ -1,3 +1,4 @@
+const { assign } = require("lodash");
 const { knexInstance: knex } = require("../../utils/db");
 const {
   setupAll,
@@ -20,7 +21,7 @@ describe("Topic model tests", () => {
   beforeEach(setupEach);
   beforeEach(() => {
     const newTopics = topicFactory.build(3).map(topic =>
-      Object.assign({}, topic, {
+      assign({}, topic, {
         created_by_id: userHolder.getAdmin().id,
         modified_by_id: userHolder.getAdmin().id
       })
@@ -51,7 +52,7 @@ describe("Topic model tests", () => {
   });
 
   test("Inserts topic and returns inserted topic", async () => {
-    const topicToInsert = Object.assign({}, topicFactory.build(1), {
+    const topicToInsert = assign({}, topicFactory.build(1), {
       created_by_id: userHolder.getAdmin().id,
       modified_by_id: userHolder.getAdmin().id
     });
@@ -68,7 +69,7 @@ describe("Topic model tests", () => {
 
   test("Inserts array of topics", async () => {
     const topicsToInsert = topicFactory.build(2).map(topic =>
-      Object.assign({}, topic, {
+      assign({}, topic, {
         created_by_id: userHolder.getAdmin().id,
         modified_by_id: userHolder.getAdmin().id
       })

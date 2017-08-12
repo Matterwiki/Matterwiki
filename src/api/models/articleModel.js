@@ -1,4 +1,6 @@
 const Model = require("objection").Model;
+const { omit, assign } = require("lodash");
+
 const withDBHelpers = require("./withDBHelpers");
 const { ARTICLE_HISTORY_TYPES } = require("../utils/constants");
 
@@ -49,6 +51,7 @@ class Article extends Model {
   }
 }
 
+// TODO clean this up a bit
 const extraHelpers = {
   /**
    * Sets a simple `WHERE LIKE` query on model
@@ -60,27 +63,62 @@ const extraHelpers = {
 
     return (
       Article.query()
-        .where("title", "like", escapedString)
+        .where("is_active", true)
+        .andWhere("title", "like", escapedString)
         // TODO change when we use MySQL's json type to store editor data
         .orWhere("content", "like", escapedString)
         .orWhere("change_log", "like", escapedString)
     );
   },
   /**
-   * Helps insert an archive for a corresponding article
+   * Helps insert a history item for a corresponding article
    */
-  insertWithArchive: item => {
+  insertWithHistory: item => {
     const articleHistory = {
-      articleHistory: Object.assign(
-        {
-          type: ARTICLE_HISTORY_TYPES.CREATE
-        },
-        item
-      )
+      articleHistory: assign({ type: ARTICLE_HISTORY_TYPES.CREATE }, item)
     };
-    const graphToInsert = Object.assign({}, item, articleHistory);
+    const graphToInsert = assign({}, item, articleHistory);
 
-    return Article.query().insertGraph(graphToInsert);
+    return Article.query().insertGraphAndFetch(graphToInsert);
+  },
+
+  /**
+   * Helper to delete article and make a new history item
+   */
+  deleteWithHistory: async id => {
+    // delete article
+    const article = await Article.query().updateAndFetchById(id, {
+      is_active: false
+    });
+
+    // placeholder history item
+    const articleHistory = {
+      type: ARTICLE_HISTORY_TYPES.DELETE
+    };
+
+    // make a new history item
+    return article.$relatedQuery("articleHistory").insert(articleHistory);
+  },
+
+  /**
+   * Helper to update article and make a new history item
+   */
+  updateWithHistory: async (id, item) => {
+    // update article
+    const article = await Article.query().updateAndFetchById(id, item);
+
+    const articleHistory = assign(
+      { type: ARTICLE_HISTORY_TYPES.UPDATE },
+      omit(article, "id")
+    );
+
+    // make a new history item
+    article.articleHistory = await article
+      .$relatedQuery("articleHistory")
+      .insertAndFetch(articleHistory);
+
+    // return the whole thing out
+    return article;
   }
 };
 

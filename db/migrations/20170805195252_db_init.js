@@ -50,10 +50,10 @@ exports.up = knex => {
         .unsigned()
         .references("article.id")
         .notNullable();
-      table.string("title").notNullable();
-      table.text("content").notNullable();
-      table.string("change_log").notNullable();
-      table.integer("topic_id").unsigned().references("topic.id").notNullable();
+      table.string("title");
+      table.text("content");
+      table.string("change_log");
+      table.integer("topic_id").unsigned().references("topic.id");
       addMetaFieldsTo(table);
     });
 

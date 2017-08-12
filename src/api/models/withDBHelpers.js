@@ -1,9 +1,12 @@
 const Promise = require("bluebird");
+const { assign } = require("lodash");
 
 /**
  * This decorator adds extra helpers to the Models for the sake of brevity
  * These are pretty basic, they could be extended for more flexibility in the models
  * Also mushes in anything extra that this brought it in from the model file (eg. search)
+ * 
+ * TODO extras could have the fn signature that looks like this: Model => (...args) => {}; this way extras could reuse the methods defined here
  * 
  * Supported methods:
  * - get
@@ -37,7 +40,7 @@ module.exports = (Model, extras, options = { relations: "" }) => {
     // NOTE: does not get inactive items by default.
     getAll: (params = {}) => {
       // But, if `is_active`: false is passed as a query param, default will be overriden
-      const paramsWithActive = Object.assign({}, { is_active: true }, params);
+      const paramsWithActive = assign({}, { is_active: true }, params);
       return Model.query().where(paramsWithActive);
     },
 
@@ -61,6 +64,6 @@ module.exports = (Model, extras, options = { relations: "" }) => {
     getAllWithRels: () => Model.query().eager(relations)
   };
 
-  // Mush em all together cos we like to over-use Object.assign ;)
-  return Object.assign({ Model }, queryMethods, queryMethodsWithRels, extras);
+  // Mush em all together cos we like to over-use `Object.assign` ;)
+  return assign({ Model }, queryMethods, queryMethodsWithRels, extras);
 };
