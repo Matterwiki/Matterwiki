@@ -1,9 +1,26 @@
 const Promise = require("bluebird");
 const { assign } = require("lodash");
 
+const objection = require("objection");
+
 /**
- * This decorator adds extra helpers to the Models for the sake of brevity
- * These are pretty basic, they could be extended for more flexibility in the models
+ * Extends the base model with additions
+ * Defines global hooks and triggers that affects all MODELS!
+ */
+class BaseModel extends objection.Model {
+  /**
+   * Runs before update for all models 
+   * - removes `created_at` and updates `modified_at`
+   */
+  $beforeUpdate() {
+    if (this.created_at) delete this.created_at;
+    this.updated_at = new Date();
+  }
+}
+
+/**
+ * This decorator adds extra helpers to the Models for the sake of brevity.
+ * These are pretty basic, they could be extended for more flexibility in the models.
  * Also mushes in anything extra that this brought it in from the model file (eg. search)
  * 
  * 
@@ -13,6 +30,7 @@ const { assign } = require("lodash");
  * - insert
  * - insertMany
  * - update
+ * - TODO updateMany
  * - delete
  * - TODO search
  * 
@@ -25,7 +43,7 @@ const { assign } = require("lodash");
  * @param {string} [options={ relations: "" }] 
  * @returns 
  */
-module.exports = (Model, extras, options = { relations: "" }) => {
+function withDbHelpers(Model, extras, options = { relations: "" }) {
   const { relations } = options;
 
   /**
@@ -63,4 +81,6 @@ module.exports = (Model, extras, options = { relations: "" }) => {
 
   // Mush em all together cos we like to over-use `assign` ;)
   return assign({ Model }, queryMethods, queryMethodsWithRels, extras);
-};
+}
+
+module.exports = { withDbHelpers, BaseModel };

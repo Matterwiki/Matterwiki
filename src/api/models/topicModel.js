@@ -1,7 +1,6 @@
-const Model = require("objection").Model;
-const withDBHelpers = require("./withDBHelpers");
+const { withDbHelpers, BaseModel } = require("./modelHelpers");
 
-class TopicModel extends Model {
+class TopicModel extends BaseModel {
   static get tableName() {
     return "topic";
   }
@@ -13,7 +12,7 @@ class TopicModel extends Model {
 
     return {
       article: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: "topic.id",
@@ -21,7 +20,7 @@ class TopicModel extends Model {
         }
       },
       createdUser: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "topic.created_by_id",
@@ -29,7 +28,7 @@ class TopicModel extends Model {
         }
       },
       modifiedUser: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "topic.modified_by_id",
@@ -40,4 +39,10 @@ class TopicModel extends Model {
   }
 }
 
-module.exports = withDBHelpers(TopicModel);
+module.exports = withDbHelpers(
+  TopicModel,
+  {},
+  {
+    relations: "[article, article.[modifiedUser]]"
+  }
+);

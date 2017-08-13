@@ -1,10 +1,9 @@
-const Model = require("objection").Model;
 const { omit, assign } = require("lodash");
 
-const withDBHelpers = require("./withDBHelpers");
+const { withDbHelpers, BaseModel } = require("./modelHelpers");
 const { ARTICLE_HISTORY_TYPES } = require("../utils/constants");
 
-class Article extends Model {
+class Article extends BaseModel {
   static get tableName() {
     return "article";
   }
@@ -16,7 +15,7 @@ class Article extends Model {
 
     return {
       topic: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: TopicModel,
         join: {
           from: "article.topic_id",
@@ -24,7 +23,7 @@ class Article extends Model {
         }
       },
       createdUser: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "article.created_by_id",
@@ -32,7 +31,7 @@ class Article extends Model {
         }
       },
       modifiedUser: {
-        relation: Model.BelongsToOneRelation,
+        relation: BaseModel.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "article.modified_by_id",
@@ -40,7 +39,7 @@ class Article extends Model {
         }
       },
       articleHistory: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleHistoryModel,
         join: {
           from: "article.id",
@@ -51,7 +50,6 @@ class Article extends Model {
   }
 }
 
-// TODO clean this up a bit
 const extraHelpers = {
   /**
    * Sets a simple `WHERE LIKE` query on model
@@ -122,6 +120,6 @@ const extraHelpers = {
   }
 };
 
-module.exports = withDBHelpers(Article, extraHelpers, {
+module.exports = withDbHelpers(Article, extraHelpers, {
   relations: "[createdUser, topic]"
 });

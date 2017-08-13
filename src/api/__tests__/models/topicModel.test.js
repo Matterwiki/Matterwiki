@@ -1,4 +1,6 @@
 const { assign } = require("lodash");
+const Promise = require("bluebird");
+
 const { knexInstance: knex } = require("../../utils/db");
 const {
   setupAll,
@@ -7,6 +9,7 @@ const {
 } = require("../testUtils/globalSetup");
 
 const { userHolder } = require("../testUtils/modelHolder");
+const { makeTopics, makeArticles } = require("../testUtils/dataGenerators");
 
 const { topic: topicFactory } = require("../factories/factories");
 
@@ -19,21 +22,7 @@ describe("Topic model tests", () => {
   afterAll(teardownAll);
 
   beforeEach(setupEach);
-  beforeEach(() => {
-    const newTopics = topicFactory.build(3).map(topic =>
-      assign({}, topic, {
-        created_by_id: userHolder.getAdmin().id,
-        modified_by_id: userHolder.getAdmin().id
-      })
-    );
-
-    return knex("topic")
-      .insert(newTopics)
-      .then(() => knex("topic").select())
-      .then(topics => {
-        dbTopics = topics;
-      });
-  });
+  beforeEach(() => makeTopics().then(topics => (dbTopics = topics)));
 
   test("Gets topic by ID", async () => {
     const expectedTopic = dbTopics[0];
@@ -51,29 +40,46 @@ describe("Topic model tests", () => {
     });
   });
 
-  test("Inserts topic and returns inserted topic", async () => {
-    const topicToInsert = assign({}, topicFactory.build(1), {
-      created_by_id: userHolder.getAdmin().id,
-      modified_by_id: userHolder.getAdmin().id
+  describe("Relation queries", () => {
+    let dbArticles = [];
+
+    beforeEach(() =>
+      makeArticles(dbTopics[0].id).then(articles => (dbArticles = articles))
+    );
+
+    test("Gets topic by ID with articles", async () => {
+      const expectedTopic = dbTopics[0];
+
+      const articles = await Promise.map(dbArticles, async article => {
+        const [modifiedUser] = await knex("user").where(
+          "id",
+          article.modified_by_id
+        );
+
+        return assign({}, article, { modifiedUser });
+      });
+
+      expectedTopic.article = articles;
+
+      const dbTopic = await TopicModel.getWithRels(expectedTopic.id);
+
+      expect(dbTopic).toEqual(expectedTopic);
     });
+  });
+
+  test("Inserts topic and returns inserted topic", async () => {
+    const topicToInsert = topicFactory.build(1);
 
     const dbTopic = await TopicModel.insert(topicToInsert);
 
     expect(dbTopic).toBeInstanceOf(TopicModel.Model);
     expect(dbTopic.name).toEqual(topicToInsert.name);
     expect(dbTopic.description).toEqual(topicToInsert.description);
-    expect(dbTopic.created_by_id).toEqual(userHolder.getAdmin().id);
-    expect(dbTopic.modified_by_id).toEqual(userHolder.getAdmin().id);
     expect(dbTopic.is_active).toBeTruthy();
   });
 
   test("Inserts array of topics", async () => {
-    const topicsToInsert = topicFactory.build(2).map(topic =>
-      assign({}, topic, {
-        created_by_id: userHolder.getAdmin().id,
-        modified_by_id: userHolder.getAdmin().id
-      })
-    );
+    const topicsToInsert = topicFactory.build(2);
     const insertedDbTopics = await TopicModel.insertMany(topicsToInsert);
 
     insertedDbTopics.forEach((dbTopic, i) => {

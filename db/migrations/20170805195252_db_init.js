@@ -1,15 +1,4 @@
 exports.up = knex => {
-  /**
-   * Helper to add meta fields to table
-   */
-  const addMetaFieldsTo = table => {
-    table.integer("created_by_id").unsigned().references("user.id");
-    table.integer("modified_by_id").unsigned().references("user.id");
-    table.boolean("is_active").notNullable().defaultTo(true);
-    table.timestamp("created_at").defaultTo(knex.fn.now()).notNullable();
-    table.timestamp("modified_at").defaultTo(knex.fn.now()).notNullable();
-  };
-
   const createUserTable = () =>
     knex.schema.createTableIfNotExists("user", table => {
       table.increments().primary();
@@ -19,16 +8,16 @@ exports.up = knex => {
       table.string("about").notNullable();
       table.enu("role", ["ADMIN", "USER"]).notNullable();
       table.boolean("is_active").notNullable().default(true);
-      table.timestamp("created_at").defaultTo(knex.fn.now()).notNullable();
-      table.timestamp("modified_at").defaultTo(knex.fn.now()).notNullable();
+      table.timestamps(true, true);
     });
 
   const createTopicTable = () =>
     knex.schema.createTable("topic", table => {
       table.increments().primary();
-      table.string("name").notNullable();
+      table.string("name").notNullable().unique();
       table.string("description").notNullable();
-      addMetaFieldsTo(table);
+      table.boolean("is_active").notNullable().defaultTo(true);
+      table.timestamps(true, true);
     });
 
   const createArticleTable = () =>
@@ -38,7 +27,10 @@ exports.up = knex => {
       table.text("content").notNullable();
       table.string("change_log").notNullable();
       table.integer("topic_id").unsigned().references("topic.id").notNullable();
-      addMetaFieldsTo(table);
+      table.integer("created_by_id").unsigned().references("user.id");
+      table.integer("modified_by_id").unsigned().references("user.id");
+      table.boolean("is_active").notNullable().defaultTo(true);
+      table.timestamps(true, true);
     });
 
   const createArticleHistoryTable = () =>
@@ -54,7 +46,10 @@ exports.up = knex => {
       table.text("content");
       table.string("change_log");
       table.integer("topic_id").unsigned().references("topic.id");
-      addMetaFieldsTo(table);
+      table.integer("created_by_id").unsigned().references("user.id");
+      table.integer("modified_by_id").unsigned().references("user.id");
+      table.boolean("is_active").notNullable().defaultTo(true);
+      table.timestamps(true, true);
     });
 
   return createUserTable()

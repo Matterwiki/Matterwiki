@@ -16,33 +16,20 @@ const ArticleHistoryModel = require("../../models/articleHistoryModel");
 
 const { ARTICLE_HISTORY_TYPES } = require("../../utils/constants");
 
+const { makeArticles } = require("../testUtils/dataGenerators");
+
 describe("Article Model", () => {
   let dbArticles = null;
-  let topicId = null;
+  const topicId = 1;
 
   beforeAll(setupAll);
   afterAll(teardownAll);
 
   beforeEach(setupEach);
-  beforeEach(() => {
+  beforeEach(() =>
     // seed inserts general topic (check `setupEach`)
-    topicId = 1;
-
-    const newArticles = articleFactory.build(3).map(article =>
-      assign({}, article, {
-        created_by_id: userHolder.getAdmin().id,
-        modified_by_id: userHolder.getAdmin().id,
-        topic_id: topicId
-      })
-    );
-
-    return knex("article")
-      .insert(newArticles)
-      .then(() => knex("article").select())
-      .then(articles => {
-        dbArticles = articles;
-      });
-  });
+    makeArticles(topicId).then(articles => (dbArticles = articles))
+  );
 
   test("Gets article by ID", async () => {
     const expectedArticle = dbArticles[0];

@@ -1,4 +1,5 @@
 const express = require("express");
+const { includes, isEmpty } = require("lodash");
 
 const router = express.Router();
 
@@ -6,14 +7,17 @@ const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
-const { DELETE_DEFAULT_TOPIC } = require("../utils/constants").ERRORS;
+const {
+  DELETE_DEFAULT_TOPIC,
+  DUPLICATE_TOPIC
+} = require("../utils/constants").ERRORS;
 
-const topicModel = require("../models/topicModel");
-const articleModel = require("../models/articleModel");
+const TopicModel = require("../models/topicModel");
+const ArticleModel = require("../models/articleModel");
 
 async function fetchTopics(req, res, next) {
   try {
-    const topics = await topicModel.getAll();
+    const topics = await TopicModel.getAll();
     res.status(200).json(topics);
   } catch (err) {
     next(err);
@@ -23,45 +27,36 @@ async function fetchTopics(req, res, next) {
 async function fetchTopicsById(req, res, next) {
   const { id } = req.params;
   try {
-    const topic = await topicModel.get({ id });
+    const topic = await TopicModel.get(id);
     res.status(200).json(topic);
   } catch (err) {
     next(err);
   }
 }
 
-// TODO Duplicate checks - One way would be set the name to be a unique field in the DB
 async function createTopic(req, res, next) {
-  const { name, description } = req.body;
-
   try {
-    // create the admin user
-    let newTopic = {
-      name,
-      description
-    };
-
-    newTopic = await topicModel.post(newTopic);
+    const newTopic = await TopicModel.insert(req.body);
     res.status(201).json(newTopic);
   } catch (err) {
+    if (err.code === DUPLICATE_TOPIC.code) {
+      return next(DUPLICATE_TOPIC);
+    }
+
     next(err);
   }
 }
 
 async function updateTopic(req, res, next) {
   const { id } = req.params;
-  const { name, description } = req.body;
-
   try {
-    let updatedTopic = {
-      name,
-      description
-    };
-
-    updatedTopic = await topicModel.put({ id }, updatedTopic);
-
+    const updatedTopic = await TopicModel.update(id, req.body);
     res.status(200).json(updatedTopic);
   } catch (err) {
+    if (err.code === DUPLICATE_TOPIC.code) {
+      return next(DUPLICATE_TOPIC);
+    }
+
     next(err);
   }
 }
@@ -69,31 +64,38 @@ async function updateTopic(req, res, next) {
 async function deleteTopic(req, res, next) {
   const { id } = req.params;
 
-  if (id === 1) {
+  if (includes([1, 2], parseInt(id, 10))) {
     return next(DELETE_DEFAULT_TOPIC);
   }
 
   try {
-    await topicModel.delete({ id });
+    // check if articles are tagged to this topic
+    const topicWithArticles = await TopicModel.getWithRels(id);
+
+    if (!isEmpty(topicWithArticles.article)) {
+      // tag all the articles to "topic_id: 1; uncategorized"
+      // TODO could use topic relations to change this
+      await ArticleModel.Model
+        .query()
+        .update({ topic_id: 1 })
+        .where({ topic_id: id });
+    }
+
+    // now delete item
+    await TopicModel.delete(id);
     res.status(200).json({});
   } catch (err) {
+    console.log(err);
     next(err);
   }
 }
 
 async function fetchArticlesByTopic(req, res, next) {
   const { topicId } = req.params;
-  const { limit } = req.query;
 
   try {
-    // TODO Make these using the `withRelated` API
-    // TODO Doesn't seem RESTful, this. Needs more research
-    const articles = await articleModel.getAllArticles(
-      { topic_id: topicId },
-      limit
-    );
-
-    res.status(200).json(articles);
+    const topicWithArticles = await TopicModel.getWithRels(topicId);
+    res.status(200).json(topicWithArticles);
   } catch (err) {
     next(err);
   }
@@ -109,7 +111,6 @@ router.post("/", checkIfAdmin, JSONParser, createTopic);
 router.put("/:id", checkIfAdmin, JSONParser, updateTopic);
 router.delete("/:id", checkIfAdmin, deleteTopic);
 
-// TODO this feels a little off. Maybe there's a better way to do this?
 router.get("/:topicId/articles", fetchArticlesByTopic);
 
 module.exports = router;

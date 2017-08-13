@@ -1,7 +1,6 @@
-const Model = require("objection").Model;
-const withDbHelpers = require("./withDBHelpers");
+const { withDbHelpers, BaseModel } = require("./modelHelpers");
 
-class UserModel extends Model {
+class UserModel extends BaseModel {
   static get tableName() {
     return "user";
   }
@@ -14,7 +13,7 @@ class UserModel extends Model {
 
     return {
       createdArticle: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: `user.id`,
@@ -22,7 +21,7 @@ class UserModel extends Model {
         }
       },
       modifiedArticle: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: `user.id`,
@@ -30,7 +29,7 @@ class UserModel extends Model {
         }
       },
       createdTopic: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: TopicModel,
         join: {
           from: `user.id`,
@@ -38,7 +37,7 @@ class UserModel extends Model {
         }
       },
       modifiedTopic: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: TopicModel,
         join: {
           from: `user.id`,
@@ -46,7 +45,7 @@ class UserModel extends Model {
         }
       },
       createdArticleHistory: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
@@ -54,7 +53,7 @@ class UserModel extends Model {
         }
       },
       modifiedArticleHistory: {
-        relation: Model.HasManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
