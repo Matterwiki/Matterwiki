@@ -23,6 +23,8 @@ class BaseModel extends objection.Model {
  * These are pretty basic, they could be extended for more flexibility in the models.
  * Also mushes in anything extra that this brought it in from the model file (eg. search)
  * 
+ * TODO in the future, when we need sorting and stuff like that, we could make implement all this INSIDE the BaseModel
+ * 
  * 
  * Supported methods:
  * - get
@@ -33,6 +35,7 @@ class BaseModel extends objection.Model {
  * - TODO updateMany
  * - delete
  * - TODO search
+ * - TODO find
  * 
  * Methods with relations `withRels`
  * - get
@@ -56,6 +59,7 @@ function withDbHelpers(Model, extras, options = { relations: "" }) {
     getAll: (params = {}) => {
       // But, if `is_active`: false is passed as a query param, default will be overriden
       const paramsWithActive = assign({}, { is_active: true }, params);
+
       return Model.query().where(paramsWithActive);
     },
 

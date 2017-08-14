@@ -9,11 +9,11 @@ const { checkIfAdmin } = require("../middleware/checkRole");
 
 const { SALT_ROUNDS } = require("../utils/constants");
 
-const userModel = require("../models/userModel");
+const UserModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
-    const users = await userModel.getAll();
+    const users = await UserModel.getAll();
     res.status(200).json(users);
   } catch (err) {
     next(err);
@@ -23,7 +23,7 @@ const fetchUsers = async (req, res, next) => {
 const fetchUsersById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const user = await userModel.get({ id });
+    const user = await UserModel.get(id);
     res.status(200).json(user);
   } catch (err) {
     next(err);
@@ -47,7 +47,7 @@ const createUser = async (req, res, next) => {
       about
     };
 
-    newUser = await userModel.post(newUser);
+    newUser = await UserModel.insert(newUser);
     res.status(201).json(newUser);
   } catch (err) {
     next(err);
@@ -71,7 +71,7 @@ const updateUser = async (req, res, next) => {
       updatedUser.password = hashedPassword;
     }
 
-    updatedUser = await userModel.put({ id }, updatedUser);
+    updatedUser = await UserModel.update(id, updatedUser);
 
     res.status(200).json(updatedUser);
   } catch (err) {
@@ -84,7 +84,7 @@ const deleteUser = async (req, res, next) => {
 
   try {
     if (parseInt(id, 10) !== 1) {
-      await userModel.delete({ id });
+      await UserModel.delete(id);
     }
     res.status(200).json({});
   } catch (err) {

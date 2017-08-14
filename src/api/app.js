@@ -6,9 +6,9 @@ require("./utils/db");
 
 const setupRouter = require("./routes/setupRouter");
 const authRouter = require("./routes/authRouter");
-const articleRouter = require("./routes/articlesRouter/articlesRouter");
+const articleRouter = require("./routes/articleRouter/articleRouter");
 const topicsRouter = require("./routes/topicRouter");
-const userRouter = require("./routes/usersRouter");
+const userRouter = require("./routes/userRouter");
 const uploadsRouter = require("./routes/uploadsRouter");
 const searchRouter = require("./routes/searchRouter");
 

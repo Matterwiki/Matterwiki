@@ -8,7 +8,8 @@ const {
 } = require("../testUtils/globalSetup");
 
 const { userHolder, tokenHolder } = require("../testUtils/modelHolder");
-const { factories, apiClient } = require("../testUtils/testUtils");
+const { apiClient } = require("../testUtils/testUtils");
+const { user: userFactory } = require("../factories/factories");
 
 describe("User API tests", () => {
   beforeAll(setupAll);
@@ -38,7 +39,7 @@ describe("User API tests", () => {
         .set("x-access-token", tokens.admin)
         .expect(200)
         .then(async res => {
-          const dbUsers = (await UserModel.getAll()).toJSON();
+          const dbUsers = await UserModel.getAll();
           expect(res.body).toHaveLength(dbUsers.length);
 
           res.body.forEach((user, i) => {
@@ -54,6 +55,7 @@ describe("User API tests", () => {
           });
         }));
   });
+
   describe("GET api/users/:id", () => {
     test("403 user - INVALID - only admin allowed to fetch specific user", () =>
       apiClient
@@ -68,7 +70,7 @@ describe("User API tests", () => {
         .set("x-access-token", tokens.admin)
         .expect(200)
         .then(async res => {
-          const user = (await UserModel.get({ id: 1 })).toJSON();
+          const user = await UserModel.get(1);
 
           expect(res.body).toEqual(
             expect.objectContaining({
@@ -94,11 +96,11 @@ describe("User API tests", () => {
           expect(res.body.message).toBe(NO_ACCESS.message);
         }));
 
-    xtest("201 admin - VALID - should hash password when creating user");
+    test("409 - INVALID - duplicate user not allowed");
 
     // TODO this test is incredibly slow
     test("201 admin - VALID - creates user", () => {
-      const newUser = factories.user.build();
+      const newUser = userFactory.build();
 
       return apiClient
         .post(apiUrl)
@@ -106,7 +108,7 @@ describe("User API tests", () => {
         .send(newUser)
         .expect(201)
         .then(async res => {
-          const user = (await UserModel.get({ id: res.body.id })).toJSON();
+          const user = await UserModel.get(res.body.id);
 
           expect(user.id).toEqual(res.body.id);
           expect(res.body).toEqual(
@@ -119,6 +121,7 @@ describe("User API tests", () => {
         });
     });
   });
+
   describe("PUT api/users/:id", () => {
     test("403 user - INVALID - only admin allowed to update user", () =>
       apiClient
@@ -131,7 +134,7 @@ describe("User API tests", () => {
           expect(res.body.message).toBe(NO_ACCESS.message);
         }));
 
-    xtest("201 admin - VALID - should hash password when updating user");
+    test("409 - INVALID - duplicate user not allowed");
 
     test("200 admin - VALID - updates user", () => {
       const updatedUser = Object.assign({}, testUsers[0], {
@@ -144,12 +147,13 @@ describe("User API tests", () => {
         .send(updatedUser)
         .expect(200)
         .then(async res => {
-          expect(res.body.id).toBe("2");
+          expect(res.body.id).toBe(2);
           expect(res.body.name).toBe(updatedUser.name);
           expect(res.body.about).toBe(updatedUser.about);
         });
     });
   });
+
   describe("DELETE api/users/:id", () => {
     test("403 user - INVALID - only admin allowed to delete user", () =>
       apiClient
@@ -160,14 +164,14 @@ describe("User API tests", () => {
         .then(res => {
           expect(res.body.message).toBe(NO_ACCESS.message);
         }));
-    test("403 admin - INVALID - cannot delete admin user", () =>
+    test("403 admin - INVALID - cannot delete first user", () =>
       apiClient
         .delete(`${apiUrl}/1`)
         .set("x-access-token", tokens.admin)
         .expect(200)
         .then(async () => {
-          const user = await UserModel.get({ id: 1 });
-          expect(user).not.toBeNull();
+          const user = await UserModel.get(1);
+          expect(user.is_active).toBeTruthy();
         }));
 
     test("200 admin - VALID - deletes user", () =>
@@ -176,8 +180,8 @@ describe("User API tests", () => {
         .set("x-access-token", tokens.admin)
         .expect(200)
         .then(async () => {
-          const topic = await UserModel.get({ id: 2 });
-          expect(topic).toBeNull();
+          const topic = await UserModel.get(2);
+          expect(topic.is_active).toBeFalsy();
         }));
   });
 });

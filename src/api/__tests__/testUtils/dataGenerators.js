@@ -24,7 +24,8 @@ function makeArticles(topicId, userId = userHolder.getAdmin().id) {
 
   return knex("article")
     .insert(newArticles)
-    .then(() => knex("article").select());
+    .then(() => knex("article").select())
+    .catch(console.error);
 }
 
 module.exports = { makeTopics, makeArticles };

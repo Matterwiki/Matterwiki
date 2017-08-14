@@ -1,4 +1,6 @@
 const bcrypt = require("bcryptjs");
+const Promise = require("bluebird");
+const { flatten } = require("lodash");
 
 const userFactory = require("../factories/userFactory");
 const { knexInstance: knex } = require("../../utils/db");
@@ -21,7 +23,7 @@ function makeTestUsers(numberOfUsers = 2) {
   const users = userFactory.build(numberOfUsers);
 
   // TODO kinda inefficient, fix later
-  return Promise.all(users.map(user => createUser(user)));
+  return Promise.map(users, user => createUser(user));
 }
 
 // TODO Change if we make more than one admin in the future
@@ -40,7 +42,7 @@ async function makeUsers() {
   const admin = await makeTestAdmin();
   const users = await makeTestUsers(3);
 
-  return { admin, users };
+  return { admin, users: flatten(users) };
 }
 
 module.exports = { makeTestUsers, makeTestAdmin, makeUsers };

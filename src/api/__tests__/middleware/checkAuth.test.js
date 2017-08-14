@@ -1,6 +1,7 @@
 const checkAuth = require("../../middleware/checkAuth");
 const { INVALID_TOKEN } = require("../../utils/constants").ERRORS;
-const { makeJwt, factories } = require("../testUtils/testUtils");
+const { makeJwt } = require("../testUtils/testUtils");
+const { user: userFactory } = require("../factories/factories");
 
 describe("checkAuth middleware tests", () => {
   test("INVALID - Errors out when token is invalid", () => {
@@ -27,7 +28,7 @@ describe("checkAuth middleware tests", () => {
     });
   });
 
-  test("INVALID - Errors out when token fails verification", async () => {
+  test("INVALID - Errors out when token fails verification", done => {
     const req = {
       headers: {
         // invalid token
@@ -37,19 +38,17 @@ describe("checkAuth middleware tests", () => {
 
     const res = {};
 
-    const err = await new Promise(resolve => {
-      checkAuth(req, res, nextError => {
-        resolve(nextError);
-      });
-    });
+    checkAuth(req, res, err => {
+      expect(err.code).toBe(INVALID_TOKEN.code);
+      expect(err.message).toBe(INVALID_TOKEN.message);
+      expect(err.status).toBe(INVALID_TOKEN.status);
 
-    expect(err.code).toBe(INVALID_TOKEN.code);
-    expect(err.message).toBe(INVALID_TOKEN.message);
-    expect(err.status).toBe(INVALID_TOKEN.status);
+      done();
+    });
   });
 
-  test("VALID - Sets the decoded user on the request", async () => {
-    const expectedUser = factories.user.build();
+  test("VALID - Sets the decoded user on the request", done => {
+    const expectedUser = userFactory.build();
 
     const req = {
       headers: {
@@ -59,15 +58,7 @@ describe("checkAuth middleware tests", () => {
 
     const res = {};
 
-    const checkAuthPromise = new Promise((resolve, reject) => {
-      checkAuth(req, res, nextError => {
-        if (nextError) return reject(nextError);
-
-        resolve(true);
-      });
-    });
-
-    checkAuthPromise.then(() => {
+    checkAuth(req, res, () => {
       const { name, email, about } = expectedUser;
 
       expect(req.user).toEqual(
@@ -77,6 +68,8 @@ describe("checkAuth middleware tests", () => {
           about
         })
       );
+
+      done();
     });
   });
 });

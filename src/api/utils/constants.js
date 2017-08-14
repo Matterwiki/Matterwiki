@@ -3,6 +3,8 @@ const ADMIN_ID = 1;
 
 const TOKEN_EXPIRATION = 86400;
 
+const DEFAULT_CHANGELOG_MESSAGE = "Another drop in the ocean of knowledge";
+
 // TODO The stuff that follow are ENUMS on the database. Could put them elsewhere when there's more
 const ROLES = {
   ADMIN: "ADMIN",
@@ -60,6 +62,7 @@ module.exports = {
   SALT_ROUNDS,
   ADMIN_ID,
   TOKEN_EXPIRATION,
+  DEFAULT_CHANGELOG_MESSAGE,
   ROLES,
   ARTICLE_HISTORY_TYPES,
   ERRORS

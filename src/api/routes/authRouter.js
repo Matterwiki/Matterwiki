@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { omit } = require("lodash");
 
 const router = express.Router();
 
@@ -13,20 +14,18 @@ const { authSecret } = require("../config");
 const { CREDS_WRONG } = require("../utils/constants").ERRORS;
 const { TOKEN_EXPIRATION } = require("../utils/constants").TOKEN_EXPIRATION;
 
-const userModel = require("../models/userModel");
+const UserModel = require("../models/userModel");
 
 const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-
   try {
-    let user = await userModel.get({ email });
+    const user = (await UserModel.getAll({ email }))[0];
 
     // user not found, kick user out
     if (!user) {
       return next(CREDS_WRONG);
     }
 
-    user = user.toJSON();
     const userValid = await bcrypt.compare(password, user.password);
 
     // credentials wrong, kick user out
@@ -35,11 +34,8 @@ const loginUser = async (req, res, next) => {
     }
 
     // Everything is fine and dandy (Phew..)
-
-    const payloadUser = user;
-
     // dont hash the password
-    delete payloadUser.password;
+    const payloadUser = omit(user, "password");
 
     // make token and attach it to user
     payloadUser.token = jwt.sign(payloadUser, authSecret, {

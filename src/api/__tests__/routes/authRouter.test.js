@@ -5,11 +5,8 @@ const {
 } = require("../testUtils/globalSetup");
 
 const { userHolder } = require("../testUtils/modelHolder");
-const {
-  factories,
-  apiClient,
-  testConstants
-} = require("../testUtils/testUtils");
+const { user: userFactory } = require("../factories/factories");
+const { apiClient, testConstants } = require("../testUtils/testUtils");
 
 const { CREDS_WRONG } = require("../../utils/constants").ERRORS;
 
@@ -21,7 +18,7 @@ describe("Auth API tests", () => {
   describe("POST - api/auth/login/", () => {
     const apiUrl = "/api/auth/login";
     test("401 any - INVALID - bad email provided", () => {
-      const { email, password } = factories.user.build();
+      const { email, password } = userFactory.build();
 
       return apiClient
         .post(apiUrl)
@@ -82,12 +79,12 @@ describe("Auth API tests", () => {
         });
     });
     test("201 any - VALID - should not return password", () => {
-      const { email } = userHolder.getUsers()[0];
+      const user = userHolder.getUsers()[0];
       const password = testConstants.DEFAULT_PASSWORD;
 
       return apiClient
         .post(apiUrl)
-        .send({ email, password })
+        .send({ email: user.email, password })
         .expect(201)
         .then(res => {
           expect(res.body.password).not.toBeDefined();
