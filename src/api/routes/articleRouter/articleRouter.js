@@ -15,16 +15,16 @@ const historyRouter = require("./articleHistoryRouter");
 
 const ArticleModel = require("../../models/articleModel");
 
-const fetchArticles = async (req, res, next) => {
+async function fetchArticles(req, res, next) {
   try {
     const articles = await ArticleModel.getAllWithRels();
     res.status(200).json(articles);
   } catch (err) {
     next(err);
   }
-};
+}
 
-const fetchArticleById = async (req, res, next) => {
+async function fetchArticleById(req, res, next) {
   const { id } = req.params;
   try {
     const article = await ArticleModel.getWithRels(id);
@@ -37,9 +37,9 @@ const fetchArticleById = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
-const saveArticle = async (req, res, next) => {
+async function saveArticle(req, res, next) {
   try {
     const articleWithChangeLog = assign({}, req.body, {
       change_log: DEFAULT_CHANGELOG_MESSAGE
@@ -52,9 +52,9 @@ const saveArticle = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
-const updateArticle = async (req, res, next) => {
+async function updateArticle(req, res, next) {
   const { id } = req.params;
 
   try {
@@ -64,9 +64,9 @@ const updateArticle = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
 
-const deleteArticle = async (req, res, next) => {
+async function deleteArticle(req, res, next) {
   const { id } = req.params;
 
   try {
@@ -75,12 +75,24 @@ const deleteArticle = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
+
+async function searchArticle(req, res, next) {
+  const { query } = req.query;
+
+  try {
+    const articles = await ArticleModel.searchWithRels(query);
+    res.status(200).json(articles);
+  } catch (err) {
+    next(err);
+  }
+}
 
 // All `article` routes need auth
 router.use(checkAuth);
 
 router.get("/", fetchArticles);
+router.get("/search/", searchArticle);
 router.get("/:id", fetchArticleById);
 
 router.post("/", JSONParser, filterMetaData, saveArticle);

@@ -68,6 +68,25 @@ const extraHelpers = {
         .orWhere("change_log", "like", escapedString)
     );
   },
+
+  /**
+   * Quite the same as `search`, but with relations
+   */
+  searchWithRels: searchString => {
+    // TODO :(
+    const escapedString = `%${searchString}%`;
+
+    return (
+      Article.query()
+        .where("is_active", true)
+        .andWhere("title", "like", escapedString)
+        // TODO change when we use MySQL's json type to store editor data
+        .orWhere("content", "like", escapedString)
+        .orWhere("change_log", "like", escapedString)
+        .eager("[topic, createdUser]")
+    );
+  },
+
   /**
    * Helps insert a history item for a corresponding article
    */

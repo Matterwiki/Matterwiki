@@ -10,7 +10,6 @@ const articleRouter = require("./routes/articleRouter/articleRouter");
 const topicsRouter = require("./routes/topicRouter");
 const userRouter = require("./routes/userRouter");
 const uploadsRouter = require("./routes/uploadsRouter");
-const searchRouter = require("./routes/searchRouter");
 
 const errorHandler = require("./middleware/errorHandler");
 
@@ -41,9 +40,6 @@ app.use("/api/topics", topicsRouter);
 
 // handles all upload endpoints
 app.use("/api/uploads", uploadsRouter);
-
-// handles all search endpoints
-app.use("/api/search", searchRouter);
 
 // Global error handling
 // TODO https://www.joyent.com/node-js/production/design/errors

@@ -1,5 +1,5 @@
 const Promise = require("bluebird");
-const { assign } = require("lodash");
+const { assign, omit } = require("lodash");
 const { knexInstance: knex } = require("../../utils/db");
 const {
   setupAll,
@@ -323,6 +323,31 @@ describe("Article Model", () => {
       const filteredDbItems = await ArticleModel.search("jolly");
 
       expect(filteredDbItems).toHaveLength(0);
+    });
+
+    test("search returns topic and user with articles", async () => {
+      const excludedProps = ["created_at", "updated_at"];
+      const filteredDbItems = await ArticleModel.searchWithRels("ell");
+
+      const topics = await knex("topic").select();
+      const users = await knex("user").select();
+
+      expect(filteredDbItems).toHaveLength(3);
+
+      filteredDbItems.forEach(article => {
+        expect(article.topic).toBeDefined();
+        expect(article.createdUser).toBeDefined();
+
+        const [topic] = topics.filter(t => t.id === article.topic_id);
+        const [user] = users.filter(u => u.id === article.created_by_id);
+
+        expect(article.topic).toEqual(
+          expect.objectContaining(omit(topic, excludedProps))
+        );
+        expect(article.createdUser).toEqual(
+          expect.objectContaining(omit(user, excludedProps))
+        );
+      });
     });
   });
 });

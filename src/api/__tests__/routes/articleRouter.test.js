@@ -3,6 +3,8 @@ const { omit, assign } = require("lodash");
 
 const ArticleModel = require("../../models/articleModel");
 const ArticleHistoryModel = require("../../models/articleHistoryModel");
+const TopicModel = require("../../models/topicModel");
+const UserModel = require("../../models/userModel");
 
 const {
   setupAll,
@@ -129,6 +131,72 @@ describe("Articles API tests", () => {
             expect(omit(res.body.topic, ignoredFields)).toEqual(
               omit(articlesWithRel.topic, ignoredFields)
             );
+          })
+      ));
+  });
+
+  describe("GET Search API tests - api/articles/search/?query", () => {
+    beforeEach(() => {
+      // update articles to something we know
+      const updateTitle = () =>
+        ArticleModel.update(articles[0].id, { title: "jolly ladwig fell" });
+
+      const updateChangelog = () =>
+        ArticleModel.update(articles[1].id, {
+          change_log: "funky nosed fella"
+        });
+
+      const updateContent = () =>
+        ArticleModel.update(articles[2].id, {
+          content: `random stuff in here that's of no use whatsoever..
+      I wonder if this is the right way to test this. they'd tell you why.`
+        });
+
+      return Promise.all([updateTitle(), updateChangelog(), updateContent()]);
+    });
+
+    test("200 any - VALID - search returns no articles if search term not found", async () =>
+      Promise.map([tokens.admin, tokens.user], token =>
+        apiClient
+          .get(`${apiUrl}/search/?query=ghgrjvengrrfenwincjggwnecrcgnj`)
+          .set("x-access-token", token)
+          .expect(200)
+          .then(async res => {
+            const filteredDbItems = res.body;
+
+            expect(filteredDbItems).toHaveLength(0);
+          })
+      ));
+
+    test("200 any - VALID - search returns topic and user with articles", async () =>
+      Promise.map([tokens.admin, tokens.user], token =>
+        apiClient
+          .get(`${apiUrl}/search/?query=ell`)
+          .set("x-access-token", token)
+          .expect(200)
+          .then(async res => {
+            const topic = await TopicModel.get(1);
+            const user = await UserModel.get(testUsers.users[0].id);
+
+            const filteredDbItems = res.body;
+
+            expect(filteredDbItems).toHaveLength(3);
+
+            expect(filteredDbItems[0].title).toContain("ell");
+            expect(filteredDbItems[1].change_log).toContain("ell");
+            expect(filteredDbItems[2].content).toContain("ell");
+
+            filteredDbItems.forEach(article => {
+              expect(article.topic).toBeDefined();
+              expect(article.createdUser).toBeDefined();
+
+              expect(article.topic).toEqual(
+                expect.objectContaining(omit(topic, ignoredFields))
+              );
+              expect(article.createdUser).toEqual(
+                expect.objectContaining(omit(user, ignoredFields))
+              );
+            });
           })
       ));
   });

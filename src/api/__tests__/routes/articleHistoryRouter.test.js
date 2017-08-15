@@ -1,7 +1,4 @@
 const Promise = require("bluebird");
-const { omit, assign } = require("lodash");
-
-const ArticleHistoryModel = require("../../models/articleHistoryModel");
 
 const {
   setupAll,
@@ -9,12 +6,9 @@ const {
   teardownAll
 } = require("../testUtils/globalSetup");
 
-const { userHolder, tokenHolder } = require("../testUtils/modelHolder");
-const { apiClient, makeJwt } = require("../testUtils/testUtils");
-const {
-  makeArticles,
-  makeHistoryItems
-} = require("../testUtils/dataGenerators");
+const { tokenHolder } = require("../testUtils/modelHolder");
+const { apiClient } = require("../testUtils/testUtils");
+const { makeHistoryItems } = require("../testUtils/dataGenerators");
 
 describe("Article Router tests", () => {
   beforeAll(setupAll);
