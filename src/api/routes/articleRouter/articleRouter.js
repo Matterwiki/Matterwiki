@@ -11,7 +11,7 @@ const filterMetaData = require("../../middleware/filterMetadata");
 const { DEFAULT_CHANGELOG_MESSAGE } = require("../../utils/constants");
 const { NOT_FOUND } = require("../../utils/constants").ERRORS;
 
-const archivesRouter = require("./archivesRouter.js");
+const historyRouter = require("./articleHistoryRouter");
 
 const ArticleModel = require("../../models/articleModel");
 
@@ -90,6 +90,6 @@ router.put("/:id", JSONParser, filterMetaData, updateArticle);
 router.delete("/:id", checkIfAdmin, deleteArticle);
 
 // Archive stuff
-router.use("/:id/archives", archivesRouter);
+router.use("/:id/history", historyRouter);
 
 module.exports = router;

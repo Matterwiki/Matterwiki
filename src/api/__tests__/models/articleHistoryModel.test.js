@@ -9,6 +9,7 @@ const {
 } = require("../testUtils/globalSetup");
 
 const { userHolder } = require("../testUtils/modelHolder");
+const { makeHistoryItems } = require("../testUtils/dataGenerators");
 
 const { article: articleFactory } = require("../factories/factories");
 
@@ -25,39 +26,9 @@ describe("Article history tests", () => {
 
   beforeEach(setupEach);
   beforeEach(async () => {
-    const newArticle = assign(articleFactory.build(1), {
-      created_by_id: userHolder.getAdmin().id,
-      modified_by_id: userHolder.getAdmin().id,
-      // the seed gives us this ID
-      topic_id: 1
-    });
-    // make article
-    [articleId] = await knex("article").insert(newArticle);
-
-    function makeHistoryItem(type, changes = {}) {
-      const historyItem = assign(
-        { type, article_id: articleId },
-        newArticle,
-        changes
-      );
-      return knex("article_history")
-        .insert(historyItem)
-        .then(id => knex("article_history").where({ id }))
-        .then(([item]) => item);
-    }
-
-    // insert history items
-    // dont really care that data is not sequenced, like history data should
-    return Promise.all([
-      // make a CREATE item
-      makeHistoryItem(ARTICLE_HISTORY_TYPES.CREATE),
-      // make an UPDATE item
-      makeHistoryItem(ARTICLE_HISTORY_TYPES.UPDATE, { title: "New title" }),
-      // make an UPDATE item
-      makeHistoryItem(ARTICLE_HISTORY_TYPES.UPDATE, { content: "New content" }),
-      // make a DELETE item
-      makeHistoryItem(ARTICLE_HISTORY_TYPES.DELETE)
-    ]).then(dbHistoryItems => (historyItems = dbHistoryItems));
+    const stuff = await makeHistoryItems();
+    historyItems = stuff.historyItems;
+    articleId = stuff.article.id;
   });
 
   test("Gets all history items for an article", async () => {
