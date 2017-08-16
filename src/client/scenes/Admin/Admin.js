@@ -5,7 +5,7 @@ import "./Admin.css";
 
 import AdminNavBar from "./components/AdminNavBar";
 
-import { ManageTopics, ManageUsers, LogoUpload } from "./scenes/AdminScenes";
+import { ManageTopics, ManageUsers } from "./scenes/AdminScenes";
 
 class Admin extends React.Component {
   constructor(...args) {
@@ -49,7 +49,6 @@ class Admin extends React.Component {
         <Switch>
           <Route path={`${match.url}/topics`} component={ManageTopics} />
           <Route path={`${match.url}/users`} component={ManageUsers} />
-          <Route path={`${match.url}/design`} component={LogoUpload} />
         </Switch>
       </div>
     );

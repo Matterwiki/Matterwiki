@@ -20,15 +20,15 @@ const ArticleSidebar = ({
     <ArticleSidebarItem title="Last Updated By">
       <h3>
         <b>
-          {article.user.name}
+          {article.createdUser.name}
         </b>
       </h3>
       <p>
-        {article.user.about}
+        {article.createdUser.about}
       </p>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="What Changed in last edit">
-      {article.what_changed || <h4>No information available</h4>}
+      {article.change_log || <h4>No information available</h4>}
     </ArticleSidebarItem>
     <Button onClick={onEditClick} block>
       Edit

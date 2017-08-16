@@ -56,7 +56,7 @@ class ViewArticle extends React.Component {
                 {article.title}
               </ArticleHeading>
               <div className="single-article-body">
-                <WikiEditor readOnly rawContent={JSON.parse(article.body)} />
+                <WikiEditor readOnly rawContent={JSON.parse(article.content)} />
               </div>
             </Col>
             <Col md={3}>

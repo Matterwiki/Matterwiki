@@ -15,7 +15,7 @@ class EditArticle extends React.Component {
 
     APIProvider.get(`articles/${articleId}`).then(article => {
       this.setState({
-        article: { ...article, what_changed: "" },
+        article: { ...article, change_log: "" },
         loading: false
       });
     });

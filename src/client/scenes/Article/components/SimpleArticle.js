@@ -9,13 +9,13 @@ const SimpleArticle = ({ loading, article }) => {
   if (loading) {
     return <Loader />;
   }
-  if (article && article.user) {
-    const rawContent = JSON.parse(article.body);
+  if (article) {
+    const rawContent = JSON.parse(article.content);
     return (
       <Grid fluid>
         <Row>
           <Col md={12}>
-            <ArticleHeading editedBy={article.user.name}>
+            <ArticleHeading editedBy={article.createdUser.name}>
               {article.title}
             </ArticleHeading>
             <div className="single-article-body">

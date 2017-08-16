@@ -39,7 +39,7 @@ const BrowseArchives = ({ onArchiveChosen, archives }) => {
               key={archive.id}
               header={lastUpdated}
               onClick={e => archiveClick(archive.id, e)}>
-              {archive.what_changed}
+              {archive.change_log}
             </ListGroupItem>
           );
         })}

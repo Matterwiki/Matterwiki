@@ -7,7 +7,7 @@ const WhatChanged = ({ value, onChange }) =>
     <FormControl
       componentClass="textarea"
       className="what_changed"
-      name="what_changed"
+      name="change_log"
       placeholder="Example: Fixed a typo. It's grammer not grammar"
       value={value}
       onChange={onChange}

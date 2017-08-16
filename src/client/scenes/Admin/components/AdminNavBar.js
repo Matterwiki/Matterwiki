@@ -14,9 +14,6 @@ const AdminNavBar = ({ activeTab, handleSelect }) =>
     <NavItem role="presentation" eventKey="topics">
       Topics
     </NavItem>
-    <NavItem role="presentation" eventKey="design">
-      Design
-    </NavItem>
   </Nav>;
 
 export default AdminNavBar;

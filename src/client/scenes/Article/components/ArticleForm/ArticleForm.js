@@ -26,13 +26,13 @@ class ArticleForm extends React.Component {
         topic_id: 1
       };
     } else {
-      const { topic_id, title, what_changed } = article;
+      const { topic_id, title, change_log } = article;
 
       this.state = {
         edit: true,
         title,
         topic_id,
-        what_changed
+        change_log
       };
     }
   }
@@ -50,21 +50,20 @@ class ArticleForm extends React.Component {
 
     // get the rawContent from refs
     // TODO this will change when we use Redux! :)
-    const body = this.getEditorContent();
-    const { title, topic_id, what_changed, edit } = this.state;
+    const content = this.getEditorContent();
+    const { title, topic_id, change_log, edit } = this.state;
 
     const canSubmit = edit
-      ? body && title && topic_id && what_changed
-      : body && title && topic_id;
+      ? content && title && topic_id && change_log
+      : content && title && topic_id;
 
     const changeInfo = edit ? ", Change info" : "";
     const errorMessage = `Article Body, Title${changeInfo} and Topic Information is required.`;
 
     if (canSubmit) {
-      const user_id = window.localStorage.getItem("userId");
-      const formData = { title, body, topic_id, user_id };
+      const formData = { title, content, topic_id };
       if (edit) {
-        formData.what_changed = what_changed;
+        formData.change_log = change_log;
       }
 
       this.props.onSubmit(formData);
@@ -80,7 +79,7 @@ class ArticleForm extends React.Component {
     const WikiEditorProps = Object.assign(
       {},
       { ref: _editor => (this.editor = _editor) },
-      edit ? { rawContent: JSON.parse(this.props.article.body) } : {}
+      edit ? { rawContent: JSON.parse(this.props.article.content) } : {}
     );
 
     return (
@@ -109,7 +108,7 @@ class ArticleForm extends React.Component {
             <FormGroup>
               <WhatChanged
                 onChange={this.onChange}
-                value={this.state.what_changed}
+                value={this.state.change_log}
               />
             </FormGroup>}
         </Col>

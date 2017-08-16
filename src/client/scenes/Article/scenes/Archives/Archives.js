@@ -18,7 +18,7 @@ class ArticleHistory extends React.Component {
 
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    APIProvider.get(`articles/${articleId}/archives`)
+    APIProvider.get(`articles/${articleId}/history`)
       .then(archives => {
         this.setState({
           archives,
@@ -35,7 +35,7 @@ class ArticleHistory extends React.Component {
     });
     const { articleId } = this.props.match.params;
     APIProvider.get(
-      `articles/${articleId}/archives/${archiveId}`
+      `articles/${articleId}/history/${archiveId}`
     ).then(article => {
       this.setState({
         article,
