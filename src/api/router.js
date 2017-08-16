@@ -7,7 +7,6 @@ const authRouter = require("./routes/authRouter");
 const articleRouter = require("./routes/articleRouter/articleRouter");
 const topicsRouter = require("./routes/topicRouter");
 const userRouter = require("./routes/userRouter");
-const uploadsRouter = require("./routes/uploadsRouter");
 
 // Sample API endpoint
 router.get("/api", (req, res) => {
@@ -22,8 +21,5 @@ router.use("/api/auth", authRouter);
 router.use("/api/articles", articleRouter);
 router.use("/api/users", userRouter);
 router.use("/api/topics", topicsRouter);
-
-// handles all upload endpoints
-router.use("/api/uploads", uploadsRouter);
 
 module.exports = router;

@@ -11,6 +11,8 @@ const { userHolder, tokenHolder } = require("../testUtils/modelHolder");
 const { apiClient } = require("../testUtils/testUtils");
 const { user: userFactory } = require("../factories/factories");
 
+const testUnauthenticatedRequests = require("../sharedBehaviour/testUnauthenticatedRequests");
+
 describe("User API tests", () => {
   beforeAll(setupAll);
   afterAll(teardownAll);
@@ -24,6 +26,8 @@ describe("User API tests", () => {
     testUsers = userHolder.get();
     tokens = tokenHolder.get();
   });
+
+  testUnauthenticatedRequests(apiUrl);
 
   describe("GET api/users", () => {
     test("403 user - INVALID - only admin allowed to fetch users", () =>

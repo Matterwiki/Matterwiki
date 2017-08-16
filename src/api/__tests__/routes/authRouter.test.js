@@ -17,6 +17,7 @@ describe("Auth API tests", () => {
 
   describe("POST - api/auth/login/", () => {
     const apiUrl = "/api/auth/login";
+
     test("401 any - INVALID - bad email provided", () => {
       const { email, password } = userFactory.build();
 
