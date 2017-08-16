@@ -1,5 +1,5 @@
 const UserModel = require("../../models/userModel");
-const { NO_ACCESS } = require("../../utils/constants").ERRORS;
+const { NO_ACCESS, DUPLICATE_USER } = require("../../utils/constants").ERRORS;
 
 const {
   setupAll,
@@ -96,7 +96,20 @@ describe("User API tests", () => {
           expect(res.body.message).toBe(NO_ACCESS.message);
         }));
 
-    test("409 - INVALID - duplicate user not allowed");
+    test("409 - INVALID - duplicate user not allowed", () => {
+      const newUser = Object.assign({}, userFactory.build(), {
+        email: testUsers.users[1].email,
+        about: "is quite random"
+      });
+      return apiClient
+        .post(apiUrl)
+        .set("x-access-token", tokens.admin)
+        .send(newUser)
+        .expect(409)
+        .then(async res => {
+          expect(res.body.message).toBe(DUPLICATE_USER.message);
+        });
+    });
 
     // TODO this test is incredibly slow
     test("201 admin - VALID - creates user", () => {
@@ -134,10 +147,23 @@ describe("User API tests", () => {
           expect(res.body.message).toBe(NO_ACCESS.message);
         }));
 
-    test("409 - INVALID - duplicate user not allowed");
+    test("409 - INVALID - duplicate user not allowed", () => {
+      const updatedUser = Object.assign({}, testUsers.users[0], {
+        email: testUsers.users[1].email,
+        about: "is quite random"
+      });
+      return apiClient
+        .put(`${apiUrl}/2`)
+        .set("x-access-token", tokens.admin)
+        .send(updatedUser)
+        .expect(409)
+        .then(async res => {
+          expect(res.body.message).toBe(DUPLICATE_USER.message);
+        });
+    });
 
     test("200 admin - VALID - updates user", () => {
-      const updatedUser = Object.assign({}, testUsers[0], {
+      const updatedUser = Object.assign({}, testUsers.users[0], {
         name: "Randy Bagner",
         about: "is quite random"
       });

@@ -31,6 +31,11 @@ const ERRORS = {
     message:
       "There was an error creating the admin user. Chances are you're already set up"
   },
+  DUPLICATE_USER: {
+    status: 409,
+    code: "ER_DUP_ENTRY",
+    message: "This email is already in use. Please try another email"
+  },
   CREDS_WRONG: {
     status: 401,
     code: "CREDS_WRONG",

@@ -7,7 +7,7 @@ const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
-const { SALT_ROUNDS } = require("../utils/constants");
+const { SALT_ROUNDS, ERRORS } = require("../utils/constants");
 
 const UserModel = require("../models/userModel");
 
@@ -50,31 +50,32 @@ const createUser = async (req, res, next) => {
     newUser = await UserModel.insert(newUser);
     res.status(201).json(newUser);
   } catch (err) {
+    if (err.code === ERRORS.DUPLICATE_USER.code) {
+      return next(ERRORS.DUPLICATE_USER);
+    }
+
     next(err);
   }
 };
 
 const updateUser = async (req, res, next) => {
   const { id } = req.params;
-  const { name, email, about, password } = req.body;
+  const { password } = req.body;
 
   try {
-    let updatedUser = {
-      name,
-      email,
-      about
-    };
-
     if (password) {
       // hash password
       const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-      updatedUser.password = hashedPassword;
+      req.body.password = hashedPassword;
     }
 
-    updatedUser = await UserModel.update(id, updatedUser);
+    const updatedUser = await UserModel.update(id, req.body);
 
     res.status(200).json(updatedUser);
   } catch (err) {
+    if (err.code === ERRORS.DUPLICATE_USER.code) {
+      return next(ERRORS.DUPLICATE_USER);
+    }
     next(err);
   }
 };
