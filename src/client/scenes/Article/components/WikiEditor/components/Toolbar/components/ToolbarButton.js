@@ -5,7 +5,7 @@ import classNames from "classnames";
 class ToolbarButton extends Component {
   onToggle = evt => {
     evt.preventDefault();
-    this.props.onToggle(this.props.style);
+    this.props.onToggle(this.props.styleName);
   };
 
   render() {

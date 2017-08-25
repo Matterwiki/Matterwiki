@@ -11,7 +11,7 @@ const APP_DIR = path.resolve(__dirname, "src/client");
 
 module.exports = {
   context: BUILD_DIR,
-  entry: APP_DIR + "/index.js",
+  entry: `${APP_DIR}/index.js`,
   output: {
     path: BUILD_DIR,
     publicPath: "/",
@@ -35,9 +35,8 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
-      minChunks: function(module) {
-        return module.context && module.context.indexOf("node_modules") !== -1;
-      }
+      minChunks: module =>
+        module.context && module.context.indexOf("node_modules") !== -1
     })
   ],
   module: {
@@ -46,7 +45,14 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         include: APP_DIR,
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          presets: [["env", { modules: false }], "react"],
+          plugins: [
+            "transform-class-properties",
+            "transform-object-rest-spread"
+          ]
+        }
       },
       {
         test: /\.css$/,

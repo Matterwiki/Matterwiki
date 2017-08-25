@@ -1,0 +1,11 @@
+{
+  "ignore": ["src/client/", "README", ".git", "node_modules/**/node_modules"],
+  "verbose": true,
+  "execMap": {
+    "js": "node"
+  },
+  "events": {
+    "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+  },
+  "watch": ["src/api/"]
+}

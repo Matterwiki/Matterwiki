@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "react-bootstrap";
 
-const AdminNavBar = ({ activeTab, handleSelect }) => (
+const AdminNavBar = ({ activeTab, handleSelect }) =>
   <Nav
     bsStyle="tabs"
     className="admin-nav"
@@ -14,10 +14,6 @@ const AdminNavBar = ({ activeTab, handleSelect }) => (
     <NavItem role="presentation" eventKey="topics">
       Topics
     </NavItem>
-    <NavItem role="presentation" eventKey="design">
-      Design
-    </NavItem>
-  </Nav>
-);
+  </Nav>;
 
 export default AdminNavBar;

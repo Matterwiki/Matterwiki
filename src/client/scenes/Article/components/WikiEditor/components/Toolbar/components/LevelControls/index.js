@@ -17,14 +17,14 @@ const LevelControls = ({ editorState, toggleLevelType }) => {
         onToggle={onDecreaseLevel}
         disabled={disableOutdent}
         label="Decrease Level"
-        style="outdent"
+        styleName="outdent"
         fa={FaDedent}
       />
       <ToolbarButton
         onToggle={onIncreaseLevel}
         disabled={disableIndent}
         label="Increase Level"
-        style="indent"
+        styleName="indent"
         fa={FaIndent}
       />
     </ButtonGroup>

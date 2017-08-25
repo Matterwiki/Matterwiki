@@ -1,3 +1,7 @@
+# misc
+.vscode
+.idea
+
 # Logs
 logs
 *.log
@@ -16,6 +20,11 @@ coverage
 
 # nyc test coverage
 .nyc_output
+
+# configuration
+config.dev.env
+config.test.env
+config.prod.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt

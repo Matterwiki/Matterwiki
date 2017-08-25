@@ -1,46 +1,38 @@
 import React from "react";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
-import ArticleForm from "../components/ArticleForm/ArticleForm";
-
 import APIProvider from "utils/APIProvider";
+
+import ArticleForm from "../components/ArticleForm/ArticleForm";
 
 class EditArticle extends React.Component {
   state = {
     loading: true
   };
 
-  handleSubmit = article => {
-    const articleId = this.props.match.params.articleId;
-
-    article.id = articleId;
-
-    APIProvider.put("articles", article)
-      .then(article => {
-        Alert.success("Article has been successfully saved");
-        this.props.history.push(`/article/${articleId}`);
-      })
-      .catch(err => {
-        Alert.error(response.error.message);
-      });
-  };
-
   componentDidMount() {
-    this.setState({
-      loading: true
-    });
-
-    const articleId = this.props.match.params.articleId;
+    const { articleId } = this.props.match.params;
 
     APIProvider.get(`articles/${articleId}`).then(article => {
-      article.what_changed = "";
-
       this.setState({
-        article,
+        article: { ...article, change_log: "" },
         loading: false
       });
     });
   }
+
+  handleSubmit = article => {
+    const articleId = this.props.match.params.articleId;
+
+    APIProvider.put(`articles/${articleId}`, article)
+      .then(() => {
+        Alert.success("Article has been successfully saved");
+        this.props.history.push(`/article/${articleId}`);
+      })
+      .catch(err => {
+        Alert.error(err.message);
+      });
+  };
 
   render() {
     const { loading, article } = this.state;

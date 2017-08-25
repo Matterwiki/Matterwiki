@@ -1,10 +1,10 @@
 import React from "react";
 import Alert from "react-s-alert";
-import { Grid, Row, Col } from "react-bootstrap";
-
-import LoginForm from "./components/LoginForm";
+import { Grid, Col } from "react-bootstrap";
 
 import APIProvider from "utils/APIProvider";
+
+import LoginForm from "./components/LoginForm";
 
 import "./Login.css";
 
@@ -16,18 +16,17 @@ class Login extends React.Component {
   }
 
   handleSubmit = user => {
-    const that = this;
-    APIProvider.post("authenticate", user)
-      .then(function(loggedInUser) {
+    APIProvider.post("auth/login", user)
+      .then(loggedInUser => {
         window.localStorage.setItem("userToken", loggedInUser.token);
-        window.localStorage.setItem("userId", loggedInUser.user.id);
-        window.localStorage.setItem("userEmail", loggedInUser.user.email);
+        window.localStorage.setItem("userId", loggedInUser.id);
+        window.localStorage.setItem("userEmail", loggedInUser.email);
 
-        that.props.history.push("home");
+        this.props.history.push("home");
 
         Alert.success("You are now logged in");
       })
-      .catch(function(err) {
+      .catch(err => {
         Alert.error(err.message);
       });
   };

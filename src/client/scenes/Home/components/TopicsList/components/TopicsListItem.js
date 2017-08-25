@@ -12,7 +12,7 @@ const TopicsListItem = ({ topic, onTopicClick }) => {
   };
 
   return (
-    <ListGroupItem header={name} onClick={handleTopicClick} >
+    <ListGroupItem header={name} onClick={handleTopicClick}>
       {description}
     </ListGroupItem>
   );

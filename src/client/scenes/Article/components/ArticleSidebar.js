@@ -8,29 +8,38 @@ const ArticleSidebar = ({
   onEditClick,
   onHistoryClick,
   onDeleteClick
-}) => (
+}) =>
   <div className="article-sidebar">
     <ArticleSidebarItem title="Filed under">
       <h2 className="color-text">
-        <b>{article.topic.name}</b>
+        <b>
+          {article.topic.name}
+        </b>
       </h2>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="Last Updated By">
       <h3>
-        <b>{article.user.name}</b>
+        <b>
+          {article.createdUser.name}
+        </b>
       </h3>
-      <p>{article.user.about}</p>
+      <p>
+        {article.createdUser.about}
+      </p>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="What Changed in last edit">
-      {article.what_changed || <h4>No information available</h4>}
+      {article.change_log || <h4>No information available</h4>}
     </ArticleSidebarItem>
-    <Button onClick={onEditClick} block={true}>Edit</Button>
-    <Button onClick={onHistoryClick} block={true}>History</Button>
+    <Button onClick={onEditClick} block>
+      Edit
+    </Button>
+    <Button onClick={onHistoryClick} block>
+      History
+    </Button>
     {isAdmin &&
-      <Button block={true} onClick={onDeleteClick}>
+      <Button block onClick={onDeleteClick}>
         Delete
       </Button>}
-  </div>
-);
+  </div>;
 
 export default ArticleSidebar;

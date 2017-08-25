@@ -3,12 +3,12 @@ import React from "react";
 import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
 
 class ItemForm extends React.Component {
-  initState = ({ itemFormFields, item }) => {
-    this.state = itemFormFields.reduce((state, formField) => {
-      state[formField.name] = item ? item[formField.name] : "";
-      return state;
-    }, {});
-  };
+  componentWillMount() {
+    this.initState(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.initState(nextProps);
+  }
 
   onChange = e => {
     const { name, value } = e.target;
@@ -21,8 +21,19 @@ class ItemForm extends React.Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.onSubmit(this.state);
-    this.initState();
+    const { onSubmit, itemFormFields } = this.props;
+
+    onSubmit(this.state);
+    this.initState({
+      itemFormFields
+    });
+  };
+
+  initState = ({ itemFormFields, item }) => {
+    this.state = itemFormFields.reduce((acc, formField) => {
+      acc[formField.name] = item ? item[formField.name] : "";
+      return acc;
+    }, {});
   };
 
   cancelUpdate = e => {
@@ -30,27 +41,19 @@ class ItemForm extends React.Component {
     this.props.onCancelUpdate();
   };
 
-  componentWillMount() {
-    this.initState(this.props);
-  }
-  componentWillReceiveProps(nextProps) {
-    this.initState(nextProps);
-  }
-
   render() {
     const { item, itemName, itemFormFields } = this.props;
-    const currentlyEditing = () => {
-      if (item) {
-        return (
-          <p className="editing-heading">You're currently editing a {itemName}</p>
-        );
-      }
-    }
+    const currentlyEditing =
+      item &&
+      <p className="editing-heading">
+        You are currently editing a {itemName}
+      </p>;
+
     return (
       <div>
-        { currentlyEditing() }
+        {currentlyEditing}
         <Form className="tabform" onSubmit={this.onSubmit}>
-          {itemFormFields.map(formField => (
+          {itemFormFields.map(formField =>
             <Col sm={12} key={formField.name}>
               <FormGroup>
                 <FormControl
@@ -62,16 +65,16 @@ class ItemForm extends React.Component {
                 />
               </FormGroup>
             </Col>
-          ))}
+          )}
           <Col sm={12}>
-            <Button type="submit" block={true}>
+            <Button type="submit" block>
               {item ? `Update ${itemName}` : `Add ${itemName}`}
             </Button>
-            { (item) ? 
-              <Button block={true} onClick={this.cancelUpdate}>
-                Cancel
-              </Button> : ''
-            }
+            {item
+              ? <Button block onClick={this.cancelUpdate}>
+                  Cancel
+                </Button>
+              : ""}
           </Col>
         </Form>
       </div>

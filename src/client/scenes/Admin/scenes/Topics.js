@@ -1,14 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Grid, Row, Col } from "react-bootstrap";
+import APIProvider from "utils/APIProvider";
 
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
-
-import APIProvider from "utils/APIProvider";
 
 // TODO move these fellas to a nice consts file
 const TOPIC_FORM_FIELDS = [
@@ -22,6 +20,10 @@ class ManageTopics extends React.Component {
     topics: [],
     currentTopic: null
   };
+
+  componentDidMount() {
+    this.handleUpdate();
+  }
 
   handleUpdate = () => {
     this.setState({ loading: true });
@@ -41,20 +43,16 @@ class ManageTopics extends React.Component {
     });
   };
 
-  componentDidMount() {
-    this.handleUpdate();
-  }
-
   deleteTopic = id => {
-    APIProvider.delete(`topics?id=${id}`).then(topic => {
+    APIProvider.delete(`topics/${id}`).then(() => {
       Alert.success("Topic has been deleted");
       this.handleUpdate();
     });
   };
 
   updateTopic = topic => {
-    topic.id = this.state.currentTopic.id;
-    APIProvider.put("topics", topic).then(topic => {
+    const id = this.state.currentTopic.id;
+    APIProvider.put(`topics/${id}`, topic).then(() => {
       Alert.success("Topic has been edited");
       this.setState({
         currentTopic: null
@@ -64,7 +62,7 @@ class ManageTopics extends React.Component {
   };
 
   addTopic = topic => {
-    APIProvider.post("topics", topic).then(topic => {
+    APIProvider.post("topics", topic).then(() => {
       Alert.success("Topic has been added");
       this.handleUpdate();
     });
@@ -75,39 +73,38 @@ class ManageTopics extends React.Component {
   };
 
   render() {
-    if (this.state.loading) return <Loader />;
-    else {
-      const onSubmit = this.state.currentTopic
-        ? this.updateTopic
-        : this.addTopic;
-      return (
-        <Grid>
-          <Row>
-            <Col sm={12} md={4}>
-              <Row>
-                <Col md={12} sm={12}>
-                  <ItemForm
-                    itemFormFields={TOPIC_FORM_FIELDS}
-                    itemName="topic"
-                    item={this.state.currentTopic}
-                    onSubmit={onSubmit}
-                    onCancelUpdate={this.emptyCurrentTopicState}
-                  />
-                </Col>
-              </Row>
-            </Col>
-            <Col sm={12} md={8}>
-              <ItemList
-                items={this.state.topics}
-                itemName="topic"
-                onDeleteClick={this.deleteTopic}
-                onEditClick={this.handleEditClick}
-              />
-            </Col>
-          </Row>
-        </Grid>
-      );
+    if (this.state.loading) {
+      return <Loader />;
     }
+
+    const onSubmit = this.state.currentTopic ? this.updateTopic : this.addTopic;
+    return (
+      <Grid>
+        <Row>
+          <Col sm={12} md={4}>
+            <Row>
+              <Col md={12} sm={12}>
+                <ItemForm
+                  itemFormFields={TOPIC_FORM_FIELDS}
+                  itemName="topic"
+                  item={this.state.currentTopic}
+                  onSubmit={onSubmit}
+                  onCancelUpdate={this.emptyCurrentTopicState}
+                />
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={12} md={8}>
+            <ItemList
+              items={this.state.topics}
+              itemName="topic"
+              onDeleteClick={this.deleteTopic}
+              onEditClick={this.handleEditClick}
+            />
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
 }
 
