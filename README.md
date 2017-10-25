@@ -51,8 +51,8 @@ You need to have `Node` (version 7 or above) and `npm` installed on your system.
 8. Create topics and add users to your Wiki.
 
 
-**NOTE - Using MySQL**
-<hr/>
+## NOTE - Using MySQL
+
 By default Matterwiki uses **Sqlite**, which is a lightweight database management system perfect for an internal wiki.
 If your team size is huge and you need a concurrent and flexible DBMS you can change the config to use **MySQL**.
 As we use `Knex` as a query builder all you have to do use MySQL is to change the db object in `knexfile.js` (found the app root directory). Using MySQL requires MySQL 5.6.5 as a minimum.
