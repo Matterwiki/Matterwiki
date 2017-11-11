@@ -56,7 +56,10 @@ const extraHelpers = {
    * is_active set to true 
    */
   getAllActiveWithRels: async () =>
-    Article.query().where("is_active", true).eager("[topic, createdUser]"),
+    Article.query()
+      .where("is_active", true)
+      .orderBy("updated_at", "desc")
+      .eager("[topic, createdUser]"),
 
   /**
    * Sets a simple `WHERE LIKE` query on model
