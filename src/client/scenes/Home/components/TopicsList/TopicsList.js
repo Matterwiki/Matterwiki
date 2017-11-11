@@ -10,7 +10,7 @@ const TopicsList = ({ topics, onTopicClick }) =>
       </HelpBlock>
     : <ListGroup>
         {topics
-          .filter(t => t.id !== 1)
+          // .filter(t => t.id !== 1) // TODO Decide if we should show the uncategorized category
           .map(topic =>
             <TopicsListItem
               key={topic.id}

@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import store from "state/store";
-import { addArticles } from "state/actions/article";
+import { addArticles, emptyArticles } from "state/actions/article";
 import { addTopics } from "state/actions/topic";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
@@ -10,11 +11,6 @@ import APIProvider from "utils/APIProvider";
 import TopicsList from "./components/TopicsList/TopicsList";
 
 class Home extends React.Component {
-  state = {
-    articles: null,
-    topics: []
-  };
-
   componentDidMount() {
     Promise.all([
       APIProvider.get("articles"),
@@ -24,25 +20,19 @@ class Home extends React.Component {
       const topics = responses[1];
       store.dispatch(addArticles(articles));
       store.dispatch(addTopics(topics));
-      this.setState({
-        articles,
-        topics
-      });
     });
   }
 
   handleTopicClick = topicId => {
-    this.setState({
-      articles: null
-    });
+    store.dispatch(emptyArticles());
 
-    APIProvider.get(`topics/${topicId}/articles`).then(articles =>
-      this.setState({ articles })
+    APIProvider.get(`topics/${topicId}/articles`).then(topic =>
+      store.dispatch(addArticles(topic.article))
     );
   };
 
   render() {
-    const { topics, articles } = this.state;
+    const { topics, articles } = store.getState();
     return (
       <Row>
         <Col md={3}>
@@ -56,4 +46,9 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  topics: state.topics,
+  articles: state.articles
+});
+
+export default connect(mapStateToProps)(Home);
