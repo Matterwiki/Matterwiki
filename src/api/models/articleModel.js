@@ -52,6 +52,13 @@ class Article extends BaseModel {
 
 const extraHelpers = {
   /**
+   * Gets all records in the article model which have
+   * is_active set to true 
+   */
+  getAllActiveWithRels: async () =>
+    Article.query().where("is_active", true).eager("[topic, createdUser]"),
+
+  /**
    * Sets a simple `WHERE LIKE` query on model
    * Models have to implement their own search methods with the fields that need to be used
    */

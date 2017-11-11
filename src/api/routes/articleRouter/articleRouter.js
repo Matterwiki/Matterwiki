@@ -17,7 +17,7 @@ const ArticleModel = require("../../models/articleModel");
 
 async function fetchArticles(req, res, next) {
   try {
-    const articles = await ArticleModel.getAllWithRels();
+    const articles = await ArticleModel.getAllActiveWithRels();
     res.status(200).json(articles);
   } catch (err) {
     next(err);
