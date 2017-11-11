@@ -1,4 +1,6 @@
 import React from "react";
+import store from "state/store";
+import { addArticles } from "state/actions/article";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 
@@ -19,7 +21,7 @@ class Home extends React.Component {
     ]).then(responses => {
       const articles = responses[0];
       const topics = responses[1];
-
+      store.dispatch(addArticles(articles));
       this.setState({
         articles,
         topics

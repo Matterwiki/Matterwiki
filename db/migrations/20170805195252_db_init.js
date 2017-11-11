@@ -1,6 +1,8 @@
 exports.up = knex => {
   const createUserTable = () =>
     knex.schema.createTableIfNotExists("user", table => {
+      table.charset("utf8");
+      table.collate("utf8_unicode_ci");
       table.increments().primary();
       table.string("name").notNullable();
       table.string("email").notNullable().unique();
@@ -13,6 +15,8 @@ exports.up = knex => {
 
   const createTopicTable = () =>
     knex.schema.createTable("topic", table => {
+      table.charset("utf8");
+      table.collate("utf8_unicode_ci");
       table.increments().primary();
       table.string("name").notNullable().unique();
       table.string("description").notNullable();
@@ -22,6 +26,8 @@ exports.up = knex => {
 
   const createArticleTable = () =>
     knex.schema.createTableIfNotExists("article", table => {
+      table.charset("utf8");
+      table.collate("utf8_unicode_ci");
       table.increments().primary();
       table.string("title").notNullable();
       table.text("content").notNullable();
@@ -35,6 +41,8 @@ exports.up = knex => {
 
   const createArticleHistoryTable = () =>
     knex.schema.createTableIfNotExists("article_history", table => {
+      table.charset("utf8");
+      table.collate("utf8_unicode_ci");
       table.increments().primary();
       table.enu("type", ["CREATE", "UPDATE", "DELETE"]).notNullable();
       table
