@@ -1,42 +1,38 @@
 {
-    "extends": [
-        "airbnb",
-        "prettier",
-        "prettier/react"
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  "plugins": ["react", "jsx-a11y", "import", "prettier"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "settings": {
+    // For the resolves specified in webpack.config to work properly
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    // For defaults, check https://github.com/prettier/prettier#options
+    "prettier/prettier": [
+      2,
+      {
+        "jsxBracketSameLine": true,
+        "printWidth": 100
+      }
     ],
-    "parser": "babel-eslint",
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import",
-        "prettier"
-    ],
-    "env": {
-        "browser": true,
-        "node": true,
-        "jest": true
-    },
-    "settings": {
-        // For the resolves specified in webpack.config to work properly
-        "import/resolver": "webpack"
-    },
-    "rules": {
-        // For defaults, check https://github.com/prettier/prettier#options
-        "prettier/prettier": [2, {
-            "jsxBracketSameLine": true
-        }],
-        "import/no-extraneous-dependencies": [2, {"devDependencies": true}],
-        // TODO :(
-        "react/prop-types": 0,
-        "react/sort-comp": 1,
-        "react/no-find-dom-node": 1,
-        // JS is fine too! 
-        "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    // TODO :(
+    "react/prop-types": 0,
+    "react/sort-comp": 1,
+    "react/no-find-dom-node": 1,
+    // JS is fine too!
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
 
-        "no-unused-vars": 1,
-        "camelcase": 1,
-        "consistent-return": 0,
-        "no-console": 0,
-        "global-require": 1
-    }
+    "no-unused-vars": 1,
+    "camelcase": 1,
+    "consistent-return": 0,
+    "no-console": 0,
+    "global-require": 1,
+    "no-param-reassign": 0
+  }
 }

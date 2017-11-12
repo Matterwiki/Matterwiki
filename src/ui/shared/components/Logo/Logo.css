@@ -1,0 +1,8 @@
+.login-logo {
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+.login-logo img {
+  max-height: 50px;
+  width: auto;
+}

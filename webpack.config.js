@@ -6,7 +6,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const BUILD_DIR = path.resolve(__dirname, "dist/");
-const APP_DIR = path.resolve(__dirname, "src/client");
+const APP_DIR = path.resolve(__dirname, "src/");
+const PUBLIC_DIR = path.resolve(__dirname, "public/");
 
 module.exports = {
   context: BUILD_DIR,
@@ -28,7 +29,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(APP_DIR, "index.html")
+      template: path.resolve(PUBLIC_DIR, "index.html")
     }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("dev")
@@ -54,6 +55,10 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
         test: /\.(jpg|png|svg)$/,
         loader: "url-loader",
         options: {
@@ -72,11 +77,7 @@ module.exports = {
   },
 
   resolve: {
-    modules: [
-      path.resolve("./"),
-      path.resolve("./src/client"),
-      path.resolve("./node_modules")
-    ]
+    extensions: [".js", ".scss", ".css", ".json"]
   },
 
   node: {

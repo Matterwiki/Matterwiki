@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.primary-logo {
+  height: 4em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+body {
+  background-color: #ffffff;
+  color: #4d4d4d;
+  letter-spacing: 1px;
+  font-family: "Open Sans", sans-serif;
+}

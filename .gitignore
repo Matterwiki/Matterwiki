@@ -21,10 +21,6 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# configuration
-config.dev.env
-config.test.env
-config.prod.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -48,5 +44,5 @@ jspm_packages
 .node_repl_history
 
 dist/
-db/matterwiki.sqlite
+matterwikitest.db
 tests/e2e/db/matterwiki.sqlite

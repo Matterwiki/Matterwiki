@@ -54,6 +54,7 @@ module.exports = {
           ]
         }
       },
+      // TODO extract to separate file with ExtractTextPlugin
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
