@@ -94,8 +94,10 @@ async function fetchArticlesByTopic(req, res, next) {
   const { topicId } = req.params;
 
   try {
-    const topicWithArticles = await TopicModel.getWithRels(topicId);
-    res.status(200).json(topicWithArticles);
+    // TODO Shouldn't run two separate queries for this.
+    const topic = await TopicModel.get(topicId);
+    topic.article = await TopicModel.fetchActiveArticles(topicId);
+    res.status(200).json(topic);
   } catch (err) {
     next(err);
   }

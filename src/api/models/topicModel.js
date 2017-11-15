@@ -1,5 +1,7 @@
 const { withDbHelpers, BaseModel } = require("./modelHelpers");
 
+const ArticleModel = require("./articleModel").Model;
+
 class TopicModel extends BaseModel {
   static get tableName() {
     return "topic";
@@ -8,7 +10,6 @@ class TopicModel extends BaseModel {
   static get relationMappings() {
     const UserModel = require("./userModel").Model;
     const ArticleHistoryModel = require("./articleHistoryModel").Model;
-    const ArticleModel = require("./articleModel").Model;
 
     return {
       article: {
@@ -39,10 +40,15 @@ class TopicModel extends BaseModel {
   }
 }
 
-module.exports = withDbHelpers(
-  TopicModel,
-  {},
-  {
-    relations: "[article, article.[modifiedUser]]"
-  }
-);
+const extraHelpers = {
+  // TODO fix this function. Should run the query on topic model
+  fetchActiveArticles: async id =>
+    ArticleModel.query()
+      .where("is_active", true)
+      .where("topic_id", id)
+      .eager("[createdUser, modifiedUser]")
+};
+
+module.exports = withDbHelpers(TopicModel, extraHelpers, {
+  relations: "[article, article.[modifiedUser]]"
+});
