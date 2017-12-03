@@ -1,7 +1,9 @@
 import {
   ADD_TOPICS,
   START_LOADING_TOPICS,
-  STOP_LOADING_TOPICS
+  STOP_LOADING_TOPICS,
+  SET_CURRENT_TOPIC,
+  EMPTY_CURRENT_TOPIC
 } from "state/actions/types";
 
 export default (
@@ -26,6 +28,16 @@ export default (
       return {
         ...state,
         loading: false
+      };
+    case SET_CURRENT_TOPIC:
+      return {
+        ...state,
+        currentTopic: payload.topic
+      };
+    case EMPTY_CURRENT_TOPIC:
+      return {
+        ...state,
+        currentTopic: payload.topic
       };
     default:
       return state;

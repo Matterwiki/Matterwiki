@@ -1,5 +1,11 @@
 /* eslint-disable */
-import { ADD_TOPICS, START_LOADING_TOPICS, STOP_LOADING_TOPICS } from "./types";
+import {
+  ADD_TOPICS,
+  START_LOADING_TOPICS,
+  STOP_LOADING_TOPICS,
+  SET_CURRENT_TOPIC,
+  EMPTY_CURRENT_TOPIC
+} from "./types";
 
 export const addTopics = topics => {
   return {
@@ -17,5 +23,18 @@ export const startLoading = () => {
 export const stopLoading = () => {
   return {
     type: STOP_LOADING_TOPICS
+  };
+};
+
+export const setCurrentTopic = topic => {
+  return {
+    type: SET_CURRENT_TOPIC,
+    topic
+  };
+};
+
+export const emptyCurrentTopic = () => {
+  return {
+    type: EMPTY_CURRENT_TOPIC
   };
 };
