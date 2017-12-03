@@ -1,9 +1,13 @@
 import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import APIProvider from "utils/APIProvider";
+import { connect } from "react-redux";
 
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
+
+import { addTopics, startLoading, stopLoading } from "state/actions/topic";
+import store from "state/store";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
@@ -26,12 +30,11 @@ class ManageTopics extends React.Component {
   }
 
   handleUpdate = () => {
-    this.setState({ loading: true });
+    // this.setState({ loading: true });
+    store.dispatch(startLoading());
     APIProvider.get("topics").then(topics => {
-      this.setState({
-        topics,
-        loading: false
-      });
+      store.dispatch(addTopics(topics));
+      store.dispatch(stopLoading());
     });
   };
 
@@ -73,7 +76,8 @@ class ManageTopics extends React.Component {
   };
 
   render() {
-    if (this.state.loading) {
+    const { topics, loading } = store.getState().topics;
+    if (loading) {
       return <Loader />;
     }
 
@@ -96,7 +100,7 @@ class ManageTopics extends React.Component {
           </Col>
           <Col sm={12} md={8}>
             <ItemList
-              items={this.state.topics}
+              items={topics}
               itemName="topic"
               onDeleteClick={this.deleteTopic}
               onEditClick={this.handleEditClick}
@@ -108,4 +112,8 @@ class ManageTopics extends React.Component {
   }
 }
 
-export default ManageTopics;
+const mapStateToProps = state => ({
+  topics: state.topics.topics
+});
+
+export default connect(mapStateToProps)(ManageTopics);

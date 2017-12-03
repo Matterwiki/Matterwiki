@@ -32,7 +32,8 @@ class Home extends React.Component {
   };
 
   render() {
-    const { topics, articles } = store.getState();
+    const { topics } = store.getState().topics;
+    const { articles } = store.getState();
     return (
       <Row>
         <Col md={3}>
@@ -47,7 +48,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  topics: state.topics,
+  topics: state.topics.topics,
   articles: state.articles
 });
 
