@@ -25,15 +25,13 @@ class Home extends React.Component {
 
   handleTopicClick = topicId => {
     store.dispatch(emptyArticles());
-
     APIProvider.get(`topics/${topicId}/articles`).then(topic =>
       store.dispatch(addArticles(topic.article))
     );
   };
 
   render() {
-    const { topics } = store.getState().topics;
-    const { articles } = store.getState();
+    const { topics: { topics }, articles: { articles } } = store.getState();
     return (
       <Row>
         <Col md={3}>

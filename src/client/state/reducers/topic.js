@@ -1,4 +1,8 @@
-import { ADD_TOPICS, START_LOADING, STOP_LOADING } from "state/actions/types";
+import {
+  ADD_TOPICS,
+  START_LOADING_TOPICS,
+  STOP_LOADING_TOPICS
+} from "state/actions/types";
 
 export default (
   state = {
@@ -13,12 +17,12 @@ export default (
         ...state,
         topics: payload.topics
       };
-    case START_LOADING:
+    case START_LOADING_TOPICS:
       return {
         ...state,
         loading: true
       };
-    case STOP_LOADING:
+    case STOP_LOADING_TOPICS:
       return {
         ...state,
         loading: false

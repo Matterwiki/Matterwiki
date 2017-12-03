@@ -76,7 +76,8 @@ class ManageTopics extends React.Component {
   };
 
   render() {
-    const { topics, loading } = store.getState().topics;
+    const { topics: { topics, loading } } = store.getState();
+    console.log(loading, topics);
     if (loading) {
       return <Loader />;
     }
@@ -113,7 +114,8 @@ class ManageTopics extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  topics: state.topics.topics
+  topics: state.topics.topics,
+  loading: state.topics.loading
 });
 
 export default connect(mapStateToProps)(ManageTopics);
