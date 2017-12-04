@@ -9,7 +9,8 @@ import {
 export default (
   state = {
     topics: [],
-    loading: false
+    loading: false,
+    currentTopic: null
   },
   payload
 ) => {
@@ -37,7 +38,7 @@ export default (
     case EMPTY_CURRENT_TOPIC:
       return {
         ...state,
-        currentTopic: payload.topic
+        currentTopic: null
       };
     default:
       return state;
