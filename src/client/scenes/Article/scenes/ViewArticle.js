@@ -9,6 +9,10 @@ import ArticleSidebar from "../components/ArticleSidebar";
 const ViewArticle = props => {
   const article = props.article;
   const isAdmin = parseInt(window.localStorage.getItem("userId"), 10) === 1;
+  const handleDeleteClick = props.handleDeleteClick;
+  const handleEditClick = props.handleEditClick;
+  const handleHistoryClick = props.handleHistoryClick;
+
   return (
     <Grid fluid>
       <Row>
@@ -23,9 +27,9 @@ const ViewArticle = props => {
         <Col md={3}>
           <ArticleSidebar
             article={article}
-            onEditClick={this.handleEditClick}
-            onDeleteClick={this.handleDeleteClick}
-            onHistoryClick={this.handleHistoryClick}
+            onEditClick={handleEditClick}
+            onDeleteClick={handleDeleteClick}
+            onHistoryClick={handleHistoryClick}
             isAdmin={isAdmin}
           />
         </Col>

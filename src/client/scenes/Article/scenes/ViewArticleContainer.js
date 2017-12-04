@@ -59,7 +59,15 @@ class ViewArticleContainer extends React.Component {
     if (loading) {
       return <Loader />;
     } else if (article.title) {
-      return <ViewArticle article={article} loading={loading} />;
+      return (
+        <ViewArticle
+          article={article}
+          loading={loading}
+          handleEditClick={this.handleEditClick}
+          handleDeleteClick={this.handleDeleteClick}
+          handleHistoryClick={this.handleHistoryClick}
+        />
+      );
     }
     return <div />;
   }
