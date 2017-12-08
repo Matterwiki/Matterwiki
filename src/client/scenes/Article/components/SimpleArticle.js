@@ -6,6 +6,7 @@ import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "./WikiEditor/WikiEditor";
 
 const SimpleArticle = ({ loading, article }) => {
+  console.log(article);
   if (loading) {
     return <Loader />;
   }
