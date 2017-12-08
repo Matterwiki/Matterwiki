@@ -6,11 +6,10 @@ import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "./WikiEditor/WikiEditor";
 
 const SimpleArticle = ({ loading, article }) => {
-  console.log(article);
   if (loading) {
     return <Loader />;
   }
-  if (article.title) {
+  if (article && article.title) {
     const rawContent = JSON.parse(article.content);
     return (
       <Grid fluid>
