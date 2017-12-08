@@ -9,7 +9,7 @@ const SimpleArticle = ({ loading, article }) => {
   if (loading) {
     return <Loader />;
   }
-  if (article) {
+  if (article.title) {
     const rawContent = JSON.parse(article.content);
     return (
       <Grid fluid>

@@ -61,7 +61,7 @@ class ArticleHistory extends React.Component {
               />
             </Col>
             <Col md={9}>
-              <SimpleArticle article={article} />
+              <SimpleArticle article={article} loading={this.state.loading} />
             </Col>
           </Row>
         </Grid>
