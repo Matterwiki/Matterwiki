@@ -20,10 +20,9 @@ async function fetchHistoryByArticle(req, res, next) {
 }
 
 async function fetchHistoryById(req, res, next) {
-  const { id } = req.params;
+  const id = req.params.archiveId;
   try {
-    const archive = await ArticleHistoryModel.get(id);
-
+    const archive = await ArticleHistoryModel.fetchArchive(id);
     res.status(200).json(archive);
   } catch (err) {
     next(err);

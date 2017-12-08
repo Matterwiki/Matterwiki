@@ -39,4 +39,14 @@ class ArticleHistoryModel extends BaseModel {
   }
 }
 
-module.exports = withDbHelpers(ArticleHistoryModel);
+const extraHelpers = {
+  fetchArchive(id) {
+    const archive = ArticleHistoryModel.query()
+      .where("id", id)
+      .where("is_active", true)
+      .eager("[createdUser, modifiedUser]");
+    return archive;
+  }
+};
+
+module.exports = withDbHelpers(ArticleHistoryModel, extraHelpers);
