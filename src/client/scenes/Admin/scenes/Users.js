@@ -9,8 +9,8 @@ import { connect } from "react-redux";
 import {
   addUsers,
   emptyUsers,
-  startLoading,
-  stopLoading,
+  startLoadingUsers,
+  stopLoadingUsers,
   setCurrentUser,
   emptyCurrentUser
 } from "state/actions/user";
@@ -44,10 +44,10 @@ class ManageUsers extends React.Component {
   }
 
   handleUpdate = () => {
-    store.dispatch(startLoading());
+    store.dispatch(startLoadingUsers());
     APIProvider.get("users").then(users => {
       store.dispatch(addUsers(users));
-      store.dispatch(stopLoading());
+      store.dispatch(stopLoadingUsers());
     });
   };
 

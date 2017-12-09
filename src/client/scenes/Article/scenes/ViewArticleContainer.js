@@ -6,8 +6,8 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 import {
-  startLoading,
-  stopLoading,
+  startLoadingArticles,
+  stopLoadingArticles,
   setCurrentArticle,
   emptyCurrentArticle
 } from "state/actions/article";
@@ -23,13 +23,13 @@ class ViewArticleContainer extends React.Component {
 
   componentDidMount() {
     const id = this.props.match.params.articleId;
-    store.dispatch(startLoading());
+    store.dispatch(startLoadingArticles());
     APIProvider.get(`articles/${id}`).then(article => {
       this.setState({
         article,
         loading: false
       });
-      store.dispatch(stopLoading());
+      store.dispatch(stopLoadingArticles());
       store.dispatch(setCurrentArticle(article));
     });
   }

@@ -21,13 +21,13 @@ export const emptyTopics = () => {
   };
 };
 
-export const startLoading = () => {
+export const startLoadingTopics = () => {
   return {
     type: START_LOADING_TOPICS
   };
 };
 
-export const stopLoading = () => {
+export const stopLoadingTopics = () => {
   return {
     type: STOP_LOADING_TOPICS
   };

@@ -21,13 +21,13 @@ export const emptyUsers = () => {
   };
 };
 
-export const startLoading = () => {
+export const startLoadingUsers = () => {
   return {
     type: START_LOADING_USERS
   };
 };
 
-export const stopLoading = () => {
+export const stopLoadingUsers = () => {
   return {
     type: STOP_LOADING_USERS
   };

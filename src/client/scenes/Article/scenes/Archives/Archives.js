@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import {
   addArchives,
   emptyArchives,
-  startLoading,
-  stopLoading,
+  startLoadingArchives,
+  stopLoadingArchives,
   setCurrentArchive,
   emptyCurrentArchive
 } from "state/actions/archive";
@@ -26,15 +26,15 @@ class ArticleHistory extends React.Component {
 
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    store.dispatch(startLoading());
+    store.dispatch(startLoadingArchives());
     APIProvider.get(`articles/${articleId}/history`)
       .then(archives => {
         store.dispatch(addArchives(archives));
-        store.dispatch(stopLoading());
+        store.dispatch(stopLoadingArchives());
       })
       .catch(() => {
         store.dispatch(emptyArchives());
-        store.dispatch(stopLoading());
+        store.dispatch(stopLoadingArchives());
       });
   }
 

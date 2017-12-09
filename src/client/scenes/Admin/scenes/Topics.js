@@ -8,8 +8,8 @@ import Loader from "components/Loader/Loader";
 
 import {
   addTopics,
-  startLoading,
-  stopLoading,
+  startLoadingTopics,
+  stopLoadingTopics,
   setCurrentTopic,
   emptyCurrentTopic
 } from "state/actions/topic";
@@ -32,10 +32,10 @@ class ManageTopics extends React.Component {
 
   handleUpdate = () => {
     // this.setState({ loading: true });
-    store.dispatch(startLoading());
+    store.dispatch(startLoadingTopics());
     APIProvider.get("topics").then(topics => {
       store.dispatch(addTopics(topics));
-      store.dispatch(stopLoading());
+      store.dispatch(stopLoadingTopics());
     });
   };
 

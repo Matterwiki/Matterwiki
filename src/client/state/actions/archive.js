@@ -21,13 +21,13 @@ export const emptyArchives = () => {
   };
 };
 
-export const startLoading = () => {
+export const startLoadingArchives = () => {
   return {
     type: START_LOADING_ARCHIVES
   };
 };
 
-export const stopLoading = () => {
+export const stopLoadingArchives = () => {
   return {
     type: STOP_LOADING_ARCHIVES
   };

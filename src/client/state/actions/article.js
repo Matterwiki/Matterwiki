@@ -34,13 +34,13 @@ export const emptyCurrentArticle = () => {
   };
 };
 
-export const startLoading = () => {
+export const startLoadingArticles = () => {
   return {
     type: START_LOADING_ARTICLES
   };
 };
 
-export const stopLoading = () => {
+export const stopLoadingArticles = () => {
   return {
     type: STOP_LOADING_ARTICLES
   };
