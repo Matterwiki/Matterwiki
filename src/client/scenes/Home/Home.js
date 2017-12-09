@@ -5,22 +5,20 @@ import { addArticles, emptyArticles } from "state/actions/article";
 import { addTopics } from "state/actions/topic";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
+import Loader from "components/Loader/Loader";
 
 import APIProvider from "utils/APIProvider";
+import { loadHomepage, disposeHomepage } from "state/actions/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
 class Home extends React.Component {
   componentDidMount() {
-    Promise.all([
-      APIProvider.get("articles"),
-      APIProvider.get("topics")
-    ]).then(responses => {
-      const articles = responses[0];
-      const topics = responses[1];
-      store.dispatch(addArticles(articles));
-      store.dispatch(addTopics(topics));
-    });
+    store.dispatch(loadHomepage());
+  }
+
+  componentWillUnmount() {
+    store.dispatch(disposeHomepage());
   }
 
   handleTopicClick = topicId => {
@@ -31,7 +29,13 @@ class Home extends React.Component {
   };
 
   render() {
-    const { topics: { topics }, articles: { articles } } = store.getState();
+    const {
+      topics: { topics },
+      articles: { articles },
+      app: { loading }
+    } = store.getState();
+    console.log("loading", loading);
+    if (loading) return <Loader />;
     return (
       <Row>
         <Col md={3}>
@@ -47,7 +51,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   topics: state.topics.topics,
-  articles: state.articles
+  articles: state.articles,
+  loading: state.app.loading
 });
 
 export default connect(mapStateToProps)(Home);

@@ -1,8 +1,12 @@
 /* eslint-disable*/
+export const START_LOADING_APP = "START_LOADING_APP";
+export const STOP_LOADING_APP = "STOP_LOADING_APP";
+
 export const ADD_ARTICLES = "ADD_ARTICLES";
 export const EMPTY_ARTICLES = "EMPTY_ARTICLES";
 
 export const ADD_TOPICS = "ADD_TOPICS";
+export const EMPTY_TOPICS = "EMPTY_TOPICS";
 
 export const START_LOADING_TOPICS = "START_LOADING_TOPICS";
 export const STOP_LOADING_TOPICS = "STOP_LOADING_TOPICS";
@@ -33,3 +37,9 @@ export const STOP_LOADING_ARCHIVES = "STOP_LOADING_ARCHIVES";
 
 export const SET_CURRENT_ARCHIVE = "SET_CURRENT_ARCHIVE";
 export const EMPTY_CURRENT_ARCHIVE = "EMPTY_CURRENT_ARCHIVE";
+
+// Action types that probably won't have any reducers
+// I'll be using them to group actions to handle them in our saga
+
+export const LOAD_HOMEPAGE = "LOAD_HOMEPAGE";
+export const DISPOSE_HOMEPAGE = "DISPOSE_HOMEPAGE";

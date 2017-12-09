@@ -1,5 +1,6 @@
 import {
   ADD_TOPICS,
+  EMPTY_TOPICS,
   START_LOADING_TOPICS,
   STOP_LOADING_TOPICS,
   SET_CURRENT_TOPIC,
@@ -19,6 +20,11 @@ export default (
       return {
         ...state,
         topics: payload.topics
+      };
+    case EMPTY_TOPICS:
+      return {
+        ...state,
+        topics: []
       };
     case START_LOADING_TOPICS:
       return {
