@@ -5,37 +5,20 @@ import Loader from "components/Loader/Loader";
 import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
-import {
-  startLoadingArticles,
-  stopLoadingArticles,
-  setCurrentArticle,
-  emptyCurrentArticle
-} from "state/actions/article";
+
 import store from "state/store";
+import { loadArticlePage, disposeArticlePage } from "state/actions/sagaActions";
 
 import ViewArticle from "./ViewArticle";
 
 class ViewArticleContainer extends React.Component {
-  state = {
-    loading: true,
-    article: {}
-  };
-
   componentDidMount() {
     const id = this.props.match.params.articleId;
-    store.dispatch(startLoadingArticles());
-    APIProvider.get(`articles/${id}`).then(article => {
-      this.setState({
-        article,
-        loading: false
-      });
-      store.dispatch(stopLoadingArticles());
-      store.dispatch(setCurrentArticle(article));
-    });
+    store.dispatch(loadArticlePage(id));
   }
 
   componentWillUnmount() {
-    store.dispatch(emptyCurrentArticle());
+    store.dispatch(disposeArticlePage());
   }
 
   handleEditClick = () => {
@@ -74,7 +57,8 @@ class ViewArticleContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  article: state.articles.currentArticle
+  article: state.articles.currentArticle,
+  loading: state.articles.loading
 });
 
 export default connect(mapStateToProps)(ViewArticleContainer);

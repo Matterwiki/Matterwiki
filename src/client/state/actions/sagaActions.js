@@ -2,7 +2,9 @@
 import {
   LOAD_HOMEPAGE,
   DISPOSE_HOMEPAGE,
-  FETCH_ARTICLES_BY_TOPIC
+  FETCH_ARTICLE_BY_TOPIC,
+  LOAD_ARTICLE_PAGE,
+  DISPOSE_ARTICLE_PAGE
 } from "./types";
 
 export const loadHomepage = () => {
@@ -21,5 +23,18 @@ export const fetchArticlesByTopic = id => {
   return {
     type: FETCH_ARTICLES_BY_TOPIC,
     id
+  };
+};
+
+export const loadArticlePage = id => {
+  return {
+    type: LOAD_ARTICLE_PAGE,
+    id
+  };
+};
+
+export const disposeArticlePage = () => {
+  return {
+    type: DISPOSE_ARTICLE_PAGE
   };
 };
