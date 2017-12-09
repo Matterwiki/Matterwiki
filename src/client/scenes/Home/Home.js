@@ -8,7 +8,11 @@ import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
 import APIProvider from "utils/APIProvider";
-import { loadHomepage, disposeHomepage } from "state/actions/sagaActions";
+import {
+  loadHomepage,
+  disposeHomepage,
+  fetchArticlesByTopic
+} from "state/actions/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
@@ -22,19 +26,15 @@ class Home extends React.Component {
   }
 
   handleTopicClick = topicId => {
-    store.dispatch(emptyArticles());
-    APIProvider.get(`topics/${topicId}/articles`).then(topic =>
-      store.dispatch(addArticles(topic.article))
-    );
+    store.dispatch(fetchArticlesByTopic(topicId));
   };
 
   render() {
     const {
       topics: { topics },
-      articles: { articles },
+      articles: { articles, loading: loadingArticles },
       app: { loading }
     } = store.getState();
-    console.log("loading", loading);
     if (loading) return <Loader />;
     return (
       <Row>
@@ -42,7 +42,7 @@ class Home extends React.Component {
           <TopicsList topics={topics} onTopicClick={this.handleTopicClick} />
         </Col>
         <Col md={9}>
-          <ArticlesList articles={articles} />
+          {loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}
         </Col>
       </Row>
     );
@@ -52,6 +52,7 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
   topics: state.topics.topics,
   articles: state.articles,
+  loadingArticles: state.articles.loading,
   loading: state.app.loading
 });
 
