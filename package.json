@@ -58,6 +58,7 @@
     "mariasql": "^0.2.6",
     "morgan": "^1.8.2",
     "mysql": "^2.15.0",
+    "node-sass": "^4.7.2",
     "objection": "^0.8.6",
     "react": "15.3.0",
     "react-bootstrap": "^0.30.10",
@@ -69,6 +70,8 @@
     "react-s-alert": "1.2.2",
     "redux": "^3.7.2",
     "redux-saga": "^0.16.0",
+    "sass-loader": "^6.0.6",
+    "styled-components": "^2.2.4",
     "url-search-params-polyfill": "^2.0.0"
   },
   "devDependencies": {
