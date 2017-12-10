@@ -1,21 +1,15 @@
-import React from "react";
 import styled from "styled-components";
-
 import "assets/css/milligram.scss";
 
-const ButtonWrapper = styled.button.attrs({
-  className: "button"
+const Button = styled.button.attrs({
+  className: props => {
+    const outlineClass = props.outline ? "button-outline" : "";
+    const clearClass = props.clear ? "button-clear" : "";
+    const defaultClass = "button";
+    return `${defaultClass} ${outlineClass} ${clearClass}`;
+  }
 })`
-
+  width: ${props => (props.block ? "100%" : "auto")}
 `;
-
-const Button = props => {
-  const onClick = props.onClick;
-  return (
-    <ButtonWrapper onClick={onClick} role="button" tabIndex={0}>
-      {props.children}
-    </ButtonWrapper>
-  );
-};
 
 export default Button;
