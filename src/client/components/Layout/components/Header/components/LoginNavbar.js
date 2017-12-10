@@ -1,14 +1,12 @@
 import React from "react";
-import { Navbar } from "react-bootstrap";
 import Logo from "assets/logo.png";
+import { Container, ImageWrapper } from "ui";
 
 const LoginNavbar = () =>
-  <Navbar>
-    <center>
-      <a className="navbar-login-logo">
-        <img alt="Matterwiki" src={Logo} />
-      </a>
-    </center>
-  </Navbar>;
+  <Container textAlign="center">
+    <ImageWrapper height="60">
+      <img alt="Matterwiki" src={Logo} />
+    </ImageWrapper>
+  </Container>;
 
 export default LoginNavbar;
