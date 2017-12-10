@@ -10,7 +10,11 @@ import {
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
   LOAD_EDIT_USER,
-  DISPOSE_EDIT_USER
+  DISPOSE_EDIT_USER,
+  LOAD_TOPICS_PAGE,
+  DISPOSE_TOPICS_PAGE,
+  LOAD_EDIT_TOPIC,
+  DISPOSE_EDIT_TOPIC
 } from "state/actions/types";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
@@ -41,7 +45,14 @@ import {
   emptyCurrentUser
 } from "state/actions/user";
 
-import { addTopics, emptyTopics } from "state/actions/topic";
+import {
+  addTopics,
+  emptyTopics,
+  startLoadingTopics,
+  stopLoadingTopics,
+  setCurrentTopic,
+  emptyCurrentTopic
+} from "state/actions/topic";
 
 import { startLoadingApp, stopLoadingApp } from "state/actions/app";
 
@@ -127,6 +138,28 @@ function* disposeEditUser() {
   yield put(emptyCurrentUser());
 }
 
+function* loadTopicsPage() {
+  yield put(startLoadingTopics());
+  const topics = yield call(APIProvider.get, "topics");
+  yield put(addTopics(topics));
+  yield put(stopLoadingTopics());
+}
+
+function* disposeTopicsPage() {
+  yield put(emptyTopics());
+  yield put(emptyCurrentTopic());
+}
+
+function* loadEditTopic(action) {
+  yield put(emptyCurrentTopic());
+  const topic = yield call(APIProvider.get, `topics/${action.id}`);
+  yield put(setCurrentTopic(topic));
+}
+
+function* disposeEditTopic() {
+  yield put(emptyCurrentTopic());
+}
+
 function* saga() {
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
@@ -140,6 +173,10 @@ function* saga() {
   yield takeEvery(DISPOSE_USERS_PAGE, disposeUsersPage);
   yield takeEvery(LOAD_EDIT_USER, loadEditUser);
   yield takeEvery(DISPOSE_EDIT_USER, disposeEditUser);
+  yield takeEvery(LOAD_TOPICS_PAGE, loadTopicsPage);
+  yield takeEvery(DISPOSE_TOPICS_PAGE, disposeTopicsPage);
+  yield takeEvery(LOAD_EDIT_TOPIC, loadEditTopic);
+  yield takeEvery(DISPOSE_EDIT_TOPIC, disposeEditTopic);
 }
 
 export default saga;

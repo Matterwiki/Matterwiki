@@ -14,6 +14,12 @@ import {
   emptyCurrentTopic
 } from "state/actions/topic";
 import store from "state/store";
+import {
+  loadTopicsPage,
+  disposeTopicsPage,
+  loadEditTopic,
+  disposeEditTopic
+} from "state/actions/sagaActions";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
@@ -31,18 +37,11 @@ class ManageTopics extends React.Component {
   }
 
   handleUpdate = () => {
-    // this.setState({ loading: true });
-    store.dispatch(startLoadingTopics());
-    APIProvider.get("topics").then(topics => {
-      store.dispatch(addTopics(topics));
-      store.dispatch(stopLoadingTopics());
-    });
+    store.dispatch(loadTopicsPage());
   };
 
   handleEditClick = id => {
-    APIProvider.get(`topics/${id}`).then(currentTopic => {
-      store.dispatch(setCurrentTopic(currentTopic));
-    });
+    store.dispatch(loadEditTopic(id));
   };
 
   deleteTopic = id => {
@@ -56,7 +55,7 @@ class ManageTopics extends React.Component {
     const id = this.state.currentTopic.id;
     APIProvider.put(`topics/${id}`, topic).then(() => {
       Alert.success("Topic has been edited");
-      store.dispatch(emptyCurrentTopic());
+      store.dispatch(disposeEditTopic());
       this.handleUpdate();
     });
   };
@@ -69,7 +68,7 @@ class ManageTopics extends React.Component {
   };
 
   emptyCurrentTopicState = () => {
-    store.dispatch(emptyCurrentTopic());
+    store.dispatch(disposeEditTopic());
   };
 
   render() {

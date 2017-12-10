@@ -11,7 +11,11 @@ import {
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
   LOAD_EDIT_USER,
-  DISPOSE_EDIT_USER
+  DISPOSE_EDIT_USER,
+  LOAD_TOPICS_PAGE,
+  DISPOSE_TOPICS_PAGE,
+  LOAD_EDIT_TOPIC,
+  DISPOSE_EDIT_TOPIC
 } from "./types";
 
 export const loadHomepage = () => {
@@ -89,5 +93,30 @@ export const loadEditUser = id => {
 export const disposeEditUser = () => {
   return {
     type: DISPOSE_EDIT_USER
+  };
+};
+
+export const loadTopicsPage = () => {
+  return {
+    type: LOAD_TOPICS_PAGE
+  };
+};
+
+export const disposeTopicsPage = () => {
+  return {
+    type: DISPOSE_TOPICS_PAGE
+  };
+};
+
+export const loadEditTopic = id => {
+  return {
+    type: LOAD_EDIT_TOPIC,
+    id
+  };
+};
+
+export const disposeEditTopic = () => {
+  return {
+    type: DISPOSE_EDIT_TOPIC
   };
 };
