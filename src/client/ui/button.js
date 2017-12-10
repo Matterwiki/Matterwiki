@@ -9,7 +9,7 @@ const Button = styled.button.attrs({
     return `${defaultClass} ${outlineClass} ${clearClass}`;
   }
 })`
-  width: ${props => (props.block ? "100%" : "auto")}
+  width: ${props => (props.block ? "100%" : "auto")};
 `;
 
 export default Button;
