@@ -1,13 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import store from "state/store";
-import { addArticles, emptyArticles } from "state/actions/article";
-import { addTopics } from "state/actions/topic";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
-import APIProvider from "utils/APIProvider";
 import {
   loadHomepage,
   disposeHomepage,

@@ -21,17 +21,22 @@ class ViewArticleContainer extends React.Component {
     store.dispatch(disposeArticlePage());
   }
 
-  handleEditClick = () => {
-    this.props.history.push(`/article/edit/${this.state.article.id}`);
+  handleEditClick = e => {
+    e.preventDefault();
+    const { articles: { currentArticle: { id } } } = store.getState();
+    this.props.history.push(`/article/edit/${id}`);
   };
 
-  handleHistoryClick = () => {
-    this.props.history.push(`/article/${this.state.article.id}/history`);
+  handleHistoryClick = e => {
+    e.preventDefault();
+    const { articles: { currentArticle: { id } } } = store.getState();
+    this.props.history.push(`/article/${id}/history`);
   };
 
   handleDeleteClick = e => {
     e.preventDefault();
-    APIProvider.delete(`articles/${this.state.article.id}`).then(() => {
+    const { articles: { currentArticle: { id } } } = store.getState();
+    APIProvider.delete(`articles/${id}`).then(() => {
       Alert.success("Article has been deleted");
       this.props.history.push("/home");
     });

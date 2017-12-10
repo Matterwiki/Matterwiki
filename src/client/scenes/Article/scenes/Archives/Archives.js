@@ -2,17 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
 import Loader from "components/Loader/Loader";
-import APIProvider from "utils/APIProvider";
 import { connect } from "react-redux";
-import {
-  addArchives,
-  emptyArchives,
-  startLoadingArchives,
-  stopLoadingArchives,
-  setCurrentArchive,
-  emptyCurrentArchive
-} from "state/actions/archive";
+
 import store from "state/store";
+import {
+  loadArchivesPage,
+  disposeArchivesPage,
+  fetchArchiveById
+} from "state/actions/sagaActions";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
@@ -20,50 +17,25 @@ import SimpleArticle from "../../components/SimpleArticle";
 import "./Archives.css";
 
 class ArticleHistory extends React.Component {
-  state = {
-    loadingCurrentArchive: false
-  };
-
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    store.dispatch(startLoadingArchives());
-    APIProvider.get(`articles/${articleId}/history`)
-      .then(archives => {
-        store.dispatch(addArchives(archives));
-        store.dispatch(stopLoadingArchives());
-      })
-      .catch(() => {
-        store.dispatch(emptyArchives());
-        store.dispatch(stopLoadingArchives());
-      });
+    store.dispatch(loadArchivesPage(articleId));
   }
 
   componentWillUnmount() {
-    store.dispatch(emptyArchives());
-    store.dispatch(emptyCurrentArchive());
+    store.dispatch(disposeArchivesPage());
   }
 
   getArchive = archiveId => {
-    this.setState({
-      loadingCurrentArchive: true
-    });
-    store.dispatch(emptyCurrentArchive());
     const { articleId } = this.props.match.params;
-    APIProvider.get(`articles/${articleId}/history/${archiveId}`)
-      .then(article => {
-        store.dispatch(setCurrentArchive(article));
-        this.setState({
-          loadingCurrentArchive: false
-        });
-      })
-      .catch(() => this.setState({ loadingCurrentArchive: false }));
+    store.dispatch(fetchArchiveById(articleId, archiveId));
   };
 
   render() {
     const {
-      archives: { loading, archives, currentArchive }
+      archives: { archives, currentArchive, loading: loadingCurrentArchive },
+      app: { loading }
     } = store.getState();
-    const { loadingCurrentArchive } = this.state;
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
@@ -103,7 +75,8 @@ class ArticleHistory extends React.Component {
 const mapStateToProps = state => ({
   currentArchive: state.archives.currentArchive,
   archives: state.archives.archives,
-  loading: state.archives.loading
+  loading: state.app.loading,
+  loadingCurrentArchive: state.archives.loading
 });
 
 export default connect(mapStateToProps)(ArticleHistory);

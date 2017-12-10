@@ -3,7 +3,10 @@ import {
   DISPOSE_HOMEPAGE,
   FETCH_ARTICLES_BY_TOPIC,
   LOAD_ARTICLE_PAGE,
-  DISPOSE_ARTICLE_PAGE
+  DISPOSE_ARTICLE_PAGE,
+  LOAD_ARCHIVES_PAGE,
+  DISPOSE_ARCHIVES_PAGE,
+  FETCH_ARCHIVE_BY_ID
 } from "state/actions/types";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
@@ -15,6 +18,15 @@ import {
   setCurrentArticle,
   emptyCurrentArticle
 } from "state/actions/article";
+
+import {
+  addArchives,
+  startLoadingArchives,
+  stopLoadingArchives,
+  emptyArchives,
+  emptyCurrentArchive,
+  setCurrentArchive
+} from "state/actions/archive";
 
 import { addTopics, emptyTopics } from "state/actions/topic";
 
@@ -55,12 +67,40 @@ function* disposeArticlePage() {
   yield put(emptyCurrentArticle());
 }
 
+function* loadArchivesPage(action) {
+  yield put(startLoadingApp());
+  const archives = yield call(
+    APIProvider.get,
+    `articles/${action.articleId}/history`
+  );
+  yield put(addArchives(archives));
+  yield put(stopLoadingApp());
+}
+
+function* disposeArchivesPage() {
+  yield put(emptyArchives());
+  yield put(emptyCurrentArchive());
+}
+
+function* fetchArchiveById(action) {
+  yield put(startLoadingArchives());
+  const archive = yield call(
+    APIProvider.get,
+    `articles/${action.articleId}/history/${action.archiveId}`
+  );
+  yield put(setCurrentArchive(archive));
+  yield put(stopLoadingArchives());
+}
+
 function* saga() {
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
   yield takeEvery(FETCH_ARTICLES_BY_TOPIC, fetchArticlesByTopic);
   yield takeEvery(LOAD_ARTICLE_PAGE, loadArticlePage);
   yield takeEvery(DISPOSE_ARTICLE_PAGE, disposeArticlePage);
+  yield takeEvery(LOAD_ARCHIVES_PAGE, loadArchivesPage);
+  yield takeEvery(DISPOSE_ARCHIVES_PAGE, disposeArchivesPage);
+  yield takeEvery(FETCH_ARCHIVE_BY_ID, fetchArchiveById);
 }
 
 export default saga;
