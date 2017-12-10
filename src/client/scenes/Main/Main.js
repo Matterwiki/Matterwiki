@@ -17,7 +17,6 @@ import {
 } from "./MainScenes";
 
 // bunch of custom styles that are needed globally
-import "./bootstrap.css";
 import "./style.css";
 
 // TODO refactor the Auth logic into a HOC

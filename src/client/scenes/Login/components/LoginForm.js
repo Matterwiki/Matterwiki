@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, FormGroup, FormControl, Col } from "react-bootstrap";
-import { Button, BlockWrapper } from "ui";
+import { Button, Container } from "ui";
 // TODO move these fellas to a nice consts file
 const LOGIN_FORM_FIELDS = [
   { name: "email", type: "email" },
@@ -33,26 +33,28 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        {LOGIN_FORM_FIELDS.map(formField =>
-          <Col sm={12} key={formField.name}>
-            <FormGroup>
-              <FormControl
-                type={formField.type}
-                placeholder={formField.name}
-                name={formField.name}
-                value={this.state[formField.name]}
-                onChange={this.onChange}
-              />
-            </FormGroup>
+      <Container width="50" textAlign="center">
+        <Form onSubmit={this.onSubmit}>
+          {LOGIN_FORM_FIELDS.map(formField =>
+            <Col sm={12} key={formField.name}>
+              <FormGroup>
+                <FormControl
+                  type={formField.type}
+                  placeholder={formField.name}
+                  name={formField.name}
+                  value={this.state[formField.name]}
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+            </Col>
+          )}
+          <Col sm={12}>
+            <Button type="submit" block>
+              Sign in
+            </Button>
           </Col>
-        )}
-        <Col sm={12}>
-          <Button type="submit" block>
-            Sign in
-          </Button>
-        </Col>
-      </Form>
+        </Form>
+      </Container>
     );
   }
 }

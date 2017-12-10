@@ -1,5 +1,5 @@
 /* eslint-disable */
 import Button from "./button";
-import BlockWrapper from "./blockWrapper";
+import Container from "./container";
 
-export { Button, BlockWrapper };
+export { Button, Container };
