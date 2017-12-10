@@ -6,14 +6,7 @@ import Loader from "components/Loader/Loader";
 import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
-import {
-  addUsers,
-  emptyUsers,
-  startLoadingUsers,
-  stopLoadingUsers,
-  setCurrentUser,
-  emptyCurrentUser
-} from "state/actions/user";
+
 import store from "state/store";
 import {
   loadUsersPage,
@@ -74,7 +67,7 @@ class ManageUsers extends React.Component {
     const id = this.state.currentUser.id;
     APIProvider.put(`users/${id}`, user).then(() => {
       Alert.success("User has been edited");
-      store.dispatch(emptyCurrentUser());
+      store.dispatch(disposeEditUser());
       this.handleUpdate();
     });
   };
