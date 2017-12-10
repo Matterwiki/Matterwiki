@@ -6,7 +6,11 @@ import {
   DISPOSE_ARTICLE_PAGE,
   LOAD_ARCHIVES_PAGE,
   DISPOSE_ARCHIVES_PAGE,
-  FETCH_ARCHIVE_BY_ID
+  FETCH_ARCHIVE_BY_ID,
+  LOAD_USERS_PAGE,
+  DISPOSE_USERS_PAGE,
+  LOAD_EDIT_USER,
+  DISPOSE_EDIT_USER
 } from "state/actions/types";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
@@ -27,6 +31,15 @@ import {
   emptyCurrentArchive,
   setCurrentArchive
 } from "state/actions/archive";
+
+import {
+  addUsers,
+  emptyUsers,
+  startLoadingUsers,
+  stopLoadingUsers,
+  setCurrentUser,
+  emptyCurrentUser
+} from "state/actions/user";
 
 import { addTopics, emptyTopics } from "state/actions/topic";
 
@@ -92,6 +105,28 @@ function* fetchArchiveById(action) {
   yield put(stopLoadingArchives());
 }
 
+function* loadUsersPage() {
+  yield put(startLoadingUsers());
+  const users = yield call(APIProvider.get, "users");
+  yield put(addUsers(users));
+  yield put(stopLoadingUsers());
+}
+
+function* disposeUsersPage() {
+  yield put(emptyUsers());
+  yield put(emptyCurrentUser());
+}
+
+function* loadEditUser(action) {
+  yield put(emptyCurrentUser());
+  const user = yield call(APIProvider.get, `users/${action.id}`);
+  yield put(setCurrentUser(user));
+}
+
+function* disposeEditUser() {
+  yield put(emptyCurrentUser());
+}
+
 function* saga() {
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
@@ -101,6 +136,10 @@ function* saga() {
   yield takeEvery(LOAD_ARCHIVES_PAGE, loadArchivesPage);
   yield takeEvery(DISPOSE_ARCHIVES_PAGE, disposeArchivesPage);
   yield takeEvery(FETCH_ARCHIVE_BY_ID, fetchArchiveById);
+  yield takeEvery(LOAD_USERS_PAGE, loadUsersPage);
+  yield takeEvery(DISPOSE_USERS_PAGE, disposeUsersPage);
+  yield takeEvery(LOAD_EDIT_USER, loadEditUser);
+  yield takeEvery(DISPOSE_EDIT_USER, disposeEditUser);
 }
 
 export default saga;

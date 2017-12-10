@@ -15,6 +15,12 @@ import {
   emptyCurrentUser
 } from "state/actions/user";
 import store from "state/store";
+import {
+  loadUsersPage,
+  disposeUsersPage,
+  loadEditUser,
+  disposeEditUser
+} from "state/actions/sagaActions";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
@@ -40,21 +46,15 @@ class ManageUsers extends React.Component {
   }
 
   componentWillUnmount() {
-    store.dispatch(emptyUsers());
+    store.dispatch(disposeUsersPage());
   }
 
   handleUpdate = () => {
-    store.dispatch(startLoadingUsers());
-    APIProvider.get("users").then(users => {
-      store.dispatch(addUsers(users));
-      store.dispatch(stopLoadingUsers());
-    });
+    store.dispatch(loadUsersPage());
   };
 
   handleEditClick = id => {
-    APIProvider.get(`users/${id}`).then(currentUser => {
-      store.dispatch(setCurrentUser(currentUser));
-    });
+    store.dispatch(loadEditUser(id));
   };
 
   deleteUser = id => {
@@ -87,7 +87,7 @@ class ManageUsers extends React.Component {
   };
 
   emptyCurrentUserState = () => {
-    store.dispatch(emptyCurrentUser());
+    store.dispatch(disposeEditUser());
   };
 
   render() {

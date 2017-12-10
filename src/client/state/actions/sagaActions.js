@@ -7,7 +7,11 @@ import {
   DISPOSE_ARTICLE_PAGE,
   LOAD_ARCHIVES_PAGE,
   DISPOSE_ARCHIVES_PAGE,
-  FETCH_ARCHIVE_BY_ID
+  FETCH_ARCHIVE_BY_ID,
+  LOAD_USERS_PAGE,
+  DISPOSE_USERS_PAGE,
+  LOAD_EDIT_USER,
+  DISPOSE_EDIT_USER
 } from "./types";
 
 export const loadHomepage = () => {
@@ -60,5 +64,30 @@ export const fetchArchiveById = (articleId, archiveId) => {
     type: FETCH_ARCHIVE_BY_ID,
     articleId,
     archiveId
+  };
+};
+
+export const loadUsersPage = () => {
+  return {
+    type: LOAD_USERS_PAGE
+  };
+};
+
+export const disposeUsersPage = () => {
+  return {
+    type: DISPOSE_USERS_PAGE
+  };
+};
+
+export const loadEditUser = id => {
+  return {
+    type: LOAD_EDIT_USER,
+    id
+  };
+};
+
+export const disposeEditUser = () => {
+  return {
+    type: DISPOSE_EDIT_USER
   };
 };
