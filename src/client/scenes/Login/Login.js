@@ -1,6 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
-import { Grid, Col } from "react-bootstrap";
+
+import { Row, Col } from "ui";
 
 import APIProvider from "utils/APIProvider";
 
@@ -33,11 +34,11 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Grid bsClass="login-box">
-        <Col md={12}>
+      <Row>
+        <Col>
           <LoginForm onSubmit={this.handleSubmit} />
         </Col>
-      </Grid>
+      </Row>
     );
   }
 }

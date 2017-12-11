@@ -1,11 +1,9 @@
 import React from "react";
-import { HelpBlock } from "react-bootstrap";
+import { Footer } from "ui";
 
-const Footer = () =>
-  <div className="footer center-align">
-    <HelpBlock>
-      Powered by <a href="http://matterwiki.com">Matterwiki</a>
-    </HelpBlock>
-  </div>;
+const AppFooter = () =>
+  <Footer align="center">
+    Powered by <a href="http://matterwiki.com">Matterwiki</a>
+  </Footer>;
 
-export default Footer;
+export default AppFooter;

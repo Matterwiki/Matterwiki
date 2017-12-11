@@ -1,6 +1,6 @@
 import React from "react";
+import { Container } from "ui";
 import Header from "./components/Header/Header";
-import Container from "./components/Container";
 import Footer from "./components/Footer";
 
 import "./Layout.css";
