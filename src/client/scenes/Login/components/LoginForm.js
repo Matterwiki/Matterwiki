@@ -1,6 +1,5 @@
 import React from "react";
-import { FormGroup, FormControl } from "react-bootstrap";
-import { Button, Container, Col, Form } from "ui";
+import { Button, Container, Col, Form, Input } from "ui";
 // TODO move these fellas to a nice consts file
 const LOGIN_FORM_FIELDS = [
   { name: "email", type: "email" },
@@ -37,7 +36,7 @@ class LoginForm extends React.Component {
         <Form onSubmit={this.onSubmit}>
           {LOGIN_FORM_FIELDS.map(formField =>
             <Col key={formField.name}>
-              <FormControl
+              <Input
                 type={formField.type}
                 placeholder={formField.name}
                 name={formField.name}
