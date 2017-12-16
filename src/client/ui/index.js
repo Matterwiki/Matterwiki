@@ -8,6 +8,8 @@ import Form from "./form";
 import Input from "./input";
 import Footer from "./footer";
 import { Navbar, Nav, NavItem, NavForm } from "./navbar";
+import { List, ListItem, ListItemBody, ListItemHeader } from "./list";
+import Heading from "./heading";
 
 export {
   Button,
@@ -21,5 +23,10 @@ export {
   Navbar,
   Nav,
   NavItem,
-  NavForm
+  NavForm,
+  List,
+  ListItem,
+  ListItemBody,
+  ListItemHeader,
+  Heading
 };

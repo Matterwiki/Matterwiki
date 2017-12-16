@@ -1,5 +1,6 @@
 import React from "react";
 import { HelpBlock, ListGroup } from "react-bootstrap";
+import { List, ListItem } from "ui";
 
 import TopicsListItem from "./components/TopicsListItem";
 
@@ -8,7 +9,7 @@ const TopicsList = ({ topics, onTopicClick }) =>
     ? <HelpBlock bsClass="center-align">
         There are no topics created yet
       </HelpBlock>
-    : <ListGroup>
+    : <List>
         {topics
           // .filter(t => t.id !== 1) // TODO Decide if we should show the uncategorized category
           .map(topic =>
@@ -18,6 +19,6 @@ const TopicsList = ({ topics, onTopicClick }) =>
               onTopicClick={onTopicClick}
             />
           )}
-      </ListGroup>;
+      </List>;
 
 export default TopicsList;

@@ -7,7 +7,7 @@ const Navbar = styled.div`
   max-height: 6rem;
   border-bottom: 1px solid #ccc;
   box-shadow: 0px 17px 12px -24px #000;
-  padding: 0 5rem;
+  padding: 0 3rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -41,8 +41,12 @@ const NavItem = styled.div`
   max-height: 4rem;
   margin-left: 2rem;
   a {
-    padding: 0.5rem;
     display: block;
+    display: block;
+    font-size: 1.4rem;
+    line-height: 4rem;
+    text-transform: uppercase;
+}
   }
   * {
     height: 100%;

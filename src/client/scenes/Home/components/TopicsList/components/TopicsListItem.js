@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ListGroupItem } from "react-bootstrap";
+import { ListItem, ListItemHeader, ListItemBody } from "ui";
 
 const TopicsListItem = ({ topic, onTopicClick }) => {
   const { id, name, description } = topic;
@@ -12,9 +13,14 @@ const TopicsListItem = ({ topic, onTopicClick }) => {
   };
 
   return (
-    <ListGroupItem header={name} onClick={handleTopicClick}>
-      {description}
-    </ListGroupItem>
+    <ListItem onClick={handleTopicClick}>
+      <ListItemHeader>
+        {name}
+      </ListItemHeader>
+      <ListItemBody>
+        {description}
+      </ListItemBody>
+    </ListItem>
   );
 };
 

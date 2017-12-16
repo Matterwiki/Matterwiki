@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import store from "state/store";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Heading } from "ui";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
@@ -34,11 +34,11 @@ class Home extends React.Component {
     } = store.getState();
     if (loading) return <Loader />;
     return (
-      <Row>
-        <Col md={3}>
+      <Row marginTop="1">
+        <Col width="25">
           <TopicsList topics={topics} onTopicClick={this.handleTopicClick} />
         </Col>
-        <Col md={9}>
+        <Col>
           {loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}
         </Col>
       </Row>

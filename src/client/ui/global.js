@@ -3,6 +3,6 @@ import { injectGlobal } from "styled-components";
 
 injectGlobal`
   body {
-    margin-top: 60px;
+    padding-top: 6rem;
   }
 `;
