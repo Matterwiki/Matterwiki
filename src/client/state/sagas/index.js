@@ -66,16 +66,27 @@ function* loadHomepage() {
   yield put(addArticles(articles));
   yield put(stopLoadingApp());
 }
+function* disposeTopic() {
+  yield put(emptyCurrentTopic());
+}
 
 function* disposeHomepage() {
   yield put(emptyArticles());
   yield put(emptyTopics());
+  yield disposeTopic();
+}
+
+function* setTopic(action) {
+  yield put(emptyCurrentTopic());
+  const topic = yield call(APIProvider.get, `topics/${action.id}`);
+  yield put(setCurrentTopic(topic));
 }
 
 function* fetchArticlesByTopic(action) {
   yield put(startLoadingArticles());
   const topic = yield call(APIProvider.get, `topics/${action.id}/articles`);
   const articles = topic.article;
+  yield setTopic(action);
   yield put(addArticles(articles));
   yield put(stopLoadingArticles());
 }
@@ -150,16 +161,6 @@ function* disposeTopicsPage() {
   yield put(emptyCurrentTopic());
 }
 
-function* loadEditTopic(action) {
-  yield put(emptyCurrentTopic());
-  const topic = yield call(APIProvider.get, `topics/${action.id}`);
-  yield put(setCurrentTopic(topic));
-}
-
-function* disposeEditTopic() {
-  yield put(emptyCurrentTopic());
-}
-
 function* saga() {
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
@@ -175,8 +176,8 @@ function* saga() {
   yield takeEvery(DISPOSE_EDIT_USER, disposeEditUser);
   yield takeEvery(LOAD_TOPICS_PAGE, loadTopicsPage);
   yield takeEvery(DISPOSE_TOPICS_PAGE, disposeTopicsPage);
-  yield takeEvery(LOAD_EDIT_TOPIC, loadEditTopic);
-  yield takeEvery(DISPOSE_EDIT_TOPIC, disposeEditTopic);
+  yield takeEvery(LOAD_EDIT_TOPIC, setTopic);
+  yield takeEvery(DISPOSE_EDIT_TOPIC, disposeTopic);
 }
 
 export default saga;

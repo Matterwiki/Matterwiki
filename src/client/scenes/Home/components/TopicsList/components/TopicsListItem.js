@@ -3,7 +3,7 @@ import React from "react";
 import { ListGroupItem } from "react-bootstrap";
 import { ListItem, ListItemHeader, ListItemBody } from "ui";
 
-const TopicsListItem = ({ topic, onTopicClick }) => {
+const TopicsListItem = ({ topic, onTopicClick, isActive }) => {
   const { id, name, description } = topic;
 
   // TODO wrap these into generic HOCs
@@ -13,9 +13,9 @@ const TopicsListItem = ({ topic, onTopicClick }) => {
   };
 
   return (
-    <ListItem onClick={handleTopicClick}>
+    <ListItem onClick={handleTopicClick} active={isActive}>
       <ListItemHeader>
-        {name}
+        {name} {isActive}
       </ListItemHeader>
       <ListItemBody>
         {description}

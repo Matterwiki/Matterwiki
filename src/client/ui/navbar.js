@@ -5,7 +5,6 @@ const Navbar = styled.div`
   flex-direction: row;
   background-color: #fff;
   max-height: 6rem;
-  border-bottom: 1px solid #ccc;
   box-shadow: 0px 17px 12px -24px #000;
   padding: 0 3rem;
   position: fixed;

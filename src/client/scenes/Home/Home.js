@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import store from "state/store";
-import { Row, Col, Heading } from "ui";
+import { Row, Col } from "ui";
+import { FullHeightContainer } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
@@ -28,7 +29,7 @@ class Home extends React.Component {
 
   render() {
     const {
-      topics: { topics },
+      topics: { topics, currentTopic },
       articles: { articles, loading: loadingArticles },
       app: { loading }
     } = store.getState();
@@ -36,7 +37,13 @@ class Home extends React.Component {
     return (
       <Row marginTop="1">
         <Col width="25">
-          <TopicsList topics={topics} onTopicClick={this.handleTopicClick} />
+          <FullHeightContainer borderRight>
+            <TopicsList
+              topics={topics}
+              onTopicClick={this.handleTopicClick}
+              activeTopic={currentTopic}
+            />
+          </FullHeightContainer>
         </Col>
         <Col>
           {loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}
@@ -48,6 +55,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   topics: state.topics.topics,
+  currentTopic: state.topics.currentTopic,
   articles: state.articles,
   loadingArticles: state.articles.loading,
   loading: state.app.loading

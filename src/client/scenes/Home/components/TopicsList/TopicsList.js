@@ -4,7 +4,7 @@ import { List, ListItem } from "ui";
 
 import TopicsListItem from "./components/TopicsListItem";
 
-const TopicsList = ({ topics, onTopicClick }) =>
+const TopicsList = ({ topics, onTopicClick, activeTopic }) =>
   topics.length < 1
     ? <HelpBlock bsClass="center-align">
         There are no topics created yet
@@ -17,6 +17,7 @@ const TopicsList = ({ topics, onTopicClick }) =>
               key={topic.id}
               topic={topic}
               onTopicClick={onTopicClick}
+              isActive={activeTopic && activeTopic.id === topic.id}
             />
           )}
       </List>;

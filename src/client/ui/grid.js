@@ -12,8 +12,18 @@ const Row = styled.div.attrs({
 `;
 
 const Col = styled.div.attrs({
-  className: props => (props.width ? `column column-${props.width}` : "column")
+  className: props => {
+    let className = "column ";
+    if (props.width) {
+      className += `column-${props.width}`;
+    }
+    if (props.offset) {
+      className += `column-offset-${props.offset}`;
+    }
+    return className;
+  }
 })`
+  position: ${props => (props.fixed ? "fixed" : "")}
 `;
 
 export { Row, Col };
