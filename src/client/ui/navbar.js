@@ -31,6 +31,8 @@ const Nav = styled.div`
     return "flex-start";
   }};
   width: 100%;
+  margin-bottom: ${props =>
+    props.marginBottom ? `${props.marginBottom}rem` : ""};
 `;
 
 const NavItem = styled.div`
@@ -38,14 +40,27 @@ const NavItem = styled.div`
   margin-bottom: 1rem;
   height: 4rem;
   max-height: 4rem;
-  margin-left: 2rem;
+  margin-left: ${props => (props.tab ? "0rem" : "2rem")};
+  padding: ${props => (props.tab ? "1rem 2rem" : "")};
+  border: ${props => (props.tab ? `1px solid #d1d1d1` : "")};
+  border-bottom: ${props => (props.tab && props.active ? "none" : "")};
+  background-color: ${props => {
+    if (props.tab) {
+      if (props.active) {
+        return "#fff";
+      }
+      return "#efefef";
+    }
+    return "";
+  }};
+  cursor: ${props => (props.cursorPointer ? "pointer" : "")};
+  width: ${props => (props.tab ? "100%" : "")};
   a {
     display: block;
     display: block;
     font-size: 1.4rem;
     line-height: 4rem;
     text-transform: uppercase;
-}
   }
   * {
     height: 100%;

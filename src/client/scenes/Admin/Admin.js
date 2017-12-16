@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import "./Admin.css";
+import { Row, Col } from "ui";
 
 import AdminNavBar from "./components/AdminNavBar";
 
@@ -28,7 +28,8 @@ class Admin extends React.Component {
     return currentTab;
   };
 
-  updateTab = name => {
+  updateTab = (name, e) => {
+    e.preventDefault();
     this.setState({
       tab: name
     });
@@ -41,16 +42,29 @@ class Admin extends React.Component {
     const { location, match } = this.props;
 
     return (
-      <div>
-        <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
-        {location.pathname === "/admin"
-          ? <Redirect to={`${match.url}/users`} />
-          : ""}
-        <Switch>
-          <Route path={`${match.url}/topics`} component={ManageTopics} />
-          <Route path={`${match.url}/users`} component={ManageUsers} />
-        </Switch>
-      </div>
+      <Row>
+        <Col>
+          <Row>
+            <Col>
+              <AdminNavBar
+                handleSelect={this.updateTab}
+                activeTab={this.state.tab}
+              />
+              {location.pathname === "/admin"
+                ? <Redirect to={`${match.url}/users`} />
+                : ""}
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Switch>
+                <Route path={`${match.url}/topics`} component={ManageTopics} />
+                <Route path={`${match.url}/users`} component={ManageUsers} />
+              </Switch>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }

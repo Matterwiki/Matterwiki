@@ -1,17 +1,20 @@
 import React from "react";
-import { Nav, NavItem } from "react-bootstrap";
+import { Nav, NavItem } from "ui";
 
 const AdminNavBar = ({ activeTab, handleSelect }) =>
-  <Nav
-    bsStyle="tabs"
-    className="admin-nav"
-    justified
-    activeKey={activeTab}
-    onSelect={handleSelect}>
-    <NavItem role="presentation" eventKey="users">
+  <Nav marginBottom="2">
+    <NavItem
+      onClick={e => handleSelect("users", e)}
+      active={activeTab === "users"}
+      tab
+      cursorPointer>
       Users
     </NavItem>
-    <NavItem role="presentation" eventKey="topics">
+    <NavItem
+      onClick={e => handleSelect("topics", e)}
+      active={activeTab === "topics"}
+      tab
+      cursorPointer>
       Topics
     </NavItem>
   </Nav>;

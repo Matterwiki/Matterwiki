@@ -1,5 +1,6 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Row, Col, List, ListItem, ListItemHeader, Button } from "ui";
+import { Clearfix, FloatRight } from "ui/utils";
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
@@ -14,32 +15,39 @@ class ResourceListItem extends React.Component {
   render() {
     const { item } = this.props;
     return (
-      <ListGroupItem header={item.name}>
-        {/* Only used in the Admin section at this point. If this were to be used elswehere, 
+      <ListItem>
+        <Row>
+          <Col>
+            <ListItemHeader>
+              {item.name}
+            </ListItemHeader>
+            {/* Only used in the Admin section at this point. If this were to be used elswehere, 
           a schema level change is inevitable */}
-        {item.description || item.about || "-"}
-        <span className="pull-right">
-          <Button
-            onClick={e => {
-              this.handleEditClick(item, e);
-            }}>
-            Edit
-          </Button>
-          {item.id !== 1 &&
+            {item.description || item.about || "-"}
+          </Col>
+          <Col width="50" textAlign="right">
             <Button
               onClick={e => {
-                this.handleDeleteClick(item, e);
+                this.handleEditClick(item, e);
               }}>
-              Delete
-            </Button>}
-        </span>
-      </ListGroupItem>
+              Edit
+            </Button>&nbsp;
+            {item.id !== 1 &&
+              <Button
+                onClick={e => {
+                  this.handleDeleteClick(item, e);
+                }}>
+                Delete
+              </Button>}
+          </Col>
+        </Row>
+      </ListItem>
     );
   }
 }
 
 const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) =>
-  <ListGroup>
+  <List>
     {items.map(item =>
       <ResourceListItem
         key={item.id}
@@ -49,6 +57,6 @@ const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) =>
         onDeleteClick={onDeleteClick}
       />
     )}
-  </ListGroup>;
+  </List>;
 
 export default ResourceList;

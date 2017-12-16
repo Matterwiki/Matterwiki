@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Row, Col } from "ui";
 import Alert from "react-s-alert";
 
 import Loader from "components/Loader/Loader";
@@ -94,31 +94,25 @@ class ManageUsers extends React.Component {
       ? EDIT_USER_FORM_FIELDS
       : USER_FORM_FIELDS;
     return (
-      <Grid>
-        <Row>
-          <Col sm={12} md={4}>
-            <Row>
-              <Col md={12} sm={12}>
-                <ItemForm
-                  itemFormFields={itemFormFields}
-                  item={currentUser}
-                  itemName="user"
-                  onSubmit={onSubmit}
-                  onCancelUpdate={this.emptyCurrentUserState}
-                />
-              </Col>
-            </Row>
-          </Col>
-          <Col sm={12} md={8}>
-            <ItemList
-              items={users}
-              itemName="user"
-              onDeleteClick={this.deleteUser}
-              onEditClick={this.handleEditClick}
-            />
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <Col width="25">
+          <ItemForm
+            itemFormFields={itemFormFields}
+            item={currentUser}
+            itemName="user"
+            onSubmit={onSubmit}
+            onCancelUpdate={this.emptyCurrentUserState}
+          />
+        </Col>
+        <Col>
+          <ItemList
+            items={users}
+            itemName="user"
+            onDeleteClick={this.deleteUser}
+            onEditClick={this.handleEditClick}
+          />
+        </Col>
+      </Row>
     );
   }
 }

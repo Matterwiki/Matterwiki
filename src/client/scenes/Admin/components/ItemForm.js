@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
+import { Form, Input, Button } from "ui";
 
 class ItemForm extends React.Component {
   componentWillMount() {
@@ -52,30 +52,25 @@ class ItemForm extends React.Component {
     return (
       <div>
         {currentlyEditing}
-        <Form className="tabform" onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit}>
           {itemFormFields.map(formField =>
-            <Col sm={12} key={formField.name}>
-              <FormGroup>
-                <FormControl
-                  type={formField.type}
-                  placeholder={formField.name}
-                  name={formField.name}
-                  value={this.state[formField.name]}
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-            </Col>
+            <Input
+              type={formField.type}
+              placeholder={formField.name}
+              name={formField.name}
+              value={this.state[formField.name]}
+              onChange={this.onChange}
+              key={formField.name}
+            />
           )}
-          <Col sm={12}>
-            <Button type="submit" block>
-              {item ? `Update ${itemName}` : `Add ${itemName}`}
-            </Button>
-            {item
-              ? <Button block onClick={this.cancelUpdate}>
-                  Cancel
-                </Button>
-              : ""}
-          </Col>
+          <Button type="submit" block>
+            {item ? `Update ${itemName}` : `Add ${itemName}`}
+          </Button>
+          {item
+            ? <Button block onClick={this.cancelUpdate}>
+                Cancel
+              </Button>
+            : ""}
         </Form>
       </div>
     );
