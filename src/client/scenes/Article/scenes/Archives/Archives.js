@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
+import { HelpBlock } from "react-bootstrap";
+import { Row, Col, Heading } from "ui";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
@@ -13,8 +14,6 @@ import {
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
-
-import "./Archives.css";
 
 class ArticleHistory extends React.Component {
   componentDidMount() {
@@ -39,24 +38,25 @@ class ArticleHistory extends React.Component {
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
-        <Grid>
-          <Row>
-            <Col md={3}>
-              <span>Archives</span>
-              <BrowseArchives
-                archives={archives}
-                onArchiveChosen={this.getArchive}
-                articleId={this.props.match.params.articleId}
-              />
-            </Col>
-            <Col md={9}>
-              <SimpleArticle
-                article={currentArchive}
-                loading={loadingCurrentArchive}
-              />
-            </Col>
-          </Row>
-        </Grid>
+        <Row>
+          <Col width="25">
+            <Heading size="1" transform="uppercase">
+              Archives
+            </Heading>
+            <BrowseArchives
+              archives={archives}
+              onArchiveChosen={this.getArchive}
+              articleId={this.props.match.params.articleId}
+              currentArchive={currentArchive}
+            />
+          </Col>
+          <Col>
+            <SimpleArticle
+              article={currentArchive}
+              loading={loadingCurrentArchive}
+            />
+          </Col>
+        </Row>
       );
     }
     return (

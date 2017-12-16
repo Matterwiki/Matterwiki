@@ -1,5 +1,6 @@
 import React from "react";
-import { Grid, Row, Col, HelpBlock } from "react-bootstrap";
+import { HelpBlock } from "react-bootstrap";
+import { Row, Col } from "ui";
 import Loader from "components/Loader/Loader";
 
 import ArticleHeading from "./ArticleHeading";
@@ -12,18 +13,14 @@ const SimpleArticle = ({ loading, article }) => {
   if (article && article.title) {
     const rawContent = JSON.parse(article.content);
     return (
-      <Grid fluid>
-        <Row>
-          <Col md={12}>
-            <ArticleHeading editedBy={article.createdUser.name}>
-              {article.title}
-            </ArticleHeading>
-            <div className="single-article-body">
-              <WikiEditor readOnly rawContent={rawContent} />
-            </div>
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <Col>
+          <ArticleHeading editedBy={article.createdUser.name}>
+            {article.title}
+          </ArticleHeading>
+          <WikiEditor readOnly rawContent={rawContent} />
+        </Col>
+      </Row>
     );
   }
   return (

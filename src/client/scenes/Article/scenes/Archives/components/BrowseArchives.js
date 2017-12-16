@@ -1,50 +1,41 @@
 import React from "react";
 import { HelpBlock, Button, ListGroup, ListGroupItem } from "react-bootstrap";
 
+import { List, ListItem, ListItemHeader, ListItemBody } from "ui";
+
 // TODO Componentize further?
-const BrowseArchives = ({ onArchiveChosen, archives }) => {
+const BrowseArchives = ({ onArchiveChosen, archives, currentArchive }) => {
   const archiveClick = (id, e) => {
     e.preventDefault();
     onArchiveChosen(id);
   };
 
   if (!archives.length) {
-    return (
-      <HelpBlock className="center-align">
-        There are no archives for this article
-      </HelpBlock>
-    );
+    return <HelpBlock>There are no archives for this article</HelpBlock>;
   }
   return (
-    <div className="custom-collapse">
-      <div className="visible-xs">
-        <Button
-          className="collapse-toggle"
-          data-toggle="collapse"
-          data-parent="custom-collapse"
-          data-target="#side-menu-collapse">
-          View Archives
-        </Button>
-        <br />
-        <br />
-      </div>
-      <ListGroup id="side-menu-collapse" className="collapse archive-list">
-        {archives.map(archive => {
-          const lastUpdated = new Date(
-            archive.updated_at.replace(" ", "T")
-          ).toDateString();
+    <List>
+      {archives.map(archive => {
+        const lastUpdated = new Date(
+          archive.updated_at.replace(" ", "T")
+        ).toDateString();
 
-          return (
-            <ListGroupItem
-              key={archive.id}
-              header={lastUpdated}
-              onClick={e => archiveClick(archive.id, e)}>
+        return (
+          <ListItem
+            key={archive.id}
+            onClick={e => archiveClick(archive.id, e)}
+            cursorPointer
+            active={currentArchive && currentArchive.id === archive.id}>
+            <ListItemHeader>
+              {lastUpdated}
+            </ListItemHeader>
+            <ListItemBody>
               {archive.change_log}
-            </ListGroupItem>
-          );
-        })}
-      </ListGroup>
-    </div>
+            </ListItemBody>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 
