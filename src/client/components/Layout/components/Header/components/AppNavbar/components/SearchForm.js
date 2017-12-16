@@ -1,5 +1,6 @@
 import React from "react";
-import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
+import { NavForm, Button, Input } from "ui";
+import { DisplayFlexRow } from "ui/utils";
 import FaSearch from "react-icons/lib/fa/search";
 import { withRouter } from "react-router-dom";
 
@@ -28,22 +29,18 @@ class SearchForm extends React.Component {
 
   render() {
     return (
-      <Navbar.Form pullRight>
-        <Form onSubmit={this.onSubmit}>
-          <FormGroup>
-            <FormControl
-              className="search-input"
-              type="text"
-              placeholder="Search"
-              value={this.state.searchText}
-              onChange={this.onChange}
-            />
-          </FormGroup>
-          <Button type="submit" className="search-button">
-            <FaSearch />
-          </Button>
-        </Form>
-      </Navbar.Form>
+      <NavForm onSubmit={this.onSubmit}>
+        <Input
+          className="search-input"
+          type="text"
+          placeholder="Search"
+          value={this.state.searchText}
+          onChange={this.onChange}
+        />
+        <Button type="submit" className="search-button">
+          <FaSearch />
+        </Button>
+      </NavForm>
     );
   }
 }

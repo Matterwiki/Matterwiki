@@ -5,6 +5,7 @@ const Container = styled.div.attrs({
 })`
   width: ${props => (props.width ? props.width : "100")}%;
   text-align: ${props => (props.textAlign ? props.textAlign : "left")};
+  margin-top: 2rem;
 `;
 
 export default Container;
