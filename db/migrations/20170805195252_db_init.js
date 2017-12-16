@@ -5,11 +5,17 @@ exports.up = knex => {
       table.collate("utf8_unicode_ci");
       table.increments().primary();
       table.string("name").notNullable();
-      table.string("email").notNullable().unique();
+      table
+        .string("email")
+        .notNullable()
+        .unique();
       table.string("password").notNullable();
       table.string("about").notNullable();
       table.enu("role", ["ADMIN", "USER"]).notNullable();
-      table.boolean("is_active").notNullable().default(true);
+      table
+        .boolean("is_active")
+        .notNullable()
+        .default(true);
       table.timestamps(true, true);
     });
 
@@ -18,9 +24,15 @@ exports.up = knex => {
       table.charset("utf8");
       table.collate("utf8_unicode_ci");
       table.increments().primary();
-      table.string("name").notNullable().unique();
+      table
+        .string("name")
+        .notNullable()
+        .unique();
       table.string("description").notNullable();
-      table.boolean("is_active").notNullable().defaultTo(true);
+      table
+        .boolean("is_active")
+        .notNullable()
+        .defaultTo(true);
       table.timestamps(true, true);
     });
 
@@ -32,10 +44,23 @@ exports.up = knex => {
       table.string("title").notNullable();
       table.text("content").notNullable();
       table.string("change_log").notNullable();
-      table.integer("topic_id").unsigned().references("topic.id").notNullable();
-      table.integer("created_by_id").unsigned().references("user.id");
-      table.integer("modified_by_id").unsigned().references("user.id");
-      table.boolean("is_active").notNullable().defaultTo(true);
+      table
+        .integer("topic_id")
+        .unsigned()
+        .references("topic.id")
+        .notNullable();
+      table
+        .integer("created_by_id")
+        .unsigned()
+        .references("user.id");
+      table
+        .integer("modified_by_id")
+        .unsigned()
+        .references("user.id");
+      table
+        .boolean("is_active")
+        .notNullable()
+        .defaultTo(true);
       table.timestamps(true, true);
     });
 
@@ -53,10 +78,22 @@ exports.up = knex => {
       table.string("title");
       table.text("content");
       table.string("change_log");
-      table.integer("topic_id").unsigned().references("topic.id");
-      table.integer("created_by_id").unsigned().references("user.id");
-      table.integer("modified_by_id").unsigned().references("user.id");
-      table.boolean("is_active").notNullable().defaultTo(true);
+      table
+        .integer("topic_id")
+        .unsigned()
+        .references("topic.id");
+      table
+        .integer("created_by_id")
+        .unsigned()
+        .references("user.id");
+      table
+        .integer("modified_by_id")
+        .unsigned()
+        .references("user.id");
+      table
+        .boolean("is_active")
+        .notNullable()
+        .defaultTo(true);
       table.timestamps(true, true);
     });
 
@@ -67,7 +104,6 @@ exports.up = knex => {
 };
 
 exports.down = (knex, Promise) =>
-  Promise.mapSeries(
-    ["article_history", "article", "topic", "user"],
-    tableName => knex.dropTableIfExists(tableName)
+  Promise.mapSeries(["article_history", "article", "topic", "user"], tableName =>
+    knex.dropTableIfExists(tableName)
   );

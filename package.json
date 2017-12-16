@@ -4,25 +4,26 @@
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=prod webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
-    "start": "npm run build && cross-env NODE_ENV=prod node ./src/api/server.js",
-    "dev": "cross-env NODE_ENV=dev nodemon --config nodemon.json ./src/api/server.js",
-    "dev:debug": "cross-env NODE_ENV=dev nodemon --config nodemon.json  --inspect=5858 ./src/api/server.js",
+    "build":
+      "cross-env NODE_ENV=prod webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
+    "start":
+      "npm run build && cross-env NODE_ENV=prod node ./src/api/server.js",
+    "dev":
+      "cross-env NODE_ENV=dev nodemon --config nodemon.json ./src/api/server.js",
+    "dev:debug":
+      "cross-env NODE_ENV=dev nodemon --config nodemon.json  --inspect=5858 ./src/api/server.js",
     "db:migrate": "knex migrate:latest",
     "db:migrate_make": "knex migrate:make",
     "db:seed": "knex seed:run",
     "db:seed_make": "knex seed:make",
     "lint": "eslint ./src/**",
-    "format": "prettier --write --jsx-bracket-same-line",
-    "test": "cross-env NODE_ENV=test jest --config ./jest.config.json --runInBand",
+    "format": "prettier --write --jsx-bracket-same-line --print-width 100",
+    "test":
+      "cross-env NODE_ENV=test jest --config ./jest.config.json --runInBand",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run format",
-      "npm run lint",
-      "git add"
-    ]
+    "*.js": ["npm run format", "npm run lint", "git add"]
   },
   "bin": {
     "wiki": "./install.js"
@@ -34,7 +35,8 @@
     "type": "git",
     "url": "git+https://github.com/Matterwiki/Matterwiki.git"
   },
-  "author": "Krishna Gopinath (@krishnagopinath) and Nishant Arora (@nshntarora)",
+  "author":
+    "Krishna Gopinath (@krishnagopinath) and Nishant Arora (@nshntarora)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Matterwiki/Matterwiki/issues"
@@ -52,13 +54,15 @@
     "draftjs-utils": "^0.7.4",
     "express": "^4.15.3",
     "helmet": "^3.6.1",
+    "http-status-codes": "^1.3.0",
     "jsonwebtoken": "^7.4.1",
     "knex": "0.13.0",
     "lodash": "^4.17.4",
-    "mariasql": "^0.2.6",
     "morgan": "^1.8.2",
     "mysql": "^2.15.0",
-    "objection": "^0.8.6",
+    "objection": "^0.9.2",
+    "objection-unique": "^0.2.1",
+    "prettier-eslint": "^8.2.2",
     "react": "15.3.0",
     "react-bootstrap": "^0.30.10",
     "react-dom": "15.3.0",
@@ -98,7 +102,7 @@
     "knex-db-manager": "^0.3.0",
     "lint-staged": "^4.0.0",
     "nodemon": "^1.11.0",
-    "prettier": "^1.5.2",
+    "prettier": "^1.8.2",
     "redux-devtools": "^3.4.0",
     "style-loader": "^0.17.0",
     "superagent": "^3.5.2",
