@@ -1,21 +1,21 @@
 import React from "react";
 
+import { Heading } from "ui";
+
 const LastUpdatedDate = ({ date }) =>
-  <div className="single-article-meta">
+  <span>
     Last updated on {new Date(date.replace(" ", "T")).toDateString()}
-  </div>;
+  </span>;
 
 const EditedBy = ({ name }) =>
-  <div className="single-article-meta">
-    Edited by <b>{name}</b>
-  </div>;
+  <span>
+    by <b>{name}</b>
+  </span>;
 
 const ArticleHeading = ({ children, date, editedBy }) =>
-  <div className="article-heading">
-    <h1 className="single-article-title">
-      {children}
-    </h1>
-    {date && <LastUpdatedDate date={date} />}
+  <div>
+    <Heading size="6">{children}</Heading>
+    {date && <LastUpdatedDate date={date} />}&nbsp;
     {editedBy && <EditedBy name={editedBy} />}
   </div>;
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
-   sodipodi:docname="logomw.svg">
+   sodipodi:docname="logo.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="466.88571"
-     inkscape:cy="548.57143"
+     inkscape:cx="679.38586"
+     inkscape:cy="551.42857"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g5449-3-2"
      showgrid="false"
      inkscape:showpageshadow="false"
      inkscape:window-width="1366"
@@ -56,58 +56,65 @@
      transform="translate(0,-254)">
     <g
        id="g5449-3-2"
-       transform="matrix(1.9986255,0,0,1.9986255,439.6262,-26.985149)">
+       transform="matrix(1.9986255,0,0,1.9986255,439.6262,-26.985149)"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
       <g
-         style="fill:#ff0066;fill-opacity:1;stroke:none"
-         transform="translate(-5.2916616,-2.6458384)"
-         id="g4985-6-6-7">
-        <rect
-           style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.13383266;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312"
-           id="rect4964-0-7-0"
-           width="10.583333"
-           height="15.874995"
-           x="-214.3125"
-           y="143.54167" />
-        <rect
-           style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.11740765;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312"
-           id="rect4966-64-5-9"
-           width="2.6458445"
-           height="15.87501"
-           x="-195.79167"
-           y="143.54167" />
-        <rect
-           style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.11833527;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312"
-           id="rect4970-30-3-3"
-           width="21.166674"
-           height="2.6458333"
-           x="-214.3125"
-           y="162.0625" />
-        <rect
-           style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.13784453;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312"
-           id="rect4972-5-5-6"
-           width="2.7850773"
-           height="2.6458347"
-           x="-201.08333"
-           y="143.54167" />
-        <rect
-           style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.12329213;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312"
-           id="rect4976-4-6-0"
-           width="2.6110196"
-           height="10.583337"
-           x="-201.08333"
-           y="148.83333" />
+         id="g829"
+         inkscape:export-xdpi="300"
+         inkscape:export-ydpi="300">
+        <g
+           id="g4985-6-6-7"
+           transform="translate(-5.6698977,-108.55196)"
+           style="fill:#ff0066;fill-opacity:1;stroke:none">
+          <rect
+             y="143.54167"
+             x="-214.3125"
+             height="15.874995"
+             width="10.583333"
+             id="rect4964-0-7-0"
+             style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.13383266;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312" />
+          <rect
+             y="143.54167"
+             x="-195.79167"
+             height="15.87501"
+             width="2.6458445"
+             id="rect4966-64-5-9"
+             style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.11740765;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312" />
+          <rect
+             y="162.0625"
+             x="-214.3125"
+             height="2.6458333"
+             width="21.166674"
+             id="rect4970-30-3-3"
+             style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.11833527;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312" />
+          <rect
+             y="143.54167"
+             x="-201.08333"
+             height="2.6458347"
+             width="2.7850773"
+             id="rect4972-5-5-6"
+             style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.13784453;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312" />
+          <rect
+             y="148.83333"
+             x="-201.08333"
+             height="10.583337"
+             width="2.6110196"
+             id="rect4976-4-6-0"
+             style="opacity:1;fill:#ff0066;fill-opacity:1;stroke:none;stroke-width:0.12329213;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.42396312" />
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.12007713px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.70300192"
+           x="-196.03293"
+           y="55.999828"
+           id="text5403-1-29-6"><tspan
+             sodipodi:role="line"
+             id="tspan5401-4-1-2"
+             x="-196.03293"
+             y="55.999828"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Lato;-inkscape-font-specification:'Lato Bold';fill:#333333;stroke-width:0.70300192">Matterwiki</tspan></text>
       </g>
-      <text
-         id="text5403-1-29-6"
-         y="161.90594"
-         x="-195.65469"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.12007713px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.70300192"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lato;-inkscape-font-specification:Lato;fill:#333333;stroke-width:0.70300192"
-           y="161.90594"
-           x="-195.65469"
-           id="tspan5401-4-1-2"
-           sodipodi:role="line">Matterwiki</tspan></text>
     </g>
   </g>
 </svg>
