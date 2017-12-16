@@ -5,6 +5,8 @@ const Heading = styled.div`
   text-transform: ${props => (props.transform ? props.transform : "")};
   margin-bottom: 1rem;
   font-weight: 700;
+  border-bottom: ${props => (props.borderBottom ? `1px solid` : "")};
+  padding-bottom: 1rem;
 `;
 
 export default Heading;

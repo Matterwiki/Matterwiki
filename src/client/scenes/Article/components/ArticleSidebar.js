@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Sidebar, Button } from "ui";
 import ArticleSidebarItem from "./ArticleSidebarItem";
 
 const ArticleSidebar = ({
@@ -9,7 +9,7 @@ const ArticleSidebar = ({
   onHistoryClick,
   onDeleteClick
 }) =>
-  <div className="article-sidebar">
+  <Sidebar>
     <ArticleSidebarItem title="Filed under">
       <h2 className="color-text">
         <b>
@@ -18,11 +18,9 @@ const ArticleSidebar = ({
       </h2>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="Last Updated By">
-      <h3>
-        <b>
-          {article.createdUser.name}
-        </b>
-      </h3>
+      <b>
+        {article.createdUser.name}
+      </b>
       <p>
         {article.createdUser.about}
       </p>
@@ -40,6 +38,6 @@ const ArticleSidebar = ({
       <Button block onClick={onDeleteClick}>
         Delete
       </Button>}
-  </div>;
+  </Sidebar>;
 
 export default ArticleSidebar;

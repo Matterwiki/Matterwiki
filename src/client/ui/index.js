@@ -10,6 +10,7 @@ import Footer from "./footer";
 import { Navbar, Nav, NavItem, NavForm } from "./navbar";
 import { List, ListItem, ListItemBody, ListItemHeader } from "./list";
 import Heading from "./heading";
+import { Sidebar, SidebarBlock } from "./sidebar";
 
 export {
   Button,
@@ -28,5 +29,7 @@ export {
   ListItem,
   ListItemBody,
   ListItemHeader,
-  Heading
+  Heading,
+  Sidebar,
+  SidebarBlock
 };

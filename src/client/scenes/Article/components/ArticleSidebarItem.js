@@ -1,11 +1,13 @@
 import React from "react";
 
+import { Heading, SidebarBlock } from "ui";
+
 const ArticleSidebarItem = ({ title, children }) =>
-  <div className="sidebar-block">
-    <div className="sidebar-title">
+  <SidebarBlock>
+    <Heading size="1" transform="uppercase">
       {title}
-    </div>
+    </Heading>
     {children}
-  </div>;
+  </SidebarBlock>;
 
 export default ArticleSidebarItem;
