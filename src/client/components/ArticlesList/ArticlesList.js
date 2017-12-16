@@ -6,8 +6,6 @@ import { List } from "ui";
 import Loader from "components/Loader/Loader";
 import ArticlesListItem from "./components/ArticlesListItem";
 
-import "./ArticlesList.css";
-
 const ArticlesList = props => {
   const { articles } = props;
 

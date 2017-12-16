@@ -7,8 +7,6 @@ import APIProvider from "utils/APIProvider";
 
 import LoginForm from "./components/LoginForm";
 
-import "./Login.css";
-
 class Login extends React.Component {
   componentDidMount() {
     if (window.localStorage.getItem("userToken")) {
