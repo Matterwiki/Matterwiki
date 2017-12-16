@@ -1,6 +1,8 @@
 import React from "react";
 import { HelpBlock } from "react-bootstrap";
 
+import { List } from "ui";
+
 import Loader from "components/Loader/Loader";
 import ArticlesListItem from "./components/ArticlesListItem";
 
@@ -22,11 +24,11 @@ const ArticlesList = props => {
     );
   }
   return (
-    <div className="article-list">
+    <List>
       {articles.map(article =>
         <ArticlesListItem key={article.id} article={article} />
       )}
-    </div>
+    </List>
   );
 };
 
