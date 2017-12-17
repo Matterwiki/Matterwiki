@@ -6,13 +6,6 @@ import { connect } from "react-redux";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 
-import {
-  addTopics,
-  startLoadingTopics,
-  stopLoadingTopics,
-  setCurrentTopic,
-  emptyCurrentTopic
-} from "state/actions/topic";
 import store from "state/store";
 import {
   loadTopicsPage,
@@ -34,6 +27,10 @@ const TOPIC_FORM_FIELDS = [
 class ManageTopics extends React.Component {
   componentDidMount() {
     this.handleUpdate();
+  }
+
+  componentWillUnmount() {
+    store.dispatch(disposeTopicsPage());
   }
 
   handleUpdate = () => {
