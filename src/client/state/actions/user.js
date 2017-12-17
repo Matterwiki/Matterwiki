@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   ADD_USERS,
   EMPTY_USERS,
@@ -8,40 +7,28 @@ import {
   EMPTY_CURRENT_USER
 } from "state/actions/types";
 
-export const addUsers = users => {
-  return {
-    type: ADD_USERS,
-    users
-  };
-};
+export const addUsers = users => ({
+  type: ADD_USERS,
+  users
+});
 
-export const emptyUsers = () => {
-  return {
-    type: EMPTY_USERS
-  };
-};
+export const emptyUsers = () => ({
+  type: EMPTY_USERS
+});
 
-export const startLoadingUsers = () => {
-  return {
-    type: START_LOADING_USERS
-  };
-};
+export const startLoadingUsers = () => ({
+  type: START_LOADING_USERS
+});
 
-export const stopLoadingUsers = () => {
-  return {
-    type: STOP_LOADING_USERS
-  };
-};
+export const stopLoadingUsers = () => ({
+  type: STOP_LOADING_USERS
+});
 
-export const setCurrentUser = user => {
-  return {
-    type: SET_CURRENT_USER,
-    user
-  };
-};
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  user
+});
 
-export const emptyCurrentUser = () => {
-  return {
-    type: EMPTY_CURRENT_USER
-  };
-};
+export const emptyCurrentUser = () => ({
+  type: EMPTY_CURRENT_USER
+});

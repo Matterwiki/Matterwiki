@@ -1,4 +1,3 @@
-/* eslint-disable*/
 export const START_LOADING_APP = "START_LOADING_APP";
 export const STOP_LOADING_APP = "STOP_LOADING_APP";
 

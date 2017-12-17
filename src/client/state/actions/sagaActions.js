@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   LOAD_HOMEPAGE,
   DISPOSE_HOMEPAGE,
@@ -18,105 +17,73 @@ import {
   DISPOSE_EDIT_TOPIC
 } from "./types";
 
-export const loadHomepage = () => {
-  return {
-    type: LOAD_HOMEPAGE
-  };
-};
+export const loadHomepage = () => ({
+  type: LOAD_HOMEPAGE
+});
 
-export const disposeHomepage = () => {
-  return {
-    type: DISPOSE_HOMEPAGE
-  };
-};
+export const disposeHomepage = () => ({
+  type: DISPOSE_HOMEPAGE
+});
 
-export const fetchArticlesByTopic = id => {
-  return {
-    type: FETCH_ARTICLES_BY_TOPIC,
-    id
-  };
-};
+export const fetchArticlesByTopic = id => ({
+  type: FETCH_ARTICLES_BY_TOPIC,
+  id
+});
 
-export const loadArticlePage = id => {
-  return {
-    type: LOAD_ARTICLE_PAGE,
-    id
-  };
-};
+export const loadArticlePage = id => ({
+  type: LOAD_ARTICLE_PAGE,
+  id
+});
 
-export const disposeArticlePage = () => {
-  return {
-    type: DISPOSE_ARTICLE_PAGE
-  };
-};
+export const disposeArticlePage = () => ({
+  type: DISPOSE_ARTICLE_PAGE
+});
 
-export const loadArchivesPage = articleId => {
-  return {
-    type: LOAD_ARCHIVES_PAGE,
-    articleId
-  };
-};
+export const loadArchivesPage = articleId => ({
+  type: LOAD_ARCHIVES_PAGE,
+  articleId
+});
 
-export const disposeArchivesPage = () => {
-  return {
-    type: DISPOSE_ARCHIVES_PAGE
-  };
-};
+export const disposeArchivesPage = () => ({
+  type: DISPOSE_ARCHIVES_PAGE
+});
 
-export const fetchArchiveById = (articleId, archiveId) => {
-  return {
-    type: FETCH_ARCHIVE_BY_ID,
-    articleId,
-    archiveId
-  };
-};
+export const fetchArchiveById = (articleId, archiveId) => ({
+  type: FETCH_ARCHIVE_BY_ID,
+  articleId,
+  archiveId
+});
 
-export const loadUsersPage = () => {
-  return {
-    type: LOAD_USERS_PAGE
-  };
-};
+export const loadUsersPage = () => ({
+  type: LOAD_USERS_PAGE
+});
 
-export const disposeUsersPage = () => {
-  return {
-    type: DISPOSE_USERS_PAGE
-  };
-};
+export const disposeUsersPage = () => ({
+  type: DISPOSE_USERS_PAGE
+});
 
-export const loadEditUser = id => {
-  return {
-    type: LOAD_EDIT_USER,
-    id
-  };
-};
+export const loadEditUser = id => ({
+  type: LOAD_EDIT_USER,
+  id
+});
 
-export const disposeEditUser = () => {
-  return {
-    type: DISPOSE_EDIT_USER
-  };
-};
+export const disposeEditUser = () => ({
+  type: DISPOSE_EDIT_USER
+});
 
-export const loadTopicsPage = () => {
-  return {
-    type: LOAD_TOPICS_PAGE
-  };
-};
+export const loadTopicsPage = () => ({
+  type: LOAD_TOPICS_PAGE
+});
 
-export const disposeTopicsPage = () => {
-  return {
-    type: DISPOSE_TOPICS_PAGE
-  };
-};
+export const disposeTopicsPage = () => ({
+  type: DISPOSE_TOPICS_PAGE
+});
 
-export const loadEditTopic = id => {
-  return {
-    type: LOAD_EDIT_TOPIC,
-    id
-  };
-};
+export const loadEditTopic = id => ({
+  type: LOAD_EDIT_TOPIC,
+  id
+});
 
-export const disposeEditTopic = () => {
-  return {
-    type: DISPOSE_EDIT_TOPIC
-  };
-};
+export const disposeEditTopic = () => ({
+  type: DISPOSE_EDIT_TOPIC
+});

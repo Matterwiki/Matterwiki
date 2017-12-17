@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   ADD_ARCHIVES,
   EMPTY_ARCHIVES,
@@ -8,40 +7,28 @@ import {
   EMPTY_CURRENT_ARCHIVE
 } from "./types";
 
-export const addArchives = archives => {
-  return {
-    type: ADD_ARCHIVES,
-    archives
-  };
-};
+export const addArchives = archives => ({
+  type: ADD_ARCHIVES,
+  archives
+});
 
-export const emptyArchives = () => {
-  return {
-    type: EMPTY_ARCHIVES
-  };
-};
+export const emptyArchives = () => ({
+  type: EMPTY_ARCHIVES
+});
 
-export const startLoadingArchives = () => {
-  return {
-    type: START_LOADING_ARCHIVES
-  };
-};
+export const startLoadingArchives = () => ({
+  type: START_LOADING_ARCHIVES
+});
 
-export const stopLoadingArchives = () => {
-  return {
-    type: STOP_LOADING_ARCHIVES
-  };
-};
+export const stopLoadingArchives = () => ({
+  type: STOP_LOADING_ARCHIVES
+});
 
-export const setCurrentArchive = archive => {
-  return {
-    type: SET_CURRENT_ARCHIVE,
-    archive
-  };
-};
+export const setCurrentArchive = archive => ({
+  type: SET_CURRENT_ARCHIVE,
+  archive
+});
 
-export const emptyCurrentArchive = () => {
-  return {
-    type: EMPTY_CURRENT_ARCHIVE
-  };
-};
+export const emptyCurrentArchive = () => ({
+  type: EMPTY_CURRENT_ARCHIVE
+});
