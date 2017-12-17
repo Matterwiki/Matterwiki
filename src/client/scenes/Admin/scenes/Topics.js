@@ -49,7 +49,7 @@ class ManageTopics extends React.Component {
   };
 
   updateTopic = topic => {
-    const id = this.state.currentTopic.id;
+    const id = this.props.currentTopic.id;
     APIProvider.put(`topics/${id}`, topic).then(() => {
       Alert.success("Topic has been edited");
       store.dispatch(disposeEditTopic());
@@ -69,7 +69,7 @@ class ManageTopics extends React.Component {
   };
 
   render() {
-    const { topics: { topics, loading, currentTopic } } = store.getState();
+    const { topics, currentTopic, loading } = this.props;
     if (loading) {
       return <Loader />;
     }
