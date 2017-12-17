@@ -35,15 +35,14 @@ class LoginForm extends React.Component {
       <Container width="50" textAlign="center">
         <Form onSubmit={this.onSubmit}>
           {LOGIN_FORM_FIELDS.map(formField =>
-            <Col key={formField.name}>
-              <Input
-                type={formField.type}
-                placeholder={formField.name}
-                name={formField.name}
-                value={this.state[formField.name]}
-                onChange={this.onChange}
-              />
-            </Col>
+            <Input
+              key={formField.name}
+              type={formField.type}
+              placeholder={formField.name}
+              name={formField.name}
+              value={this.state[formField.name]}
+              onChange={this.onChange}
+            />
           )}
           <Col sm={12}>
             <Button type="submit" block>
