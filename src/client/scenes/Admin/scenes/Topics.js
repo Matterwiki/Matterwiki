@@ -6,13 +6,13 @@ import { connect } from "react-redux";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 
-import store from "state/store";
+import store from "store";
 import {
   loadTopicsPage,
   disposeTopicsPage,
   loadEditTopic,
   disposeEditTopic
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";

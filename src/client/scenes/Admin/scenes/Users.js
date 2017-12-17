@@ -7,13 +7,13 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 
-import store from "state/store";
+import store from "store";
 import {
   loadUsersPage,
   disposeUsersPage,
   loadEditUser,
   disposeEditUser
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import store from "state/store";
+import store from "store";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
@@ -9,7 +9,7 @@ import {
   loadHomepage,
   disposeHomepage,
   fetchArticlesByTopic
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 

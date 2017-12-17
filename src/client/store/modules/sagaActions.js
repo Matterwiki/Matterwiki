@@ -15,7 +15,7 @@ import {
   DISPOSE_TOPICS_PAGE,
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC
-} from "./types";
+} from "store/actionTypes";
 
 export const loadHomepage = () => ({
   type: LOAD_HOMEPAGE

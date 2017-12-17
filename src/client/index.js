@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 // TODO replace this with core-js and use the stuff you just need
 import "babel-polyfill";
 
-import store from "./state/store";
+import store from "store";
 
 import Main from "./scenes/Main/Main";
 

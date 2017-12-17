@@ -15,7 +15,7 @@ import {
   DISPOSE_TOPICS_PAGE,
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC
-} from "state/actions/types";
+} from "store/actionTypes";
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
 
 import {
@@ -25,7 +25,7 @@ import {
   stopLoadingArticles,
   setCurrentArticle,
   emptyCurrentArticle
-} from "state/actions/article";
+} from "store/modules/article";
 
 import {
   addArchives,
@@ -34,7 +34,7 @@ import {
   emptyArchives,
   emptyCurrentArchive,
   setCurrentArchive
-} from "state/actions/archive";
+} from "store/modules/archive";
 
 import {
   addUsers,
@@ -43,7 +43,7 @@ import {
   stopLoadingUsers,
   setCurrentUser,
   emptyCurrentUser
-} from "state/actions/user";
+} from "store/modules/user";
 
 import {
   addTopics,
@@ -52,9 +52,9 @@ import {
   stopLoadingTopics,
   setCurrentTopic,
   emptyCurrentTopic
-} from "state/actions/topic";
+} from "store/modules/topic";
 
-import { startLoadingApp, stopLoadingApp } from "state/actions/app";
+import { startLoadingApp, stopLoadingApp } from "store/modules/app";
 
 import APIProvider from "utils/APIProvider";
 

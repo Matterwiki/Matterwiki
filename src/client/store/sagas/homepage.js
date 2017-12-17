@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { addArticles, emptyArticles } from "state/actions/article";
+import { addArticles, emptyArticles } from "store/modules/article";
 
-import { addTopics, emptyTopics } from "state/actions/topic";
+import { addTopics, emptyTopics } from "store/modules/topic";
 
 import APIProvider from "utils/APIProvider";
 

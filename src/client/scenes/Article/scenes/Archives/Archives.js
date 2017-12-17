@@ -4,12 +4,12 @@ import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
-import store from "state/store";
+import store from "store";
 import {
   loadArchivesPage,
   disposeArchivesPage,
   fetchArchiveById
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";

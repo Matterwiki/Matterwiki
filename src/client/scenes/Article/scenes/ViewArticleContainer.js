@@ -6,8 +6,8 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 
-import store from "state/store";
-import { loadArticlePage, disposeArticlePage } from "state/actions/sagaActions";
+import store from "store";
+import { loadArticlePage, disposeArticlePage } from "store/modules/sagaActions";
 
 import ViewArticle from "./ViewArticle";
 
