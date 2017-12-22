@@ -10,8 +10,8 @@ const ArticleSidebar = ({ article, isAdmin, onEditClick, onHistoryClick, onDelet
       </h2>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="Last Updated By" iconType="user">
-      <b>{article.createdUser.name}</b>
-      <p>{article.createdUser.about}</p>
+      <b>{article.createdByUser.name}</b>
+      <p>{article.createdByUser.about}</p>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="What Changed in last edit" iconType="edit-3">
       {article.change_log || <h4>No information available</h4>}

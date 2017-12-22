@@ -25,7 +25,7 @@ export function* disposeArticlePage() {
 
 export function* fetchArticlesByTopic(action) {
   yield put(startLoadingArticles());
-  const topic = yield call(APIProvider.get, `topics/${action.id}/articles`);
+  const topic = yield call(APIProvider.get, `articles?topic_id=${action.id}`);
   const articles = topic.article;
   yield setTopic(action);
   yield put(addArticles(articles));
