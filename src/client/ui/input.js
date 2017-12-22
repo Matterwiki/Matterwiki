@@ -5,7 +5,22 @@ const Input = styled.input`
   height: 4rem;
   font-family: inherit;
   font-size: 1.3rem;
-  text-transform: uppercase;
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    text-transform: uppercase;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    text-transform: uppercase;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    text-transform: uppercase;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    text-transform: uppercase;
+  }
 `;
 
 export default Input;
