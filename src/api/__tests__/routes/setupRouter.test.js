@@ -1,73 +1,59 @@
-const {
-  setupAll,
-  setupEach,
-  teardownAll
-} = require("../testUtils/globalSetup");
+const { merge } = require("lodash");
+const { setupAll, setupEach, teardownAll } = require("../testUtils/globalSetup");
 
-const { userHolder, tokenHolder } = require("../testUtils/modelHolder");
-const { apiClient, userHelpers } = require("../testUtils/testUtils");
-const { truncateDb } = require("../testUtils/dbHelpers");
+const { apiClient } = require("../testUtils/testUtils");
 const { user: userFactory } = require("../factories/factories");
 
 const { DUPLICATE_ADMIN_USER } = require("../../utils/constants").ERRORS;
 const { ADMIN_ID, ROLES } = require("../../utils/constants");
 
-const { makeUsers, makeJwt } = userHelpers;
+const UserModel = require("../../models/userModel");
 
 describe("Setup API tests", () => {
   beforeAll(setupAll);
   afterAll(teardownAll);
-  beforeEach(setupEach);
+  beforeEach(() => setupEach({ keepUsers: false }));
 
   const apiUrl = "/api/setup/";
-  describe("POST api/setup", () => {
-    test("409 any - INVALID - should not allow insert if admin already exists", () =>
-      apiClient
+  describe("#POST api/setup", () => {
+    test("(409) should not create if admin already exists", async () => {
+      const adminUser = merge(userFactory.build(), {
+        id: 1,
+        role: ROLES.ADMIN
+      });
+
+      await UserModel.query().insert(adminUser);
+
+      return apiClient
         .post(apiUrl)
         .send(userFactory.build())
         .expect(409)
-        .then(res =>
-          expect(res.body.message).toBe(DUPLICATE_ADMIN_USER.message)
-        ));
-    describe("201 POST api/setup/", () => {
-      // this is a block that needs an empty users table
-      beforeEach(() => truncateDb(false));
+        .then(async res => {
+          expect(res.body.message).toBe(DUPLICATE_ADMIN_USER.message);
+        });
+    });
 
-      // make new users and tokens, in case some other test is using this
-      // NOTE: might be unnecessary because we destroy the database after every test suite runs, but just in case
-      afterAll(() =>
-        makeUsers()
-          .then(testUsers => {
-            userHolder.set(testUsers);
-            return testUsers;
-          })
-          .then(testUsers => {
-            const tokens = {};
-            tokens.admin = makeJwt(testUsers.admin);
-            tokens.user = makeJwt(testUsers.users[0]);
+    test("(201) should create admin user", async () => {
+      const newAdminUser = userFactory.build();
 
-            tokenHolder.set(tokens);
-          })
-      );
-      test("201 any - VALID - should create admin user", () => {
-        const newAdminUser = userFactory.build();
+      return apiClient
+        .post(apiUrl)
+        .send(newAdminUser)
+        .expect(201)
+        .then(async () => {
+          const adminUser = await UserModel.query().findById(ADMIN_ID);
 
-        return apiClient
-          .post(apiUrl)
-          .send(newAdminUser)
-          .expect(201)
-          .then(async res => {
-            expect(res.body.id).toEqual(ADMIN_ID);
-            expect(res.body).toEqual(
-              expect.objectContaining({
-                about: newAdminUser.about,
-                email: newAdminUser.email,
-                name: newAdminUser.name,
-                role: ROLES.ADMIN
-              })
-            );
-          });
-      });
+          expect(adminUser).toEqual(
+            expect.objectContaining({
+              id: ADMIN_ID,
+              is_active: 1,
+              about: newAdminUser.about,
+              email: newAdminUser.email,
+              name: newAdminUser.name,
+              role: ROLES.ADMIN
+            })
+          );
+        });
     });
   });
 });

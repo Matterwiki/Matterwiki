@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ const UserModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
-    const users = await UserModel.getAll();
+    const users = await UserModel.query();
     res.status(200).json(users);
   } catch (err) {
     next(err);
@@ -23,8 +24,9 @@ const fetchUsers = async (req, res, next) => {
 const fetchUsersById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const user = await UserModel.get(id);
-    res.status(200).json(user);
+    const user = await UserModel.query().findById(id);
+
+    res.status(HttpStatus.OK).json(user);
   } catch (err) {
     next(err);
   }
@@ -37,7 +39,7 @@ const createUser = async (req, res, next) => {
 
   try {
     // hash password
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
 
     // create the admin user
     let newUser = {
@@ -47,10 +49,12 @@ const createUser = async (req, res, next) => {
       about
     };
 
-    newUser = await UserModel.insert(newUser);
-    res.status(201).json(newUser);
+    newUser = await UserModel.query().insert(newUser);
+    res.status(HttpStatus.CREATED).json(newUser);
   } catch (err) {
-    if (err.code === ERRORS.DUPLICATE_USER.code) {
+    // TODO get more granular here
+    // since this is the only kind of validation we have on emails, this is OK for now
+    if (err.statusCode === HttpStatus.BAD_REQUEST && err.data.email) {
       return next(ERRORS.DUPLICATE_USER);
     }
 
@@ -69,10 +73,12 @@ const updateUser = async (req, res, next) => {
       req.body.password = hashedPassword;
     }
 
-    const updatedUser = await UserModel.update(id, req.body);
+    const updatedUser = await UserModel.query().updateAndFetchById(id, req.body);
 
-    res.status(200).json(updatedUser);
+    res.status(HttpStatus.OK).json(updatedUser);
   } catch (err) {
+    // TODO Apparently, validation does not work for updates! >.<
+    // https://github.com/seegno/objection-unique/blob/master/test/index.test.js#L94
     if (err.code === ERRORS.DUPLICATE_USER.code) {
       return next(ERRORS.DUPLICATE_USER);
     }
@@ -84,10 +90,11 @@ const deleteUser = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    if (parseInt(id, 10) !== 1) {
-      await UserModel.delete(id);
-    }
-    res.status(200).json({});
+    if (id === "1") return next(ERRORS.DELETE_DEFAULT_ADMIN);
+
+    await UserModel.query().deleteById(id);
+
+    res.status(HttpStatus.OK).json({});
   } catch (err) {
     next(err);
   }

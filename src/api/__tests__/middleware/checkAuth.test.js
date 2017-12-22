@@ -4,7 +4,7 @@ const { makeJwt } = require("../testUtils/testUtils");
 const { user: userFactory } = require("../factories/factories");
 
 describe("checkAuth middleware tests", () => {
-  test("INVALID - Errors out when token is invalid", () => {
+  test("(invalid) errors out when token is invalid", () => {
     const invalidTokens = ["", null, undefined];
 
     invalidTokens.map(async token => {
@@ -28,7 +28,7 @@ describe("checkAuth middleware tests", () => {
     });
   });
 
-  test("INVALID - Errors out when token fails verification", done => {
+  test("(invalid) errors out when token fails verification", done => {
     const req = {
       headers: {
         // invalid token
@@ -47,7 +47,7 @@ describe("checkAuth middleware tests", () => {
     });
   });
 
-  test("VALID - Sets the decoded user on the request", done => {
+  test("(valid) sets the decoded user on the request", done => {
     const expectedUser = userFactory.build();
 
     const req = {

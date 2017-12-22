@@ -4,7 +4,7 @@ const filterMetadata = require("../../middleware/filterMetadata");
 const articleFactory = require("../factories/articleFactory");
 
 describe("metadata middleware tests", () => {
-  test("POST - VALID - should add `created_by` and `modified_by` props to req.body", done => {
+  test("#POST should add `created_by` and `modified_by` props to req.body", done => {
     const req = {
       method: "POST",
       user: {
@@ -21,7 +21,7 @@ describe("metadata middleware tests", () => {
       done();
     });
   });
-  test("PUT - VALID - should add `modified_by` prop to req.body", done => {
+  test("#PUT should add `modified_by` prop to req.body", done => {
     const req = {
       method: "PUT",
       user: {
