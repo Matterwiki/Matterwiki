@@ -15,17 +15,11 @@ const ArticlesList = props => {
     return <Loader message="Loading articles" />;
   }
   if (!articles.length) {
-    return (
-      <HelpBlock className="center-align">
-        There are no articles under this topic
-      </HelpBlock>
-    );
+    return <HelpBlock className="center-align">There are no articles under this topic</HelpBlock>;
   }
   return (
     <div className="article-list">
-      {articles.map(article =>
-        <ArticlesListItem key={article.id} article={article} />
-      )}
+      {articles.map(article => <ArticlesListItem key={article.id} article={article} />)}
     </div>
   );
 };

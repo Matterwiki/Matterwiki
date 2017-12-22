@@ -35,7 +35,7 @@ class SetupForm extends React.Component {
   render() {
     return (
       <Form onSubmit={this.onSubmit}>
-        {SETUP_FORM_FIELDS.map(formField =>
+        {SETUP_FORM_FIELDS.map(formField => (
           <Col sm={12} key={formField.name}>
             <FormGroup>
               <FormControl
@@ -47,7 +47,7 @@ class SetupForm extends React.Component {
               />
             </FormGroup>
           </Col>
-        )}
+        ))}
         <Col sm={12}>
           <Button type="submit" block>
             Setup My Account

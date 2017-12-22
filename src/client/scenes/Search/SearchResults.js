@@ -7,10 +7,7 @@ import "url-search-params-polyfill";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
-import {
-  loadArticleSearchPage,
-  disposeArticleSearchPage
-} from "store/modules/sagaActions";
+import { loadArticleSearchPage, disposeArticleSearchPage } from "store/modules/sagaActions";
 
 import "./SearchResults.css";
 
@@ -41,12 +38,14 @@ class Search extends React.Component {
             We found {results.length} articles for {query}
           </HelpBlock>
         </div>
-        {!results.length
-          ? <div className="no-results">
-              <FaFrownO size={100} />
-              <p>Please try again with another query</p>
-            </div>
-          : <ArticlesList articles={results} />}
+        {!results.length ? (
+          <div className="no-results">
+            <FaFrownO size={100} />
+            <p>Please try again with another query</p>
+          </div>
+        ) : (
+          <ArticlesList articles={results} />
+        )}
       </div>
     );
   }

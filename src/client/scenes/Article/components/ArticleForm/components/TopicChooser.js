@@ -25,11 +25,11 @@ class TopicChooser extends React.Component {
           className="topic-select"
           value={value}
           onChange={onChange}>
-          {topics.filter(t => t.id !== 1).map(topic =>
+          {topics.filter(t => t.id !== 1).map(topic => (
             <option value={topic.id} key={topic.id}>
               {topic.name}
             </option>
-          )}
+          ))}
         </FormControl>
       </div>
     );

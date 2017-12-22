@@ -15,10 +15,7 @@ const getDisabledLevelButtons = editorState => {
   const previousBlockType = previousBlock ? previousBlock.getType() : null;
 
   // could become a regex soon!
-  if (
-    currentBlockType === "unordered-list-item" ||
-    currentBlockType === "ordered-list-item"
-  ) {
+  if (currentBlockType === "unordered-list-item" || currentBlockType === "ordered-list-item") {
     if (previousBlockType === currentBlockType) {
       disableIndent = false;
       disableOutdent = true;
@@ -26,10 +23,7 @@ const getDisabledLevelButtons = editorState => {
       if (previousBlockDepth !== currentBlockDepth && currentBlockDepth !== 0) {
         disableOutdent = false;
         disableIndent = true;
-      } else if (
-        previousBlockDepth === currentBlockDepth &&
-        currentBlockDepth !== 0
-      ) {
+      } else if (previousBlockDepth === currentBlockDepth && currentBlockDepth !== 0) {
         disableOutdent = false;
         disableIndent = false;
       }

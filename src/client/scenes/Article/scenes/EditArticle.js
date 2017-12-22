@@ -38,8 +38,7 @@ class EditArticle extends React.Component {
     const { loading, article } = this.state;
 
     return (
-      (loading && <Loader />) ||
-      <ArticleForm article={article} onSubmit={this.handleSubmit} />
+      (loading && <Loader />) || <ArticleForm article={article} onSubmit={this.handleSubmit} />
     );
   }
 }

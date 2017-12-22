@@ -2,30 +2,18 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import ArticleSidebarItem from "./ArticleSidebarItem";
 
-const ArticleSidebar = ({
-  article,
-  isAdmin,
-  onEditClick,
-  onHistoryClick,
-  onDeleteClick
-}) =>
+const ArticleSidebar = ({ article, isAdmin, onEditClick, onHistoryClick, onDeleteClick }) => (
   <div className="article-sidebar">
     <ArticleSidebarItem title="Filed under">
       <h2 className="color-text">
-        <b>
-          {article.topic.name}
-        </b>
+        <b>{article.topic.name}</b>
       </h2>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="Last Updated By">
       <h3>
-        <b>
-          {article.createdUser.name}
-        </b>
+        <b>{article.createdUser.name}</b>
       </h3>
-      <p>
-        {article.createdUser.about}
-      </p>
+      <p>{article.createdUser.about}</p>
     </ArticleSidebarItem>
     <ArticleSidebarItem title="What Changed in last edit">
       {article.change_log || <h4>No information available</h4>}
@@ -36,10 +24,12 @@ const ArticleSidebar = ({
     <Button onClick={onHistoryClick} block>
       History
     </Button>
-    {isAdmin &&
+    {isAdmin && (
       <Button block onClick={onDeleteClick}>
         Delete
-      </Button>}
-  </div>;
+      </Button>
+    )}
+  </div>
+);
 
 export default ArticleSidebar;

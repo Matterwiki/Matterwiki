@@ -1,9 +1,10 @@
 import React from "react";
 
-const LastUpdatedDate = ({ date }) =>
+const LastUpdatedDate = ({ date }) => (
   <div className="single-article-meta">
     Last updated on
     {new Date(date.replace(" ", "T")).toDateString()}
-  </div>;
+  </div>
+);
 
 export default LastUpdatedDate;

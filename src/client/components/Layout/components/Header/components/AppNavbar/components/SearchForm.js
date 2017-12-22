@@ -50,6 +50,4 @@ const mapDispatchToProps = dispatch => ({
   setArticleSearchQuery: query => dispatch(setArticleSearchQuery(query))
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SearchForm)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchForm));

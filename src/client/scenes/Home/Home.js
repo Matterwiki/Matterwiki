@@ -4,11 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
-import {
-  loadHomepage,
-  disposeHomepage,
-  fetchArticlesByTopic
-} from "store/modules/sagaActions";
+import { loadHomepage, disposeHomepage, fetchArticlesByTopic } from "store/modules/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
@@ -33,9 +29,7 @@ class Home extends React.Component {
         <Col md={3}>
           <TopicsList topics={topics} onTopicClick={this.handleTopicClick} />
         </Col>
-        <Col md={9}>
-          {loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}
-        </Col>
+        <Col md={9}>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
       </Row>
     );
   }

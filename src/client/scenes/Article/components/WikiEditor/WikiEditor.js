@@ -31,11 +31,7 @@ const customStyleMap = {
 
 const Link = ({ contentState, entityKey, children }) => {
   const { url } = contentState.getEntity(entityKey).getData();
-  return (
-    <a href={url}>
-      {children || url}
-    </a>
-  );
+  return <a href={url}>{children || url}</a>;
 };
 
 class WikiEditor extends Component {
@@ -121,11 +117,7 @@ class WikiEditor extends Component {
     });
 
     this.onChange(
-      RichUtils.toggleLink(
-        editorStateWithEntity,
-        editorStateWithEntity.getSelection(),
-        entityKey
-      )
+      RichUtils.toggleLink(editorStateWithEntity, editorStateWithEntity.getSelection(), entityKey)
     );
 
     //  TODO move cursor to after entity text and focus. The code below does this, but creates problems with Link addition. FIX THIS
@@ -151,10 +143,7 @@ class WikiEditor extends Component {
 
   // `BlockControls`
   toggleBlockType = blockType => {
-    const newState = RichUtils.toggleBlockType(
-      this.state.editorState,
-      blockType
-    );
+    const newState = RichUtils.toggleBlockType(this.state.editorState, blockType);
     this.onChange(newState);
     setTimeout(() => this.focus(), 0);
   };
@@ -196,9 +185,7 @@ class WikiEditor extends Component {
   render() {
     const { editorState, currentEntityKey } = this.state;
     const contentState = editorState.getCurrentContent();
-    const currentEntity = currentEntityKey
-      ? contentState.getEntity(currentEntityKey)
-      : null;
+    const currentEntity = currentEntityKey ? contentState.getEntity(currentEntityKey) : null;
 
     const editorProps = {
       ref: "editor",
@@ -242,12 +229,8 @@ class WikiEditor extends Component {
 
     return (
       <div className="WikiEditor-root">
-        <div className="WikiEditor-toolbar">
-          {ToolbarComponent}
-        </div>
-        <div className={className}>
-          {EditorComponent}
-        </div>
+        <div className="WikiEditor-toolbar">{ToolbarComponent}</div>
+        <div className={className}>{EditorComponent}</div>
       </div>
     );
   }

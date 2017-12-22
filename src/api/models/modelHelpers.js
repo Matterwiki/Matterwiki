@@ -1,90 +1,101 @@
-const Promise = require("bluebird");
-const { assign } = require("lodash");
-
-const objection = require("objection");
+const { omit, pick } = require("lodash");
+const unique = require("objection-unique");
 
 /**
- * Extends the base model with additions
- * Defines global hooks and triggers that affects all MODELS!
+ * Plugin that has some useful fns for all models.
+ *
+ * All of the following are ideas from existing ObjectionJS mixins by the community.
  */
-class BaseModel extends objection.Model {
-  /**
-   * Runs before update for all models 
-   * - removes `created_at` and updates `modified_at`
-   */
-  $beforeUpdate() {
-    if (this.created_at) delete this.created_at;
-    this.updated_at = new Date();
-  }
+function withDbHelpers(options = {}) {
+  return Model => {
+    /**
+     * A custom query builder with defaults
+     *
+     * @class CustomerQueryBuilder
+     * @extends {Model.QueryBuilder}
+     */
+    class CustomerQueryBuilder extends Model.QueryBuilder {
+      constructor(...args) {
+        super(...args);
+
+        // TODO find a way to conditionally filter active items
+        // As a workaround for now, use knex for fetching inactive items
+
+        // All models will only query active items by default
+        return this.where({ is_active: true });
+      }
+
+      /**
+       * Adds an eager load query to the chain, so that relations could be loaded as well.
+       * Requires options.eagerRelations to be defined
+       * @returns
+       * @memberof CustomerQueryBuilder
+       */
+      withRels() {
+        return options.eagerRelations ? this.eager(options.eagerRelations) : this;
+      }
+
+      /**
+       * Never delete anything, just patch the item to be inactive
+       *
+       * @returns
+       * @memberof CustomerQueryBuilder
+       */
+      delete() {
+        return this.patch({ is_active: false });
+      }
+
+      /**
+       * Never delete anything, just patch the item to be inactive
+       *
+       * @returns
+       * @memberof CustomerQueryBuilder
+       */
+      deleteById(id) {
+        return this.patch({ is_active: false }).where({ id });
+      }
+    }
+
+    const uniqueFieldConfig = {
+      identifiers: ["id"],
+      fields: options.uniqueFields ? options.uniqueFields : ["id"]
+    };
+
+    return class extends unique(uniqueFieldConfig)(Model) {
+      static get QueryBuilder() {
+        return CustomerQueryBuilder;
+      }
+
+      /**
+       * Setting updated_at property before update correctly
+       *
+       */
+      $beforeUpdate(opt) {
+        // patches dont need the following; they are the escape hatch
+        if (opt.patch) return;
+
+        if (this.created_at) delete this.created_at;
+        this.updated_at = new Date();
+      }
+
+      // From: https://github.com/oscaroox/objection-visibility
+      $formatJson(json) {
+        let superJson = super.$formatJson(json);
+
+        if (!this.constructor.hidden && !this.constructor.visible) return superJson;
+
+        if (this.constructor.visible) {
+          superJson = pick(superJson, this.constructor.visible);
+        }
+
+        if (this.constructor.hidden) {
+          superJson = omit(superJson, this.constructor.hidden);
+        }
+
+        return superJson;
+      }
+    };
+  };
 }
 
-/**
- * This decorator adds extra helpers to the Models for the sake of brevity.
- * These are pretty basic, they could be extended for more flexibility in the models.
- * Also mushes in anything extra that this brought it in from the model file (eg. search)
- * 
- * TODO in the future, when we need sorting and stuff like that, we could make implement all this INSIDE the BaseModel
- * 
- * 
- * Supported methods:
- * - get
- * - getAll
- * - insert
- * - insertMany
- * - update
- * - TODO updateMany
- * - delete
- * - TODO search
- * - TODO find
- * 
- * Methods with relations `withRels`
- * - get
- * - getAll
- * 
- * @param {any} Model 
- * @param {any} extras 
- * @param {string} [options={ relations: "" }] 
- * @returns 
- */
-function withDbHelpers(Model, extras, options = { relations: "" }) {
-  const { relations } = options;
-
-  /**
-   * GENERAL QUERIES
-   */
-  const queryMethods = {
-    get: id => Model.query().findById(id),
-
-    // NOTE: does not get inactive items by default.
-    getAll: (params = {}) => {
-      // But, if `is_active`: false is passed as a query param, default will be overriden
-      const paramsWithActive = assign({}, { is_active: true }, params);
-
-      return Model.query().where(paramsWithActive);
-    },
-
-    insert: item => Model.query().insertAndFetch(item),
-
-    // NOTE: not really performant; O(n) for insert
-    insertMany: items =>
-      Promise.mapSeries(items, item => Model.query().insertAndFetch(item)),
-
-    update: (id, item) => Model.query().updateAndFetchById(id, item),
-
-    // NOTE: doesn't quite delete, just sets item's `is_active` value to false
-    delete: id => Model.query().update({ is_active: false }).where("id", id)
-  };
-
-  /**
-   * QUERIES THAT INCLUDE RELATIONS - Uses the relations provided as options
-   */
-  const queryMethodsWithRels = {
-    getWithRels: id => Model.query().findById(id).eager(relations),
-    getAllWithRels: () => Model.query().eager(relations)
-  };
-
-  // Mush em all together cos we like to over-use `assign` ;)
-  return assign({ Model }, queryMethods, queryMethodsWithRels, extras);
-}
-
-module.exports = { withDbHelpers, BaseModel };
+module.exports = { withDbHelpers };

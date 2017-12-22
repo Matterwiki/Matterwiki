@@ -7,14 +7,13 @@ import { LinkContainer } from "react-router-bootstrap";
 import Logo from "assets/logo.png";
 import SearchForm from "./components/SearchForm";
 
-const LinkNavItem = ({ to, children }) =>
+const LinkNavItem = ({ to, children }) => (
   <LinkContainer to={to}>
-    <NavItem>
-      {" "}{children}{" "}
-    </NavItem>
-  </LinkContainer>;
+    <NavItem> {children} </NavItem>
+  </LinkContainer>
+);
 
-const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
+const AppNavbar = ({ isAdmin, handleLogoutClick }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -32,6 +31,7 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
         <NavItem onClick={handleLogoutClick}> Logout </NavItem>
       </Nav>
     </Navbar.Collapse>
-  </Navbar>;
+  </Navbar>
+);
 
 export default AppNavbar;

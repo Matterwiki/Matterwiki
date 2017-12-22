@@ -89,9 +89,7 @@ class ManageUsers extends React.Component {
     }
 
     const onSubmit = currentUser ? this.updateUser : this.addUser;
-    const itemFormFields = currentUser
-      ? EDIT_USER_FORM_FIELDS
-      : USER_FORM_FIELDS;
+    const itemFormFields = currentUser ? EDIT_USER_FORM_FIELDS : USER_FORM_FIELDS;
     return (
       <Grid>
         <Row>

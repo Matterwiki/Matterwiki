@@ -17,9 +17,7 @@ const ViewArticle = props => {
     <Grid fluid>
       <Row>
         <Col md={9}>
-          <ArticleHeading date={article.updated_at}>
-            {article.title}
-          </ArticleHeading>
+          <ArticleHeading date={article.updated_at}>{article.title}</ArticleHeading>
           <div className="single-article-body">
             <WikiEditor readOnly rawContent={JSON.parse(article.content)} />
           </div>

@@ -70,6 +70,4 @@ const mapDispatchToProps = dispatch => ({
   disposeArticlePage: () => dispatch(disposeArticlePage())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ViewArticleContainer
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewArticleContainer);
