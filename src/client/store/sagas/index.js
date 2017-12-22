@@ -14,7 +14,9 @@ import {
   LOAD_TOPICS_PAGE,
   DISPOSE_TOPICS_PAGE,
   LOAD_EDIT_TOPIC,
-  DISPOSE_EDIT_TOPIC
+  DISPOSE_EDIT_TOPIC,
+  LOAD_ARTICLE_SEARCH_PAGE,
+  DISPOSE_ARTICLE_SEARCH_PAGE
 } from "store/actionTypes";
 import { takeEvery } from "redux-saga/effects";
 
@@ -46,6 +48,8 @@ import {
 
 import { loadHomepage, disposeHomepage } from "./app";
 
+import { loadArticleSearchPage, disposeArticleSearchPage } from "./search";
+
 function* saga() {
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
@@ -63,6 +67,8 @@ function* saga() {
   yield takeEvery(DISPOSE_TOPICS_PAGE, disposeTopicsPage);
   yield takeEvery(LOAD_EDIT_TOPIC, loadEditTopic);
   yield takeEvery(DISPOSE_EDIT_TOPIC, disposeEditTopic);
+  yield takeEvery(LOAD_ARTICLE_SEARCH_PAGE, loadArticleSearchPage);
+  yield takeEvery(DISPOSE_ARTICLE_SEARCH_PAGE, disposeArticleSearchPage);
 }
 
 export default saga;

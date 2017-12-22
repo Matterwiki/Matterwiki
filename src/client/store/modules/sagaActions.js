@@ -14,7 +14,9 @@ import {
   LOAD_TOPICS_PAGE,
   DISPOSE_TOPICS_PAGE,
   LOAD_EDIT_TOPIC,
-  DISPOSE_EDIT_TOPIC
+  DISPOSE_EDIT_TOPIC,
+  LOAD_ARTICLE_SEARCH_PAGE,
+  DISPOSE_ARTICLE_SEARCH_PAGE
 } from "store/actionTypes";
 
 export const loadHomepage = () => ({
@@ -86,4 +88,13 @@ export const loadEditTopic = id => ({
 
 export const disposeEditTopic = () => ({
   type: DISPOSE_EDIT_TOPIC
+});
+
+export const loadArticleSearchPage = query => ({
+  type: LOAD_ARTICLE_SEARCH_PAGE,
+  query
+});
+
+export const disposeArticleSearchPage = () => ({
+  type: DISPOSE_ARTICLE_SEARCH_PAGE
 });

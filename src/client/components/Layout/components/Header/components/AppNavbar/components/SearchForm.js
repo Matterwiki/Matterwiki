@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 import FaSearch from "react-icons/lib/fa/search";
 import { withRouter } from "react-router-dom";
+import { loadArticleSearchPage } from "store/modules/sagaActions";
 
 class SearchForm extends React.Component {
   state = {
@@ -16,17 +18,13 @@ class SearchForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    this.setState(() => {
-      const { searchText } = this.state;
-      this.props.history.push(`/search?query=${searchText}`);
-      return {
-        searchText: ""
-      };
-    });
+    const { searchText } = this.state;
+    this.props.history.push(`/search?query=${searchText}`);
+    this.props.loadArticleSearchPage(searchText);
   };
 
   render() {
+    const { query } = this.props;
     return (
       <Navbar.Form pullRight>
         <Form onSubmit={this.onSubmit}>
@@ -35,7 +33,7 @@ class SearchForm extends React.Component {
               className="search-input"
               type="text"
               placeholder="Search"
-              value={this.state.searchText}
+              value={this.state.searchText || query || ""}
               onChange={this.onChange}
             />
           </FormGroup>
@@ -48,4 +46,14 @@ class SearchForm extends React.Component {
   }
 }
 
-export default withRouter(SearchForm);
+const mapStateToProps = state => ({
+  query: state.search.query
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadArticleSearchPage: query => dispatch(loadArticleSearchPage(query))
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SearchForm)
+);
