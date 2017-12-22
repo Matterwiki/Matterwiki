@@ -5,7 +5,7 @@ const Navbar = styled.div`
   flex-direction: row;
   background-color: #fff;
   max-height: 6rem;
-  box-shadow: 0px 17px 12px -24px #000;
+  box-shadow: 0rem 0.1rem 1rem #d1d1d1;
   padding: 0 3rem;
   position: fixed;
   top: 0;
@@ -40,7 +40,7 @@ const NavItem = styled.div`
   margin-bottom: 1rem;
   height: 4rem;
   max-height: 4rem;
-  margin-left: ${props => (props.tab ? "0rem" : "2rem")};
+  margin-left: ${props => (props.tab ? "0rem" : "3rem")};
   padding: ${props => (props.tab ? "1rem 2rem" : "")};
   border: ${props => (props.tab ? `1px solid #d1d1d1` : "")};
   border-bottom: ${props => (props.tab && props.active ? "none" : "")};
@@ -55,12 +55,19 @@ const NavItem = styled.div`
   }};
   cursor: ${props => (props.cursorPointer ? "pointer" : "")};
   width: ${props => (props.tab ? "100%" : "")};
+  .icon {
+    margin-right: 0.5rem;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+  }
   a {
-    display: block;
-    display: block;
+    display: flex;
     font-size: 1.4rem;
     line-height: 4rem;
     text-transform: uppercase;
+    justify-content: flex-start;
   }
   * {
     height: 100%;

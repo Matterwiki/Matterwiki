@@ -51,6 +51,7 @@
     "draft-js": "^0.10.0",
     "draftjs-utils": "^0.7.4",
     "express": "^4.15.3",
+    "feather-icons": "^4.5.0",
     "helmet": "^3.6.1",
     "jsonwebtoken": "^7.4.1",
     "knex": "0.13.0",

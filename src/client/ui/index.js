@@ -12,6 +12,7 @@ import { List, ListItem, ListItemBody, ListItemHeader } from "./list";
 import Heading from "./heading";
 import { Sidebar, SidebarBlock } from "./sidebar";
 import HelpBlock from "./helpblock";
+import Icon from "./icon";
 
 export {
   Button,
@@ -33,5 +34,6 @@ export {
   Heading,
   Sidebar,
   SidebarBlock,
-  HelpBlock
+  HelpBlock,
+  Icon
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavForm, Button, Input } from "ui";
+import { NavForm, Button, Input, Icon } from "ui";
 import { withRouter } from "react-router-dom";
 import { loadArticleSearchPage } from "store/modules/sagaActions";
 
@@ -26,12 +26,12 @@ class SearchForm extends React.Component {
     const { query } = this.props;
     return (
       <NavForm onSubmit={this.onSubmit}>
+        <Icon type="search" />
         <Input
           type="text"
           placeholder="Search"
           value={this.state.searchText || query || ""}
           onChange={this.onChange}
-          background="#efefef"
         />
       </NavForm>
     );

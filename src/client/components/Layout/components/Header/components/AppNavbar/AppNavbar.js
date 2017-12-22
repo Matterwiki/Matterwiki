@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { Navbar, ImageWrapper, NavItem, Button, Nav } from "ui";
+import { Navbar, ImageWrapper, NavItem, Button, Nav, Icon } from "ui";
 
 import Logo from "assets/logo.png";
 import SearchForm from "./components/SearchForm";
@@ -20,14 +20,18 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
       </NavItem>
       {isAdmin &&
         <NavItem>
-          <Link to="/admin">Admin</Link>
+          <Link to="/admin">
+            <Icon type="terminal" />Admin
+          </Link>
         </NavItem>}
       <NavItem>
-        <Link to="/article/new">New Article</Link>
+        <Link to="/article/new">
+          <Icon type="plus-square" />New Article
+        </Link>
       </NavItem>
       <NavItem>
         <Button onClick={handleLogoutClick} outline>
-          {" "}Logout{" "}
+          <Icon type="log-out" />Logout
         </Button>
       </NavItem>
     </Nav>
