@@ -13,6 +13,8 @@ const Button = styled.button.attrs({
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.3rem;
+  font-weight: 300;
 `;
 
 export default Button;
