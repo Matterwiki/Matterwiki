@@ -10,6 +10,8 @@ import {
 
 import APIProvider from "utils/APIProvider";
 
+import { setTopic } from "./topic";
+
 export function* loadArticlePage(action) {
   yield put(startLoadingArticles());
   const article = yield call(APIProvider.get, `articles/${action.id}`);
@@ -25,6 +27,7 @@ export function* fetchArticlesByTopic(action) {
   yield put(startLoadingArticles());
   const topic = yield call(APIProvider.get, `topics/${action.id}/articles`);
   const articles = topic.article;
+  yield setTopic(action);
   yield put(addArticles(articles));
   yield put(stopLoadingArticles());
 }
