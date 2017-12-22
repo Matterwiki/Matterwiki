@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import store from "state/store";
 import { Row, Col } from "ui";
 import { FullHeightContainer } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
@@ -10,29 +9,31 @@ import {
   loadHomepage,
   disposeHomepage,
   fetchArticlesByTopic
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
 class Home extends React.Component {
   componentDidMount() {
-    store.dispatch(loadHomepage());
+    this.props.loadHomepage();
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeHomepage());
+    this.props.disposeHomepage();
   }
 
   handleTopicClick = topicId => {
-    store.dispatch(fetchArticlesByTopic(topicId));
+    this.props.fetchArticlesByTopic(topicId);
   };
 
   render() {
     const {
-      topics: { topics, currentTopic },
-      articles: { articles, loading: loadingArticles },
-      app: { loading }
-    } = store.getState();
+      topics,
+      articles,
+      loadingArticles,
+      loading,
+      currentTopic
+    } = this.props;
     if (loading) return <Loader />;
     return (
       <Row marginTop="1">
@@ -56,9 +57,15 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
   topics: state.topics.topics,
   currentTopic: state.topics.currentTopic,
-  articles: state.articles,
+  articles: state.articles.articles,
   loadingArticles: state.articles.loading,
   loading: state.app.loading
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => ({
+  loadHomepage: () => dispatch(loadHomepage()),
+  disposeHomepage: () => dispatch(disposeHomepage()),
+  fetchArticlesByTopic: id => dispatch(fetchArticlesByTopic(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

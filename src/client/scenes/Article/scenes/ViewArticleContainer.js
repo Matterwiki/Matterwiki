@@ -6,36 +6,35 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 
-import store from "state/store";
-import { loadArticlePage, disposeArticlePage } from "state/actions/sagaActions";
+import { loadArticlePage, disposeArticlePage } from "store/modules/sagaActions";
 
 import ViewArticle from "./ViewArticle";
 
 class ViewArticleContainer extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.articleId;
-    store.dispatch(loadArticlePage(id));
+    this.props.loadArticlePage(id);
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeArticlePage());
+    this.props.disposeArticlePage();
   }
 
   handleEditClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     this.props.history.push(`/article/edit/${id}`);
   };
 
   handleHistoryClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     this.props.history.push(`/article/${id}/history`);
   };
 
   handleDeleteClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     APIProvider.delete(`articles/${id}`).then(() => {
       Alert.success("Article has been deleted");
       this.props.history.push("/home");
@@ -43,7 +42,7 @@ class ViewArticleContainer extends React.Component {
   };
 
   render() {
-    const { articles: { loading, currentArticle: article } } = store.getState();
+    const { article, loading } = this.props;
     if (loading) {
       return <Loader />;
     } else if (article.title) {
@@ -66,4 +65,11 @@ const mapStateToProps = state => ({
   loading: state.articles.loading
 });
 
-export default connect(mapStateToProps)(ViewArticleContainer);
+const mapDispatchToProps = dispatch => ({
+  loadArticlePage: id => dispatch(loadArticlePage(id)),
+  disposeArticlePage: () => dispatch(disposeArticlePage())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ViewArticleContainer
+);

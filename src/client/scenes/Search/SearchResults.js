@@ -1,72 +1,66 @@
 import React from "react";
+import { connect } from "react-redux";
 import FaFrownO from "react-icons/lib/fa/frown-o";
 import { HelpBlock } from "react-bootstrap";
 import "url-search-params-polyfill";
 
-import APIProvider from "utils/APIProvider";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
+
+import {
+  loadArticleSearchPage,
+  disposeArticleSearchPage
+} from "store/modules/sagaActions";
 
 import "./SearchResults.css";
 
 // TODO - fix an encoding problem when the query param contains symbols and other weird stuff
 class Search extends React.Component {
-  state = {
-    articles: [],
-    loading: true
-  };
-
   componentWillMount() {
     this.getSearchResults();
   }
 
-  componentWillReceiveProps() {
-    this.getSearchResults();
-  }
-
   componentWillUnmount() {
-    this.setState({
-      articles: []
-    });
+    this.props.disposeArticleSearchPage();
   }
 
   getSearchResults = () => {
     const { search } = this.props.location;
     const params = new URLSearchParams(search);
     const query = params.get("query");
-
-    this.setState({
-      loading: true,
-      query
-    });
-
-    return APIProvider.query("search", { query }).then(articles => {
-      this.setState({
-        articles,
-        loading: false
-      });
-    });
+    this.props.loadArticleSearchPage(query);
   };
 
   render() {
-    const { articles, loading, query } = this.state;
+    const { query, results, loading } = this.props;
     if (loading) return <Loader message={`Looking up ${query}`} />;
     return (
       <div>
         <div className="result-info">
           <HelpBlock>
-            We found {articles.length} articles for {query}
+            We found {results.length} articles for {query}
           </HelpBlock>
         </div>
-        {!this.state.articles.length
+        {!results.length
           ? <div className="no-results">
               <FaFrownO size={100} />
               <p>Please try again with another query</p>
             </div>
-          : <ArticlesList articles={articles} />}
+          : <ArticlesList articles={results} />}
       </div>
     );
   }
 }
 
-export default Search;
+const mapStateToProps = state => ({
+  query: state.search.query,
+  results: state.search.results,
+  loading: state.search.loading
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadArticleSearchPage: query => dispatch(loadArticleSearchPage(query)),
+  disposeArticleSearchPage: () => dispatch(disposeArticleSearchPage())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

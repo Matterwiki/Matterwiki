@@ -5,12 +5,11 @@ import { Row, Col, Heading } from "ui";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
-import store from "state/store";
 import {
   loadArchivesPage,
   disposeArchivesPage,
   fetchArchiveById
-} from "state/actions/sagaActions";
+} from "store/modules/sagaActions";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
@@ -18,23 +17,25 @@ import SimpleArticle from "../../components/SimpleArticle";
 class ArticleHistory extends React.Component {
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    store.dispatch(loadArchivesPage(articleId));
+    this.props.loadArchivesPage(articleId);
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeArchivesPage());
+    this.props.disposeArchivesPage();
   }
 
   getArchive = archiveId => {
     const { articleId } = this.props.match.params;
-    store.dispatch(fetchArchiveById(articleId, archiveId));
+    this.props.fetchArchiveById(articleId, archiveId);
   };
 
   render() {
     const {
-      archives: { archives, currentArchive, loading: loadingCurrentArchive },
-      app: { loading }
-    } = store.getState();
+      archives,
+      currentArchive,
+      loadingCurrentArchive,
+      loading
+    } = this.props;
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
@@ -79,4 +80,11 @@ const mapStateToProps = state => ({
   loadingCurrentArchive: state.archives.loading
 });
 
-export default connect(mapStateToProps)(ArticleHistory);
+const mapDispatchToProps = dispatch => ({
+  loadArchivesPage: articleId => dispatch(loadArchivesPage(articleId)),
+  disposeArchivesPage: () => dispatch(disposeArchivesPage()),
+  fetchArchiveById: (articleId, archiveId) =>
+    dispatch(fetchArchiveById(articleId, archiveId))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleHistory);
