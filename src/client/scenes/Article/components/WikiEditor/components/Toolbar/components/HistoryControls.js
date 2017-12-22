@@ -3,7 +3,7 @@ import { ButtonGroup } from "react-bootstrap";
 import { FaRotateLeft, FaRepeat } from "react-icons/lib/fa";
 import ToolbarButton from "./ToolbarButton";
 
-const HistoryControls = ({ editorState, onUndo, onRedo }) =>
+const HistoryControls = ({ editorState, onUndo, onRedo }) => (
   <ButtonGroup>
     <ToolbarButton
       key="Undo"
@@ -19,6 +19,7 @@ const HistoryControls = ({ editorState, onUndo, onRedo }) =>
       fa={FaRepeat}
       disabled={editorState.getRedoStack().size === 0}
     />
-  </ButtonGroup>;
+  </ButtonGroup>
+);
 
 export default HistoryControls;

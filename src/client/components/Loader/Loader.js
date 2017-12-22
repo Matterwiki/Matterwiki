@@ -3,8 +3,7 @@ import React from "react";
 import "./Loader.css";
 
 // TODO move this to a const file
-const FALLBACK_MSG =
-  "There seems to be a problem in processing your request. Please try again.";
+const FALLBACK_MSG = "There seems to be a problem in processing your request. Please try again.";
 
 class Loader extends React.Component {
   constructor(props) {
@@ -13,10 +12,7 @@ class Loader extends React.Component {
   }
 
   componentDidMount() {
-    this.runFallback = setTimeout(
-      () => this.setState({ message: FALLBACK_MSG }),
-      10000
-    );
+    this.runFallback = setTimeout(() => this.setState({ message: FALLBACK_MSG }), 10000);
   }
 
   componentWillUnmount() {
@@ -27,9 +23,7 @@ class Loader extends React.Component {
     return (
       <div className="loader">
         <div className="loading" />
-        <p className="help-block">
-          {this.state.message}
-        </p>
+        <p className="help-block">{this.state.message}</p>
       </div>
     );
   }

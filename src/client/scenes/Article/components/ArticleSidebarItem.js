@@ -1,11 +1,10 @@
 import React from "react";
 
-const ArticleSidebarItem = ({ title, children }) =>
+const ArticleSidebarItem = ({ title, children }) => (
   <div className="sidebar-block">
-    <div className="sidebar-title">
-      {title}
-    </div>
+    <div className="sidebar-title">{title}</div>
     {children}
-  </div>;
+  </div>
+);
 
 export default ArticleSidebarItem;

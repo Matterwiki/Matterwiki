@@ -5,6 +5,15 @@ import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 import APIProvider from "utils/APIProvider";
 
+import { connect } from "react-redux";
+
+import {
+  loadUsersPage,
+  disposeUsersPage,
+  loadEditUser,
+  disposeEditUser
+} from "store/modules/sagaActions";
+
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
 
@@ -24,33 +33,20 @@ const EDIT_USER_FORM_FIELDS = [
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageUsers extends React.Component {
-  state = {
-    users: [],
-    currentUser: null
-  };
-
   componentDidMount() {
     this.handleUpdate();
   }
 
+  componentWillUnmount() {
+    this.props.disposeUsersPage();
+  }
+
   handleUpdate = () => {
-    this.setState({
-      loading: true
-    });
-    APIProvider.get("users").then(users => {
-      this.setState({
-        users,
-        loading: false
-      });
-    });
+    this.props.loadUsersPage();
   };
 
   handleEditClick = id => {
-    APIProvider.get(`users/${id}`).then(currentUser => {
-      this.setState({
-        currentUser
-      });
-    });
+    this.props.loadEditUser(id);
   };
 
   deleteUser = id => {
@@ -67,12 +63,10 @@ class ManageUsers extends React.Component {
   };
 
   updateUser = user => {
-    const id = this.state.currentUser.id;
+    const id = this.props.currentUser.id;
     APIProvider.put(`users/${id}`, user).then(() => {
       Alert.success("User has been edited");
-      this.setState({
-        currentUser: null
-      });
+      this.props.disposeEditUser();
       this.handleUpdate();
     });
   };
@@ -85,18 +79,17 @@ class ManageUsers extends React.Component {
   };
 
   emptyCurrentUserState = () => {
-    this.setState({ currentUser: null });
+    this.props.disposeEditUser();
   };
 
   render() {
-    if (this.state.loading) {
+    const { users, loading, currentUser } = this.props;
+    if (loading) {
       return <Loader />;
     }
 
-    const onSubmit = this.state.currentUser ? this.updateUser : this.addUser;
-    const itemFormFields = this.state.currentUser
-      ? EDIT_USER_FORM_FIELDS
-      : USER_FORM_FIELDS;
+    const onSubmit = currentUser ? this.updateUser : this.addUser;
+    const itemFormFields = currentUser ? EDIT_USER_FORM_FIELDS : USER_FORM_FIELDS;
     return (
       <Grid>
         <Row>
@@ -105,7 +98,7 @@ class ManageUsers extends React.Component {
               <Col md={12} sm={12}>
                 <ItemForm
                   itemFormFields={itemFormFields}
-                  item={this.state.currentUser}
+                  item={currentUser}
                   itemName="user"
                   onSubmit={onSubmit}
                   onCancelUpdate={this.emptyCurrentUserState}
@@ -115,7 +108,7 @@ class ManageUsers extends React.Component {
           </Col>
           <Col sm={12} md={8}>
             <ItemList
-              items={this.state.users}
+              items={users}
               itemName="user"
               onDeleteClick={this.deleteUser}
               onEditClick={this.handleEditClick}
@@ -127,4 +120,17 @@ class ManageUsers extends React.Component {
   }
 }
 
-export default ManageUsers;
+const mapStateToProps = state => ({
+  users: state.users.users,
+  loading: state.users.loading,
+  currentUser: state.users.currentUser
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadUsersPage: () => dispatch(loadUsersPage()),
+  disposeUsersPage: () => dispatch(disposeUsersPage()),
+  loadEditUser: id => dispatch(loadEditUser(id)),
+  disposeEditUser: () => dispatch(disposeEditUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageUsers);

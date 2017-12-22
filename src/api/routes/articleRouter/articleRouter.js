@@ -1,5 +1,6 @@
 const express = require("express");
-const { assign } = require("lodash");
+const { assign, omit, cloneDeep } = require("lodash");
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
 
@@ -8,48 +9,58 @@ const checkAuth = require("../../middleware/checkAuth");
 const { checkIfAdmin } = require("../../middleware/checkRole");
 const filterMetaData = require("../../middleware/filterMetadata");
 
-const { DEFAULT_CHANGELOG_MESSAGE } = require("../../utils/constants");
-const { NOT_FOUND } = require("../../utils/constants").ERRORS;
+const {
+  DEFAULT_CHANGELOG_MESSAGE,
+  ARTICLE_HISTORY_TYPES,
+  ERRORS
+} = require("../../utils/constants");
 
-const historyRouter = require("./articleHistoryRouter");
+const articleHistoryRouter = require("./articleHistoryRouter");
 
 const ArticleModel = require("../../models/articleModel");
 
-async function fetchArticles(req, res, next) {
-  try {
-    const articles = await ArticleModel.getAllWithRels();
-    res.status(200).json(articles);
-  } catch (err) {
-    next(err);
-  }
-}
+const { validateArticle, validateArticleDuringUpdate } = require("./articleRouterUtils");
+
+const fetchArticles = require("./fetchArticles");
 
 async function fetchArticleById(req, res, next) {
   const { id } = req.params;
   try {
-    const article = await ArticleModel.getWithRels(id);
+    const article = await ArticleModel.query()
+      .findById(id)
+      .withRels();
 
     if (!article) {
-      return next(NOT_FOUND);
+      return next(ERRORS.NOT_FOUND);
     }
 
-    res.status(200).json(article);
+    res.status(HttpStatus.OK).json(article);
   } catch (err) {
     next(err);
   }
 }
 
-async function saveArticle(req, res, next) {
+async function createArticle(req, res, next) {
   try {
-    const articleWithChangeLog = assign({}, req.body, {
+    if (!validateArticle(req.body)) return next(ERRORS.BAD_ARTICLE_CREATE);
+
+    const articleToCreate = assign(req.body, {
       change_log: DEFAULT_CHANGELOG_MESSAGE
     });
-    const newArticle = await ArticleModel.insertWithHistory(
-      articleWithChangeLog
-    );
 
-    res.status(201).json(newArticle);
+    // TODO This should ideally be a separate request from the UI, make it so if saves are slow
+    const articleHistory = {
+      articleHistory: assign({ type: ARTICLE_HISTORY_TYPES.CREATE }, articleToCreate)
+    };
+    const graphToInsert = assign({}, articleToCreate, articleHistory);
+
+    const insertedArticle = await ArticleModel.query()
+      .insertGraphAndFetch(graphToInsert)
+      .withRels();
+
+    res.status(HttpStatus.CREATED).json(insertedArticle);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 }
@@ -58,10 +69,25 @@ async function updateArticle(req, res, next) {
   const { id } = req.params;
 
   try {
-    const updatedArticle = await ArticleModel.updateWithHistory(id, req.body);
+    if (!validateArticleDuringUpdate(req.body)) return next(ERRORS.BAD_ARTICLE_UPDATE);
 
-    res.status(200).json(updatedArticle);
+    const updatedArticle = await ArticleModel.query()
+      .updateAndFetchById(id, req.body)
+      .withRels();
+
+    const updatedArticleToSend = cloneDeep(updatedArticle);
+
+    // TODO This should ideally be a separate request from the UI, make it so if saves are slow
+    const articleHistory = assign(
+      { type: ARTICLE_HISTORY_TYPES.UPDATE },
+      omit(updatedArticle, ["topic", "createdByUser", "modifiedByUser"])
+    );
+
+    await updatedArticle.$relatedQuery("articleHistory").insert(articleHistory);
+
+    res.status(HttpStatus.OK).json(updatedArticleToSend);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 }
@@ -70,19 +96,8 @@ async function deleteArticle(req, res, next) {
   const { id } = req.params;
 
   try {
-    await ArticleModel.deleteWithHistory(id);
-    res.status(200).json({});
-  } catch (err) {
-    next(err);
-  }
-}
-
-async function searchArticle(req, res, next) {
-  const { query } = req.query;
-
-  try {
-    const articles = await ArticleModel.searchWithRels(query);
-    res.status(200).json(articles);
+    await ArticleModel.query().deleteById(id);
+    res.status(HttpStatus.OK).json({});
   } catch (err) {
     next(err);
   }
@@ -92,16 +107,15 @@ async function searchArticle(req, res, next) {
 router.use(checkAuth);
 
 router.get("/", fetchArticles);
-router.get("/search/", searchArticle);
 router.get("/:id", fetchArticleById);
 
-router.post("/", JSONParser, filterMetaData, saveArticle);
+router.post("/", JSONParser, filterMetaData, createArticle);
 router.put("/:id", JSONParser, filterMetaData, updateArticle);
 
 // ONLY Admins can delete articles
 router.delete("/:id", checkIfAdmin, deleteArticle);
 
 // Archive stuff
-router.use("/:id/history", historyRouter);
+router.use("/:id/history", articleHistoryRouter);
 
 module.exports = router;

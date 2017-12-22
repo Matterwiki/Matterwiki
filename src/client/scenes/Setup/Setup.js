@@ -33,8 +33,8 @@ class Setup extends React.Component {
             <h3>Matterwiki is a simple wiki for teams</h3>
             <br />
             <h4>
-              People use it to store documentation, notes, culture guidelines,
-              employee onboarding content and everything they want to.
+              People use it to store documentation, notes, culture guidelines, employee onboarding
+              content and everything they want to.
             </h4>
             <br />
           </Col>

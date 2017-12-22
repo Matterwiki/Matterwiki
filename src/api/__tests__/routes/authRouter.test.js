@@ -1,8 +1,8 @@
-const {
-  setupAll,
-  setupEach,
-  teardownAll
-} = require("../testUtils/globalSetup");
+const jwt = require("jsonwebtoken");
+const HttpStatus = require("http-status-codes");
+
+const { authSecret } = require("../../config");
+const { setupAll, setupEach, teardownAll } = require("../testUtils/globalSetup");
 
 const { userHolder } = require("../testUtils/modelHolder");
 const { user: userFactory } = require("../factories/factories");
@@ -15,10 +15,10 @@ describe("Auth API tests", () => {
   afterAll(teardownAll);
   beforeEach(setupEach);
 
-  describe("POST - api/auth/login/", () => {
+  describe("#POST - api/auth/login/", () => {
     const apiUrl = "/api/auth/login";
 
-    test("401 any - INVALID - bad email provided", () => {
+    test("(400) bad email provided", () => {
       const { email, password } = userFactory.build();
 
       return apiClient
@@ -27,28 +27,29 @@ describe("Auth API tests", () => {
           email,
           password
         })
-        .expect(401)
+        .expect(HttpStatus.BAD_REQUEST)
         .then(res => expect(res.body.message).toBe(CREDS_WRONG.message));
     });
 
-    test("401 any - INVALID - bad password provided", () => {
+    test("(400) bad password provided", () => {
       const { email } = userHolder.getUsers()[0];
       const password = "invalidpass";
 
       return apiClient
         .post(apiUrl)
         .send({ email, password })
-        .expect(401)
+        .expect(HttpStatus.BAD_REQUEST)
         .then(res => expect(res.body.message).toBe(CREDS_WRONG.message));
     });
-    test("401 any - INVALID - user and password not provided", () =>
+
+    test("(400) user and password not provided", () =>
       apiClient
         .post(apiUrl)
         .send({})
-        .expect(401)
+        .expect(HttpStatus.BAD_REQUEST)
         .then(res => expect(res.body.message).toBe(CREDS_WRONG.message)));
 
-    test("201 any - VALID - returns expected fields", () => {
+    test("(201) login request returns expected fields", () => {
       const { email, name, id, about } = userHolder.getAdmin();
       const password = testConstants.DEFAULT_PASSWORD;
 
@@ -67,7 +68,8 @@ describe("Auth API tests", () => {
           );
         });
     });
-    test("201 any - VALID - should provide token after login", () => {
+
+    test("(201) request should provide token after login", () => {
       const { email } = userHolder.getAdmin();
       const password = testConstants.DEFAULT_PASSWORD;
 
@@ -77,9 +79,12 @@ describe("Auth API tests", () => {
         .expect(201)
         .then(res => {
           expect(res.body.token).toBeDefined();
+
+          expect(jwt.verify(res.body.token, authSecret)).toBeDefined();
         });
     });
-    test("201 any - VALID - should not return password", () => {
+
+    test("(201) request should not return password", () => {
       const user = userHolder.getUsers()[0];
       const password = testConstants.DEFAULT_PASSWORD;
 
@@ -92,12 +97,13 @@ describe("Auth API tests", () => {
         });
     });
   });
-  describe("GET - api/auth/check/", () => {
-    const apiUrl = "/api/auth/check";
-    test("401 any - VALID - should fail if bad/missing token", () =>
-      apiClient.get(apiUrl).expect(401));
 
-    test("200 any - VALID - should authenticate if token valid", async () => {
+  describe("#GET - api/auth/check/", () => {
+    const apiUrl = "/api/auth/check";
+
+    test("(401) should fail if bad/missing token", () => apiClient.get(apiUrl).expect(401));
+
+    test("(200) should authenticate if token valid", async () => {
       const { email } = userHolder.getUsers()[0];
       const password = testConstants.DEFAULT_PASSWORD;
 
@@ -108,7 +114,10 @@ describe("Auth API tests", () => {
 
       expect(token).toBeDefined();
 
-      return apiClient.get(apiUrl).set("x-access-token", token).expect(200);
+      return apiClient
+        .get(apiUrl)
+        .set("x-access-token", token)
+        .expect(200);
     });
   });
 });

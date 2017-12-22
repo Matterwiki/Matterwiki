@@ -1,22 +1,23 @@
 import React from "react";
 
-const LastUpdatedDate = ({ date }) =>
+const LastUpdatedDate = ({ date }) => (
   <div className="single-article-meta">
     Last updated on {new Date(date.replace(" ", "T")).toDateString()}
-  </div>;
+  </div>
+);
 
-const EditedBy = ({ name }) =>
+const EditedBy = ({ name }) => (
   <div className="single-article-meta">
     Edited by <b>{name}</b>
-  </div>;
+  </div>
+);
 
-const ArticleHeading = ({ children, date, editedBy }) =>
+const ArticleHeading = ({ children, date, editedBy }) => (
   <div className="article-heading">
-    <h1 className="single-article-title">
-      {children}
-    </h1>
+    <h1 className="single-article-title">{children}</h1>
     {date && <LastUpdatedDate date={date} />}
     {editedBy && <EditedBy name={editedBy} />}
-  </div>;
+  </div>
+);
 
 export default ArticleHeading;

@@ -9,11 +9,7 @@ const BrowseArchives = ({ onArchiveChosen, archives }) => {
   };
 
   if (!archives.length) {
-    return (
-      <HelpBlock className="center-align">
-        There are no archives for this article
-      </HelpBlock>
-    );
+    return <HelpBlock className="center-align">There are no archives for this article</HelpBlock>;
   }
   return (
     <div className="custom-collapse">
@@ -30,9 +26,7 @@ const BrowseArchives = ({ onArchiveChosen, archives }) => {
       </div>
       <ListGroup id="side-menu-collapse" className="collapse archive-list">
         {archives.map(archive => {
-          const lastUpdated = new Date(
-            archive.updated_at.replace(" ", "T")
-          ).toDateString();
+          const lastUpdated = new Date(archive.updated_at.replace(" ", "T")).toDateString();
 
           return (
             <ListGroupItem

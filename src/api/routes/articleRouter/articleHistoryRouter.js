@@ -1,30 +1,36 @@
 const express = require("express");
+const HttpStatus = require("http-status-codes");
 
 const router = express.Router({ mergeParams: true });
 
 const ArticleHistoryModel = require("../../models/articleHistoryModel");
 
 async function fetchHistoryByArticle(req, res, next) {
-  const { id } = req.params;
+  const { id: article_id } = req.params;
 
   try {
-    // TODO Orderby Date descending
-    const articles = await ArticleHistoryModel.getAll({
-      article_id: id
-    });
+    const articles = await ArticleHistoryModel.query()
+      .where({ article_id })
+      .withRels()
+      .orderBy("updated_at", "desc");
 
-    res.status(200).json(articles);
+    res.status(HttpStatus.OK).json(articles);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 }
 
 async function fetchHistoryById(req, res, next) {
-  const { id } = req.params;
-  try {
-    const archive = await ArticleHistoryModel.get(id);
+  const { id: article_id, archiveId: id } = req.params;
 
-    res.status(200).json(archive);
+  try {
+    const archive = await ArticleHistoryModel.query()
+      .where({ article_id })
+      .findById(id)
+      .withRels();
+
+    res.status(HttpStatus.OK).json(archive);
   } catch (err) {
     next(err);
   }

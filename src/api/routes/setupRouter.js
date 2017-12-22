@@ -1,5 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const HttpStatus = require("http-status-codes");
+const { isNil } = require("lodash");
 
 const router = express.Router();
 
@@ -15,12 +17,12 @@ const setupAdminUser = async (req, res, next) => {
   const { name, email, about, password } = req.body;
 
   try {
-    const adminUserFromDb = await UserModel.get(1);
+    const adminUserFromDb = await UserModel.query().findOne({ id: 1 });
 
-    if (adminUserFromDb) next(DUPLICATE_ADMIN_USER);
+    if (!isNil(adminUserFromDb)) return next(DUPLICATE_ADMIN_USER);
 
     // hash password
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
 
     // create the admin user
     const adminUser = {
@@ -32,8 +34,8 @@ const setupAdminUser = async (req, res, next) => {
       role: ROLES.ADMIN
     };
 
-    const newUser = await UserModel.insert(adminUser);
-    res.status(201).json(newUser);
+    await UserModel.query().insert(adminUser);
+    res.status(HttpStatus.CREATED).end();
   } catch (err) {
     next(err);
   }

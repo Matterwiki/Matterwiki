@@ -43,17 +43,15 @@ class ItemForm extends React.Component {
 
   render() {
     const { item, itemName, itemFormFields } = this.props;
-    const currentlyEditing =
-      item &&
-      <p className="editing-heading">
-        You are currently editing a {itemName}
-      </p>;
+    const currentlyEditing = item && (
+      <p className="editing-heading">You are currently editing a {itemName}</p>
+    );
 
     return (
       <div>
         {currentlyEditing}
         <Form className="tabform" onSubmit={this.onSubmit}>
-          {itemFormFields.map(formField =>
+          {itemFormFields.map(formField => (
             <Col sm={12} key={formField.name}>
               <FormGroup>
                 <FormControl
@@ -65,16 +63,18 @@ class ItemForm extends React.Component {
                 />
               </FormGroup>
             </Col>
-          )}
+          ))}
           <Col sm={12}>
             <Button type="submit" block>
               {item ? `Update ${itemName}` : `Add ${itemName}`}
             </Button>
-            {item
-              ? <Button block onClick={this.cancelUpdate}>
-                  Cancel
-                </Button>
-              : ""}
+            {item ? (
+              <Button block onClick={this.cancelUpdate}>
+                Cancel
+              </Button>
+            ) : (
+              ""
+            )}
           </Col>
         </Form>
       </div>

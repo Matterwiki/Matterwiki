@@ -7,9 +7,7 @@ import getDisabledLevelButtons from "./utils/getDisabledLevelButtons";
 const LevelControls = ({ editorState, toggleLevelType }) => {
   const onDecreaseLevel = () => toggleLevelType(-1);
   const onIncreaseLevel = () => toggleLevelType(1);
-  const { disableOutdent, disableIndent } = getDisabledLevelButtons(
-    editorState
-  );
+  const { disableOutdent, disableIndent } = getDisabledLevelButtons(editorState);
 
   return (
     <ButtonGroup>

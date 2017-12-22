@@ -1,18 +1,26 @@
-const { withDbHelpers, BaseModel } = require("./modelHelpers");
+const { Model } = require("objection");
+const { withDbHelpers } = require("./modelHelpers");
 
-class TopicModel extends BaseModel {
+const options = { uniqueFields: ["name"] };
+
+class TopicModel extends withDbHelpers(options)(Model) {
   static get tableName() {
     return "topic";
   }
 
+  static get namedFilters() {
+    return {
+      lite: builder => builder.select("name", "description")
+    };
+  }
+
   static get relationMappings() {
-    const UserModel = require("./userModel").Model;
-    const ArticleHistoryModel = require("./articleHistoryModel").Model;
-    const ArticleModel = require("./articleModel").Model;
+    const ArticleModel = require("./articleModel");
+    const UserModel = require("./userModel");
 
     return {
       article: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: "topic.id",
@@ -20,7 +28,7 @@ class TopicModel extends BaseModel {
         }
       },
       createdUser: {
-        relation: BaseModel.BelongsToOneRelation,
+        relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "topic.created_by_id",
@@ -28,7 +36,7 @@ class TopicModel extends BaseModel {
         }
       },
       modifiedUser: {
-        relation: BaseModel.BelongsToOneRelation,
+        relation: Model.BelongsToOneRelation,
         modelClass: UserModel,
         join: {
           from: "topic.modified_by_id",
@@ -39,10 +47,4 @@ class TopicModel extends BaseModel {
   }
 }
 
-module.exports = withDbHelpers(
-  TopicModel,
-  {},
-  {
-    relations: "[article, article.[modifiedUser]]"
-  }
-);
+module.exports = TopicModel;

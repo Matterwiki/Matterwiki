@@ -1,9 +1,6 @@
-const {
-  initTestDb,
-  destroyTestDb,
-  truncateDb,
-  seedDb
-} = require("./dbHelpers");
+const { isBoolean } = require("lodash");
+
+const { initTestDb, destroyTestDb, truncateDb, seedDb } = require("./dbHelpers");
 
 const { makeUsers } = require("./userHelpers");
 const makeJwt = require("./makeJwt");
@@ -38,17 +35,25 @@ module.exports = {
    * Setup block that runs before any of the tests, runs only once/suite
    * Inits DB, makes test users needed
    */
-  setupAll: () => initTestDb().then(makeTestUsers).then(makeTokens),
+  setupAll: () =>
+    initTestDb()
+      .then(makeTestUsers)
+      .then(makeTokens),
+
   /**
    * Teardown block that runs before any of the tests
    * 1) runs only once
    * 2) removes the test DB made in the beforeAll block
    */
   teardownAll: () => destroyTestDb(),
+
   /**
    * Setup block that runs before every single test
    * 1) truncates the DB and makes it clean
    * 2) runs seed scripts again
    */
-  setupEach: () => truncateDb().then(seedDb)
+  setupEach: (options = {}) => {
+    const keepUsers = isBoolean(options.keepUsers) ? options.keepUsers : true;
+    return truncateDb(keepUsers).then(seedDb);
+  }
 };

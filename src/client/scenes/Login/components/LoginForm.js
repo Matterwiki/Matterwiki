@@ -12,10 +12,7 @@ const LOGIN_FORM_FIELDS = [
 // https://bartj.com/posts/2016-11-07-managing-form-validation-in-react.html
 class LoginForm extends React.Component {
   // Setup state
-  state = LOGIN_FORM_FIELDS.reduce(
-    (acc, formField) => ({ [formField.name]: "", ...acc }),
-    {}
-  );
+  state = LOGIN_FORM_FIELDS.reduce((acc, formField) => ({ [formField.name]: "", ...acc }), {});
 
   onChange = e => {
     const { name, value } = e.target;
@@ -34,7 +31,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <Form onSubmit={this.onSubmit}>
-        {LOGIN_FORM_FIELDS.map(formField =>
+        {LOGIN_FORM_FIELDS.map(formField => (
           <Col sm={12} key={formField.name}>
             <FormGroup>
               <FormControl
@@ -46,7 +43,7 @@ class LoginForm extends React.Component {
               />
             </FormGroup>
           </Col>
-        )}
+        ))}
         <Col sm={12}>
           <Button type="submit" block>
             Sign in

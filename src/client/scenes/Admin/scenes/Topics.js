@@ -1,46 +1,40 @@
 import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 import APIProvider from "utils/APIProvider";
+import { connect } from "react-redux";
 
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
+
+import {
+  loadTopicsPage,
+  disposeTopicsPage,
+  loadEditTopic,
+  disposeEditTopic
+} from "store/modules/sagaActions";
 
 import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
 
 // TODO move these fellas to a nice consts file
-const TOPIC_FORM_FIELDS = [
-  { name: "name", type: "text" },
-  { name: "description", type: "text" }
-];
+const TOPIC_FORM_FIELDS = [{ name: "name", type: "text" }, { name: "description", type: "text" }];
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageTopics extends React.Component {
-  state = {
-    topics: [],
-    currentTopic: null
-  };
-
   componentDidMount() {
     this.handleUpdate();
   }
 
+  componentWillUnmount() {
+    this.props.disposeTopicsPage();
+  }
+
   handleUpdate = () => {
-    this.setState({ loading: true });
-    APIProvider.get("topics").then(topics => {
-      this.setState({
-        topics,
-        loading: false
-      });
-    });
+    this.props.loadTopicsPage();
   };
 
   handleEditClick = id => {
-    APIProvider.get(`topics/${id}`).then(currentTopic => {
-      this.setState({
-        currentTopic
-      });
-    });
+    this.props.loadEditTopic(id);
   };
 
   deleteTopic = id => {
@@ -51,12 +45,10 @@ class ManageTopics extends React.Component {
   };
 
   updateTopic = topic => {
-    const id = this.state.currentTopic.id;
+    const id = this.props.currentTopic.id;
     APIProvider.put(`topics/${id}`, topic).then(() => {
       Alert.success("Topic has been edited");
-      this.setState({
-        currentTopic: null
-      });
+      this.props.disposeEditTopic();
       this.handleUpdate();
     });
   };
@@ -69,15 +61,16 @@ class ManageTopics extends React.Component {
   };
 
   emptyCurrentTopicState = () => {
-    this.setState({ currentTopic: null });
+    this.props.disposeEditTopic();
   };
 
   render() {
-    if (this.state.loading) {
+    const { topics, currentTopic, loading } = this.props;
+    if (loading) {
       return <Loader />;
     }
 
-    const onSubmit = this.state.currentTopic ? this.updateTopic : this.addTopic;
+    const onSubmit = currentTopic ? this.updateTopic : this.addTopic;
     return (
       <Grid>
         <Row>
@@ -87,7 +80,7 @@ class ManageTopics extends React.Component {
                 <ItemForm
                   itemFormFields={TOPIC_FORM_FIELDS}
                   itemName="topic"
-                  item={this.state.currentTopic}
+                  item={currentTopic}
                   onSubmit={onSubmit}
                   onCancelUpdate={this.emptyCurrentTopicState}
                 />
@@ -96,7 +89,7 @@ class ManageTopics extends React.Component {
           </Col>
           <Col sm={12} md={8}>
             <ItemList
-              items={this.state.topics}
+              items={topics}
               itemName="topic"
               onDeleteClick={this.deleteTopic}
               onEditClick={this.handleEditClick}
@@ -108,4 +101,17 @@ class ManageTopics extends React.Component {
   }
 }
 
-export default ManageTopics;
+const mapStateToProps = state => ({
+  topics: state.topics.topics,
+  loading: state.topics.loading,
+  currentTopic: state.topics.currentTopic
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadTopicsPage: () => dispatch(loadTopicsPage()),
+  disposeTopicsPage: () => disposeTopicsPage(disposeTopicsPage()),
+  loadEditTopic: id => dispatch(loadEditTopic(id)),
+  disposeEditTopic: () => dispatch(disposeEditTopic())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageTopics);

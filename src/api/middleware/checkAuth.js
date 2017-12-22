@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
     // valid token
     if (decodedToken) {
       // set the decoded user on the `req` obj
-      // TODO make sure the decoded user is present and active
+      // TODO make sure the decoded user is present and active in DB
       req.user = decodedToken;
       return next();
     }

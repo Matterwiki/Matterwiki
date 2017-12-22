@@ -3,7 +3,7 @@ import { HelpBlock, Grid, Col, Row } from "react-bootstrap";
 
 import "./Errors.css";
 
-const NotFoundError = () =>
+const NotFoundError = () => (
   <Grid bsClass="error-container">
     <Row>
       <Col md={12}>
@@ -15,6 +15,7 @@ const NotFoundError = () =>
         </HelpBlock>
       </Col>
     </Row>
-  </Grid>;
+  </Grid>
+);
 
 export default NotFoundError;

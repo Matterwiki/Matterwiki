@@ -1,9 +1,4 @@
-import {
-  EditorState,
-  ContentState,
-  convertFromHTML,
-  convertFromRaw
-} from "draft-js";
+import { EditorState, ContentState, convertFromHTML, convertFromRaw } from "draft-js";
 
 const convertToEditorState = (rawContent, isHtml, decorator) => {
   let editorState = EditorState.createEmpty(decorator);

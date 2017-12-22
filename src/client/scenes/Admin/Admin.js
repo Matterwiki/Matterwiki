@@ -21,9 +21,7 @@ class Admin extends React.Component {
     // TODO There must be a better way to do this. Fix when moving to RR v4
     const pathArray = this.props.location.pathname.split("/");
     const currentTab =
-      pathArray.length === 3 && !!pathArray[2]
-        ? pathArray[pathArray.length - 1]
-        : "users";
+      pathArray.length === 3 && !!pathArray[2] ? pathArray[pathArray.length - 1] : "users";
 
     return currentTab;
   };
@@ -43,9 +41,7 @@ class Admin extends React.Component {
     return (
       <div>
         <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
-        {location.pathname === "/admin"
-          ? <Redirect to={`${match.url}/users`} />
-          : ""}
+        {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}
         <Switch>
           <Route path={`${match.url}/topics`} component={ManageTopics} />
           <Route path={`${match.url}/users`} component={ManageUsers} />

@@ -83,16 +83,10 @@ class LinkControl extends Component {
             onChange={this.onURLChange}
           />
           <ButtonGroup className="pull-right">
-            <Button
-              bsSize="sm"
-              className="toolbar-button"
-              onClick={this.handleLinkSave}>
+            <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkSave}>
               Link
             </Button>
-            <Button
-              bsSize="sm"
-              className="toolbar-button"
-              onClick={this.handleLinkRemove}>
+            <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkRemove}>
               Unlink
             </Button>
           </ButtonGroup>
@@ -100,8 +94,7 @@ class LinkControl extends Component {
       </Overlay>
     );
 
-    const isLinkEntity =
-      (currentEntity && currentEntity.getType() === "LINK") || false;
+    const isLinkEntity = (currentEntity && currentEntity.getType() === "LINK") || false;
     const toolbarButtonClass = classNames(
       {
         active: isLinkEntity
