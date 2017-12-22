@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HelpBlock } from "react-bootstrap";
-import { Row, Col, Heading } from "ui";
+import { Row, Col, Heading, HelpBlock } from "ui";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
@@ -62,7 +61,7 @@ class ArticleHistory extends React.Component {
     }
     return (
       <Row>
-        <HelpBlock className="center-align">
+        <HelpBlock textAlign="center">
           There are no archives for this article {`   `}
           <Link to={`/article/${this.props.match.params.articleId}`}>
             Go back

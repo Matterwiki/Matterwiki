@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import FaFrownO from "react-icons/lib/fa/frown-o";
-import { HelpBlock } from "react-bootstrap";
+import { HelpBlock } from "ui";
 import "url-search-params-polyfill";
 
 import ArticlesList from "components/ArticlesList/ArticlesList";
@@ -37,9 +37,7 @@ class Search extends React.Component {
     return (
       <div>
         <div className="result-info">
-          <HelpBlock>
-            We found {results.length} articles for {query}
-          </HelpBlock>
+          We found {results.length} articles for {query}
         </div>
         {!results.length
           ? <div className="no-results">

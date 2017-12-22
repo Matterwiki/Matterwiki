@@ -1,6 +1,5 @@
 import React from "react";
-import { HelpBlock } from "react-bootstrap";
-import { Row, Col } from "ui";
+import { Row, Col, HelpBlock } from "ui";
 import Loader from "components/Loader/Loader";
 
 import ArticleHeading from "./ArticleHeading";
@@ -25,7 +24,7 @@ const SimpleArticle = ({ loading, article }) => {
   }
   return (
     <center>
-      <HelpBlock>Please select an archive</HelpBlock>
+      <HelpBlock textAlign="center">Please select an archive</HelpBlock>
     </center>
   );
 };

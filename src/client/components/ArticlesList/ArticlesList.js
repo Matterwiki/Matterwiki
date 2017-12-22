@@ -1,7 +1,6 @@
 import React from "react";
-import { HelpBlock } from "react-bootstrap";
 
-import { List } from "ui";
+import { List, HelpBlock } from "ui";
 
 import Loader from "components/Loader/Loader";
 import ArticlesListItem from "./components/ArticlesListItem";
@@ -16,7 +15,7 @@ const ArticlesList = props => {
   }
   if (!articles.length) {
     return (
-      <HelpBlock className="center-align">
+      <HelpBlock textAlign="center">
         There are no articles under this topic
       </HelpBlock>
     );

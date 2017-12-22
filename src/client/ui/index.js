@@ -11,6 +11,7 @@ import { Navbar, Nav, NavItem, NavForm } from "./navbar";
 import { List, ListItem, ListItemBody, ListItemHeader } from "./list";
 import Heading from "./heading";
 import { Sidebar, SidebarBlock } from "./sidebar";
+import HelpBlock from "./helpblock";
 
 export {
   Button,
@@ -31,5 +32,6 @@ export {
   ListItemHeader,
   Heading,
   Sidebar,
-  SidebarBlock
+  SidebarBlock,
+  HelpBlock
 };
