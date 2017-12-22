@@ -84,7 +84,7 @@ class ManageUsers extends React.Component {
   };
 
   render() {
-    const { users: { users, loading, currentUser } } = store.getState();
+    const { users, loading, currentUser } = this.props;
     if (loading) {
       return <Loader />;
     }

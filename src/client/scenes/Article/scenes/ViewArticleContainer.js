@@ -23,19 +23,19 @@ class ViewArticleContainer extends React.Component {
 
   handleEditClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     this.props.history.push(`/article/edit/${id}`);
   };
 
   handleHistoryClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     this.props.history.push(`/article/${id}/history`);
   };
 
   handleDeleteClick = e => {
     e.preventDefault();
-    const { articles: { currentArticle: { id } } } = store.getState();
+    const id = this.props.article.id;
     APIProvider.delete(`articles/${id}`).then(() => {
       Alert.success("Article has been deleted");
       this.props.history.push("/home");
@@ -43,7 +43,7 @@ class ViewArticleContainer extends React.Component {
   };
 
   render() {
-    const { articles: { loading, currentArticle: article } } = store.getState();
+    const { article, loading } = this.props;
     if (loading) {
       return <Loader />;
     } else if (article.title) {

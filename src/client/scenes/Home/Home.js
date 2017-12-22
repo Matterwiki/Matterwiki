@@ -27,11 +27,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const {
-      topics: { topics },
-      articles: { articles, loading: loadingArticles },
-      app: { loading }
-    } = store.getState();
+    const { topics, articles, loadingArticles, loading } = this.props;
     if (loading) return <Loader />;
     return (
       <Row>
@@ -48,7 +44,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => ({
   topics: state.topics.topics,
-  articles: state.articles,
+  articles: state.articles.articles,
   loadingArticles: state.articles.loading,
   loading: state.app.loading
 });

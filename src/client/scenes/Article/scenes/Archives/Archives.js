@@ -33,9 +33,11 @@ class ArticleHistory extends React.Component {
 
   render() {
     const {
-      archives: { archives, currentArchive, loading: loadingCurrentArchive },
-      app: { loading }
-    } = store.getState();
+      archives,
+      currentArchive,
+      loadingCurrentArchive,
+      loading
+    } = this.props;
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
