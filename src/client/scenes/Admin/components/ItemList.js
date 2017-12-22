@@ -1,6 +1,5 @@
 import React from "react";
-import { Row, Col, List, ListItem, ListItemHeader, Button } from "ui";
-import { Clearfix, FloatRight } from "ui/utils";
+import { Row, Col, List, ListItem, ListItemHeader, Button, Icon } from "ui";
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
@@ -30,14 +29,14 @@ class ResourceListItem extends React.Component {
               onClick={e => {
                 this.handleEditClick(item, e);
               }}>
-              Edit
+              <Icon type="edit" size="12" /> Edit
             </Button>&nbsp;
             {item.id !== 1 &&
               <Button
                 onClick={e => {
                   this.handleDeleteClick(item, e);
                 }}>
-                Delete
+                <Icon type="trash-2" size="12" /> Delete
               </Button>}
           </Col>
         </Row>

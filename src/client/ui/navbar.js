@@ -49,7 +49,7 @@ const NavItem = styled.div`
       if (props.active) {
         return "#fff";
       }
-      return "#efefef";
+      return "#f6f6f6";
     }
     return "";
   }};
@@ -58,16 +58,13 @@ const NavItem = styled.div`
   .icon {
     margin-right: 0.5rem;
   }
-  button {
-    display: flex;
-    justify-content: center;
-  }
   a {
     display: flex;
     font-size: 1.4rem;
     line-height: 4rem;
     text-transform: uppercase;
     justify-content: flex-start;
+    align-items: center;
   }
   * {
     height: 100%;

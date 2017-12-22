@@ -10,6 +10,9 @@ const Button = styled.button.attrs({
   }
 })`
   width: ${props => (props.block ? "100%" : "auto")};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Button;

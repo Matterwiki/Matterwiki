@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Heading } from "ui";
+import { Heading, Icon } from "ui";
 
 const LastUpdatedDate = ({ date }) =>
   <span>
@@ -15,7 +15,11 @@ const EditedBy = ({ name }) =>
 const ArticleHeading = ({ children, date, editedBy }) =>
   <div>
     <Heading size="6">{children}</Heading>
-    {date && <LastUpdatedDate date={date} />}&nbsp;
+    {date &&
+      <span>
+        <Icon type="clock" size="12" />
+        <LastUpdatedDate date={date} />
+      </span>}&nbsp;
     {editedBy && <EditedBy name={editedBy} />}
   </div>;
 

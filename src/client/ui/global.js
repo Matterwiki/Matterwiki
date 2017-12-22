@@ -7,4 +7,7 @@ injectGlobal`
   }
   :focus {outline:none;}
   ::-moz-focus-inner {border:0;}
+  .icon {
+    margin-right: 0.5rem;
+  }
 `;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Form, Input, Button } from "ui";
+import { Form, Input, Button, Icon } from "ui";
 
 class ItemForm extends React.Component {
   componentWillMount() {
@@ -64,11 +64,12 @@ class ItemForm extends React.Component {
             />
           )}
           <Button type="submit" block>
+            <Icon type={item ? "send" : "plus-square"} size="12" />{" "}
             {item ? `Update ${itemName}` : `Add ${itemName}`}
           </Button>
           {item
             ? <Button block onClick={this.cancelUpdate}>
-                Cancel
+                <Icon type="x-square" size="12" /> Cancel
               </Button>
             : ""}
         </Form>

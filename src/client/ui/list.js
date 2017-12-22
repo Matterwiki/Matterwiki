@@ -11,8 +11,8 @@ const ListItem = styled.div`
   width: 100%;
   cursor: ${props => (props.cursorPointer ? "pointer" : "")};
   padding: 1rem;
-  background-color: ${props => (props.active ? "#efefef" : "#fff")};
-  border-bottom: 1px solid #efefef;
+  background-color: ${props => (props.active ? "#f6f6f6" : "#fff")};
+  border-bottom: 1px solid #f6f6f6;
   border-radius: 0.4rem;
 `;
 

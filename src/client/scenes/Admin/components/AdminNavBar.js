@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav, NavItem } from "ui";
+import { Nav, NavItem, Icon } from "ui";
 
 const AdminNavBar = ({ activeTab, handleSelect }) =>
   <Nav marginBottom="2">
@@ -8,14 +8,14 @@ const AdminNavBar = ({ activeTab, handleSelect }) =>
       active={activeTab === "users"}
       tab
       cursorPointer>
-      Users
+      <Icon type="users" />Users
     </NavItem>
     <NavItem
       onClick={e => handleSelect("topics", e)}
       active={activeTab === "topics"}
       tab
       cursorPointer>
-      Topics
+      <Icon type="folder" />Topics
     </NavItem>
   </Nav>;
 

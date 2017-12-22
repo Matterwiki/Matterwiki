@@ -2,12 +2,17 @@ import React from "react";
 import feather from "feather-icons";
 
 const Icon = props => {
-  const { type, color } = props;
-  console.log(feather.icons[type].toSvg());
+  const { type } = props;
+  let size;
+  if (!props.size) size = 24;
+  else size = props.size;
+
   return (
     <span
       className="icon"
-      dangerouslySetInnerHTML={{ __html: feather.icons[type].toSvg() }}
+      dangerouslySetInnerHTML={{
+        __html: feather.icons[type].toSvg({ width: size, height: size })
+      }}
     />
   );
 };

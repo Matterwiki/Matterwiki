@@ -24,7 +24,7 @@ const Col = styled.div.attrs({
   }
 })`
   position: ${props => (props.fixed ? "fixed" : "")};
-  text-align: ${props => (props.textAlign ? props.textAlign : "")}
+  text-align: ${props => (props.textAlign ? props.textAlign : "")};
 `;
 
 export { Row, Col };
