@@ -23,8 +23,7 @@ export function* disposeArticlePage() {
 
 export function* fetchArticlesByTopic(action) {
   yield put(startLoadingArticles());
-  const topic = yield call(APIProvider.get, `topics/${action.id}/articles`);
-  const articles = topic.article;
+  const articles = yield call(APIProvider.get, `articles?topic_id=${action.id}`);
   yield put(addArticles(articles));
   yield put(stopLoadingArticles());
 }

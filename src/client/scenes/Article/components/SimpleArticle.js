@@ -15,7 +15,7 @@ const SimpleArticle = ({ loading, article }) => {
       <Grid fluid>
         <Row>
           <Col md={12}>
-            <ArticleHeading editedBy={article.createdUser.name}>{article.title}</ArticleHeading>
+            <ArticleHeading editedBy={article.createdByUser.name}>{article.title}</ArticleHeading>
             <div className="single-article-body">
               <WikiEditor readOnly rawContent={rawContent} />
             </div>
