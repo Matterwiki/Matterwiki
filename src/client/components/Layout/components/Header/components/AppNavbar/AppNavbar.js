@@ -7,7 +7,7 @@ import { Navbar, ImageWrapper, NavItem, Button, Nav, Icon } from "ui";
 import Logo from "assets/logo.png";
 import SearchForm from "./components/SearchForm";
 
-const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
+const AppNavbar = ({ isAdmin, handleLogoutClick }) => (
   <Navbar>
     <ImageWrapper height="4">
       <Link replace to="/home" className="navbar-brand">
@@ -18,12 +18,13 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
       <NavItem>
         <SearchForm />
       </NavItem>
-      {isAdmin &&
+      {isAdmin && (
         <NavItem>
           <Link to="/admin">
             <Icon type="terminal" />Admin
           </Link>
-        </NavItem>}
+        </NavItem>
+      )}
       <NavItem>
         <Link to="/article/new">
           <Icon type="plus-square" />New Article
@@ -35,6 +36,7 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) =>
         </Button>
       </NavItem>
     </Nav>
-  </Navbar>;
+  </Navbar>
+);
 
 export default AppNavbar;

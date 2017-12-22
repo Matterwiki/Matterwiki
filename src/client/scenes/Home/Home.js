@@ -5,11 +5,7 @@ import { FullHeightContainer } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
-import {
-  loadHomepage,
-  disposeHomepage,
-  fetchArticlesByTopic
-} from "store/modules/sagaActions";
+import { loadHomepage, disposeHomepage, fetchArticlesByTopic } from "store/modules/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
@@ -27,13 +23,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const {
-      topics,
-      articles,
-      loadingArticles,
-      loading,
-      currentTopic
-    } = this.props;
+    const { topics, articles, loadingArticles, loading, currentTopic } = this.props;
     if (loading) return <Loader />;
     return (
       <Row marginTop="1">
@@ -46,9 +36,7 @@ class Home extends React.Component {
             />
           </FullHeightContainer>
         </Col>
-        <Col>
-          {loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}
-        </Col>
+        <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
       </Row>
     );
   }

@@ -4,11 +4,7 @@ import { Row, Col, Heading, HelpBlock } from "ui";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
-import {
-  loadArchivesPage,
-  disposeArchivesPage,
-  fetchArchiveById
-} from "store/modules/sagaActions";
+import { loadArchivesPage, disposeArchivesPage, fetchArchiveById } from "store/modules/sagaActions";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
@@ -29,12 +25,7 @@ class ArticleHistory extends React.Component {
   };
 
   render() {
-    const {
-      archives,
-      currentArchive,
-      loadingCurrentArchive,
-      loading
-    } = this.props;
+    const { archives, currentArchive, loadingCurrentArchive, loading } = this.props;
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
@@ -51,10 +42,7 @@ class ArticleHistory extends React.Component {
             />
           </Col>
           <Col>
-            <SimpleArticle
-              article={currentArchive}
-              loading={loadingCurrentArchive}
-            />
+            <SimpleArticle article={currentArchive} loading={loadingCurrentArchive} />
           </Col>
         </Row>
       );
@@ -63,9 +51,7 @@ class ArticleHistory extends React.Component {
       <Row>
         <HelpBlock textAlign="center">
           There are no archives for this article {`   `}
-          <Link to={`/article/${this.props.match.params.articleId}`}>
-            Go back
-          </Link>
+          <Link to={`/article/${this.props.match.params.articleId}`}>Go back</Link>
         </HelpBlock>
       </Row>
     );
@@ -82,8 +68,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadArchivesPage: articleId => dispatch(loadArchivesPage(articleId)),
   disposeArchivesPage: () => dispatch(disposeArchivesPage()),
-  fetchArchiveById: (articleId, archiveId) =>
-    dispatch(fetchArchiveById(articleId, archiveId))
+  fetchArchiveById: (articleId, archiveId) => dispatch(fetchArchiveById(articleId, archiveId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleHistory);

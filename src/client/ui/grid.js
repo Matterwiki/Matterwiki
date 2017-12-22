@@ -4,9 +4,7 @@ const Row = styled.div.attrs({
   className: "row"
 })`
   margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : "")};
-  margin-bottom: ${props =>
-    props.marginBottom ? `${props.marginBottom}rem` : ""}
-  .column {
+  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")} .column {
     margin-bottom: 0.5rem;
   }
 `;

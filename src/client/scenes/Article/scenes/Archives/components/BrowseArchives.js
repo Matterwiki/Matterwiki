@@ -16,9 +16,7 @@ const BrowseArchives = ({ onArchiveChosen, archives, currentArchive }) => {
   return (
     <List>
       {archives.map(archive => {
-        const lastUpdated = new Date(
-          archive.updated_at.replace(" ", "T")
-        ).toDateString();
+        const lastUpdated = new Date(archive.updated_at.replace(" ", "T")).toDateString();
 
         return (
           <ListItem
@@ -26,12 +24,8 @@ const BrowseArchives = ({ onArchiveChosen, archives, currentArchive }) => {
             onClick={e => archiveClick(archive.id, e)}
             cursorPointer
             active={currentArchive && currentArchive.id === archive.id}>
-            <ListItemHeader>
-              {lastUpdated}
-            </ListItemHeader>
-            <ListItemBody>
-              {archive.change_log}
-            </ListItemBody>
+            <ListItemHeader>{lastUpdated}</ListItemHeader>
+            <ListItemBody>{archive.change_log}</ListItemBody>
           </ListItem>
         );
       })}

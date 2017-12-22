@@ -20,31 +20,13 @@ import {
 } from "store/actionTypes";
 import { takeEvery } from "redux-saga/effects";
 
-import {
-  loadArticlePage,
-  disposeArticlePage,
-  fetchArticlesByTopic
-} from "./article";
+import { loadArticlePage, disposeArticlePage, fetchArticlesByTopic } from "./article";
 
-import {
-  loadArchivesPage,
-  disposeArchivesPage,
-  fetchArchiveById
-} from "./archive";
+import { loadArchivesPage, disposeArchivesPage, fetchArchiveById } from "./archive";
 
-import {
-  loadUsersPage,
-  disposeUsersPage,
-  loadEditUser,
-  disposeEditUser
-} from "./user";
+import { loadUsersPage, disposeUsersPage, loadEditUser, disposeEditUser } from "./user";
 
-import {
-  loadTopicsPage,
-  disposeTopicsPage,
-  loadEditTopic,
-  disposeEditTopic
-} from "./topic";
+import { loadTopicsPage, disposeTopicsPage, loadEditTopic, disposeEditTopic } from "./topic";
 
 import { loadHomepage, disposeHomepage } from "./app";
 

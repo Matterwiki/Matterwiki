@@ -17,9 +17,7 @@ const TopicsListItem = ({ topic, onTopicClick, isActive }) => {
       <ListItemHeader>
         {name} {isActive}
       </ListItemHeader>
-      <ListItemBody>
-        {description}
-      </ListItemBody>
+      <ListItemBody>{description}</ListItemBody>
     </ListItem>
   );
 };

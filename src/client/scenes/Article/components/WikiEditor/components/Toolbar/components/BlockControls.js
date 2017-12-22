@@ -1,12 +1,6 @@
 import React from "react";
 import { ButtonGroup } from "react-bootstrap";
-import {
-  FaHeader,
-  FaQuoteRight,
-  FaCode,
-  FaListUl,
-  FaListOl
-} from "react-icons/lib/fa";
+import { FaHeader, FaQuoteRight, FaCode, FaListUl, FaListOl } from "react-icons/lib/fa";
 
 import ToolbarButton from "./ToolbarButton";
 
@@ -28,7 +22,7 @@ const BlockControls = ({ editorState, toggleBlockType }) => {
 
   return (
     <ButtonGroup>
-      {BLOCK_TYPES.map(type =>
+      {BLOCK_TYPES.map(type => (
         <ToolbarButton
           key={type.label}
           active={blockType === type.style}
@@ -37,7 +31,7 @@ const BlockControls = ({ editorState, toggleBlockType }) => {
           style={type.style}
           fa={type.fa}
         />
-      )}
+      ))}
     </ButtonGroup>
   );
 };

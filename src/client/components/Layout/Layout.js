@@ -3,13 +3,12 @@ import { Container } from "ui";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 
-const Layout = ({ children, ...props }) =>
+const Layout = ({ children, ...props }) => (
   <div>
     <Header {...props} />
-    <Container>
-      {children}
-    </Container>
+    <Container>{children}</Container>
     <Footer />
-  </div>;
+  </div>
+);
 
 export default Layout;

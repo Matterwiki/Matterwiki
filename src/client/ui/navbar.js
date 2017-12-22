@@ -31,8 +31,7 @@ const Nav = styled.div`
     return "flex-start";
   }};
   width: 100%;
-  margin-bottom: ${props =>
-    props.marginBottom ? `${props.marginBottom}rem` : ""};
+  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
 `;
 
 const NavItem = styled.div`

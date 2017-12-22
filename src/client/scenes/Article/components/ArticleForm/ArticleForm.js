@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Form,
-  FormGroup,
-  FormControl,
-  Col,
-  Clearfix,
-  Button
-} from "react-bootstrap";
+import { Form, FormGroup, FormControl, Col, Clearfix, Button } from "react-bootstrap";
 import Alert from "react-s-alert";
 
 import WikiEditor from "../WikiEditor/WikiEditor";
@@ -99,18 +92,13 @@ class ArticleForm extends React.Component {
             <WikiEditor {...WikiEditorProps} />
           </FormGroup>
           <FormGroup>
-            <TopicChooser
-              onChange={this.onChange}
-              value={this.state.topic_id}
-            />
+            <TopicChooser onChange={this.onChange} value={this.state.topic_id} />
           </FormGroup>
-          {this.props.article &&
+          {this.props.article && (
             <FormGroup>
-              <WhatChanged
-                onChange={this.onChange}
-                value={this.state.change_log}
-              />
-            </FormGroup>}
+              <WhatChanged onChange={this.onChange} value={this.state.change_log} />
+            </FormGroup>
+          )}
         </Col>
         <Clearfix />
         <br />

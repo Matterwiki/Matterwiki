@@ -22,12 +22,7 @@ class SearchForm extends React.Component {
     return (
       <NavForm onSubmit={this.onSubmit}>
         <Icon type="search" />
-        <Input
-          type="text"
-          placeholder="Search"
-          value={query || ""}
-          onChange={this.onChange}
-        />
+        <Input type="text" placeholder="Search" value={query || ""} onChange={this.onChange} />
       </NavForm>
     );
   }
@@ -42,6 +37,4 @@ const mapDispatchToProps = dispatch => ({
   setArticleSearchQuery: query => dispatch(setArticleSearchQuery(query))
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SearchForm)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchForm));

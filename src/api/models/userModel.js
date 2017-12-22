@@ -1,19 +1,32 @@
-const { withDbHelpers, BaseModel } = require("./modelHelpers");
+const { withDbHelpers } = require("./modelHelpers");
+const { Model } = require("objection");
 
-class UserModel extends BaseModel {
+const options = { uniqueFields: ["email"] };
+
+class UserModel extends withDbHelpers(options)(Model) {
   static get tableName() {
     return "user";
   }
 
+  static get hidden() {
+    return ["password"];
+  }
+
+  static get namedFilters() {
+    return {
+      lite: builder => builder.select("name", "email", "about")
+    };
+  }
+
   static get relationMappings() {
     // this is in here to prevent circular deps
-    const TopicModel = require("./topicModel").Model;
-    const ArticleHistoryModel = require("./articleHistoryModel").Model;
-    const ArticleModel = require("./articleModel").Model;
+    const TopicModel = require("./topicModel");
+    const ArticleHistoryModel = require("./articleHistoryModel");
+    const ArticleModel = require("./articleModel");
 
     return {
       createdArticle: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: `user.id`,
@@ -21,7 +34,7 @@ class UserModel extends BaseModel {
         }
       },
       modifiedArticle: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ArticleModel,
         join: {
           from: `user.id`,
@@ -29,7 +42,7 @@ class UserModel extends BaseModel {
         }
       },
       createdTopic: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: TopicModel,
         join: {
           from: `user.id`,
@@ -37,7 +50,7 @@ class UserModel extends BaseModel {
         }
       },
       modifiedTopic: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: TopicModel,
         join: {
           from: `user.id`,
@@ -45,7 +58,7 @@ class UserModel extends BaseModel {
         }
       },
       createdArticleHistory: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
@@ -53,7 +66,7 @@ class UserModel extends BaseModel {
         }
       },
       modifiedArticleHistory: {
-        relation: BaseModel.HasManyRelation,
+        relation: Model.HasManyRelation,
         modelClass: ArticleHistoryModel,
         join: {
           from: `user.id`,
@@ -64,4 +77,4 @@ class UserModel extends BaseModel {
   }
 }
 
-module.exports = withDbHelpers(UserModel);
+module.exports = UserModel;

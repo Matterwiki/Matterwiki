@@ -10,14 +10,10 @@ const ArticlesListItem = props => {
   return (
     <ListItem>
       <ListItemHeader size="4">
-        <Link to={articleLink}>
-          {article.title}
-        </Link>
+        <Link to={articleLink}>{article.title}</Link>
       </ListItemHeader>
       <ListItemBody>
-        {`Last updated on ${new Date(
-          article.updated_at.replace(" ", "T")
-        ).toDateString()}`}
+        {`Last updated on ${new Date(article.updated_at.replace(" ", "T")).toDateString()}`}
       </ListItemBody>
     </ListItem>
   );

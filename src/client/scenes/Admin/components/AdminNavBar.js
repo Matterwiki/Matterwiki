@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem, Icon } from "ui";
 
-const AdminNavBar = ({ activeTab, handleSelect }) =>
+const AdminNavBar = ({ activeTab, handleSelect }) => (
   <Nav marginBottom="2">
     <NavItem
       onClick={e => handleSelect("users", e)}
@@ -17,6 +17,7 @@ const AdminNavBar = ({ activeTab, handleSelect }) =>
       cursorPointer>
       <Icon type="folder" />Topics
     </NavItem>
-  </Nav>;
+  </Nav>
+);
 
 export default AdminNavBar;

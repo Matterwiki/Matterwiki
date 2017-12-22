@@ -1,9 +1,10 @@
 import React from "react";
 import { Footer } from "ui";
 
-const AppFooter = () =>
+const AppFooter = () => (
   <Footer align="center">
     Powered by <a href="http://matterwiki.com">Matterwiki</a>
-  </Footer>;
+  </Footer>
+);
 
 export default AppFooter;

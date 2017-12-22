@@ -2,25 +2,27 @@ import React from "react";
 
 import { Heading, Icon } from "ui";
 
-const LastUpdatedDate = ({ date }) =>
-  <span>
-    Last updated on {new Date(date.replace(" ", "T")).toDateString()}
-  </span>;
+const LastUpdatedDate = ({ date }) => (
+  <span>Last updated on {new Date(date.replace(" ", "T")).toDateString()}</span>
+);
 
-const EditedBy = ({ name }) =>
+const EditedBy = ({ name }) => (
   <span>
     by <b>{name}</b>
-  </span>;
+  </span>
+);
 
-const ArticleHeading = ({ children, date, editedBy }) =>
+const ArticleHeading = ({ children, date, editedBy }) => (
   <div>
     <Heading size="6">{children}</Heading>
-    {date &&
+    {date && (
       <span>
         <Icon type="clock" size="12" />
         <LastUpdatedDate date={date} />
-      </span>}&nbsp;
+      </span>
+    )}&nbsp;
     {editedBy && <EditedBy name={editedBy} />}
-  </div>;
+  </div>
+);
 
 export default ArticleHeading;

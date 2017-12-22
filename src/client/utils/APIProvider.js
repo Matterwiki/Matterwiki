@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 });
 
 /**
- * Takes care of user created errors, returns a promise which could be handled at the component side 
+ * Takes care of user created errors, returns a promise which could be handled at the component side
  */
 function prepareResponse(response) {
   if (!response.data) {
@@ -35,7 +35,10 @@ function prepareError({ response }) {
 }
 
 const get = endpoint =>
-  axiosInstance.get(endpoint).then(prepareResponse).catch(prepareError);
+  axiosInstance
+    .get(endpoint)
+    .then(prepareResponse)
+    .catch(prepareError);
 
 const query = (endpoint, queryParams) =>
   axiosInstance
@@ -55,8 +58,7 @@ const put = (endpoint, payload) =>
     .then(prepareResponse)
     .catch(prepareError);
 
-const deleteReq = endpoint =>
-  axiosInstance.delete(endpoint).catch(prepareError);
+const deleteReq = endpoint => axiosInstance.delete(endpoint).catch(prepareError);
 
 /**
  * Main export

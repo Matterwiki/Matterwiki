@@ -15,10 +15,7 @@ import APIProvider from "utils/APIProvider";
 
 export function* loadArchivesPage(action) {
   yield put(startLoadingApp());
-  const archives = yield call(
-    APIProvider.get,
-    `articles/${action.articleId}/history`
-  );
+  const archives = yield call(APIProvider.get, `articles/${action.articleId}/history`);
   yield put(addArchives(archives));
   yield put(stopLoadingApp());
 }

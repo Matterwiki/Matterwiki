@@ -4,7 +4,7 @@ const { ROLES } = require("../../utils/constants");
 
 describe("checkRole middleware tests", () => {
   describe("checkAdmin tests", () => {
-    test("INVALID - if user is passed in", done => {
+    test("(invalid) if user is passed in", done => {
       const req = {
         user: {
           id: 2,
@@ -23,7 +23,7 @@ describe("checkRole middleware tests", () => {
       });
     });
 
-    test("VALID - if admin is passed in", done => {
+    test("(valid) if admin is passed in", done => {
       const req = {
         user: {
           id: 1,

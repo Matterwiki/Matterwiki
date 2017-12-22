@@ -43,17 +43,15 @@ class ItemForm extends React.Component {
 
   render() {
     const { item, itemName, itemFormFields } = this.props;
-    const currentlyEditing =
-      item &&
-      <p className="editing-heading">
-        You are currently editing a {itemName}
-      </p>;
+    const currentlyEditing = item && (
+      <p className="editing-heading">You are currently editing a {itemName}</p>
+    );
 
     return (
       <div>
         {currentlyEditing}
         <Form onSubmit={this.onSubmit}>
-          {itemFormFields.map(formField =>
+          {itemFormFields.map(formField => (
             <Input
               type={formField.type}
               placeholder={formField.name}
@@ -62,16 +60,18 @@ class ItemForm extends React.Component {
               onChange={this.onChange}
               key={formField.name}
             />
-          )}
+          ))}
           <Button type="submit" block>
             <Icon type={item ? "send" : "plus-square"} size="12" />{" "}
             {item ? `Update ${itemName}` : `Add ${itemName}`}
           </Button>
-          {item
-            ? <Button block onClick={this.cancelUpdate}>
-                <Icon type="x-square" size="12" /> Cancel
-              </Button>
-            : ""}
+          {item ? (
+            <Button block onClick={this.cancelUpdate}>
+              <Icon type="x-square" size="12" /> Cancel
+            </Button>
+          ) : (
+            ""
+          )}
         </Form>
       </div>
     );

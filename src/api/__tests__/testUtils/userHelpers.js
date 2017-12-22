@@ -1,22 +1,29 @@
 const bcrypt = require("bcryptjs");
 const Promise = require("bluebird");
-const { flatten } = require("lodash");
+const { assign } = require("lodash");
 
 const userFactory = require("../factories/userFactory");
-const { knexInstance: knex } = require("../../utils/db");
+
+const UserModel = require("../../models/userModel");
 
 const { ROLES, SALT_ROUNDS } = require("../../utils/constants");
 const { DEFAULT_PASSWORD } = require("./testConstants");
 
+const hashedPassword = bcrypt.hashSync(DEFAULT_PASSWORD, SALT_ROUNDS);
+
 async function createUser(user) {
-  const password = bcrypt.hashSync(DEFAULT_PASSWORD, SALT_ROUNDS);
   const userWithHash = Object.assign({}, user, {
-    password
+    password: hashedPassword
   });
 
-  return knex("user")
-    .insert(userWithHash)
-    .then(id => knex("user").where("id", id));
+  return UserModel.query()
+    .insertAndFetch(userWithHash)
+    .then(u =>
+      assign(u, {
+        created_at: u.created_at.toISOString(),
+        updated_at: u.updated_at.toISOString()
+      })
+    );
 }
 
 function makeTestUsers(numberOfUsers = 2) {
@@ -31,18 +38,14 @@ async function makeTestAdmin() {
   const adminUser = Object.assign({}, userFactory.build(1), {
     role: ROLES.ADMIN
   });
-  return (
-    createUser(adminUser)
-      // `createUser` gives us an array - let's pick out the only item in there
-      .then(dbAdmin => dbAdmin[0])
-  );
+  return createUser(adminUser);
 }
 
 async function makeUsers() {
   const admin = await makeTestAdmin();
   const users = await makeTestUsers(3);
 
-  return { admin, users: flatten(users) };
+  return { admin, users };
 }
 
 module.exports = { makeTestUsers, makeTestAdmin, makeUsers };

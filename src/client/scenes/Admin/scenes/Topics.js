@@ -17,10 +17,7 @@ import ItemList from "../components/ItemList";
 import ItemForm from "../components/ItemForm";
 
 // TODO move these fellas to a nice consts file
-const TOPIC_FORM_FIELDS = [
-  { name: "name", type: "text" },
-  { name: "description", type: "text" }
-];
+const TOPIC_FORM_FIELDS = [{ name: "name", type: "text" }, { name: "description", type: "text" }];
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageTopics extends React.Component {

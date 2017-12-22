@@ -17,9 +17,7 @@ class ResourceListItem extends React.Component {
       <ListItem>
         <Row>
           <Col>
-            <ListItemHeader>
-              {item.name}
-            </ListItemHeader>
+            <ListItemHeader>{item.name}</ListItemHeader>
             {/* Only used in the Admin section at this point. If this were to be used elswehere, 
           a schema level change is inevitable */}
             {item.description || item.about || "-"}
@@ -31,13 +29,14 @@ class ResourceListItem extends React.Component {
               }}>
               <Icon type="edit" size="12" /> Edit
             </Button>&nbsp;
-            {item.id !== 1 &&
+            {item.id !== 1 && (
               <Button
                 onClick={e => {
                   this.handleDeleteClick(item, e);
                 }}>
                 <Icon type="trash-2" size="12" /> Delete
-              </Button>}
+              </Button>
+            )}
           </Col>
         </Row>
       </ListItem>
@@ -45,9 +44,9 @@ class ResourceListItem extends React.Component {
   }
 }
 
-const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) =>
+const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
   <List>
-    {items.map(item =>
+    {items.map(item => (
       <ResourceListItem
         key={item.id}
         item={item}
@@ -55,7 +54,8 @@ const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) =>
         onEditClick={onEditClick}
         onDeleteClick={onDeleteClick}
       />
-    )}
-  </List>;
+    ))}
+  </List>
+);
 
 export default ResourceList;
