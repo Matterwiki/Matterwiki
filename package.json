@@ -55,7 +55,6 @@
     "jsonwebtoken": "^7.4.1",
     "knex": "0.13.0",
     "lodash": "^4.17.4",
-    "mariasql": "^0.2.6",
     "morgan": "^1.8.2",
     "mysql": "^2.15.0",
     "objection": "^0.8.6",
