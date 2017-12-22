@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Col, Form, Input } from "ui";
+import { Button, Container, Col, Form, Input, Icon } from "ui";
 // TODO move these fellas to a nice consts file
 const LOGIN_FORM_FIELDS = [
   { name: "email", type: "email" },
@@ -41,11 +41,9 @@ class LoginForm extends React.Component {
               onChange={this.onChange}
             />
           ))}
-          <Col sm={12}>
-            <Button type="submit" block>
-              Sign in
-            </Button>
-          </Col>
+          <Button type="submit" block>
+            <Icon type="log-in" />Sign in
+          </Button>
         </Form>
       </Container>
     );
