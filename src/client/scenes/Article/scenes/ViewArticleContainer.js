@@ -6,7 +6,6 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 
-import store from "store";
 import { loadArticlePage, disposeArticlePage } from "store/modules/sagaActions";
 
 import ViewArticle from "./ViewArticle";
@@ -14,11 +13,11 @@ import ViewArticle from "./ViewArticle";
 class ViewArticleContainer extends React.Component {
   componentDidMount() {
     const id = this.props.match.params.articleId;
-    store.dispatch(loadArticlePage(id));
+    this.props.loadArticlePage(id);
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeArticlePage());
+    this.props.disposeArticlePage();
   }
 
   handleEditClick = e => {
@@ -66,4 +65,11 @@ const mapStateToProps = state => ({
   loading: state.articles.loading
 });
 
-export default connect(mapStateToProps)(ViewArticleContainer);
+const mapDispatchToProps = dispatch => ({
+  loadArticlePage: id => dispatch(loadArticlePage(id)),
+  disposeArticlePage: () => dispatch(disposeArticlePage())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ViewArticleContainer
+);

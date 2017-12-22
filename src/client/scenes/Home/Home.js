@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import store from "store";
 import { Row, Col } from "react-bootstrap";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
@@ -15,15 +14,15 @@ import TopicsList from "./components/TopicsList/TopicsList";
 
 class Home extends React.Component {
   componentDidMount() {
-    store.dispatch(loadHomepage());
+    this.props.loadHomepage();
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeHomepage());
+    this.props.disposeHomepage();
   }
 
   handleTopicClick = topicId => {
-    store.dispatch(fetchArticlesByTopic(topicId));
+    this.props.fetchArticlesByTopic(topicId);
   };
 
   render() {
@@ -49,4 +48,10 @@ const mapStateToProps = state => ({
   loading: state.app.loading
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => ({
+  loadHomepage: () => dispatch(loadHomepage()),
+  disposeHomepage: () => dispatch(disposeHomepage()),
+  fetchArticlesByTopic: id => dispatch(fetchArticlesByTopic(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -7,7 +7,6 @@ import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
 
-import store from "store";
 import {
   loadUsersPage,
   disposeUsersPage,
@@ -39,15 +38,15 @@ class ManageUsers extends React.Component {
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeUsersPage());
+    this.props.disposeUsersPage();
   }
 
   handleUpdate = () => {
-    store.dispatch(loadUsersPage());
+    this.props.loadUsersPage();
   };
 
   handleEditClick = id => {
-    store.dispatch(loadEditUser(id));
+    this.props.loadEditUser(id);
   };
 
   deleteUser = id => {
@@ -64,10 +63,10 @@ class ManageUsers extends React.Component {
   };
 
   updateUser = user => {
-    const id = this.state.currentUser.id;
+    const id = this.props.currentUser.id;
     APIProvider.put(`users/${id}`, user).then(() => {
       Alert.success("User has been edited");
-      store.dispatch(disposeEditUser());
+      this.props.disposeEditUser();
       this.handleUpdate();
     });
   };
@@ -80,7 +79,7 @@ class ManageUsers extends React.Component {
   };
 
   emptyCurrentUserState = () => {
-    store.dispatch(disposeEditUser());
+    this.props.disposeEditUser();
   };
 
   render() {
@@ -129,4 +128,11 @@ const mapStateToProps = state => ({
   currentUser: state.users.currentUser
 });
 
-export default connect(mapStateToProps)(ManageUsers);
+const mapDispatchToProps = dispatch => ({
+  loadUsersPage: () => dispatch(loadUsersPage()),
+  disposeUsersPage: () => dispatch(disposeUsersPage()),
+  loadEditUser: id => dispatch(loadEditUser(id)),
+  disposeEditUser: () => dispatch(disposeEditUser())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageUsers);

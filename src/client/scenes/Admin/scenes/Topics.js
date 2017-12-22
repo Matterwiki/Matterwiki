@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import Alert from "react-s-alert";
 import Loader from "components/Loader/Loader";
 
-import store from "store";
 import {
   loadTopicsPage,
   disposeTopicsPage,
@@ -30,15 +29,15 @@ class ManageTopics extends React.Component {
   }
 
   componentWillUnmount() {
-    store.dispatch(disposeTopicsPage());
+    this.props.disposeTopicsPage();
   }
 
   handleUpdate = () => {
-    store.dispatch(loadTopicsPage());
+    this.props.loadTopicsPage();
   };
 
   handleEditClick = id => {
-    store.dispatch(loadEditTopic(id));
+    this.props.loadEditTopic(id);
   };
 
   deleteTopic = id => {
@@ -52,7 +51,7 @@ class ManageTopics extends React.Component {
     const id = this.props.currentTopic.id;
     APIProvider.put(`topics/${id}`, topic).then(() => {
       Alert.success("Topic has been edited");
-      store.dispatch(disposeEditTopic());
+      this.props.disposeEditTopic();
       this.handleUpdate();
     });
   };
@@ -65,7 +64,7 @@ class ManageTopics extends React.Component {
   };
 
   emptyCurrentTopicState = () => {
-    store.dispatch(disposeEditTopic());
+    this.props.disposeEditTopic();
   };
 
   render() {
@@ -111,4 +110,11 @@ const mapStateToProps = state => ({
   currentTopic: state.topics.currentTopic
 });
 
-export default connect(mapStateToProps)(ManageTopics);
+const mapDispatchToProps = dispatch => ({
+  loadTopicsPage: () => dispatch(loadTopicsPage()),
+  disposeTopicsPage: () => disposeTopicsPage(disposeTopicsPage()),
+  loadEditTopic: id => dispatch(loadEditTopic(id)),
+  disposeEditTopic: () => dispatch(disposeEditTopic())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ManageTopics);
