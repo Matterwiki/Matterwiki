@@ -67,7 +67,7 @@ class ItemForm extends React.Component {
             {item ? `Update ${itemName}` : `Add ${itemName}`}
           </Button>
           {item ? (
-            <Button block onClick={this.cancelUpdate}>
+            <Button block onClick={this.cancelUpdate} outline>
               <Icon type="x-square" size="12" /> Cancel
             </Button>
           ) : (

@@ -1,23 +1,37 @@
 import React from "react";
-import { Nav, NavItem, Icon } from "ui";
+import { List, ListItem, ListItemHeader, Icon } from "ui";
+import { ListItemBody } from "../../../ui/list";
 
 const AdminNavBar = ({ activeTab, handleSelect }) => (
-  <Nav marginBottom="2">
-    <NavItem
-      onClick={e => handleSelect("users", e)}
-      active={activeTab === "users"}
-      tab
-      cursorPointer>
-      <Icon type="users" />Users
-    </NavItem>
-    <NavItem
+  <List>
+    <ListItem onClick={e => handleSelect("users", e)} active={activeTab === "users"} cursorPointer>
+      <ListItemHeader>
+        <Icon type="users" />
+        Users
+      </ListItemHeader>
+      <ListItemBody>Create, edit, and delete users</ListItemBody>
+    </ListItem>
+    <ListItem
       onClick={e => handleSelect("topics", e)}
       active={activeTab === "topics"}
-      tab
       cursorPointer>
-      <Icon type="folder" />Topics
-    </NavItem>
-  </Nav>
+      <ListItemHeader>
+        <Icon type="folder" />
+        Topics
+      </ListItemHeader>
+      <ListItemBody>Create, edit, and delete topics</ListItemBody>
+    </ListItem>
+    <ListItem
+      onClick={e => handleSelect("customize", e)}
+      active={activeTab === "customize"}
+      cursorPointer>
+      <ListItemHeader>
+        <Icon type="settings" />
+        Customize
+      </ListItemHeader>
+      <ListItemBody>Change the color scheme, and logo</ListItemBody>
+    </ListItem>
+  </List>
 );
 
 export default AdminNavBar;

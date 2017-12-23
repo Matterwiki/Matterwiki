@@ -19,6 +19,8 @@ const ListItem = styled.div`
 const ListItemHeader = styled.div`
   font-size: ${props => (props.size ? props.size : 2)}rem;
   font-weight: 700;
+  display: flex;
+  align-items: center;
   a {
     color: inherit;
   }

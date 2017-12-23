@@ -1,6 +1,6 @@
 import React from "react";
 import Alert from "react-s-alert";
-import { Grid, Row, Col, Button, Form, FormGroup, FormControl, HelpBlock } from "react-bootstrap";
+import { Row, Col, Button, Form, Input, Heading, HelpBlock, Icon } from "ui";
 
 import APIProvider from "utils/APIProvider";
 
@@ -29,31 +29,22 @@ class LogoUpload extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col md={6} sm={12}>
-            <h4>
-              <b>Change Logo</b>
-            </h4>
-            <Form onSubmit={this.handleUpload}>
-              <FormGroup>
-                <FormControl
-                  className="form-control"
-                  onChange={this.handleChange}
-                  type="file"
-                  name="logo"
-                />
-              </FormGroup>
-              <HelpBlock>
-                Please reload the page for the changes to reflect throughout the site.
-              </HelpBlock>
-              <Button type="submit" block>
-                Upload Logo
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <Col>
+          <Heading size="2">
+            <b>Change Logo</b>
+          </Heading>
+          <Form onSubmit={this.handleUpload}>
+            <Input className="form-control" onChange={this.handleChange} type="file" name="logo" />
+            <HelpBlock>
+              Please reload the page for the changes to reflect throughout the site.
+            </HelpBlock>
+            <Button type="submit" block>
+              <Icon type="upload" />Upload Logo
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     );
   }
 }

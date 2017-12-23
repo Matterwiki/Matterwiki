@@ -23,6 +23,8 @@ const Col = styled.div.attrs({
 })`
   position: ${props => (props.fixed ? "fixed" : "")};
   text-align: ${props => (props.textAlign ? props.textAlign : "")};
+  flex: ${props => (props.width ? `0 0 ${props.width}%` : "")};
+  max-width: ${props => (props.width ? `${props.width}%` : "")};
 `;
 
 export { Row, Col };
