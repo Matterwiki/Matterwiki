@@ -13,7 +13,7 @@ const Button = styled.button.attrs({
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: ${props => (props.small ? "1rem" : "1.3rem")};
+  font-size: ${props => (props.small ? "1.2rem" : "1.4rem")};
   padding: ${props => (props.small ? "0 1rem" : "")};
   height: ${props => (props.small ? "3rem" : "")};
   line-height: ${props => (props.small ? "3rem" : "")};

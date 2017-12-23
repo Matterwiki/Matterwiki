@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Form, Input, Button, Icon } from "ui";
+import { BorderedBox } from "ui/utils";
 
 class ItemForm extends React.Component {
   componentWillMount() {
@@ -49,7 +50,7 @@ class ItemForm extends React.Component {
     );
 
     return (
-      <div>
+      <BorderedBox shadow={item !== null}>
         {currentlyEditing}
         <Form onSubmit={this.onSubmit}>
           {itemFormFields.map(formField => (
@@ -74,7 +75,7 @@ class ItemForm extends React.Component {
             ""
           )}
         </Form>
-      </div>
+      </BorderedBox>
     );
   }
 }
