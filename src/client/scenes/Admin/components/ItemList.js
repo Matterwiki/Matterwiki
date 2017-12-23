@@ -26,14 +26,17 @@ class ResourceListItem extends React.Component {
             <Button
               onClick={e => {
                 this.handleEditClick(item, e);
-              }}>
+              }}
+              outline
+              small>
               <Icon type="edit" size="12" /> Edit
             </Button>&nbsp;
             {item.id !== 1 && (
               <Button
                 onClick={e => {
                   this.handleDeleteClick(item, e);
-                }}>
+                }}
+                small>
                 <Icon type="trash-2" size="12" /> Delete
               </Button>
             )}
