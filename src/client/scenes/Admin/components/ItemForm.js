@@ -30,10 +30,11 @@ class ItemForm extends React.Component {
   };
 
   initState = ({ itemFormFields, item }) => {
-    this.state = itemFormFields.reduce((acc, formField) => {
+    const newState = itemFormFields.reduce((acc, formField) => {
       acc[formField.name] = item ? item[formField.name] : "";
       return acc;
     }, {});
+    this.setState(newState);
   };
 
   cancelUpdate = e => {
