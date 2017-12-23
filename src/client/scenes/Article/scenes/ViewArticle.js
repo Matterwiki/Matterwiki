@@ -16,7 +16,9 @@ const ViewArticle = props => {
   return (
     <Row>
       <Col>
-        <ArticleHeading date={article.updated_at}>{article.title}</ArticleHeading>
+        <ArticleHeading date={article.updated_at} editedBy={article.modifiedByUser.name}>
+          {article.title}
+        </ArticleHeading>
         <WikiEditor readOnly rawContent={JSON.parse(article.content)} />
       </Col>
       <Col width="25">

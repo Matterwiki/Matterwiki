@@ -13,7 +13,8 @@ const ArticlesListItem = props => {
         <Link to={articleLink}>{article.title}</Link>
       </ListItemHeader>
       <ListItemBody>
-        {`Last updated on ${new Date(article.updated_at.replace(" ", "T")).toDateString()}`}
+        {`Last updated on ${new Date(article.updated_at.replace(" ", "T")).toDateString()}`} by{" "}
+        {article.modifiedByUser.name}
       </ListItemBody>
     </ListItem>
   );
