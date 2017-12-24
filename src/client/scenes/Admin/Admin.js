@@ -43,9 +43,6 @@ class Admin extends React.Component {
       <Row>
         <Col>
           <Row>
-            <Heading size="2">Dashboard</Heading>
-          </Row>
-          <Row>
             <Col width="25">
               <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
               {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}

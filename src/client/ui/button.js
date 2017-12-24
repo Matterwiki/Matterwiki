@@ -17,7 +17,7 @@ const Button = styled.button.attrs({
   padding: ${props => (props.small ? "0 1rem" : "")};
   height: ${props => (props.small ? "3rem" : "")};
   line-height: ${props => (props.small ? "3rem" : "")};
-  font-weight: 300;
+  font-family: inherit;
 `;
 
 export default Button;
