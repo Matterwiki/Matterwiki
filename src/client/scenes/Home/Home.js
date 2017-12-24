@@ -41,9 +41,12 @@ class Home extends React.Component {
             </option>
           ))}
         </select>
+        <Row>
+          <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
+        </Row>
       </Hide>,
-      <Row marginTop="1">
-        <Hide small extraSmall>
+      <Hide small extraSmall>
+        <Row marginTop="1">
           <Col width="25">
             <FullHeightContainer borderRight>
               <TopicsList
@@ -53,9 +56,9 @@ class Home extends React.Component {
               />
             </FullHeightContainer>
           </Col>
-        </Hide>
-        <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
-      </Row>
+          <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
+        </Row>
+      </Hide>
     ];
   }
 }
