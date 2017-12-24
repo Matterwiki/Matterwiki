@@ -40,7 +40,7 @@ class LogoUpload extends React.Component {
               Please reload the page for the changes to reflect throughout the site.
             </HelpBlock>
             <Button type="submit" block>
-              <Icon type="upload" />Upload Logo
+              <Icon type="upload" size="12" />Upload Logo
             </Button>
           </Form>
         </Col>
