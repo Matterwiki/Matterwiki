@@ -39,6 +39,14 @@ const NavItem = styled.div`
   margin-bottom: 1rem;
   height: 4rem;
   max-height: 4rem;
+  display: flex;
+  justify-content: ${props => {
+    if (props.pull && props.pull === "right") {
+      return "flex-end";
+    }
+    return "flex-start";
+  }};
+  width: ${props => (props.fullWidth ? "100%" : "")};
   margin-left: ${props => (props.tab ? "0rem" : "3rem")};
   padding: ${props => (props.tab ? "1rem 2rem" : "")};
   border: ${props => (props.tab ? `1px solid #d1d1d1` : "")};
@@ -57,6 +65,10 @@ const NavItem = styled.div`
   .icon {
     margin-right: 0.5rem;
   }
+  form,
+  input {
+    margin-bottom: 0rem;
+  }
   a {
     display: flex;
     font-size: 1.4rem;
@@ -73,4 +85,23 @@ const NavForm = styled.form`
   align-items: center;
 `;
 
-export { Navbar, Nav, NavItem, NavForm };
+const NavCollapse = styled.div`
+  ${props =>
+    props.isOpen
+      ? `
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: absolute;
+      top: 5rem;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      padding: 1rem;
+      box-shadow: 0rem 2rem 3rem -2rem #d1d1d1;
+`
+      : ""};
+  display: ${props => (props.isOpen ? "flex" : "none")};
+`;
+
+export { Navbar, Nav, NavItem, NavForm, NavCollapse };

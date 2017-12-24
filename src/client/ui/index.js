@@ -7,7 +7,7 @@ import { Row, Col } from "./grid";
 import Form from "./form";
 import Input from "./input";
 import Footer from "./footer";
-import { Navbar, Nav, NavItem, NavForm } from "./navbar";
+import { Navbar, Nav, NavItem, NavForm, NavCollapse } from "./navbar";
 import { List, ListItem, ListItemBody, ListItemHeader } from "./list";
 import Heading from "./heading";
 import { Sidebar, SidebarBlock } from "./sidebar";
@@ -27,6 +27,7 @@ export {
   Nav,
   NavItem,
   NavForm,
+  NavCollapse,
   List,
   ListItem,
   ListItemBody,

@@ -48,7 +48,7 @@ class Main extends React.Component {
 
     return (
       <div>
-        <Layout {...headerProps}>
+        <Layout {...headerProps} {...this.props}>
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
