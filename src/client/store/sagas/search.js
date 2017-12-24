@@ -15,7 +15,7 @@ export function* loadArticleSearchPage(action) {
   yield put(startLoadingSearchResults());
   const { query } = action;
   yield put(setArticleSearchQuery(query));
-  const results = yield call(APIProvider.query, "articles/search", { query });
+  const results = yield call(APIProvider.query, `articles?search=${query}`);
   yield put(addSearchResults(results));
   yield put(stopLoadingSearchResults());
 }
