@@ -31,9 +31,9 @@ const AppNavbar = ({ isAdmin, handleLogoutClick }) => (
         </Link>
       </NavItem>
       <NavItem>
-        <Button onClick={handleLogoutClick} outline>
+        <a href="#" onClick={handleLogoutClick}>
           <Icon type="log-out" />Logout
-        </Button>
+        </a>
       </NavItem>
     </Nav>
   </Navbar>

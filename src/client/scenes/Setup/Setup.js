@@ -7,9 +7,6 @@ import APIProvider from "utils/APIProvider";
 // import needed components
 import SetupForm from "./components/SetupForm";
 
-// import CSS
-import "./Setup.css";
-
 class Setup extends React.Component {
   handleSignUp = user => {
     APIProvider.post("setup", user)

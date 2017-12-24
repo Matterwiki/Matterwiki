@@ -8,9 +8,6 @@ import APIProvider from "utils/APIProvider";
 
 import { Login, Setup, Search, Home, Article, Admin, NotFoundError } from "./MainScenes";
 
-// bunch of custom styles that are needed globally
-import "./style.css";
-
 // TODO refactor the Auth logic into a HOC
 class Main extends React.Component {
   componentWillMount() {

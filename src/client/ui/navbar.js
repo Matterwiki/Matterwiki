@@ -65,19 +65,12 @@ const NavItem = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
-  * {
-    height: 100%;
-  }
 `;
 
 const NavForm = styled.form`
   display: flex;
   flex-direction: row;
-  input,
-  button,
-  a {
-    height: 100%;
-  }
+  align-items: center;
 `;
 
 export { Navbar, Nav, NavItem, NavForm };

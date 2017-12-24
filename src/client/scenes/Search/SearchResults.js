@@ -9,8 +9,6 @@ import Loader from "components/Loader/Loader";
 
 import { loadArticleSearchPage, disposeArticleSearchPage } from "store/modules/sagaActions";
 
-import "./SearchResults.css";
-
 // TODO - fix an encoding problem when the query param contains symbols and other weird stuff
 class Search extends React.Component {
   componentWillMount() {

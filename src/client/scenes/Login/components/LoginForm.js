@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
             />
           ))}
           <Button type="submit" block>
-            <Icon type="log-in" />Sign in
+            <Icon type="log-in" size="12" />Sign in
           </Button>
         </Form>
       </Container>

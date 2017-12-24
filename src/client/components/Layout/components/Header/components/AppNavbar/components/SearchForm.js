@@ -21,7 +21,6 @@ class SearchForm extends React.Component {
     const { query } = this.props;
     return (
       <NavForm onSubmit={this.onSubmit}>
-        <Icon type="search" />
         <Input type="text" placeholder="Search" value={query || ""} onChange={this.onChange} />
       </NavForm>
     );
