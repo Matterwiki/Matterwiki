@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "ui";
-import { FullHeightContainer } from "ui/utils";
+import { FullHeightContainer, Hide } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "components/Loader/Loader";
 
@@ -25,20 +25,38 @@ class Home extends React.Component {
   render() {
     const { topics, articles, loadingArticles, loading, currentTopic } = this.props;
     if (loading) return <Loader />;
-    return (
+    return [
+      <Hide medium large>
+        <select>
+          {topics.map(topic => (
+            <option
+              key={topic.id}
+              value={topic.name}
+              onClick={e => {
+                e.preventDefault();
+                this.handleTopicClick(topic.id);
+              }}
+              selected={currentTopic && currentTopic.id === topic.id}>
+              {topic.name}
+            </option>
+          ))}
+        </select>
+      </Hide>,
       <Row marginTop="1">
-        <Col width="25">
-          <FullHeightContainer borderRight>
-            <TopicsList
-              topics={topics}
-              onTopicClick={this.handleTopicClick}
-              activeTopic={currentTopic}
-            />
-          </FullHeightContainer>
-        </Col>
+        <Hide small extraSmall>
+          <Col width="25">
+            <FullHeightContainer borderRight>
+              <TopicsList
+                topics={topics}
+                onTopicClick={this.handleTopicClick}
+                activeTopic={currentTopic}
+              />
+            </FullHeightContainer>
+          </Col>
+        </Hide>
         <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
       </Row>
-    );
+    ];
   }
 }
 
