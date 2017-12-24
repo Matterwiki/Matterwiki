@@ -1,6 +1,6 @@
 import React from "react";
 import Alert from "react-s-alert";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Row, Col } from "ui";
 // import services
 import APIProvider from "utils/APIProvider";
 
@@ -21,25 +21,23 @@ class Setup extends React.Component {
 
   render() {
     return (
-      <Grid bsClass="setup-container">
-        <Row>
-          <Col md={6}>
-            <h1>
-              <b>Welcome,</b>
-            </h1>
-            <h3>Matterwiki is a simple wiki for teams</h3>
-            <br />
-            <h4>
-              People use it to store documentation, notes, culture guidelines, employee onboarding
-              content and everything they want to.
-            </h4>
-            <br />
-          </Col>
-          <Col md={6}>
-            <SetupForm onSubmit={this.handleSignUp} />
-          </Col>
-        </Row>
-      </Grid>
+      <Row>
+        <Col>
+          <h1>
+            <b>Welcome,</b>
+          </h1>
+          <h3>Matterwiki is a simple wiki for teams</h3>
+          <br />
+          <h4>
+            People use it to store documentation, notes, culture guidelines, employee onboarding
+            content and everything they want to.
+          </h4>
+          <br />
+        </Col>
+        <Col>
+          <SetupForm onSubmit={this.handleSignUp} />
+        </Col>
+      </Row>
     );
   }
 }
