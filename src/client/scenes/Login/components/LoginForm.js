@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Container width="50" textAlign="center">
+      <Container textAlign="center" maxWidth="500">
         <Form onSubmit={this.onSubmit}>
           {LOGIN_FORM_FIELDS.map(formField => (
             <Input

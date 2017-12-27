@@ -18,7 +18,8 @@ class Home extends React.Component {
     this.props.disposeHomepage();
   }
 
-  handleTopicClick = topicId => {
+  handleTopicClick = (topicId, e) => {
+    if (e) e.preventDefault();
     this.props.fetchArticlesByTopic(topicId);
   };
 
@@ -27,16 +28,11 @@ class Home extends React.Component {
     if (loading) return <Loader />;
     return [
       <Hide medium large>
-        <select>
+        <select
+          onChange={e => this.handleTopicClick(e.target.value, e)}
+          selected={currentTopic ? currentTopic.id : 1}>
           {topics.map(topic => (
-            <option
-              key={topic.id}
-              value={topic.name}
-              onClick={e => {
-                e.preventDefault();
-                this.handleTopicClick(topic.id);
-              }}
-              selected={currentTopic && currentTopic.id === topic.id}>
+            <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>
           ))}

@@ -14,9 +14,7 @@ const TopicsListItem = ({ topic, onTopicClick, isActive }) => {
 
   return (
     <ListItem onClick={handleTopicClick} active={isActive} cursorPointer>
-      <ListItemHeader>
-        {name} {isActive}
-      </ListItemHeader>
+      <ListItemHeader>{name}</ListItemHeader>
       <ListItemBody>{description}</ListItemBody>
     </ListItem>
   );
