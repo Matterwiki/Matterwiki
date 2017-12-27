@@ -13,6 +13,8 @@ import Heading from "./heading";
 import { Sidebar, SidebarBlock } from "./sidebar";
 import HelpBlock from "./helpblock";
 import Icon from "./icon";
+import Blockquote from "./blockquote";
+import Divider from "./divider";
 
 export {
   Button,
@@ -36,5 +38,7 @@ export {
   Sidebar,
   SidebarBlock,
   HelpBlock,
-  Icon
+  Icon,
+  Blockquote,
+  Divider
 };
