@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 const Footer = styled.footer`
-  text-align: ${props => (props.align ? props.align : "left")};
+  display: flex;
+  justify-content: ${props => (props.align ? props.align : "left")};
+  align-content: ${props => (props.align ? props.align : "left")};
+  align-items: center;
 `;
 
 export default Footer;

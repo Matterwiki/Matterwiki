@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 const Layout = ({ children, ...props }) => (
   <div>
     <Header {...props} />
-    <Container>{children}</Container>
+    <Container minHeight="80vh">{children}</Container>
     <Footer />
   </div>
 );

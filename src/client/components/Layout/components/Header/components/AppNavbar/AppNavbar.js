@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Navbar, ImageWrapper, NavItem, Button, Nav, Icon, NavCollapse } from "ui";
 import { Hide } from "ui/utils";
 
-import Logo from "assets/logo.png";
+import Logo from "assets/logo.svg";
 import AllNavItems from "./components/AllNavItems";
 
 class AppNavbar extends React.Component {

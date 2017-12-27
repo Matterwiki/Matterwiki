@@ -6,7 +6,7 @@ const ImageWrapper = styled.div`
     height: ${props => (props.height ? props.height : "")}rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
-    padding: 0.5rem;
+    padding: 0.6rem;
   }
 `;
 

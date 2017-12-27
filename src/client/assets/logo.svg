@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="312mm"
+   width="320mm"
    height="43mm"
-   viewBox="0 0 312 43"
+   viewBox="0 0 320 43"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -25,18 +25,22 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="679.38586"
-     inkscape:cy="551.42857"
+     inkscape:zoom="0.76"
+     inkscape:cx="705.15653"
+     inkscape:cy="-27.518798"
      inkscape:document-units="mm"
-     inkscape:current-layer="g5449-3-2"
+     inkscape:current-layer="g829"
      showgrid="false"
      inkscape:showpageshadow="false"
      inkscape:window-width="1366"
      inkscape:window-height="749"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825" />
+  </sodipodi:namedview>
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -62,7 +66,8 @@
       <g
          id="g829"
          inkscape:export-xdpi="300"
-         inkscape:export-ydpi="300">
+         inkscape:export-ydpi="300"
+         transform="matrix(1.0012671,0,0,1.013172,0.28459837,105.27396)">
         <g
            id="g4985-6-6-7"
            transform="translate(-5.6698977,-108.55196)"
@@ -105,7 +110,7 @@
         </g>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.12007713px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#333333;fill-opacity:1;stroke:none;stroke-width:0.70300192"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.12007713px;line-height:1.25;font-family:Montserrat;-inkscape-font-specification:Montserrat;letter-spacing:0px;word-spacing:0px;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.70300192;"
            x="-196.03293"
            y="55.999828"
            id="text5403-1-29-6"><tspan
@@ -113,7 +118,7 @@
              id="tspan5401-4-1-2"
              x="-196.03293"
              y="55.999828"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Lato;-inkscape-font-specification:'Lato Bold';fill:#333333;stroke-width:0.70300192">Matterwiki</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Lato;-inkscape-font-specification:'Lato Bold';fill:#4d4d4d;stroke-width:0.70300192;">Matterwiki</tspan></text>
       </g>
     </g>
   </g>

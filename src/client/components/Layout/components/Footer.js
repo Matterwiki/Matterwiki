@@ -1,9 +1,15 @@
 import React from "react";
-import { Footer } from "ui";
+import { Footer, ImageWrapper } from "ui";
+import Logo from "assets/logo.svg";
 
 const AppFooter = () => (
   <Footer align="center">
-    Powered by <a href="http://matterwiki.com">Matterwiki</a>
+    Powered by{" "}
+    <a href="http://matterwiki.com">
+      <ImageWrapper height="3">
+        <img alt="matterwiki-logo" src={Logo} />
+      </ImageWrapper>
+    </a>
   </Footer>
 );
 

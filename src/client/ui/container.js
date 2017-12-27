@@ -7,6 +7,7 @@ const Container = styled.div.attrs({
   text-align: ${props => (props.textAlign ? props.textAlign : "left")};
   margin-top: 2rem;
   max-width: ${props => (props.maxWidth ? props.maxWidth : "")};
+  min-height: ${props => (props.minHeight ? props.minHeight : "")};
 `;
 
 export default Container;

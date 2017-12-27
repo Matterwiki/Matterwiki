@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "assets/logo.png";
+import Logo from "assets/logo.svg";
 import { Container, ImageWrapper } from "ui";
 
 const LoginNavbar = () => (
