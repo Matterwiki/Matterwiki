@@ -39,6 +39,17 @@ injectGlobal`
     margin-top: 0;
   }
 
+  a {
+    color: #ff0066;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      color: #da045a;
+    }
+  }
+
+
   h1,
   h2,
   h3,
@@ -79,6 +90,57 @@ injectGlobal`
     font-size: 1.6rem;
     line-height: 1.4;
   }
+
+  dl,
+  ol,
+  ul {
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+
+    dl,
+    ol,
+    ul {
+      font-size: 90%;
+      margin: 1.5rem 0 1.5rem 3rem;
+    }
+  }
+
+  ol {
+    list-style: decimal inside;
+  }
+
+  ul {
+    list-style: circle inside;
+  }
+
+  button,
+  dd,
+  dt,
+  li {
+    margin-bottom: 1rem;
+  }
+
+  fieldset,
+  input,
+  select,
+  textarea {
+    margin-bottom: 1rem;
+  }
+
+  blockquote,
+  dl,
+  figure,
+  form,
+  ol,
+  p,
+  pre,
+  table,
+  ul {
+    margin-bottom: 2rem;
+  }
+
+
 
 
   .icon {
