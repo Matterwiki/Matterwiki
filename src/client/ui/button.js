@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import "assets/css/milligram.scss";
 
 const Button = styled.button`
   width: ${props => (props.block ? "100%" : "auto")};
@@ -7,22 +6,17 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   font-size: ${props => (props.small ? "1.2rem" : "1.4rem")};
-  padding: ${props => (props.small ? "0 1rem" : "")};
-  height: ${props => (props.small ? "3rem" : "")};
-  line-height: ${props => (props.small ? "3rem" : "")};
+  padding: ${props => (props.small ? "0 1rem" : "0 3rem")};
+  height: ${props => (props.small ? "3rem" : "4rem")};
+  line-height: ${props => (props.small ? "3rem" : "4rem")};
   font-family: inherit;
   background-color: #ff0066;
   border: 0.1rem solid #ff0066;
   border-radius: 0.4rem;
   color: #ffffff;
   cursor: pointer;
-  display: inline-block;
-  font-size: 1.1rem;
   font-weight: 700;
-  height: 4rem;
   letter-spacing: 0.1rem;
-  line-height: 4rem;
-  padding: 0 3rem;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;

@@ -15,6 +15,7 @@ import HelpBlock from "./helpblock";
 import Icon from "./icon";
 import Blockquote from "./blockquote";
 import Divider from "./divider";
+import CodeBlock from "./codeblock";
 
 export {
   Button,
@@ -40,5 +41,6 @@ export {
   HelpBlock,
   Icon,
   Blockquote,
-  Divider
+  Divider,
+  CodeBlock
 };

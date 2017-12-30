@@ -140,7 +140,79 @@ injectGlobal`
     margin-bottom: 2rem;
   }
 
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='text'],
+  input[type='url'],
+  textarea,
+  select {
+    appearance: none;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: 0.4rem;
+    box-shadow: none;
+    box-sizing: inherit;
+    height: 4rem;
+    padding: 0.6rem 1rem;
+    width: 100%;
+    background: inherit;
 
+    &:focus {
+      border-color: #ff0066;
+      outline: 0;
+    }
+  }
+
+  textarea {
+    min-height: 6.5rem;
+  }
+
+  label,
+  legend {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  fieldset {
+    border-width: 0;
+    padding: 0;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    display: inline;
+  }
+
+  .label-inline {
+    display: inline-block;
+    font-weight: normal;
+    margin-left: 0.5rem;
+  }
+
+
+  table {
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border-bottom: 0.1rem solid #e1e1e1;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
 
 
   .icon {
