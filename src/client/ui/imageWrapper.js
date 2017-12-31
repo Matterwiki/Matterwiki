@@ -4,9 +4,9 @@ const ImageWrapper = styled.div`
   img {
     width: ${props => (props.width ? props.width : "")}px;
     height: ${props => (props.height ? props.height : "")}rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    padding: 0.6rem;
+    margin-bottom: 0.8rem;
+    margin-top: 0.8rem;
+    padding: 0.8rem;
   }
 `;
 

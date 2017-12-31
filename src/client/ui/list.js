@@ -35,6 +35,9 @@ const ListItemHeader = styled.div`
 const ListItemBody = styled.div`
   font-size: inherit;
   font-weight: 400;
+  opacity: 0.7;
+  display: inline-flex;
+  align-items: center;
 `;
 
 export { List, ListItem, ListItemHeader, ListItemBody };

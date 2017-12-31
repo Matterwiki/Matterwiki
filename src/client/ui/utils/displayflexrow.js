@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 const DisplayFlexRow = styled.div`
-  * {
-    display: flex;
-    flex-direction: row;
-  }
+  display: flex;
+  flex-direction: row;
 `;
 
 export default DisplayFlexRow;

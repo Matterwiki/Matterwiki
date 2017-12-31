@@ -16,6 +16,7 @@ import Icon from "./icon";
 import Blockquote from "./blockquote";
 import Divider from "./divider";
 import CodeBlock from "./codeblock";
+import TextMuted from "./textmuted";
 
 export {
   Button,
@@ -42,5 +43,6 @@ export {
   Icon,
   Blockquote,
   Divider,
-  CodeBlock
+  CodeBlock,
+  TextMuted
 };

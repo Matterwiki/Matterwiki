@@ -14,7 +14,7 @@ const SimpleArticle = ({ loading, article }) => {
     return (
       <Row>
         <Col>
-          <ArticleHeading editedBy={article.createdByUser.name}>{article.title}</ArticleHeading>
+          <ArticleHeading article={article}>{article.title}</ArticleHeading>
           <WikiEditor readOnly rawContent={rawContent} />
         </Col>
       </Row>
