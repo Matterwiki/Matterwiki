@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, List, ListItem, ListItemHeader, Button, Icon } from "ui";
+import { DisplayFlexRow, Hide } from "ui/utils";
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
@@ -16,32 +17,36 @@ class ResourceListItem extends React.Component {
     return (
       <ListItem>
         <Row>
-          <Col>
-            <ListItemHeader>{item.name}</ListItemHeader>
-            {/* Only used in the Admin section at this point. If this were to be used elswehere, 
+          <DisplayFlexRow>
+            <Col>
+              <ListItemHeader>{item.name}</ListItemHeader>
+              {/* Only used in the Admin section at this point. If this were to be used elswehere, 
           a schema level change is inevitable */}
-            {item.description || item.about || "-"}
-          </Col>
-          <Col width="50" textAlign="right">
-            <Button
-              onClick={e => {
-                this.handleEditClick(item, e);
-              }}
-              clear
-              small>
-              <Icon type="edit" size="12" /> Edit
-            </Button>&nbsp;
-            {item.id !== 1 && (
+              {item.description || item.about || "-"}
+            </Col>
+            <Col width="50" textAlign="right">
               <Button
-                clear
                 onClick={e => {
-                  this.handleDeleteClick(item, e);
+                  this.handleEditClick(item, e);
                 }}
+                clear
                 small>
-                <Icon type="trash-2" size="12" /> Delete
-              </Button>
-            )}
-          </Col>
+                <Icon type="edit" size="12" />
+                <Hide small> Edit</Hide>
+              </Button>&nbsp;
+              {item.id !== 1 && (
+                <Button
+                  clear
+                  onClick={e => {
+                    this.handleDeleteClick(item, e);
+                  }}
+                  small>
+                  <Icon type="trash-2" size="12" />
+                  <Hide small> Delete</Hide>
+                </Button>
+              )}
+            </Col>
+          </DisplayFlexRow>
         </Row>
       </ListItem>
     );

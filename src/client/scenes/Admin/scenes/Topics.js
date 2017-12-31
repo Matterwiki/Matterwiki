@@ -73,7 +73,7 @@ class ManageTopics extends React.Component {
     const onSubmit = currentTopic ? this.updateTopic : this.addTopic;
     return (
       <Row>
-        <Col width="40">
+        <Col widthMedium="40" withSmall="100">
           <ItemForm
             itemFormFields={TOPIC_FORM_FIELDS}
             itemName="topic"

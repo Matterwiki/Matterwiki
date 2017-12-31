@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Row, Col, Heading } from "ui";
+import { Hide, DisplayFlexRow } from "ui/utils";
 
 import AdminNavBar from "./components/AdminNavBar";
 
@@ -43,17 +44,19 @@ class Admin extends React.Component {
       <Row>
         <Col>
           <Row>
-            <Col width="25">
-              <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
-              {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}
-            </Col>
-            <Col>
-              <Switch>
-                <Route path={`${match.url}/topics`} component={ManageTopics} />
-                <Route path={`${match.url}/users`} component={ManageUsers} />
-                <Route path={`${match.url}/customize`} component={LogoUpload} />
-              </Switch>
-            </Col>
+            <DisplayFlexRow>
+              <Col widthMedium="25" widthSmall="20">
+                <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
+                {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}
+              </Col>
+              <Col>
+                <Switch>
+                  <Route path={`${match.url}/topics`} component={ManageTopics} />
+                  <Route path={`${match.url}/users`} component={ManageUsers} />
+                  <Route path={`${match.url}/customize`} component={LogoUpload} />
+                </Switch>
+              </Col>
+            </DisplayFlexRow>
           </Row>
         </Col>
       </Row>

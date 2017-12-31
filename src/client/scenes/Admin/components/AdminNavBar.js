@@ -1,15 +1,17 @@
 import React from "react";
-import { List, ListItem, ListItemHeader, Icon } from "ui";
-import { ListItemBody } from "../../../ui/list";
+import { List, ListItem, ListItemHeader, ListItemBody, Icon } from "ui";
+import { Hide } from "ui/utils";
 
 const AdminNavBar = ({ activeTab, handleSelect }) => (
   <List>
     <ListItem onClick={e => handleSelect("users", e)} active={activeTab === "users"} cursorPointer>
       <ListItemHeader>
         <Icon type="users" />
-        Users
+        <Hide small>Users</Hide>
       </ListItemHeader>
-      <ListItemBody>Create, edit, and delete users</ListItemBody>
+      <Hide small>
+        <ListItemBody>Create, edit, and delete users</ListItemBody>
+      </Hide>
     </ListItem>
     <ListItem
       onClick={e => handleSelect("topics", e)}
@@ -17,9 +19,11 @@ const AdminNavBar = ({ activeTab, handleSelect }) => (
       cursorPointer>
       <ListItemHeader>
         <Icon type="folder" />
-        Topics
+        <Hide small>Topics</Hide>
       </ListItemHeader>
-      <ListItemBody>Create, edit, and delete topics</ListItemBody>
+      <Hide small>
+        <ListItemBody>Create, edit, and delete topics</ListItemBody>
+      </Hide>
     </ListItem>
     <ListItem
       onClick={e => handleSelect("customize", e)}
@@ -27,9 +31,11 @@ const AdminNavBar = ({ activeTab, handleSelect }) => (
       cursorPointer>
       <ListItemHeader>
         <Icon type="settings" />
-        Customize
+        <Hide small>Customize</Hide>
       </ListItemHeader>
-      <ListItemBody>Change the color scheme, and logo</ListItemBody>
+      <Hide small>
+        <ListItemBody>Change the color scheme, and logo</ListItemBody>
+      </Hide>
     </ListItem>
   </List>
 );

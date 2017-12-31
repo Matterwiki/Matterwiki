@@ -92,7 +92,7 @@ class ManageUsers extends React.Component {
     const itemFormFields = currentUser ? EDIT_USER_FORM_FIELDS : USER_FORM_FIELDS;
     return (
       <Row>
-        <Col width="40">
+        <Col widthMedium="40" withSmall="100">
           <ItemForm
             itemFormFields={itemFormFields}
             item={currentUser}
