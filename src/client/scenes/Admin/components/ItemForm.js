@@ -52,7 +52,7 @@ class ItemForm extends React.Component {
     return (
       <BorderedBox shadow={item !== null}>
         {currentlyEditing}
-        <Form onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit} marginBottom="0">
           {itemFormFields.map(formField => (
             <Input
               type={formField.type}
