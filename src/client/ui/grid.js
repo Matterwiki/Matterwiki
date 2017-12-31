@@ -17,15 +17,12 @@ const Col = styled.div`
   margin-left: ${props => (props.offset ? `${props.offset}%` : "")};
   flex-grow: 0;
   ${breakpoints.css.small`
-    flex-basis: ${props => (props.widthSmall ? `${props.widthSmall}%` : "")};
     max-width: ${props => (props.widthSmall ? `${props.widthSmall}%` : "")};
   `};
   ${breakpoints.css.medium`
-    flex-basis: ${props => (props.widthMedium ? `${props.widthMedium}%` : "")};
     max-width: ${props => (props.widthMedium ? `${props.widthMedium}%` : "")};
   `};
   ${breakpoints.css.large`
-    flex-basis: ${props => (props.widthLarge ? `${props.widthLarge}%` : "")};
     max-width: ${props => (props.widthLarge ? `${props.widthLarge}%` : "")};
   `};
 `;

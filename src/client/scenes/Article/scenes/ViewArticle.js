@@ -21,7 +21,7 @@ const ViewArticle = props => {
         </ArticleHeading>
         <WikiEditor readOnly rawContent={JSON.parse(article.content)} />
       </Col>
-      <Col widthMedium="40">
+      <Col widthMedium="25">
         <ArticleSidebar
           article={article}
           onEditClick={handleEditClick}

@@ -149,7 +149,6 @@ injectGlobal`
   input[type='url'],
   textarea,
   select {
-    appearance: none;
     border: 0.1rem solid #d1d1d1;
     border-radius: 0.4rem;
     box-shadow: none;
