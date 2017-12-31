@@ -23,6 +23,7 @@ injectGlobal`
     font-size: 1.4em;
     letter-spacing: 1px;
     line-height: 1.6;
+    overflow-x: hidden;
   }
   /* Hides the default dotted outline on firefox and the blue on chrome */
   :focus {outline:none;}

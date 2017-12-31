@@ -17,36 +17,38 @@ class ResourceListItem extends React.Component {
     return (
       <ListItem>
         <Row>
-          <DisplayFlexRow>
-            <Col>
-              <ListItemHeader>{item.name}</ListItemHeader>
-              {/* Only used in the Admin section at this point. If this were to be used elswehere, 
+          <Col>
+            <DisplayFlexRow>
+              <Col>
+                <ListItemHeader>{item.name}</ListItemHeader>
+                {/* Only used in the Admin section at this point. If this were to be used elswehere, 
           a schema level change is inevitable */}
-              {item.description || item.about || "-"}
-            </Col>
-            <Col width="50" textAlign="right">
-              <Button
-                onClick={e => {
-                  this.handleEditClick(item, e);
-                }}
-                clear
-                small>
-                <Icon type="edit" size="12" />
-                <Hide small> Edit</Hide>
-              </Button>&nbsp;
-              {item.id !== 1 && (
+                {item.description || item.about || "-"}
+              </Col>
+              <Col textAlign="right">
                 <Button
-                  clear
                   onClick={e => {
-                    this.handleDeleteClick(item, e);
+                    this.handleEditClick(item, e);
                   }}
+                  clear
                   small>
-                  <Icon type="trash-2" size="12" />
-                  <Hide small> Delete</Hide>
-                </Button>
-              )}
-            </Col>
-          </DisplayFlexRow>
+                  <Icon type="edit" size="12" />
+                  <Hide small> Edit</Hide>
+                </Button>&nbsp;
+                {item.id !== 1 && (
+                  <Button
+                    clear
+                    onClick={e => {
+                      this.handleDeleteClick(item, e);
+                    }}
+                    small>
+                    <Icon type="trash-2" size="12" />
+                    <Hide small> Delete</Hide>
+                  </Button>
+                )}
+              </Col>
+            </DisplayFlexRow>
+          </Col>
         </Row>
       </ListItem>
     );

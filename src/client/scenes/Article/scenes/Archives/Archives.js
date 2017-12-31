@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Heading, HelpBlock } from "ui";
+import { DisplayFlexRow } from "ui/utils";
 import Loader from "components/Loader/Loader";
 import { connect } from "react-redux";
 
@@ -30,7 +31,7 @@ class ArticleHistory extends React.Component {
     else if (archives && archives.length) {
       return (
         <Row>
-          <Col width="25">
+          <Col widthMedium="25">
             <Heading size="1" transform="uppercase">
               Archives
             </Heading>

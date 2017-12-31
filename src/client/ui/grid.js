@@ -33,7 +33,6 @@ const Row = styled.div`
   padding: 0;
   width: 100%;
   margin-left: -1rem;
-  width: calc(100% + 2rem);
   margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : "")};
   margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
   ${Col} {
