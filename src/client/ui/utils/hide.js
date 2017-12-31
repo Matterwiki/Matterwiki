@@ -14,13 +14,25 @@ export const hidden = key => props =>
       }
     : null;
 
-export const extraSmall = hidden("extraSmall");
 export const small = hidden("small");
 export const medium = hidden("medium");
 export const large = hidden("large");
 
-const Hide = styled.span([], extraSmall, small, medium, large, {
+const Hide = styled.span([], small, medium, large, {
   display: "inherit"
 });
+
+const Hid = styled.span`
+  display: inherit;
+  ${breakpoints.css.small`
+    display: ${props => (props.small ? "none" : "")};
+  `};
+  ${breakpoints.css.medium`
+    display: ${props => (props.medium ? "none" : "")};
+  `};
+  ${breakpoints.css.large`
+    display: ${props => (props.large ? "none" : "")};
+  `};
+`;
 
 export default Hide;

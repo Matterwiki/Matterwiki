@@ -1,28 +1,5 @@
-import styled from "styled-components";
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 0;
-  width: 100%;
-  margin-left: -1rem;
-  width: calc(100% + 2rem);
-  margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : "")};
-  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
-  .column {
-    margin-bottom: 0.5rem;
-  }
-  &.row-no-padding {
-    padding: 0;
-
-    & > .column {
-      padding: 0;
-    }
-  }
-  &.row-wrap {
-    flex-wrap: wrap;
-  }
-`;
+import styled, { css } from "styled-components";
+import breakpoints from "./utils/breakpoints";
 
 const Col = styled.div`
   display: block;
@@ -38,6 +15,36 @@ const Col = styled.div`
   flex: ${props => (props.width ? `0 0 ${props.width}%` : "")};
   max-width: ${props => (props.width ? `${props.width}%` : "")};
   margin-left: ${props => (props.offset ? `${props.offset}%` : "")};
+  flex-grow: 0;
+  ${breakpoints.css.small`
+    flex-basis: ${props => (props.widthSmall ? `${props.widthSmall}%` : "")};
+    max-width: ${props => (props.widthSmall ? `${props.widthSmall}%` : "")};
+  `};
+  ${breakpoints.css.medium`
+    flex-basis: ${props => (props.widthMedium ? `${props.widthMedium}%` : "")};
+    max-width: ${props => (props.widthMedium ? `${props.widthMedium}%` : "")};
+  `};
+  ${breakpoints.css.large`
+    flex-basis: ${props => (props.widthLarge ? `${props.widthLarge}%` : "")};
+    max-width: ${props => (props.widthLarge ? `${props.widthLarge}%` : "")};
+  `};
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  margin-left: -1rem;
+  width: calc(100% + 2rem);
+  margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : "")};
+  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
+  ${Col} {
+    margin-bottom: 0.5rem;
+  }
+  ${breakpoints.css.medium`
+    flex-direction: row;
+  `};
 `;
 
 export { Row, Col };

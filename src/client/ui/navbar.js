@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const Navbar = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: #fff;
   max-height: 6rem;
   box-shadow: 0rem 0.1rem 1rem #d1d1d1;
@@ -47,7 +48,7 @@ const NavItem = styled.div`
     return "flex-start";
   }};
   width: ${props => (props.fullWidth ? "100%" : "")};
-  margin-left: ${props => (props.tab ? "0rem" : "3rem")};
+  margin-left: ${props => (props.marginLeft ? props.marginLeft : "3rem")};
   padding: ${props => (props.tab ? "1rem 2rem" : "")};
   border: ${props => (props.tab ? `1px solid #d1d1d1` : "")};
   border-bottom: ${props => (props.tab && props.active ? "none" : "")};
@@ -88,18 +89,18 @@ const NavForm = styled.form`
 const NavCollapse = styled.div`
   ${props =>
     props.isOpen
-      ? `
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      position: absolute;
-      top: 5rem;
-      left: 0;
-      right: 0;
-      background-color: #fff;
-      padding: 1rem;
-      box-shadow: 0rem 2rem 3rem -2rem #d1d1d1;
-`
+      ? css`
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          position: absolute;
+          top: 5rem;
+          left: 0;
+          right: 0;
+          background-color: #fff;
+          padding: 1rem;
+          box-shadow: 0rem 2rem 3rem -2rem #d1d1d1;
+        `
       : ""};
   display: ${props => (props.isOpen ? "flex" : "none")};
 `;

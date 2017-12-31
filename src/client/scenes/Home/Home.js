@@ -26,24 +26,21 @@ class Home extends React.Component {
   render() {
     const { topics, articles, loadingArticles, loading, currentTopic } = this.props;
     if (loading) return <Loader />;
-    return [
-      <Hide medium large>
-        <select
-          onChange={e => this.handleTopicClick(e.target.value, e)}
-          selected={currentTopic ? currentTopic.id : 1}>
-          {topics.map(topic => (
-            <option key={topic.id} value={topic.id}>
-              {topic.name}
-            </option>
-          ))}
-        </select>
-        <Row>
-          <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
-        </Row>
-      </Hide>,
-      <Hide small extraSmall>
-        <Row marginTop="1">
-          <Col width="25">
+    return (
+      <Row marginTop="1">
+        <Col widthMedium="25" widthSmall="100">
+          <Hide medium large>
+            <select
+              onChange={e => this.handleTopicClick(e.target.value, e)}
+              selected={currentTopic ? currentTopic.id : 1}>
+              {topics.map(topic => (
+                <option key={topic.id} value={topic.id}>
+                  {topic.name}
+                </option>
+              ))}
+            </select>
+          </Hide>
+          <Hide small>
             <FullHeightContainer borderRight>
               <TopicsList
                 topics={topics}
@@ -51,11 +48,11 @@ class Home extends React.Component {
                 activeTopic={currentTopic}
               />
             </FullHeightContainer>
-          </Col>
-          <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
-        </Row>
-      </Hide>
-    ];
+          </Hide>
+        </Col>
+        <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
+      </Row>
+    );
   }
 }
 

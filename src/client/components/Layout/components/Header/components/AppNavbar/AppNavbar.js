@@ -39,7 +39,7 @@ class AppNavbar extends React.Component {
           </Link>
         </ImageWrapper>
         <Nav pull="right">
-          <Hide small extraSmall>
+          <Hide small>
             <AllNavItems isAdmin={isAdmin} onLogout={handleLogoutClick} />
           </Hide>
           <Hide medium large>
