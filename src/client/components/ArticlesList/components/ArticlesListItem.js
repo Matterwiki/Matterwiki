@@ -14,9 +14,10 @@ const ArticlesListItem = props => {
         <Link to={articleLink}>{article.title}</Link>
       </ListItemHeader>
       <ListItemBody>
-        <Icon type="clock" size="12" />&nbsp; <Hide small>Last updated on&nbsp;</Hide>
-        {new Date(article.updated_at.replace(" ", "T")).toDateString()} <Hide small>by &nbsp;</Hide>
-        <Icon type="user" size="12" />&nbsp;
+        <Icon type="clock" size="12" /> <Hide small>Last updated on&nbsp;</Hide>
+        {new Date(article.updated_at.replace(" ", "T")).toDateString()}
+        <Hide small>&nbsp;by&nbsp;</Hide>
+        <Icon type="user" size="12" />
         {article.modifiedByUser.name}
       </ListItemBody>
     </ListItem>
