@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { lighten } from "polished";
 
 const CodeBlock = styled.code`
-  background: $color-tertiary;
+  background: ${props => (props.theme ? lighten(0.2, props.theme.border) : "transparent")};
   border-radius: 0.4rem;
   font-size: 86%;
   margin: 0 0.2rem;

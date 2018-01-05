@@ -6,7 +6,7 @@ import { Hide, DisplayFlexRow } from "ui/utils";
 const ArticleHeading = ({ article, children }) => (
   <div>
     <Heading size="6">{children}</Heading>
-    <DisplayFlexRow>
+    <DisplayFlexRow alignItems="center">
       <Icon type="clock" size="12" />&nbsp;<Hide small>Last updated on&nbsp;</Hide>
       {new Date(article.updated_at.replace(" ", "T")).toDateString()}
       <Hide small>&nbsp;by&nbsp;</Hide>

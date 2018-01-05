@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "ui";
 import Alert from "react-s-alert";
 
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";

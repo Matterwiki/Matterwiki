@@ -4,7 +4,7 @@ import APIProvider from "utils/APIProvider";
 import { connect } from "react-redux";
 
 import Alert from "react-s-alert";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 
 import {
   loadTopicsPage,

@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Heading, HelpBlock } from "ui";
-import { DisplayFlexRow } from "ui/utils";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 import { connect } from "react-redux";
 
 import { loadArchivesPage, disposeArchivesPage, fetchArchiveById } from "store/modules/sagaActions";

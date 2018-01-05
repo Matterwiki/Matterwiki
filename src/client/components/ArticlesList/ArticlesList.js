@@ -2,7 +2,7 @@ import React from "react";
 
 import { List, HelpBlock } from "ui";
 
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 import ArticlesListItem from "./components/ArticlesListItem";
 
 const ArticlesList = props => {

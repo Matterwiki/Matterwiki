@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Row, Col } from "ui";
 import { FullHeightContainer, Hide } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 
 import { loadHomepage, disposeHomepage, fetchArticlesByTopic } from "store/modules/sagaActions";
 

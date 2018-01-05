@@ -5,7 +5,7 @@ import { HelpBlock } from "ui";
 import "url-search-params-polyfill";
 
 import ArticlesList from "components/ArticlesList/ArticlesList";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 
 import { loadArticleSearchPage, disposeArticleSearchPage } from "store/modules/sagaActions";
 

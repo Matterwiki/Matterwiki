@@ -1,5 +1,7 @@
 /* eslint-disable */
 import { injectGlobal } from "styled-components";
+import { lighten } from "polished";
+import theme from "./theme";
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Lato');  
@@ -18,12 +20,13 @@ injectGlobal`
     padding-top: 6rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #4d4d4d;
+    color: ${theme ? theme.font : "#4d4d4d"};
     font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-size: 1.4em;
     letter-spacing: 1px;
     line-height: 1.6;
     overflow-x: hidden;
+    background: ${theme ? theme.background : "#fff"}
   }
   /* Hides the default dotted outline on firefox and the blue on chrome */
   :focus {outline:none;}
@@ -41,12 +44,12 @@ injectGlobal`
   }
 
   a {
-    color: #ff0066;
+    color: ${theme ? theme.primary : "#ff0066"};
     text-decoration: none;
 
     &:focus,
     &:hover {
-      color: #da045a;
+      color: ${theme ? lighten(0.1, theme.primary) : lighten(0.1, "#ff0066")};;
     }
   }
 
@@ -150,7 +153,7 @@ injectGlobal`
   input[type='url'],
   textarea,
   select {
-    border: 0.1rem solid #d1d1d1;
+    border: 0.1rem solid ${theme ? theme.border : "#d1d1d1"};
     border-radius: 0.4rem;
     box-shadow: none;
     box-sizing: inherit;
@@ -160,7 +163,7 @@ injectGlobal`
     background: inherit;
 
     &:focus {
-      border-color: #ff0066;
+      border-color: ${theme ? theme.primary : "#ff0066"};
       outline: 0;
     }
   }
@@ -201,7 +204,7 @@ injectGlobal`
 
   td,
   th {
-    border-bottom: 0.1rem solid #e1e1e1;
+    border-bottom: 0.1rem solid ${theme ? theme.border : "#d1d1d1"};
     padding: 1.2rem 1.5rem;
     text-align: left;
 

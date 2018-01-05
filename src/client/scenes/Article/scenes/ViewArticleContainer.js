@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { Grid, Row, Col } from "react-bootstrap";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";

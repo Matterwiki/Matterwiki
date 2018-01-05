@@ -1,4 +1,6 @@
-import styled from "styled-components";
+/* eslint-disable no-shadow */
+import styled, { css } from "styled-components";
+import { lighten } from "polished";
 
 const Button = styled.button`
   width: ${props => (props.block ? "100%" : "auto")};
@@ -10,8 +12,8 @@ const Button = styled.button`
   height: ${props => (props.small ? "3rem" : "4rem")};
   line-height: ${props => (props.small ? "3rem" : "4rem")};
   font-family: inherit;
-  background-color: #ff0066;
-  border: 0.1rem solid #ff0066;
+  background-color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+  border: 0.1rem solid ${props => (props.theme ? props.theme.primary : "#ff0066")};
   border-radius: 0.4rem;
   color: #ffffff;
   cursor: pointer;
@@ -24,8 +26,10 @@ const Button = styled.button`
 
   &:focus,
   &:hover {
-    background-color: #da045a;
-    border-color: #da045a;
+    background-color: ${props =>
+      props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+    border-color: ${props =>
+      props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
     color: #ffffff;
     outline: 0;
   }
@@ -36,52 +40,56 @@ const Button = styled.button`
 
     &:focus,
     &:hover {
-      background-color: #ff0066;
-      border-color: #ff0066;
+      background-color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+      border-color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
     }
   }
 
   ${props =>
     props.outline
-      ? `
-    background-color: transparent;
-    color: #ff0066;
+      ? css`
+          background-color: transparent;
+          color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
 
-    &:focus,
-    &:hover {
-      background-color: transparent;
-      border-color: #da045a;
-      color: #da045a;
-    }
+          &:focus,
+          &:hover {
+            background-color: transparent;
+            border-color: ${props =>
+              props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+            color: ${props =>
+              props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+          }
 
-    &[disabled] {
-      &:focus,
-      &:hover {
-        border-color: inherit;
-        color: #ff0066;
-      }
-  }`
+          &[disabled] {
+            &:focus,
+            &:hover {
+              border-color: inherit;
+              color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+            }
+          }
+        `
       : ""} ${props =>
       props.clear
-        ? `
-  background-color: transparent;
-    border-color: transparent;
-    color: #ff0066;
+        ? css`
+            background-color: transparent;
+            border-color: transparent;
+            color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
 
-    &:focus,
-    &:hover {
-      background-color: transparent;
-      border-color: transparent;
-      color: #da045a;
-    }
+            &:focus,
+            &:hover {
+              background-color: transparent;
+              border-color: transparent;
+              color: ${props =>
+                props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+            }
 
-    &[disabled] {
-      &:focus,
-      &:hover {
-        color: #ff0066;
-      }
-    }
-  `
+            &[disabled] {
+              &:focus,
+              &:hover {
+                color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+              }
+            }
+          `
         : ""};
 `;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, HelpBlock } from "ui";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 
 import ArticleHeading from "./ArticleHeading";
 import WikiEditor from "./WikiEditor/WikiEditor";

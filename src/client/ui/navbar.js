@@ -4,22 +4,22 @@ const Navbar = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: ${props => (props.theme ? props.theme.background : "#fff")};
   max-height: 6rem;
-  box-shadow: 0rem 0.1rem 1rem #d1d1d1;
+  box-shadow: 0rem 0.1rem 1rem ${props => (props.theme ? props.theme.border : "#d1d1d1")};
   padding: 0 3rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  border-top: 0.4rem solid #ff0066;
+  border-top: 0.4rem solid ${props => (props.theme ? props.theme.primary : "#ff0066")};
   a {
     height: 100%;
     color: inherit;
   }
   a:hover {
-    color: #ff0066;
+    color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
   }
 `;
 
@@ -51,7 +51,8 @@ const NavItem = styled.div`
   width: ${props => (props.fullWidth ? "100%" : "")};
   margin-left: ${props => (props.marginLeft ? props.marginLeft : "3rem")};
   padding: ${props => (props.tab ? "1rem 2rem" : "")};
-  border: ${props => (props.tab ? `1px solid #d1d1d1` : "")};
+  border: ${props =>
+    props.tab ? `1px solid ${props.theme ? props.theme.border : "#d1d1d1"}` : ""};
   border-bottom: ${props => (props.tab && props.active ? "none" : "")};
   background-color: ${props => {
     if (props.tab) {
@@ -98,9 +99,9 @@ const NavCollapse = styled.div`
           top: 5rem;
           left: 0;
           right: 0;
-          background-color: #fff;
+          background-color: ${props.theme ? props.theme.background : "#fff"};
           padding: 1rem;
-          box-shadow: 0rem 2rem 3rem -2rem #d1d1d1;
+          box-shadow: 0rem 2rem 3rem -2rem ${props.theme ? props.theme.border : "#d1d1d1"};
         `
       : ""};
   display: ${props => (props.isOpen ? "flex" : "none")};
