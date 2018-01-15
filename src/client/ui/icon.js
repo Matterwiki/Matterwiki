@@ -10,6 +10,7 @@ const Icon = props => {
   return (
     <span
       className="icon"
+      style={{ cursor: props.cursorPointer ? "pointer" : "" }}
       dangerouslySetInnerHTML={{
         __html: feather.icons[type].toSvg({ width: size, height: size })
       }}

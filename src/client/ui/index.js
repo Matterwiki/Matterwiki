@@ -17,6 +17,7 @@ import Blockquote from "./blockquote";
 import Divider from "./divider";
 import CodeBlock from "./codeblock";
 import TextMuted from "./textmuted";
+import Modal from "./modal";
 
 export {
   Button,
@@ -44,5 +45,6 @@ export {
   Blockquote,
   Divider,
   CodeBlock,
-  TextMuted
+  TextMuted,
+  Modal
 };
