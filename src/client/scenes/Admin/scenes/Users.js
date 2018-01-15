@@ -67,7 +67,7 @@ class ManageUsers extends React.Component {
   };
 
   closeDeleteModal = () => {
-    this.setState({ showDeleteModal: false });
+    this.setState({ showDeleteModal: false, userId: null });
   };
 
   updateUser = user => {
