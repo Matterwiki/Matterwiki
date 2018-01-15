@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "ui";
+import { Row, Col, Modal } from "ui";
 import APIProvider from "utils/APIProvider";
 import { connect } from "react-redux";
 
@@ -21,6 +21,10 @@ const TOPIC_FORM_FIELDS = [{ name: "name", type: "text" }, { name: "description"
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageTopics extends React.Component {
+  state = {
+    topicId: null,
+    showDeleteModal: false
+  };
   componentDidMount() {
     this.handleUpdate();
   }
@@ -38,10 +42,18 @@ class ManageTopics extends React.Component {
   };
 
   deleteTopic = id => {
-    APIProvider.delete(`topics/${id}`).then(() => {
+    this.setState({ showDeleteModal: true, topicId: id });
+  };
+
+  confirmDelete = () => {
+    APIProvider.delete(`topics/${this.state.topicId}`).then(() => {
       Alert.success("Topic has been deleted");
       this.handleUpdate();
     });
+  };
+
+  closeDeleteModal = () => {
+    this.setState({ showDeleteModal: false, topicId: null });
   };
 
   updateTopic = topic => {
@@ -66,31 +78,42 @@ class ManageTopics extends React.Component {
 
   render() {
     const { topics, currentTopic, loading } = this.props;
+    const { showDeleteModal } = this.state;
     if (loading) {
       return <Loader />;
     }
 
     const onSubmit = currentTopic ? this.updateTopic : this.addTopic;
     return (
-      <Row>
-        <Col widthMedium="40" withSmall="100">
-          <ItemForm
-            itemFormFields={TOPIC_FORM_FIELDS}
-            itemName="topic"
-            item={currentTopic}
-            onSubmit={onSubmit}
-            onCancelUpdate={this.emptyCurrentTopicState}
-          />
-        </Col>
-        <Col>
-          <ItemList
-            items={topics}
-            itemName="topic"
-            onDeleteClick={this.deleteTopic}
-            onEditClick={this.handleEditClick}
-          />
-        </Col>
-      </Row>
+      <React.Fragment>
+        <Row>
+          <Col widthMedium="40" withSmall="100">
+            <ItemForm
+              itemFormFields={TOPIC_FORM_FIELDS}
+              itemName="topic"
+              item={currentTopic}
+              onSubmit={onSubmit}
+              onCancelUpdate={this.emptyCurrentTopicState}
+            />
+          </Col>
+          <Col>
+            <ItemList
+              items={topics}
+              itemName="topic"
+              onDeleteClick={this.deleteTopic}
+              onEditClick={this.handleEditClick}
+            />
+          </Col>
+        </Row>
+        <Modal
+          visible={showDeleteModal}
+          title="Are you sure?"
+          okText="I understand, delete!"
+          handleClose={this.closeDeleteModal}
+          handleOk={this.confirmDelete}>
+          Deleting the topic will move all of its articles to Uncategorized. Are you sure?
+        </Modal>
+      </React.Fragment>
     );
   }
 }
