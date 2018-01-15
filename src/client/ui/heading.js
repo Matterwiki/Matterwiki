@@ -7,6 +7,7 @@ const Heading = styled.div`
   font-weight: 700;
   border-bottom: ${props => (props.borderBottom ? `1px solid` : "")};
   padding-bottom: 1rem;
+  letter-spacing: 1px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

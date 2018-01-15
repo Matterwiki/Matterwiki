@@ -22,8 +22,7 @@ injectGlobal`
     -moz-osx-font-smoothing: grayscale;
     color: ${theme ? theme.font : "#4d4d4d"};
     font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    font-size: 1.4em;
-    letter-spacing: 1px;
+    font-size: 1.5em;
     line-height: 1.6;
     overflow-x: hidden;
     background: ${theme ? theme.background : "#fff"}

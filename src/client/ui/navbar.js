@@ -76,6 +76,7 @@ const NavItem = styled.div`
     display: flex;
     font-size: 1.4rem;
     line-height: 4rem;
+    letter-spacing: 1px;
     text-transform: uppercase;
     justify-content: flex-start;
     align-items: center;
