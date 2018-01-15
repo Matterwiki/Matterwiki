@@ -50,11 +50,8 @@ const ModalFooter = styled.div`
 `;
 
 class Modal extends React.Component {
-  state = {
-    visible: true
-  };
   render() {
-    if (!this.state.visible) return null;
+    if (!this.props.visible) return null;
     const { title, children, footer, okText, cancelText, handleOk, handleClose } = this.props;
     const modal = (
       <React.Fragment>
@@ -62,8 +59,8 @@ class Modal extends React.Component {
           <ModalWrapper>
             <ModalHeader>
               <ModalTitle>{title}</ModalTitle>
-              <TextMuted>
-                <Icon type="x-square" cursorPointer onClick={handleClose} />
+              <TextMuted onClick={handleClose}>
+                <Icon type="x-square" cursorPointer />
               </TextMuted>
             </ModalHeader>
             <ModalBody>{children}</ModalBody>

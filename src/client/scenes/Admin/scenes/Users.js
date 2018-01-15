@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "ui";
+import { Row, Col, Modal } from "ui";
 import Alert from "react-s-alert";
 
 import Loader from "ui/loader";
@@ -33,6 +33,11 @@ const EDIT_USER_FORM_FIELDS = [
 
 // TODO MangeUsers and ManageTopics are basically the same with different endpoints. Abstract!
 class ManageUsers extends React.Component {
+  state = {
+    userId: null,
+    showDeleteModal: false
+  };
+
   componentDidMount() {
     this.handleUpdate();
   }
@@ -50,16 +55,19 @@ class ManageUsers extends React.Component {
   };
 
   deleteUser = id => {
-    const canDelete = confirm(
-      "Deleting the user will move all of his/her articles to the Admin. Are you sure?"
-    );
+    this.setState({ showDeleteModal: true, userId: id });
+  };
 
-    if (canDelete) {
-      APIProvider.delete(`users/${id}`).then(() => {
-        Alert.success("User has been deleted");
-        this.handleUpdate();
-      });
-    }
+  confirmDelete = () => {
+    APIProvider.delete(`users/${this.state.userId}`).then(() => {
+      Alert.success("User has been deleted");
+      this.handleUpdate();
+    });
+    this.closeDeleteModal();
+  };
+
+  closeDeleteModal = () => {
+    this.setState({ showDeleteModal: false });
   };
 
   updateUser = user => {
@@ -84,6 +92,7 @@ class ManageUsers extends React.Component {
 
   render() {
     const { users, loading, currentUser } = this.props;
+    const { showDeleteModal } = this.state;
     if (loading) {
       return <Loader />;
     }
@@ -91,25 +100,35 @@ class ManageUsers extends React.Component {
     const onSubmit = currentUser ? this.updateUser : this.addUser;
     const itemFormFields = currentUser ? EDIT_USER_FORM_FIELDS : USER_FORM_FIELDS;
     return (
-      <Row>
-        <Col widthMedium="40" withSmall="100">
-          <ItemForm
-            itemFormFields={itemFormFields}
-            item={currentUser}
-            itemName="user"
-            onSubmit={onSubmit}
-            onCancelUpdate={this.emptyCurrentUserState}
-          />
-        </Col>
-        <Col>
-          <ItemList
-            items={users}
-            itemName="user"
-            onDeleteClick={this.deleteUser}
-            onEditClick={this.handleEditClick}
-          />
-        </Col>
-      </Row>
+      <React.Fragment>
+        <Row>
+          <Col widthMedium="40" withSmall="100">
+            <ItemForm
+              itemFormFields={itemFormFields}
+              item={currentUser}
+              itemName="user"
+              onSubmit={onSubmit}
+              onCancelUpdate={this.emptyCurrentUserState}
+            />
+          </Col>
+          <Col>
+            <ItemList
+              items={users}
+              itemName="user"
+              onDeleteClick={this.deleteUser}
+              onEditClick={this.handleEditClick}
+            />
+          </Col>
+        </Row>
+        <Modal
+          visible={showDeleteModal}
+          title="Are you sure?"
+          okText="I understand, delete!"
+          handleClose={this.closeDeleteModal}
+          handleOk={this.confirmDelete}>
+          Deleting the user will move all of their articles to the Admin. Are you sure?
+        </Modal>
+      </React.Fragment>
     );
   }
 }
