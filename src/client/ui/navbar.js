@@ -13,7 +13,6 @@ const Navbar = styled.div`
   left: 0;
   right: 0;
   z-index: 10;
-  border-top: 0.4rem solid ${props => (props.theme ? props.theme.primary : "#ff0066")};
   a {
     height: 100%;
     color: inherit;
@@ -37,8 +36,8 @@ const Nav = styled.div`
 `;
 
 const NavItem = styled.div`
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   height: 4rem;
   max-height: 4rem;
   display: flex;
