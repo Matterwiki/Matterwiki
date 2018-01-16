@@ -17,9 +17,9 @@ const ModalMask = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  border: 1px solid #ccc;
+  border: 1px solid ${props => (props.theme ? props.theme.border : "#efefef")};
   padding: 2rem;
-  background-color: #fff;
+  background-color: ${props => (props.theme ? props.theme.background : "#fff")};
   max-width: 60rem;
   margin: 0px auto;
   margin-top: 10rem;
