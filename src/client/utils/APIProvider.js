@@ -61,6 +61,19 @@ const put = (endpoint, payload) =>
 const deleteReq = endpoint => axiosInstance.delete(endpoint).catch(prepareError);
 
 /**
+ * Helpers
+ */
+
+/**
+ * updateToken
+ * Takes in the new token and updates the axios instance headers
+ * @param {string} newToken
+ */
+const updateToken = newToken => {
+  axiosInstance.defaults.headers["x-access-token"] = newToken;
+};
+
+/**
  * Main export
  */
 const APIProvider = {
@@ -68,7 +81,10 @@ const APIProvider = {
   query,
   post,
   put,
-  delete: deleteReq
+  delete: deleteReq,
+  helpers: {
+    updateToken
+  }
 };
 
 export default APIProvider;
