@@ -21,8 +21,6 @@ class Login extends React.Component {
         window.localStorage.setItem("userId", loggedInUser.id);
         window.localStorage.setItem("userEmail", loggedInUser.email);
 
-        APIProvider.helpers.updateToken(loggedInUser.token);
-
         this.props.history.push("home");
 
         Alert.success("You are now logged in");
