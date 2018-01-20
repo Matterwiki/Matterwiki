@@ -5,7 +5,7 @@ const Input = styled.input`
   height: 4rem;
   font-family: inherit;
   font-size: 1.6rem;
-  color: ${props => (props.theme ? props.theme.font : "#fff")}
+  color: ${props => (props.theme ? props.theme.font : "#fff")};
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     text-transform: uppercase;
