@@ -611,6 +611,8 @@ describe("Article API tests", () => {
           expect(historyItem.updated_at).toBeDefined();
         });
     });
+
+    test.skip("(200) creates and updates should create unique history items");
   });
 
   describe("#DELETE /api/articles/:id", () => {
