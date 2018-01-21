@@ -26,10 +26,15 @@
     "react/sort-comp": 0,
     "react/no-find-dom-node": 0,
     // JS is fine too!
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
-
-    "no-unused-vars": 0,
+    "react/jsx-filename-extension": 0,
+    "function-paren-newline": 0,
+    "prefer-destructuring": 0,
     "camelcase": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-restricted-globals": 0,
+    "prefer-promise-reject-errors": 0,
+    "react/no-danger": 0,
+    "no-unused-vars": 0,
     "consistent-return": 0,
     "no-console": 0,
     "global-require": 0,

@@ -1,22 +1,18 @@
-import React from "react";
+import React, { Children } from "react";
 
-const LastUpdatedDate = ({ date }) => (
-  <div className="single-article-meta">
-    Last updated on {new Date(date.replace(" ", "T")).toDateString()}
-  </div>
-);
+import { Heading, Icon } from "ui";
+import { Hide, DisplayFlexRow } from "ui/utils";
 
-const EditedBy = ({ name }) => (
-  <div className="single-article-meta">
-    Edited by <b>{name}</b>
-  </div>
-);
-
-const ArticleHeading = ({ children, date, editedBy }) => (
-  <div className="article-heading">
-    <h1 className="single-article-title">{children}</h1>
-    {date && <LastUpdatedDate date={date} />}
-    {editedBy && <EditedBy name={editedBy} />}
+const ArticleHeading = ({ article, children }) => (
+  <div>
+    <Heading size="6">{children}</Heading>
+    <DisplayFlexRow alignItems="center">
+      <Icon type="clock" size="12" />&nbsp;<Hide small>Last updated on&nbsp;</Hide>
+      {new Date(article.updated_at.replace(" ", "T")).toDateString()}
+      <Hide small>&nbsp;by&nbsp;</Hide>
+      <Icon type="user" size="12" />
+      {article.modifiedByUser.name}
+    </DisplayFlexRow>
   </div>
 );
 

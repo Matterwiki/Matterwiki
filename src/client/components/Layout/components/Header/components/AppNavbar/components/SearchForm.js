@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
-import FaSearch from "react-icons/lib/fa/search";
+import { NavForm, Button, Input, Icon } from "ui";
 import { withRouter } from "react-router-dom";
 import { loadArticleSearchPage } from "store/modules/sagaActions";
 import { setArticleSearchQuery } from "store/modules/search";
@@ -21,22 +20,9 @@ class SearchForm extends React.Component {
   render() {
     const { query } = this.props;
     return (
-      <Navbar.Form pullRight>
-        <Form onSubmit={this.onSubmit}>
-          <FormGroup>
-            <FormControl
-              className="search-input"
-              type="text"
-              placeholder="Search"
-              value={query || ""}
-              onChange={this.onChange}
-            />
-          </FormGroup>
-          <Button type="submit" className="search-button">
-            <FaSearch />
-          </Button>
-        </Form>
-      </Navbar.Form>
+      <NavForm onSubmit={this.onSubmit}>
+        <Input type="text" placeholder="Search" value={query || ""} onChange={this.onChange} />
+      </NavForm>
     );
   }
 }

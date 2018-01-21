@@ -1,16 +1,14 @@
 import React from "react";
 import Alert from "react-s-alert";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import theme from "ui/theme";
 import NotificationsWrapper from "components/Notifications/NotificationsWrapper";
 
 import Layout from "components/Layout/Layout";
 import APIProvider from "utils/APIProvider";
 
 import { Login, Setup, Search, Home, Article, Admin, NotFoundError } from "./MainScenes";
-
-// bunch of custom styles that are needed globally
-import "./bootstrap.css";
-import "./style.css";
 
 // TODO refactor the Auth logic into a HOC
 class Main extends React.Component {
@@ -49,22 +47,23 @@ class Main extends React.Component {
       }
       return <Redirect to="/login" />;
     }
-
     return (
-      <div>
-        <Layout {...headerProps}>
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/article" component={Article} />
-            <Route path="/admin" component={Admin} />
-            <Route path="/search" component={Search} />
-            <Route path="/setup" component={Setup} />
-            <Route path="*" component={NotFoundError} />
-          </Switch>
-        </Layout>
+      <React.Fragment>
+        <ThemeProvider theme={theme}>
+          <Layout {...headerProps} {...this.props}>
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/article" component={Article} />
+              <Route path="/admin" component={Admin} />
+              <Route path="/search" component={Search} />
+              <Route path="/setup" component={Setup} />
+              <Route path="*" component={NotFoundError} />
+            </Switch>
+          </Layout>
+        </ThemeProvider>
         <NotificationsWrapper />
-      </div>
+      </React.Fragment>
     );
   }
 }

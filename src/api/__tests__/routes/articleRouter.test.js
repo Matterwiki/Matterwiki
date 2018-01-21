@@ -519,7 +519,8 @@ describe("Article API tests", () => {
       const articleToUpdate = {
         title: "random title",
         content: "random content used for testing this",
-        change_log: "things have changed"
+        change_log: "things have changed",
+        topic_id: 1
       };
 
       let dbCreatedArticle = await ArticleModel.query().findById(2);
@@ -545,8 +546,10 @@ describe("Article API tests", () => {
 
     test("(200) update should return expected fields", () => {
       const articleToUpdate = {
+        title: "random title",
         content: "random content used for testing this",
-        change_log: "things have changed"
+        change_log: "things have changed",
+        topic_id: 1
       };
 
       return apiClient
@@ -578,8 +581,10 @@ describe("Article API tests", () => {
 
     test("(200) should make a history item for the article", () => {
       const articleToUpdate = {
+        title: "random title",
         content: "random content used for testing this",
-        change_log: "things have changed"
+        change_log: "things have changed",
+        topic_id: 1
       };
 
       return apiClient
@@ -606,6 +611,8 @@ describe("Article API tests", () => {
           expect(historyItem.updated_at).toBeDefined();
         });
     });
+
+    test.skip("(200) creates and updates should create unique history items");
   });
 
   describe("#DELETE /api/articles/:id", () => {

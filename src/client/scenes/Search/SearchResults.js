@@ -1,15 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import FaFrownO from "react-icons/lib/fa/frown-o";
-import { HelpBlock } from "react-bootstrap";
+import { HelpBlock } from "ui";
 import "url-search-params-polyfill";
 
 import ArticlesList from "components/ArticlesList/ArticlesList";
-import Loader from "components/Loader/Loader";
+import Loader from "ui/loader";
 
 import { loadArticleSearchPage, disposeArticleSearchPage } from "store/modules/sagaActions";
-
-import "./SearchResults.css";
 
 // TODO - fix an encoding problem when the query param contains symbols and other weird stuff
 class Search extends React.Component {
@@ -34,9 +32,7 @@ class Search extends React.Component {
     return (
       <div>
         <div className="result-info">
-          <HelpBlock>
-            We found {results.length} articles for {query}
-          </HelpBlock>
+          We found {results.length} articles for {query}
         </div>
         {!results.length ? (
           <div className="no-results">

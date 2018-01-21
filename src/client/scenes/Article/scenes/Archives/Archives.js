@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Grid, HelpBlock } from "react-bootstrap";
-import Loader from "components/Loader/Loader";
+import { Row, Col, Heading, HelpBlock } from "ui";
+import Loader from "ui/loader";
 import { connect } from "react-redux";
 
 import { loadArchivesPage, disposeArchivesPage, fetchArchiveById } from "store/modules/sagaActions";
 
 import BrowseArchives from "./components/BrowseArchives";
 import SimpleArticle from "../../components/SimpleArticle";
-
-import "./Archives.css";
 
 class ArticleHistory extends React.Component {
   componentDidMount() {
@@ -31,26 +29,27 @@ class ArticleHistory extends React.Component {
     if (loading) return <Loader />;
     else if (archives && archives.length) {
       return (
-        <Grid>
-          <Row>
-            <Col md={3}>
-              <span>Archives</span>
-              <BrowseArchives
-                archives={archives}
-                onArchiveChosen={this.getArchive}
-                articleId={this.props.match.params.articleId}
-              />
-            </Col>
-            <Col md={9}>
-              <SimpleArticle article={currentArchive} loading={loadingCurrentArchive} />
-            </Col>
-          </Row>
-        </Grid>
+        <Row>
+          <Col widthMedium="25">
+            <Heading size="1" transform="uppercase">
+              Archives
+            </Heading>
+            <BrowseArchives
+              archives={archives}
+              onArchiveChosen={this.getArchive}
+              articleId={this.props.match.params.articleId}
+              currentArchive={currentArchive}
+            />
+          </Col>
+          <Col>
+            <SimpleArticle article={currentArchive} loading={loadingCurrentArchive} />
+          </Col>
+        </Row>
       );
     }
     return (
       <Row>
-        <HelpBlock className="center-align">
+        <HelpBlock textAlign="center">
           There are no archives for this article {`   `}
           <Link to={`/article/${this.props.match.params.articleId}`}>Go back</Link>
         </HelpBlock>

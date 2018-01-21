@@ -1,12 +1,16 @@
 import React from "react";
-import { HelpBlock } from "react-bootstrap";
+import { Footer, ImageWrapper } from "ui";
+import Logo from "assets/logo.svg";
 
-const Footer = () => (
-  <div className="footer center-align">
-    <HelpBlock>
-      Powered by <a href="http://matterwiki.com">Matterwiki</a>
-    </HelpBlock>
-  </div>
+const AppFooter = () => (
+  <Footer align="center">
+    Powered by{" "}
+    <a href="http://matterwiki.com">
+      <ImageWrapper height="3">
+        <img alt="matterwiki-logo" src={Logo} />
+      </ImageWrapper>
+    </a>
+  </Footer>
 );
 
-export default Footer;
+export default AppFooter;

@@ -1,10 +1,14 @@
 import React from "react";
 
-const ArticleSidebarItem = ({ title, children }) => (
-  <div className="sidebar-block">
-    <div className="sidebar-title">{title}</div>
+import { Heading, SidebarBlock, Icon } from "ui";
+
+const ArticleSidebarItem = ({ title, children, iconType }) => (
+  <SidebarBlock>
+    <Heading size="1" transform="uppercase">
+      {iconType ? <Icon type={iconType} size="12" /> : null} {title}
+    </Heading>
     {children}
-  </div>
+  </SidebarBlock>
 );
 
 export default ArticleSidebarItem;

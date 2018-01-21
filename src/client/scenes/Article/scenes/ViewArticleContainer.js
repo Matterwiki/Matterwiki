@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "react-s-alert";
-import { Grid, Row, Col } from "react-bootstrap";
-import Loader from "components/Loader/Loader";
+import { Modal } from "ui";
+import Loader from "ui/loader";
 import APIProvider from "utils/APIProvider";
 
 import { connect } from "react-redux";
@@ -11,6 +11,10 @@ import { loadArticlePage, disposeArticlePage } from "store/modules/sagaActions";
 import ViewArticle from "./ViewArticle";
 
 class ViewArticleContainer extends React.Component {
+  state = {
+    showDeleteModal: false
+  };
+
   componentDidMount() {
     const id = this.props.match.params.articleId;
     this.props.loadArticlePage(id);
@@ -34,6 +38,10 @@ class ViewArticleContainer extends React.Component {
 
   handleDeleteClick = e => {
     e.preventDefault();
+    this.setState({ showDeleteModal: true });
+  };
+
+  confirmDelete = () => {
     const id = this.props.article.id;
     APIProvider.delete(`articles/${id}`).then(() => {
       Alert.success("Article has been deleted");
@@ -41,19 +49,34 @@ class ViewArticleContainer extends React.Component {
     });
   };
 
+  closeDeleteModal = () => {
+    this.setState({ showDeleteModal: false });
+  };
+
   render() {
     const { article, loading } = this.props;
+    const { showDeleteModal } = this.state;
     if (loading) {
       return <Loader />;
     } else if (article.title) {
       return (
-        <ViewArticle
-          article={article}
-          loading={loading}
-          handleEditClick={this.handleEditClick}
-          handleDeleteClick={this.handleDeleteClick}
-          handleHistoryClick={this.handleHistoryClick}
-        />
+        <React.Fragment>
+          <ViewArticle
+            article={article}
+            loading={loading}
+            handleEditClick={this.handleEditClick}
+            handleDeleteClick={this.handleDeleteClick}
+            handleHistoryClick={this.handleHistoryClick}
+          />
+          <Modal
+            visible={showDeleteModal}
+            title="Are you sure you want to delete the article?"
+            okText="I understand, delete!"
+            handleClose={this.closeDeleteModal}
+            handleOk={this.confirmDelete}>
+            Everyone in your company will lose access to this article.
+          </Modal>
+        </React.Fragment>
       );
     }
     return <div />;

@@ -1,10 +1,9 @@
 import React from "react";
-import { HelpBlock } from "react-bootstrap";
 
-import Loader from "components/Loader/Loader";
+import { List, HelpBlock } from "ui";
+
+import Loader from "ui/loader";
 import ArticlesListItem from "./components/ArticlesListItem";
-
-import "./ArticlesList.css";
 
 const ArticlesList = props => {
   const { articles } = props;
@@ -15,12 +14,10 @@ const ArticlesList = props => {
     return <Loader message="Loading articles" />;
   }
   if (!articles.length) {
-    return <HelpBlock className="center-align">There are no articles under this topic</HelpBlock>;
+    return <HelpBlock textAlign="center">There are no articles under this topic</HelpBlock>;
   }
   return (
-    <div className="article-list">
-      {articles.map(article => <ArticlesListItem key={article.id} article={article} />)}
-    </div>
+    <List>{articles.map(article => <ArticlesListItem key={article.id} article={article} />)}</List>
   );
 };
 

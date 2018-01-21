@@ -1,35 +1,33 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Sidebar, Button, Icon } from "ui";
 import ArticleSidebarItem from "./ArticleSidebarItem";
 
 const ArticleSidebar = ({ article, isAdmin, onEditClick, onHistoryClick, onDeleteClick }) => (
-  <div className="article-sidebar">
-    <ArticleSidebarItem title="Filed under">
+  <Sidebar>
+    <ArticleSidebarItem title="Filed under" iconType="folder">
       <h2 className="color-text">
         <b>{article.topic.name}</b>
       </h2>
     </ArticleSidebarItem>
-    <ArticleSidebarItem title="Last Updated By">
-      <h3>
-        <b>{article.createdByUser.name}</b>
-      </h3>
+    <ArticleSidebarItem title="Last Updated By" iconType="user">
+      <b>{article.createdByUser.name}</b>
       <p>{article.createdByUser.about}</p>
     </ArticleSidebarItem>
-    <ArticleSidebarItem title="What Changed in last edit">
+    <ArticleSidebarItem title="What Changed in last edit" iconType="edit-3">
       {article.change_log || <h4>No information available</h4>}
     </ArticleSidebarItem>
     <Button onClick={onEditClick} block>
-      Edit
+      <Icon type="edit" size="12" /> Edit
     </Button>
     <Button onClick={onHistoryClick} block>
-      History
+      <Icon type="clock" size="12" /> History
     </Button>
     {isAdmin && (
       <Button block onClick={onDeleteClick}>
-        Delete
+        <Icon type="trash-2" size="12" /> Delete
       </Button>
     )}
-  </div>
+  </Sidebar>
 );
 
 export default ArticleSidebar;

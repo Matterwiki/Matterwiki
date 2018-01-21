@@ -32,3 +32,7 @@ export function* loadEditTopic(action) {
 export function* disposeEditTopic() {
   yield put(emptyCurrentTopic());
 }
+
+export function* setTopic(action) {
+  yield loadEditTopic(action);
+}

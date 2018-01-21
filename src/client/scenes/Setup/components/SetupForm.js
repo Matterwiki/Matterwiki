@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
+import { Form, Input, Button } from "ui";
 
 // TODO move these fellas to a nice consts file
 const SETUP_FORM_FIELDS = [
@@ -36,23 +36,18 @@ class SetupForm extends React.Component {
     return (
       <Form onSubmit={this.onSubmit}>
         {SETUP_FORM_FIELDS.map(formField => (
-          <Col sm={12} key={formField.name}>
-            <FormGroup>
-              <FormControl
-                type={formField.type}
-                name={formField.name}
-                placeholder={formField.name}
-                value={this.state[formField.name]}
-                onChange={this.onChange}
-              />
-            </FormGroup>
-          </Col>
+          <Input
+            type={formField.type}
+            name={formField.name}
+            placeholder={formField.name}
+            value={this.state[formField.name]}
+            onChange={this.onChange}
+            key={formField.name}
+          />
         ))}
-        <Col sm={12}>
-          <Button type="submit" block>
-            Setup My Account
-          </Button>
-        </Col>
+        <Button type="submit" block>
+          Setup My Account
+        </Button>
       </Form>
     );
   }

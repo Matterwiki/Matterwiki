@@ -6,6 +6,7 @@
 }
 
 .s-alert-box {
+    border-radius: 0.4rem;
     position: fixed;
     background: rgba(42,45,50,0.85);
     padding: 22px;
@@ -17,6 +18,7 @@
     max-width: 300px;
     -webkit-transition: top .4s, bottom .4s;
     transition: top .4s, bottom .4s;
+    box-shadow: 0rem 0rem 1rem #d1d1d1;
 }
 
 .s-alert-box.s-alert-show {

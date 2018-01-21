@@ -1,11 +1,12 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import "./Admin.css";
+import { Row, Col, Heading } from "ui";
+import { Hide, DisplayFlexRow } from "ui/utils";
 
 import AdminNavBar from "./components/AdminNavBar";
 
-import { ManageTopics, ManageUsers } from "./scenes/AdminScenes";
+import { ManageTopics, ManageUsers, LogoUpload } from "./scenes/AdminScenes";
 
 class Admin extends React.Component {
   constructor(...args) {
@@ -26,7 +27,8 @@ class Admin extends React.Component {
     return currentTab;
   };
 
-  updateTab = name => {
+  updateTab = (name, e) => {
+    e.preventDefault();
     this.setState({
       tab: name
     });
@@ -39,14 +41,25 @@ class Admin extends React.Component {
     const { location, match } = this.props;
 
     return (
-      <div>
-        <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
-        {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}
-        <Switch>
-          <Route path={`${match.url}/topics`} component={ManageTopics} />
-          <Route path={`${match.url}/users`} component={ManageUsers} />
-        </Switch>
-      </div>
+      <Row>
+        <Col>
+          <Row>
+            <DisplayFlexRow>
+              <Col widthMedium="25" widthSmall="20">
+                <AdminNavBar handleSelect={this.updateTab} activeTab={this.state.tab} />
+                {location.pathname === "/admin" ? <Redirect to={`${match.url}/users`} /> : ""}
+              </Col>
+              <Col>
+                <Switch>
+                  <Route path={`${match.url}/topics`} component={ManageTopics} />
+                  <Route path={`${match.url}/users`} component={ManageUsers} />
+                  <Route path={`${match.url}/customize`} component={LogoUpload} />
+                </Switch>
+              </Col>
+            </DisplayFlexRow>
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }

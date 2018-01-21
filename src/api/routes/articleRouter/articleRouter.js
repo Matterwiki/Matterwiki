@@ -1,5 +1,5 @@
 const express = require("express");
-const { assign, omit, cloneDeep } = require("lodash");
+const { assign, pick, cloneDeep } = require("lodash");
 const HttpStatus = require("http-status-codes");
 
 const router = express.Router();
@@ -80,7 +80,7 @@ async function updateArticle(req, res, next) {
     // TODO This should ideally be a separate request from the UI, make it so if saves are slow
     const articleHistory = assign(
       { type: ARTICLE_HISTORY_TYPES.UPDATE },
-      omit(updatedArticle, ["topic", "createdByUser", "modifiedByUser"])
+      pick(updatedArticle, ["title", "content", "change_log", "topic_id", "modified_by_id"])
     );
 
     await updatedArticle.$relatedQuery("articleHistory").insert(articleHistory);

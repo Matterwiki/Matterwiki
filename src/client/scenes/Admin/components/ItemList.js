@@ -1,5 +1,6 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Row, Col, List, ListItem, ListItemHeader, Button, Icon } from "ui";
+import { DisplayFlexRow, Hide } from "ui/utils";
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
@@ -14,33 +15,48 @@ class ResourceListItem extends React.Component {
   render() {
     const { item } = this.props;
     return (
-      <ListGroupItem header={item.name}>
-        {/* Only used in the Admin section at this point. If this were to be used elswehere, 
+      <ListItem>
+        <Row>
+          <Col>
+            <DisplayFlexRow>
+              <Col>
+                <ListItemHeader>{item.name}</ListItemHeader>
+                {/* Only used in the Admin section at this point. If this were to be used elswehere, 
           a schema level change is inevitable */}
-        {item.description || item.about || "-"}
-        <span className="pull-right">
-          <Button
-            onClick={e => {
-              this.handleEditClick(item, e);
-            }}>
-            Edit
-          </Button>
-          {item.id !== 1 && (
-            <Button
-              onClick={e => {
-                this.handleDeleteClick(item, e);
-              }}>
-              Delete
-            </Button>
-          )}
-        </span>
-      </ListGroupItem>
+                {item.description || item.about || "-"}
+              </Col>
+              <Col textAlign="right">
+                <Button
+                  onClick={e => {
+                    this.handleEditClick(item, e);
+                  }}
+                  clear
+                  small>
+                  <Icon type="edit" size="12" />
+                  <Hide small> Edit</Hide>
+                </Button>&nbsp;
+                {item.id !== 1 && (
+                  <Button
+                    clear
+                    onClick={e => {
+                      this.handleDeleteClick(item, e);
+                    }}
+                    small>
+                    <Icon type="trash-2" size="12" />
+                    <Hide small> Delete</Hide>
+                  </Button>
+                )}
+              </Col>
+            </DisplayFlexRow>
+          </Col>
+        </Row>
+      </ListItem>
     );
   }
 }
 
 const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
-  <ListGroup>
+  <List>
     {items.map(item => (
       <ResourceListItem
         key={item.id}
@@ -50,7 +66,7 @@ const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
         onDeleteClick={onDeleteClick}
       />
     ))}
-  </ListGroup>
+  </List>
 );
 
 export default ResourceList;

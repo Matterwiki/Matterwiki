@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import "./Articles.css";
 
 import { NewArticle, ViewArticle, EditArticle, Archives } from "./scenes/ArticleScenes";
 

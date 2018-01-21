@@ -43,18 +43,15 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: [["env", { modules: false }], "react"],
-          plugins: [
-            "transform-class-properties",
-            "transform-object-rest-spread"
-          ]
+          plugins: ["transform-class-properties", "transform-object-rest-spread"]
         }
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        test: /\.(css|scss)$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpg|png)$/,
         loader: "url-loader",
         options: {
           limit: 25000,
@@ -72,11 +69,7 @@ module.exports = {
   },
 
   resolve: {
-    modules: [
-      path.resolve("./"),
-      path.resolve("./src/client"),
-      path.resolve("./node_modules")
-    ]
+    modules: [path.resolve("./"), path.resolve("./src/client"), path.resolve("./node_modules")]
   },
 
   node: {

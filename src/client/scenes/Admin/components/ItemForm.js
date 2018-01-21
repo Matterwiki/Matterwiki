@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Form, FormGroup, FormControl, Col, Button } from "react-bootstrap";
+import { Form, Input, Button, Icon } from "ui";
+import { BorderedBox } from "ui/utils";
 
 class ItemForm extends React.Component {
   componentWillMount() {
@@ -30,10 +31,11 @@ class ItemForm extends React.Component {
   };
 
   initState = ({ itemFormFields, item }) => {
-    this.state = itemFormFields.reduce((acc, formField) => {
+    const newState = itemFormFields.reduce((acc, formField) => {
       acc[formField.name] = item ? item[formField.name] : "";
       return acc;
     }, {});
+    this.setState(newState);
   };
 
   cancelUpdate = e => {
@@ -48,36 +50,32 @@ class ItemForm extends React.Component {
     );
 
     return (
-      <div>
+      <BorderedBox shadow={item !== null}>
         {currentlyEditing}
-        <Form className="tabform" onSubmit={this.onSubmit}>
+        <Form onSubmit={this.onSubmit} marginBottom="0">
           {itemFormFields.map(formField => (
-            <Col sm={12} key={formField.name}>
-              <FormGroup>
-                <FormControl
-                  type={formField.type}
-                  placeholder={formField.name}
-                  name={formField.name}
-                  value={this.state[formField.name]}
-                  onChange={this.onChange}
-                />
-              </FormGroup>
-            </Col>
+            <Input
+              type={formField.type}
+              placeholder={formField.name}
+              name={formField.name}
+              value={this.state[formField.name]}
+              onChange={this.onChange}
+              key={formField.name}
+            />
           ))}
-          <Col sm={12}>
-            <Button type="submit" block>
-              {item ? `Update ${itemName}` : `Add ${itemName}`}
+          <Button type="submit" block>
+            <Icon type={item ? "send" : "plus-square"} size="12" />{" "}
+            {item ? `Update ${itemName}` : `Add ${itemName}`}
+          </Button>
+          {item ? (
+            <Button block onClick={this.cancelUpdate} outline>
+              <Icon type="x-square" size="12" /> Cancel
             </Button>
-            {item ? (
-              <Button block onClick={this.cancelUpdate}>
-                Cancel
-              </Button>
-            ) : (
-              ""
-            )}
-          </Col>
+          ) : (
+            ""
+          )}
         </Form>
-      </div>
+      </BorderedBox>
     );
   }
 }
