@@ -1,6 +1,6 @@
 const { assign } = require("lodash");
 const HttpStatus = require("http-status-codes");
-const { ARTICLE_RESULTS_LIMIT } = require("../../utils/constants");
+const { RESULT_LIMITS } = require("../../utils/constants");
 const ArticleModel = require("../../models/articleModel");
 
 /**
@@ -97,7 +97,7 @@ async function fetchArticles(req, res, next) {
       .where(filters)
       .andWhere(...getCursorQuery(req.query))
       .orderBy(sortField, directionToSort)
-      .limit(req.query.limit || ARTICLE_RESULTS_LIMIT);
+      .limit(req.query.limit || RESULT_LIMITS.ARTICLES);
 
     res.status(HttpStatus.OK).json(articles);
   } catch (err) {
