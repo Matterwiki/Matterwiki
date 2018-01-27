@@ -7,6 +7,8 @@ const TOKEN_EXPIRATION = 86400;
 
 const DEFAULT_CHANGELOG_MESSAGE = "Another drop in the ocean of knowledge";
 
+const ARTICLE_RESULTS_LIMIT = 10;
+
 // TODO The stuff that follow are ENUMS on the database. Could put them elsewhere when there's more
 const ROLES = {
   ADMIN: "ADMIN",
@@ -86,5 +88,6 @@ module.exports = {
   DEFAULT_CHANGELOG_MESSAGE,
   ROLES,
   ARTICLE_HISTORY_TYPES,
-  ERRORS
+  ERRORS,
+  ARTICLE_RESULTS_LIMIT
 };
