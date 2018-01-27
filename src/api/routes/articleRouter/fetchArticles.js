@@ -1,6 +1,7 @@
 const { assign } = require("lodash");
 const HttpStatus = require("http-status-codes");
 const { RESULT_LIMITS } = require("../../utils/constants");
+const { getCursorQuery } = require("../../utils/queryHelpers");
 const ArticleModel = require("../../models/articleModel");
 
 /**
@@ -69,16 +70,6 @@ function buildSortObjectForArticle({ sort, direction }) {
 
   return { directionToSort, sortField };
 }
-
-/**
- * Function that returns arguments for the pagination orWhere query
- * @param {object} queryParams
- * @returns {array}
- */
-const getCursorQuery = queryParams => {
-  if (!queryParams.cursor) return ["updated_at", "<", new Date()];
-  return ["updated_at", ">", new Date(queryParams.cursor)];
-};
 
 /**
  * Actual middleware fn that is used for fetching a list of articles

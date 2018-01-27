@@ -8,14 +8,20 @@ const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
-const { DELETE_DEFAULT_TOPIC, DUPLICATE_TOPIC } = require("../utils/constants").ERRORS;
+const {
+  ERRORS: { DELETE_DEFAULT_TOPIC, DUPLICATE_TOPIC },
+  RESULT_LIMITS
+} = require("../utils/constants");
+const { getCursorQuery } = require("../utils/queryHelpers");
 
 const TopicModel = require("../models/topicModel");
 const ArticleModel = require("../models/articleModel");
 
 async function fetchTopics(req, res, next) {
   try {
-    const topics = await TopicModel.query();
+    const topics = await TopicModel.query()
+      .where(...getCursorQuery(req.query, "created_at"))
+      .limit(req.query.limit || RESULT_LIMITS.TOPICS);
     res.status(HttpStatus.OK).json(topics);
   } catch (err) {
     next(err);

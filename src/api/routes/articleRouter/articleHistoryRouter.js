@@ -6,22 +6,12 @@ const router = express.Router({ mergeParams: true });
 const ArticleHistoryModel = require("../../models/articleHistoryModel");
 
 const { RESULT_LIMITS } = require("../../utils/constants");
-
-/**
- * Function that returns arguments for the pagination andWhere query
- * @param {object} queryParams
- * @returns {array}
- */
-const getCursorQuery = queryParams => {
-  if (!queryParams.cursor) return ["updated_at", "<", new Date()];
-  return ["updated_at", ">", new Date(queryParams.cursor)];
-};
+const { getCursorQuery } = require("../../utils/queryHelpers");
 
 async function fetchHistoryByArticle(req, res, next) {
   const { id: article_id } = req.params;
 
   try {
-    console.log(...getCursorQuery(req.query));
     const articles = await ArticleHistoryModel.query()
       .where({ article_id })
       .andWhere(...getCursorQuery(req.query))
