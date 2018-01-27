@@ -71,6 +71,16 @@ function buildSortObjectForArticle({ sort, direction }) {
 }
 
 /**
+ * Function that returns arguments for the pagination orWhere query
+ * @param {object} queryParams
+ * @returns {array}
+ */
+const getCursorQuery = queryParams => {
+  if (!queryParams.cursor) return ["updated_at", "<", new Date()];
+  return ["updated_at", ">", new Date(queryParams.cursor)];
+};
+
+/**
  * Actual middleware fn that is used for fetching a list of articles
  *
  * @param {any} req
@@ -85,6 +95,7 @@ async function fetchArticles(req, res, next) {
     const articles = await chainSearchQuery(ArticleModel.query(), req.query.search)
       .withRels()
       .where(filters)
+      .andWhere(...getCursorQuery(req.query))
       .orderBy(sortField, directionToSort);
 
     res.status(HttpStatus.OK).json(articles);
