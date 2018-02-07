@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Row, Col } from "ui";
-import { FullHeightContainer, Hide } from "ui/utils";
+import { Row, Col, Button } from "ui";
+import { FullHeightContainer, Hide, DisplayFlexRow } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "ui/loader";
 
@@ -21,6 +21,10 @@ class Home extends React.Component {
   handleTopicClick = (topicId, e) => {
     if (e) e.preventDefault();
     this.props.fetchArticlesByTopic(topicId);
+  };
+
+  loadMoreArticles = () => {
+    console.log("loading more articles...");
   };
 
   render() {
@@ -50,7 +54,20 @@ class Home extends React.Component {
             </FullHeightContainer>
           </Hide>
         </Col>
-        <Col>{loadingArticles ? <Loader /> : <ArticlesList articles={articles} />}</Col>
+        <Col>
+          {loadingArticles ? (
+            <Loader />
+          ) : (
+            <React.Fragment>
+              <ArticlesList articles={articles} />
+              <DisplayFlexRow justifyContent="center" marginTop="2">
+                <Button outline onClick={this.loadMoreArticles}>
+                  Load More
+                </Button>
+              </DisplayFlexRow>
+            </React.Fragment>
+          )}
+        </Col>
       </Row>
     );
   }

@@ -83,14 +83,29 @@ async function fetchArticles(req, res, next) {
     const filters = buildWhereForArticle(req.query);
     const { sortField, directionToSort } = buildSortObjectForArticle(req.query);
 
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10);
+
     const articles = await chainSearchQuery(ArticleModel.query(), req.query.search)
       .withRels()
       .where(filters)
       .andWhere(...getCursorQuery(req.query))
       .orderBy(sortField, directionToSort)
-      .limit(req.query.limit || RESULT_LIMITS.ARTICLES);
+      .limit(limit + 1); // We fetch an extra row, to see if there are more left.
 
-    res.status(HttpStatus.OK).json(articles);
+    const response = {};
+
+    if (articles.length > limit) {
+      response.more = true;
+      articles.splice(articles.length - 1, 1);
+    } else if (articles.length === limit) {
+      response.more = false;
+    } else {
+      response.more = false;
+    }
+
+    response.articles = articles;
+
+    res.status(HttpStatus.OK).json(response);
   } catch (err) {
     console.log(err);
     next(err);

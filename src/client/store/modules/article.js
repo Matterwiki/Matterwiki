@@ -36,6 +36,7 @@ export const stopLoadingArticles = () => ({
 export default (
   state = {
     articles: [],
+    more: false,
     currentArticle: {},
     loading: false
   },
@@ -45,7 +46,8 @@ export default (
     case ADD_ARTICLES:
       return {
         ...state,
-        articles: payload.articles
+        articles: payload.articles,
+        more: payload.more
       };
     case EMPTY_ARTICLES:
       return {
