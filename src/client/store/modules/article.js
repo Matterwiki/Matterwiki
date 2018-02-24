@@ -72,7 +72,10 @@ export default (
     case EMPTY_ARTICLES:
       return {
         ...state,
-        articles: []
+        articles: {
+          all: [],
+          meta: {}
+        }
       };
     case SET_CURRENT_ARTICLE:
       return {
