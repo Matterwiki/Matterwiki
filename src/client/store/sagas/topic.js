@@ -3,6 +3,7 @@ import { put, call } from "redux-saga/effects";
 import {
   startLoadingTopics,
   addTopics,
+  appendTopics,
   stopLoadingTopics,
   setCurrentTopic,
   emptyCurrentTopic,
@@ -35,4 +36,14 @@ export function* disposeEditTopic() {
 
 export function* setTopic(action) {
   yield loadEditTopic(action);
+}
+
+export function* fetchTopicsByPage(action) {
+  try {
+    const topics = yield call(APIProvider.get, `topics?page=${action.page}`);
+    yield put(appendTopics(topics));
+    if (action.callback) action.callback(true);
+  } catch (error) {
+    if (action.callback) action.callback(false);
+  }
 }

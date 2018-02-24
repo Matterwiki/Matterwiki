@@ -18,8 +18,27 @@ const ArticleModel = require("../models/articleModel");
 
 async function fetchTopics(req, res, next) {
   try {
-    const topics = await TopicModel.query().limit(req.query.limit || RESULT_LIMITS.TOPICS);
-    res.status(HttpStatus.OK).json(topics);
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.TOPICS, 10);
+    const pageNumber = parseInt(req.query.page || 1, 10);
+    const pageOffset = (pageNumber - 1) * limit;
+
+    const topics = await TopicModel.query()
+      .offset(pageOffset)
+      .limit(limit);
+
+    const totalRecords = (await TopicModel.query()).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
+
+    res.status(HttpStatus.OK).json({
+      topics,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     next(err);
   }

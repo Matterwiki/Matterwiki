@@ -94,7 +94,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  topics: state.topics.topics,
+  topics: state.topics.topics.all,
   currentTopic: state.topics.currentTopic,
   articles: state.articles.articles.all,
   articlesMeta: state.articles.articles.meta,

@@ -64,7 +64,10 @@ export default (
     case EMPTY_USERS:
       return {
         ...state,
-        users: []
+        users: {
+          all: [],
+          meta: {}
+        }
       };
     case APPEND_USERS:
       return {

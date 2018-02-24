@@ -1,19 +1,27 @@
 import {
   ADD_TOPICS,
   EMPTY_TOPICS,
+  APPEND_TOPICS,
   START_LOADING_TOPICS,
   STOP_LOADING_TOPICS,
   SET_CURRENT_TOPIC,
   EMPTY_CURRENT_TOPIC
 } from "store/actionTypes";
 
-export const addTopics = topics => ({
+export const addTopics = ({ topics, meta }) => ({
   type: ADD_TOPICS,
-  topics
+  topics,
+  meta
 });
 
 export const emptyTopics = () => ({
   type: EMPTY_TOPICS
+});
+
+export const appendTopics = ({ topics, meta }) => ({
+  type: APPEND_TOPICS,
+  topics,
+  meta
 });
 
 export const startLoadingTopics = () => ({
@@ -35,7 +43,10 @@ export const emptyCurrentTopic = () => ({
 
 export default (
   state = {
-    topics: [],
+    topics: {
+      all: [],
+      meta: {}
+    },
     loading: false,
     currentTopic: null
   },
@@ -45,12 +56,26 @@ export default (
     case ADD_TOPICS:
       return {
         ...state,
-        topics: payload.topics
+        topics: {
+          all: payload.topics,
+          meta: payload.meta
+        }
       };
     case EMPTY_TOPICS:
       return {
         ...state,
-        topics: []
+        topics: {
+          all: [],
+          meta: {}
+        }
+      };
+    case APPEND_TOPICS:
+      return {
+        ...state,
+        topics: {
+          all: [...state.topics.all, ...payload.topics],
+          meta: payload.meta
+        }
       };
     case START_LOADING_TOPICS:
       return {

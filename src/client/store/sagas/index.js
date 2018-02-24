@@ -16,6 +16,7 @@ import {
   DISPOSE_EDIT_USER,
   LOAD_TOPICS_PAGE,
   DISPOSE_TOPICS_PAGE,
+  FETCH_TOPICS_BY_PAGE,
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC,
   LOAD_ARTICLE_SEARCH_PAGE,
@@ -45,7 +46,13 @@ import {
   fetchUsersByPage
 } from "./user";
 
-import { loadTopicsPage, disposeTopicsPage, loadEditTopic, disposeEditTopic } from "./topic";
+import {
+  loadTopicsPage,
+  disposeTopicsPage,
+  loadEditTopic,
+  disposeEditTopic,
+  fetchTopicsByPage
+} from "./topic";
 
 import { loadHomepage, disposeHomepage } from "./app";
 
@@ -73,6 +80,7 @@ function* saga() {
 
   yield takeEvery(LOAD_TOPICS_PAGE, loadTopicsPage);
   yield takeEvery(DISPOSE_TOPICS_PAGE, disposeTopicsPage);
+  yield takeEvery(FETCH_TOPICS_BY_PAGE, fetchTopicsByPage);
   yield takeEvery(LOAD_EDIT_TOPIC, loadEditTopic);
   yield takeEvery(DISPOSE_EDIT_TOPIC, disposeEditTopic);
 

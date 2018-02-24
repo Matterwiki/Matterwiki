@@ -16,6 +16,7 @@ import {
   DISPOSE_EDIT_USER,
   LOAD_TOPICS_PAGE,
   DISPOSE_TOPICS_PAGE,
+  FETCH_TOPICS_BY_PAGE,
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC,
   LOAD_ARTICLE_SEARCH_PAGE,
@@ -101,6 +102,12 @@ export const loadTopicsPage = () => ({
 
 export const disposeTopicsPage = () => ({
   type: DISPOSE_TOPICS_PAGE
+});
+
+export const fetchTopicsByPage = (page, callback) => ({
+  type: FETCH_TOPICS_BY_PAGE,
+  page,
+  callback
 });
 
 export const loadEditTopic = id => ({

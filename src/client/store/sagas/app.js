@@ -11,8 +11,8 @@ import APIProvider from "utils/APIProvider";
 export function* loadHomepage() {
   yield put(startLoadingApp());
   const topics = yield call(APIProvider.get, "topics");
-  const articles = yield call(APIProvider.get, `articles?topic_id=${topics[0].id}`);
-  yield put(setCurrentTopic(topics[0]));
+  const articles = yield call(APIProvider.get, `articles?topic_id=${topics.topics[0].id}`);
+  yield put(setCurrentTopic(topics.topics[0]));
   yield put(addTopics(topics));
   yield put(addArticles(articles));
   yield put(stopLoadingApp());

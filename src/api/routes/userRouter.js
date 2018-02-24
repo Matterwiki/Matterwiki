@@ -14,13 +14,13 @@ const UserModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
-    const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10);
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.USERS, 10);
     const pageNumber = parseInt(req.query.page || 1, 10);
     const pageOffset = (pageNumber - 1) * limit;
 
     const users = await UserModel.query()
       .offset(pageOffset)
-      .limit(req.query.limit || RESULT_LIMITS.USERS);
+      .limit(limit);
     const totalRecords = (await UserModel.query()).length;
     const totalPages = Math.ceil(totalRecords / limit);
     const remainingPages = totalPages - pageNumber;
