@@ -9,15 +9,12 @@ const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
 const { SALT_ROUNDS, ERRORS, RESULT_LIMITS } = require("../utils/constants");
-const { getCursorQuery } = require("../utils/queryHelpers");
 
 const UserModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
-    const users = await UserModel.query()
-      .where(...getCursorQuery(req.query))
-      .limit(req.query.limit || RESULT_LIMITS.USERS);
+    const users = await UserModel.query().limit(req.query.limit || RESULT_LIMITS.USERS);
     res.status(200).json(users);
   } catch (err) {
     next(err);

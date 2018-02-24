@@ -2,6 +2,7 @@ import {
   LOAD_HOMEPAGE,
   DISPOSE_HOMEPAGE,
   FETCH_ARTICLES_BY_TOPIC,
+  FETCH_ARTICLES_BY_PAGE,
   LOAD_ARTICLE_PAGE,
   DISPOSE_ARTICLE_PAGE,
   LOAD_ARCHIVES_PAGE,
@@ -30,6 +31,12 @@ export const disposeHomepage = () => ({
 export const fetchArticlesByTopic = id => ({
   type: FETCH_ARTICLES_BY_TOPIC,
   id
+});
+
+export const fetchArticlesByPage = (page, callback) => ({
+  type: FETCH_ARTICLES_BY_PAGE,
+  page,
+  callback
 });
 
 export const loadArticlePage = id => ({

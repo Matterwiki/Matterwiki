@@ -5,11 +5,20 @@ import { FullHeightContainer, Hide, DisplayFlexRow } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 import Loader from "ui/loader";
 
-import { loadHomepage, disposeHomepage, fetchArticlesByTopic } from "store/modules/sagaActions";
+import {
+  loadHomepage,
+  disposeHomepage,
+  fetchArticlesByTopic,
+  fetchArticlesByPage
+} from "store/modules/sagaActions";
 
 import TopicsList from "./components/TopicsList/TopicsList";
 
 class Home extends React.Component {
+  state = {
+    appendingArticles: false
+  };
+
   componentDidMount() {
     this.props.loadHomepage();
   }
@@ -24,11 +33,15 @@ class Home extends React.Component {
   };
 
   loadMoreArticles = () => {
-    console.log("loading more articles...");
+    this.setState({ appendingArticles: true });
+    this.props.fetchArticlesByPage(this.props.articlesMeta.pageNumber + 1, () => {
+      this.setState({ appendingArticles: false });
+    });
   };
 
   render() {
-    const { topics, articles, loadingArticles, loading, currentTopic } = this.props;
+    const { appendingArticles } = this.state;
+    const { topics, articles, loadingArticles, loading, currentTopic, articlesMeta } = this.props;
     if (loading) return <Loader />;
     return (
       <Row marginTop="1">
@@ -60,11 +73,19 @@ class Home extends React.Component {
           ) : (
             <React.Fragment>
               <ArticlesList articles={articles} />
-              <DisplayFlexRow justifyContent="center" marginTop="2">
-                <Button outline onClick={this.loadMoreArticles}>
-                  Load More
-                </Button>
-              </DisplayFlexRow>
+              {articlesMeta.remainingPages === 0 ? null : (
+                <span>
+                  {appendingArticles ? (
+                    <Loader />
+                  ) : (
+                    <DisplayFlexRow justifyContent="center" marginTop="2">
+                      <Button outline onClick={this.loadMoreArticles}>
+                        Load More
+                      </Button>
+                    </DisplayFlexRow>
+                  )}
+                </span>
+              )}
             </React.Fragment>
           )}
         </Col>
@@ -76,7 +97,8 @@ class Home extends React.Component {
 const mapStateToProps = state => ({
   topics: state.topics.topics,
   currentTopic: state.topics.currentTopic,
-  articles: state.articles.articles,
+  articles: state.articles.articles.all,
+  articlesMeta: state.articles.articles.meta,
   loadingArticles: state.articles.loading,
   loading: state.app.loading
 });
@@ -84,7 +106,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   loadHomepage: () => dispatch(loadHomepage()),
   disposeHomepage: () => dispatch(disposeHomepage()),
-  fetchArticlesByTopic: id => dispatch(fetchArticlesByTopic(id))
+  fetchArticlesByTopic: id => dispatch(fetchArticlesByTopic(id)),
+  fetchArticlesByPage: (page, callback) => dispatch(fetchArticlesByPage(page, callback))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

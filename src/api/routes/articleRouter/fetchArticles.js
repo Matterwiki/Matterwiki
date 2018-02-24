@@ -1,7 +1,6 @@
 const { assign } = require("lodash");
 const HttpStatus = require("http-status-codes");
 const { RESULT_LIMITS } = require("../../utils/constants");
-const { getCursorQuery } = require("../../utils/queryHelpers");
 const ArticleModel = require("../../models/articleModel");
 
 /**
@@ -84,28 +83,31 @@ async function fetchArticles(req, res, next) {
     const { sortField, directionToSort } = buildSortObjectForArticle(req.query);
 
     const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10);
+    const pageNumber = parseInt(req.query.page || 1, 10);
+    const pageOffset = (pageNumber - 1) * limit;
 
     const articles = await chainSearchQuery(ArticleModel.query(), req.query.search)
       .withRels()
       .where(filters)
-      .andWhere(...getCursorQuery(req.query))
       .orderBy(sortField, directionToSort)
-      .limit(limit + 1); // We fetch an extra row, to see if there are more left.
+      .offset(pageOffset)
+      .limit(limit);
 
-    const response = {};
+    const totalRecords = (await chainSearchQuery(ArticleModel.query(), req.query.search).where(
+      filters
+    )).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
 
-    if (articles.length > limit) {
-      response.more = true;
-      articles.splice(articles.length - 1, 1);
-    } else if (articles.length === limit) {
-      response.more = false;
-    } else {
-      response.more = false;
-    }
-
-    response.articles = articles;
-
-    res.status(HttpStatus.OK).json(response);
+    res.status(HttpStatus.OK).json({
+      articles,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     console.log(err);
     next(err);
