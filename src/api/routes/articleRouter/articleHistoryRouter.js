@@ -15,7 +15,7 @@ async function fetchHistoryByArticle(req, res, next) {
   const pageOffset = (pageNumber - 1) * limit;
 
   try {
-    const articles = await ArticleHistoryModel.query()
+    const archives = await ArticleHistoryModel.query()
       .where({ article_id })
       .withRels()
       .orderBy("updated_at", "desc")
@@ -27,7 +27,7 @@ async function fetchHistoryByArticle(req, res, next) {
     const remainingPages = totalPages - pageNumber;
 
     res.status(HttpStatus.OK).json({
-      articles,
+      archives,
       meta: {
         totalRecords,
         totalPages,

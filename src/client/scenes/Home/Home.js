@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Row, Col, Button } from "ui";
+import { Row, Col, Button, Loader } from "ui";
 import { FullHeightContainer, Hide, DisplayFlexRow } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
-import Loader from "ui/loader";
 
 import {
   loadHomepage,

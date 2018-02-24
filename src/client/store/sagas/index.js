@@ -8,6 +8,7 @@ import {
   LOAD_ARCHIVES_PAGE,
   DISPOSE_ARCHIVES_PAGE,
   FETCH_ARCHIVE_BY_ID,
+  FETCH_ARCHIVES_BY_PAGE,
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
   LOAD_EDIT_USER,
@@ -28,7 +29,12 @@ import {
   fetchArticlesByPage
 } from "./article";
 
-import { loadArchivesPage, disposeArchivesPage, fetchArchiveById } from "./archive";
+import {
+  loadArchivesPage,
+  disposeArchivesPage,
+  fetchArchiveById,
+  fetchArchivesByPage
+} from "./archive";
 
 import { loadUsersPage, disposeUsersPage, loadEditUser, disposeEditUser } from "./user";
 
@@ -50,6 +56,7 @@ function* saga() {
   yield takeEvery(LOAD_ARCHIVES_PAGE, loadArchivesPage);
   yield takeEvery(DISPOSE_ARCHIVES_PAGE, disposeArchivesPage);
   yield takeEvery(FETCH_ARCHIVE_BY_ID, fetchArchiveById);
+  yield takeEvery(FETCH_ARCHIVES_BY_PAGE, fetchArchivesByPage);
 
   yield takeEvery(LOAD_USERS_PAGE, loadUsersPage);
   yield takeEvery(DISPOSE_USERS_PAGE, disposeUsersPage);

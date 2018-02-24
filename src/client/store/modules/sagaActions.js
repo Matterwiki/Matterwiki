@@ -8,6 +8,7 @@ import {
   LOAD_ARCHIVES_PAGE,
   DISPOSE_ARCHIVES_PAGE,
   FETCH_ARCHIVE_BY_ID,
+  FETCH_ARCHIVES_BY_PAGE,
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
   LOAD_EDIT_USER,
@@ -35,6 +36,13 @@ export const fetchArticlesByTopic = id => ({
 
 export const fetchArticlesByPage = (page, callback) => ({
   type: FETCH_ARTICLES_BY_PAGE,
+  page,
+  callback
+});
+
+export const fetchArchivesByPage = (articleId, page, callback) => ({
+  type: FETCH_ARCHIVES_BY_PAGE,
+  articleId,
   page,
   callback
 });

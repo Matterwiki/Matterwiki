@@ -18,6 +18,7 @@ import Divider from "./divider";
 import CodeBlock from "./codeblock";
 import TextMuted from "./textmuted";
 import Modal from "./modal";
+import Loader from "./loader";
 
 export {
   Button,
@@ -46,5 +47,6 @@ export {
   Divider,
   CodeBlock,
   TextMuted,
-  Modal
+  Modal,
+  Loader
 };
