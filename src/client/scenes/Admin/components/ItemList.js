@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, List, ListItem, ListItemHeader, Button, Icon } from "ui";
+import { Row, Col, List, ListItem, ListItemHeader, Button, Icon, Loader } from "ui";
 import { DisplayFlexRow, Hide } from "ui/utils";
 
 class ResourceListItem extends React.Component {
@@ -55,7 +55,15 @@ class ResourceListItem extends React.Component {
   }
 }
 
-const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
+const ResourceList = ({
+  items,
+  itemName,
+  onEditClick,
+  onDeleteClick,
+  handleLoadMore,
+  itemsMeta,
+  appendingItems
+}) => (
   <List>
     {items.map(item => (
       <ResourceListItem
@@ -66,6 +74,19 @@ const ResourceList = ({ items, itemName, onEditClick, onDeleteClick }) => (
         onDeleteClick={onDeleteClick}
       />
     ))}
+    {itemsMeta && itemsMeta.remainingPages === 0 ? null : (
+      <span>
+        {appendingItems ? (
+          <Loader />
+        ) : (
+          <DisplayFlexRow justifyContent="center" marginTop="2">
+            <Button outline onClick={handleLoadMore}>
+              Load More
+            </Button>
+          </DisplayFlexRow>
+        )}
+      </span>
+    )}
   </List>
 );
 

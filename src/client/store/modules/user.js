@@ -1,19 +1,27 @@
 import {
   ADD_USERS,
   EMPTY_USERS,
+  APPEND_USERS,
   START_LOADING_USERS,
   STOP_LOADING_USERS,
   SET_CURRENT_USER,
   EMPTY_CURRENT_USER
 } from "store/actionTypes";
 
-export const addUsers = users => ({
+export const addUsers = ({ users, meta }) => ({
   type: ADD_USERS,
-  users
+  users,
+  meta
 });
 
 export const emptyUsers = () => ({
   type: EMPTY_USERS
+});
+
+export const appendUsers = ({ users, meta }) => ({
+  type: APPEND_USERS,
+  users,
+  meta
 });
 
 export const startLoadingUsers = () => ({
@@ -35,7 +43,10 @@ export const emptyCurrentUser = () => ({
 
 export default (
   state = {
-    users: [],
+    users: {
+      all: [],
+      meta: {}
+    },
     loading: false,
     currentUser: null
   },
@@ -45,12 +56,23 @@ export default (
     case ADD_USERS:
       return {
         ...state,
-        users: payload.users
+        users: {
+          all: payload.users,
+          meta: payload.meta
+        }
       };
     case EMPTY_USERS:
       return {
         ...state,
         users: []
+      };
+    case APPEND_USERS:
+      return {
+        ...state,
+        users: {
+          all: [...state.users.all, ...payload.users],
+          meta: payload.meta
+        }
       };
     case START_LOADING_USERS:
       return {

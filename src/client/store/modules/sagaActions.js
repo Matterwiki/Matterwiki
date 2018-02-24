@@ -11,6 +11,7 @@ import {
   FETCH_ARCHIVES_BY_PAGE,
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
+  FETCH_USERS_BY_PAGE,
   LOAD_EDIT_USER,
   DISPOSE_EDIT_USER,
   LOAD_TOPICS_PAGE,
@@ -82,6 +83,12 @@ export const disposeUsersPage = () => ({
 export const loadEditUser = id => ({
   type: LOAD_EDIT_USER,
   id
+});
+
+export const fetchUsersByPage = (page, callback) => ({
+  type: FETCH_USERS_BY_PAGE,
+  page,
+  callback
 });
 
 export const disposeEditUser = () => ({

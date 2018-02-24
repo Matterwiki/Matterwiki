@@ -72,7 +72,7 @@ class Home extends React.Component {
           ) : (
             <React.Fragment>
               <ArticlesList articles={articles} />
-              {articlesMeta.remainingPages === 0 ? null : (
+              {articlesMeta && articlesMeta.remainingPages === 0 ? null : (
                 <span>
                   {appendingArticles ? (
                     <Loader />
