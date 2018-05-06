@@ -5,16 +5,36 @@ const router = express.Router({ mergeParams: true });
 
 const ArticleHistoryModel = require("../../models/articleHistoryModel");
 
+const { RESULT_LIMITS } = require("../../utils/constants");
+
 async function fetchHistoryByArticle(req, res, next) {
   const { id: article_id } = req.params;
 
+  const limit = parseInt(req.query.limit || RESULT_LIMITS.ARCHIVES, 10);
+  const pageNumber = parseInt(req.query.page || 1, 10);
+  const pageOffset = (pageNumber - 1) * limit;
+
   try {
-    const articles = await ArticleHistoryModel.query()
+    const archives = await ArticleHistoryModel.query()
       .where({ article_id })
       .withRels()
-      .orderBy("updated_at", "desc");
+      .orderBy("updated_at", "desc")
+      .offset(pageOffset)
+      .limit(limit);
 
-    res.status(HttpStatus.OK).json(articles);
+    const totalRecords = (await ArticleHistoryModel.query().where({ article_id })).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
+
+    res.status(HttpStatus.OK).json({
+      archives,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     console.log(err);
     next(err);

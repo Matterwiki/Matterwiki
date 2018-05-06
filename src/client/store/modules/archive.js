@@ -4,12 +4,20 @@ import {
   START_LOADING_ARCHIVES,
   STOP_LOADING_ARCHIVES,
   SET_CURRENT_ARCHIVE,
-  EMPTY_CURRENT_ARCHIVE
+  EMPTY_CURRENT_ARCHIVE,
+  APPEND_ARCHIVES
 } from "store/actionTypes";
 
-export const addArchives = archives => ({
+export const addArchives = ({ archives, meta }) => ({
   type: ADD_ARCHIVES,
-  archives
+  archives,
+  meta
+});
+
+export const appendArchives = ({ archives, meta }) => ({
+  type: APPEND_ARCHIVES,
+  archives,
+  meta
 });
 
 export const emptyArchives = () => ({
@@ -35,7 +43,10 @@ export const emptyCurrentArchive = () => ({
 
 export default (
   state = {
-    archives: [],
+    archives: {
+      all: [],
+      meta: {}
+    },
     loading: false,
     currentArchive: null
   },
@@ -45,12 +56,26 @@ export default (
     case ADD_ARCHIVES:
       return {
         ...state,
-        archives: payload.archives
+        archives: {
+          all: payload.archives,
+          meta: payload.meta
+        }
       };
     case EMPTY_ARCHIVES:
       return {
         ...state,
-        archives: []
+        archives: {
+          all: [],
+          meta: {}
+        }
+      };
+    case APPEND_ARCHIVES:
+      return {
+        ...state,
+        archives: {
+          all: [...state.archives.all, ...payload.archives],
+          meta: payload.meta
+        }
       };
     case START_LOADING_ARCHIVES:
       return {

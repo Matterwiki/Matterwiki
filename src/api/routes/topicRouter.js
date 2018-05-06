@@ -8,15 +8,37 @@ const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
-const { DELETE_DEFAULT_TOPIC, DUPLICATE_TOPIC } = require("../utils/constants").ERRORS;
+const {
+  ERRORS: { DELETE_DEFAULT_TOPIC, DUPLICATE_TOPIC },
+  RESULT_LIMITS
+} = require("../utils/constants");
 
 const TopicModel = require("../models/topicModel");
 const ArticleModel = require("../models/articleModel");
 
 async function fetchTopics(req, res, next) {
   try {
-    const topics = await TopicModel.query();
-    res.status(HttpStatus.OK).json(topics);
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.TOPICS, 10);
+    const pageNumber = parseInt(req.query.page || 1, 10);
+    const pageOffset = (pageNumber - 1) * limit;
+
+    const topics = await TopicModel.query()
+      .offset(pageOffset)
+      .limit(limit);
+
+    const totalRecords = (await TopicModel.query()).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
+
+    res.status(HttpStatus.OK).json({
+      topics,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     next(err);
   }

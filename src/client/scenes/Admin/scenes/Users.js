@@ -11,7 +11,8 @@ import {
   loadUsersPage,
   disposeUsersPage,
   loadEditUser,
-  disposeEditUser
+  disposeEditUser,
+  fetchUsersByPage
 } from "store/modules/sagaActions";
 
 import ItemList from "../components/ItemList";
@@ -35,7 +36,8 @@ const EDIT_USER_FORM_FIELDS = [
 class ManageUsers extends React.Component {
   state = {
     userId: null,
-    showDeleteModal: false
+    showDeleteModal: false,
+    appendingUsers: false
   };
 
   componentDidMount() {
@@ -86,13 +88,22 @@ class ManageUsers extends React.Component {
     });
   };
 
+  handleLoadMore = e => {
+    e.preventDefault();
+    this.setState({ appendingUsers: true });
+    const { pageNumber } = this.props.usersMeta;
+    this.props.fetchUsersByPage(pageNumber + 1, () => {
+      this.setState({ appendingUsers: false });
+    });
+  };
+
   emptyCurrentUserState = () => {
     this.props.disposeEditUser();
   };
 
   render() {
-    const { users, loading, currentUser } = this.props;
-    const { showDeleteModal } = this.state;
+    const { users, loading, currentUser, usersMeta } = this.props;
+    const { showDeleteModal, appendingUsers } = this.state;
     if (loading) {
       return <Loader />;
     }
@@ -117,6 +128,9 @@ class ManageUsers extends React.Component {
               itemName="user"
               onDeleteClick={this.deleteUser}
               onEditClick={this.handleEditClick}
+              itemsMeta={usersMeta}
+              handleLoadMore={this.handleLoadMore}
+              appendingItems={appendingUsers}
             />
           </Col>
         </Row>
@@ -134,7 +148,8 @@ class ManageUsers extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users.users,
+  users: state.users.users.all,
+  usersMeta: state.users.users.meta,
   loading: state.users.loading,
   currentUser: state.users.currentUser
 });
@@ -143,7 +158,8 @@ const mapDispatchToProps = dispatch => ({
   loadUsersPage: () => dispatch(loadUsersPage()),
   disposeUsersPage: () => dispatch(disposeUsersPage()),
   loadEditUser: id => dispatch(loadEditUser(id)),
-  disposeEditUser: () => dispatch(disposeEditUser())
+  disposeEditUser: () => dispatch(disposeEditUser()),
+  fetchUsersByPage: (page, callback) => dispatch(fetchUsersByPage(page, callback))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageUsers);

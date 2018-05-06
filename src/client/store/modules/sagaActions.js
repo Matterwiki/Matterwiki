@@ -2,17 +2,21 @@ import {
   LOAD_HOMEPAGE,
   DISPOSE_HOMEPAGE,
   FETCH_ARTICLES_BY_TOPIC,
+  FETCH_ARTICLES_BY_PAGE,
   LOAD_ARTICLE_PAGE,
   DISPOSE_ARTICLE_PAGE,
   LOAD_ARCHIVES_PAGE,
   DISPOSE_ARCHIVES_PAGE,
   FETCH_ARCHIVE_BY_ID,
+  FETCH_ARCHIVES_BY_PAGE,
   LOAD_USERS_PAGE,
   DISPOSE_USERS_PAGE,
+  FETCH_USERS_BY_PAGE,
   LOAD_EDIT_USER,
   DISPOSE_EDIT_USER,
   LOAD_TOPICS_PAGE,
   DISPOSE_TOPICS_PAGE,
+  FETCH_TOPICS_BY_PAGE,
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC,
   LOAD_ARTICLE_SEARCH_PAGE,
@@ -30,6 +34,19 @@ export const disposeHomepage = () => ({
 export const fetchArticlesByTopic = id => ({
   type: FETCH_ARTICLES_BY_TOPIC,
   id
+});
+
+export const fetchArticlesByPage = (page, callback) => ({
+  type: FETCH_ARTICLES_BY_PAGE,
+  page,
+  callback
+});
+
+export const fetchArchivesByPage = (articleId, page, callback) => ({
+  type: FETCH_ARCHIVES_BY_PAGE,
+  articleId,
+  page,
+  callback
 });
 
 export const loadArticlePage = id => ({
@@ -69,6 +86,12 @@ export const loadEditUser = id => ({
   id
 });
 
+export const fetchUsersByPage = (page, callback) => ({
+  type: FETCH_USERS_BY_PAGE,
+  page,
+  callback
+});
+
 export const disposeEditUser = () => ({
   type: DISPOSE_EDIT_USER
 });
@@ -79,6 +102,12 @@ export const loadTopicsPage = () => ({
 
 export const disposeTopicsPage = () => ({
   type: DISPOSE_TOPICS_PAGE
+});
+
+export const fetchTopicsByPage = (page, callback) => ({
+  type: FETCH_TOPICS_BY_PAGE,
+  page,
+  callback
 });
 
 export const loadEditTopic = id => ({

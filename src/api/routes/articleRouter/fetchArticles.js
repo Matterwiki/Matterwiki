@@ -1,6 +1,6 @@
 const { assign } = require("lodash");
 const HttpStatus = require("http-status-codes");
-
+const { RESULT_LIMITS } = require("../../utils/constants");
 const ArticleModel = require("../../models/articleModel");
 
 /**
@@ -82,12 +82,32 @@ async function fetchArticles(req, res, next) {
     const filters = buildWhereForArticle(req.query);
     const { sortField, directionToSort } = buildSortObjectForArticle(req.query);
 
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10);
+    const pageNumber = parseInt(req.query.page || 1, 10);
+    const pageOffset = (pageNumber - 1) * limit;
+
     const articles = await chainSearchQuery(ArticleModel.query(), req.query.search)
       .withRels()
       .where(filters)
-      .orderBy(sortField, directionToSort);
+      .orderBy(sortField, directionToSort)
+      .offset(pageOffset)
+      .limit(limit);
 
-    res.status(HttpStatus.OK).json(articles);
+    const totalRecords = (await chainSearchQuery(ArticleModel.query(), req.query.search).where(
+      filters
+    )).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
+
+    res.status(HttpStatus.OK).json({
+      articles,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     console.log(err);
     next(err);
