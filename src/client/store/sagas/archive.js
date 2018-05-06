@@ -5,6 +5,7 @@ import { startLoadingApp, stopLoadingApp } from "store/modules/app";
 import {
   startLoadingArchives,
   addArchives,
+  appendArchives,
   stopLoadingArchives,
   setCurrentArchive,
   emptyCurrentArchive,
@@ -33,4 +34,17 @@ export function* fetchArchiveById(action) {
   );
   yield put(setCurrentArchive(archive));
   yield put(stopLoadingArchives());
+}
+
+export function* fetchArchivesByPage(action) {
+  try {
+    const archives = yield call(
+      APIProvider.get,
+      `articles/${action.articleId}/history?page=${action.page}`
+    );
+    yield put(appendArchives(archives));
+    if (action.callback) action.callback(true);
+  } catch (error) {
+    if (action.callback) action.callback(false);
+  }
 }

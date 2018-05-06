@@ -9,7 +9,7 @@ class TopicChooser extends React.Component {
   };
 
   componentDidMount() {
-    APIProvider.get("topics").then(topics => this.setState({ topics }));
+    APIProvider.get("topics").then(topics => this.setState({ topics: topics.topics }));
   }
 
   render() {

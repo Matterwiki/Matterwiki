@@ -1,5 +1,6 @@
 import {
   ADD_ARTICLES,
+  APPEND_ARTICLES,
   EMPTY_ARTICLES,
   START_LOADING_ARTICLES,
   STOP_LOADING_ARTICLES,
@@ -7,9 +8,16 @@ import {
   EMPTY_CURRENT_ARTICLE
 } from "store/actionTypes";
 
-export const addArticles = articles => ({
+export const addArticles = ({ articles, meta }) => ({
   type: ADD_ARTICLES,
-  articles
+  articles,
+  meta
+});
+
+export const appendArticles = ({ articles, meta }) => ({
+  type: APPEND_ARTICLES,
+  articles,
+  meta
 });
 
 export const emptyArticles = () => ({
@@ -35,7 +43,10 @@ export const stopLoadingArticles = () => ({
 
 export default (
   state = {
-    articles: [],
+    articles: {
+      all: [],
+      meta: {}
+    },
     currentArticle: {},
     loading: false
   },
@@ -45,12 +56,26 @@ export default (
     case ADD_ARTICLES:
       return {
         ...state,
-        articles: payload.articles
+        articles: {
+          all: payload.articles,
+          meta: payload.meta
+        }
+      };
+    case APPEND_ARTICLES:
+      return {
+        ...state,
+        articles: {
+          all: [...state.articles.all, ...payload.articles],
+          meta: payload.meta
+        }
       };
     case EMPTY_ARTICLES:
       return {
         ...state,
-        articles: []
+        articles: {
+          all: [],
+          meta: {}
+        }
       };
     case SET_CURRENT_ARTICLE:
       return {

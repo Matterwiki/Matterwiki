@@ -9,6 +9,7 @@ import Loader from "ui/loader";
 import {
   loadTopicsPage,
   disposeTopicsPage,
+  fetchTopicsByPage,
   loadEditTopic,
   disposeEditTopic
 } from "store/modules/sagaActions";
@@ -23,7 +24,8 @@ const TOPIC_FORM_FIELDS = [{ name: "name", type: "text" }, { name: "description"
 class ManageTopics extends React.Component {
   state = {
     topicId: null,
-    showDeleteModal: false
+    showDeleteModal: false,
+    appendingTopics: false
   };
   componentDidMount() {
     this.handleUpdate();
@@ -76,9 +78,18 @@ class ManageTopics extends React.Component {
     this.props.disposeEditTopic();
   };
 
+  handleLoadMore = e => {
+    e.preventDefault();
+    this.setState({ appendingTopics: true });
+    const { pageNumber } = this.props.topicsMeta;
+    this.props.fetchTopicsByPage(pageNumber + 1, () => {
+      this.setState({ appendingTopics: false });
+    });
+  };
+
   render() {
-    const { topics, currentTopic, loading } = this.props;
-    const { showDeleteModal } = this.state;
+    const { topics, currentTopic, loading, topicsMeta } = this.props;
+    const { showDeleteModal, appendingTopics } = this.state;
     if (loading) {
       return <Loader />;
     }
@@ -102,6 +113,9 @@ class ManageTopics extends React.Component {
               itemName="topic"
               onDeleteClick={this.deleteTopic}
               onEditClick={this.handleEditClick}
+              handleLoadMore={this.handleLoadMore}
+              appendingItems={appendingTopics}
+              itemsMeta={topicsMeta}
             />
           </Col>
         </Row>
@@ -119,7 +133,8 @@ class ManageTopics extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  topics: state.topics.topics,
+  topics: state.topics.topics.all,
+  topicsMeta: state.topics.topics.meta,
   loading: state.topics.loading,
   currentTopic: state.topics.currentTopic
 });
@@ -128,7 +143,8 @@ const mapDispatchToProps = dispatch => ({
   loadTopicsPage: () => dispatch(loadTopicsPage()),
   disposeTopicsPage: () => disposeTopicsPage(disposeTopicsPage()),
   loadEditTopic: id => dispatch(loadEditTopic(id)),
-  disposeEditTopic: () => dispatch(disposeEditTopic())
+  disposeEditTopic: () => dispatch(disposeEditTopic()),
+  fetchTopicsByPage: (page, callback) => dispatch(fetchTopicsByPage(page, callback))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageTopics);

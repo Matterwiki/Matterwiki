@@ -4,6 +4,7 @@ import {
   startLoadingUsers,
   addUsers,
   stopLoadingUsers,
+  appendUsers,
   setCurrentUser,
   emptyCurrentUser,
   emptyUsers
@@ -31,4 +32,14 @@ export function* loadEditUser(action) {
 
 export function* disposeEditUser() {
   yield put(emptyCurrentUser());
+}
+
+export function* fetchUsersByPage(action) {
+  try {
+    const users = yield call(APIProvider.get, `users?page=${action.page}`);
+    yield put(appendUsers(users));
+    if (action.callback) action.callback(true);
+  } catch (error) {
+    if (action.callback) action.callback(false);
+  }
 }

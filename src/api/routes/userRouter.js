@@ -8,14 +8,32 @@ const { JSONParser } = require("../middleware/bodyParser");
 const checkAuth = require("../middleware/checkAuth");
 const { checkIfAdmin } = require("../middleware/checkRole");
 
-const { SALT_ROUNDS, ERRORS } = require("../utils/constants");
+const { SALT_ROUNDS, ERRORS, RESULT_LIMITS } = require("../utils/constants");
 
 const UserModel = require("../models/userModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
-    const users = await UserModel.query();
-    res.status(200).json(users);
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.USERS, 10);
+    const pageNumber = parseInt(req.query.page || 1, 10);
+    const pageOffset = (pageNumber - 1) * limit;
+
+    const users = await UserModel.query()
+      .offset(pageOffset)
+      .limit(limit);
+    const totalRecords = (await UserModel.query()).length;
+    const totalPages = Math.ceil(totalRecords / limit);
+    const remainingPages = totalPages - pageNumber;
+
+    res.status(HttpStatus.OK).json({
+      users,
+      meta: {
+        totalRecords,
+        totalPages,
+        remainingPages,
+        pageNumber
+      }
+    });
   } catch (err) {
     next(err);
   }

@@ -8,7 +8,7 @@ const modalRoot = document.getElementById("modal");
 
 const ModalMask = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
