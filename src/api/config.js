@@ -1,6 +1,6 @@
 // TODO Needs more fine tuning - https://12factor.net/config
 const config = require("dotenv").config({
-  // process.env.NODE_ENV = dev|test|prod;
+  // process.env.NODE_ENV = development|test|production;
   path: `config.${process.env.NODE_ENV}.env`
 });
 
