@@ -69,28 +69,28 @@ const Button = styled.button`
           }
         `
       : ""} ${props =>
-      props.clear
-        ? css`
+    props.clear
+      ? css`
+          background-color: transparent;
+          border-color: transparent;
+          color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+
+          &:focus,
+          &:hover {
             background-color: transparent;
             border-color: transparent;
-            color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+            color: ${props =>
+              props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+          }
 
+          &[disabled] {
             &:focus,
             &:hover {
-              background-color: transparent;
-              border-color: transparent;
-              color: ${props =>
-                props.theme ? lighten(0.1, props.theme.primary) : lighten(0.1, "#ff0066")};
+              color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
             }
-
-            &[disabled] {
-              &:focus,
-              &:hover {
-                color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
-              }
-            }
-          `
-        : ""};
+          }
+        `
+      : ""};
 `;
 
 export default Button;

@@ -21,6 +21,7 @@ module.exports = {
   client: "mysql",
   connection,
   pool: {
+    min: 1,
     max: 1
   },
   seeds: {

@@ -33,8 +33,7 @@ describe("Article API tests", () => {
       articles = flatten(
         await Promise.all([makeArticlesForTopic(1, userId), makeArticlesForTopic(2, adminId)])
       );
-    })
-  );
+    }));
 
   let tokens = {};
 

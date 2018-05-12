@@ -9,6 +9,7 @@ const BUILD_DIR = path.resolve(__dirname, "dist/");
 const APP_DIR = path.resolve(__dirname, "src/client");
 
 module.exports = {
+  mode: "development",
   context: BUILD_DIR,
   entry: [
     // make sure this is at the top
@@ -25,13 +26,9 @@ module.exports = {
   devtool: "inline-source-map",
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(APP_DIR, "index.html")
-    }),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("dev")
     })
   ],
   module: {

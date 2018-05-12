@@ -3,7 +3,7 @@ const app = require("./app");
 
 // TODO use morgan or something for logging
 
-if (process.env.NODE_ENV === "dev") {
+if (process.env.NODE_ENV === "development") {
   console.info("Dev environment detected, starting webpack-dev-server..");
 
   // add some patchwork for the devserver to work!

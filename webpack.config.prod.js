@@ -10,6 +10,7 @@ const BUILD_DIR = path.resolve(__dirname, "dist/");
 const APP_DIR = path.resolve(__dirname, "src/client");
 
 module.exports = {
+  mode: "production",
   context: BUILD_DIR,
   entry: `${APP_DIR}/index.js`,
   output: {
@@ -20,23 +21,12 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     new CleanWebpackPlugin(["dist"]),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    }),
     new HtmlWebpackPlugin({
       template: path.resolve(APP_DIR, "index.html")
     }),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("production")
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
-      minChunks: module =>
-        module.context && module.context.indexOf("node_modules") !== -1
+      minChunks: module => module.context && module.context.indexOf("node_modules") !== -1
     })
   ],
   module: {
@@ -48,10 +38,7 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: [["env", { modules: false }], "react"],
-          plugins: [
-            "transform-class-properties",
-            "transform-object-rest-spread"
-          ]
+          plugins: ["transform-class-properties", "transform-object-rest-spread"]
         }
       },
       {
@@ -77,10 +64,6 @@ module.exports = {
   },
 
   resolve: {
-    modules: [
-      path.resolve("./"),
-      path.resolve("./src/client"),
-      path.resolve("./node_modules")
-    ]
+    modules: [path.resolve("./"), path.resolve("./src/client"), path.resolve("./node_modules")]
   }
 };
