@@ -54,5 +54,5 @@ const finishCheck = (req, res) => res.status(HttpStatus.OK).json(req.user);
 
 router.post("/login", JSONParser, loginUser);
 router.get("/check", checkAuth, finishCheck);
-
+// Building OAuth
 module.exports = router;
