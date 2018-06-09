@@ -12,6 +12,7 @@ const { SALT_ROUNDS, ADMIN_ID, ROLES } = require("../utils/constants");
 const { DUPLICATE_ADMIN_USER } = require("../utils/constants").ERRORS;
 
 const UserModel = require("../models/userModel");
+const AuthModel = require("../models/authModel");
 
 const setupAdminUser = async (req, res, next) => {
   const { name, email, about, password } = req.body;
@@ -29,12 +30,17 @@ const setupAdminUser = async (req, res, next) => {
       id: ADMIN_ID,
       name,
       email,
-      password: hashedPassword,
       about,
       role: ROLES.ADMIN
     };
 
     await UserModel.query().insert(adminUser);
+    await AuthModel.query().insert({
+      user_id: ADMIN_ID,
+      type: "password",
+      key: hashedPassword
+    });
+
     res.status(HttpStatus.CREATED).end();
   } catch (err) {
     next(err);

@@ -11,6 +11,7 @@ const { checkIfAdmin } = require("../middleware/checkRole");
 const { SALT_ROUNDS, ERRORS, RESULT_LIMITS } = require("../utils/constants");
 
 const UserModel = require("../models/userModel");
+const AuthModel = require("../models/authModel");
 
 const fetchUsers = async (req, res, next) => {
   try {
@@ -63,11 +64,15 @@ const createUser = async (req, res, next) => {
     let newUser = {
       name,
       email,
-      password: hashedPassword,
       about
     };
 
     newUser = await UserModel.query().insert(newUser);
+    await AuthModel.query().insert({
+      user_id: newUser.id,
+      type: "password",
+      key: hashedPassword
+    });
     res.status(HttpStatus.CREATED).json(newUser);
   } catch (err) {
     // TODO get more granular here

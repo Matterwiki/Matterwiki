@@ -9,7 +9,6 @@ exports.up = knex => {
         .string("email")
         .notNullable()
         .unique();
-      table.string("password").notNullable();
       table.string("about").notNullable();
       table.enu("role", ["ADMIN", "USER"]).notNullable();
       table
@@ -19,8 +18,27 @@ exports.up = knex => {
       table.timestamps(true, true);
     });
 
+  const createAuthTable = () =>
+    knex.schema.createTableIfNotExists("auth", table => {
+      table.charset("utf8");
+      table.collate("utf8_unicode_ci");
+      table.increments().primary();
+      table
+        .integer("user_id")
+        .unsigned()
+        .references("user.id")
+        .notNullable();
+      table.enu("type", ["password", "slack"]).notNullable();
+      table.string("key").notNullable();
+      table
+        .boolean("is_active")
+        .notNullable()
+        .defaultTo(true);
+      table.timestamps(true, true);
+    });
+
   const createTopicTable = () =>
-    knex.schema.createTable("topic", table => {
+    knex.schema.createTableIfNotExists("topic", table => {
       table.charset("utf8");
       table.collate("utf8_unicode_ci");
       table.increments().primary();
@@ -98,6 +116,7 @@ exports.up = knex => {
     });
 
   return createUserTable()
+    .then(createAuthTable)
     .then(createTopicTable)
     .then(createArticleTable)
     .then(createArticleHistoryTable);

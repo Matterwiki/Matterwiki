@@ -23,8 +23,17 @@ class UserModel extends withDbHelpers(options)(Model) {
     const TopicModel = require("./topicModel");
     const ArticleHistoryModel = require("./articleHistoryModel");
     const ArticleModel = require("./articleModel");
+    const AuthModel = require("./authModel");
 
     return {
+      authMethods: {
+        relation: Model.HasManyRelation,
+        modelClass: AuthModel,
+        join: {
+          from: "user.id",
+          to: "auth.user_id"
+        }
+      },
       createdArticle: {
         relation: Model.HasManyRelation,
         modelClass: ArticleModel,

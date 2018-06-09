@@ -62,6 +62,8 @@
     "node-sass": "^4.7.2",
     "objection": "^0.9.2",
     "objection-unique": "^0.2.1",
+    "passport": "^0.4.0",
+    "passport-slack": "0.0.7",
     "polished": "^1.9.0",
     "prettier-eslint": "^8.2.2",
     "react": "16.2.0",

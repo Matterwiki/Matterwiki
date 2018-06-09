@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const passport = require("passport");
 
 // Sets up the DB, starts the knex connection
 require("./utils/db");
@@ -15,6 +16,9 @@ app.use(helmet());
 // TODO for perf reasons, https://www.npmjs.com/package/compression
 // TODO setup task runner for easier management: https://github.com/lukeed/taskr
 // TODO Maybe use lerna and split client and api dirs into subapps in a mono repo
+
+app.use(passport.initialize());
+app.use(require("body-parser").urlencoded({ extended: true }));
 
 app.use(appRouter);
 
