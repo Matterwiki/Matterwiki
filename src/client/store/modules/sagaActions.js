@@ -20,8 +20,28 @@ import {
   LOAD_EDIT_TOPIC,
   DISPOSE_EDIT_TOPIC,
   LOAD_ARTICLE_SEARCH_PAGE,
-  DISPOSE_ARTICLE_SEARCH_PAGE
+  DISPOSE_ARTICLE_SEARCH_PAGE,
+  LOGIN_USER,
+  LOGOUT_USER,
+  OAUTH_LOGIN
 } from "store/actionTypes";
+
+export const loginUser = (user, callback) => ({
+  type: LOGIN_USER,
+  user,
+  callback
+});
+
+export const logoutUser = callback => ({
+  type: LOGOUT_USER,
+  callback
+});
+
+export const oAuthLogin = (token, callback) => ({
+  type: OAUTH_LOGIN,
+  token,
+  callback
+});
 
 export const loadHomepage = () => ({
   type: LOAD_HOMEPAGE

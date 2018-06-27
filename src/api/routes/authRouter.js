@@ -79,11 +79,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       // optionally persist profile data
       try {
-        console.log("Access Token", accessToken);
-        console.log("Refresh Token", refreshToken);
-        console.log("Profile", profile);
-        const user = (await UserModel.query().where({ email: profile.user.email }))[0];
-        console.log("User", user);
+        let user = (await UserModel.query().where({ email: profile.user.email }))[0];
         if (!user) {
           const createdUser = await UserModel.query().insert({
             name: profile.user.name,
@@ -95,6 +91,7 @@ passport.use(
             type: "slack",
             key: accessToken
           });
+          user = createdUser;
         } else {
           const slackAuth = (await AuthModel.query().where({ user_id: user.id, type: "slack" }))[0];
           if (!slackAuth) {
@@ -109,7 +106,11 @@ passport.use(
               .where({ user_id: user.id });
           }
         }
-        done(null, profile);
+        user = JSON.parse(JSON.stringify(user));
+        const token = jwt.sign(user, authSecret, {
+          expiresIn: TOKEN_EXPIRATION
+        });
+        done(null, token);
       } catch (e) {
         done(true, null);
       }
@@ -123,9 +124,10 @@ router.get("/slack", passport.authorize("slack"));
 // OAuth callback url
 router.get(
   "/slack/callback",
-  passport.authorize("slack", { failureRedirect: "/login" }),
+  passport.authorize("slack", { failureRedirect: "/#/login" }),
   (req, res) => {
-    res.redirect("/");
+    const token = req.account;
+    res.redirect(`/#/oauth/login?token=${token}`);
   }
 );
 

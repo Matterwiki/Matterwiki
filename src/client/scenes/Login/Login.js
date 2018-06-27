@@ -1,9 +1,10 @@
 import React from "react";
 import Alert from "react-s-alert";
+import { connect } from "react-redux";
 
-import { Row, Col } from "ui";
+import { Row, Col, Button, Icon } from "ui";
 
-import APIProvider from "utils/APIProvider";
+import { loginUser } from "store/modules/sagaActions";
 
 import LoginForm from "./components/LoginForm";
 
@@ -15,19 +16,16 @@ class Login extends React.Component {
   }
 
   handleSubmit = user => {
-    APIProvider.post("auth/login", user)
-      .then(loggedInUser => {
-        window.localStorage.setItem("userToken", loggedInUser.token);
-        window.localStorage.setItem("userId", loggedInUser.id);
-        window.localStorage.setItem("userEmail", loggedInUser.email);
-
-        this.props.history.push("home");
-
+    this.props.loginUser(user, error => {
+      if (!error) {
         Alert.success("You are now logged in");
-      })
-      .catch(err => {
-        Alert.error(err.message);
-      });
+        this.props.history.push("/home");
+      } else Alert.error(error);
+    });
+  };
+
+  handleSlackLogin = () => {
+    window.location = "/api/auth/slack";
   };
 
   render() {
@@ -35,10 +33,17 @@ class Login extends React.Component {
       <Row>
         <Col>
           <LoginForm onSubmit={this.handleSubmit} />
+          <Button onClick={this.handleSlackLogin} block>
+            <Icon type="slack" size="12" /> Login via Slack
+          </Button>
         </Col>
       </Row>
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  loginUser: (user, callback) => dispatch(loginUser(user, callback))
+});
+
+export default connect(() => ({}), mapDispatchToProps)(Login);

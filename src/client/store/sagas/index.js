@@ -1,4 +1,7 @@
 import {
+  LOGIN_USER,
+  OAUTH_LOGIN,
+  LOGOUT_USER,
   LOAD_HOMEPAGE,
   DISPOSE_HOMEPAGE,
   FETCH_ARTICLES_BY_TOPIC,
@@ -54,11 +57,14 @@ import {
   fetchTopicsByPage
 } from "./topic";
 
-import { loadHomepage, disposeHomepage } from "./app";
+import { loadHomepage, disposeHomepage, loginUser, logoutUser, oAuthLogin } from "./app";
 
 import { loadArticleSearchPage, disposeArticleSearchPage } from "./search";
 
 function* saga() {
+  yield takeEvery(LOGIN_USER, loginUser);
+  yield takeEvery(LOGOUT_USER, logoutUser);
+  yield takeEvery(OAUTH_LOGIN, oAuthLogin);
   yield takeEvery(LOAD_HOMEPAGE, loadHomepage);
   yield takeEvery(DISPOSE_HOMEPAGE, disposeHomepage);
   yield takeEvery(FETCH_ARTICLES_BY_TOPIC, fetchArticlesByTopic);

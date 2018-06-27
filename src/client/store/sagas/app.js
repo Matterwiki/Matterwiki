@@ -4,9 +4,9 @@ import { addArticles, emptyArticles } from "store/modules/article";
 
 import { addTopics, emptyTopics, setCurrentTopic, emptyCurrentTopic } from "store/modules/topic";
 
-import { startLoadingApp, stopLoadingApp } from "store/modules/app";
+import { startLoadingApp, stopLoadingApp, setUser, unsetUser } from "store/modules/app";
 
-import APIProvider from "utils/APIProvider";
+import APIProvider, { setTokenHeader } from "utils/APIProvider";
 
 export function* loadHomepage() {
   yield put(startLoadingApp());
@@ -22,4 +22,27 @@ export function* disposeHomepage() {
   yield put(emptyArticles());
   yield put(emptyTopics());
   yield put(emptyCurrentTopic());
+}
+
+export function* loginUser(action) {
+  const loggedInUser = yield call(APIProvider.post, "auth/login", action.user);
+  window.localStorage.setItem("userToken", loggedInUser.token);
+  window.localStorage.setItem("userId", loggedInUser.id);
+  window.localStorage.setItem("userEmail", loggedInUser.email);
+  setTokenHeader(loggedInUser.token);
+  yield put(setUser(loggedInUser));
+  if (action.callback) action.callback(false);
+}
+
+export function oAuthLogin(action) {
+  window.localStorage.setItem("userToken", action.token);
+  setTokenHeader(action.token);
+  if (action.callback) action.callback(false);
+}
+
+export function* logoutUser(action) {
+  yield put(unsetUser());
+  setTokenHeader("");
+  window.localStorage.setItem("userToken", "");
+  if (action.callback) action.callback(false);
 }

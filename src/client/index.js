@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 
 // For `Promise`, Array.from and other fun stuff
@@ -10,11 +10,15 @@ import "babel-polyfill";
 import store from "store";
 
 import Main from "./scenes/Main/Main";
+import OAuth from "./scenes/OAuth/OAuth";
 
 render(
   <Provider store={store}>
     <Router>
-      <Route path="/" component={Main} />
+      <Switch>
+        <Route path="/oauth/login" component={OAuth} />
+        <Route path="/" component={Main} />
+      </Switch>
     </Router>
   </Provider>,
   document.getElementById("app")

@@ -1,3 +1,10 @@
+export const LOGIN_USER = "LOGIN_USER";
+export const OAUTH_LOGIN = "OAUTH_LOGIN";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+export const SET_USER = "SET_USER";
+export const UNSET_USER = "UNSET_USER";
+
 export const START_LOADING_APP = "START_LOADING_APP";
 export const STOP_LOADING_APP = "STOP_LOADING_APP";
 

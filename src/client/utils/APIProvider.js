@@ -2,11 +2,13 @@ import axios from "axios";
 
 // TODO Add better error handling
 // TODO use something light weight like `unfetch`
-const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
-  baseURL: "/api/",
-  headers: { "x-access-token": token }
+  baseURL: "/api/"
 });
+
+export const setTokenHeader = token => {
+  axiosInstance.defaults.headers.common["x-access-token"] = token;
+};
 
 /**
  * Takes care of user created errors, returns a promise which could be handled at the component side
