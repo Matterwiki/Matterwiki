@@ -25,13 +25,17 @@ export function* disposeHomepage() {
 }
 
 export function* loginUser(action) {
-  const loggedInUser = yield call(APIProvider.post, "auth/login", action.user);
-  window.localStorage.setItem("userToken", loggedInUser.token);
-  window.localStorage.setItem("userId", loggedInUser.id);
-  window.localStorage.setItem("userEmail", loggedInUser.email);
-  setTokenHeader(loggedInUser.token);
-  yield put(setUser(loggedInUser));
-  if (action.callback) action.callback(false);
+  try {
+    const loggedInUser = yield call(APIProvider.post, "auth/login", action.user);
+    window.localStorage.setItem("userToken", loggedInUser.token);
+    window.localStorage.setItem("userId", loggedInUser.id);
+    window.localStorage.setItem("userEmail", loggedInUser.email);
+    setTokenHeader(loggedInUser.token);
+    yield put(setUser(loggedInUser));
+    if (action.callback) action.callback(false);
+  } catch (e) {
+    if (action.callback) action.callback(e);
+  }
 }
 
 export function oAuthLogin(action) {

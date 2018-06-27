@@ -6,6 +6,8 @@ const axiosInstance = axios.create({
   baseURL: "/api/"
 });
 
+axiosInstance.defaults.headers.common["x-access-token"] = window.localStorage.getItem("userToken");
+
 export const setTokenHeader = token => {
   axiosInstance.defaults.headers.common["x-access-token"] = token;
 };

@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import theme from "ui/theme";
 import { connect } from "react-redux";
-import NotificationsWrapper from "components/Notifications/NotificationsWrapper";
 
 import Layout from "components/Layout/Layout";
 
@@ -64,7 +63,6 @@ class Main extends React.Component {
             </Switch>
           </Layout>
         </ThemeProvider>
-        <NotificationsWrapper />
       </React.Fragment>
     );
   }

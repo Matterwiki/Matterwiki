@@ -20,7 +20,7 @@ class Login extends React.Component {
       if (!error) {
         Alert.success("You are now logged in");
         this.props.history.push("/home");
-      } else Alert.error(error);
+      } else Alert.error(error.message);
     });
   };
 
@@ -33,7 +33,7 @@ class Login extends React.Component {
       <Row>
         <Col>
           <LoginForm onSubmit={this.handleSubmit} />
-          <Button onClick={this.handleSlackLogin} block>
+          <Button onClick={this.handleSlackLogin} block outline>
             <Icon type="slack" size="12" /> Login via Slack
           </Button>
         </Col>

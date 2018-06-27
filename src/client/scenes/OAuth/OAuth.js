@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Loader } from "ui";
 import { DisplayFlexRow } from "ui/utils";
 import { oAuthLogin } from "store/modules/sagaActions";
-import { call } from "redux-saga/effects";
 
 class OAuth extends React.Component {
   componentDidMount() {
@@ -16,7 +15,7 @@ class OAuth extends React.Component {
         this.props.history.push("/home");
       });
     } else {
-      // this.props.history.push("login");
+      this.props.history.push("/login");
     }
   }
   render() {
