@@ -73,7 +73,7 @@ const NavItem = styled.div`
   }
   a {
     display: flex;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     line-height: 4rem;
     letter-spacing: 1px;
     text-transform: uppercase;

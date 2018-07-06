@@ -9,22 +9,22 @@ const Input = styled.input`
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   ::-moz-placeholder {
     /* Firefox 19+ */
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   :-ms-input-placeholder {
     /* IE 10+ */
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   :-moz-placeholder {
     /* Firefox 18- */
     text-transform: uppercase;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 `;
 

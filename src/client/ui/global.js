@@ -5,6 +5,7 @@ import theme from "./theme";
 
 injectGlobal`
   @import url('https://fonts.googleapis.com/css?family=Lato');  
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');  
   /* Set box-sizing globally to handle padding and border widths */
   *,
   *:after,

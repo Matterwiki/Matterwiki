@@ -7,9 +7,9 @@ const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: ${props => (props.small ? "1.2rem" : "1.4rem")};
+  font-size: ${props => (props.small ? "1.4rem" : "1.6rem")};
   padding: ${props => (props.small ? "0 1rem" : "0 3rem")};
-  height: ${props => (props.small ? "3rem" : "4rem")};
+  height: ${props => (props.small ? "4rem" : "6rem")};
   line-height: ${props => (props.small ? "3rem" : "4rem")};
   font-family: inherit;
   background-color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
@@ -17,11 +17,9 @@ const Button = styled.button`
   border-radius: 0.4rem;
   color: #ffffff;
   cursor: pointer;
-  font-weight: 700;
   letter-spacing: 0.1rem;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   white-space: nowrap;
 
   &:focus,
