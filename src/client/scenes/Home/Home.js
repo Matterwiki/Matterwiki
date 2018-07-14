@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Row, Col, Button, Loader } from "ui";
-import { FullHeightContainer, Hide, DisplayFlexRow } from "ui/utils";
+import { FullHeightContainer, Hide, Flex } from "ui/utils";
 import ArticlesList from "components/ArticlesList/ArticlesList";
 
 import {
@@ -78,11 +78,11 @@ class Home extends React.Component {
                   {appendingArticles ? (
                     <Loader />
                   ) : (
-                    <DisplayFlexRow justifyContent="center" marginTop="2">
+                    <Flex justifyContent="center" marginTop="2">
                       <Button outline onClick={this.loadMoreArticles}>
                         Load More
                       </Button>
-                    </DisplayFlexRow>
+                    </Flex>
                   )}
                 </span>
               )}

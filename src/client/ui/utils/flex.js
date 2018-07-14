@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const DisplayFlexRow = styled.div`
+const Flex = styled.div`
   display: flex;
   width: 100%;
   align-items: ${props => (props.alignItems ? props.alignItems : "")};
@@ -12,4 +12,4 @@ const DisplayFlexRow = styled.div`
   margin-left: ${props => (props.marginLeft ? `${props.marginLeft}rem` : "")};
 `;
 
-export default DisplayFlexRow;
+export default Flex;

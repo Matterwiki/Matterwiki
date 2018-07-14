@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { injectGlobal } from "styled-components";
-import { lighten } from "polished";
+import { lighten, darken } from "polished";
 import theme from "./theme";
 
 injectGlobal`
@@ -15,10 +15,12 @@ injectGlobal`
   /* Setting base font size for easier rem calculations */
   html {
     box-sizing: border-box;
-    font-size: 8.5px;
+    font-size: 10px;
   }
   body {
-    padding-top: 6rem;
+    padding-top: 8rem;
+    margin: 0;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: ${theme ? theme.font : "#4d4d4d"};
@@ -160,10 +162,9 @@ injectGlobal`
     height: 4rem;
     padding: 0.6rem 1rem;
     width: 100%;
-    background: inherit;
-
+    background: ${theme ? theme.border : "#d1d1d1"};
     &:focus {
-      border-color: ${theme ? theme.primary : "#ff0066"};
+      border-color: ${theme ? darken(0.1, theme.border) : "#ff0066"};
       outline: 0;
     }
   }

@@ -3,10 +3,10 @@ import { Form, Input, Button } from "ui";
 
 // TODO move these fellas to a nice consts file
 const SETUP_FORM_FIELDS = [
-  { name: "name", type: "text" },
-  { name: "about", type: "text" },
-  { name: "email", type: "email" },
-  { name: "password", type: "password" }
+  { name: "Name", type: "text" },
+  { name: "About", type: "text" },
+  { name: "Email", type: "email" },
+  { name: "Password", type: "password" }
 ];
 
 // TODO add validation to this form

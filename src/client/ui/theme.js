@@ -1,6 +1,6 @@
 export default {
   font: "#4d4d4d",
-  primary: "#ff0066",
+  primary: "#0044aa",
   border: "#efefef",
   background: "#ffffff",
   secondaryBackground: "#f6f6f6"

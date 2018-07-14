@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import FaFrownO from "react-icons/lib/fa/frown-o";
-import { HelpBlock } from "ui";
 import "url-search-params-polyfill";
 
 import ArticlesList from "components/ArticlesList/ArticlesList";
-import Loader from "ui/loader";
+import { Loader, HelpBlock } from "ui";
+import { Flex } from "ui/utils";
+
+import NoResultsFound from "assets/noresults.svg";
 
 import { loadArticleSearchPage, disposeArticleSearchPage } from "store/modules/sagaActions";
 
@@ -29,20 +30,18 @@ class Search extends React.Component {
   render() {
     const { query, results, loading } = this.props;
     if (loading) return <Loader message={`Looking up ${query}`} />;
-    return (
-      <div>
-        <div className="result-info">
+    return !results.length ? (
+      <Flex flexDirection="column" alignItems="center">
+        <img src={NoResultsFound} alt="No results found" />
+        <h3>No results found for {query}</h3>
+      </Flex>
+    ) : (
+      <React.Fragment>
+        <HelpBlock>
           We found {results.length} articles for {query}
-        </div>
-        {!results.length ? (
-          <div className="no-results">
-            <FaFrownO size={100} />
-            <p>Please try again with another query</p>
-          </div>
-        ) : (
-          <ArticlesList articles={results} />
-        )}
-      </div>
+        </HelpBlock>
+        <ArticlesList articles={results} />
+      </React.Fragment>
     );
   }
 }

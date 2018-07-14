@@ -1,7 +1,7 @@
 import React from "react";
 
 import { List, ListItem, ListItemHeader, ListItemBody, Loader, Button, HelpBlock } from "ui";
-import { DisplayFlexRow } from "ui/utils";
+import { Flex } from "ui/utils";
 
 // TODO Componentize further?
 const BrowseArchives = ({
@@ -43,11 +43,11 @@ const BrowseArchives = ({
           {appendingArchives ? (
             <Loader />
           ) : (
-            <DisplayFlexRow justifyContent="center" marginTop="2">
+            <Flex justifyContent="center" marginTop="2">
               <Button outline onClick={handleLoadMore}>
                 Load More
               </Button>
-            </DisplayFlexRow>
+            </Flex>
           )}
         </span>
       )}

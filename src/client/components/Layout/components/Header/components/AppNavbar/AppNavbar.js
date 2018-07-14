@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { Navbar, ImageWrapper, NavItem, Button, Nav, Icon, NavCollapse } from "ui";
+import { Navbar, NavLogo, NavItem, Button, Nav, Icon, NavCollapse, Container } from "ui";
 import { Hide } from "ui/utils";
 
 import Logo from "assets/logo.svg";
@@ -33,26 +33,28 @@ class AppNavbar extends React.Component {
     const { isAdmin, handleLogoutClick } = this.props;
     return (
       <Navbar>
-        <ImageWrapper height="4">
-          <Link replace to="/home" className="navbar-brand">
-            <img alt="Matterwiki" src={Logo} /> {isOpen}
-          </Link>
-        </ImageWrapper>
-        <Nav pull="right">
-          <Hide small>
-            <AllNavItems isAdmin={isAdmin} onLogout={handleLogoutClick} />
-          </Hide>
-          <Hide medium large>
-            <NavItem>
-              <Button onClick={this.toggleNav} clear>
-                <Icon type="menu" />
-              </Button>
-            </NavItem>
-            <NavCollapse isOpen={isOpen}>
+        <Container>
+          <NavLogo>
+            <Link replace to="/home">
+              <img alt="Matterwiki" src={Logo} /> {isOpen}
+            </Link>
+          </NavLogo>
+          <Nav pull="right">
+            <Hide small>
               <AllNavItems isAdmin={isAdmin} onLogout={handleLogoutClick} />
-            </NavCollapse>
-          </Hide>
-        </Nav>
+            </Hide>
+            <Hide medium large>
+              <NavItem>
+                <Button onClick={this.toggleNav} clear>
+                  <Icon type="menu" />
+                </Button>
+              </NavItem>
+              <NavCollapse isOpen={isOpen}>
+                <AllNavItems isAdmin={isAdmin} onLogout={handleLogoutClick} />
+              </NavCollapse>
+            </Hide>
+          </Nav>
+        </Container>
       </Navbar>
     );
   }

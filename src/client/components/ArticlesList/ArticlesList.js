@@ -1,9 +1,10 @@
 import React from "react";
 
-import { List, HelpBlock } from "ui";
+import { List } from "ui";
 
 import Loader from "ui/loader";
 import ArticlesListItem from "./components/ArticlesListItem";
+import NoArticlesFound from "./components/NoArticlesFound";
 
 const ArticlesList = props => {
   const { articles } = props;
@@ -14,7 +15,7 @@ const ArticlesList = props => {
     return <Loader message="Loading articles" />;
   }
   if (!articles.length) {
-    return <HelpBlock textAlign="center">There are no articles under this topic</HelpBlock>;
+    return <NoArticlesFound />;
   }
   return (
     <List>{articles.map(article => <ArticlesListItem key={article.id} article={article} />)}</List>

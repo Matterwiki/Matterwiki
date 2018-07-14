@@ -9,6 +9,8 @@ const Navbar = styled.div`
   box-shadow: 0rem 0.1rem 1rem ${props => (props.theme ? props.theme.border : "#d1d1d1")};
   padding: 0 3rem;
   position: fixed;
+  height: 6rem;
+  align-items: center;
   top: 0;
   left: 0;
   right: 0;
@@ -73,12 +75,20 @@ const NavItem = styled.div`
   }
   a {
     display: flex;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     line-height: 4rem;
     letter-spacing: 1px;
-    text-transform: uppercase;
     justify-content: flex-start;
     align-items: center;
+  }
+`;
+
+const NavLogo = styled.div`
+  img {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 4rem;
+    max-height: 4rem;
   }
 `;
 
@@ -107,4 +117,4 @@ const NavCollapse = styled.div`
   display: ${props => (props.isOpen ? "flex" : "none")};
 `;
 
-export { Navbar, Nav, NavItem, NavForm, NavCollapse };
+export { Navbar, Nav, NavItem, NavForm, NavCollapse, NavLogo };

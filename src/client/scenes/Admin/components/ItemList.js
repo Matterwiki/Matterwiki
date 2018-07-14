@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, List, ListItem, ListItemHeader, Button, Icon, Loader } from "ui";
-import { DisplayFlexRow, Hide } from "ui/utils";
+import { Flex, Hide } from "ui/utils";
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
@@ -18,7 +18,7 @@ class ResourceListItem extends React.Component {
       <ListItem>
         <Row>
           <Col>
-            <DisplayFlexRow>
+            <Flex>
               <Col>
                 <ListItemHeader>{item.name}</ListItemHeader>
                 {/* Only used in the Admin section at this point. If this were to be used elswehere, 
@@ -47,7 +47,7 @@ class ResourceListItem extends React.Component {
                   </Button>
                 )}
               </Col>
-            </DisplayFlexRow>
+            </Flex>
           </Col>
         </Row>
       </ListItem>
@@ -79,11 +79,11 @@ const ResourceList = ({
         {appendingItems ? (
           <Loader />
         ) : (
-          <DisplayFlexRow justifyContent="center" marginTop="2">
+          <Flex justifyContent="center" marginTop="2">
             <Button outline onClick={handleLoadMore}>
               Load More
             </Button>
-          </DisplayFlexRow>
+          </Flex>
         )}
       </span>
     )}

@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, Container, Col, Form, Input, Icon } from "ui";
+import { Button, Container, Form, Input, Icon } from "ui";
 // TODO move these fellas to a nice consts file
 const LOGIN_FORM_FIELDS = [
-  { name: "email", type: "email" },
-  { name: "password", type: "password" }
+  { name: "Email", type: "email" },
+  { name: "Password", type: "password" }
 ];
 
 // TODO add validation to this form
@@ -21,6 +21,10 @@ class LoginForm extends React.Component {
     });
   };
 
+  handleSlackLogin = () => {
+    window.location = "/api/auth/slack";
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -29,7 +33,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <Container textAlign="center" maxWidth="500">
+      <Container center maxWidth="500" column>
         <Form onSubmit={this.onSubmit}>
           {LOGIN_FORM_FIELDS.map(formField => (
             <Input
@@ -45,6 +49,9 @@ class LoginForm extends React.Component {
             <Icon type="log-in" size="12" />Sign in
           </Button>
         </Form>
+        <Button onClick={this.handleSlackLogin} block outline large>
+          <Icon type="slack" size="12" /> Login via Slack
+        </Button>
       </Container>
     );
   }

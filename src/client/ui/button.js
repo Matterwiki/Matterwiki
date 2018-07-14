@@ -7,10 +7,10 @@ const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-size: ${props => (props.small ? "1.4rem" : "1.6rem")};
-  padding: ${props => (props.small ? "0 1rem" : "0 3rem")};
-  height: ${props => (props.small ? "4rem" : "6rem")};
-  line-height: ${props => (props.small ? "3rem" : "4rem")};
+  font-size: ${props => (props.large ? "1.4rem" : "1.2rem")};
+  padding: ${props => (props.large ? "0 3rem" : "0 1rem")};
+  height: ${props => (props.large ? "6rem" : "4rem")};
+  line-height: ${props => (props.large ? "4rem" : "3rem")};
   font-family: inherit;
   background-color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
   border: 0.1rem solid ${props => (props.theme ? props.theme.primary : "#ff0066")};

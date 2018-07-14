@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Loader } from "ui";
-import { DisplayFlexRow } from "ui/utils";
+import { Flex } from "ui/utils";
 import { oAuthLogin } from "store/modules/sagaActions";
 
 class OAuth extends React.Component {
@@ -20,10 +20,10 @@ class OAuth extends React.Component {
   }
   render() {
     return (
-      <DisplayFlexRow justifyContent="center" flexDirection="column">
+      <Flex justifyContent="center" flexDirection="column">
         <Loader />
         Logging you in
-      </DisplayFlexRow>
+      </Flex>
     );
   }
 }

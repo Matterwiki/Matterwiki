@@ -3,8 +3,8 @@ import Logo from "assets/logo.svg";
 import { Container, ImageWrapper } from "ui";
 
 const LoginNavbar = () => (
-  <Container textAlign="center">
-    <ImageWrapper height="5">
+  <Container center marginBottom="3">
+    <ImageWrapper height="7">
       <img alt="Matterwiki" src={Logo} />
     </ImageWrapper>
   </Container>

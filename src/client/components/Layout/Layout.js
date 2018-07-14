@@ -4,11 +4,11 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 
 const Layout = ({ children, ...props }) => (
-  <div>
+  <React.Fragment>
     <Header {...props} />
     <Container minHeight="80vh">{children}</Container>
     <Footer />
-  </div>
+  </React.Fragment>
 );
 
 export default Layout;

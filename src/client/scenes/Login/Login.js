@@ -24,18 +24,11 @@ class Login extends React.Component {
     });
   };
 
-  handleSlackLogin = () => {
-    window.location = "/api/auth/slack";
-  };
-
   render() {
     return (
       <Row>
         <Col>
           <LoginForm onSubmit={this.handleSubmit} />
-          <Button onClick={this.handleSlackLogin} block outline>
-            <Icon type="slack" size="12" /> Login via Slack
-          </Button>
         </Col>
       </Row>
     );
