@@ -1,7 +1,7 @@
-// TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
-
 const webpack = require("webpack");
 const path = require("path");
+
+const config = require("dotenv").config({ path: `config.production.env` });
 
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -23,6 +23,9 @@ module.exports = {
     new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       template: path.resolve(APP_DIR, "index.html")
+    }),
+    new webpack.DefinePlugin({
+      apiUrl: JSON.stringify(`http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
@@ -62,7 +65,6 @@ module.exports = {
       }
     ]
   },
-
   resolve: {
     modules: [path.resolve("./"), path.resolve("./src/client"), path.resolve("./node_modules")]
   }

@@ -71,43 +71,43 @@ class ArticleForm extends React.Component {
     const { edit } = this.state;
     const WikiEditorProps = Object.assign(
       {},
-      { ref: _editor => (this.editor = _editor) },
       edit ? { rawContent: JSON.parse(this.props.article.content) } : {}
     );
 
     return (
-      <Form className="new-article" onSubmit={this.onSubmit}>
-        <Col sm={12}>
-          <FormGroup>
-            <FormControl
-              type="text"
-              name="title"
-              className="input-title"
-              placeholder="Enter article title..."
-              value={this.state.title}
-              onChange={this.onChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <WikiEditor {...WikiEditorProps} />
-          </FormGroup>
-          <FormGroup>
-            <TopicChooser onChange={this.onChange} value={this.state.topic_id} />
-          </FormGroup>
-          {this.props.article && (
-            <FormGroup>
-              <WhatChanged onChange={this.onChange} value={this.state.change_log} />
-            </FormGroup>
-          )}
-        </Col>
-        <Clearfix />
-        <br />
-        <Col sm={12}>
-          <Button type="submit" block>
-            {`${edit ? "Update" : "Create"} Article`}
-          </Button>
-        </Col>
-      </Form>
+      <WikiEditor {...WikiEditorProps} />
+      // <Form className="new-article" onSubmit={this.onSubmit}>
+      //   <Col sm={12}>
+      //     {/* <FormGroup>
+      //       <FormControl
+      //         type="text"
+      //         name="title"
+      //         className="input-title"
+      //         placeholder="Enter article title..."
+      //         value={this.state.title}
+      //         onChange={this.onChange}
+      //       />
+      //     </FormGroup> */}
+      //     <FormGroup>
+
+      //     </FormGroup>
+      //     {/* <FormGroup>
+      //       <TopicChooser onChange={this.onChange} value={this.state.topic_id} />
+      //     </FormGroup>
+      //     {this.props.article && (
+      //       <FormGroup>
+      //         <WhatChanged onChange={this.onChange} value={this.state.change_log} />
+      //       </FormGroup>
+      //     )} */}
+      //   </Col>
+      //   <Clearfix />
+      //   <br />
+      //   <Col sm={12}>
+      //     <Button type="submit" block>
+      //       {`${edit ? "Update" : "Create"} Article`}
+      //     </Button>
+      //   </Col>
+      // </Form>
     );
   }
 }

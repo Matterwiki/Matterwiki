@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const cors = require("cors");
 
 // Sets up the DB, starts the knex connection
 require("./utils/db");
@@ -11,6 +12,8 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 
 app.use(helmet());
+
+app.use(cors());
 
 // TODO for perf reasons, https://www.npmjs.com/package/compression
 // TODO setup task runner for easier management: https://github.com/lukeed/taskr

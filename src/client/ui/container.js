@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   margin: 0 auto;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
   position: relative;
   width: ${props => (props.width ? props.width : "100")}%;
   text-align: ${props => (props.textAlign ? props.textAlign : "left")};

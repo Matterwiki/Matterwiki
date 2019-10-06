@@ -1,32 +1,40 @@
-// TODO extract common chunks from dev and production configs, use webpack-merge compose the final webpack config
-
 const webpack = require("webpack");
 const path = require("path");
+
+const config = require("dotenv").config({ path: `config.development.env` });
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const BUILD_DIR = path.resolve(__dirname, "dist/");
 const APP_DIR = path.resolve(__dirname, "src/client");
 
+if (config.error) throw new Error(config.error);
+
 module.exports = {
   mode: "development",
   context: BUILD_DIR,
-  entry: [
-    // make sure this is at the top
-    "webpack-hot-middleware/client?reload=true",
-
-    // entry point
-    `${APP_DIR}/index.js`
-  ],
+  entry: [`${APP_DIR}/index.js`],
   output: {
     path: BUILD_DIR,
     publicPath: "/",
     filename: "bundle.js"
   },
   devtool: "inline-source-map",
+  serve: {
+    port: 5001,
+    host: "localhost",
+    hot: {
+      autoConfigure: true,
+      port: 3001
+    }
+  },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      apiUrl: JSON.stringify(`http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`)
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(APP_DIR, "index.html")
     })

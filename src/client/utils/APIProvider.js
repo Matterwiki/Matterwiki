@@ -4,7 +4,7 @@ import axios from "axios";
 // TODO use something light weight like `unfetch`
 const token = window.localStorage.getItem("userToken");
 const axiosInstance = axios.create({
-  baseURL: "/api/",
+  baseURL: `${apiUrl}/api/`,
   headers: { "x-access-token": token }
 });
 

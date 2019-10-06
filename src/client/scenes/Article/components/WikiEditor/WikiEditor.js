@@ -1,236 +1,130 @@
-import React, { Component } from "react";
+import React from "react";
+import styled from "styled-components";
+import { Editor } from "slate-react";
+import { Value } from "slate";
+
 import {
-  Editor,
-  EditorState,
-  RichUtils,
-  Modifier,
-  CompositeDecorator,
-  convertToRaw
-} from "draft-js";
+  BoldButton,
+  ItalicButton,
+  UnderlineButton,
+  StrikeButton,
+  LinkButton,
+  CodeButton,
+  BlockQuoteButton,
+  HeaderButton,
+  Header2Button,
+  Header3Button,
+  ListBulletButton,
+  ListOrderedButton,
+  CodeBlockButton
+} from "ui/editor/toolbarButtons";
 
-import { changeDepth, getEntityRange } from "draftjs-utils";
-import classNames from "classnames";
+const EditorTitle = styled.input`
+  font-size: 2.2em;
+  width: 100%;
+  padding: 0.5em 0 0.5em 0;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #eff1f4;
+  color: #393e41;
+`;
 
-import "draft-js/dist/Draft.css";
+const EditorBody = styled.div`
+  background-color: #f8f9fa;
+  padding: 1.8em 0 1.8em 0;
+`;
 
-import Toolbar from "./components/Toolbar/index";
-import {
-  getLinkEntities,
-  convertToEditorState,
-  getCurrentEntityKey,
-  shouldHidePlaceholder
-} from "./utils/index";
+const EditorToolbar = styled.div``;
 
-import "./WikiEditor.css";
-
-const customStyleMap = {
-  STRIKETHROUGH: {
-    textDecoration: "line-through"
-  }
+const BLOCK_TYPES = {
+  blockQuote: "block-quote",
+  headingOne: "heading-one",
+  headingTwo: "heading-two",
+  headingThree: "heading-three",
+  numberedList: "numbered-list",
+  bulletedList: "bulleted-list",
+  code: "code"
 };
 
-const Link = ({ contentState, entityKey, children }) => {
-  const { url } = contentState.getEntity(entityKey).getData();
-  return <a href={url}>{children || url}</a>;
-};
+// TODO Research compound components and see how these could be changed
+class WikiEditor extends React.Component {
+  // TODO Is this the right way to set this up?
+  state = {
+    value: Value.fromJSON({ document: { nodes: [] } })
+  };
 
-class WikiEditor extends Component {
-  constructor(...args) {
-    super(...args);
+  markButtons = [
+    { type: "bold", btn: BoldButton },
+    { type: "italic", btn: ItalicButton },
+    { type: "underline", btn: UnderlineButton },
+    // TODO This might not work!!!
+    { type: "strikethrough", btn: StrikeButton },
+    { type: "code", btn: CodeButton },
+    { type: "link", btn: LinkButton }
+  ];
 
-    const decorator = new CompositeDecorator([
-      {
-        strategy: getLinkEntities,
-        component: Link
-      }
-    ]);
+  blockButtons = [
+    { type: "block-quote", btn: BlockQuoteButton },
+    { type: "heading-one", btn: HeaderButton },
+    { type: "heading-two", btn: Header2Button },
+    { type: "heading-three", btn: Header3Button },
+    { type: "numbered-list", btn: ListOrderedButton },
+    { type: "bulleted-list", btn: ListBulletButton },
+    { type: "code", btn: CodeBlockButton }
+  ];
 
-    const { rawContent, isHtml } = this.props;
+  onChange = ({ value }) => {
+    this.setState({ value });
+  };
 
-    this.state = {
-      // `convertToEditorState` contains some logic to preserve backward compatibility
-      editorState: convertToEditorState(rawContent, isHtml, decorator),
-      currentEntityKey: null
-    };
+  hasMark(type) {
+    const { value } = this.state;
+    return value.activeMarks.some(mark => mark.type === type);
   }
 
-  onChange = editorState => {
-    // get the currentEntity
-    // TODO, again, is inefficient
-    this.setState({
-      currentEntityKey: getCurrentEntityKey(editorState),
-      editorState
-    });
-  };
+  hasBlock() {}
 
-  // to get the rawContent when the Save button in the parent is clicked.
-  // invoked via ref
-  getRawContent = () => {
-    // TODO REDUX will remove this from here, in the future!
-    const { editorState } = this.state;
-    const rawContent = convertToRaw(editorState.getCurrentContent());
+  onClickMark(evt, type) {
+    evt.preventDefault();
+    const { value } = this.state;
+    const change = value.change().toggleMark(type);
+    this.onChange(change);
+  }
 
-    return rawContent;
-  };
+  onClickBlock(evt, type) {
+    evt.preventDefault();
+    const { value } = this.state;
+    const { document } = value;
 
-  // Handlers for `Toolbar` components.
-  // TODO Should this be placed elsewhere?
-
-  // `InlineControls`
-  toggleInlineStyle = inlineStyle => {
-    const { editorState } = this.state;
-
-    this.onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
-  };
-
-  // `LinkControl`
-  onAddLink = url => {
-    const { editorState } = this.state;
-    const contentState = editorState.getCurrentContent();
-
-    // create the entity. returns a new ContentState object that must be pushed back into the editor
-    let contentStateWithEntity = contentState.createEntity("LINK", "MUTABLE", {
-      url
-    });
-
-    // get the entity key, so that..
-    // ..1) if there is no selected range, use the Modifier API (see below) OR....
-    // ..2) Now that there is some selected text, RichUtils could be used to toggle selected text with entityKey's type
-
-    const entityKey = contentState.getLastCreatedEntityKey();
-
-    const selection = editorState.getSelection();
-    if (selection.isCollapsed()) {
-      // insert the URL as entity text
-      contentStateWithEntity = Modifier.insertText(
-        contentStateWithEntity,
-        selection,
-        url,
-        null,
-        entityKey
-      );
+    if (type !== BLOCK_TYPES.bulletedList && type !== BLOCK_TYPES.numberedList) {
+      console.log(1000);
     }
+  }
 
-    //  create a new EditorState
-    const editorStateWithEntity = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity
-    });
+  renderEditorToolBar() {
+    return (
+      <EditorToolbar>
+        {this.markButtons.map(({ type, btn: Btn }) => {
+          const onClick = e => this.onClickMark(e, type);
+          const isActive = this.hasMark(type);
 
-    this.onChange(
-      RichUtils.toggleLink(editorStateWithEntity, editorStateWithEntity.getSelection(), entityKey)
+          return <Btn active={isActive} key={type} onClick={onClick} />;
+        })}
+        {this.blockButtons.map(({ type, btn: Btn }) => {
+          const onClick = e => this.onClickBlock(e, type);
+          const isActive = this.hasBlock(type);
+
+          return <Btn active={isActive} key={type} onClick={onClick} />;
+        })}
+      </EditorToolbar>
     );
-
-    //  TODO move cursor to after entity text and focus. The code below does this, but creates problems with Link addition. FIX THIS
-    //  const editorStateWithSelection = EditorState.moveSelectionToEnd(editorStateWithEntity);
-    //  setTimeout(() => this.focus(), 0);
-  };
-  // `LinkControl`
-  onRemoveLink = () => {
-    const { editorState, currentEntityKey } = this.state;
-
-    if (currentEntityKey) {
-      let selection = editorState.getSelection();
-      const entityRange = getEntityRange(editorState, currentEntityKey);
-
-      selection = selection.merge({
-        anchorOffset: entityRange.start,
-        focusOffset: entityRange.end
-      });
-
-      this.onChange(RichUtils.toggleLink(editorState, selection, null));
-    }
-  };
-
-  // `BlockControls`
-  toggleBlockType = blockType => {
-    const newState = RichUtils.toggleBlockType(this.state.editorState, blockType);
-    this.onChange(newState);
-    setTimeout(() => this.focus(), 0);
-  };
-
-  // `LevelControls`
-  toggleLevelType = adjustment => {
-    // adjustment = 1 for indent
-    // adjustment = -1 for outdent
-    const newState = changeDepth(this.state.editorState, adjustment, 4);
-    this.onChange(newState);
-  };
-  // `HistoryControls`
-  onUndo = () => {
-    const { editorState } = this.state;
-
-    const newState = EditorState.undo(editorState);
-
-    if (newState) {
-      this.onChange(newState);
-      return true;
-    }
-
-    return false;
-  };
-  // `HistoryControls`
-  onRedo = () => {
-    const { editorState } = this.state;
-
-    const newState = EditorState.redo(editorState);
-
-    if (newState) {
-      this.onChange(newState);
-      return true;
-    }
-
-    return false;
-  };
+  }
 
   render() {
-    const { editorState, currentEntityKey } = this.state;
-    const contentState = editorState.getCurrentContent();
-    const currentEntity = currentEntityKey ? contentState.getEntity(currentEntityKey) : null;
-
-    const editorProps = {
-      ref: "editor",
-      customStyleMap,
-      editorState,
-      onChange: this.onChange,
-      onTab: this.onTab,
-      handleKeyCommand: this.handleKeyCommand,
-      placeholder: "Start writing here...."
-    };
-    const toolbarProps = {
-      editorState,
-      currentEntity,
-      toggleBlockType: this.toggleBlockType,
-      toggleInlineStyle: this.toggleInlineStyle,
-      onAddLink: this.onAddLink,
-      onRemoveLink: this.onRemoveLink,
-      toggleLevelType: this.toggleLevelType,
-      onUndo: this.onUndo,
-      onRedo: this.onRedo
-    };
-
-    let ToolbarComponent = <Toolbar {...toolbarProps} />;
-
-    let EditorComponent = <Editor {...editorProps} />;
-
-    if (this.props.readOnly) {
-      ToolbarComponent = null;
-      EditorComponent = (
-        <div className="readonly">
-          <Editor readOnly {...editorProps} />
-        </div>
-      );
-    }
-
-    // If the user changes block type before entering any text, we can
-    // either style the placeholder or hide it. Let's just hide it now.
-    const className = classNames("WikiEditor-editor", {
-      "WikiEditor-hidePlaceholder": shouldHidePlaceholder(contentState)
-    });
-
     return (
-      <div className="WikiEditor-root">
-        <div className="WikiEditor-toolbar">{ToolbarComponent}</div>
-        <div className={className}>{EditorComponent}</div>
+      <div>
+        <EditorTitle placeholder="Enter article title*" required="true" />
+        <EditorBody>{this.renderEditorToolBar()}</EditorBody>
       </div>
     );
   }
