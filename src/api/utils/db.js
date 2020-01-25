@@ -2,7 +2,7 @@ const knex = require("knex");
 const Model = require("objection").Model;
 const knexDbManager = require("knex-db-manager");
 
-const dbConfig = require("../../../knexfile");
+const dbConfig = require("../knexfile");
 
 // build the knex instance
 const knexInstance = knex(dbConfig);
