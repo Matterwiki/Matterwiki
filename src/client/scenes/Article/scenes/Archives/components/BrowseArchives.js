@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import { List, ListItem, ListItemHeader, ListItemBody, Loader, Button, HelpBlock } from "ui";
-import { DisplayFlexRow } from "ui/utils";
+import { List, ListItem, ListItemHeader, ListItemBody, Loader, Button, HelpBlock } from 'ui'
+import { DisplayFlexRow } from 'ui/utils'
 
 // TODO Componentize further?
 const BrowseArchives = ({
@@ -10,32 +10,33 @@ const BrowseArchives = ({
   currentArchive,
   archivesMeta,
   appendingArchives,
-  handleLoadMore
+  onLoadMoreClick: handleLoadMore
 }) => {
   const archiveClick = (id, e) => {
-    e.preventDefault();
-    onArchiveChosen(id);
-  };
+    e.preventDefault()
+    onArchiveChosen(id)
+  }
 
   if (!archives.length) {
-    return <HelpBlock>There are no archives for this article</HelpBlock>;
+    return <HelpBlock>There are no archives for this article</HelpBlock>
   }
   return (
-    <React.Fragment>
+    <>
       <List>
         {archives.map(archive => {
-          const lastUpdated = new Date(archive.updated_at.replace(" ", "T")).toDateString();
+          const lastUpdated = new Date(archive.updated_at.replace(' ', 'T')).toDateString()
 
           return (
             <ListItem
               key={archive.id}
               onClick={e => archiveClick(archive.id, e)}
               cursorPointer
-              active={currentArchive && currentArchive.id === archive.id}>
+              active={currentArchive && currentArchive.id === archive.id}
+            >
               <ListItemHeader>{lastUpdated}</ListItemHeader>
               <ListItemBody>{archive.change_log}</ListItemBody>
             </ListItem>
-          );
+          )
         })}
       </List>
       {archivesMeta && archivesMeta.remainingPages === 0 ? null : (
@@ -43,7 +44,7 @@ const BrowseArchives = ({
           {appendingArchives ? (
             <Loader />
           ) : (
-            <DisplayFlexRow justifyContent="center" marginTop="2">
+            <DisplayFlexRow justifyContent='center' marginTop='2'>
               <Button outline onClick={handleLoadMore}>
                 Load More
               </Button>
@@ -51,8 +52,8 @@ const BrowseArchives = ({
           )}
         </span>
       )}
-    </React.Fragment>
-  );
-};
+    </>
+  )
+}
 
-export default BrowseArchives;
+export default BrowseArchives

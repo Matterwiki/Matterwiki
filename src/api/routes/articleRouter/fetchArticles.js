@@ -1,7 +1,7 @@
-const { assign } = require("lodash");
-const HttpStatus = require("http-status-codes");
-const { RESULT_LIMITS } = require("../../utils/constants");
-const ArticleModel = require("../../models/articleModel");
+const { assign } = require('lodash')
+const HttpStatus = require('http-status-codes')
+const { RESULT_LIMITS } = require('../../utils/constants')
+const ArticleModel = require('../../models/articleModel')
 
 /**
  * Given query params, build a filter object that could be used in a where clause.
@@ -13,11 +13,11 @@ const ArticleModel = require("../../models/articleModel");
  * @param {string} params.modified_by_id - filter objects by modifiedBy ID
  * @returns
  */
-function buildWhereForArticle({ topic_id, modified_by_id }) {
+function buildWhereForArticle ({ topic_id: topicId, modified_by_id: modifiedById }) {
   return assign(
-    topic_id ? { topic_id: parseInt(topic_id, 10) } : {},
-    modified_by_id ? { modified_By_id: parseInt(modified_by_id, 10) } : {}
-  );
+    topicId ? { topic_id: parseInt(topicId, 10) } : {},
+    modifiedById ? { modified_By_id: parseInt(modifiedById, 10) } : {}
+  )
 }
 
 /**
@@ -27,18 +27,18 @@ function buildWhereForArticle({ topic_id, modified_by_id }) {
  * @param {string} search
  * @returns
  */
-function chainSearchQuery(queryBuilder, search) {
-  if (!search) return queryBuilder;
+function chainSearchQuery (queryBuilder, search) {
+  if (!search) return queryBuilder
 
-  const escapedString = `%${search}%`;
+  const escapedString = `%${search}%`
 
   return (
     queryBuilder
-      .andWhere("title", "like", escapedString)
+      .andWhere('title', 'like', escapedString)
       // TODO change when we use MySQL's json type to store editor data
-      .orWhere("content", "like", escapedString)
-      .orWhere("change_log", "like", escapedString)
-  );
+      .orWhere('content', 'like', escapedString)
+      .orWhere('change_log', 'like', escapedString)
+  )
 }
 
 /**
@@ -48,26 +48,26 @@ function chainSearchQuery(queryBuilder, search) {
  * @param {string} direction - could be ascending (asc) or descending (desc)
  * @returns
  */
-function buildSortObjectForArticle({ sort, direction }) {
+function buildSortObjectForArticle ({ sort, direction }) {
   // TODO clean this up a bit.. was written in 45 seconds
 
   const defaultSort = {
-    sortField: "updated_at",
-    directionToSort: "desc"
-  };
+    sortField: 'updated_at',
+    directionToSort: 'desc'
+  }
 
-  if (!sort) return defaultSort;
+  if (!sort) return defaultSort
 
-  let sortField = "";
-  let directionToSort = direction;
+  let sortField = ''
+  let directionToSort = direction
 
-  if (sort !== "title" && sort !== "topic_id") return defaultSort;
+  if (sort !== 'title' && sort !== 'topic_id') return defaultSort
 
-  if (directionToSort !== "asc" && directionToSort !== "desc") directionToSort = "asc";
+  if (directionToSort !== 'asc' && directionToSort !== 'desc') directionToSort = 'asc'
 
-  sortField = sort;
+  sortField = sort
 
-  return { directionToSort, sortField };
+  return { directionToSort, sortField }
 }
 
 /**
@@ -77,27 +77,27 @@ function buildSortObjectForArticle({ sort, direction }) {
  * @param {any} res
  * @param {any} next
  */
-async function fetchArticles(req, res, next) {
+async function fetchArticles (req, res, next) {
   try {
-    const filters = buildWhereForArticle(req.query);
-    const { sortField, directionToSort } = buildSortObjectForArticle(req.query);
+    const filters = buildWhereForArticle(req.query)
+    const { sortField, directionToSort } = buildSortObjectForArticle(req.query)
 
-    const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10);
-    const pageNumber = parseInt(req.query.page || 1, 10);
-    const pageOffset = (pageNumber - 1) * limit;
+    const limit = parseInt(req.query.limit || RESULT_LIMITS.ARTICLES, 10)
+    const pageNumber = parseInt(req.query.page || 1, 10)
+    const pageOffset = (pageNumber - 1) * limit
 
     const articles = await chainSearchQuery(ArticleModel.query(), req.query.search)
       .withRels()
       .where(filters)
       .orderBy(sortField, directionToSort)
       .offset(pageOffset)
-      .limit(limit);
+      .limit(limit)
 
     const totalRecords = (await chainSearchQuery(ArticleModel.query(), req.query.search).where(
       filters
-    )).length;
-    const totalPages = Math.ceil(totalRecords / limit);
-    const remainingPages = totalPages - pageNumber;
+    )).length
+    const totalPages = Math.ceil(totalRecords / limit)
+    const remainingPages = totalPages - pageNumber
 
     res.status(HttpStatus.OK).json({
       articles,
@@ -107,11 +107,11 @@ async function fetchArticles(req, res, next) {
         remainingPages,
         pageNumber
       }
-    });
+    })
   } catch (err) {
-    console.log(err);
-    next(err);
+    console.log(err)
+    next(err)
   }
 }
 
-module.exports = fetchArticles;
+module.exports = fetchArticles

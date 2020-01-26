@@ -1,96 +1,97 @@
-import React from "react";
-import Alert from "react-s-alert";
-import { Modal } from "ui";
-import Loader from "ui/loader";
-import APIProvider from "utils/APIProvider";
+import React from 'react'
+import Alert from 'react-s-alert'
+import { Modal } from 'ui'
+import Loader from 'ui/loader'
+import APIProvider from 'utils/APIProvider'
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
-import { loadArticlePage, disposeArticlePage } from "store/modules/sagaActions";
+import { loadArticlePage, disposeArticlePage } from 'store/modules/sagaActions'
 
-import ViewArticle from "./ViewArticle";
+import ViewArticle from './ViewArticle'
 
 class ViewArticleContainer extends React.Component {
   state = {
     showDeleteModal: false
   };
 
-  componentDidMount() {
-    const id = this.props.match.params.articleId;
-    this.props.loadArticlePage(id);
+  componentDidMount () {
+    const id = this.props.match.params.articleId
+    this.props.loadArticlePage(id)
   }
 
-  componentWillUnmount() {
-    this.props.disposeArticlePage();
+  componentWillUnmount () {
+    this.props.disposeArticlePage()
   }
 
   handleEditClick = e => {
-    e.preventDefault();
-    const id = this.props.article.id;
-    this.props.history.push(`/article/edit/${id}`);
+    e.preventDefault()
+    const id = this.props.article.id
+    this.props.history.push(`/article/edit/${id}`)
   };
 
   handleHistoryClick = e => {
-    e.preventDefault();
-    const id = this.props.article.id;
-    this.props.history.push(`/article/${id}/history`);
+    e.preventDefault()
+    const id = this.props.article.id
+    this.props.history.push(`/article/${id}/history`)
   };
 
   handleDeleteClick = e => {
-    e.preventDefault();
-    this.setState({ showDeleteModal: true });
+    e.preventDefault()
+    this.setState({ showDeleteModal: true })
   };
 
   confirmDelete = () => {
-    const id = this.props.article.id;
+    const id = this.props.article.id
     APIProvider.delete(`articles/${id}`).then(() => {
-      Alert.success("Article has been deleted");
-      this.props.history.push("/home");
-    });
+      Alert.success('Article has been deleted')
+      this.props.history.push('/home')
+    })
   };
 
   closeDeleteModal = () => {
-    this.setState({ showDeleteModal: false });
+    this.setState({ showDeleteModal: false })
   };
 
-  render() {
-    const { article, loading } = this.props;
-    const { showDeleteModal } = this.state;
+  render () {
+    const { article, loading } = this.props
+    const { showDeleteModal } = this.state
     if (loading) {
-      return <Loader />;
+      return <Loader />
     } else if (article.title) {
       return (
-        <React.Fragment>
+        <>
           <ViewArticle
             article={article}
             loading={loading}
-            handleEditClick={this.handleEditClick}
-            handleDeleteClick={this.handleDeleteClick}
-            handleHistoryClick={this.handleHistoryClick}
+            onEditClick={this.handleEditClick}
+            onDeleteClick={this.handleDeleteClick}
+            onHistoryClick={this.handleHistoryClick}
           />
           <Modal
             visible={showDeleteModal}
-            title="Are you sure you want to delete the article?"
-            okText="I understand, delete!"
+            title='Are you sure you want to delete the article?'
+            okText='I understand, delete!'
             handleClose={this.closeDeleteModal}
-            handleOk={this.confirmDelete}>
+            handleOk={this.confirmDelete}
+          >
             Everyone in your company will lose access to this article.
           </Modal>
-        </React.Fragment>
-      );
+        </>
+      )
     }
-    return <div />;
+    return <div />
   }
 }
 
 const mapStateToProps = state => ({
   article: state.articles.currentArticle,
   loading: state.articles.loading
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   loadArticlePage: id => dispatch(loadArticlePage(id)),
   disposeArticlePage: () => dispatch(disposeArticlePage())
-});
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewArticleContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ViewArticleContainer)

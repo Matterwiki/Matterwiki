@@ -1,7 +1,7 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import { NewArticle, ViewArticle, EditArticle, Archives } from "./scenes/ArticleScenes";
+import { NewArticle, ViewArticle, EditArticle, Archives } from './scenes/ArticleScenes'
 
 const Article = ({ match }) => (
   <div>
@@ -12,6 +12,6 @@ const Article = ({ match }) => (
       <Route exact path={`${match.url}/:articleId/history/`} component={Archives} />
     </Switch>
   </div>
-);
+)
 
-export default Article;
+export default Article

@@ -1,5 +1,5 @@
-import React from "react";
-import { HelpBlock, Col, Row } from "ui";
+import React from 'react'
+import { HelpBlock, Col, Row } from 'ui'
 
 const NotFoundError = () => (
   <Row>
@@ -12,6 +12,6 @@ const NotFoundError = () => (
       </HelpBlock>
     </Col>
   </Row>
-);
+)
 
-export default NotFoundError;
+export default NotFoundError

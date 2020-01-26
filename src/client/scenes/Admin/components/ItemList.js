@@ -1,19 +1,20 @@
-import React from "react";
-import { Row, Col, List, ListItem, ListItemHeader, Button, Icon, Loader } from "ui";
-import { DisplayFlexRow, Hide } from "ui/utils";
+import React from 'react'
+import { Row, Col, List, ListItem, ListItemHeader, Button, Icon, Loader } from 'ui'
+import { DisplayFlexRow, Hide } from 'ui/utils'
 
 class ResourceListItem extends React.Component {
   handleDeleteClick = (item, e) => {
-    e.preventDefault();
-    this.props.onDeleteClick(this.props.item.id);
-  };
-  handleEditClick = (item, e) => {
-    e.preventDefault();
-    this.props.onEditClick(this.props.item.id);
+    e.preventDefault()
+    this.props.onDeleteClick(this.props.item.id)
   };
 
-  render() {
-    const { item } = this.props;
+  handleEditClick = (item, e) => {
+    e.preventDefault()
+    this.props.onEditClick(this.props.item.id)
+  };
+
+  render () {
+    const { item } = this.props
     return (
       <ListItem>
         <Row>
@@ -21,28 +22,30 @@ class ResourceListItem extends React.Component {
             <DisplayFlexRow>
               <Col>
                 <ListItemHeader>{item.name}</ListItemHeader>
-                {/* Only used in the Admin section at this point. If this were to be used elswehere, 
+                {/* Only used in the Admin section at this point. If this were to be used elswehere,
           a schema level change is inevitable */}
-                {item.description || item.about || "-"}
+                {item.description || item.about || '-'}
               </Col>
-              <Col textAlign="right">
+              <Col textAlign='right'>
                 <Button
                   onClick={e => {
-                    this.handleEditClick(item, e);
+                    this.handleEditClick(item, e)
                   }}
                   clear
-                  small>
-                  <Icon type="edit" size="12" />
+                  small
+                >
+                  <Icon type='edit' size='12' />
                   <Hide small> Edit</Hide>
                 </Button>&nbsp;
                 {item.id !== 1 && (
                   <Button
                     clear
                     onClick={e => {
-                      this.handleDeleteClick(item, e);
+                      this.handleDeleteClick(item, e)
                     }}
-                    small>
-                    <Icon type="trash-2" size="12" />
+                    small
+                  >
+                    <Icon type='trash-2' size='12' />
                     <Hide small> Delete</Hide>
                   </Button>
                 )}
@@ -51,7 +54,7 @@ class ResourceListItem extends React.Component {
           </Col>
         </Row>
       </ListItem>
-    );
+    )
   }
 }
 
@@ -60,7 +63,7 @@ const ResourceList = ({
   itemName,
   onEditClick,
   onDeleteClick,
-  handleLoadMore,
+  onLoadMoreClick: handleLoadMoreClick,
   itemsMeta,
   appendingItems
 }) => (
@@ -79,8 +82,8 @@ const ResourceList = ({
         {appendingItems ? (
           <Loader />
         ) : (
-          <DisplayFlexRow justifyContent="center" marginTop="2">
-            <Button outline onClick={handleLoadMore}>
+          <DisplayFlexRow justifyContent='center' marginTop='2'>
+            <Button outline onClick={handleLoadMoreClick}>
               Load More
             </Button>
           </DisplayFlexRow>
@@ -88,6 +91,6 @@ const ResourceList = ({
       </span>
     )}
   </List>
-);
+)
 
-export default ResourceList;
+export default ResourceList

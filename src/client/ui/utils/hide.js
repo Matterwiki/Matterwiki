@@ -2,37 +2,24 @@
 // https://github.com/jxnblk/hidden-styled (Licensed under MIT)
 // Thank you Brent!
 
-import styled from "styled-components";
-import breakpoints from "./breakpoints";
+import styled from 'styled-components'
+import breakpoints from './breakpoints'
 
 export const hidden = key => props =>
   props[key]
     ? {
-        [breakpoints[key]]: {
-          display: "none"
-        }
+      [breakpoints[key]]: {
+        display: 'none'
       }
-    : null;
+    }
+    : null
 
-export const small = hidden("small");
-export const medium = hidden("medium");
-export const large = hidden("large");
+export const small = hidden('small')
+export const medium = hidden('medium')
+export const large = hidden('large')
 
 const Hide = styled.span([], small, medium, large, {
-  display: "inherit"
-});
+  display: 'inherit'
+})
 
-const Hid = styled.span`
-  display: inherit;
-  ${breakpoints.css.small`
-    display: ${props => (props.small ? "none" : "")};
-  `};
-  ${breakpoints.css.medium`
-    display: ${props => (props.medium ? "none" : "")};
-  `};
-  ${breakpoints.css.large`
-    display: ${props => (props.large ? "none" : "")};
-  `};
-`;
-
-export default Hide;
+export default Hide

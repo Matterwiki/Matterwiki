@@ -1,39 +1,39 @@
-const { knexInstance, dbManager } = require("../../utils/db");
+const { knexInstance, dbManager } = require('../../utils/db')
 
 // TODO move to consts file when there are more
-const ER_DB_CREATE_EXISTS = `ER_DB_CREATE_EXISTS`;
+const ER_DB_CREATE_EXISTS = 'ER_DB_CREATE_EXISTS'
 
 /**
  * Creates DB if it doesn't exist.
  * This is needed because the teardown (`afterAll` block) might not run if some test fails
  */
-function createDbIfNotExists() {
+function createDbIfNotExists () {
   return dbManager
     .createDbOwnerIfNotExist()
     .then(() => dbManager.createDb())
     .catch(err => {
       // in case something went wrong
       if (err.code === ER_DB_CREATE_EXISTS) {
-        return dbManager.dropDb().then(() => dbManager.createDb());
+        return dbManager.dropDb().then(() => dbManager.createDb())
       }
-    });
+    })
 }
 
 /**
  * Cleans up test db between tests
  * Provides options to keep or destroy user table
  */
-function truncateDb(keepUsers = true) {
+function truncateDb (keepUsers = true) {
   // wasteful to `makeTestUsers` before every test
-  const ignoreList = keepUsers ? ["user"] : [];
-  return dbManager.truncateDb(ignoreList);
+  const ignoreList = keepUsers ? ['user'] : []
+  return dbManager.truncateDb(ignoreList)
 }
 
 /**
  * Runs the seed on the database
  */
-function seedDb() {
-  return knexInstance.seed.run();
+function seedDb () {
+  return knexInstance.seed.run()
 }
 
 /**
@@ -41,17 +41,17 @@ function seedDb() {
  * Runs migrations
  * Runs general seed scripts
  */
-function initTestDb() {
+function initTestDb () {
   return createDbIfNotExists()
     .then(() => knexInstance.migrate.latest())
-    .then(() => seedDb());
+    .then(() => seedDb())
 }
 
 /**
  * Destroys the Matterwiki test DB, used when all the tests are done
  */
-function destroyTestDb() {
-  return dbManager.createDbOwnerIfNotExist().then(() => dbManager.dropDb());
+function destroyTestDb () {
+  return dbManager.createDbOwnerIfNotExist().then(() => dbManager.dropDb())
 }
 
 /**
@@ -62,4 +62,4 @@ module.exports = {
   destroyTestDb,
   truncateDb,
   seedDb
-};
+}

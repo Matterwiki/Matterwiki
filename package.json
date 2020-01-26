@@ -12,10 +12,32 @@
     "db:migrate_make": "knex migrate:make",
     "db:seed": "knex seed:run",
     "db:seed_make": "knex seed:make",
-    "test": "cross-env NODE_ENV=test jest --config ./src/api/jest.config.json --runInBand"
+    "test": "cross-env NODE_ENV=test jest --config ./src/api/jest.config.json --runInBand",
+    "lint": "standard --parser babel-eslint --env jest --verbose | snazzy",
+    "lint:fix": "standard --verbose --fix | snazzy"
   },
-  "bin": {
-    "wiki": "./install.js"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*": [
+        "yarn lint:fix",
+        "git add"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true,
+      "jest": true
+    },
+    "globals": [
+      "fetch",
+      "FormData"
+    ]
   },
   "engines": {
     "node": ">=12.0.0"
@@ -70,6 +92,7 @@
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "app-root-path": "^3.0.0",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "concurrently": "^5.0.2",
@@ -77,12 +100,15 @@
     "dotenv": "^8.2.0",
     "dreamjs": "^0.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.1",
     "jest": "^25.1.0",
     "knex-db-manager": "^0.5.0",
+    "lint-staged": "^10.0.2",
     "mini-css-extract-plugin": "^0.9.0",
     "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
-    "standardjs": "^1.0.0-alpha",
+    "snazzy": "^8.0.0",
+    "standard": "^14.3.1",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",
     "webpack-blocks": "^2.0.1",

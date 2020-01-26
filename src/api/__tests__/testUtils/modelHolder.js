@@ -6,12 +6,12 @@
 let userStore = {
   users: [],
   admin: null
-};
+}
 
 let tokenStore = {
   user: null,
   admin: null
-};
+}
 
 module.exports = {
   userHolder: {
@@ -30,4 +30,4 @@ module.exports = {
     getUserToken: () => tokenStore.user,
     setUserToken: userToken => (tokenStore.user = userToken)
   }
-};
+}

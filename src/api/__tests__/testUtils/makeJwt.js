@@ -1,22 +1,22 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
-const { authSecret } = require("../../config");
-const { TOKEN_EXPIRATION } = require("../../utils/constants");
+const { authSecret } = require('../../config')
+const { TOKEN_EXPIRATION } = require('../../utils/constants')
 
-function makeJwt(user) {
+function makeJwt (user) {
   const payloadUser = {
     name: user.name,
     email: user.email,
     about: user.about,
     role: user.role,
     id: user.id
-  };
+  }
 
   const token = jwt.sign(payloadUser, authSecret, {
     expiresIn: TOKEN_EXPIRATION
-  });
+  })
 
-  return token;
+  return token
 }
 
-module.exports = makeJwt;
+module.exports = makeJwt

@@ -1,64 +1,61 @@
-import axios from "axios";
+import axios from 'axios'
 
 // TODO Add better error handling
 // TODO use something light weight like `unfetch`
-const token = window.localStorage.getItem("userToken");
+const token = window.localStorage.getItem('userToken')
 const axiosInstance = axios.create({
-  baseURL: "/api/",
-  headers: { "x-access-token": token }
-});
+  baseURL: '/api/',
+  headers: { 'x-access-token': token }
+})
 
 /**
  * Takes care of user created errors, returns a promise which could be handled at the component side
  */
-function prepareResponse(response) {
+function prepareResponse (response) {
   if (!response.data) {
-    return;
+    return
   }
 
-  const { url } = response.config;
-  const { data } = response;
+  const { url } = response.config
+  const { data } = response
 
   // if login, edit the axiosInstance
-  if (url.includes("login")) {
-    axiosInstance.defaults.headers["x-access-token"] = data.token;
+  if (url.includes('login')) {
+    axiosInstance.defaults.headers['x-access-token'] = data.token
   }
 
-  return data;
+  return data
 }
 
-function prepareError({ response }) {
-  return Promise.reject({
-    status: response.status,
-    ...response.data
-  });
+function prepareError ({ response }) {
+  return Promise.reject(new Error(response.status))
 }
 
 const get = endpoint =>
   axiosInstance
     .get(endpoint)
     .then(prepareResponse)
-    .catch(prepareError);
+    .catch(prepareError)
 
 const query = (endpoint, queryParams) =>
   axiosInstance
     .get(endpoint, { params: queryParams })
     .then(prepareResponse)
-    .catch(prepareError);
+    .catch(prepareError)
 
 const post = (endpoint, payload) =>
   axiosInstance
     .post(endpoint, payload)
     .then(prepareResponse)
-    .catch(prepareError);
+    .catch(prepareError)
 
 const put = (endpoint, payload) =>
   axiosInstance
     .put(endpoint, payload)
     .then(prepareResponse)
-    .catch(prepareError);
+    .catch(prepareError)
 
-const deleteReq = endpoint => axiosInstance.delete(endpoint).catch(prepareError);
+const deleteReq = endpoint => axiosInstance.delete(endpoint).catch(prepareError)
 
 /**
  * Main export
@@ -69,6 +66,6 @@ const APIProvider = {
   post,
   put,
   delete: deleteReq
-};
+}
 
-export default APIProvider;
+export default APIProvider

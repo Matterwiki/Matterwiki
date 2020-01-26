@@ -1,11 +1,11 @@
-const env = process.env.NODE_ENV;
-const config = require("dotenv").config({
+const env = process.env.NODE_ENV
+const config = require('dotenv').config({
   path: `config.${env}.env`
-});
+})
 
 // Config probably not found!
 if (config.error) {
-  throw new Error(config.error);
+  throw new Error(config.error)
 }
 
 const connection = {
@@ -13,21 +13,21 @@ const connection = {
   user: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  charset: "utf8",
+  charset: 'utf8',
   debug: !!process.env.DB_DEBUGINFO
-};
+}
 
 module.exports = {
-  client: "mysql",
+  client: 'mysql',
   connection,
   pool: {
     min: 1,
     max: 1
   },
   seeds: {
-    directory: "./db/seeds/"
+    directory: './db/seeds/'
   },
   migrations: {
-    directory: "./db/migrations/"
+    directory: './db/migrations/'
   }
-};
+}

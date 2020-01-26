@@ -1,11 +1,11 @@
-const appRoot = require('app-root-path');
-const path = require("path");
+const appRoot = require('app-root-path')
+const path = require('path')
 
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const {
   createConfig,
@@ -25,13 +25,13 @@ const {
   url,
   file,
   resolve
-} = require("webpack-blocks");
+} = require('webpack-blocks')
 
 /**
  * Custom block that extracts CSS for production mode
  * @param {object} options - https://github.com/webpack-contrib/mini-css-extract-plugin#options
  */
-function extractCSS(options = {}) {
+function extractCSS (options = {}) {
   return ({ match }, util) => util.merge({
     module: {
       rules: [
@@ -39,15 +39,15 @@ function extractCSS(options = {}) {
           test: /\.css$/,
           use: [
             {
-              loader: MiniCssExtractPlugin.loader,
-            },
-          ],
+              loader: MiniCssExtractPlugin.loader
+            }
+          ]
         }, match)
       ]
     },
     plugins: [
-      new MiniCssExtractPlugin(options),
-    ],
+      new MiniCssExtractPlugin(options)
+    ]
   })
 }
 
@@ -55,7 +55,7 @@ function extractCSS(options = {}) {
  * Minify CSS files
  * @param {object} options - https://github.com/NMFR/optimize-css-assets-webpack-plugin#configuration
  */
-function minifyCSS(options = {}) {
+function minifyCSS (options = {}) {
   return (context, { merge }) => merge({
     optimization: {
       minimizer: [
@@ -80,7 +80,7 @@ function minifyCSS(options = {}) {
  * Minify JS files
  * @param {object} options - https://github.com/webpack-contrib/terser-webpack-plugin#options
  */
-function minifyJS(options) {
+function minifyJS (options) {
   return (context, { merge }) => merge({
     optimization: {
       minimize: true,
@@ -95,11 +95,10 @@ function minifyJS(options) {
   })
 }
 
-
 /**
  * Splits node_modules into its own chunk
  */
-function splitVendorChunk() {
+function splitVendorChunk () {
   return ({ match }, { merge }) => merge({
     optimization: {
       splitChunks: {
@@ -115,15 +114,15 @@ function splitVendorChunk() {
   })
 }
 
-const BUILD_DIR = appRoot.resolve("dist/");
-const APP_DIR = appRoot.resolve("src/client");
+const BUILD_DIR = appRoot.resolve('dist/')
+const APP_DIR = appRoot.resolve('src/client')
 
 /**
  * Common config used across debug and release modes
  */
 const commonConfig = () => group([
   setContext(BUILD_DIR),
-  entryPoint(path.join(APP_DIR, "index.js")),
+  entryPoint(path.join(APP_DIR, 'index.js')),
   match(/\.js$/, {
     include: APP_DIR,
     exclude: /node_modules/
@@ -131,7 +130,7 @@ const commonConfig = () => group([
     babel({
       presets: [
         [
-          "@babel/preset-env",
+          '@babel/preset-env',
           {
             // https://browserl.ist/?q=defaults%2C+%3E+1%25%2C+not+dead%2C+not+ie+%3C%3D+11
             targets: 'defaults, > 1%, not dead, not ie <= 11',
@@ -140,7 +139,7 @@ const commonConfig = () => group([
             corejs: { version: 3, proposals: false }
           }
         ],
-        "@babel/preset-react"
+        '@babel/preset-react'
       ],
       plugins: [
         '@babel/plugin-proposal-class-properties'
@@ -150,16 +149,16 @@ const commonConfig = () => group([
   match(/\.(jpg|png)$/, [
     url({
       limit: 25000,
-      name: "./assets/[name].[ext]"
+      name: './assets/[name].[ext]'
     })
   ]),
   match(/\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/, [
     file({
-      name: "fonts/[name].[ext]"
+      name: 'fonts/[name].[ext]'
     })
   ]),
   resolve({
-    modules: [path.resolve(APP_DIR, "./"), path.resolve(APP_DIR, "./src/client"), "./node_modules"]
+    modules: [path.resolve(APP_DIR, './'), path.resolve(APP_DIR, './src/client'), './node_modules']
   }),
   addPlugins([
     new HtmlWebpackPlugin({
@@ -168,7 +167,6 @@ const commonConfig = () => group([
   ])
 ])
 
-
 /**
  * Debug config. Priorities here are:
  * - HMR
@@ -176,13 +174,13 @@ const commonConfig = () => group([
  * - Quick rebuilds
  */
 const debugConfig = () => group([
-  setMode("development"),
+  setMode('development'),
   setOutput({
     path: BUILD_DIR,
-    publicPath: "/",
-    filename: "[name].js"
+    publicPath: '/',
+    filename: '[name].js'
   }),
-  sourceMaps("inline-source-map"),
+  sourceMaps('inline-source-map'),
   devServer({
     overlay: true,
     liveReload: true,
@@ -212,13 +210,13 @@ const debugConfig = () => group([
  * - Cache busting
  */
 const releaseConfig = () => group([
-  setMode("production"),
+  setMode('production'),
   setOutput({
     path: BUILD_DIR,
-    publicPath: "/",
-    filename: "[name].[hash].js"
+    publicPath: '/',
+    filename: '[name].[hash].js'
   }),
-  sourceMaps("source-map"),
+  sourceMaps('source-map'),
   match(/\.(sa|sc|c)ss$/, [
     extractCSS({
       filename: '[name].[hash].css'
@@ -234,11 +232,11 @@ const releaseConfig = () => group([
   ])
 ])
 
-/** 
- * The main webpack config file, composed with blocks! 
+/**
+ * The main webpack config file, composed with blocks!
  */
 module.exports = createConfig([
   commonConfig(),
   env('development', [debugConfig()]),
-  env('production', [releaseConfig()]),
-]);
+  env('production', [releaseConfig()])
+])

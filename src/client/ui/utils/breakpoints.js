@@ -1,10 +1,10 @@
-import { css } from "styled-components";
+import { css } from 'styled-components'
 
 const breakpoints = {
-  small: "@media screen and (max-width: 55em)",
-  medium: "@media screen and (min-width: 55em) and (max-width: 64em)",
-  large: "@media screen and (min-width: 64em)"
-};
+  small: '@media screen and (max-width: 55em)',
+  medium: '@media screen and (min-width: 55em) and (max-width: 64em)',
+  large: '@media screen and (min-width: 64em)'
+}
 
 const sizes = {
   small: {
@@ -18,7 +18,7 @@ const sizes = {
   large: {
     min: 64
   }
-};
+}
 
 // Iterate through the sizes and create a media template
 const media = Object.keys(sizes).reduce((acc, label) => {
@@ -27,11 +27,11 @@ const media = Object.keys(sizes).reduce((acc, label) => {
       @media screen and (max-width: ${sizes[label].max}em) {
       ${css(...args)};
     }
-  `;
+  `
 
-  return acc;
-}, {});
+  return acc
+}, {})
 
-breakpoints.css = media;
+breakpoints.css = media
 
-export default breakpoints;
+export default breakpoints

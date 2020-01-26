@@ -1,30 +1,30 @@
-const { isBoolean } = require("lodash");
+const { isBoolean } = require('lodash')
 
-const { initTestDb, destroyTestDb, truncateDb, seedDb } = require("./dbHelpers");
+const { initTestDb, destroyTestDb, truncateDb, seedDb } = require('./dbHelpers')
 
-const { makeUsers } = require("./userHelpers");
-const makeJwt = require("./makeJwt");
-const { userHolder, tokenHolder } = require("./modelHolder");
+const { makeUsers } = require('./userHelpers')
+const makeJwt = require('./makeJwt')
+const { userHolder, tokenHolder } = require('./modelHolder')
 
 /**
  * Makes the test users needed, sets it in the holder for future use
  */
-function makeTestUsers() {
+function makeTestUsers () {
   return makeUsers().then(testUsers => {
-    userHolder.set(testUsers);
-    return testUsers;
-  });
+    userHolder.set(testUsers)
+    return testUsers
+  })
 }
 
 /**
  * Makes the auth tokens needed, sets it in the holder for future use
  */
-function makeTokens(testUsers) {
-  const tokens = {};
-  tokens.admin = makeJwt(testUsers.admin);
-  tokens.user = makeJwt(testUsers.users[0]);
+function makeTokens (testUsers) {
+  const tokens = {}
+  tokens.admin = makeJwt(testUsers.admin)
+  tokens.user = makeJwt(testUsers.users[0])
 
-  tokenHolder.set(tokens);
+  tokenHolder.set(tokens)
 }
 
 /**
@@ -53,7 +53,7 @@ module.exports = {
    * 2) runs seed scripts again
    */
   setupEach: (options = {}) => {
-    const keepUsers = isBoolean(options.keepUsers) ? options.keepUsers : true;
-    return truncateDb(keepUsers).then(seedDb);
+    const keepUsers = isBoolean(options.keepUsers) ? options.keepUsers : true
+    return truncateDb(keepUsers).then(seedDb)
   }
-};
+}

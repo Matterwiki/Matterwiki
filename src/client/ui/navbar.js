@@ -1,12 +1,12 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 const Navbar = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${props => (props.theme ? props.theme.background : "#fff")};
+  background-color: ${props => (props.theme ? props.theme.background : '#fff')};
   max-height: 6rem;
-  box-shadow: 0rem 0.1rem 1rem ${props => (props.theme ? props.theme.border : "#d1d1d1")};
+  box-shadow: 0rem 0.1rem 1rem ${props => (props.theme ? props.theme.border : '#d1d1d1')};
   padding: 0 3rem;
   position: fixed;
   top: 0;
@@ -18,22 +18,22 @@ const Navbar = styled.div`
     color: inherit;
   }
   a:hover {
-    color: ${props => (props.theme ? props.theme.primary : "#ff0066")};
+    color: ${props => (props.theme ? props.theme.primary : '#ff0066')};
   }
-`;
+`
 
 const Nav = styled.div`
   display: flex;
-  flex-direction: ${props => (props.vertical ? "column" : "row")};
+  flex-direction: ${props => (props.vertical ? 'column' : 'row')};
   justify-content: ${props => {
-    if (props.pull && props.pull === "right") {
-      return "flex-end";
+    if (props.pull && props.pull === 'right') {
+      return 'flex-end'
     }
-    return "flex-start";
+    return 'flex-start'
   }};
   width: 100%;
-  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
-`;
+  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : '')};
+`
 
 const NavItem = styled.div`
   margin-top: 1rem;
@@ -42,28 +42,28 @@ const NavItem = styled.div`
   max-height: 4rem;
   display: flex;
   justify-content: ${props => {
-    if (props.pull && props.pull === "right") {
-      return "flex-end";
+    if (props.pull && props.pull === 'right') {
+      return 'flex-end'
     }
-    return "flex-start";
+    return 'flex-start'
   }};
-  width: ${props => (props.fullWidth ? "100%" : "")};
-  margin-left: ${props => (props.marginLeft ? props.marginLeft : "3rem")};
-  padding: ${props => (props.tab ? "1rem 2rem" : "")};
+  width: ${props => (props.fullWidth ? '100%' : '')};
+  margin-left: ${props => (props.marginLeft ? props.marginLeft : '3rem')};
+  padding: ${props => (props.tab ? '1rem 2rem' : '')};
   border: ${props =>
-    props.tab ? `1px solid ${props.theme ? props.theme.border : "#d1d1d1"}` : ""};
-  border-bottom: ${props => (props.tab && props.active ? "none" : "")};
+    props.tab ? `1px solid ${props.theme ? props.theme.border : '#d1d1d1'}` : ''};
+  border-bottom: ${props => (props.tab && props.active ? 'none' : '')};
   background-color: ${props => {
     if (props.tab) {
       if (props.active) {
-        return "#fff";
+        return '#fff'
       }
-      return "#f6f6f6";
+      return '#f6f6f6'
     }
-    return "";
+    return ''
   }};
-  cursor: ${props => (props.cursorPointer ? "pointer" : "")};
-  width: ${props => (props.tab ? "100%" : "")};
+  cursor: ${props => (props.cursorPointer ? 'pointer' : '')};
+  width: ${props => (props.tab ? '100%' : '')};
   .icon {
     margin-right: 0.5rem;
   }
@@ -80,13 +80,13 @@ const NavItem = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
-`;
+`
 
 const NavForm = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
+`
 
 const NavCollapse = styled.div`
   ${props =>
@@ -99,12 +99,12 @@ const NavCollapse = styled.div`
           top: 5rem;
           left: 0;
           right: 0;
-          background-color: ${props.theme ? props.theme.background : "#fff"};
+          background-color: ${props.theme ? props.theme.background : '#fff'};
           padding: 1rem;
-          box-shadow: 0rem 2rem 3rem -2rem ${props.theme ? props.theme.border : "#d1d1d1"};
+          box-shadow: 0rem 2rem 3rem -2rem ${props.theme ? props.theme.border : '#d1d1d1'};
         `
-      : ""};
-  display: ${props => (props.isOpen ? "flex" : "none")};
-`;
+      : ''};
+  display: ${props => (props.isOpen ? 'flex' : 'none')};
+`
 
-export { Navbar, Nav, NavItem, NavForm, NavCollapse };
+export { Navbar, Nav, NavItem, NavForm, NavCollapse }

@@ -1,25 +1,25 @@
-import React from "react";
-import Alert from "react-s-alert";
-import { Row, Col } from "ui";
+import React from 'react'
+import Alert from 'react-s-alert'
+import { Row, Col } from 'ui'
 // import services
-import APIProvider from "utils/APIProvider";
+import APIProvider from 'utils/APIProvider'
 
 // import needed components
-import SetupForm from "./components/SetupForm";
+import SetupForm from './components/SetupForm'
 
 class Setup extends React.Component {
   handleSignUp = user => {
-    APIProvider.post("setup", user)
+    APIProvider.post('setup', user)
       .then(() => {
-        Alert.success("Admin user generated");
-        this.props.history.push("/login");
+        Alert.success('Admin user generated')
+        this.props.history.push('/login')
       })
       .catch(err => {
-        Alert.error(err.message);
-      });
+        Alert.error(err.message)
+      })
   };
 
-  render() {
+  render () {
     return (
       <Row>
         <Col>
@@ -38,8 +38,8 @@ class Setup extends React.Component {
           <SetupForm onSubmit={this.handleSignUp} />
         </Col>
       </Row>
-    );
+    )
   }
 }
 
-export default Setup;
+export default Setup

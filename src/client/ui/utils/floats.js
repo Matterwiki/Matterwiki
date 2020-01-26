@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Clearfix = styled.div`
   &:after {
@@ -6,14 +6,14 @@ const Clearfix = styled.div`
     content: " ";
     display: table;
   }
-`;
+`
 
 const FloatLeft = styled.div`
   float: left;
-`;
+`
 
 const FloatRight = styled.div`
   float: right;
-`;
+`
 
-export { Clearfix, FloatRight, FloatLeft };
+export { Clearfix, FloatRight, FloatLeft }

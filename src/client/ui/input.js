@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Input = styled.input`
-  background-color: ${props => (props.theme ? props.theme.background : "")};
+  background-color: ${props => (props.theme ? props.theme.background : '')};
   height: 4rem;
   font-family: inherit;
   font-size: 1.6rem;
-  color: ${props => (props.theme ? props.theme.font : "#fff")};
+  color: ${props => (props.theme ? props.theme.font : '#fff')};
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     text-transform: uppercase;
@@ -26,6 +26,6 @@ const Input = styled.input`
     text-transform: uppercase;
     font-size: 1.4rem;
   }
-`;
+`
 
-export default Input;
+export default Input

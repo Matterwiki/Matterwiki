@@ -1,10 +1,10 @@
-import React from "react";
-import { ButtonToolbar } from "react-bootstrap";
-import InlineControls from "./components/InlineControls";
-import BlockControls from "./components/BlockControls";
-import LevelControls from "./components/LevelControls/index";
-import LinkControl from "./components/LinkControl";
-import HistoryControls from "./components/HistoryControls";
+import React from 'react'
+import { ButtonToolbar } from 'react-bootstrap'
+import InlineControls from './components/InlineControls'
+import BlockControls from './components/BlockControls'
+import LevelControls from './components/LevelControls/index'
+import LinkControl from './components/LinkControl'
+import HistoryControls from './components/HistoryControls'
 
 const Toolbar = props => (
   <ButtonToolbar>
@@ -14,6 +14,6 @@ const Toolbar = props => (
     <LevelControls {...props} />
     <HistoryControls {...props} />
   </ButtonToolbar>
-);
+)
 
-export default Toolbar;
+export default Toolbar

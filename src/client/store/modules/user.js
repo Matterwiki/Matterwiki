@@ -6,40 +6,40 @@ import {
   STOP_LOADING_USERS,
   SET_CURRENT_USER,
   EMPTY_CURRENT_USER
-} from "store/actionTypes";
+} from 'store/actionTypes'
 
 export const addUsers = ({ users, meta }) => ({
   type: ADD_USERS,
   users,
   meta
-});
+})
 
 export const emptyUsers = () => ({
   type: EMPTY_USERS
-});
+})
 
 export const appendUsers = ({ users, meta }) => ({
   type: APPEND_USERS,
   users,
   meta
-});
+})
 
 export const startLoadingUsers = () => ({
   type: START_LOADING_USERS
-});
+})
 
 export const stopLoadingUsers = () => ({
   type: STOP_LOADING_USERS
-});
+})
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
   user
-});
+})
 
 export const emptyCurrentUser = () => ({
   type: EMPTY_CURRENT_USER
-});
+})
 
 export default (
   state = {
@@ -60,7 +60,7 @@ export default (
           all: payload.users,
           meta: payload.meta
         }
-      };
+      }
     case EMPTY_USERS:
       return {
         ...state,
@@ -68,7 +68,7 @@ export default (
           all: [],
           meta: {}
         }
-      };
+      }
     case APPEND_USERS:
       return {
         ...state,
@@ -76,28 +76,28 @@ export default (
           all: [...state.users.all, ...payload.users],
           meta: payload.meta
         }
-      };
+      }
     case START_LOADING_USERS:
       return {
         ...state,
         loading: true
-      };
+      }
     case STOP_LOADING_USERS:
       return {
         ...state,
         loading: false
-      };
+      }
     case SET_CURRENT_USER:
       return {
         ...state,
         currentUser: payload.user
-      };
+      }
     case EMPTY_CURRENT_USER:
       return {
         ...state,
         currentUser: null
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}

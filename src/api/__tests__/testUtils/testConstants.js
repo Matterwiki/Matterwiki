@@ -1,3 +1,3 @@
 module.exports = {
-  DEFAULT_PASSWORD: "MatterWikiPass!23"
-};
+  DEFAULT_PASSWORD: 'MatterWikiPass!23'
+}

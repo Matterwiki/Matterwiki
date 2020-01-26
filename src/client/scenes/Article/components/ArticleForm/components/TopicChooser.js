@@ -1,30 +1,31 @@
-import React from "react";
-import { FormControl, ControlLabel } from "react-bootstrap";
+import React from 'react'
+import { FormControl, ControlLabel } from 'react-bootstrap'
 
-import APIProvider from "utils/APIProvider";
+import APIProvider from 'utils/APIProvider'
 
 class TopicChooser extends React.Component {
   state = {
     topics: []
   };
 
-  componentDidMount() {
-    APIProvider.get("topics").then(topics => this.setState({ topics: topics.topics }));
+  componentDidMount () {
+    APIProvider.get('topics').then(topics => this.setState({ topics: topics.topics }))
   }
 
-  render() {
-    const { topics } = this.state;
-    const { onChange, value } = this.props;
+  render () {
+    const { topics } = this.state
+    const { onChange, value } = this.props
 
     return (
       <div>
         <ControlLabel>Choose topic</ControlLabel>
         <FormControl
-          name="topic_id"
-          componentClass="select"
-          className="topic-select"
+          name='topic_id'
+          componentClass='select'
+          className='topic-select'
           value={value}
-          onChange={onChange}>
+          onChange={onChange}
+        >
           {topics.filter(t => t.id !== 1).map(topic => (
             <option value={topic.id} key={topic.id}>
               {topic.name}
@@ -32,8 +33,8 @@ class TopicChooser extends React.Component {
           ))}
         </FormControl>
       </div>
-    );
+    )
   }
 }
 
-export default TopicChooser;
+export default TopicChooser

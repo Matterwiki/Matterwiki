@@ -1,5 +1,5 @@
-import LogoUpload from "./LogoUpload";
-import ManageTopics from "./Topics";
-import ManageUsers from "./Users";
+import LogoUpload from './LogoUpload'
+import ManageTopics from './Topics'
+import ManageUsers from './Users'
 
-export { LogoUpload, ManageTopics, ManageUsers };
+export { LogoUpload, ManageTopics, ManageUsers }

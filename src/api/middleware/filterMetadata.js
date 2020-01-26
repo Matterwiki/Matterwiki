@@ -1,4 +1,4 @@
-const { assign } = require("lodash");
+const { assign } = require('lodash')
 
 /**
  * Middleware that adds or removes meta fields
@@ -9,15 +9,15 @@ const { assign } = require("lodash");
  * @param {any} next
  */
 module.exports = (req, res, next) => {
-  if (req.method === "POST") {
+  if (req.method === 'POST') {
     req.body = assign(req.body, {
       created_by_id: req.user.id,
       modified_by_id: req.user.id
-    });
+    })
   } else {
     req.body = assign(req.body, {
       modified_by_id: req.user.id
-    });
+    })
   }
-  next();
-};
+  next()
+}

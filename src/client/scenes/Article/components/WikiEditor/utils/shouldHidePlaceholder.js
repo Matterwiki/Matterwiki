@@ -4,13 +4,13 @@ const shouldHidePlaceholder = contentState => {
       contentState
         .getBlockMap()
         .first()
-        .getType() !== "unstyled"
+        .getType() !== 'unstyled'
     ) {
-      return true;
+      return true
     }
   }
 
-  return false;
-};
+  return false
+}
 
-export default shouldHidePlaceholder;
+export default shouldHidePlaceholder

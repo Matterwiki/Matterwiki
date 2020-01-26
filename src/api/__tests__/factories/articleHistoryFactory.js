@@ -1,6 +1,6 @@
-const { assign, omit } = require("lodash");
+const { assign, omit } = require('lodash')
 
-const { ARTICLE_HISTORY_TYPES } = require("../../utils/constants");
+const { ARTICLE_HISTORY_TYPES } = require('../../utils/constants')
 
 module.exports = {
   build: (historyType = ARTICLE_HISTORY_TYPES.CREATE, article = {}) =>
@@ -9,6 +9,6 @@ module.exports = {
       {
         type: historyType
       },
-      omit(article, "id")
+      omit(article, 'id')
     )
-};
+}

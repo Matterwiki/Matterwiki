@@ -1,12 +1,12 @@
-import React from "react";
-import { HelpBlock, ListGroup } from "react-bootstrap";
-import { List, ListItem } from "ui";
+import React from 'react'
+import { HelpBlock } from 'react-bootstrap'
+import { List } from 'ui'
 
-import TopicsListItem from "./components/TopicsListItem";
+import TopicsListItem from './components/TopicsListItem'
 
 const TopicsList = ({ topics, onTopicClick, activeTopic }) =>
   topics.length < 1 ? (
-    <HelpBlock bsClass="center-align">There are no topics created yet</HelpBlock>
+    <HelpBlock bsClass='center-align'>There are no topics created yet</HelpBlock>
   ) : (
     <List>
       {topics
@@ -20,6 +20,6 @@ const TopicsList = ({ topics, onTopicClick, activeTopic }) =>
           />
         ))}
     </List>
-  );
+  )
 
-export default TopicsList;
+export default TopicsList

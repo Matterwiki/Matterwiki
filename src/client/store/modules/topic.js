@@ -6,40 +6,40 @@ import {
   STOP_LOADING_TOPICS,
   SET_CURRENT_TOPIC,
   EMPTY_CURRENT_TOPIC
-} from "store/actionTypes";
+} from 'store/actionTypes'
 
 export const addTopics = ({ topics, meta }) => ({
   type: ADD_TOPICS,
   topics,
   meta
-});
+})
 
 export const emptyTopics = () => ({
   type: EMPTY_TOPICS
-});
+})
 
 export const appendTopics = ({ topics, meta }) => ({
   type: APPEND_TOPICS,
   topics,
   meta
-});
+})
 
 export const startLoadingTopics = () => ({
   type: START_LOADING_TOPICS
-});
+})
 
 export const stopLoadingTopics = () => ({
   type: STOP_LOADING_TOPICS
-});
+})
 
 export const setCurrentTopic = topic => ({
   type: SET_CURRENT_TOPIC,
   topic
-});
+})
 
 export const emptyCurrentTopic = () => ({
   type: EMPTY_CURRENT_TOPIC
-});
+})
 
 export default (
   state = {
@@ -60,7 +60,7 @@ export default (
           all: payload.topics,
           meta: payload.meta
         }
-      };
+      }
     case EMPTY_TOPICS:
       return {
         ...state,
@@ -68,7 +68,7 @@ export default (
           all: [],
           meta: {}
         }
-      };
+      }
     case APPEND_TOPICS:
       return {
         ...state,
@@ -76,28 +76,28 @@ export default (
           all: [...state.topics.all, ...payload.topics],
           meta: payload.meta
         }
-      };
+      }
     case START_LOADING_TOPICS:
       return {
         ...state,
         loading: true
-      };
+      }
     case STOP_LOADING_TOPICS:
       return {
         ...state,
         loading: false
-      };
+      }
     case SET_CURRENT_TOPIC:
       return {
         ...state,
         currentTopic: payload.topic
-      };
+      }
     case EMPTY_CURRENT_TOPIC:
       return {
         ...state,
         currentTopic: null
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}

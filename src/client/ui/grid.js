@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import breakpoints from "./utils/breakpoints";
+import styled from 'styled-components'
+import breakpoints from './utils/breakpoints'
 
 const Col = styled.div`
   display: block;
@@ -10,22 +10,22 @@ const Col = styled.div`
   margin-bottom: inherit;
   padding: 0 1rem;
   width: 100%;
-  position: ${props => (props.fixed ? "fixed" : "")};
-  text-align: ${props => (props.textAlign ? props.textAlign : "")};
-  flex: ${props => (props.width ? `0 0 ${props.width}%` : "")};
-  max-width: ${props => (props.width ? `${props.width}%` : "")};
-  margin-left: ${props => (props.offset ? `${props.offset}%` : "")};
+  position: ${props => (props.fixed ? 'fixed' : '')};
+  text-align: ${props => (props.textAlign ? props.textAlign : '')};
+  flex: ${props => (props.width ? `0 0 ${props.width}%` : '')};
+  max-width: ${props => (props.width ? `${props.width}%` : '')};
+  margin-left: ${props => (props.offset ? `${props.offset}%` : '')};
   flex-grow: 0;
   ${breakpoints.css.small`
-    max-width: ${props => (props.widthSmall ? `${props.widthSmall}%` : "")};
+    max-width: ${props => (props.widthSmall ? `${props.widthSmall}%` : '')};
   `};
   ${breakpoints.css.medium`
-    max-width: ${props => (props.widthMedium ? `${props.widthMedium}%` : "")};
+    max-width: ${props => (props.widthMedium ? `${props.widthMedium}%` : '')};
   `};
   ${breakpoints.css.large`
-    max-width: ${props => (props.widthLarge ? `${props.widthLarge}%` : "")};
+    max-width: ${props => (props.widthLarge ? `${props.widthLarge}%` : '')};
   `};
-`;
+`
 
 const Row = styled.div`
   display: flex;
@@ -33,14 +33,14 @@ const Row = styled.div`
   padding: 0;
   width: 100%;
   margin-left: -1rem;
-  margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : "")};
-  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : "")};
+  margin-top: ${props => (props.marginTop ? `${props.marginTop}rem` : '')};
+  margin-bottom: ${props => (props.marginBottom ? `${props.marginBottom}rem` : '')};
   ${Col} {
     margin-bottom: 0.5rem;
   }
   ${breakpoints.css.medium`
     flex-direction: row;
   `};
-`;
+`
 
-export { Row, Col };
+export { Row, Col }

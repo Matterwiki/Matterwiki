@@ -1,17 +1,17 @@
-const dream = require("dreamjs");
+const dream = require('dreamjs')
 
 module.exports = {
   build: (numberOfArticles = 1) => {
     const articles = dream
       .schema({
-        title: "word",
+        title: 'word',
         // TODO mock out a draft JSON object for this
-        content: "paragraph",
-        change_log: "sentence"
+        content: 'paragraph',
+        change_log: 'sentence'
       })
       .generateRnd(numberOfArticles)
-      .output();
+      .output()
 
-    return articles;
+    return articles
   }
-};
+}

@@ -1,123 +1,125 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import classNames from "classnames";
-import FaExternalLink from "react-icons/lib/fa/external-link";
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import classNames from 'classnames'
+import FaExternalLink from 'react-icons/lib/fa/external-link'
 // TODO transition this to the entire codebase.
-import { Popover, Overlay, Button, ButtonGroup } from "react-bootstrap";
+import { Popover, Overlay, Button, ButtonGroup } from 'react-bootstrap'
 
 class LinkControl extends Component {
   state = {
-    url: "",
+    url: '',
     showPopup: null
   };
 
-  onURLChange = e => {
+  handleURLChange = e => {
     this.setState({
       url: e.target.value
-    });
+    })
   };
 
   handleLinkPopupOpen = () => {
-    const { currentEntity } = this.props;
+    const { currentEntity } = this.props
 
-    let url = "";
+    let url = ''
     if (currentEntity) {
-      url = currentEntity.getData().url;
+      url = currentEntity.getData().url
     }
 
     this.setState({
       url,
       showPopup: true
-    });
+    })
 
     // hack to defer focus to after <Overlay/> has been mounted
     setTimeout(() => {
-      this.linkURL.focus();
-    }, 0);
+      this.linkURL.focus()
+    }, 0)
   };
 
   handleLinkSave = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { url } = this.state;
-    const { onAddLink } = this.props;
+    const { url } = this.state
+    const { onAddLink } = this.props
 
-    onAddLink(url);
-    this.resetPopoverState();
+    onAddLink(url)
+    this.handleHide()
   };
 
   handleLinkRemove = e => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const { onRemoveLink } = this.props;
+    const { onRemoveLink } = this.props
 
-    onRemoveLink();
-    this.resetPopoverState();
+    onRemoveLink()
+    this.handleHide()
   };
 
-  resetPopoverState = () => {
+  handleHide = () => {
     this.setState({
-      url: "",
+      url: '',
       showPopup: false
-    });
+    })
   };
 
-  render() {
-    const { currentEntity } = this.props;
-    const { url, showPopup } = this.state;
+  render () {
+    const { currentEntity } = this.props
+    const { url, showPopup } = this.state
 
     // TODO make this a separate component
     const popover = (
       <Overlay
         show={showPopup}
-        placement="bottom"
+        placement='bottom'
         target={() => ReactDOM.findDOMNode(this.targetButton)}
-        onHide={this.resetPopoverState}
-        rootClose>
-        <Popover id="link-popover">
+        onHide={this.handleHide}
+        rootClose
+      >
+        <Popover id='link-popover'>
           <input
-            type="text"
-            placeholder="Enter a URL.."
+            type='text'
+            placeholder='Enter a URL..'
             ref={input => (this.linkURL = input)}
             value={url}
-            onChange={this.onURLChange}
+            onChange={this.handleURLChange}
           />
-          <ButtonGroup className="pull-right">
-            <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkSave}>
+          <ButtonGroup className='pull-right'>
+            <Button bsSize='sm' className='toolbar-button' onClick={this.handleLinkSave}>
               Link
             </Button>
-            <Button bsSize="sm" className="toolbar-button" onClick={this.handleLinkRemove}>
+            <Button bsSize='sm' className='toolbar-button' onClick={this.handleLinkRemove}>
               Unlink
             </Button>
           </ButtonGroup>
         </Popover>
       </Overlay>
-    );
+    )
 
-    const isLinkEntity = (currentEntity && currentEntity.getType() === "LINK") || false;
+    const isLinkEntity = (currentEntity && currentEntity.getType() === 'LINK') || false
     const toolbarButtonClass = classNames(
       {
         active: isLinkEntity
       },
-      "toolbar-button"
-    );
+      'toolbar-button'
+    )
 
     return (
       <div>
         <ButtonGroup>
           <Button
             ref={_ref => (this.targetButton = _ref)}
-            bsStyle="default"
-            bsSize="lg"
+            bsStyle='default'
+            bsSize='lg'
             className={toolbarButtonClass}
-            onClick={this.handleLinkPopupOpen}>
+            onClick={this.handleLinkPopupOpen}
+          >
             <FaExternalLink />
           </Button>
         </ButtonGroup>
         {popover}
       </div>
-    );
+    )
   }
 }
 
-export default LinkControl;
+export default LinkControl
