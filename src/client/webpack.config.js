@@ -127,6 +127,8 @@ const commonConfig = () => group([
     include: APP_DIR,
     exclude: /node_modules/
   }, [
+    // TODO: Replace with webpack-babel-multi-target-plugin when it supports `@babel/preset-react`
+    //       https://github.com/DanielSchaffer/webpack-babel-multi-target-plugin/issues/54
     babel({
       presets: [
         [
