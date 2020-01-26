@@ -31,11 +31,15 @@ function prepareError ({ response }) {
   return Promise.reject(new Error(response.status))
 }
 
-const get = endpoint =>
-  axiosInstance
-    .get(endpoint)
-    .then(prepareResponse)
-    .catch(prepareError)
+const get = async endpoint => {
+  try {
+    const response = await axiosInstance.get(endpoint)
+
+    return prepareResponse(response)
+  } catch (error) {
+    prepareError(error)
+  }
+}
 
 const query = (endpoint, queryParams) =>
   axiosInstance

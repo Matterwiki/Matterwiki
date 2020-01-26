@@ -144,6 +144,7 @@ const commonConfig = () => group([
         '@babel/preset-react'
       ],
       plugins: [
+        '@babel/transform-runtime',
         '@babel/plugin-proposal-class-properties'
       ]
     })

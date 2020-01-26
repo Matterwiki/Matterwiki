@@ -4,7 +4,7 @@
   "description": "A simple and beautiful wiki for teams",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently 'npm:start:client' 'npm:start:api'",
+    "start": "concurrently --kill-others --prefix-colors 'bgGreen.bold,bgMagenta.italic'  'npm:start:client' 'npm:start:api'",
     "start:client": "cross-env NODE_ENV=development webpack-dev-server --config ./src/client/webpack.config.js --open",
     "start:api": "cross-env NODE_ENV=development nodemon --inspect=5858 --config ./src/api/nodemon.json ./src/api/server.js",
     "build": "cross-env NODE_ENV=production webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
@@ -23,8 +23,8 @@
   },
   "lint-staged": {
     "**/*": [
-        "yarn lint:fix",
-        "git add"
+      "yarn lint:fix",
+      "git add"
     ]
   },
   "standard": {
@@ -53,6 +53,7 @@
   },
   "homepage": "http://matterwiki.com",
   "dependencies": {
+    "@babel/runtime": "^7.8.3",
     "axios": "^0.18.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.1",
@@ -89,6 +90,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
     "app-root-path": "^3.0.0",
