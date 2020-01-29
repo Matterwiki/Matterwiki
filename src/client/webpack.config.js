@@ -19,6 +19,7 @@ const {
   sourceMaps,
   babel,
   css,
+  // TODO: Remove css related loading if it's not being used
   sass,
   match,
   devServer,
@@ -129,25 +130,7 @@ const commonConfig = () => group([
   }, [
     // TODO: Replace with webpack-babel-multi-target-plugin when it supports `@babel/preset-react`
     //       https://github.com/DanielSchaffer/webpack-babel-multi-target-plugin/issues/54
-    babel({
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            // https://browserl.ist/?q=defaults%2C+%3E+1%25%2C+not+dead%2C+not+ie+%3C%3D+11
-            targets: 'defaults, > 1%, not dead, not ie <= 11',
-            modules: false,
-            useBuiltIns: 'usage',
-            corejs: { version: 3, proposals: false }
-          }
-        ],
-        '@babel/preset-react'
-      ],
-      plugins: [
-        '@babel/transform-runtime',
-        '@babel/plugin-proposal-class-properties'
-      ]
-    })
+    babel()
   ]),
   match(/\.(jpg|png)$/, [
     url({
