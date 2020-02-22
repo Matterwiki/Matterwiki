@@ -22,7 +22,7 @@ coverage
 .nyc_output
 
 # configuration
-config.*.env
+.env
 !config.example.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
