@@ -127,7 +127,14 @@ test('(200) list returns expected data', async t => {
 
     t.deepEqual(
         keys(res.body[0]).sort(),
-        ['id', 'name', 'description', 'modifiedAt', 'createdAt'].sort(),
+        [
+            'id',
+            'name',
+            'isDefault',
+            'description',
+            'modifiedAt',
+            'createdAt',
+        ].sort(),
     )
 })
 

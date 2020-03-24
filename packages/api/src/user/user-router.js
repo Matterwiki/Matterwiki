@@ -19,9 +19,8 @@ const {
 } = require('./user-utils')
 const {
     LoginValidator,
-    UserCreateValidator,
+    UserValidator,
     UserUpdateValidator,
-    UserPasswordUpdateValidator,
 } = require('./user-validator')
 
 const router = express.Router()
@@ -32,7 +31,7 @@ router.post('/login', JSONParser, loginUser)
 
 // Authenticated routes
 router.get('/verify', checkAuth, (req, res, next) => {
-    res.status(HttpStatus.OK).end()
+    res.status(HttpStatus.OK).json(withoutSensitiveFields(req.user))
 })
 
 router.get('/:id', checkAuth, checkUserExists, getUserById)
@@ -56,13 +55,7 @@ router.put(
     checkDuplicateUser,
     updateUser,
 )
-router.post(
-    '/:id/change-password',
-    adminMiddleware,
-    JSONParser,
-    checkUserExists,
-    updateUserPassword,
-)
+
 router.delete('/:id', adminMiddleware, checkUserExists, deleteUser)
 
 /**
@@ -119,7 +112,7 @@ async function checkDuplicateUser(req, res, next) {
 
 async function createAdminUser(req, res, next) {
     try {
-        const error = await UserCreateValidator.validate(req.body)
+        const error = await UserValidator.validate(req.body)
         if (error) return next(makeHttpBadRequest(error))
 
         if (!isNil(await UserModel.fetchAdmin())) {
@@ -165,7 +158,7 @@ async function loginUser(req, res, next) {
 
 async function createRegularUser(req, res, next) {
     try {
-        const error = await UserCreateValidator.validate(req.body)
+        const error = await UserValidator.validate(req.body)
         if (error) return next(makeHttpBadRequest(error))
 
         const user = await UserModel.createUser(
@@ -187,29 +180,7 @@ async function updateUser(req, res, next) {
         const user = await UserModel.updateUserById(req.item.id, req.body)
         res.status(HttpStatus.OK).json(withoutSensitiveFields(user))
     } catch (error) {
-        next(error)
-    }
-}
-
-async function updateUserPassword(req, res, next) {
-    try {
-        const error = await UserPasswordUpdateValidator.validate(req.body)
-        if (error) return next(makeHttpBadRequest(error))
-
-        const passwordVerified = await verifyPassword(
-            req.item.password,
-            req.body.currentPassword,
-        )
-        if (!passwordVerified) {
-            return next({
-                status: HttpStatus.BAD_REQUEST,
-                ...ERRORS.BAD_PASSWORD,
-            })
-        }
-
-        await UserModel.updatePasswordById(req.params.id, req.body.newPassword)
-        res.status(HttpStatus.OK).end()
-    } catch (error) {
+        console.log(error)
         next(error)
     }
 }

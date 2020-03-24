@@ -1,10 +1,10 @@
 const test = require('ava')
 
 const { validationTestRunner } = require('../../common/test-utils/index')
-const { UserCreateValidator } = require('../user-validator')
+const { UserValidator } = require('../user-validator')
 const { makeUserData } = require('./user-test-utils')
 
-const validationTester = validationTestRunner(makeUserData, UserCreateValidator)
+const validationTester = validationTestRunner(makeUserData, UserValidator)
 
 test(
     'missing email',
@@ -53,6 +53,6 @@ test(
 
 test('valid user', async t => {
     const user = makeUserData()
-    const error = await UserCreateValidator.validate(user)
+    const error = await UserValidator.validate(user)
     t.falsy(error)
 })

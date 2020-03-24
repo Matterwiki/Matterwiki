@@ -15,26 +15,24 @@ const router = express.Router({ mergeParams: true })
 // Check `article-model` file, specifically the insert and update methods,
 // if you need to know how that works!
 
-router.get('/', withDefaultFilterParams, fetchArticleHistoryList)
+router.get('/', fetchArticleHistoryList)
 router.get('/:id', fetchArticleHistoryEntry)
 
-function withDefaultFilterParams(req, res, next) {
-    const { paging, pageNo, pageSize } = req.query || {}
+function withDefaultFilterParams(query) {
+    const { paging, pageNo, pageSize } = query || {}
 
-    req.query = {
+    return {
         paging: paging === 'true',
         pageNo: paging ? pageNo || 0 : null,
         pageSize: paging ? pageSize || 20 : null,
     }
-
-    next()
 }
 
 async function fetchArticleHistoryList(req, res, next) {
     try {
         const historyItems = await ArticleHistoryModel.fetchHistoryByArticleId(
             req.params.articleId,
-            req.query,
+            withDefaultFilterParams(req.query),
         )
 
         res.status(HttpStatus.OK).json(historyItems)

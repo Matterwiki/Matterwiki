@@ -1,8 +1,7 @@
 exports.ERRORS = {
     DUPLICATE_ADMIN_USER: {
         code: 'ER_DUP_ADMIN',
-        message:
-            "There was an error creating the admin user. Chances are you're already set up",
+        message: 'Admin user already exists.',
     },
     DUPLICATE_EMAIL: {
         code: 'ER_DUP_EMAIL',
@@ -11,10 +10,6 @@ exports.ERRORS = {
     CREDS_WRONG: {
         code: 'CREDS_WRONG',
         message: 'Email or Password is wrong',
-    },
-    BAD_PASSWORD: {
-        code: 'BAD_PASSWORD',
-        message: 'Password is not accurate.',
     },
     INVALID_TOKEN: {
         code: 'INVALID_TOKEN',

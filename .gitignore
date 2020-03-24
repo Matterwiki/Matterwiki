@@ -1,5 +1,4 @@
-# misc
-.vscode
+
 .idea
 
 # Logs
@@ -23,7 +22,6 @@ coverage
 
 # configuration
 .env
-!config.example.env
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -46,6 +44,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-dist/
-db/matterwiki.sqlite
-tests/e2e/db/matterwiki.sqlite
+# Misc
+package.json.lerna_backup

@@ -5,10 +5,7 @@ exports.up = async knex => {
         table.charset('utf8')
         table.collate('utf8_unicode_ci')
         table.increments().primary()
-        table
-            .string('title')
-            .notNullable()
-            .unique()
+        table.string('title').notNullable().unique()
         table.text('content', 'mediumtext').notNullable()
         table.string('change_log').notNullable()
         table.text('search_tokens', 'mediumtext').notNullable()
@@ -17,22 +14,10 @@ exports.up = async knex => {
             .unsigned()
             .references('topic.id')
             .notNullable()
-        table
-            .integer('created_by_id')
-            .unsigned()
-            .references('user.id')
-        table
-            .integer('modified_by_id')
-            .unsigned()
-            .references('user.id')
-        table
-            .timestamp('created_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())
-        table
-            .timestamp('modified_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())
+        table.integer('created_by_id').unsigned().references('user.id')
+        table.integer('modified_by_id').unsigned().references('user.id')
+        table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
+        table.timestamp('modified_at').notNullable().defaultTo(knex.fn.now())
     })
 
     await knex.raw('alter table `article` add fulltext(`search_tokens`);')

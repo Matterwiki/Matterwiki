@@ -3,12 +3,9 @@ const test = require('ava')
 const { UserUpdateValidator } = require('../user-validator')
 
 const { validationTestRunner } = require('../../common/test-utils/index')
-const { makeUpdatePayload } = require('./user-test-utils')
+const { makeUserData } = require('./user-test-utils')
 
-const validationTester = validationTestRunner(
-    makeUpdatePayload,
-    UserUpdateValidator,
-)
+const validationTester = validationTestRunner(makeUserData, UserUpdateValidator)
 
 test(
     'missing email',
@@ -48,8 +45,16 @@ test(
     { name: ['"name" length must be at least 3 characters long'] },
 )
 
+test('allow empty password', async t => {
+    const user = makeUserData()
+    delete user.password
+
+    const error = await UserUpdateValidator.validate(user)
+    t.falsy(error)
+})
+
 test('valid user', async t => {
-    const user = makeUpdatePayload()
+    const user = makeUserData()
     const error = await UserUpdateValidator.validate(user)
     t.falsy(error)
 })

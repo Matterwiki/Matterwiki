@@ -122,7 +122,14 @@ class TopicModel extends Model {
             filters || {}
 
         const resultSet = await this.query()
-            .select('id', 'name', 'description', 'modifiedAt', 'createdAt')
+            .select(
+                'id',
+                'name',
+                'isDefault',
+                'description',
+                'modifiedAt',
+                'createdAt',
+            )
             // Search term modifier
             .modify(qb => {
                 if (searchTerm) {
@@ -208,11 +215,9 @@ class TopicModel extends Model {
         )
 
         await Promise.map(['article', 'articleHistory'], related => {
-            return this.relatedQuery(related)
-                .for(id)
-                .update({
-                    topicId: uncategorisedTopicId,
-                })
+            return this.relatedQuery(related).for(id).update({
+                topicId: uncategorisedTopicId,
+            })
         })
 
         return this.query().deleteById(id)

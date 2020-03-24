@@ -47,3 +47,5 @@ test('(200) user deleted', async t => {
     const user = await UserModel.fetchUserById(t.context.users.user1.id)
     t.falsy(user)
 })
+
+test.todo('(200) articles linked to deleted user are reassigned')

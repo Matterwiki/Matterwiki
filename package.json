@@ -1,7 +1,37 @@
 {
-  "name": "root",
+  "name": "matterwiki",
   "private": true,
+  "scripts": {
+    "postinstall": "lerna bootstrap --no-ci",
+    "start": "lerna run start --parallel",
+    "test": "lerna run test --concurrency=1 --stream",
+    "add": "lerna add",
+    "lint": "eslint './packages/**/*.{js,jsx}'",
+    "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'"
+  },
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.9",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix"
   }
 }

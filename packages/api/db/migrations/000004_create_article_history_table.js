@@ -15,26 +15,11 @@ exports.up = async knex => {
         table.string('title')
         table.text('content')
         table.string('change_log')
-        table
-            .integer('topic_id')
-            .unsigned()
-            .references('topic.id')
-        table
-            .integer('created_by_id')
-            .unsigned()
-            .references('user.id')
-        table
-            .integer('modified_by_id')
-            .unsigned()
-            .references('user.id')
-        table
-            .timestamp('created_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())
-        table
-            .timestamp('modified_at')
-            .notNullable()
-            .defaultTo(knex.fn.now())
+        table.integer('topic_id').unsigned().references('topic.id')
+        table.integer('created_by_id').unsigned().references('user.id')
+        table.integer('modified_by_id').unsigned().references('user.id')
+        table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
+        table.timestamp('modified_at').notNullable().defaultTo(knex.fn.now())
     })
 }
 

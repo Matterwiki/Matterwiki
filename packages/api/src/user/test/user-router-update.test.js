@@ -12,7 +12,7 @@ const {
     testAuth,
     testAdminRole,
 } = require('../../common/test-utils/index')
-const { makeUpdatePayload, testUserSetup } = require('./user-test-utils')
+const { makeUserData, testUserSetup } = require('./user-test-utils')
 
 const apiUrl = '/api/user'
 
@@ -24,11 +24,12 @@ testAuth('put')
 testAdminRole('put')
 
 const getUpdatedPayload = userToUpdate => {
-    const updates = makeUpdatePayload()
+    const updates = makeUserData()
 
     const payload = {
         name: updates.name,
         about: updates.about,
+        password: updates.password,
 
         // unchanged
         email: userToUpdate.email,
@@ -75,6 +76,28 @@ test('(409) duplicate email', async t => {
     t.is(res.body.error.code, ERRORS.DUPLICATE_EMAIL.code)
 })
 
+test('(200) password unchanged if absent from payload', async t => {
+    const payload = getUpdatedPayload(t.context.users.user1)
+    delete payload.password
+
+    const res = await t.context.apiClient
+        .put(t.context.apiUrl)
+        .set('x-access-token', t.context.tokens.admin)
+        .send(payload)
+
+    t.is(res.status, HttpStatus.OK)
+
+    const userFromDb = await UserModel.fetchUserById(t.context.users.user1.id)
+
+    t.truthy(userFromDb)
+    t.true(
+        await bcrypt.compare(
+            t.context.users.user1Data.password,
+            userFromDb.password,
+        ),
+    )
+})
+
 test('(200) user updated', async t => {
     // Prep user we are updating with older date, for testing.
     const dateFrom2018 = new Date(new Date().setFullYear(2018))
@@ -103,14 +126,7 @@ test('(200) user updated', async t => {
         pick(payload, ['name', 'email', 'about']),
     )
 
-    t.true(
-        await bcrypt.compare(
-            t.context.users.user1Data.password,
-            userFromDb.password,
-        ),
-        'Password should not change during PUT operation.',
-    )
-
+    t.true(await bcrypt.compare(payload.password, userFromDb.password))
     t.is(dateFrom2018.getFullYear(), userFromDb.createdAt.getFullYear())
     t.not(dateFrom2018.getFullYear(), userFromDb.modifiedAt.getFullYear())
 

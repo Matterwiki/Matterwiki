@@ -200,17 +200,22 @@ class UserModel extends Model {
      * @param {number} id
      * @param {object} user
      * @param {string} user.name
+     * @param {string} user.password
      * @param {string} user.about
      * @param {string} user.email
      * @returns
      */
-    static updateUserById(id, { name, about, email }) {
-        return this.query().updateAndFetchById(id, {
+    static async updateUserById(id, { name, password, about, email }) {
+        const userData = {
             name,
             about,
             email,
             modifiedAt: new Date(),
-        })
+        }
+        if (password) {
+            userData.password = await bcrypt.hash(password, SALT_ROUNDS)
+        }
+        return this.query().updateAndFetchById(id, userData)
     }
 
     /**

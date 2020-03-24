@@ -24,21 +24,8 @@ exports.makeUserData = function makeUserData(num = 1) {
         .output()
 }
 
-exports.makePasswordUpdatePayload = function makePasswordUpdatePayload() {
-    return dream
-        .schema({
-            currentPassword: 'user-password',
-            newPassword: 'user-password',
-        })
-        .generateRnd(1)
-        .output()
-}
-
-exports.makeLoginPayload = function() {
+exports.makeLoginPayload = function () {
     return pick(exports.makeUserData(), ['email', 'password'])
-}
-exports.makeUpdatePayload = function() {
-    return pick(exports.makeUserData(), ['name', 'email', 'about'])
 }
 
 exports.createAdmin = async function createAdmin(overrides = {}) {

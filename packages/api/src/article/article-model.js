@@ -293,9 +293,7 @@ class ArticleModel extends Model {
      */
     static async deleteArticleById(id) {
         // Delete history entries before deleting article
-        await this.relatedQuery('articleHistory')
-            .for(id)
-            .delete()
+        await this.relatedQuery('articleHistory').for(id).delete()
 
         return this.query().deleteById(id)
     }
