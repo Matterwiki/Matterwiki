@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import _get from 'lodash/get'
 import {
@@ -13,6 +13,7 @@ import {
 
 import Icons from './Icons'
 import { IconButton } from './Buttons'
+import { FormContext } from './Form'
 
 const inputStyles = {
     focusBorderColor: 'primary.400',
@@ -111,7 +112,10 @@ function GenericFormInput({ nonInputProps, ...inputProps }) {
 /* eslint-enable react/prop-types */
 
 /**
- * Input with tonnes of customization
+ * A "batteries included" Input component with customization.
+ *
+ * ⚠️ This will work only if it is a child to the `<Form/>` component!
+ *    We use `FormContext` to provide some common props to this component.
  * @param {*} props
  */
 export default function FormInput({
@@ -120,32 +124,34 @@ export default function FormInput({
     isRequired,
     labelText,
     type,
-    validationError,
-    values,
     ...props
 }) {
+    const { error, initialData, onFieldChange } = useContext(FormContext)
+
     const nonInputProps = {
         fieldName,
         helperText,
         isRequired,
         labelText,
-        validationError,
-        values,
+        validationError: _get(error, 'message'),
+        values: initialData,
     }
 
     if (type === 'password')
         return (
             <PasswordFormInput
-                type={type}
                 {...props}
+                type={type}
                 nonInputProps={nonInputProps}
+                onChange={onFieldChange}
             />
         )
     return (
         <GenericFormInput
-            type={type}
             {...props}
+            type={type}
             nonInputProps={nonInputProps}
+            onChange={onFieldChange}
         />
     )
 }
@@ -161,9 +167,6 @@ FormInput.propTypes = {
     helperText: PropTypes.string,
     isRequired: PropTypes.bool,
     labelText: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string,
-    validationError: PropTypes.any,
-    values: PropTypes.object.isRequired,
 }

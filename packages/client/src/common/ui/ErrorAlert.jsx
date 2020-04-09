@@ -12,7 +12,10 @@ export default function ErrorAlert({
     defaultErrorMessage,
     ...alertProps
 }) {
-    const errorMessage = _get(jsError, 'message') || defaultErrorMessage
+    const errorMessage =
+        (jsError.isJoiValidationErr
+            ? defaultErrorMessage
+            : _get(jsError, 'message')) || defaultErrorMessage
 
     return (
         <Alert
