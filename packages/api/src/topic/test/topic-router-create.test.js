@@ -55,7 +55,7 @@ test('(409) duplicate topic', async t => {
 test('(201) topic created', async t => {
     const topic = makeTopicData()
 
-    const res = await await t.context.apiClient
+    const res = await t.context.apiClient
         .post(t.context.apiUrl)
         .set('x-access-token', t.context.tokens.admin)
         .send(topic)

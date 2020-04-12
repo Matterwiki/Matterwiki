@@ -264,6 +264,7 @@ test('(200) search filter returns expected list', async t => {
         [
             'id',
             'name',
+            'isDefault',
             'description',
             'modifiedAt',
             'createdAt',

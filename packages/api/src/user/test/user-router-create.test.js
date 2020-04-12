@@ -49,7 +49,7 @@ test('(409) duplicate email', async t => {
 test('(201) user created', async t => {
     const user = makeUserData()
 
-    const res = await await t.context.apiClient
+    const res = await t.context.apiClient
         .post(t.context.apiUrl)
         .set('x-access-token', t.context.tokens.admin)
         .send(user)
