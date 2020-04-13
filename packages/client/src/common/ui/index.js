@@ -2,6 +2,7 @@ export * from './Buttons'
 export { default as ErrorAlert } from './ErrorAlert'
 export { default as Form } from './Form' // 📝 We are not importing `FormContext` to other parts of the app!
 export { default as FormInput } from './FormInput'
+export * from './FileUpload'
 export { default as Global } from './Global'
 export * from './Headers'
 export { default as Icons } from './Icons'

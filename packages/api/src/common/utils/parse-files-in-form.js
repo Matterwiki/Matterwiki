@@ -34,7 +34,7 @@ module.exports = function parseFilesInForm(req, options) {
             }),
         })
 
-        return upload.single(options.fieldName)(req, {}, function (err) {
+        upload.single(options.fieldName)(req, {}, function (err) {
             if (err) reject(err)
 
             const { file } = req

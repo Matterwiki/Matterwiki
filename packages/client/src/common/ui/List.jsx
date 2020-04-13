@@ -5,12 +5,11 @@ import {
     Flex,
     List as ChakraList,
     ListItem as ChakraListItem,
-    Text,
     Stack,
     Badge,
 } from '@chakra-ui/core'
 
-import { Description } from './Text'
+import { Description, Text } from './Text'
 import { Button } from './Buttons'
 import Icons from './Icons'
 

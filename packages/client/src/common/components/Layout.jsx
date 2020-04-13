@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { Stack, Box, Image, Link } from '@chakra-ui/core'
 
-import Logo from '@/assets/logo.png'
+import LogoWithName from '@/assets/logo-with-name.png'
 
 import NavHeader from './NavHeader'
 import SimpleHeader from './SimpleHeader'
@@ -39,7 +39,7 @@ export default function Layout({ children }) {
                     <Image
                         display="inline"
                         width={20}
-                        src={Logo}
+                        src={LogoWithName}
                         alt="Wiki Logo"
                     />
                 </Link>

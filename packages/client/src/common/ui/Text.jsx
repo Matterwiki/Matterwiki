@@ -1,6 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Text, Heading as ChakraHeading } from '@chakra-ui/core'
+import {
+    Flex,
+    Text as ChakraText,
+    Heading as ChakraHeading,
+} from '@chakra-ui/core'
 
 /**
  * Simple description wrapper
@@ -8,9 +12,9 @@ import { Flex, Text, Heading as ChakraHeading } from '@chakra-ui/core'
  */
 export function Description({ children, ...props }) {
     return (
-        <Text color="gray.500" fontSize="xs" isTruncated {...props}>
+        <ChakraText color="gray.500" fontSize="xs" isTruncated {...props}>
             {children}
-        </Text>
+        </ChakraText>
     )
 }
 
@@ -26,7 +30,7 @@ export function TextWithIcon({ icon: Icon, text, ...props }) {
     return (
         <Flex justifyContent="flex-start" alignItems="center" {...props}>
             <Icon marginRight={2} />
-            <Text>{text}</Text>
+            <ChakraText>{text}</ChakraText>
         </Flex>
     )
 }
@@ -73,6 +77,11 @@ export function Heading3(props) {
  */
 export function Heading4(props) {
     return (
-        <ChakraHeading as="h4" size="sm" {...commonHeadingStyles} {...props} />
+        <ChakraHeading as="h4" size="md" {...commonHeadingStyles} {...props} />
     )
 }
+
+/**
+ * One stop shop for text needs!
+ */
+export const Text = ChakraText

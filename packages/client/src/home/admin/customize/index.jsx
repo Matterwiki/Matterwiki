@@ -1,5 +1,12 @@
 import React from 'react'
+import { Stack } from '@chakra-ui/core'
+
+import ChangeLogo from './ChangeLogo'
 
 export default function Customize() {
-    return <div>Customize</div>
+    return (
+        <Stack>
+            <ChangeLogo />
+        </Stack>
+    )
 }

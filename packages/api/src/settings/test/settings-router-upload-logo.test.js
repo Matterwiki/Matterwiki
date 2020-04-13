@@ -20,7 +20,6 @@ test.before(async t => {
     // Change FILE_STORAGE_PATH env var to something within the test directory
     t.context.oldFileStoragePath = process.env.FILE_STORAGE_PATH
     process.env.FILE_STORAGE_PATH = dirPath
-    console.log('env var in test', process.env.FILE_STORAGE_PATH)
 })
 
 testDbSetup()

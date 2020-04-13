@@ -25,7 +25,7 @@ const [useUserStore] = createStore((set, get) => ({
      * @param {*} id
      */
     find(id) {
-        return _find(get().userList, u => u.id.toString() === id)
+        return _find(get().userList, u => u.id.toString() === id.toString())
     },
 
     /**

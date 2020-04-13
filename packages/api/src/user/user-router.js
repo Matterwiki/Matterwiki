@@ -180,7 +180,6 @@ async function updateUser(req, res, next) {
         const user = await UserModel.updateUserById(req.item.id, req.body)
         res.status(HttpStatus.OK).json(withoutSensitiveFields(user))
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

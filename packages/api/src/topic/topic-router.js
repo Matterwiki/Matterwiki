@@ -158,7 +158,6 @@ async function deleteTopic(req, res, next) {
         await TopicModel.deleteTopicById(req.item.id)
         res.status(HttpStatus.OK).end()
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

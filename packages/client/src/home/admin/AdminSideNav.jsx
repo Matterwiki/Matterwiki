@@ -12,6 +12,7 @@ function AdminSideNavItem(props) {
             borderBottom="1px"
             borderColor="gray.100"
             borderRadius="4px"
+            padding={3}
         />
     )
 }
@@ -20,7 +21,7 @@ export default function AdminSideNav() {
     const { url } = useRouteMatch()
 
     return (
-        <Stack>
+        <Stack spacing={0}>
             <AdminSideNavItem
                 to={`${url}/users`}
                 icon={Icons.FaUserFriends}

@@ -18,4 +18,4 @@ module.exports = router
     .use('/api/settings', settingsRouter)
     .use('/api/user', userRouter)
     // TODO: Stuff will change when we have S3 and other integrations
-    .use('/public', express.static(process.env.FILE_STORAGE_PATH))
+    .use('/api/public', express.static(process.env.FILE_STORAGE_PATH))

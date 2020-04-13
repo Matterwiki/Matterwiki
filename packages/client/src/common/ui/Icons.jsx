@@ -12,12 +12,16 @@ import {
     FaSignOutAlt,
     FaTerminal,
     FaTrashAlt,
+    FaUpload,
     FaUserFriends,
 } from 'react-icons/fa'
 import { Box } from '@chakra-ui/core'
 
 const withBox = icon => props => <Box as={icon} size={4} {...props} />
 
+/**
+ * Icons used in the app. `withBox` gives it styling super powers! ⚡️
+ */
 export default {
     FaBars: withBox(FaBars),
     FaCog: withBox(FaCog),
@@ -31,5 +35,6 @@ export default {
     FaSignOutAlt: withBox(FaSignOutAlt),
     FaTerminal: withBox(FaTerminal),
     FaTrashAlt: withBox(FaTrashAlt),
+    FaUpload: withBox(FaUpload),
     FaUserFriends: withBox(FaUserFriends),
 }

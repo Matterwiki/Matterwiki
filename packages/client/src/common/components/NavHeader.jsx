@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 import { useRouteMatch } from 'react-router-dom'
 
 import {
@@ -10,12 +10,14 @@ import {
 } from '../ui/'
 import { useAuthStore } from '../store/'
 
-import Logo from '@/assets/logo.png'
+import LogoImage from './LogoImage'
 
 function LeftPartNav() {
     return (
         <RouterLink to="/">
-            <Image width={40} src={Logo} alt="Wiki Logo" />
+            <Box width={6}>
+                <LogoImage />
+            </Box>
         </RouterLink>
     )
 }

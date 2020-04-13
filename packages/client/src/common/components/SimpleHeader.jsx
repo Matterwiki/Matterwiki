@@ -1,9 +1,8 @@
 import React from 'react'
-import { Image } from '@chakra-ui/core'
-
-import Logo from '@/assets/logo.png'
+import { Box } from '@chakra-ui/core'
 
 import { SimpleHeader as GenericSimpleHeader } from '../ui/'
+import { LogoImage } from '../components'
 
 /**
  * A simple app header, used for unauthenticated pages
@@ -11,7 +10,9 @@ import { SimpleHeader as GenericSimpleHeader } from '../ui/'
 export default function SimpleHeader() {
     return (
         <GenericSimpleHeader>
-            <Image width={64} src={Logo} alt="Wiki Logo" />
+            <Box width={20}>
+                <LogoImage />
+            </Box>
         </GenericSimpleHeader>
     )
 }
