@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import createStore from './create-store'
 import userApi from '../utils/user-api'
 
@@ -9,19 +8,15 @@ export const [useAuthStore, authStoreApi] = createStore((set, get) => ({
     currentUser: {},
 
     /**
-     * Checker to verify if current user is an admin!
-     */
-    isAdmin() {
-        return _get(get().currentUser, 'role') === 'ADMIN'
-    },
-
-    /**
      * Shortcut to set currentUser state
      * @param {*} currentUser
      */
     setCurrentUser(currentUser) {
         set(state => {
             state.currentUser = currentUser
+            if (state.currentUser) {
+                state.currentUser.isAdmin = currentUser.role === 'ADMIN'
+            }
         })
     },
 

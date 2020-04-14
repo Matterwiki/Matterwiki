@@ -8,8 +8,8 @@ import { pickFromState } from '@/common/utils/'
 import useUserStore from './user-store'
 
 export default function UsersList() {
-    const [userList, getUserList, isAdmin] = useUserStore(
-        pickFromState('userList', 'getList', 'isAdmin'),
+    const [userList, getUserList] = useUserStore(
+        pickFromState('userList', 'getList'),
         shallow,
     )
 
@@ -26,7 +26,7 @@ export default function UsersList() {
     return (
         <List>
             {userList.map(user => {
-                const { id, about, name } = user
+                const { id, about, name, isAdmin } = user
                 const handleEditClick = () => history.push(`${url}/${id}`)
                 const handleDeleteClick = () => {
                     history.push(`${url}/${id}/delete`)
@@ -36,7 +36,7 @@ export default function UsersList() {
                     <CardListItem
                         key={id}
                         name={name}
-                        badgeText={isAdmin(id) ? 'admin' : ''}
+                        badgeText={isAdmin ? 'admin' : ''}
                         about={about}
                         onEditClick={handleEditClick}
                         onDeleteClick={handleDeleteClick}

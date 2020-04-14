@@ -12,15 +12,6 @@ const [useUserStore] = createStore((set, get) => ({
     userList: [],
 
     /**
-     * Checks if passed in userId is an admin
-     * @param {*} id
-     */
-    isAdmin(id) {
-        const user = get().find(id)
-        return !user || user.role === 'ADMIN'
-    },
-
-    /**
      * Given an id, finds a user in a list
      * @param {*} id
      */
@@ -34,7 +25,10 @@ const [useUserStore] = createStore((set, get) => ({
     async getList() {
         const userList = await userApi.getList()
         set(state => {
-            state.userList = userList
+            state.userList = userList.map(u => {
+                u.isAdmin = u.role === 'ADMIN'
+                return u
+            })
         })
     },
 

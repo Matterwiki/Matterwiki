@@ -24,11 +24,11 @@ function LeftPartNav() {
 
 function RightPartNav() {
     const { url } = useRouteMatch('/home')
-    const isAdmin = useAuthStore(s => s.isAdmin)
+    const currentUser = useAuthStore(s => s.currentUser)
 
     return (
         <>
-            {isAdmin() ? (
+            {currentUser.isAdmin ? (
                 <NavItem
                     to={`${url}/admin`}
                     icon={Icons.FaTerminal}

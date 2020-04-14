@@ -7,9 +7,14 @@
     "test": "lerna run test --concurrency=1 --stream",
     "add": "lerna add",
     "lint": "eslint './packages/**/*.{js,jsx}'",
-    "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'"
+    "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'",
+    "cm": "git-cz"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/config-lerna-scopes": "^8.3.4",
+    "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-config-standard": "^14.1.1",
@@ -28,10 +33,17 @@
   },
   "husky": {
     "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

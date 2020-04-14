@@ -40,8 +40,8 @@ export default function ProtectedRoute({
     adminOnly,
     ...routerProps
 }) {
-    const [currentUser, verifyAuth, isAdmin] = useAuthStore(
-        pickFromState('currentUser', 'verifyAuth', 'isAdmin'),
+    const [currentUser, verifyAuth] = useAuthStore(
+        pickFromState('currentUser', 'verifyAuth'),
         shallow,
     )
     const verifyUserIfNeeded = async () => {
@@ -62,7 +62,7 @@ export default function ProtectedRoute({
 
                 // Do not allow user to proceed if this is an admin route and they aren't
                 // allowed in there.
-                if (adminOnly && !isAdmin()) return <RedirectToHome />
+                if (adminOnly && !currentUser.isAdmin) return <RedirectToHome />
 
                 return <Component />
             }}
