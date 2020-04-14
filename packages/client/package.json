@@ -43,7 +43,6 @@
     "zustand": "^2.2.3"
   },
   "devDependencies": {
-    "@neutrinojs/dev-server": "^9.1.0",
     "@neutrinojs/jest": "^9.1.0",
     "@neutrinojs/react": "^9.1.0",
     "@testing-library/react": "^10.0.1",
