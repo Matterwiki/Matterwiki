@@ -1,8 +1,8 @@
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
 
-import { createStore } from '@/common/store'
-import topicApi from './topic-api'
+import { createStore, withStringPicker } from './store-utils'
+import topicApi from '../utils/topic-api'
 
 /**
  * Topic store that holds topic data.
@@ -76,4 +76,4 @@ const [useTopicStore] = createStore((set, get) => ({
     },
 }))
 
-export default useTopicStore
+export default withStringPicker(useTopicStore)

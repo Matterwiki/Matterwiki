@@ -1,16 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import shallow from 'zustand/shallow'
 import { useParams } from 'react-router-dom'
 import { useAsync } from 'react-async-hook'
 import { Box } from '@chakra-ui/core'
 
-import { pickFromState } from '@/common/utils/'
+import { topicApi } from '@/common/utils/'
+import { useTopicStore } from '@/common/store/'
 import { FullScreenSpinner, SimpleModal, ErrorAlert } from '@/common/ui'
 
 import TopicForm from './TopicForm'
-import useTopicStore from './topic-store'
-import topicApi from './topic-api'
 
 /**
  * Manages creating and editing topics
@@ -20,10 +18,7 @@ import topicApi from './topic-api'
  */
 export default function ManageTopicModal({ createMode, onClose: handleClose }) {
     const { id } = useParams()
-    const [saveTopic, createTopic] = useTopicStore(
-        pickFromState('save', 'create'),
-        shallow,
-    )
+    const [saveTopic, createTopic] = useTopicStore('save', 'create')
     const { loading, error, result } = useAsync(async () => {
         if (createMode) return
         return topicApi.getOne(id)

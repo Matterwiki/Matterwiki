@@ -1,18 +1,12 @@
 import React from 'react'
-import shallow from 'zustand/shallow'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { FullScreenSpinner, List, CardListItem, Heading4 } from '@/common/ui'
-import { pickFromState } from '@/common/utils/'
 import useUserStore from './user-store'
 
 export default function UsersList() {
-    const [userList, getUserList] = useUserStore(
-        pickFromState('userList', 'getList'),
-        shallow,
-    )
-
+    const [userList, getUserList] = useUserStore('userList', 'getList')
     const history = useHistory()
     const { url } = useRouteMatch()
     const { error, loading } = useAsync(getUserList, [])

@@ -1,13 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Stack } from '@chakra-ui/core'
 
-import ErrorAlert from './ErrorAlert'
-
-/**
- * Context that gets shared between all form elements within the `Form` component
- */
-export const FormContext = createContext({})
+import ErrorAlert from '../ErrorAlert'
+import { FormContext } from './utils'
 
 /**
  * A "batteries included" form wrapper that holds some common props.
@@ -39,8 +35,7 @@ export default function Form({
             ) : null}
             <form onSubmit={handleSubmit}>
                 <FormContext.Provider value={contextValue}>
-                    {// Only render if contextValue has been set
-                    contextValue ? children : null}
+                    <Stack spacing={3}>{contextValue ? children : null}</Stack>
                 </FormContext.Provider>
             </form>
         </Stack>

@@ -11,7 +11,7 @@ import { useLocationQuery } from '@/common/hooks/'
 const defaultRoute = { pathname: '/home' }
 
 export default function LoginRoute() {
-    const loginUser = useAuthStore(s => s.login)
+    const [loginUser] = useAuthStore('login')
     const history = useHistory()
     const query = useLocationQuery()
 

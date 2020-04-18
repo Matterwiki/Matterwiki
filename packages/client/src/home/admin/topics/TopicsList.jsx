@@ -1,17 +1,12 @@
 import React from 'react'
-import shallow from 'zustand/shallow'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
 import { FullScreenSpinner, List, CardListItem, Heading4 } from '@/common/ui'
-import { pickFromState } from '@/common/utils/'
-import useTopicStore from './topic-store'
+import { useTopicStore } from '@/common/store/'
 
 export default function TopicsList() {
-    const [topicList, getTopicList] = useTopicStore(
-        pickFromState('topicList', 'getList'),
-        shallow,
-    )
+    const [topicList, getTopicList] = useTopicStore('topicList', 'getList')
     const history = useHistory()
     const { url } = useRouteMatch()
     const { error, loading } = useAsync(getTopicList, [])

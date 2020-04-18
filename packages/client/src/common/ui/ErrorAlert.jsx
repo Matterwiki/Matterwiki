@@ -18,11 +18,7 @@ export default function ErrorAlert({
             : _get(jsError, 'message')) || defaultErrorMessage
 
     return (
-        <Alert
-            fontSize="md"
-            status="error"
-            variant="left-accent"
-            {...alertProps}>
+        <Alert status="error" variant="left-accent" {...alertProps}>
             <AlertIcon />
             {errorMessage}
         </Alert>

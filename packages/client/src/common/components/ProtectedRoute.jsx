@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import shallow from 'zustand/shallow'
 import _isEmpty from 'lodash/isEmpty'
 import { useAsync } from 'react-async-hook'
 import { Route, Redirect } from 'react-router-dom'
 
 import { FullScreenSpinner } from '../ui/'
-import { pickFromState } from '../utils/'
 import { useAuthStore } from '../store/'
 
 function RedirectToLogin({ location }) {
@@ -40,10 +38,7 @@ export default function ProtectedRoute({
     adminOnly,
     ...routerProps
 }) {
-    const [currentUser, verifyAuth] = useAuthStore(
-        pickFromState('currentUser', 'verifyAuth'),
-        shallow,
-    )
+    const [currentUser, verifyAuth] = useAuthStore('currentUser', 'verifyAuth')
     const verifyUserIfNeeded = async () => {
         // 🏎 Perf measure: If user is already fetched, no need to run this!
         if (!_isEmpty(currentUser)) return

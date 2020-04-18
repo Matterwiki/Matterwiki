@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import shallow from 'zustand/shallow'
 import { useParams } from 'react-router-dom'
 
 import { AlertModal } from '@/common/ui'
-import { pickFromState } from '@/common/utils/'
 import useUserStore from './user-store'
 
 export default function DeleteUserModal({ onClose: handleClose }) {
     const { id } = useParams()
-    const [findUserById, removeUser] = useUserStore(
-        pickFromState('find', 'remove'),
-        shallow,
-    )
+    const [findUserById, removeUser] = useUserStore('find', 'remove')
     const [userToDelete, setUserToDelete] = useState(null)
 
     useEffect(() => {

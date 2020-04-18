@@ -1,11 +1,10 @@
 import React from 'react'
-import shallow from 'zustand/shallow'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { useAsync } from 'react-async-hook'
 import { Box } from '@chakra-ui/core'
 
-import { pickFromState, userApi } from '@/common/utils/'
+import { userApi } from '@/common/utils/'
 import { FullScreenSpinner, SimpleModal, ErrorAlert } from '@/common/ui'
 import { UserForm } from '@/common/components'
 
@@ -19,10 +18,7 @@ import useUserStore from './user-store'
  */
 export default function ManageUserModal({ createMode, onClose: handleClose }) {
     const { id } = useParams()
-    const [saveUser, createUser] = useUserStore(
-        pickFromState('save', 'create'),
-        shallow,
-    )
+    const [saveUser, createUser] = useUserStore('save', 'create')
     const { loading, error, result } = useAsync(async () => {
         if (createMode) return
         return userApi.getOne(id)

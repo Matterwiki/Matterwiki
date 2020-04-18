@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import _cloneDeep from 'lodash/cloneDeep'
 import _isFunction from 'lodash/isFunction'
 
@@ -15,6 +15,10 @@ import _isFunction from 'lodash/isFunction'
 export default function useForm(initialValue) {
     const [value, setValue] = useState(_cloneDeep(initialValue) || {})
 
+    const setFieldValue = useCallback((propName, propValue) => {
+        setValue(v => ({ ...v, [propName]: propValue }))
+    }, [])
+
     return [
         value,
 
@@ -24,7 +28,7 @@ export default function useForm(initialValue) {
          */
         function handleChange(e) {
             e.persist()
-            setValue(v => ({ ...v, [e.target.name]: e.target.value }))
+            setFieldValue(e.target.name, e.target.value)
         },
 
         /**
@@ -39,5 +43,11 @@ export default function useForm(initialValue) {
                 return submitFn(value)
             }
         },
+
+        /**
+         * Used for one-off scenarios where a value is set directly, not through
+         * onChange handlers
+         */
+        setFieldValue,
     ]
 }

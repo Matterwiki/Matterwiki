@@ -48,7 +48,7 @@ export default function Global({ children }) {
             <Box
                 background="white"
                 color="text"
-                fontSize="1.4rem"
+                fontSize="md"
                 lineHeight="1.6"
                 overflowX="hidden"
                 margin="0">

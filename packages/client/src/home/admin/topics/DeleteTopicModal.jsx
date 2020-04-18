@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import shallow from 'zustand/shallow'
 import { useParams } from 'react-router-dom'
 
 import { AlertModal } from '@/common/ui'
-import { pickFromState } from '@/common/utils/'
-import useTopicStore from './topic-store'
+import { useTopicStore } from '@/common/store/'
 
 export default function DeleteTopicModal({ onClose: handleClose }) {
     const { id } = useParams()
-    const [findTopicById, removeTopic] = useTopicStore(
-        pickFromState('find', 'remove'),
-        shallow,
-    )
+    const [findTopicById, removeTopic] = useTopicStore('find', 'remove')
 
     const [topicToDelete, setTopicToDelete] = useState(null)
 

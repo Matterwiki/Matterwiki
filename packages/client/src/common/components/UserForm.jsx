@@ -36,14 +36,14 @@ export default function UserForm({
             onFieldChange={handleChange}
             onSubmit={execute}>
             <FormInput
+                isRequired
                 fieldName="name"
-                isRequired={true}
                 labelText="Name"
                 placeholder="Ward Cunningham"
             />
             <FormInput
+                isRequired
                 fieldName="email"
-                isRequired={true}
                 labelText="Email"
                 placeholder="ward@cunningham.com"
                 type="email"

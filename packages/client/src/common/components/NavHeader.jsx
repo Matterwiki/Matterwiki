@@ -1,4 +1,5 @@
 import React from 'react'
+import _get from 'lodash/get'
 import { Box } from '@chakra-ui/core'
 import { useRouteMatch } from 'react-router-dom'
 
@@ -24,11 +25,11 @@ function LeftPartNav() {
 
 function RightPartNav() {
     const { url } = useRouteMatch('/home')
-    const currentUser = useAuthStore(s => s.currentUser)
+    const [currentUser] = useAuthStore('currentUser')
 
     return (
         <>
-            {currentUser.isAdmin ? (
+            {_get(currentUser, 'isAdmin') ? (
                 <NavItem
                     to={`${url}/admin`}
                     icon={Icons.FaTerminal}
@@ -36,7 +37,7 @@ function RightPartNav() {
                 />
             ) : null}
             <NavItem
-                to={`${url}/article/new`}
+                to={`${url}/articles/new`}
                 icon={Icons.FaRegPlusSquare}
                 name="New Article"
             />

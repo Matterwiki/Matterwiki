@@ -28,7 +28,7 @@ export function CardListItem({
             borderColor="gray.100"
             alignItems="center">
             <Box flexGrow={1}>
-                <Text as="div" fontSize="md">
+                <Text as="div">
                     {name}
                     {badgeText ? (
                         <Badge

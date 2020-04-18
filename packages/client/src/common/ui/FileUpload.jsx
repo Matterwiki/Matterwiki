@@ -23,7 +23,6 @@ function FileInputWrapper(props) {
     return (
         <PseudoBox
             role="group"
-            fontSize="md"
             position="relative"
             overflow="hidden"
             display="inline-block"

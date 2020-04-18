@@ -5,7 +5,7 @@ import { Heading2, Heading3, Heading4, RouterLink } from '@/common/ui'
 import { useAuthStore } from '@/common/store/'
 
 export default function NotFound() {
-    const logoutUser = useAuthStore(state => state.logout)
+    const [logoutUser] = useAuthStore('logout')
     useEffect(logoutUser)
 
     return (

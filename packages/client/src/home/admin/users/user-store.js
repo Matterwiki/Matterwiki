@@ -1,7 +1,7 @@
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
 
-import { createStore } from '@/common/store'
+import { createStore, withStringPicker } from '@/common/store'
 import { userApi } from '@/common/utils'
 
 /**
@@ -78,4 +78,4 @@ const [useUserStore] = createStore((set, get) => ({
     },
 }))
 
-export default useUserStore
+export default withStringPicker(useUserStore)

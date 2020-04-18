@@ -29,7 +29,6 @@ export default function NavItem({
             {...props}
             to={to}
             backgroundColor={highlightActive && isActive ? 'gray.100' : null}
-            fontSize="md"
             color="text"
             marginRight={6}
             marginTop={[4, 4, 0]}
