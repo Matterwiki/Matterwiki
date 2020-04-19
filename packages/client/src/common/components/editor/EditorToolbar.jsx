@@ -1,34 +1,41 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Stack, Flex } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/core'
 import { useSlate } from 'slate-react'
 
 import { IconButton, Icons, Button } from '../../ui'
 
 import { toggleMark, isMarkActive, toggleBlock, isBlockActive } from './utils'
 
-const toolbarBtnStyles = {
+const getToolbarBtnStyles = isActive => ({
     variant: 'ghost',
     variantColor: 'gray',
-}
+    color: isActive ? 'primary.500' : 'text',
+})
 
-function EditorIconButton({ icon, onMouseDown: handleMouseDown, isActive }) {
-    return (
-        <IconButton
-            icon={icon}
-            active={isActive}
-            onMouseDown={handleMouseDown}
-            {...toolbarBtnStyles}
-        />
-    )
+function EditorIconButton({ icon, text, onMouseDown, isActive }) {
+    const props = {
+        onMouseDown,
+        ...getToolbarBtnStyles(isActive),
+    }
+
+    if (text)
+        return (
+            <Button {...props} fontSize="1rem">
+                {text}
+            </Button>
+        )
+    return <IconButton icon={icon} {...props} />
 }
 
 function MarkButton({ format, icon }) {
     const editor = useSlate()
+    const isActive = isMarkActive(editor, format)
+
     return (
         <EditorIconButton
             icon={icon}
-            isActive={isMarkActive(editor, format)}
+            isActive={isActive}
             onMouseDown={event => {
                 event.preventDefault()
                 toggleMark(editor, format)
@@ -39,36 +46,38 @@ function MarkButton({ format, icon }) {
 
 function BlockButton({ format, icon, text }) {
     const editor = useSlate()
+    const isActive = isBlockActive(editor, format)
 
-    const blockButtonProps = {
-        isActive: isBlockActive(editor, format),
-        onMouseDown(event) {
-            event.preventDefault()
-            toggleBlock(editor, format)
-        },
-    }
-
-    if (text) {
-        return (
-            <Button {...blockButtonProps} {...toolbarBtnStyles}>
-                {text}
-            </Button>
-        )
-    }
-
-    return <EditorIconButton icon={icon} {...blockButtonProps} />
+    return (
+        <EditorIconButton
+            icon={icon}
+            text={text}
+            isActive={isActive}
+            onMouseDown={event => {
+                event.preventDefault()
+                toggleBlock(editor, format)
+            }}
+        />
+    )
 }
 
 function ButtonContainer(props) {
     return (
-        <Flex borderRight="1px" borderColor="gray.200" padding={2} {...props} />
+        <Flex
+            flexWrap="nowrap"
+            borderRight="1px"
+            borderColor="gray.200"
+            padding={2}
+            {...props}
+        />
     )
 }
 
 export default function EditorToolbar() {
     return (
-        <Stack
-            isInline
+        <Flex
+            overflow="auto"
+            flexWrap="nowrap"
             borderBottom="1px"
             borderColor="gray.200"
             backgroundColor="gray.50">
@@ -76,7 +85,10 @@ export default function EditorToolbar() {
                 <MarkButton format="bold" icon={Icons.FaBold} />
                 <MarkButton format="italic" icon={Icons.FaItalic} />
                 <MarkButton format="underline" icon={Icons.FaUnderline} />
-                <MarkButton format="code" icon={Icons.FaStrikethrough} />
+                <MarkButton
+                    format="strikethrough"
+                    icon={Icons.FaStrikethrough}
+                />
                 <MarkButton format="code" icon={Icons.FaCode} />
             </ButtonContainer>
             <ButtonContainer>
@@ -86,6 +98,6 @@ export default function EditorToolbar() {
                 <BlockButton format="numbered-list" icon={Icons.FaListOl} />
                 <BlockButton format="bulleted-list" icon={Icons.FaListUl} />
             </ButtonContainer>
-        </Stack>
+        </Flex>
     )
 }

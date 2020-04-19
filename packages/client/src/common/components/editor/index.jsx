@@ -17,7 +17,7 @@ const HOTKEYS = {
     'mod+`': 'code',
 }
 
-const Editor = () => {
+export default function Editor() {
     const [value, setValue] = useState(initialValue)
     const renderElement = useCallback(props => <Element {...props} />, [])
     const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -32,22 +32,26 @@ const Editor = () => {
                 <EditorToolbar />
                 <Box
                     padding={3}
-                    as={Editable}
-                    renderElement={renderElement}
-                    renderLeaf={renderLeaf}
-                    placeholder="Enter some rich text…"
-                    spellCheck
-                    autoFocus
-                    onKeyDown={event => {
-                        for (const hotkey in HOTKEYS) {
-                            if (isHotkey(hotkey, event)) {
-                                event.preventDefault()
-                                const mark = HOTKEYS[hotkey]
-                                toggleMark(editor, mark)
+                    height="46vh"
+                    overflowY="auto"
+                    overflowX="hidden">
+                    <Editable
+                        renderElement={renderElement}
+                        renderLeaf={renderLeaf}
+                        placeholder="Enter some rich text…"
+                        spellCheck
+                        autoFocus
+                        onKeyDown={event => {
+                            for (const hotkey in HOTKEYS) {
+                                if (isHotkey(hotkey, event)) {
+                                    event.preventDefault()
+                                    const mark = HOTKEYS[hotkey]
+                                    toggleMark(editor, mark)
+                                }
                             }
-                        }
-                    }}
-                />
+                        }}
+                    />
+                </Box>
             </Slate>
         </Box>
     )
@@ -89,5 +93,3 @@ const initialValue = [
         children: [{ text: 'Try it out for yourself!' }],
     },
 ]
-
-export default Editor

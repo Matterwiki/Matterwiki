@@ -27,6 +27,7 @@ export function FormSelect({
             validationError={validationError}>
             <Select
                 {...props}
+                focusBorderColor="primary.100"
                 placeholder={placeholder}
                 id={fieldName}
                 name={fieldName}
