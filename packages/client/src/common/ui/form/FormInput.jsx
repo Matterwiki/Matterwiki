@@ -83,6 +83,8 @@ export default function FormInput({
         fieldName,
     )
 
+    // Using `defaultValue` instead of `value` to prevent cursor jumping
+    // https://github.com/facebook/react/issues/14904#issuecomment-522213842
     return (
         <FormItemContainer
             fieldName={fieldName}
@@ -97,7 +99,7 @@ export default function FormInput({
                     type={type}
                     fieldName={fieldName}
                     isInvalid={isInvalid}
-                    value={value}
+                    defaultValue={value}
                     onChange={onFieldChange}
                 />
             ) : (
@@ -106,7 +108,7 @@ export default function FormInput({
                     type={type}
                     fieldName={fieldName}
                     isInvalid={isInvalid}
-                    value={value}
+                    defaultValue={value}
                     onChange={onFieldChange}
                 />
             )}
