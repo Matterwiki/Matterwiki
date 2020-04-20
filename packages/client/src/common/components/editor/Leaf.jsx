@@ -3,13 +3,20 @@ import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/core'
 
 import { Text } from '../../ui/Text'
+import { NODE_TYPES } from './constants'
 
 function renderLeafNode(leaf, children) {
-    if (leaf.bold) children = <Text as="strong">{children}</Text>
-    if (leaf.italic) children = <Text as="i">{children}</Text>
-    if (leaf.underline) children = <Text as="u">{children}</Text>
-    if (leaf.strikethrough) children = <Text as="del">{children}</Text>
-    if (leaf.code) {
+    if (leaf[NODE_TYPES.BOLD])
+        children = (
+            <Text as="strong" fontSize="95%">
+                {children}
+            </Text>
+        )
+    if (leaf[NODE_TYPES.ITALIC]) children = <Text as="i">{children}</Text>
+    if (leaf[NODE_TYPES.UNDERLINED]) children = <Text as="u">{children}</Text>
+    if (leaf[NODE_TYPES.STRIKETHROUGH])
+        children = <Text as="del">{children}</Text>
+    if (leaf[NODE_TYPES.CODE]) {
         children = (
             <Box
                 as="code"

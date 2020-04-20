@@ -6,7 +6,7 @@ import { Box } from '@chakra-ui/core'
 
 import { topicApi } from '@/common/utils/'
 import { useTopicStore } from '@/common/store/'
-import { FullScreenSpinner, SimpleModal, ErrorAlert } from '@/common/ui'
+import { Spinner, SimpleModal, ErrorAlert } from '@/common/ui'
 
 import TopicForm from './TopicForm'
 
@@ -36,7 +36,7 @@ export default function ManageTopicModal({ createMode, onClose: handleClose }) {
     return (
         <SimpleModal showModal={true} onClose={handleClose} title={title}>
             {loading ? (
-                <FullScreenSpinner />
+                <Spinner />
             ) : error ? (
                 <Box padding={3}>
                     <ErrorAlert defaultErrorMessage="😢 There was an error fetching the topic." />

@@ -4,7 +4,7 @@ import _isEmpty from 'lodash/isEmpty'
 import { useAsync } from 'react-async-hook'
 import { Route, Redirect } from 'react-router-dom'
 
-import { FullScreenSpinner } from '../ui/'
+import { Spinner } from '../ui/'
 import { useAuthStore } from '../store/'
 
 function RedirectToLogin({ location }) {
@@ -52,7 +52,7 @@ export default function ProtectedRoute({
         <Route
             {...routerProps}
             render={({ location }) => {
-                if (loading) return <FullScreenSpinner />
+                if (loading) return <Spinner />
                 if (error) return <RedirectToLogin location={location} />
 
                 // Do not allow user to proceed if this is an admin route and they aren't

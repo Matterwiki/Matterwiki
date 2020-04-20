@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _merge from 'lodash/merge'
 import { useAsyncCallback } from 'react-async-hook'
-import { Stack, Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 
 import { Editor } from '@/common/components'
 import {
@@ -14,9 +14,48 @@ import {
 } from '@/common/ui'
 import { useForm } from '@/common/hooks'
 
+const initialValue = [
+    {
+        type: 'paragraph',
+        children: [
+            { text: 'This is editable ' },
+            { text: 'rich', bold: true },
+            { text: ' text, ' },
+            { text: 'much', italic: true },
+            { text: ' better than a ' },
+            { text: '<textarea>', code: true },
+            { text: '!' },
+        ],
+    },
+    {
+        type: 'paragraph',
+        children: [
+            {
+                text:
+                    "Since it's rich text, you can do things like turn a selection of text ",
+            },
+            { text: 'bold', bold: true },
+            {
+                text:
+                    ', or add a semantically rendered block quote in the middle of the page, like this:',
+            },
+        ],
+    },
+    {
+        type: 'block-quote',
+        children: [{ text: 'A wise quote.' }],
+    },
+    {
+        type: 'paragraph',
+        children: [{ text: 'Try it out for yourself!' }],
+    },
+]
+
 const getDefaultState = () => ({
     title: '',
-    content: '',
+    // content: null,
+    // TODO: Remove this later
+    content: initialValue,
     topicId: '',
 })
 
@@ -37,15 +76,11 @@ export default function ArticleForm({ initialValue, topics, onSubmit }) {
     )
 
     return (
-        <Stack
-            as={Form}
+        <Form
             error={error}
             initialData={values}
             onFieldChange={handleChange}
-            onSubmit={execute}
-            spacing={5}
-            flexWrap="wrap"
-            justifyContent="center">
+            onSubmit={execute}>
             <FormInput
                 fieldName="title"
                 placeholder="Enter Article Title"
@@ -56,9 +91,7 @@ export default function ArticleForm({ initialValue, topics, onSubmit }) {
             <Box>
                 <Editor
                     initialValue={values.content}
-                    onChange={editorState =>
-                        setValueFor('content', editorState)
-                    }
+                    onChange={setValueFor.bind('content')}
                 />
             </Box>
 
@@ -80,7 +113,7 @@ export default function ArticleForm({ initialValue, topics, onSubmit }) {
                 type="submit">
                 Save Article
             </Button>
-        </Stack>
+        </Form>
     )
 }
 

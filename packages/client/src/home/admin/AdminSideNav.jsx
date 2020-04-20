@@ -10,7 +10,7 @@ function AdminSideNavItem(props) {
             {...props}
             highlightActive
             borderBottom="1px"
-            borderColor="gray.100"
+            borderColor="border"
             borderRadius="4px"
             padding={3}
         />

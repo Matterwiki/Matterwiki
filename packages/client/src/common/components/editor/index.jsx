@@ -1,14 +1,16 @@
 import React, { useCallback, useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Box } from '@chakra-ui/core'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, Slate } from 'slate-react'
 import { createEditor } from 'slate'
 import { withHistory } from 'slate-history'
 
-import EditorToolbar from './EditorToolbar'
+import EditorToolbar from './toolbar'
 import Element from './Element'
 import Leaf from './Leaf'
 import { toggleMark } from './utils'
+import { DEFAULT_EDITOR_VALUE, PLACEHOLDER_TEXT } from './constants'
 
 const HOTKEYS = {
     'mod+b': 'bold',
@@ -17,18 +19,20 @@ const HOTKEYS = {
     'mod+`': 'code',
 }
 
-export default function Editor() {
-    const [value, setValue] = useState(initialValue)
-    const renderElement = useCallback(props => <Element {...props} />, [])
-    const renderLeaf = useCallback(props => <Leaf {...props} />, [])
+export default function Editor({ initialValue, onChange: handleParentChange }) {
+    const [value, setValue] = useState(initialValue || DEFAULT_EDITOR_VALUE)
+    const handleChange = useCallback(
+        value => {
+            setValue(value)
+            handleParentChange(value)
+        },
+        [handleParentChange],
+    )
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
     return (
-        <Box border="1px" borderColor="gray.200" borderRadius="2px">
-            <Slate
-                editor={editor}
-                value={value}
-                onChange={value => setValue(value)}>
+        <Box border="1px" borderColor="border" borderRadius="2px">
+            <Slate editor={editor} value={value} onChange={handleChange}>
                 <EditorToolbar />
                 <Box
                     padding={3}
@@ -36,9 +40,9 @@ export default function Editor() {
                     overflowY="auto"
                     overflowX="hidden">
                     <Editable
-                        renderElement={renderElement}
-                        renderLeaf={renderLeaf}
-                        placeholder="Enter some rich text…"
+                        renderElement={Element}
+                        renderLeaf={Leaf}
+                        placeholder={PLACEHOLDER_TEXT}
                         spellCheck
                         autoFocus
                         onKeyDown={event => {
@@ -57,39 +61,7 @@ export default function Editor() {
     )
 }
 
-const initialValue = [
-    {
-        type: 'paragraph',
-        children: [
-            { text: 'This is editable ' },
-            { text: 'rich', bold: true },
-            { text: ' text, ' },
-            { text: 'much', italic: true },
-            { text: ' better than a ' },
-            { text: '<textarea>', code: true },
-            { text: '!' },
-        ],
-    },
-    {
-        type: 'paragraph',
-        children: [
-            {
-                text:
-                    "Since it's rich text, you can do things like turn a selection of text ",
-            },
-            { text: 'bold', bold: true },
-            {
-                text:
-                    ', or add a semantically rendered block quote in the middle of the page, like this:',
-            },
-        ],
-    },
-    {
-        type: 'block-quote',
-        children: [{ text: 'A wise quote.' }],
-    },
-    {
-        type: 'paragraph',
-        children: [{ text: 'Try it out for yourself!' }],
-    },
-]
+Editor.propTypes = {
+    initialValue: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
+}

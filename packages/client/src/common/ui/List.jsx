@@ -25,7 +25,7 @@ export function CardListItem({
             as={ChakraListItem}
             width="full"
             borderBottom="1px"
-            borderColor="gray.100"
+            borderColor="border"
             alignItems="center">
             <Box flexGrow={1}>
                 <Text as="div">
@@ -78,3 +78,4 @@ CardListItem.propTypes = {
 }
 
 export const List = ChakraList
+export const ListItem = ChakraListItem

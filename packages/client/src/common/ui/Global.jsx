@@ -10,6 +10,7 @@ import 'typeface-lato'
 const newTheme = _merge({}, theme, {
     colors: {
         text: '#4d4d4d',
+        border: theme.colors.gray[200],
         primary: {
             50: '#ffe1f2',
             100: '#ffb1d3',

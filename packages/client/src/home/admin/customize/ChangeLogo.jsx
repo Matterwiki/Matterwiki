@@ -2,12 +2,7 @@ import React from 'react'
 import { useAsyncCallback } from 'react-async-hook'
 import { Stack, Box } from '@chakra-ui/core'
 
-import {
-    FileUploadButton,
-    Heading4,
-    FullScreenSpinner,
-    ErrorAlert,
-} from '@/common/ui'
+import { FileUploadButton, Heading4, Spinner, ErrorAlert } from '@/common/ui'
 import { LogoImage } from '@/common/components'
 import { settingsApi } from '@/common/utils'
 
@@ -20,21 +15,17 @@ export default function ChangeLogo() {
         window.location.reload()
     }
 
-    if (loading) return <FullScreenSpinner />
+    if (loading) return <Spinner />
     if (error) return <ErrorAlert jsError={error} />
 
     return (
-        <Stack
-            spacing={5}
-            borderBottom="1px"
-            borderColor="gray.100"
-            padding={4}>
+        <Stack spacing={5} borderBottom="1px" borderColor="border" padding={4}>
             <Heading4 fontWeight="bold">Wiki Logo</Heading4>
             <Stack spacing={3} isInline alignItems="center">
                 <Box
                     width={32}
                     border="1px"
-                    borderColor="gray.300"
+                    borderColor="border"
                     padding={3}
                     borderRadius="2px">
                     <LogoImage />

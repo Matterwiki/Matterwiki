@@ -42,44 +42,67 @@ TextWithIcon.propTypes = {
 
 const commonHeadingStyles = {
     fontWeight: 300,
-    marginBottom: 8,
 }
 
 /**
  * Heading1 component
  */
-export function Heading1(props) {
+export const Heading1 = React.forwardRef(function Heading1(props, ref) {
     return (
-        <ChakraHeading as="h1" size="2xl" {...commonHeadingStyles} {...props} />
+        <ChakraHeading
+            as="h1"
+            size="2xl"
+            {...commonHeadingStyles}
+            {...props}
+            ref={ref}
+        />
     )
-}
+})
 
 /**
  * Heading2 component
  */
-export function Heading2(props) {
+export const Heading2 = React.forwardRef(function Heading2(props, ref) {
     return (
-        <ChakraHeading as="h2" size="xl" {...commonHeadingStyles} {...props} />
+        <ChakraHeading
+            as="h2"
+            size="xl"
+            {...commonHeadingStyles}
+            {...props}
+            ref={ref}
+        />
     )
-}
+})
 
 /**
  * Heading3 component
  */
-export function Heading3(props) {
+export const Heading3 = React.forwardRef(function Heading3(props, ref) {
     return (
-        <ChakraHeading as="h3" size="lg" {...commonHeadingStyles} {...props} />
+        <ChakraHeading
+            as="h3"
+            size="lg"
+            {...commonHeadingStyles}
+            {...props}
+            ref={ref}
+        />
     )
-}
+})
 
 /**
  * Heading4 component
  */
-export function Heading4(props) {
+export const Heading4 = React.forwardRef(function Heading4(props, ref) {
     return (
-        <ChakraHeading as="h4" size="md" {...commonHeadingStyles} {...props} />
+        <ChakraHeading
+            as="h4"
+            size="md"
+            {...commonHeadingStyles}
+            {...props}
+            ref={ref}
+        />
     )
-}
+})
 
 /**
  * One stop shop for text needs!

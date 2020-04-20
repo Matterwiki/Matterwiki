@@ -32,6 +32,7 @@
     "react-async-hook": "^3.6.1",
     "react-dom": "^16.13.1",
     "react-element-proptypes": "^1.0.0",
+    "react-focus-lock": "^2.3.1",
     "react-hot-loader": "^4.12.20",
     "react-icons": "^3.9.0",
     "react-query": "^1.1.7",
@@ -41,6 +42,7 @@
     "slate-react": "^0.57.1",
     "typeface-lato": "0.0.75",
     "url-search-params-polyfill": "^8.0.0",
+    "valid-url": "^1.0.9",
     "whatwg-fetch": "^3.0.0",
     "wretch": "^1.7.1",
     "zustand": "^2.2.3"

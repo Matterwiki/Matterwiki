@@ -52,49 +52,6 @@ function FileInput(props) {
 }
 
 /**
- * File upload component that looks like a bordered box
- *
- * TODO: Drag n Drop support
- *
- * @param {*} props
- */
-export function FileUploadBox({
-    label,
-    fieldName,
-    onChange: handleChange,
-    accept,
-    multiple,
-}) {
-    return (
-        <FileInputWrapper>
-            <FileInput
-                name={fieldName}
-                onChange={handleChange}
-                accept={accept}
-                multiple={multiple}
-            />
-            <PseudoBox
-                width="full"
-                padding={4}
-                borderStyle="dashed"
-                borderWidth="2px"
-                borderColor="gray.400"
-                textAlign="center"
-                color="text"
-                _groupHover={{
-                    borderColor: 'primary.400',
-                    color: 'primary.400',
-                }}>
-                {label}
-            </PseudoBox>
-        </FileInputWrapper>
-    )
-}
-
-FileUploadBox.defaultProps = defaultProps
-FileUploadBox.propTypes = propTypes
-
-/**
  * File upload component that looks like a button
  *
  * @param {*} props

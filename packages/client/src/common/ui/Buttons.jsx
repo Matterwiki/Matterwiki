@@ -1,8 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button as ChakraButton } from '@chakra-ui/core'
+import {
+    Button as ChakraButton,
+    ButtonGroup as ChakraButtonGroup,
+} from '@chakra-ui/core'
 
-export const Button = React.forwardRef(({ ...props }, ref) => {
+/**
+ * Simple button component with some app specific theming and minor adjustments
+ */
+export const Button = React.forwardRef(function Button(props, ref) {
     return (
         <ChakraButton
             ref={ref}
@@ -13,16 +19,31 @@ export const Button = React.forwardRef(({ ...props }, ref) => {
         />
     )
 })
-Button.displayName = 'Button'
 
-export function IconButton({ icon: Icon, ...buttonProps }) {
+/**
+ * Simple icon button component with some app specific theming and minor adjustments
+ *
+ * TODO: Using regular chakra button because chakra's `IconButton` rendered with some console warnings
+ *
+ * @param {*} props
+ */
+export const IconButton = React.forwardRef(function IconButton(
+    { icon: Icon, ...buttonProps },
+    ref,
+) {
     return (
-        <ChakraButton size="sm" variantColor="primary" {...buttonProps}>
+        <ChakraButton
+            size="sm"
+            variantColor="primary"
+            {...buttonProps}
+            ref={ref}>
             <Icon />
         </ChakraButton>
     )
-}
+})
 
 IconButton.propTypes = {
     icon: PropTypes.elementType.isRequired,
 }
+
+export const ButtonGroup = ChakraButtonGroup

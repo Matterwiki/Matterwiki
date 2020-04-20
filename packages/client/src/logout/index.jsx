@@ -9,7 +9,11 @@ export default function NotFound() {
     useEffect(logoutUser)
 
     return (
-        <Stack alignItems="center" justifyContent="center" padding={12}>
+        <Stack
+            alignItems="center"
+            justifyContent="center"
+            spacing={4}
+            padding={12}>
             <Heading2>🏃‍♂️</Heading2>
             <Heading3>You&apos;ve just been logged out.</Heading3>
             <Heading4>

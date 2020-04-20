@@ -17,7 +17,7 @@ import {
 
 import { Button } from './Buttons'
 import ErrorAlert from './ErrorAlert'
-import { FullScreenSpinner } from './Spinners'
+import { Spinner } from './Spinners'
 
 export function SimpleModal({ showModal, onClose, title, children }) {
     const [isOpen, setIsOpen] = useState(showModal)
@@ -90,7 +90,7 @@ export function AlertModal({ showModal, header, text, onCancel, onConfirm }) {
 
                 <AlertDialogBody>
                     {loading ? (
-                        <FullScreenSpinner />
+                        <Spinner />
                     ) : error ? (
                         <ErrorAlert jsError={error} variant="subtle" />
                     ) : (

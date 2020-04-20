@@ -4,7 +4,7 @@ import { Spinner as ChakraSpinner, Flex } from '@chakra-ui/core'
 /**
  * Simple spinner, no character.
  */
-export function Spinner(props) {
+export function BareSpinner(props) {
     return (
         <ChakraSpinner
             color="primary.500"
@@ -16,12 +16,12 @@ export function Spinner(props) {
 }
 
 /**
- * Full screen centered spinner.
+ * Centered spinner.
  */
-export function FullScreenSpinner(props) {
+export function Spinner(props) {
     return (
         <Flex height="100%" justifyContent="center" alignItems="center">
-            <Spinner {...props} />
+            <BareSpinner {...props} />
         </Flex>
     )
 }

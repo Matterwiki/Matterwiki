@@ -22,7 +22,7 @@ export default function SetupRoute() {
 
     return (
         <Flex flexWrap="wrap" justifyContent="center">
-            <Box flexBasis={['20rem', '25rem']}>
+            <Box flexBasis={['20rem', '25rem']} marginBottom={6}>
                 <IntroInfo />
             </Box>
             <Box flexBasis={['20rem', '25rem']} paddingX={[0, 0, 6]}>

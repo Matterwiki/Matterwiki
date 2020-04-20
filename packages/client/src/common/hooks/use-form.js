@@ -40,6 +40,7 @@ export default function useForm(initialValue) {
 
             return async e => {
                 e.preventDefault()
+                e.stopPropagation()
                 return submitFn(value)
             }
         },

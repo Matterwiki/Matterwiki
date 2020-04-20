@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router-dom'
 import { PseudoBox, Stack } from '@chakra-ui/core'
 
 import { Description, TextWithIcon } from './Text'
-import RouterLink from './RouterLink'
+import { RouterLink } from './Link'
 
 /**
  * A nav item component that does a little too much!

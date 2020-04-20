@@ -5,7 +5,11 @@ import { Heading1, Heading2, Heading3, RouterLink } from '@/common/ui'
 
 export default function NotFound() {
     return (
-        <Stack alignItems="center" justifyContent="center" paddingY={12}>
+        <Stack
+            alignItems="center"
+            justifyContent="center"
+            spacing={3}
+            paddingY={12}>
             <Box as={Heading1} textAlign="center">
                 😵😢
             </Box>

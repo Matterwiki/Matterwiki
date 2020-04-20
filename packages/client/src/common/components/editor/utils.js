@@ -1,6 +1,5 @@
 import { Editor, Transforms } from 'slate'
-
-const LIST_TYPES = ['numbered-list', 'bulleted-list']
+import { LIST_TYPES, NODE_TYPES } from './constants'
 
 export function isMarkActive(editor, format) {
     const marks = Editor.marks(editor)
@@ -41,5 +40,43 @@ export function toggleBlock(editor, format) {
     if (!isActive && isList) {
         const block = { type: format, children: [] }
         Transforms.wrapNodes(editor, block)
+    }
+}
+
+export function isLinkActive(editor) {
+    const [link] = Editor.nodes(editor, {
+        match: n => n.type === NODE_TYPES.LINK,
+    })
+    return !!link
+}
+
+export function unwrapLink(editor) {
+    Transforms.unwrapNodes(editor, { match: n => n.type === 'link' })
+}
+
+export function wrapLink(editor, url) {
+    if (isLinkActive(editor)) {
+        unwrapLink(editor)
+    }
+
+    const { selection } = editor
+    const isCollapsed = selection && Range.isCollapsed(selection)
+    const link = {
+        type: 'link',
+        url,
+        children: isCollapsed ? [{ text: url }] : [],
+    }
+
+    if (isCollapsed) {
+        Transforms.insertNodes(editor, link)
+    } else {
+        Transforms.wrapNodes(editor, link, { split: true })
+        Transforms.collapse(editor, { edge: 'end' })
+    }
+}
+
+export function insertLink(editor, url) {
+    if (editor.selection) {
+        wrapLink(editor, url)
     }
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
-import { FullScreenSpinner, List, CardListItem, Heading4 } from '@/common/ui'
+import { Spinner, List, CardListItem, Heading4 } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'
 
 export default function TopicsList() {
@@ -11,7 +11,7 @@ export default function TopicsList() {
     const { url } = useRouteMatch()
     const { error, loading } = useAsync(getTopicList, [])
 
-    if (loading) return <FullScreenSpinner />
+    if (loading) return <Spinner />
     if (error) {
         return <Heading4>😢 There was an error fetching topics.</Heading4>
     }

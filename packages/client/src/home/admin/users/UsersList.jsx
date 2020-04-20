@@ -2,7 +2,7 @@ import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
-import { FullScreenSpinner, List, CardListItem, Heading4 } from '@/common/ui'
+import { Spinner, List, CardListItem, Heading4 } from '@/common/ui'
 import useUserStore from './user-store'
 
 export default function UsersList() {
@@ -11,7 +11,7 @@ export default function UsersList() {
     const { url } = useRouteMatch()
     const { error, loading } = useAsync(getUserList, [])
 
-    if (loading) return <FullScreenSpinner />
+    if (loading) return <Spinner />
     if (error) return <Heading4>😢 There was an error fetching users.</Heading4>
     if (userList.length === 0) {
         return <Heading4>😵 Looks like no users were found!</Heading4>

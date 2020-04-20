@@ -16,7 +16,10 @@ const inputStyles = {
 }
 
 /* eslint-disable react/prop-types */
-function PasswordFormInput({ fieldName, isInvalid, value, ...props }) {
+export const PasswordFormInput = React.forwardRef(function PasswordFormInput(
+    { fieldName, isInvalid, value, ...props },
+    ref,
+) {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -32,6 +35,7 @@ function PasswordFormInput({ fieldName, isInvalid, value, ...props }) {
                 type={show ? 'text' : 'password'}
                 value={value}
                 aria-describedby={getHelperTextId(fieldName)}
+                ref={ref}
             />
             {value ? (
                 <InputRightElement>
@@ -46,9 +50,12 @@ function PasswordFormInput({ fieldName, isInvalid, value, ...props }) {
             ) : null}
         </InputGroup>
     )
-}
+})
 
-function GenericFormInput({ type, fieldName, isInvalid, value, ...props }) {
+export const GenericFormInput = React.forwardRef(function GenericFormInput(
+    { type, fieldName, isInvalid, value, ...props },
+    ref,
+) {
     return (
         <ChakraInput
             {...inputStyles}
@@ -59,9 +66,10 @@ function GenericFormInput({ type, fieldName, isInvalid, value, ...props }) {
             isInvalid={isInvalid}
             value={value}
             aria-describedby={getHelperTextId(fieldName)}
+            ref={ref}
         />
     )
-}
+})
 /* eslint-enable react/prop-types */
 
 /**
@@ -71,14 +79,10 @@ function GenericFormInput({ type, fieldName, isInvalid, value, ...props }) {
  *    We use `FormContext` to provide some common props to this component.
  * @param {*} props
  */
-export default function FormInput({
-    fieldName,
-    helperText,
-    isRequired,
-    labelText,
-    type,
-    ...props
-}) {
+const FormInput = React.forwardRef(function FormInput(
+    { fieldName, helperText, isRequired, labelText, type, ...props },
+    ref,
+) {
     const { onFieldChange, validationError, isInvalid, value } = useFormContext(
         fieldName,
     )
@@ -101,6 +105,7 @@ export default function FormInput({
                     isInvalid={isInvalid}
                     defaultValue={value}
                     onChange={onFieldChange}
+                    ref={ref}
                 />
             ) : (
                 <GenericFormInput
@@ -110,11 +115,12 @@ export default function FormInput({
                     isInvalid={isInvalid}
                     defaultValue={value}
                     onChange={onFieldChange}
+                    ref={ref}
                 />
             )}
         </FormItemContainer>
     )
-}
+})
 
 FormInput.defaultProps = {
     type: 'text',
@@ -131,3 +137,5 @@ FormInput.propTypes = {
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string,
 }
+
+export default FormInput

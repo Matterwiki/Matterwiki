@@ -5,7 +5,7 @@ import { useAsync } from 'react-async-hook'
 import { Box } from '@chakra-ui/core'
 
 import { userApi } from '@/common/utils/'
-import { FullScreenSpinner, SimpleModal, ErrorAlert } from '@/common/ui'
+import { Spinner, SimpleModal, ErrorAlert } from '@/common/ui'
 import { UserForm } from '@/common/components'
 
 import useUserStore from './user-store'
@@ -37,7 +37,7 @@ export default function ManageUserModal({ createMode, onClose: handleClose }) {
     return (
         <SimpleModal showModal={true} onClose={handleClose} title={title}>
             {loading ? (
-                <FullScreenSpinner />
+                <Spinner />
             ) : error ? (
                 <Box padding={3}>
                     <ErrorAlert defaultErrorMessage="😢 There was an error fetching the user." />
