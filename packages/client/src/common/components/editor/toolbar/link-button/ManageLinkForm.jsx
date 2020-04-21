@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { isUri } from 'valid-url'
+import isUrl from 'is-url'
 
 import { Stack } from '@chakra-ui/core'
 
@@ -14,7 +14,7 @@ import { useForm } from '@/common/hooks'
  * @param {*} url
  */
 function getValidationError(url) {
-    if (isUri(url)) return null
+    if (isUrl(url)) return null
 
     const validationError = new Error('Error')
     validationError.isJoiValidationErr = true

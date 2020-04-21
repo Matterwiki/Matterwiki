@@ -26,6 +26,7 @@
     "emotion-theming": "^10.0.27",
     "immer": "^6.0.3",
     "is-hotkey": "^0.1.6",
+    "is-url": "^1.2.4",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -42,7 +43,6 @@
     "slate-react": "^0.57.1",
     "typeface-lato": "0.0.75",
     "url-search-params-polyfill": "^8.0.0",
-    "valid-url": "^1.0.9",
     "whatwg-fetch": "^3.0.0",
     "wretch": "^1.7.1",
     "zustand": "^2.2.3"

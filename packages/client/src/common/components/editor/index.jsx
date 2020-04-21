@@ -12,6 +12,8 @@ import Leaf from './Leaf'
 import { toggleMark } from './utils'
 import { DEFAULT_EDITOR_VALUE, PLACEHOLDER_TEXT } from './constants'
 
+import { withLinks } from './plugins'
+
 const HOTKEYS = {
     'mod+b': 'bold',
     'mod+i': 'italic',
@@ -28,7 +30,10 @@ export default function Editor({ initialValue, onChange: handleParentChange }) {
         },
         [handleParentChange],
     )
-    const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+    const editor = useMemo(
+        () => withLinks(withHistory(withReact(createEditor()))),
+        [],
+    )
 
     return (
         <Box border="1px" borderColor="border" borderRadius="2px">

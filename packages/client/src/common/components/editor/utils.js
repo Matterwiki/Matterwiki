@@ -1,4 +1,4 @@
-import { Editor, Transforms } from 'slate'
+import { Editor, Transforms, Range } from 'slate'
 import { LIST_TYPES, NODE_TYPES } from './constants'
 
 export function isMarkActive(editor, format) {
@@ -43,15 +43,22 @@ export function toggleBlock(editor, format) {
     }
 }
 
-export function isLinkActive(editor) {
+export function getLinkData(editor) {
     const [link] = Editor.nodes(editor, {
         match: n => n.type === NODE_TYPES.LINK,
     })
-    return !!link
+
+    return link ? link[0] : null
+}
+
+export function isLinkActive(editor) {
+    return !!getLinkData(editor)
 }
 
 export function unwrapLink(editor) {
-    Transforms.unwrapNodes(editor, { match: n => n.type === 'link' })
+    Transforms.unwrapNodes(editor, {
+        match: n => n.type === NODE_TYPES.LINK,
+    })
 }
 
 export function wrapLink(editor, url) {
@@ -62,7 +69,7 @@ export function wrapLink(editor, url) {
     const { selection } = editor
     const isCollapsed = selection && Range.isCollapsed(selection)
     const link = {
-        type: 'link',
+        type: NODE_TYPES.LINK,
         url,
         children: isCollapsed ? [{ text: url }] : [],
     }
@@ -79,4 +86,8 @@ export function insertLink(editor, url) {
     if (editor.selection) {
         wrapLink(editor, url)
     }
+}
+
+export function setSelection(editor, range) {
+    Transforms.select(editor, range)
 }

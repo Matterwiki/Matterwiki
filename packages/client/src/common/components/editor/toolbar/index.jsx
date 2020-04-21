@@ -2,10 +2,10 @@ import React from 'react'
 import { Flex } from '@chakra-ui/core'
 
 import { Icons, ButtonGroup } from '@/common/ui'
+
 import MarkButton from './MarkButton'
 import BlockButton from './BlockButton'
 import LinkButton from './link-button/'
-
 import { NODE_TYPES } from '../constants'
 
 function ButtonContainer(props) {

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import _get from 'lodash/get'
 import { useSlate } from 'slate-react'
 import FocusLock from 'react-focus-lock'
 
@@ -14,20 +15,38 @@ import { Icons } from '@/common/ui'
 
 import EditorIconButton from '../EditorIconButton'
 import ManageLinkForm from './ManageLinkForm'
-import { isLinkActive, insertLink } from '../../utils'
+import {
+    isLinkActive,
+    insertLink,
+    unwrapLink,
+    setSelection,
+    getLinkData,
+} from '../../utils'
 
 export default function LinkButton() {
-    const editor = useSlate()
     const firstFieldRef = useRef(null)
+    const [url, setUrl] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
-    const open = () => setIsOpen(true)
-    const close = () => setIsOpen(false)
+    const editor = useSlate()
+    const selectionRef = useRef(editor.selection)
+
+    const open = () => {
+        setUrl(_get(getLinkData(editor), 'url') || null)
+        selectionRef.current = editor.selection
+        setIsOpen(true)
+    }
+    const close = () => {
+        setSelection(editor, selectionRef.current)
+        setIsOpen(false)
+    }
 
     const handleLinkRemove = () => {
+        unwrapLink(editor)
         close()
     }
 
     const handleLinkAdd = url => {
+        setSelection(editor, selectionRef.current)
         insertLink(editor, url)
         close()
     }
@@ -53,6 +72,7 @@ export default function LinkButton() {
                     <PopoverCloseButton />
                     <ManageLinkForm
                         firstFieldRef={firstFieldRef}
+                        url={url}
                         onLinkRemove={handleLinkRemove}
                         onLinkAdd={handleLinkAdd}
                     />
