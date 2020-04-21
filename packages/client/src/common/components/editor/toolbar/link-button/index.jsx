@@ -41,14 +41,13 @@ export default function LinkButton() {
     }
 
     const handleLinkRemove = () => {
-        unwrapLink(editor)
         close()
+        unwrapLink(editor)
     }
 
     const handleLinkAdd = url => {
-        setSelection(editor, selectionRef.current)
-        insertLink(editor, url)
         close()
+        insertLink(editor, url)
     }
 
     return (
