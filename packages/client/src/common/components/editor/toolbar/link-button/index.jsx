@@ -31,13 +31,16 @@ export default function LinkButton() {
     const selectionRef = useRef(editor.selection)
 
     const open = () => {
-        setUrl(_get(getLinkData(editor), 'url') || null)
+        // Store current selection because once the PopOver is opened,
+        // it will lock focus, causing editor selection to go away!
         selectionRef.current = editor.selection
+        setUrl(_get(getLinkData(editor), 'url') || null)
         setIsOpen(true)
     }
     const close = () => {
-        setSelection(editor, selectionRef.current)
         setIsOpen(false)
+        // Restore edtor selection after PopOver is closed.
+        setSelection(editor, selectionRef.current)
     }
 
     const handleLinkRemove = () => {
