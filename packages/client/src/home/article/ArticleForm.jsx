@@ -28,6 +28,16 @@ const initialValue = [
         ],
     },
     {
+        type: 'link',
+        url: 'https://en.wikipedia.org/wiki/Hypertext',
+        children: [{ text: 'hyperlinks' }],
+    },
+    {
+        type: 'image',
+        url: 'https://source.unsplash.com/kFrdX5IeQzI',
+        children: [{ text: '' }],
+    },
+    {
         type: 'paragraph',
         children: [
             {

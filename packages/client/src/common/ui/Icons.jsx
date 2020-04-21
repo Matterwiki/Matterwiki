@@ -30,6 +30,7 @@ import {
     FaCheck,
     FaUnlink,
     FaImage,
+    FaExternalLinkAlt,
 } from 'react-icons/fa'
 import { Box } from '@chakra-ui/core'
 
@@ -69,6 +70,7 @@ const Icons = [
     FaCheck,
     FaUnlink,
     FaImage,
+    FaExternalLinkAlt,
 ].reduce((acc, icon) => {
     acc[icon.name] = withBox(icon)
     return acc

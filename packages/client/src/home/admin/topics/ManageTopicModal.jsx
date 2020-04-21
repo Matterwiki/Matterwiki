@@ -35,17 +35,15 @@ export default function ManageTopicModal({ createMode, onClose: handleClose }) {
 
     return (
         <SimpleModal showModal={true} onClose={handleClose} title={title}>
-            {loading ? (
-                <Spinner />
-            ) : error ? (
-                <Box padding={3}>
+            <Box padding={5}>
+                {loading ? (
+                    <Spinner />
+                ) : error ? (
                     <ErrorAlert defaultErrorMessage="😢 There was an error fetching the topic." />
-                </Box>
-            ) : (
-                <Box paddingX={6} paddingY={2}>
+                ) : (
                     <TopicForm initialValue={result} onSubmit={handleSubmit} />
-                </Box>
-            )}
+                )}
+            </Box>
         </SimpleModal>
     )
 }

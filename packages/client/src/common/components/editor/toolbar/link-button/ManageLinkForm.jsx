@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import isUrl from 'is-url'
 
-import { Stack } from '@chakra-ui/core'
+import { Stack, Box } from '@chakra-ui/core'
 
-import { Form, FormInput, IconButton, Icons } from '@/common/ui'
+import { Form, FormInput, IconButton, Icons, Link } from '@/common/ui'
 import { useForm } from '@/common/hooks'
 
 /**
@@ -57,24 +57,40 @@ export default function ManageLinkForm({
             initialData={values}
             onFieldChange={handleChange}
             onSubmit={onSubmit}>
-            <FormInput
-                isRequired
-                labelText="Link"
-                fieldName="url"
-                placeholder="https://google.com"
-                ref={firstFieldRef}
-            />
-            <Stack isInline marginTop={3} justifyContent="flex-end">
-                <IconButton
-                    icon={Icons.FaTrashAlt}
-                    onClick={onLinkRemove}
-                    variantColor="gray"
+            <Box>
+                <FormInput
+                    size="sm"
+                    labelText="Link"
+                    isRequired
+                    fieldName="url"
+                    placeholder="https://google.com"
+                    ref={firstFieldRef}
                 />
-                <IconButton
-                    icon={Icons.FaCheck}
-                    onClick={handleSubmit}
-                    type="submit"
-                />
+            </Box>
+            <Stack isInline spacing={1} justifyContent="space-between">
+                {url ? (
+                    <IconButton
+                        icon={Icons.FaTrashAlt}
+                        onClick={onLinkRemove}
+                        variantColor="gray"
+                    />
+                ) : null}
+                <Stack isInline>
+                    <IconButton
+                        icon={Icons.FaCheck}
+                        onClick={handleSubmit}
+                        type="submit"
+                    />
+                    {url ? (
+                        <IconButton
+                            as={Link}
+                            href={url}
+                            target="_blank"
+                            icon={Icons.FaExternalLinkAlt}
+                            variantColor="gray"
+                        />
+                    ) : null}
+                </Stack>
             </Stack>
         </Form>
     )
