@@ -1,1 +1,8 @@
-dist/*
+node_modules
+
+*.json
+*.css
+*.md
+
+# To ensure eslint does not ignore files that are named this way: `.eslintrc.js`, `.neutrinorc.js`, etc.
+!.*.js

@@ -1,123 +1,51 @@
 {
   "name": "matterwiki",
-  "version": "0.2.1",
-  "description": "A simple and beautiful wiki for teams",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build":
-      "cross-env NODE_ENV=production webpack -p --config ./webpack.config.prod.js --progress --profile --colors",
-    "start": "npm run build && cross-env NODE_ENV=production node ./src/api/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon --config nodemon.json ./src/api/server.js",
-    "dev:debug":
-      "cross-env NODE_ENV=development nodemon --config nodemon.json  --inspect=5858 ./src/api/server.js",
-    "db:migrate": "knex migrate:latest",
-    "db:migrate_make": "knex migrate:make",
-    "db:seed": "knex seed:run",
-    "db:seed_make": "knex seed:make",
-    "lint": "eslint ./src/**",
-    "format": "prettier --write --jsx-bracket-same-line --print-width 100 \"./src/**/*.js\"",
-    "test": "cross-env NODE_ENV=test jest --config ./jest.config.json --runInBand",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write --jsx-bracket-same-line --print-width 100",
-      "npm run lint",
-      "git add"
-    ]
-  },
-  "bin": {
-    "wiki": "./install.js"
-  },
-  "engines": {
-    "node": "^8.1.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Matterwiki/Matterwiki.git"
-  },
-  "author": "Nishant Arora (@nshntarora) and Krishna Gopinath (@krishwader)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Matterwiki/Matterwiki/issues"
-  },
-  "homepage": "http://matterwiki.com",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
-    "bcryptjs": "^2.4.3",
-    "bluebird": "^3.5.1",
-    "body-parser": "^1.18.2",
-    "classnames": "^2.2.5",
-    "dotenv": "^5.0.1",
-    "draft-js": "^0.10.5",
-    "draftjs-utils": "^0.9.4",
-    "express": "^4.16.3",
-    "feather-icons": "^4.7.0",
-    "helmet": "^3.12.0",
-    "http-status-codes": "^1.3.0",
-    "jsonwebtoken": "^8.2.1",
-    "knex": "^0.14.6",
-    "lodash": "^4.17.10",
-    "morgan": "^1.9.0",
-    "mysql": "^2.15.0",
-    "node-sass": "^4.9.0",
-    "objection": "^1.1.8",
-    "objection-unique": "^1.0.1",
-    "polished": "^1.9.2",
-    "prettier-eslint": "^8.8.1",
-    "react": "^16.3.2",
-    "react-bootstrap": "^0.32.1",
-    "react-dom": "^16.3.2",
-    "react-icons": "^2.2.7",
-    "react-redux": "^5.0.7",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.2.2",
-    "react-s-alert": "^1.4.1",
-    "redux": "^4.0.0",
-    "redux-saga": "^0.16.0",
-    "sass-loader": "^7.0.1",
-    "styled-components": "^3.2.6",
-    "url-search-params-polyfill": "^4.0.0"
+    "reset-deps": "rm -rf node_modules && rm -rf packages/*/node_modules",
+    "postinstall": "lerna bootstrap --no-ci",
+    "start": "lerna run start --parallel",
+    "test": "lerna run test --concurrency=1 --stream",
+    "add": "lerna add",
+    "lint": "eslint './packages/**/*.{js,jsx}'",
+    "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'",
+    "cm": "git-cz"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "cross-env": "^5.1.5",
-    "css-loader": "^0.28.11",
-    "dreamjs": "^0.1.8",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-import-resolver-webpack": "^0.9.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.8.1",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
-    "husky": "^0.14.2",
-    "jest": "^22.4.3",
-    "knex-db-manager": "^0.4.0",
-    "lint-staged": "^7.1.0",
-    "nodemon": "^1.17.4",
-    "prettier": "^1.12.1",
-    "redux-devtools": "^3.4.1",
-    "style-loader": "^0.21.0",
-    "superagent": "^3.8.3",
-    "supertest": "^3.0.0",
-    "testcafe": "^0.19.2",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.8.3",
-    "webpack-dev-middleware": "^3.1.3",
-    "webpack-dev-server": "^3.1.4",
-    "webpack-hot-middleware": "^2.22.1"
-  }
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/config-lerna-scopes": "^8.3.4",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.9",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {}
 }

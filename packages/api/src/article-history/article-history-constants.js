@@ -1,0 +1,4 @@
+exports.ARTICLE_HISTORY_TYPES = {
+    CREATE: 'CREATE',
+    UPDATE: 'UPDATE',
+}

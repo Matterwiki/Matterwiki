@@ -1,0 +1,57 @@
+{
+  "name": "matterwiki-api",
+  "version": "0.3.0",
+  "description": "The API project for matterwiki",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "cross-env DB_NAME=matterwiki_dev nodemon --inspect ./src/server.js",
+    "prod": "cross-env NODE_ENV=production node ./src/server.js",
+    "test": "ava reset-cache && cross-env NODE_ENV=test DB_NAME=matterwiki_test ava --verbose --serial",
+    "db:migrate": "knex migrate:latest",
+    "db:seed": "knex seed:run"
+  },
+  "engines": {
+    "node": "^12.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matterwiki/Matterwiki.git"
+  },
+  "author": "Nishant Arora (@nshntarora) and Krishna Gopinath (@krishwader)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Matterwiki/Matterwiki/issues"
+  },
+  "homepage": "http://matterwiki.com",
+  "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "html-to-text": "^5.1.1",
+    "http-status-codes": "^1.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.11",
+    "lodash": "^4.17.15",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "natural": "^0.6.3",
+    "objection": "^2.1.3",
+    "sanitize-html": "^1.22.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "ava": "^3.5.0",
+    "chance": "^1.1.4",
+    "cross-env": "^7.0.0",
+    "dreamjs": "^0.2.0",
+    "knex-db-manager": "^0.6.1",
+    "lorem-ipsum": "^2.0.3",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  }
+}
