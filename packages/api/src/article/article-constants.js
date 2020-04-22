@@ -11,6 +11,10 @@ exports.ERRORS = {
         code: 'TOPIC_INVALID',
         message: 'Topic invalid. Maybe it was deleted?',
     },
+    INVALID_FILE_ERR: {
+        code: 'INVALID_FILE_ERR',
+        message: 'Invalid file. Only gif, png and jpg allowed.',
+    },
 }
 
 exports.DEFAULT_CHANGELOG_MESSAGE = 'Another drop in the ocean of knowledge'

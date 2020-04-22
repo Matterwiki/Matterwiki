@@ -1,8 +1,9 @@
 const multer = require('multer')
+const mime = require('mime-types')
 const Promise = require('bluebird')
 
 /**
- * Util that parses incoming request and returns any file it may contain.
+ * Util that parses incoming request, saves and returns any file it may contain.
  *
  * Must only be used with `POST` and for `multipart/form-data` content types
  *
@@ -10,8 +11,9 @@ const Promise = require('bluebird')
  *
  * @param {*} req - Express req object
  * @param {object} options
- * @param {boolean} [options.fileName] - Name of the file
+ * @param {boolean} [options.fileName] - Name of the saved file. Original file's extension is used.
  * @param {boolean} [options.fieldName] - Name of the form field that has the file
+ * @param {Array} [options.acceptedMimeTypes] - list of accepted mimeTypes
  */
 module.exports = function parseFilesInForm(req, options) {
     return new Promise((resolve, reject) => {
@@ -23,13 +25,22 @@ module.exports = function parseFilesInForm(req, options) {
             throw new Error('Missing arg. `fileName` is required.')
         }
 
+        options.acceptedMimeTypes = options.acceptedMimeTypes || []
+
         const upload = multer({
+            fileFilter(req, file, cb) {
+                if (!options.acceptedMimeTypes.length) return cb(null, true)
+                cb(null, options.acceptedMimeTypes.includes(file.mimetype))
+            },
             storage: multer.diskStorage({
                 destination(req, file, cb) {
                     cb(null, process.env.FILE_STORAGE_PATH)
                 },
                 filename(req, file, cb) {
-                    cb(null, options.fileName)
+                    const [fileNameSansExt] = options.fileName.split('.')
+                    const ext = mime.extension(file.mimetype)
+
+                    cb(null, `${fileNameSansExt}.${ext}`)
                 },
             }),
         })
@@ -38,6 +49,9 @@ module.exports = function parseFilesInForm(req, options) {
             if (err) reject(err)
 
             const { file } = req
+
+            if (!file) return reject(new Error('Invalid file'))
+
             // Clean up multer's work on the request object
             delete req.file
 

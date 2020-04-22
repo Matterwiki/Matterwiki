@@ -1,8 +1,14 @@
 const express = require('express')
 const HttpStatus = require('http-status-codes')
+const mime = require('mime-types')
 
 const { checkAuth, checkAdminRole } = require('../common/middleware/index')
-const { parseFilesInForm } = require('../common/utils/index')
+const {
+    parseFilesInForm,
+    makeHttpBadRequest,
+} = require('../common/utils/index')
+
+const { ERRORS } = require('./settings-constants')
 
 const router = express.Router()
 
@@ -14,12 +20,13 @@ async function uploadLogo(req, res, next) {
     try {
         await parseFilesInForm(req, {
             fieldName: 'logo',
-            fileName: 'logo.png',
+            fileName: 'logo',
+            acceptedMimeTypes: [mime.lookup('png')],
         })
 
         res.status(HttpStatus.OK).end()
     } catch (error) {
-        next(error)
+        next(makeHttpBadRequest(ERRORS.INVALID_FILE_ERR))
     }
 }
 

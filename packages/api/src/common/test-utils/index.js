@@ -3,4 +3,5 @@ module.exports = {
     ...require('./api-test-utils'),
     ...require('./auth-test-utils'),
     ...require('./validation-test-utils'),
+    ...require('./file-test-utils'),
 }

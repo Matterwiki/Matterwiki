@@ -37,6 +37,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.11",
     "lodash": "^4.17.15",
+    "mime-types": "^2.1.26",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "natural": "^0.6.3",
@@ -52,6 +53,7 @@
     "knex-db-manager": "^0.6.1",
     "lorem-ipsum": "^2.0.3",
     "nodemon": "^2.0.2",
+    "sinon": "^9.0.2",
     "supertest": "^4.0.2"
   }
 }

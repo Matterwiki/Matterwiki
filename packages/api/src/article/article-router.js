@@ -1,12 +1,17 @@
 const express = require('express')
 const HttpStatus = require('http-status-codes')
 const { isNil } = require('lodash')
+const mime = require('mime-types')
 
 const {
     bodyParser: { JSONParser },
     checkAuth,
 } = require('../common/middleware/index')
-const { makeHttpBadRequest, makeHttpError } = require('../common/utils/index')
+const {
+    makeHttpBadRequest,
+    makeHttpError,
+    parseFilesInForm,
+} = require('../common/utils/index')
 
 const { USER_ROLES } = require('../user/user-constants')
 const TopicModel = require('../topic/topic-model')
@@ -35,6 +40,7 @@ router.post(
     checkValidTopic,
     makeArticle,
 )
+router.post('/upload-image', uploadImage)
 router.get('/:id', JSONParser, checkArticleExists, getArticleById)
 router.put(
     '/:id',
@@ -50,7 +56,7 @@ router.delete('/:id', JSONParser, checkArticleExists, deleteArticle)
  * Middleware function to verify if article exists for `req.params.id`.
  * If it exists, sets it up on `req.item`.
  *
- * TODO: Make this in a generator function
+ * TODO: Make this into a generator function
  *
  * @param {*} req
  * @param {*} res
@@ -180,6 +186,24 @@ async function getArticleList(req, res, next) {
         res.status(200).json(articleList)
     } catch (error) {
         next(error)
+    }
+}
+
+async function uploadImage(req, res, next) {
+    try {
+        const { filename } = await parseFilesInForm(req, {
+            fieldName: 'article-image',
+            fileName: `${new Date().getTime()}`,
+            acceptedMimeTypes: [
+                mime.lookup('gif'),
+                mime.lookup('png'),
+                mime.lookup('jpg'),
+            ],
+        })
+
+        res.status(HttpStatus.OK).send(filename)
+    } catch (error) {
+        next(makeHttpBadRequest(ERRORS.INVALID_FILE_ERR))
     }
 }
 
