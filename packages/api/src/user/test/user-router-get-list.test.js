@@ -64,7 +64,7 @@ function createMultipleUsers() {
             createdAt: new Date(new Date().setFullYear(2018)),
             modifiedAt: new Date(new Date().setFullYear(2019)),
         },
-        { name: 'Sand Man cool beans' },
+        { name: 'Sand Man' },
         { name: '000First Item' },
         { name: 'Shocker Zap cool' },
         { name: 'Krave Hunter' },
@@ -252,7 +252,6 @@ test('(200) search filter returns expected list', async t => {
     // TODO: Find a better way to assert order?
     const expectedUsers = [
         findUserByName(t, 'Mysterio Villain'),
-        findUserByName(t, 'Sand Man cool beans'),
         findUserByName(t, 'Shocker Zap cool'),
     ]
 
