@@ -14,11 +14,13 @@ const {
     verifyUser,
 } = require('./user-actions')
 
-const anonymousUserRouter = Router()
+// User routes that don't need auth middleware
+const anonymousRouter = Router()
     .post('/admin', createAdminUser)
     .post('/login', loginUser)
 
-const authenticatedUserRouter = Router()
+// User routes that need to authenticated!
+const authenticatedRouter = Router()
     .get('/verify', verifyUser)
     .get('/:id', checkUserExists, getUserById)
     // Admin ONLY routes
@@ -29,6 +31,6 @@ const authenticatedUserRouter = Router()
     .delete('/:id', checkUserExists, deleteUser)
 
 module.exports = Router()
-    .use(anonymousUserRouter)
+    .use(anonymousRouter)
     .use(checkAuth)
-    .use(authenticatedUserRouter)
+    .use(authenticatedRouter)

@@ -2,7 +2,6 @@ const { Router } = require('express')
 
 const {
     checkAuth,
-    checkAdminRole,
     bodyParser: { JSONParser },
 } = require('./common/middleware/index')
 
@@ -25,7 +24,7 @@ module.exports = Router()
     // ie., The only way to access this route is via `/api/article/:id/history`
     .use('/article/:articleId/history', articleHistoryRouter)
     .use('/topic', checkAuth, topicRouter)
-    .use('/settings', checkAuth, checkAdminRole, settingsRouter)
+    .use('/settings', checkAuth, settingsRouter)
     // ⚠️
     // This route has a mix of authenticated and unauthenticated routes.
     // So we're handling middleware in the file!
