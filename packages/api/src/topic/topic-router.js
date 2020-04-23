@@ -11,7 +11,7 @@ const {
     deleteTopic,
 } = require('./topic-actions')
 
-const idRouter = Router()
+const idRouter = Router({ mergeParams: true })
     .get('/', getTopicById)
     .put('/', checkDuplicateTopic, updateTopic)
     .delete('/', deleteTopic)

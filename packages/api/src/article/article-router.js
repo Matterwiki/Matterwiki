@@ -14,7 +14,7 @@ const {
     checkValidTopic,
 } = require('./article-middleware')
 
-const idRouter = Router()
+const idRouter = Router({ mergeParams: true })
     .get('/', getArticleById)
     .put('/', checkDuplicateArticle, checkValidTopic, updateArticle)
     .delete('/', deleteArticle)

@@ -41,14 +41,14 @@ exports.getArticleById = async function getArticleById(req, res, next) {
 
 exports.updateArticle = async function updateArticle(req, res, next) {
     try {
-        const { params, body, user } = req
+        const { item, body, user } = req
 
         const error = await ArticleUpdateValidator.validate(body)
         if (error) return next(makeHttpBadRequest(error))
 
         const updated = await ArticleModel.updateArticleById(
-            params.id,
-            prepareArticleDataForDb(body, params.id),
+            item.id,
+            prepareArticleDataForDb(body, item.id),
             user,
         )
         res.status(HttpStatus.OK).json(updated)
