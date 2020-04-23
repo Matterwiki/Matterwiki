@@ -1,10 +1,6 @@
-const express = require('express')
+const { Router } = require('express')
 
-const {
-    bodyParser: { JSONParser },
-    checkAuth,
-    checkAdminRole,
-} = require('../common/middleware/index')
+const { checkAdminRole } = require('../common/middleware/index')
 
 const { checkTopicExists, checkDuplicateTopic } = require('./topic-middleware')
 const {
@@ -15,35 +11,16 @@ const {
     deleteTopic,
 } = require('./topic-actions')
 
-const router = express.Router()
+const idRouter = Router()
+    .get('/', getTopicById)
+    .put('/', checkDuplicateTopic, updateTopic)
+    .delete('/', deleteTopic)
 
-// General routes
-router.get('/', checkAuth, getTopicList)
-
-// Admin ONLY routes
-const adminAuthMiddleware = [checkAuth, checkAdminRole]
-router.post(
-    '/',
-    adminAuthMiddleware,
-    JSONParser,
-    checkDuplicateTopic,
-    makeTopic,
-)
-router.get('/:id', adminAuthMiddleware, checkTopicExists, getTopicById)
-router.put(
-    '/:id',
-    adminAuthMiddleware,
-    JSONParser,
-    checkTopicExists,
-    checkDuplicateTopic,
-    updateTopic,
-)
-router.delete(
-    '/:id',
-    adminAuthMiddleware,
-    JSONParser,
-    checkTopicExists,
-    deleteTopic,
-)
-
-module.exports = router
+module.exports = Router()
+    // General routes
+    .get('/', getTopicList)
+    // Admin ONLY routes
+    .use(checkAdminRole)
+    .post('/', checkDuplicateTopic, makeTopic)
+    // Routes with `id` checks
+    .use('/:id', checkTopicExists, idRouter)

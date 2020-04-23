@@ -1,10 +1,6 @@
-const express = require('express')
+const { Router } = require('express')
 
-const {
-    bodyParser: { JSONParser },
-    checkAuth,
-    checkAdminRole,
-} = require('../common/middleware/index')
+const { checkAuth, checkAdminRole } = require('../common/middleware/index')
 
 const { checkUserExists, checkDuplicateUser } = require('./user-middleware')
 const {
@@ -18,37 +14,21 @@ const {
     verifyUser,
 } = require('./user-actions')
 
-const router = express.Router()
+const anonymousUserRouter = Router()
+    .post('/admin', createAdminUser)
+    .post('/login', loginUser)
 
-// Anonymous routes
-router.post('/admin', JSONParser, createAdminUser)
-router.post('/login', JSONParser, loginUser)
+const authenticatedUserRouter = Router()
+    .get('/verify', verifyUser)
+    .get('/:id', checkUserExists, getUserById)
+    // Admin ONLY routes
+    .use(checkAdminRole)
+    .get('/', getUserList)
+    .post('/', checkDuplicateUser, createRegularUser)
+    .put('/:id', checkUserExists, checkDuplicateUser, updateUser)
+    .delete('/:id', checkUserExists, deleteUser)
 
-// Authenticated routes
-router.get('/verify', checkAuth, verifyUser)
-
-router.get('/:id', checkAuth, checkUserExists, getUserById)
-
-// Admin ONLY routes
-const adminMiddleware = [checkAuth, checkAdminRole]
-
-router.get('/', adminMiddleware, getUserList)
-router.post(
-    '/',
-    adminMiddleware,
-    JSONParser,
-    checkDuplicateUser,
-    createRegularUser,
-)
-router.put(
-    '/:id',
-    adminMiddleware,
-    JSONParser,
-    checkUserExists,
-    checkDuplicateUser,
-    updateUser,
-)
-
-router.delete('/:id', adminMiddleware, checkUserExists, deleteUser)
-
-module.exports = router
+module.exports = Router()
+    .use(anonymousUserRouter)
+    .use(checkAuth)
+    .use(authenticatedUserRouter)

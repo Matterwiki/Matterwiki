@@ -1,9 +1,4 @@
-const express = require('express')
-
-const {
-    bodyParser: { JSONParser },
-    checkAuth,
-} = require('../common/middleware/index')
+const { Router } = require('express')
 
 const {
     makeArticle,
@@ -19,28 +14,14 @@ const {
     checkValidTopic,
 } = require('./article-middleware')
 
-const router = express.Router()
+const idRouter = Router()
+    .get('/', getArticleById)
+    .put('/', checkDuplicateArticle, checkValidTopic, updateArticle)
+    .delete('/', deleteArticle)
 
-router.use(checkAuth)
-
-router.get('/', getArticleList)
-router.post(
-    '/',
-    JSONParser,
-    checkDuplicateArticle,
-    checkValidTopic,
-    makeArticle,
-)
-router.post('/upload-image', uploadImage)
-router.get('/:id', JSONParser, checkArticleExists, getArticleById)
-router.put(
-    '/:id',
-    JSONParser,
-    checkArticleExists,
-    checkDuplicateArticle,
-    checkValidTopic,
-    updateArticle,
-)
-router.delete('/:id', JSONParser, checkArticleExists, deleteArticle)
-
-module.exports = router
+module.exports = Router()
+    .get('/', getArticleList)
+    .post('/', checkDuplicateArticle, checkValidTopic, makeArticle)
+    .post('/upload-image', uploadImage)
+    // Routes with `id` checks
+    .use('/:id', checkArticleExists, idRouter)
