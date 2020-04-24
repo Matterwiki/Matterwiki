@@ -2,25 +2,32 @@ import React from 'react'
 import { useAsyncCallback } from 'react-async-hook'
 import { Stack, Box } from '@chakra-ui/core'
 
-import { FileUploadButton, Heading4, Spinner, ErrorAlert } from '@/common/ui'
+import {
+    Heading4,
+    Spinner,
+    ErrorAlert,
+    FileUploadWrapper,
+    Button,
+    Icons,
+} from '@/common/ui'
 import { LogoImage } from '@/common/components'
 import { settingsApi } from '@/common/utils'
 
 export default function ChangeLogo() {
     const { error, execute, loading } = useAsyncCallback(settingsApi.uploadLogo)
 
-    const handleChange = async e => {
-        e.preventDefault()
-        await execute(e.target.files[0])
+    const handleChange = async ([logo]) => {
+        await execute(logo)
+        // TODO: This is definitely crude. But it is easier than managing this URL in state!
         window.location.reload()
     }
 
     if (loading) return <Spinner />
-    if (error) return <ErrorAlert jsError={error} />
 
     return (
         <Stack spacing={5} borderBottom="1px" borderColor="border" padding={4}>
             <Heading4 fontWeight="bold">Wiki Logo</Heading4>
+            {error ? <ErrorAlert jsError={error} /> : null}
             <Stack spacing={3} isInline alignItems="center">
                 <Box
                     width={32}
@@ -31,13 +38,19 @@ export default function ChangeLogo() {
                     <LogoImage />
                 </Box>
 
-                <FileUploadButton
+                <FileUploadWrapper
                     fieldName="logo"
-                    label="Change logo"
                     accept=".png"
                     onChange={handleChange}
+                    render={handleClick => (
+                        <Button onClick={handleClick} leftIcon={Icons.FaUpload}>
+                            Change logo
+                        </Button>
+                    )}
                 />
             </Stack>
         </Stack>
     )
 }
+
+//

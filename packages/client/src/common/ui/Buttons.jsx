@@ -15,6 +15,7 @@ export const Button = React.forwardRef(function Button(props, ref) {
             size="sm"
             textTransform="uppercase"
             variantColor="primary"
+            _focus={{ boxShadow: 'none' }}
             {...props}
         />
     )
@@ -35,6 +36,7 @@ export const IconButton = React.forwardRef(function IconButton(
         <ChakraButton
             size="sm"
             variantColor="primary"
+            _focus={{ boxShadow: 'none' }}
             {...buttonProps}
             ref={ref}>
             <Icon />

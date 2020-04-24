@@ -1,23 +1,6 @@
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Input, PseudoBox } from '@chakra-ui/core'
-
-import { Button } from './Buttons'
-import Icons from './Icons'
-
-const defaultProps = {
-    accept: '',
-    multiple: false,
-    label: 'Choose a file to upload',
-}
-
-const propTypes = {
-    accept: PropTypes.string,
-    multiple: PropTypes.bool,
-    label: PropTypes.string,
-    fieldName: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-}
 
 function FileInputWrapper(props) {
     return (
@@ -31,57 +14,59 @@ function FileInputWrapper(props) {
     )
 }
 
-function FileInput(props) {
-    return (
-        <Input
-            type="file"
-            width="full"
-            height="full"
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            cursor="pointer"
-            opacity={0}
-            padding={0}
-            zIndex="10"
-            {...props}
-        />
-    )
-}
-
 /**
- * File upload component that looks like a button
+ * File upload wrapper that could be used with any element.
+ * It's only been used with buttons so far, so YMMV.
  *
- * @param {*} props
+ * Any style props passed in will go to the file input hidden in here!
  */
-export function FileUploadButton({
-    label,
+export function FileUploadWrapper({
     fieldName,
-    onChange: handleChange,
+    onChange: handleParentChange,
     accept,
     multiple,
+    render,
 }) {
+    const inputRef = useRef()
+    const handleChange = useCallback(
+        e => {
+            e.preventDefault()
+            handleParentChange(e.target.files)
+        },
+        [handleParentChange],
+    )
+
+    const triggerChange = () => {
+        // "Trigger" file input click
+        inputRef.current.click()
+    }
+
     return (
         <FileInputWrapper>
-            <FileInput
+            <Input
+                ref={inputRef}
                 name={fieldName}
                 onChange={handleChange}
                 accept={accept}
                 multiple={multiple}
-                height={8}
+                type="file"
+                display="none"
+                outline="none"
             />
-            <Button
-                leftIcon={Icons.FaUpload}
-                _groupHover={{
-                    backgroundColor: 'primary.600',
-                }}>
-                {label}
-            </Button>
+            {render(triggerChange)}
         </FileInputWrapper>
     )
 }
 
-FileUploadButton.defaultProps = defaultProps
-FileUploadButton.propTypes = propTypes
+FileUploadWrapper.defaultProps = {
+    accept: '',
+    multiple: false,
+}
+
+FileUploadWrapper.propTypes = {
+    accept: PropTypes.string,
+    multiple: PropTypes.bool,
+    fieldName: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    render: PropTypes.elementType.isRequired,
+}
