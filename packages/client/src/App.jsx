@@ -8,7 +8,6 @@ import Setup from './setup/index'
 import Login from './login/index'
 import Logout from './logout/index'
 import Home from './home/index'
-import NotFound from './not-found/index'
 
 /**
  * The main app component. Contains top level routes, styles, etc.
@@ -27,8 +26,7 @@ function App() {
                         <Route path="/logout" component={Logout} />
                         <ProtectedRoute path="/home" component={Home} />
                         {/* 👋 Default base route */}
-                        <Redirect exact from="/" to="/home" />
-                        <Route path="*" component={NotFound} />
+                        <Redirect exact from="*" to="/home" />
                     </Switch>
                 </Layout>
             </BrowserRouter>
