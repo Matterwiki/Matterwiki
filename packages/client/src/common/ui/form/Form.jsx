@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Stack } from '@chakra-ui/core'
+import { Stack, Box } from '@chakra-ui/core'
 
 import ErrorAlert from '../ErrorAlert'
 import { FormContext } from './utils'
@@ -26,18 +26,20 @@ export default function Form({
     }, [onFieldChange, error, initialData])
 
     return (
-        <Stack spacing={3}>
+        <Stack spacing={3} height="full">
             {error ? (
                 <ErrorAlert
                     jsError={error}
                     defaultErrorMessage="There are errors in this form."
                 />
             ) : null}
-            <form onSubmit={handleSubmit}>
+            <Box as="form" flexGrow={1} onSubmit={handleSubmit}>
                 <FormContext.Provider value={contextValue}>
-                    <Stack spacing={3}>{contextValue ? children : null}</Stack>
+                    <Stack spacing={3} height="full">
+                        {contextValue ? children : null}
+                    </Stack>
                 </FormContext.Provider>
-            </form>
+            </Box>
         </Stack>
     )
 }

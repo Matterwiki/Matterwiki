@@ -36,12 +36,12 @@ export default function Editor({
     const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
     return (
-        <Box border="1px" borderColor="border" borderRadius="2px">
+        <Box border="1px" borderColor="border" borderRadius="2px" height="full">
             <Slate editor={editor} value={value} onChange={handleChange}>
                 <EditorToolbar imageUploadHandler={imageUploadHandler} />
                 <Box
                     padding={3}
-                    height="46vh"
+                    maxHeight="62vh"
                     overflowY="auto"
                     overflowX="hidden">
                     <Editable

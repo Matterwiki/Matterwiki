@@ -19,7 +19,7 @@ export default function Layout({ children }) {
     const showNavHeader = pathname.toLowerCase().includes('home')
 
     return (
-        <Stack align="center" height="100vh" spacing={8}>
+        <Stack align="center" height="100vh" spacing={8} overflow="hidden">
             {showNavHeader ? <NavHeader /> : <SimpleHeader />}
             <Box
                 flexGrow={1}
@@ -30,7 +30,8 @@ export default function Layout({ children }) {
                 marginTop={8}
                 paddingY={0}
                 paddingX={8}
-                minHeight={0}>
+                minHeight={0}
+                alignSelf="flex-start">
                 {children}
             </Box>
             <Box as="footer" fontSize="sm" flexShrink={0} paddingY={4}>

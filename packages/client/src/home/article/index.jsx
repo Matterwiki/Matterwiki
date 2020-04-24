@@ -12,17 +12,11 @@ export default function Articles() {
     return (
         <Switch>
             <ProtectedRoute
-                adminOnly
                 isExact
                 path={`${path}/new`}
                 component={NewArticle}
             />
-            <ProtectedRoute
-                adminOnly
-                isExact
-                path={path}
-                component={ArticleList}
-            />
+            <ProtectedRoute isExact path={path} component={ArticleList} />
         </Switch>
     )
 }

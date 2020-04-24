@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAsync } from 'react-async-hook'
-import { Box, Flex } from '@chakra-ui/core'
+import { Box, Stack } from '@chakra-ui/core'
 
 import { Spinner, Heading4 } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'
@@ -22,10 +22,10 @@ export default function NewArticle() {
     }
 
     return (
-        <Flex alignItems="center" justifyContent="center">
-            <Box width="full" flexBasis={{ lg: '45rem' }}>
+        <Stack alignItems="center" height="full">
+            <Box width={{ base: 'full', lg: '45rem' }} flexGrow={1}>
                 <ArticleForm topics={topicList} onSubmit={handleArticleSave} />
             </Box>
-        </Flex>
+        </Stack>
     )
 }
