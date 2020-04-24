@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Flex } from '@chakra-ui/core'
 
 import { Icons, ButtonGroup } from '@/common/ui'
@@ -6,6 +7,7 @@ import { Icons, ButtonGroup } from '@/common/ui'
 import MarkButton from './MarkButton'
 import BlockButton from './BlockButton'
 import LinkButton from './link-button/'
+import ImageButton from './ImageButton'
 import { NODE_TYPES } from '../constants'
 
 function ButtonContainer(props) {
@@ -20,7 +22,7 @@ function ButtonContainer(props) {
     )
 }
 
-export default function EditorToolbar() {
+export default function EditorToolbar({ imageUploadHandler }) {
     return (
         <Flex
             overflow="auto"
@@ -63,7 +65,12 @@ export default function EditorToolbar() {
             </ButtonContainer>
             <ButtonContainer>
                 <LinkButton />
+                <ImageButton imageUploadHandler={imageUploadHandler} />
             </ButtonContainer>
         </Flex>
     )
+}
+
+EditorToolbar.propTypes = {
+    imageUploadHandler: PropTypes.func.isRequired,
 }

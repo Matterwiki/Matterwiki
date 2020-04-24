@@ -21,7 +21,12 @@ const HOTKEYS = {
     'mod+`': 'code',
 }
 
-export default function Editor({ initialValue, onChange: handleParentChange }) {
+export default function Editor({
+    initialValue,
+    onChange: handleParentChange,
+    // TODO: Maybe setup a plugin for this?
+    imageUploadHandler,
+}) {
     const [value, setValue] = useState(initialValue || DEFAULT_EDITOR_VALUE)
     const handleChange = useCallback(
         value => {
@@ -38,7 +43,7 @@ export default function Editor({ initialValue, onChange: handleParentChange }) {
     return (
         <Box border="1px" borderColor="border" borderRadius="2px">
             <Slate editor={editor} value={value} onChange={handleChange}>
-                <EditorToolbar />
+                <EditorToolbar imageUploadHandler={imageUploadHandler} />
                 <Box
                     padding={3}
                     height="46vh"
@@ -69,4 +74,5 @@ export default function Editor({ initialValue, onChange: handleParentChange }) {
 Editor.propTypes = {
     initialValue: PropTypes.any,
     onChange: PropTypes.func.isRequired,
+    imageUploadHandler: PropTypes.func.isRequired,
 }

@@ -1,15 +1,51 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box } from '@chakra-ui/core'
+import { Box, AspectRatioBox, Image } from '@chakra-ui/core'
+import { useSelected, useFocused } from 'slate-react'
 
 import { Heading1, Heading2, Heading3, List, ListItem, Link } from '../../ui'
 import { NODE_TYPES } from './constants'
+
+const slateElementProps = {
+    // 📝 Don't care about these prop types, because Slate is going to be
+    //    providing them via `renderElement`
+    attributes: PropTypes.any,
+    children: PropTypes.any,
+    element: PropTypes.any,
+}
 
 const blockStyles = {
     marginBottom: 3,
 }
 
-export default function Element({ attributes, children, element }) {
+const getImageStyles = (selected, focused) => ({
+    objectFit: 'cover',
+    boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
+})
+
+function ImageElement({ attributes, children, element }) {
+    const selected = useSelected()
+    const focused = useFocused()
+    return (
+        <Box {...attributes} {...blockStyles}>
+            <div contentEditable={false}>
+                <AspectRatioBox maxWidth="full">
+                    <Image
+                        src={element.url}
+                        objectFit="cover"
+                        {...getImageStyles(selected, focused)}
+                    />
+                </AspectRatioBox>
+            </div>
+            {children}
+        </Box>
+    )
+}
+
+ImageElement.propTypes = slateElementProps
+
+export default function Element(props) {
+    const { attributes, children, element } = props
     switch (element.type) {
         case NODE_TYPES.BLOCK_QUOTE:
             return (
@@ -65,7 +101,8 @@ export default function Element({ attributes, children, element }) {
                     fontSize="xs"
                     padding={3}
                     borderRadius="4px"
-                    backgroundColor="gray.100">
+                    backgroundColor="gray.100"
+                    whiteSpace="pre-wrap">
                     {children}
                 </Box>
             )
@@ -96,6 +133,9 @@ export default function Element({ attributes, children, element }) {
                 </Link>
             )
 
+        case NODE_TYPES.IMAGE:
+            return <ImageElement {...props} />
+
         default:
             return (
                 <Box as="p" {...attributes} {...blockStyles}>
@@ -105,10 +145,4 @@ export default function Element({ attributes, children, element }) {
     }
 }
 
-// 📝 Don't care about these prop types, because Slate is going to be
-//    providing them via `renderElement`
-Element.propTypes = {
-    attributes: PropTypes.any,
-    children: PropTypes.any,
-    element: PropTypes.any,
-}
+Element.propTypes = slateElementProps

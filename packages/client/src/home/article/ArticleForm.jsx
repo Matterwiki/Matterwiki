@@ -14,6 +14,8 @@ import {
 } from '@/common/ui'
 import { useForm } from '@/common/hooks'
 
+import articleApi from './article-api'
+
 const initialValue = [
     {
         type: 'paragraph',
@@ -26,16 +28,6 @@ const initialValue = [
             { text: '<textarea>', code: true },
             { text: '!' },
         ],
-    },
-    {
-        type: 'link',
-        url: 'https://en.wikipedia.org/wiki/Hypertext',
-        children: [{ text: 'hyperlinks' }],
-    },
-    {
-        type: 'image',
-        url: 'https://source.unsplash.com/kFrdX5IeQzI',
-        children: [{ text: '' }],
     },
     {
         type: 'paragraph',
@@ -102,6 +94,7 @@ export default function ArticleForm({ initialValue, topics, onSubmit }) {
                 <Editor
                     initialValue={values.content}
                     onChange={setValueFor.bind('content')}
+                    imageUploadHandler={articleApi.uploadImage}
                 />
             </Box>
 

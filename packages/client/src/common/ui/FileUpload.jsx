@@ -37,6 +37,7 @@ export function FileUploadWrapper({
     )
 
     const triggerChange = () => {
+        inputRef.current.value = ''
         // "Trigger" file input click
         inputRef.current.click()
     }

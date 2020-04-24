@@ -15,7 +15,6 @@ export default function SetupRoute() {
         toast({
             title: 'Admin created 🙌',
             status: 'success',
-            duration: 4000,
         })
         history.replace('/login')
     }

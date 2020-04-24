@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
-import _get from 'lodash/get'
 import { useSlate } from 'slate-react'
+import _get from 'lodash/get'
 import FocusLock from 'react-focus-lock'
 
 import {
@@ -61,7 +61,7 @@ export default function LinkButton() {
             onOpen={open}
             onClose={close}
             placement="bottom"
-            closeOnBlur={false}>
+            closeOnBlur>
             <PopoverTrigger>
                 <EditorIconButton
                     isActive={isLinkActive(editor)}

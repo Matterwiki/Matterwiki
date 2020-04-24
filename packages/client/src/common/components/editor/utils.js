@@ -91,3 +91,9 @@ export function insertLink(editor, url) {
 export function setSelection(editor, range) {
     Transforms.select(editor, range)
 }
+
+export function insertImage(editor, url) {
+    const text = { text: '' }
+    const image = { type: NODE_TYPES.IMAGE, url, children: [text] }
+    Transforms.insertNodes(editor, image)
+}
