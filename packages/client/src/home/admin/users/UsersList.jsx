@@ -2,7 +2,14 @@ import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 
-import { Spinner, List, CardListItem, Heading4 } from '@/common/ui'
+import {
+    Spinner,
+    List,
+    CardListItem,
+    ErrorAlert,
+    Heading4,
+    CenteredBox,
+} from '@/common/ui'
 import useUserStore from './user-store'
 
 export default function UsersList() {
@@ -12,9 +19,20 @@ export default function UsersList() {
     const { error, loading } = useAsync(getUserList, [])
 
     if (loading) return <Spinner />
-    if (error) return <Heading4>😢 There was an error fetching users.</Heading4>
+    if (error) {
+        return (
+            <ErrorAlert
+                variant="subtle"
+                jsError={new Error('There was an error fetching users.')}
+            />
+        )
+    }
     if (userList.length === 0) {
-        return <Heading4>😵 Looks like no users were found!</Heading4>
+        return (
+            <CenteredBox>
+                <Heading4>😵 No users found</Heading4>
+            </CenteredBox>
+        )
     }
 
     return (

@@ -1,4 +1,5 @@
 export * from './Buttons'
+export { default as CenteredBox } from './CenteredBox'
 export { default as ErrorAlert } from './ErrorAlert'
 export * from './form/index'
 export * from './FileUpload'
