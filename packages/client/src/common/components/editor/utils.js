@@ -1,4 +1,7 @@
 import { Editor, Transforms, Range } from 'slate'
+import imageExtensions from 'image-extensions'
+import isUrl from 'is-url'
+
 import { LIST_TYPES, NODE_TYPES } from './constants'
 
 export function isMarkActive(editor, format) {
@@ -96,4 +99,11 @@ export function insertImage(editor, url) {
     const text = { text: '' }
     const image = { type: NODE_TYPES.IMAGE, url, children: [text] }
     Transforms.insertNodes(editor, image)
+}
+
+export function isImageUrl(url) {
+    if (!url) return false
+    if (!isUrl(url)) return false
+    const ext = new URL(url).pathname.split('.').pop()
+    return imageExtensions.includes(ext)
 }

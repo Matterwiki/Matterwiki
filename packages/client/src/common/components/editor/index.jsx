@@ -10,6 +10,7 @@ import EditorToolbar from './toolbar'
 import Element from './Element'
 import Leaf from './Leaf'
 import { toggleMark } from './utils'
+import { withImages, withLinks } from './plugins'
 import { DEFAULT_EDITOR_VALUE, PLACEHOLDER_TEXT } from './constants'
 
 const HOTKEYS = {
@@ -33,7 +34,10 @@ export default function Editor({
         },
         [handleParentChange],
     )
-    const editor = useMemo(() => withHistory(withReact(createEditor())), [])
+    const editor = useMemo(
+        () => withLinks(withImages(withHistory(withReact(createEditor())))),
+        [],
+    )
 
     return (
         <Box border="1px" borderColor="border" borderRadius="2px" height="full">
