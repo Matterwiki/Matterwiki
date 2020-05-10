@@ -2,7 +2,7 @@
   "name": "matterwiki",
   "private": true,
   "scripts": {
-    "reset-deps": "rm -rf node_modules && rm -rf packages/*/node_modules",
+    "preinstall": "rm -rf {.,packages/*}/{node_modules,package-lock.json}",
     "postinstall": "lerna bootstrap --no-ci",
     "start": "lerna run start --parallel",
     "test": "lerna run test --concurrency=1 --stream",
