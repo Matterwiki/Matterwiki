@@ -6,7 +6,7 @@ This will hopefully be automated at a later point, but for now, this should be a
 
 * Clone the repo.
 * Ensure you have `nvm`. `cd` into the codebase and run `nvm use` and follow the instructions that come up, if any.
-* Setup a MySQL server instance. [Setting it up in docker](https://dzone.com/articles/docker-for-mac-mysql-setup) is recommended. Remember to [allow `mysql_native_password` authentication in the DB server](https://stackoverflow.com/a/50131831/1217785).
+* Setup a MySQL server instance, [preferably in a docker container](https://dzone.com/articles/docker-for-mac-mysql-setup) is recommended. Remember to [allow `mysql_native_password` authentication in the DB server](https://stackoverflow.com/a/50131831/1217785).
 * Create `matterwiki_dev` database in the MySQL server. In the future, this will be automated.
 * Copy the contents of `packages/api/.example.env` and paste them into a new file called called `.env` in `packages/api`.
 * Fill up all the necessary info.
