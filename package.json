@@ -7,6 +7,7 @@
     "start": "lerna run start --parallel",
     "test": "lerna run test --concurrency=1 --stream",
     "add": "lerna add",
+    "db:setup": "lerna run --scope matterwiki-api db:setup",
     "lint": "eslint './packages/**/*.{js,jsx}'",
     "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'",
     "cm": "git-cz"
