@@ -18,8 +18,8 @@ exports.initDb = async function initDb(t) {
             // https://github.com/Vincit/knex-db-manager/issues/83
             knex: omit(knexConfig, keys(knexSnakeCaseMappers())),
             dbManager: {
-                superUser: process.env.TESTING_DB_SUPER_USER_NAME,
-                superPassword: process.env.TESTING_DB_SUPER_PASSWORD,
+                superUser: process.env.DB_SUPER_USER_NAME,
+                superPassword: process.env.DB_SUPER_PASSWORD,
             },
         })
 

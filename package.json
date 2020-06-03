@@ -10,7 +10,7 @@
     "db:setup": "lerna run --scope matterwiki-api db:setup",
     "lint": "eslint './packages/**/*.{js,jsx}'",
     "lint:fix": "eslint --fix './packages/**/*.{js,jsx}'",
-    "cm": "git-cz"
+    "cm": "git add . && git-cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
