@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const { knexSnakeCaseMappers } = require('objection')
 
 module.exports = {

@@ -4,12 +4,12 @@
   "description": "The API project for matterwiki",
   "main": "src/server.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development DB_NAME=matterwiki_dev nodemon --inspect ./src/server.js",
+    "start": "dotenv -- cross-env NODE_ENV=development DB_NAME=matterwiki_dev nodemon --inspect ./src/server.js",
     "prod": "cross-env NODE_ENV=production node ./src/server.js",
-    "test": "ava reset-cache && cross-env NODE_ENV=test DB_NAME=matterwiki_test ava --verbose --serial",
-    "db:setup": "npm run db:migrate && npm run db:seed",
-    "db:migrate": "knex migrate:latest",
-    "db:seed": "knex seed:run"
+    "test": "dotenv -- ava reset-cache && cross-env NODE_ENV=test DB_NAME=matterwiki_test ava --verbose --serial",
+    "db:setup": "dotenv -- npm run db:migrate && npm run db:seed",
+    "db:migrate": "dotenv -- knex migrate:latest",
+    "db:seed": "dotenv -- knex seed:run"
   },
   "engines": {
     "node": "^12.3.0"
@@ -31,6 +31,7 @@
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.3",
     "html-to-text": "^5.1.1",
