@@ -17,7 +17,7 @@ function handleHttp400(err) {
     err.jsonError = parseJsonError(err)
     err.message = err.jsonError.message
     err.isJoiValidationErr =
-        _get(err, 'jsonError.error.code') === 'JOI_VALIDATION_ERR'
+        _get(err, 'jsonError.error.code') === 'VALIDATION_ERR'
 
     throw err
 }
