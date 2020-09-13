@@ -11,19 +11,19 @@ test(
     'missing email',
     validationTester,
     { email: undefined },
-    { email: ['"email" is required'] },
+    { email: ['email is a required field'] },
 )
 test(
     'bad email',
     validationTester,
     { email: 'jhbdfbjd' },
-    { email: ['"email" must be a valid email'] },
+    { email: ['email must be a valid email'] },
 )
 test(
     'missing password field',
     validationTester,
     { password: undefined },
-    { password: ['"password" is required'] },
+    { password: ['password is a required field'] },
 )
 
 test('valid login payload', async t => {

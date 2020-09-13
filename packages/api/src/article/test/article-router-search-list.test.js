@@ -115,5 +115,5 @@ test('(200) search query returns expected results', async t => {
         ].sort(),
     )
 
-    t.deepEqual(expectedIdOrder, map(res.body, 'id'))
+    t.deepEqual(expectedIdOrder.sort(), map(res.body, 'id').sort())
 })

@@ -14,21 +14,21 @@ test(
     'missing title',
     validationTester,
     { title: undefined },
-    { title: ['"title" is required'] },
+    { title: ['title is a required field'] },
 )
 
 test(
     'bad title format type',
     validationTester,
     { title: null },
-    { title: ['"title" must be a string'] },
+    { title: ['title must be a `string` type'] },
 )
 
 test(
     'bad title (min)',
     validationTester,
     { title: 'jfjda' },
-    { title: ['"title" length must be at least 10 characters long'] },
+    { title: ['title must be at least 10 characters'] },
 )
 
 test(
@@ -36,9 +36,7 @@ test(
     validationTester,
     { title: chance().word({ length: 81 }) },
     {
-        title: [
-            '"title" length must be less than or equal to 80 characters long',
-        ],
+        title: ['title must be at most 80 characters'],
     },
 )
 
@@ -46,48 +44,48 @@ test(
     'missing content',
     validationTester,
     { content: undefined },
-    { content: ['"content" is required'] },
+    { content: ['content is a required field'] },
 )
 
 test(
     'bad content format type',
     validationTester,
     { content: null },
-    { content: ['"content" must be a string'] },
+    { content: ['content must be a `string` type'] },
 )
 
 test(
     'missing topicId',
     validationTester,
     { topicId: undefined },
-    { topicId: ['"topicId" is required'] },
+    { topicId: ['topicId is a required field'] },
 )
 test(
     'bad topicId format type',
     validationTester,
     { topicId: null },
-    { topicId: ['"topicId" must be a number'] },
+    { topicId: ['topicId must be a `number` type'] },
 )
 
 test(
     'missing changeLog',
     validationTester,
     { changeLog: undefined },
-    { changeLog: ['"changeLog" is required'] },
+    { changeLog: ['changeLog is a required field'] },
 )
 
 test(
     'bad changeLog format type',
     validationTester,
     { changeLog: null },
-    { changeLog: ['"changeLog" must be a string'] },
+    { changeLog: ['changeLog must be a `string` type'] },
 )
 
 test(
     'bad changeLog (min)',
     validationTester,
     { changeLog: 'jfjda' },
-    { changeLog: ['"changeLog" length must be at least 10 characters long'] },
+    { changeLog: ['changeLog must be at least 10 characters'] },
 )
 
 test(
@@ -95,9 +93,7 @@ test(
     validationTester,
     { changeLog: chance().word({ length: 51 }) },
     {
-        changeLog: [
-            '"changeLog" length must be less than or equal to 50 characters long',
-        ],
+        changeLog: ['changeLog must be at most 50 characters'],
     },
 )
 

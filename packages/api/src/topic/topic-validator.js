@@ -1,10 +1,10 @@
-const Joi = require('@hapi/joi')
+const yup = require('yup')
 
 const { modelValidationWrapper } = require('../common/utils/index')
 
 exports.TopicValidator = modelValidationWrapper(
-    Joi.object({
-        name: Joi.string().min(3).max(50).required(),
-        description: Joi.string().min(10).max(255),
+    yup.object().shape({
+        name: yup.string().min(3).max(50).required(),
+        description: yup.string().min(10).max(255),
     }),
 )

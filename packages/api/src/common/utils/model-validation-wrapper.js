@@ -1,5 +1,5 @@
-const Joi = require('@hapi/joi')
-const { get, set, reduce } = require('lodash')
+const yup = require('yup')
+const { get, set, reduce, first } = require('lodash')
 
 /**
  * Formats errors in a better(ish) way for use in the UI.
@@ -7,21 +7,22 @@ const { get, set, reduce } = require('lodash')
  * @param {*} error
  * @returns
  */
-function parseJoiError(error) {
-    if (error instanceof Joi.ValidationError) {
-        const { details } = error
+function parseValidationError(error) {
+    if (error instanceof yup.ValidationError) {
+        const { inner } = error
         const formattedError = reduce(
-            details,
+            inner,
             (acc, errorRow) => {
                 const existingValue = get(acc, errorRow.path) || []
-                set(acc, errorRow.path, existingValue.concat(errorRow.message))
+                const message = first(errorRow.message.split(', but'))
+                set(acc, errorRow.path, existingValue.concat(message))
 
                 return acc
             },
             {},
         )
 
-        return { message: formattedError, code: 'JOI_VALIDATION_ERR' }
+        return { message: formattedError, code: 'VALIDATION_ERR' }
     }
 
     return error
@@ -32,20 +33,19 @@ function parseJoiError(error) {
  *
  * Ah, such patchwork :)
  *
- * @param {any} joiValidationSchema
+ * @param {any} yupValidationSchema
  */
-module.exports = function modelValidationWrapper(joiValidationSchema) {
-    const schema = joiValidationSchema.options({ abortEarly: false })
+module.exports = function modelValidationWrapper(validationSchema) {
     return {
-        validator: schema,
+        validator: validationSchema,
         async validate(input) {
             try {
-                await schema.validateAsync(input)
+                await validationSchema.validate(input, { abortEarly: false })
                 // All good, no errors
                 return null
             } catch (error) {
                 // Format to a standard friendly structure
-                return parseJoiError(error)
+                return parseValidationError(error)
             }
         },
     }

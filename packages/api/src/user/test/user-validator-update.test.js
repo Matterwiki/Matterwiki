@@ -11,38 +11,38 @@ test(
     'missing email',
     validationTester,
     { email: undefined },
-    { email: ['"email" is required'] },
+    { email: ['email is a required field'] },
 )
 test(
     'bad email format type',
     validationTester,
     { email: null },
-    { email: ['"email" must be a string'] },
+    { email: ['email must be a `string` type'] },
 )
 test(
     'bad email',
     validationTester,
     { email: 'jhbdfbjd' },
-    { email: ['"email" must be a valid email'] },
+    { email: ['email must be a valid email'] },
 )
 
 test(
     'missing name',
     validationTester,
     { name: undefined },
-    { name: ['"name" is required'] },
+    { name: ['name is a required field'] },
 )
 test(
     'bad name format type',
     validationTester,
     { name: null },
-    { name: ['"name" must be a string'] },
+    { name: ['name must be a `string` type'] },
 )
 test(
     'bad name',
     validationTester,
     { name: 'ab' },
-    { name: ['"name" length must be at least 3 characters long'] },
+    { name: ['name must be at least 3 characters'] },
 )
 
 test('allow empty password', async t => {

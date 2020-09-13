@@ -1,30 +1,42 @@
-const Joi = require('@hapi/joi')
+const yup = require('yup')
 
 const { modelValidationWrapper } = require('../common/utils/index')
 
 exports.UserValidator = modelValidationWrapper(
-    Joi.object({
-        name: Joi.string().min(3).max(50).required(),
-        email: Joi.string().email().required(),
+    yup.object().shape({
+        name: yup.string().min(3).max(50).required(),
+        email: yup.string().email().required(),
         // TODO: Password limitations
-        password: Joi.string().required(),
-        about: Joi.string().min(10).max(255).allow('').optional(),
+        password: yup.string().required(),
+        about: yup
+            .string()
+            .transform(v => v || null)
+            .min(10)
+            .max(255)
+            .optional()
+            .nullable(),
     }),
 )
 
 exports.UserUpdateValidator = modelValidationWrapper(
-    Joi.object({
-        name: Joi.string().min(3).max(50).required(),
-        email: Joi.string().email().required(),
+    yup.object().shape({
+        name: yup.string().min(3).max(50).required(),
+        email: yup.string().email().required(),
         // TODO: Password limitations
-        password: Joi.string(),
-        about: Joi.string().min(10).max(255).allow('').optional(),
+        password: yup.string(),
+        about: yup
+            .string()
+            .transform(v => v || null)
+            .min(10)
+            .max(255)
+            .optional()
+            .nullable(),
     }),
 )
 
 exports.LoginValidator = modelValidationWrapper(
-    Joi.object({
-        email: Joi.string().email().required(),
-        password: Joi.string().required(),
+    yup.object().shape({
+        email: yup.string().email().required(),
+        password: yup.string().required(),
     }),
 )
