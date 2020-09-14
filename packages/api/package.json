@@ -7,7 +7,7 @@
     "start": "dotenv -- cross-env NODE_ENV=development DB_NAME=matterwiki_dev nodemon --inspect ./src/server.js",
     "prod": "cross-env NODE_ENV=production node ./src/server.js",
     "test": "ava reset-cache && dotenv -- cross-env NODE_ENV=test DB_NAME=matterwiki_test ava --verbose --serial",
-    "db:setup": "dotenv -- npm run db:migrate && npm run db:seed",
+    "db:devsetup": "dotenv -- cross-env NODE_ENV=development DB_NAME=matterwiki_dev node ./scripts/dev-db-setup",
     "db:migrate": "dotenv -- knex migrate:latest",
     "db:seed": "dotenv -- knex seed:run"
   },
