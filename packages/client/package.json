@@ -45,7 +45,7 @@
     "url-search-params-polyfill": "^8.0.0",
     "whatwg-fetch": "^3.0.0",
     "wretch": "^1.7.2",
-    "zustand": "^2.2.3"
+    "zustand": "^3.1.2"
   },
   "devDependencies": {
     "@neutrinojs/jest": "^9.4.0",

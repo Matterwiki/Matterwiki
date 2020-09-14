@@ -2,7 +2,7 @@ import wretch from 'wretch'
 import _get from 'lodash/get'
 
 import safeJsonParse from './safe-json-parse'
-import { authStoreApi } from '../store/auth-store'
+import { authStore } from '../store/auth-store'
 
 const parseJsonError = e => safeJsonParse(e.message, {})
 
@@ -53,7 +53,7 @@ function handleHttp401(err) {
     err.jsonError = parseJsonError(err)
     err.message = err.jsonError.message
 
-    authStoreApi.getState().logout()
+    authStore.getState().logout()
     throw err
 }
 
@@ -72,7 +72,7 @@ function handleHttp405(err) {
  * This is a function because we'd like this to executed everytime.
  */
 export default function apiHelper() {
-    const authToken = authStoreApi.getState().getToken()
+    const authToken = authStore.getState().getToken()
 
     return wretch()
         .url(`/api/`)

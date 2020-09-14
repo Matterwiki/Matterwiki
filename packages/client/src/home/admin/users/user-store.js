@@ -8,7 +8,7 @@ import { userApi } from '@/common/utils'
  * User store that holds info for managing user information.
  * Looking for authenticated user, etc? Search for `auth-store`!
  */
-const [useUserStore] = createStore((set, get) => ({
+const useUserStore = createStore((set, get) => ({
     userList: [],
 
     /**

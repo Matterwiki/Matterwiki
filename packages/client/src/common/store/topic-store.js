@@ -9,7 +9,7 @@ import topicApi from '../utils/topic-api'
  *
  * TODO: If this store is used in other spots, it will have to moved to @/common/store!
  */
-const [useTopicStore] = createStore((set, get) => ({
+const useTopicStore = createStore((set, get) => ({
     topicList: [],
 
     /**

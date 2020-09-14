@@ -7,7 +7,7 @@ import shallow from 'zustand/shallow'
  * @param {*} config
  */
 function immerMiddleware(config) {
-    return (set, get, api) => {
+    return function (set, get, api) {
         const immerSet = fn => set(produce(fn))
         return config(immerSet, get, api)
     }

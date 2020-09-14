@@ -4,7 +4,7 @@ import userApi from '../utils/user-api'
 /**
  * Store that holds auth related methods and data
  */
-const [useStore, authStoreApi] = createStore((set, get) => ({
+const authStore = createStore((set, get) => ({
     currentUser: {},
 
     /**
@@ -56,5 +56,5 @@ const [useStore, authStoreApi] = createStore((set, get) => ({
     },
 }))
 
-const useAuthStore = withStringPicker(useStore)
-export { authStoreApi, useAuthStore }
+const useAuthStore = withStringPicker(authStore)
+export { useAuthStore, authStore }
