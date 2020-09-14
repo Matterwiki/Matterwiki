@@ -48,13 +48,13 @@
     "zustand": "^2.2.3"
   },
   "devDependencies": {
-    "@neutrinojs/jest": "^9.2.0",
-    "@neutrinojs/react": "^9.2.0",
-    "@testing-library/react": "^10.0.1",
+    "@neutrinojs/jest": "^9.4.0",
+    "@neutrinojs/react": "^9.4.0",
+    "@testing-library/react": "^11.0.4",
     "jest": "^25.1.0",
-    "neutrino": "^9.2.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "neutrino": "^9.4.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
