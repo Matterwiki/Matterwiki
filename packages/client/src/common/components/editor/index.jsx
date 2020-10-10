@@ -11,19 +11,18 @@ import Element from './Element'
 import Leaf from './Leaf'
 import { toggleMark } from './utils'
 import { withImages, withLinks } from './plugins'
-import { DEFAULT_EDITOR_VALUE, PLACEHOLDER_TEXT } from './constants'
+import { DEFAULT_EDITOR_VALUE, PLACEHOLDER_TEXT, NODE_TYPES } from './constants'
 
 const HOTKEYS = {
-    'mod+b': 'bold',
-    'mod+i': 'italic',
-    'mod+u': 'underline',
-    'mod+`': 'code',
+    'mod+b': NODE_TYPES.BOLD,
+    'mod+i': NODE_TYPES.ITALIC,
+    'mod+u': NODE_TYPES.UNDERLINED,
+    'mod+`': NODE_TYPES.CODE,
 }
 
 export default function Editor({
     initialValue,
     onChange: handleParentChange,
-    // TODO: Maybe setup a plugin for this?
     imageUploadHandler,
 }) {
     const [value, setValue] = useState(initialValue || DEFAULT_EDITOR_VALUE)
