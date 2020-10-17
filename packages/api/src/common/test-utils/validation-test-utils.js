@@ -1,4 +1,4 @@
-const { JOI_VALIDATION_ERR_CODE } = require('../constants')
+const { VALIDATION_ERR_CODE } = require('../constants')
 
 /**
  * Shorthands for making validation testing easier
@@ -12,7 +12,7 @@ exports.validationTestRunner = (payloadBuilder, validator) => async (
     const error = await validator.validate(payload)
     t.deepEqual(
         {
-            code: JOI_VALIDATION_ERR_CODE,
+            code: VALIDATION_ERR_CODE,
             message: expected,
         },
         error,

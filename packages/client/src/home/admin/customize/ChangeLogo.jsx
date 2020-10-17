@@ -3,7 +3,7 @@ import { useAsyncCallback } from 'react-async-hook'
 import { Stack, Box } from '@chakra-ui/core'
 
 import {
-    Heading4,
+    Heading,
     Spinner,
     ErrorAlert,
     FileUploadWrapper,
@@ -26,7 +26,9 @@ export default function ChangeLogo() {
 
     return (
         <Stack spacing={5} borderBottom="1px" borderColor="border" padding={4}>
-            <Heading4 fontWeight="bold">Wiki Logo</Heading4>
+            <Heading size="lg" fontWeight="bold">
+                Wiki Logo
+            </Heading>
             {error ? <ErrorAlert jsError={error} /> : null}
             <Stack spacing={3} isInline alignItems="center">
                 <Box

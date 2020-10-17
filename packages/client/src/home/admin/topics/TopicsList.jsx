@@ -7,7 +7,7 @@ import {
     List,
     CardListItem,
     ErrorAlert,
-    Heading4,
+    Heading,
     CenteredBox,
 } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'
@@ -30,7 +30,7 @@ export default function TopicsList() {
     if (topicList.length === 0) {
         return (
             <CenteredBox>
-                <Heading4>😵 No topics found.</Heading4>
+                <Heading size="lg">😵 No topics found.</Heading>
             </CenteredBox>
         )
     }

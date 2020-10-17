@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Flex, Box, useToast } from '@chakra-ui/core'
+import { Box, SimpleGrid, useToast } from '@chakra-ui/core'
 
 import { UserForm } from '@/common/components'
 import { userApi } from '@/common/utils/'
@@ -20,17 +20,21 @@ export default function SetupRoute() {
     }
 
     return (
-        <Flex flexWrap="wrap" justifyContent="center">
-            <Box flexBasis={['20rem', '25rem']} marginBottom={6}>
+        <SimpleGrid columns={[1, 2]} spacing={10}>
+            <Box
+                sx={{
+                    maxWidth: ['sm', 'md'],
+                    padding: 5,
+                }}>
                 <IntroInfo />
             </Box>
-            <Box flexBasis={['20rem', '25rem']} paddingX={[0, 0, 6]}>
+            <Box>
                 <UserForm
                     passwordRequired
                     onSubmit={handleSignup}
                     submitBtnText="Setup my account"
                 />
             </Box>
-        </Flex>
+        </SimpleGrid>
     )
 }

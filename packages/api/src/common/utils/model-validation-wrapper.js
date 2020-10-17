@@ -1,6 +1,8 @@
 const yup = require('yup')
 const { get, set, reduce, first } = require('lodash')
 
+const { VALIDATION_ERR_CODE } = require('../constants')
+
 /**
  * Formats errors in a better(ish) way for use in the UI.
  *
@@ -22,7 +24,7 @@ function parseValidationError(error) {
             {},
         )
 
-        return { message: formattedError, code: 'VALIDATION_ERR' }
+        return { message: formattedError, code: VALIDATION_ERR_CODE }
     }
 
     return error

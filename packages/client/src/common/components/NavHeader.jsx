@@ -3,12 +3,7 @@ import _get from 'lodash/get'
 import { Box } from '@chakra-ui/core'
 import { useRouteMatch } from 'react-router-dom'
 
-import {
-    Icons,
-    RouterLink,
-    NavItem,
-    NavHeader as GenericNavHeader,
-} from '../ui/'
+import { Icons, RouterLink, NavItem, GenericNavHeader } from '../ui/'
 import { useAuthStore } from '../store/'
 
 import LogoImage from './LogoImage'
@@ -16,7 +11,7 @@ import LogoImage from './LogoImage'
 function LeftPartNav() {
     return (
         <RouterLink to="/">
-            <Box width={6}>
+            <Box sx={{ width: 6 }}>
                 <LogoImage />
             </Box>
         </RouterLink>

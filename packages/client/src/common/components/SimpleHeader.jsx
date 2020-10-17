@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box } from '@chakra-ui/core'
 
-import { SimpleHeader as GenericSimpleHeader } from '../ui/'
 import { LogoImage } from '../components'
 
 /**
@@ -9,10 +8,12 @@ import { LogoImage } from '../components'
  */
 export default function SimpleHeader() {
     return (
-        <GenericSimpleHeader>
-            <Box width={20}>
-                <LogoImage />
-            </Box>
-        </GenericSimpleHeader>
+        <Box
+            sx={{
+                width: 10,
+                paddingTop: 8,
+            }}>
+            <LogoImage />
+        </Box>
     )
 }

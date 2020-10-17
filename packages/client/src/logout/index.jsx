@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Stack } from '@chakra-ui/core'
 
-import { Heading2, Heading3, Heading4, RouterLink } from '@/common/ui'
+import { Heading, RouterLink } from '@/common/ui'
 import { useAuthStore } from '@/common/store/'
 
 export default function NotFound() {
@@ -14,13 +14,13 @@ export default function NotFound() {
             justifyContent="center"
             spacing={4}
             padding={12}>
-            <Heading2>🏃‍♂️</Heading2>
-            <Heading3>You&apos;ve just been logged out.</Heading3>
-            <Heading4>
+            <Heading size="2xl">🏃‍♂️</Heading>
+            <Heading size="lg">You&apos;ve just been logged out.</Heading>
+            <Heading size="md">
                 <RouterLink to="/login">
                     Would you like to log back in?
                 </RouterLink>
-            </Heading4>
+            </Heading>
         </Stack>
     )
 }

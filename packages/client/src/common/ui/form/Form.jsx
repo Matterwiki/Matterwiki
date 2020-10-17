@@ -26,18 +26,16 @@ export default function Form({
     }, [onFieldChange, error, initialData])
 
     return (
-        <Stack spacing={3} height="full">
+        <Stack spacing={3}>
             {error ? (
                 <ErrorAlert
                     jsError={error}
                     defaultErrorMessage="There are errors in this form."
                 />
             ) : null}
-            <Box as="form" flexGrow={1} onSubmit={handleSubmit}>
+            <Box as="form" onSubmit={handleSubmit}>
                 <FormContext.Provider value={contextValue}>
-                    <Stack spacing={3} height="full">
-                        {contextValue ? children : null}
-                    </Stack>
+                    <Stack spacing={4}>{contextValue ? children : null}</Stack>
                 </FormContext.Provider>
             </Box>
         </Stack>

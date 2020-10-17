@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { Link as ChakraLink } from '@chakra-ui/core'
 
-/**
- * Simple `Link` component, themed to the app for conistency
- * @param {*} props
- */
-export const Link = React.forwardRef(function Link(props, ref) {
-    return <ChakraLink color="primary.400" {...props} ref={ref} />
-})
+export const theme = {
+    Link: {
+        baseStyle: {
+            color: 'primary.400',
+        },
+    },
+}
+
+export const Link = ChakraLink
 
 /**
  * Adds some basic styling to react-router's links to make them consistent

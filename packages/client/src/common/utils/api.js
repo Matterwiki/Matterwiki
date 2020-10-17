@@ -16,7 +16,7 @@ const parseJsonError = e => safeJsonParse(e.message, {})
 function handleHttp400(err) {
     err.jsonError = parseJsonError(err)
     err.message = err.jsonError.message
-    err.isJoiValidationErr =
+    err.isApiValidatorError =
         _get(err, 'jsonError.error.code') === 'VALIDATION_ERR'
 
     throw err

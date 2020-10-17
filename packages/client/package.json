@@ -18,12 +18,9 @@
   },
   "homepage": "http://matterwiki.com",
   "dependencies": {
-    "@chakra-ui/core": "^0.7.0",
-    "@emotion/core": "^10.0.28",
-    "@emotion/styled": "^10.0.27",
+    "@chakra-ui/core": "^1.0.0-rc.5",
     "@hot-loader/react-dom": "^16.13.0",
     "core-js": "^3.6.5",
-    "emotion-theming": "^10.0.27",
     "image-extensions": "^1.1.0",
     "immer": "^7.0.9",
     "is-hotkey": "^0.1.6",

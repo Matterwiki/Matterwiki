@@ -17,7 +17,7 @@ function getValidationError(url) {
     if (isUrl(url)) return null
 
     const validationError = new Error('Error')
-    validationError.isJoiValidationErr = true
+    validationError.isApiValidatorError = true
     validationError.message = {
         url: 'Not a valid link.',
     }

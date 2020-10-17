@@ -61,12 +61,7 @@ export default function UserForm({
                 labelText="About"
                 placeholder="I make wiki software 📖"
             />
-            <Button
-                isLoading={loading}
-                loadingText="Submitting"
-                marginY={4}
-                width="full"
-                type="submit">
+            <Button isLoading={loading} loadingText="Submitting" type="submit">
                 {submitBtnText}
             </Button>
         </Form>

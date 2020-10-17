@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Box, AspectRatioBox, Image } from '@chakra-ui/core'
 import { useSelected, useFocused } from 'slate-react'
 
-import { Heading1, Heading2, Heading3, List, ListItem, Link } from '../../ui'
+import { Heading, List, ListItem, Link } from '../../ui'
 import { NODE_TYPES } from './constants'
 
 const slateElementProps = {
@@ -63,34 +63,34 @@ export default function Element(props) {
             )
         case NODE_TYPES.HEADING_ONE:
             return (
-                <Heading1
+                <Heading
                     {...attributes}
                     {...blockStyles}
                     fontWeight="600"
                     size="lg">
                     {children}
-                </Heading1>
+                </Heading>
             )
         case NODE_TYPES.HEADING_TWO:
             return (
-                <Heading2
+                <Heading
                     {...attributes}
                     {...blockStyles}
                     fontWeight="700"
                     size="md">
                     {children}
-                </Heading2>
+                </Heading>
             )
         case NODE_TYPES.HEADING_THREE:
             return (
-                <Heading3
+                <Heading
                     {...attributes}
                     {...blockStyles}
                     fontWeight="600"
                     size="sm"
                     textTransform="uppercase">
                     {children}
-                </Heading3>
+                </Heading>
             )
         case NODE_TYPES.CODE_BLOCK:
             return (

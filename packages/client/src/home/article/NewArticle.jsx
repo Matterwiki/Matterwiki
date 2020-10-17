@@ -2,7 +2,7 @@ import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { Box, Stack } from '@chakra-ui/core'
 
-import { Spinner, Heading4 } from '@/common/ui'
+import { Spinner, Heading } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'
 
 import ArticleForm from './ArticleForm'
@@ -18,7 +18,9 @@ export default function NewArticle() {
 
     if (loading) return <Spinner />
     if (error) {
-        return <Heading4>😢 There was an error fetching topics.</Heading4>
+        return (
+            <Heading size="lg">😢 There was an error fetching topics.</Heading>
+        )
     }
 
     return (

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     FaBars,
     FaCog,
@@ -32,12 +31,9 @@ import {
     FaImage,
     FaExternalLinkAlt,
 } from 'react-icons/fa'
-import { Box } from '@chakra-ui/core'
-
-const withBox = icon => props => <Box as={icon} size={4} {...props} />
 
 /**
- * Icons used in the app. `withBox` gives it styling super powers! ⚡️
+ * Icons used in the app.
  */
 const Icons = [
     FaBars,
@@ -72,8 +68,7 @@ const Icons = [
     FaImage,
     FaExternalLinkAlt,
 ].reduce((acc, icon) => {
-    acc[icon.name] = withBox(icon)
-    return acc
+    return { ...acc, [icon.name]: icon }
 }, {})
 
 export default Icons

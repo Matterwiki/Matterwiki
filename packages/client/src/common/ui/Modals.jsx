@@ -17,7 +17,7 @@ import {
 
 import { Button } from './Buttons'
 import ErrorAlert from './ErrorAlert'
-import { Spinner } from './Spinners'
+import { Spinner } from './Spinner'
 
 export function SimpleModal({ showModal, onClose, title, children }) {
     const [isOpen, setIsOpen] = useState(showModal)

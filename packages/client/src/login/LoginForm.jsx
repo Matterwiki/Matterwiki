@@ -21,24 +21,19 @@ export default function LoginForm({ onSubmit }) {
             onSubmit={execute}>
             <FormInput
                 fieldName="email"
-                isRequired={true}
+                isRequired
                 labelText="Email"
                 placeholder="ward@cunningham.com"
                 type="email"
             />
             <FormInput
                 fieldName="password"
-                isRequired={true}
+                isRequired
                 labelText="Password"
                 placeholder="SecurePassword"
                 type="password"
             />
-            <Button
-                isLoading={loading}
-                loadingText="Submitting"
-                marginY={4}
-                width="full"
-                type="submit">
+            <Button isLoading={loading} loadingText="Submitting" type="submit">
                 Login
             </Button>
         </Form>

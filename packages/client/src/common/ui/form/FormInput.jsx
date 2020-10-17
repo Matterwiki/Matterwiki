@@ -11,8 +11,15 @@ import { IconButton } from '../Buttons'
 import FormItemContainer from './FormItemContainer'
 import { getHelperTextId, useFormContext } from './utils'
 
-const inputStyles = {
-    focusBorderColor: 'primary.100',
+export const theme = {
+    Input: {
+        baseStyle: {
+            field: { paddingRight: 16 },
+        },
+        defaultProps: {
+            focusBorderColor: 'primary.100',
+        },
+    },
 }
 
 /* eslint-disable react/prop-types */
@@ -24,10 +31,8 @@ export const PasswordFormInput = React.forwardRef(function PasswordFormInput(
     const handleClick = () => setShow(!show)
 
     return (
-        <InputGroup size={inputStyles.size}>
+        <InputGroup>
             <ChakraInput
-                {...inputStyles}
-                paddingRight={16}
                 {...props}
                 id={fieldName}
                 name={fieldName}
@@ -37,17 +42,15 @@ export const PasswordFormInput = React.forwardRef(function PasswordFormInput(
                 aria-describedby={getHelperTextId(fieldName)}
                 ref={ref}
             />
-            {value ? (
-                <InputRightElement>
-                    <IconButton
-                        icon={show ? Icons.FaRegEyeSlash : Icons.FaRegEye}
-                        size="xs"
-                        aria-label="Show Password"
-                        onClick={handleClick}
-                        variantColor="gray"
-                    />
-                </InputRightElement>
-            ) : null}
+
+            <InputRightElement>
+                <IconButton
+                    icon={show ? <Icons.FaRegEyeSlash /> : <Icons.FaRegEye />}
+                    aria-label="Show Password"
+                    onClick={handleClick}
+                    colorScheme="gray"
+                />
+            </InputRightElement>
         </InputGroup>
     )
 })
@@ -58,7 +61,6 @@ export const GenericFormInput = React.forwardRef(function GenericFormInput(
 ) {
     return (
         <ChakraInput
-            {...inputStyles}
             {...props}
             type={type}
             id={fieldName}

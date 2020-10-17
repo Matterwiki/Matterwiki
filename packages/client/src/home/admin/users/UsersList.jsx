@@ -7,7 +7,7 @@ import {
     List,
     CardListItem,
     ErrorAlert,
-    Heading4,
+    Heading,
     CenteredBox,
 } from '@/common/ui'
 import useUserStore from './user-store'
@@ -30,7 +30,7 @@ export default function UsersList() {
     if (userList.length === 0) {
         return (
             <CenteredBox>
-                <Heading4>😵 No users found</Heading4>
+                <Heading size="lg">😵 No users found</Heading>
             </CenteredBox>
         )
     }

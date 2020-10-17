@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Flex, Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 
 import LoginForm from './LoginForm'
 
@@ -26,10 +26,12 @@ export default function LoginRoute() {
     }
 
     return (
-        <Flex alignItems="center" justifyContent="center">
-            <Box size={['xs', 'sm', 'md']} paddingX={[0, 0, 6]}>
-                <LoginForm onSubmit={handleLogin} />
-            </Box>
-        </Flex>
+        <Box
+            sx={{
+                width: ['full', 'md'],
+                padding: 5,
+            }}>
+            <LoginForm onSubmit={handleLogin} />
+        </Box>
     )
 }

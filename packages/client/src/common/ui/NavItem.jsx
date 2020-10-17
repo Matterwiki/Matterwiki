@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useRouteMatch } from 'react-router-dom'
-import { PseudoBox, Stack } from '@chakra-ui/core'
+import { Box, Stack } from '@chakra-ui/core'
 
 import { Description, TextWithIcon } from './Text'
 import { RouterLink } from './Link'
 
 /**
  * A nav item component that does a little too much!
- *
- * TODO: Simplify this?
  * @param {*} props
  */
 export default function NavItem({
@@ -24,28 +22,31 @@ export default function NavItem({
     const isActive = match !== null
 
     return (
-        <PseudoBox
+        <Box
             as={RouterLink}
             {...props}
             to={to}
-            backgroundColor={highlightActive && isActive ? 'gray.100' : null}
-            color="text"
-            marginRight={6}
-            marginTop={[4, 4, 0]}
-            paddingX={2}
-            outline="none"
-            _focus={{ outline: 'none', boxShadow: 'none' }}
-            _active={{ outline: 'none' }}
-            _hover={{
-                color: 'primary.500',
-                textDecoration: 'none',
+            sx={{
+                backgroundColor:
+                    highlightActive && isActive ? 'gray.100' : null,
+                color: 'text',
+                marginRight: 6,
+                marginTop: [4, 4, 0],
+                paddingX: 2,
                 outline: 'none',
+                _focus: { outline: 'none', boxShadow: 'none' },
+                _active: { outline: 'none' },
+                _hover: {
+                    color: 'primary.500',
+                    textDecoration: 'none',
+                    outline: 'none',
+                },
             }}>
             <Stack spacing={1}>
                 <TextWithIcon icon={Icon} text={name} />
                 {desc ? <Description>{desc}</Description> : null}
             </Stack>
-        </PseudoBox>
+        </Box>
     )
 }
 
