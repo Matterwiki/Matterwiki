@@ -19,9 +19,9 @@ export function GenericNavHeader({ left: Left, right: Right }) {
         <Flex
             as="nav"
             sx={{
-                align: 'center',
-                justify: 'space-between',
-                wrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
                 padding: 5,
                 width: 'full',
                 boxShadow: 'md',
@@ -40,6 +40,14 @@ export function GenericNavHeader({ left: Left, right: Right }) {
                     display: [null, 'block', 'none'],
                     backgroundColor: 'white',
                     color: 'gray.500',
+                    _active: {
+                        color: 'primary.500',
+                        background: 'white',
+                    },
+                    _focus: {
+                        color: 'primary.500',
+                        background: 'white',
+                    },
                 }}
             />
             <Box
@@ -50,6 +58,7 @@ export function GenericNavHeader({ left: Left, right: Right }) {
                     flexDirection: ['column', 'column', 'row'],
                     justifyContent: ['flex-start', 'flex-start', 'flex-end'],
                     width: ['full', 'full', 'auto'],
+                    marginTop: [15, 0, 0],
                 }}>
                 <Right />
             </Box>

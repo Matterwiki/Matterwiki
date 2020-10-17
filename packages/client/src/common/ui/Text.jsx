@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex, Text as ChakraText, Box } from '@chakra-ui/core'
+import { Text as ChakraText, Box, Stack } from '@chakra-ui/core'
 
 /**
  * Simple description wrapper
@@ -30,12 +30,14 @@ Description.propTypes = {
  */
 export function TextWithIcon({ icon: Icon, text, ...props }) {
     return (
-        <Flex
-            sx={{ justifyContent: 'flex-start', alignItems: 'center' }}
+        <Stack
+            direction="horizontal"
+            spacing={2}
+            sx={{ alignItems: 'center' }}
             {...props}>
             <Box as={Icon} sx={{ marginRight: 2 }} />
             <ChakraText>{text}</ChakraText>
-        </Flex>
+        </Stack>
     )
 }
 

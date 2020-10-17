@@ -20,7 +20,7 @@ export default function Layout({ children }) {
 
     return (
         <Stack spacing={5}>
-            <Center sx={{ height: '10vh' }}>
+            <Center sx={{ minHeight: '8vh' }}>
                 {showNavHeader ? <NavHeader /> : <SimpleHeader />}
             </Center>
             <Center sx={{ padding: 5 }}>{children}</Center>

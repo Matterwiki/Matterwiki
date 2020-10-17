@@ -18,18 +18,10 @@ export const theme = {
         defaultProps,
     },
     IconButton: {
-        baseStyle: { _focus: { boxShadow: 'none' } },
         defaultProps,
     },
 }
 
 export const Button = ChakraButton
-
-/**
- * Simple icon button component with some app specific theming and minor adjustments
- * TODO: Verify if we can simplify this
- * @param {*} props
- */
 export const IconButton = ChakraIconButton
-
 export const ButtonGroup = ChakraButtonGroup
