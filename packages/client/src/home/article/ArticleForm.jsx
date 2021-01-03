@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import _merge from 'lodash/merge'
 import { useAsyncCallback } from 'react-async-hook'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 
 import { Editor } from '@/common/components'
 import {

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import isUrl from 'is-url'
 
-import { Stack, Box } from '@chakra-ui/core'
+import { Stack, Box } from '@chakra-ui/react'
 
 import { Form, FormInput, IconButton, Icons, Link } from '@/common/ui'
 import { useForm } from '@/common/hooks'

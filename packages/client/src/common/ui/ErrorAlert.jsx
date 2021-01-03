@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _get from 'lodash/get'
-import { Alert, AlertIcon } from '@chakra-ui/core'
+import { Alert, AlertIcon } from '@chakra-ui/react'
 
 /**
  * Simple error alert, for forms

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, AspectRatioBox, Image } from '@chakra-ui/core'
+import { Box, AspectRatioBox, Image } from '@chakra-ui/react'
 import { useSelected, useFocused } from 'slate-react'
 
 import { Heading, List, ListItem, Link } from '../../ui'

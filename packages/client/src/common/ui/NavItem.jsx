@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useRouteMatch } from 'react-router-dom'
-import { Box, Stack } from '@chakra-ui/core'
+import { Box, Stack } from '@chakra-ui/react'
 
 import { Description, TextWithIcon } from './Text'
 import { RouterLink } from './Link'

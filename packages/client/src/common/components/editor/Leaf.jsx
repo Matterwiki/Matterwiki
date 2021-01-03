@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 
 import { Text } from '../../ui/Text'
 import { NODE_TYPES } from './constants'

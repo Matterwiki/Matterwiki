@@ -2,7 +2,7 @@ import {
     Button as ChakraButton,
     IconButton as ChakraIconButton,
     ButtonGroup as ChakraButtonGroup,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 const defaultProps = {
     colorScheme: 'primary',

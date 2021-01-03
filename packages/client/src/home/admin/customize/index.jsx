@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack } from '@chakra-ui/core'
+import { Stack } from '@chakra-ui/react'
 
 import ChangeLogo from './ChangeLogo'
 

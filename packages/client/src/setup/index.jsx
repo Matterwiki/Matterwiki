@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Box, SimpleGrid, useToast } from '@chakra-ui/core'
+import { Box, SimpleGrid, useToast } from '@chakra-ui/react'
 
 import { UserForm } from '@/common/components'
 import { userApi } from '@/common/utils/'

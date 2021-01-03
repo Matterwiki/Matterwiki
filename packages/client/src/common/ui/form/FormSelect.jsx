@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ElementPropTypes from 'react-element-proptypes'
-import { Select } from '@chakra-ui/core'
+import { Select } from '@chakra-ui/react'
 
 import FormItemContainer from './FormItemContainer'
 import { useFormContext, getHelperTextId } from './utils'

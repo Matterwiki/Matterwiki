@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { TabList as ChakraTabList, Tab as ChakraTab } from '@chakra-ui/core'
+import { TabList as ChakraTabList, Tab as ChakraTab } from '@chakra-ui/react'
 
 export function Tab({ children, highlight }) {
     return (

@@ -1,4 +1,4 @@
-import { extendTheme, theme } from '@chakra-ui/core'
+import { extendTheme, theme } from '@chakra-ui/react'
 
 import { theme as headingTheme } from './Heading'
 import { theme as buttonsTheme } from './Buttons'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import { Tabs, TabPanels, TabPanel } from '@chakra-ui/core'
+import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
 
 import { ProtectedRoute } from '@/common/components'
 import AdminTabs from './AdminTabs'

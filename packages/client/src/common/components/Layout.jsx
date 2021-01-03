@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
-import { Center, Image, Link, Stack } from '@chakra-ui/core'
+import { Center, Image, Link, Stack } from '@chakra-ui/react'
 
 import LogoWithName from '@/assets/logo-with-name.png'
 

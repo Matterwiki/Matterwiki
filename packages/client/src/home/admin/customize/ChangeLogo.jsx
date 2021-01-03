@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAsyncCallback } from 'react-async-hook'
-import { Stack, Box } from '@chakra-ui/core'
+import { Stack, Box } from '@chakra-ui/react'
 
 import {
     Heading,

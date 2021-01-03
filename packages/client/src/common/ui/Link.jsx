@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link as ReactRouterLink } from 'react-router-dom'
-import { Link as ChakraLink } from '@chakra-ui/core'
+import { Link as ChakraLink } from '@chakra-ui/react'
 
 export const theme = {
     Link: {

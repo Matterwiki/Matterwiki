@@ -4,7 +4,7 @@ import {
     Input as ChakraInput,
     InputGroup,
     InputRightElement,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import Icons from '../Icons'
 import { IconButton } from '../Buttons'

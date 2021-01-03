@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useSlate } from 'slate-react'
 import { useAsyncCallback } from 'react-async-hook'
-import { useToast } from '@chakra-ui/core'
+import { useToast } from '@chakra-ui/react'
 
 import { FileUploadWrapper, Icons } from '@/common/ui'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAsync } from 'react-async-hook'
-import { Box, Stack } from '@chakra-ui/core'
+import { Box, Stack } from '@chakra-ui/react'
 
 import { Spinner, Heading } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'

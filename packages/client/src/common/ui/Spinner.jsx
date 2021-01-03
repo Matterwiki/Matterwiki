@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner as ChakraSpinner, Flex } from '@chakra-ui/core'
+import { Spinner as ChakraSpinner, Flex } from '@chakra-ui/react'
 
 /**
  * Centered spinner.

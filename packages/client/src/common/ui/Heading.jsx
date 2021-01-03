@@ -1,4 +1,4 @@
-import { Heading as ChakraHeading } from '@chakra-ui/core'
+import { Heading as ChakraHeading } from '@chakra-ui/react'
 
 export const theme = {
     Heading: {

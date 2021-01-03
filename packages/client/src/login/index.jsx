@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 
 import LoginForm from './LoginForm'
 

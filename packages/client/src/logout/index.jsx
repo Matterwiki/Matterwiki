@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Stack } from '@chakra-ui/core'
+import { Stack } from '@chakra-ui/react'
 
 import { Heading, RouterLink } from '@/common/ui'
 import { useAuthStore } from '@/common/store/'

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { useAsync } from 'react-async-hook'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 
 import { topicApi } from '@/common/utils/'
 import { useTopicStore } from '@/common/store/'

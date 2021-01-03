@@ -9,7 +9,7 @@ import {
     PopoverTrigger,
     PopoverArrow,
     PopoverCloseButton,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import { Icons } from '@/common/ui'
 

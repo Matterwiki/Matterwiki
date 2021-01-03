@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Flex } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/react'
 
 import { Icons, ButtonGroup } from '@/common/ui'
 

@@ -1,6 +1,6 @@
 const sanitizeHtml = require('sanitize-html')
 const natural = require('natural')
-const htmlToText = require('html-to-text')
+const { htmlToText } = require('html-to-text')
 const { pick, merge } = require('lodash')
 
 const { DEFAULT_CHANGELOG_MESSAGE } = require('./article-constants')
@@ -68,7 +68,7 @@ exports.tokenizeArticleFields = function tokenizeArticleFields(
     title = title || ''
     htmlContent = htmlContent || ''
 
-    const plainTextContent = htmlToText.fromString(htmlContent)
+    const plainTextContent = htmlToText(htmlContent)
 
     return `${title} ${plainTextContent}`.tokenizeAndStem().join(' ')
 }

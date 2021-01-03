@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Text as ChakraText, Box, Stack } from '@chakra-ui/core'
+import { Text as ChakraText, Box, Stack } from '@chakra-ui/react'
 
 /**
  * Simple description wrapper

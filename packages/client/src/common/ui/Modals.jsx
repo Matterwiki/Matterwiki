@@ -13,7 +13,7 @@ import {
     ModalContent,
     ModalHeader,
     ModalCloseButton,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import { Button } from './Buttons'
 import ErrorAlert from './ErrorAlert'

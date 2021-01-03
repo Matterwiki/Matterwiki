@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Stack, Box } from '@chakra-ui/core'
+import { Stack, Box } from '@chakra-ui/react'
 
 import ErrorAlert from '../ErrorAlert'
 import { FormContext } from './utils'

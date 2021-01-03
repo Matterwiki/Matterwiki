@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Input, PseudoBox } from '@chakra-ui/core'
+import { Input, PseudoBox } from '@chakra-ui/react'
 
 function FileInputWrapper(props) {
     return (

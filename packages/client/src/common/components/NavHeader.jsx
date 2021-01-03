@@ -1,6 +1,6 @@
 import React from 'react'
 import _get from 'lodash/get'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import { useRouteMatch } from 'react-router-dom'
 
 import { Icons, RouterLink, NavItem, GenericNavHeader } from '../ui/'

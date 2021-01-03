@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Box, Flex } from '@chakra-ui/core'
+import { Box, Flex } from '@chakra-ui/react'
 
 import Icons from './Icons'
 import { IconButton } from './Buttons'

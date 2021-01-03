@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Box } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/react'
 import isHotkey from 'is-hotkey'
 import { Editable, withReact, Slate } from 'slate-react'
 import { createEditor } from 'slate'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import { Flex } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/react'
 
 import { Button, Icons } from '@/common/ui'
 

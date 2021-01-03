@@ -7,7 +7,7 @@ import {
     ListItem as ChakraListItem,
     Stack,
     Badge,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import { Description, Text } from './Text'
 import { Button } from './Buttons'

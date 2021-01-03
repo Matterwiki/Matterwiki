@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider } from '@chakra-ui/core'
+import { Divider } from '@chakra-ui/react'
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom'
 
 import { ProtectedRoute } from '@/common/components'

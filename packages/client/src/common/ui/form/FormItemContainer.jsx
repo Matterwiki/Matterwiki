@@ -5,7 +5,7 @@ import {
     FormLabel,
     FormErrorMessage,
     FormHelperText,
-} from '@chakra-ui/core'
+} from '@chakra-ui/react'
 
 import { getHelperTextId } from './utils'
 
