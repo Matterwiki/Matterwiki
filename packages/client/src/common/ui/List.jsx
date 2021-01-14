@@ -13,6 +13,11 @@ import { Description, Text } from './Text'
 import { Button } from './Buttons'
 import Icons from './Icons'
 
+/**
+ * Card with some management actions, to be used as a list item.
+ *
+ * TODO: This should probably not be here. It's too specific!
+ */
 export function CardListItem({
     name,
     about,
@@ -23,28 +28,28 @@ export function CardListItem({
     return (
         <Flex
             as={ChakraListItem}
-            width="full"
-            borderBottom="1px"
-            borderColor="border"
-            alignItems="center">
-            <Box flexGrow={1}>
+            sx={{
+                width: 'full',
+                borderBottom: '1px',
+                borderColor: 'border',
+                alignItems: 'center',
+            }}>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                }}>
                 <Text as="div">
                     {name}
                     {badgeText ? (
-                        <Badge
-                            variant="subtle"
-                            variantColor="gray"
-                            marginLeft={2}>
-                            {badgeText}
-                        </Badge>
+                        <Badge sx={{ marginLeft: 2 }}>{badgeText}</Badge>
                     ) : null}
                 </Text>
 
                 <Description>{about}</Description>
             </Box>
-            <Stack marginY={4}>
+            <Stack sx={{ marginY: 4 }}>
                 <Button
-                    leftIcon={Icons.FaEdit}
+                    leftIcon={<Icons.FaEdit />}
                     size="xs"
                     aria-label={`Edit ${name} information`}
                     onClick={handleEditClick}
@@ -52,12 +57,11 @@ export function CardListItem({
                     Edit
                 </Button>
                 <Button
-                    leftIcon={Icons.FaTrashAlt}
+                    leftIcon={<Icons.FaTrashAlt />}
                     size="xs"
                     aria-label={`Delete ${name}`}
                     onClick={handleDeleteClick}
-                    variantColor="red"
-                    variant="outline">
+                    colorScheme="red">
                     Delete
                 </Button>
             </Stack>

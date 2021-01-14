@@ -16,9 +16,9 @@ export default function Home() {
                 path={`${path}/admin`}
                 component={Admin}
             />
-            {/* <ProtectedRoute path={`${path}/articles`} component={Article} /> */}
+            <ProtectedRoute path={`${path}/articles`} component={Article} />
             {/* 👋 Default child route */}
-            {/* <Redirect from={`${path}`} to={`${url}/articles`} /> */}
+            <Redirect from={`${path}`} to={`${url}/articles`} />
         </Switch>
     )
 }

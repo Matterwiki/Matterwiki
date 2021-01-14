@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _get from 'lodash/get'
-import { Alert, AlertIcon } from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle } from '@chakra-ui/react'
 
 /**
  * Simple error alert, for forms
@@ -19,7 +19,7 @@ export default function ErrorAlert({
     return (
         <Alert status="error" variant="left-accent" {...alertProps}>
             <AlertIcon />
-            {errorMessage}
+            <AlertTitle>{errorMessage}</AlertTitle>
         </Alert>
     )
 }

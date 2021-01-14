@@ -16,26 +16,27 @@ import TopicForm from './TopicForm'
  * TODO: If the behaviour for add and edit change too much, it may be time to split this component up!
  * @param {*} props
  */
-export default function ManageTopicModal({ createMode, onClose: handleClose }) {
+export default function ManageTopicModal({ onClose: handleClose }) {
     const { id } = useParams()
     const [saveTopic, createTopic] = useTopicStore('save', 'create')
     const { loading, error, result } = useAsync(async () => {
-        if (createMode) return
+        if (!id) return
         return topicApi.getOne(id)
     }, [])
 
     const handleSubmit = async topic => {
-        if (createMode) await createTopic(topic)
+        if (!id) await createTopic(topic)
         else await saveTopic(id, topic)
 
         handleClose()
     }
 
-    const title = createMode ? 'Add Topic' : 'Edit Topic'
-
     return (
-        <SimpleModal showModal={true} onClose={handleClose} title={title}>
-            <Box padding={5}>
+        <SimpleModal
+            showModal={true}
+            onClose={handleClose}
+            title={id ? 'Edit Topic' : 'Add Topic'}>
+            <Box sx={{ padding: 5 }}>
                 {loading ? (
                     <Spinner />
                 ) : error ? (
@@ -49,6 +50,5 @@ export default function ManageTopicModal({ createMode, onClose: handleClose }) {
 }
 
 ManageTopicModal.propTypes = {
-    createMode: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
 }

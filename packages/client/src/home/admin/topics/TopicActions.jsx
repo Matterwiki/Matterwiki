@@ -9,12 +9,11 @@ export default function TopicActions() {
     const { url } = useRouteMatch()
 
     return (
-        <Flex justifyContent="flex-end">
+        <Flex sx={{ justifyContent: 'flex-end' }}>
             <Button
-                leftIcon={Icons.FaPlus}
+                leftIcon={<Icons.FaPlus />}
                 aria-label={`Add new topic`}
-                onClick={() => history.push(`${url}/new`)}
-                float="right">
+                onClick={() => history.push(`${url}/new`)}>
                 Add new topic
             </Button>
         </Flex>

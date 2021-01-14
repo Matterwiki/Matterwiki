@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom'
 
 import { ProtectedRoute } from '@/common/components'
@@ -16,7 +16,7 @@ export default function Users() {
     const handleModalClose = () => history.push(url)
 
     return (
-        <>
+        <Stack>
             <UserActions />
             <Divider />
             <UsersList />
@@ -49,6 +49,6 @@ export default function Users() {
                     )}
                 />
             </Switch>
-        </>
+        </Stack>
     )
 }

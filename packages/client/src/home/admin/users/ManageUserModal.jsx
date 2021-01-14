@@ -36,7 +36,7 @@ export default function ManageUserModal({ createMode, onClose: handleClose }) {
 
     return (
         <SimpleModal showModal={true} onClose={handleClose} title={title}>
-            <Box padding={5}>
+            <Box sx={{ padding: 5 }}>
                 {loading ? (
                     <Spinner />
                 ) : error ? (

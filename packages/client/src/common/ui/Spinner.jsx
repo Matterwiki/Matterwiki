@@ -13,7 +13,9 @@ export function Spinner(props) {
                 alignItems: 'center',
             }}>
             <ChakraSpinner
-                color="primary.500"
+                sx={{
+                    color: 'primary.500',
+                }}
                 size="xl"
                 label="Loading..."
                 {...props}

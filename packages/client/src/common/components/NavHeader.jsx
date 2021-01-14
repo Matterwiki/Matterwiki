@@ -26,7 +26,7 @@ function RightPartNav() {
         <>
             {_get(currentUser, 'isAdmin') ? (
                 <NavItem
-                    to={`${url}/admin`}
+                    to={`${url}/admin/users`}
                     icon={Icons.FaTerminal}
                     name="Admin"
                 />

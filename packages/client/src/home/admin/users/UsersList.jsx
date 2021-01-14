@@ -1,15 +1,9 @@
 import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
+import { Center } from '@chakra-ui/react'
 
-import {
-    Spinner,
-    List,
-    CardListItem,
-    ErrorAlert,
-    Heading,
-    CenteredBox,
-} from '@/common/ui'
+import { Spinner, List, CardListItem, ErrorAlert, Heading } from '@/common/ui'
 import useUserStore from './user-store'
 
 export default function UsersList() {
@@ -29,9 +23,9 @@ export default function UsersList() {
     }
     if (userList.length === 0) {
         return (
-            <CenteredBox>
+            <Center>
                 <Heading size="lg">😵 No users found</Heading>
-            </CenteredBox>
+            </Center>
         )
     }
 

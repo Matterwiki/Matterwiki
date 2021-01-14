@@ -41,12 +41,7 @@ export default function TopicForm({ initialValue, onSubmit }) {
                 placeholder="Party Planning Committee's meeting notes"
                 type="description"
             />
-            <Button
-                isLoading={loading}
-                loadingText="Submitting"
-                marginY={4}
-                width="full"
-                type="submit">
+            <Button isLoading={loading} loadingText="Submitting" type="submit">
                 Save
             </Button>
         </Form>

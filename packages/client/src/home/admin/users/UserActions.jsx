@@ -9,12 +9,11 @@ export default function UserActions() {
     const { url } = useRouteMatch()
 
     return (
-        <Flex justifyContent="flex-end">
+        <Flex sx={{ justifyContent: 'flex-end' }}>
             <Button
-                leftIcon={Icons.FaPlus}
+                leftIcon={<Icons.FaPlus />}
                 aria-label={`Add new user`}
-                onClick={() => history.push(`${url}/new`)}
-                float="right">
+                onClick={() => history.push(`${url}/new`)}>
                 Add new user
             </Button>
         </Flex>

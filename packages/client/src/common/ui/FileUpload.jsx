@@ -1,14 +1,16 @@
 import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { Input, PseudoBox } from '@chakra-ui/react'
+import { Input, Box } from '@chakra-ui/react'
 
 function FileInputWrapper(props) {
     return (
-        <PseudoBox
+        <Box
             role="group"
-            position="relative"
-            overflow="hidden"
-            display="inline-block"
+            sx={{
+                position: 'relative',
+                overflow: 'hidden',
+                display: 'inline-block',
+            }}
             {...props}
         />
     )
@@ -51,8 +53,10 @@ export function FileUploadWrapper({
                 accept={accept}
                 multiple={multiple}
                 type="file"
-                display="none"
-                outline="none"
+                sx={{
+                    display: 'none',
+                    outline: 'none',
+                }}
             />
             {render(triggerChange)}
         </FileInputWrapper>

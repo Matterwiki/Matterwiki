@@ -25,18 +25,22 @@ export default function ChangeLogo() {
     if (loading) return <Spinner />
 
     return (
-        <Stack spacing={5} borderBottom="1px" borderColor="border" padding={4}>
-            <Heading size="lg" fontWeight="bold">
+        <Stack
+            spacing={5}
+            sx={{ borderBottom: '1px', borderColor: 'border', padding: 4 }}>
+            <Heading size="md" sx={{ fontWeight: 'bold' }}>
                 Wiki Logo
             </Heading>
             {error ? <ErrorAlert jsError={error} /> : null}
-            <Stack spacing={3} isInline alignItems="center">
+            <Stack spacing={3} isInline sx={{ alignItems: 'center' }}>
                 <Box
-                    width={32}
-                    border="1px"
-                    borderColor="border"
-                    padding={3}
-                    borderRadius="2px">
+                    sx={{
+                        width: 32,
+                        border: '1px',
+                        borderColor: 'border',
+                        padding: 3,
+                        borderRadius: '2px',
+                    }}>
                     <LogoImage />
                 </Box>
 
@@ -45,7 +49,9 @@ export default function ChangeLogo() {
                     accept=".png"
                     onChange={handleChange}
                     render={handleClick => (
-                        <Button onClick={handleClick} leftIcon={Icons.FaUpload}>
+                        <Button
+                            onClick={handleClick}
+                            leftIcon={<Icons.FaUpload />}>
                             Change logo
                         </Button>
                     )}

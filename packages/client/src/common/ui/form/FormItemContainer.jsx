@@ -24,15 +24,17 @@ export default function FormItemContainer({
             key={fieldName}
             isInvalid={isInvalid}>
             {labelText ? (
-                <FormLabel fontSize="sm" htmlFor={fieldName}>
+                <FormLabel sx={{ fontSize: 'sm' }} htmlFor={fieldName}>
                     {labelText}
                 </FormLabel>
             ) : null}
             {children}
             {helperText ? (
                 <FormHelperText
-                    marginTop={0}
-                    fontSize="xs"
+                    sx={{
+                        marginTop: 0,
+                        fontSize: 'xs',
+                    }}
                     id={getHelperTextId(fieldName)}>
                     {helperText}
                 </FormHelperText>

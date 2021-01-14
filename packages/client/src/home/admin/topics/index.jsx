@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import { Switch, useHistory, useRouteMatch } from 'react-router-dom'
 
 import { ProtectedRoute } from '@/common/components'
@@ -16,7 +16,7 @@ export default function Topics() {
     const handleModalClose = () => history.push(url)
 
     return (
-        <>
+        <Stack>
             <TopicActions />
             <Divider />
             <TopicsList />
@@ -26,10 +26,7 @@ export default function Topics() {
                     exact
                     path={`${path}/new`}
                     component={() => (
-                        <ManageTopicModal
-                            onClose={handleModalClose}
-                            createMode
-                        />
+                        <ManageTopicModal onClose={handleModalClose} />
                     )}
                 />
                 <ProtectedRoute
@@ -49,6 +46,6 @@ export default function Topics() {
                     )}
                 />
             </Switch>
-        </>
+        </Stack>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useRouteMatch, Redirect } from 'react-router-dom'
 import { Tabs, TabPanels, TabPanel } from '@chakra-ui/react'
 
 import { ProtectedRoute } from '@/common/components'
@@ -43,6 +43,8 @@ export default function Admin() {
                         component={Customize}
                     />
                 </TabPanel>
+                {/* 👋 Default child route */}
+                <Redirect from={`${path}`} to={`${path}/users`} />
             </TabPanels>
         </Tabs>
     )

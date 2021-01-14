@@ -28,7 +28,11 @@ Tab.propTypes = {
 export function TabList({ children }) {
     return (
         <ChakraTabList
-            sx={{ maxWidth: ['sm', 'full'], overflow: ['auto', null] }}>
+            sx={{
+                maxWidth: ['sm', 'full'],
+                overflow: ['auto', null],
+                overflowY: 'hidden',
+            }}>
             {children}
         </ChakraTabList>
     )

@@ -84,7 +84,7 @@ export function AlertModal({ showModal, header, text, onCancel, onConfirm }) {
             closeOnOverlayClick={false}>
             <AlertDialogOverlay />
             <AlertDialogContent>
-                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                <AlertDialogHeader sx={{ fontSize: 'lg', fontWeight: 'bold' }}>
                     {header}
                 </AlertDialogHeader>
 
@@ -102,10 +102,13 @@ export function AlertModal({ showModal, header, text, onCancel, onConfirm }) {
                     <Button
                         ref={cancelRef}
                         onClick={handleCancel}
-                        variantColor="gray">
+                        colorScheme="gray">
                         No
                     </Button>
-                    <Button variantColor="red" onClick={execute} ml={3}>
+                    <Button
+                        onClick={execute}
+                        sx={{ marginLeft: 3 }}
+                        colorScheme="red">
                         Yes
                     </Button>
                 </AlertDialogFooter>
