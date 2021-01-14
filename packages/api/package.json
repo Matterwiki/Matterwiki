@@ -33,7 +33,7 @@
     "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
     "helmet": "^4.3.1",
-    "html-to-text": "^5.1.1",
+    "html-to-text": "^6.0.0",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.15",
@@ -42,7 +42,7 @@
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "natural": "^0.6.3",
-    "objection": "^2.2.4",
+    "objection": "^2.2.6",
     "sanitize-html": "^2.3.0",
     "winston": "^3.3.3",
     "yup": "^0.32.8"
