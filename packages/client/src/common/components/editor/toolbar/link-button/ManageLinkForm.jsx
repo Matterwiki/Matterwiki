@@ -72,7 +72,7 @@ export default function ManageLinkForm({
                     <IconButton
                         icon={Icons.FaTrashAlt}
                         onClick={onLinkRemove}
-                        variantColor="gray"
+                        colorScheme="gray"
                     />
                 ) : null}
                 <Stack isInline>
@@ -87,7 +87,7 @@ export default function ManageLinkForm({
                             href={url}
                             target="_blank"
                             icon={Icons.FaExternalLinkAlt}
-                            variantColor="gray"
+                            colorScheme="gray"
                         />
                     ) : null}
                 </Stack>

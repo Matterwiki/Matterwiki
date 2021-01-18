@@ -9,6 +9,7 @@ import {
     PopoverTrigger,
     PopoverArrow,
     PopoverCloseButton,
+    Portal,
 } from '@chakra-ui/react'
 
 import { Icons } from '@/common/ui'
@@ -68,18 +69,20 @@ export default function LinkButton() {
                     icon={Icons.FaLink}
                 />
             </PopoverTrigger>
-            <PopoverContent zIndex={4} padding={5}>
-                <FocusLock returnFocus persistentFocus={false}>
-                    <PopoverArrow background="white" />
-                    <PopoverCloseButton />
-                    <ManageLinkForm
-                        firstFieldRef={firstFieldRef}
-                        url={url}
-                        onLinkRemove={handleLinkRemove}
-                        onLinkAdd={handleLinkAdd}
-                    />
-                </FocusLock>
-            </PopoverContent>
+            <Portal>
+                <PopoverContent zIndex={4} padding={5}>
+                    <FocusLock returnFocus persistentFocus={false}>
+                        <PopoverArrow background="white" />
+                        <PopoverCloseButton />
+                        <ManageLinkForm
+                            firstFieldRef={firstFieldRef}
+                            url={url}
+                            onLinkRemove={handleLinkRemove}
+                            onLinkAdd={handleLinkAdd}
+                        />
+                    </FocusLock>
+                </PopoverContent>
+            </Portal>
         </Popover>
     )
 }

@@ -10,10 +10,12 @@ export default function NotFound() {
 
     return (
         <Stack
-            alignItems="center"
-            justifyContent="center"
-            spacing={4}
-            padding={12}>
+            sx={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 12,
+            }}
+            spacing={4}>
             <Heading size="2xl">🏃‍♂️</Heading>
             <Heading size="lg">You&apos;ve just been logged out.</Heading>
             <Heading size="md">

@@ -27,7 +27,7 @@ function ImageElement({ attributes, children, element }) {
     const selected = useSelected()
     const focused = useFocused()
     return (
-        <Box {...attributes} {...blockStyles}>
+        <Box {...attributes} sx={{ ...blockStyles }}>
             <div contentEditable={false}>
                 <AspectRatioBox maxWidth="full">
                     <Image
@@ -51,12 +51,14 @@ export default function Element(props) {
             return (
                 <Box
                     {...attributes}
-                    {...blockStyles}
-                    borderLeft="2px"
-                    borderColor="gray.100"
-                    padding={3}
-                    color="gray.500"
-                    fontStyle="italic"
+                    sx={{
+                        ...blockStyles,
+                        borderLeft: '2px',
+                        borderColor: 'gray.100',
+                        padding: 3,
+                        color: 'gray.500',
+                        fontStyle: 'italic',
+                    }}
                     as="blockquote">
                     {children}
                 </Box>
@@ -65,8 +67,10 @@ export default function Element(props) {
             return (
                 <Heading
                     {...attributes}
-                    {...blockStyles}
-                    fontWeight="600"
+                    sx={{
+                        ...blockStyles,
+                        fontWeight: '600',
+                    }}
                     size="lg">
                     {children}
                 </Heading>
@@ -75,8 +79,10 @@ export default function Element(props) {
             return (
                 <Heading
                     {...attributes}
-                    {...blockStyles}
-                    fontWeight="700"
+                    sx={{
+                        ...blockStyles,
+                        fontWeight: '700',
+                    }}
                     size="md">
                     {children}
                 </Heading>
@@ -85,8 +91,10 @@ export default function Element(props) {
             return (
                 <Heading
                     {...attributes}
-                    {...blockStyles}
-                    fontWeight="600"
+                    sx={{
+                        ...blockStyles,
+                        fontWeight: '600',
+                    }}
                     size="sm"
                     textTransform="uppercase">
                     {children}
@@ -96,19 +104,21 @@ export default function Element(props) {
             return (
                 <Box
                     {...attributes}
-                    {...blockStyles}
                     as="pre"
-                    fontSize="xs"
-                    padding={3}
-                    borderRadius="4px"
-                    backgroundColor="gray.100"
-                    whiteSpace="pre-wrap">
+                    sx={{
+                        ...blockStyles,
+                        fontSize: 'xs',
+                        padding: 3,
+                        borderRadius: '4px',
+                        backgroundColor: 'gray.100',
+                        whiteSpace: 'pre-wrap',
+                    }}>
                     {children}
                 </Box>
             )
         case NODE_TYPES.BULLETED_LIST:
             return (
-                <List {...attributes} {...blockStyles} styleType="disc">
+                <List {...attributes} sx={{ ...blockStyles }} styleType="disc">
                     {children}
                 </List>
             )
@@ -116,8 +126,8 @@ export default function Element(props) {
             return (
                 <List
                     {...attributes}
-                    {...blockStyles}
                     as="ol"
+                    sx={{ ...blockStyles }}
                     styleType="decimal">
                     {children}
                 </List>
@@ -128,7 +138,10 @@ export default function Element(props) {
 
         case NODE_TYPES.LINK:
             return (
-                <Link {...attributes} {...blockStyles} href={element.url}>
+                <Link
+                    {...attributes}
+                    sx={{ ...blockStyles }}
+                    href={element.url}>
                     {children}
                 </Link>
             )
@@ -138,7 +151,7 @@ export default function Element(props) {
 
         default:
             return (
-                <Box as="p" {...attributes} {...blockStyles}>
+                <Box as="p" {...attributes} sx={{ ...blockStyles }}>
                     {children}
                 </Box>
             )

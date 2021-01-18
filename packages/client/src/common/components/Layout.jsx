@@ -23,7 +23,14 @@ export default function Layout({ children }) {
             <Center sx={{ minHeight: '8vh' }}>
                 {showNavHeader ? <NavHeader /> : <SimpleHeader />}
             </Center>
-            <Center sx={{ padding: 5 }}>{children}</Center>
+            <Center
+                sx={{
+                    padding: 5,
+                    height: [null, '80vh'],
+                    alignItems: 'start',
+                }}>
+                {children}
+            </Center>
             <Center
                 as="footer"
                 sx={{

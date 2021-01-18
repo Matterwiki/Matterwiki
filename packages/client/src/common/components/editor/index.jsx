@@ -39,14 +39,22 @@ export default function Editor({
     )
 
     return (
-        <Box border="1px" borderColor="border" borderRadius="2px" height="full">
+        <Box
+            sx={{
+                border: '1px',
+                borderColor: 'border',
+                borderRadius: '2px',
+                height: 'full',
+            }}>
             <Slate editor={editor} value={value} onChange={handleChange}>
                 <EditorToolbar imageUploadHandler={imageUploadHandler} />
                 <Box
-                    padding={3}
-                    maxHeight="62vh"
-                    overflowY="auto"
-                    overflowX="hidden">
+                    sx={{
+                        padding: 3,
+                        maxHeight: '60vh',
+                        overflowY: 'auto',
+                        overflowX: 'hidden',
+                    }}>
                     <Editable
                         renderElement={Element}
                         renderLeaf={Leaf}

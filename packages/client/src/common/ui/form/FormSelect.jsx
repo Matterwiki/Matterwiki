@@ -42,7 +42,6 @@ export function FormSelect({
 }
 FormSelect.defaultProps = {
     isRequired: false,
-    helperText: '',
     labelText: '',
 }
 
@@ -51,7 +50,6 @@ FormSelect.propTypes = {
         ElementPropTypes.elementOfType(FormSelectOption),
     ),
     fieldName: PropTypes.string.isRequired,
-    helperText: PropTypes.string,
     labelText: PropTypes.string,
     isRequired: PropTypes.bool,
     placeholder: PropTypes.string.isRequired,

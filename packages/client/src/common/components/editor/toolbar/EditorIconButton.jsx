@@ -5,7 +5,7 @@ import { IconButton, Button } from '@/common/ui'
 
 const getToolbarBtnStyles = isActive => ({
     variant: 'ghost',
-    variantColor: 'gray',
+    colorScheme: 'gray',
     color: isActive ? 'primary.500' : 'text',
 })
 
@@ -14,7 +14,7 @@ const getToolbarBtnStyles = isActive => ({
  * @param {*} props
  */
 const EditorIconButton = React.forwardRef(function EditorIconButton(
-    { icon, text, onMouseDown, isActive, ...rest },
+    { icon: Icon, text, onMouseDown, isActive, ...rest },
     ref,
 ) {
     const props = { ...getToolbarBtnStyles(isActive), ...rest }
@@ -22,11 +22,11 @@ const EditorIconButton = React.forwardRef(function EditorIconButton(
 
     if (text)
         return (
-            <Button {...props} fontSize="1rem" ref={ref}>
+            <Button {...props} sx={{ fontSize: '1rem' }} ref={ref}>
                 {text}
             </Button>
         )
-    return <IconButton icon={icon} {...props} ref={ref} />
+    return <IconButton icon={<Icon />} {...props} ref={ref} />
 })
 
 EditorIconButton.propTypes = {

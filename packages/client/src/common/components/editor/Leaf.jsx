@@ -8,7 +8,7 @@ import { NODE_TYPES } from './constants'
 function renderLeafNode(leaf, children) {
     if (leaf[NODE_TYPES.BOLD])
         children = (
-            <Text as="strong" fontSize="95%">
+            <Text as="strong" sx={{ fontSize: '95%' }}>
                 {children}
             </Text>
         )
@@ -20,11 +20,13 @@ function renderLeafNode(leaf, children) {
         children = (
             <Box
                 as="code"
-                fontSize="80%"
-                paddingY="2px"
-                paddingX="4px"
-                borderRadius="4px"
-                backgroundColor="gray.100">
+                sx={{
+                    fontSize: '80%',
+                    paddingY: '2px',
+                    paddingX: '4px',
+                    borderRadius: '4px',
+                    backgroundColor: 'gray.100',
+                }}>
                 {children}
             </Box>
         )

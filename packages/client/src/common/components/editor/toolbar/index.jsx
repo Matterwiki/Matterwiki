@@ -13,10 +13,12 @@ import { NODE_TYPES } from '../constants'
 function ButtonContainer(props) {
     return (
         <ButtonGroup
-            display="flex"
-            borderRight="1px"
-            borderColor="border"
-            padding={2}
+            sx={{
+                display: 'flex',
+                borderRight: '1px',
+                borderColor: 'border',
+                padding: 2,
+            }}
             {...props}
         />
     )
@@ -25,10 +27,12 @@ function ButtonContainer(props) {
 export default function EditorToolbar({ imageUploadHandler }) {
     return (
         <Flex
-            overflow="auto"
-            borderBottom="1px"
-            borderColor="border"
-            backgroundColor="gray.50">
+            sx={{
+                overflow: 'auto',
+                borderBottom: '1px',
+                borderColor: 'border',
+                backgroundColor: 'gray.50',
+            }}>
             <ButtonContainer>
                 <MarkButton format={NODE_TYPES.BOLD} icon={Icons.FaBold} />
                 <MarkButton format={NODE_TYPES.ITALIC} icon={Icons.FaItalic} />
