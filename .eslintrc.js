@@ -1,18 +1,14 @@
 module.exports = {
     root: true,
-    extends: [
-      'standard',
-      'plugin:prettier/recommended'
-    ],
+    extends: ['standard', 'plugin:prettier/recommended'],
     globals: {
-      Atomics: 'readonly',
-      SharedArrayBuffer: 'readonly'
+        Atomics: 'readonly',
+        SharedArrayBuffer: 'readonly',
     },
     parserOptions: {
-      ecmaVersion: 2018
+        ecmaVersion: 2018,
     },
     rules: {
-      "prettier/prettier": ["warn"]
-    }
-  }
-  
+        'prettier/prettier': ['warn'],
+    },
+}

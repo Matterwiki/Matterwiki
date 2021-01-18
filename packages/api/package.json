@@ -32,17 +32,17 @@
     "dotenv": "^8.2.0",
     "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
-    "helmet": "^4.3.1",
+    "helmet": "^4.4.1",
     "html-to-text": "^6.0.0",
     "http-status-codes": "^2.1.4",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.21.15",
+    "knex": "^0.21.16",
     "lodash": "^4.17.20",
     "mime-types": "^2.1.28",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
-    "natural": "^0.6.3",
-    "objection": "^2.2.6",
+    "natural": "^2.4.5",
+    "objection": "^2.2.7",
     "sanitize-html": "^2.3.0",
     "winston": "^3.3.3",
     "yup": "^0.32.8"
@@ -54,8 +54,8 @@
     "dreamjs": "^0.2.0",
     "knex-db-manager": "^0.7.0",
     "lorem-ipsum": "^2.0.3",
-    "nodemon": "^2.0.6",
-    "sinon": "^9.2.2",
-    "supertest": "^6.0.1"
+    "nodemon": "^2.0.7",
+    "sinon": "^9.2.3",
+    "supertest": "^6.1.1"
   }
 }
