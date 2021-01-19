@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {
     Box,
     Flex,
-    List as ChakraList,
     ListItem as ChakraListItem,
     Stack,
     Badge,
@@ -81,5 +80,4 @@ CardListItem.propTypes = {
     onDeleteClick: PropTypes.func.isRequired,
 }
 
-export const List = ChakraList
 export const ListItem = ChakraListItem

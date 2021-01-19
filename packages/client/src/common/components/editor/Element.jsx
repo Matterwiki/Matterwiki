@@ -1,9 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Box, AspectRatioBox, Image } from '@chakra-ui/react'
+import {
+    Box,
+    AspectRatioBox,
+    Image,
+    UnorderedList,
+    OrderedList,
+} from '@chakra-ui/react'
 import { useSelected, useFocused } from 'slate-react'
 
-import { Heading, List, ListItem, Link } from '../../ui'
+import { Heading, ListItem, Link } from '../../ui'
 import { NODE_TYPES } from './constants'
 
 const slateElementProps = {
@@ -18,11 +24,6 @@ const blockStyles = {
     marginBottom: 3,
 }
 
-const getImageStyles = (selected, focused) => ({
-    objectFit: 'cover',
-    boxShadow: selected && focused ? '0 0 0 3px #B4D5FF' : 'none',
-})
-
 function ImageElement({ attributes, children, element }) {
     const selected = useSelected()
     const focused = useFocused()
@@ -33,7 +34,13 @@ function ImageElement({ attributes, children, element }) {
                     <Image
                         src={element.url}
                         objectFit="cover"
-                        {...getImageStyles(selected, focused)}
+                        sx={{
+                            objectFit: 'cover',
+                            boxShadow:
+                                selected && focused
+                                    ? '0 0 0 3px #B4D5FF'
+                                    : 'none',
+                        }}
                     />
                 </AspectRatioBox>
             </div>
@@ -118,19 +125,15 @@ export default function Element(props) {
             )
         case NODE_TYPES.BULLETED_LIST:
             return (
-                <List {...attributes} sx={{ ...blockStyles }} styleType="disc">
+                <UnorderedList {...attributes} sx={{ ...blockStyles }}>
                     {children}
-                </List>
+                </UnorderedList>
             )
         case NODE_TYPES.NUMBERED_LIST:
             return (
-                <List
-                    {...attributes}
-                    as="ol"
-                    sx={{ ...blockStyles }}
-                    styleType="decimal">
+                <OrderedList {...attributes} sx={{ ...blockStyles }}>
                     {children}
-                </List>
+                </OrderedList>
             )
         case NODE_TYPES.LIST_ITEM:
             // 📝 Intentionally not mixing `blockStyles` in here, because it does not need it!
