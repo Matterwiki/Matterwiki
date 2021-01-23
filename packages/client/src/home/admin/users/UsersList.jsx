@@ -1,9 +1,9 @@
 import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
-import { Center } from '@chakra-ui/react'
+import { Center, List } from '@chakra-ui/react'
 
-import { Spinner, List, CardListItem, ErrorAlert, Heading } from '@/common/ui'
+import { Spinner, CardListItem, ErrorAlert, Heading } from '@/common/ui'
 import useUserStore from './user-store'
 
 export default function UsersList() {

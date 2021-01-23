@@ -1,10 +1,10 @@
 import React from 'react'
 import { useAsync } from 'react-async-hook'
 import { useHistory, useRouteMatch } from 'react-router-dom'
+import { List, Center } from '@chakra-ui/react'
 
-import { Spinner, List, CardListItem, ErrorAlert, Heading } from '@/common/ui'
+import { Spinner, CardListItem, ErrorAlert, Heading } from '@/common/ui'
 import { useTopicStore } from '@/common/store/'
-import { Center } from '@chakra-ui/react'
 
 export default function TopicsList() {
     const [topicList, getTopicList] = useTopicStore('topicList', 'getList')
