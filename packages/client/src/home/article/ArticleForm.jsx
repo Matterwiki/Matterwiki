@@ -90,7 +90,13 @@ export default function ArticleForm({ initialValue, topics, onSubmit }) {
                 variant="flushed"
             />
 
-            <Box flexGrow={1}>
+            <Box
+                sx={{
+                    border: '1px',
+                    borderColor: 'border',
+                    borderRadius: '2px',
+                    height: 'full',
+                }}>
                 <Editor
                     initialValue={values.content}
                     onChange={setValueFor.bind('content')}

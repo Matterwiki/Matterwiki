@@ -25,7 +25,7 @@ export default function NewArticle() {
 
     return (
         <Stack alignItems="center" height="full">
-            <Box width={{ base: 'full', lg: '45rem' }} flexGrow={1}>
+            <Box width={['full', '45rem']}>
                 <ArticleForm topics={topicList} onSubmit={handleArticleSave} />
             </Box>
         </Stack>
