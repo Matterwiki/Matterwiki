@@ -26,7 +26,6 @@ export default function Layout({ children }) {
             <Center
                 sx={{
                     padding: 5,
-                    height: [null, '80vh'],
                     alignItems: 'start',
                 }}>
                 {children}

@@ -15,15 +15,8 @@ import {
     FaUserFriends,
 
     // Editor Icons
-    FaBold,
-    FaItalic,
-    FaUnderline,
-    FaCode,
-    FaHeading,
-    FaQuoteLeft,
     FaListOl,
     FaListUl,
-    FaStrikethrough,
     FaFileCode,
     FaLink,
     FaCheck,
@@ -31,6 +24,20 @@ import {
     FaImage,
     FaExternalLinkAlt,
 } from 'react-icons/fa'
+
+import {
+    MdLooksOne,
+    MdLooksTwo,
+    MdLooks3,
+    MdFormatBold,
+    MdFormatItalic,
+    MdCode,
+    MdStrikethroughS,
+    MdFormatUnderlined,
+    MdFormatQuote,
+} from 'react-icons/md'
+
+import { BiCodeBlock } from 'react-icons/bi'
 
 /**
  * Icons used in the app.
@@ -52,21 +59,25 @@ const Icons = [
     FaUserFriends,
 
     // Editor Icons
-    FaBold,
-    FaItalic,
-    FaUnderline,
-    FaCode,
-    FaHeading,
-    FaQuoteLeft,
+
     FaListOl,
     FaListUl,
-    FaStrikethrough,
     FaFileCode,
     FaLink,
     FaCheck,
     FaUnlink,
     FaImage,
     FaExternalLinkAlt,
+    MdLooksOne,
+    MdLooksTwo,
+    MdLooks3,
+    MdFormatBold,
+    MdFormatItalic,
+    MdFormatUnderlined,
+    MdCode,
+    MdStrikethroughS,
+    MdFormatQuote,
+    BiCodeBlock,
 ].reduce((acc, icon) => {
     return { ...acc, [icon.name]: icon }
 }, {})
