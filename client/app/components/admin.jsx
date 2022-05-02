@@ -1,6 +1,6 @@
 import React from 'react';
 import {hashHistory, Link} from 'react-router';
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert-v3';
 import Loader from './loader.jsx';
 import LogoUpload from './logo_upload.jsx';
 

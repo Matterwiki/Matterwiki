@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const TerserPlugin = require("terser-webpack-plugin");
 
 const BUILD_DIR = path.resolve(__dirname, 'client/public');
 const APP_DIR = path.resolve(__dirname, 'client/app');
@@ -19,25 +20,20 @@ module.exports = {
   },
   devtool : 'source-map',
   module : {
-    loaders : [
+    rules : [
       {
         test : /\.jsx?/,
         loader : 'babel-loader',
         include : APP_DIR,
         exclude : /node_modules/ ,
-        query: {
-          presets: ['es2015', 'react']
-        }
       }
     ]
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize : true,
-      compress: {
-          warnings: false
-      }
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })

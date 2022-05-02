@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from './loader.jsx';
 import {hashHistory} from 'react-router';
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert-v3';
 
 class BrowseArchives extends React.Component {
   constructor(props) {

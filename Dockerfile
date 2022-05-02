@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:18
 
 RUN mkdir -p /server
 WORKDIR /server
