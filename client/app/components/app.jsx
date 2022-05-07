@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './login.jsx';
 import SearchForm from './searchform.jsx';
 import {Link, hashHistory} from 'react-router';
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert-v3';
 
 class App extends React.Component {
 

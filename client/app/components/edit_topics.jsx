@@ -1,6 +1,6 @@
 import React from 'react';
 import {hashHistory} from 'react-router';
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert-v3';
 import Loader from './loader.jsx';
 
 class EditTopic extends React.Component {

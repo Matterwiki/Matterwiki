@@ -1,6 +1,6 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
-import Alert from 'react-s-alert';
+import Alert from 'react-s-alert-v3';
 
 class Login extends React.Component {
   constructor(props) {
