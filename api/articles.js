@@ -13,6 +13,7 @@ var Articles = require('../models/article.js');
 var Topics = require('../models/topic.js');
 var Archives = require('../models/archive.js');
 var Users = require('../models/user.js');
+var sanitizeBody = require('../lib/sanitize-body');
 
 var db = require('../db.js'); //this file contains the knex file import. it's equal to knex=require('knex')
 
@@ -28,9 +29,9 @@ module.exports =  function(app){
     */
     Articles.forge().save({
         title: req.body.title,
-        body: req.body.body,
+        body: sanitizeBody(req.body.body),
         topic_id: req.body.topic_id,
-        user_id: req.body.user_id,
+        user_id: req.decoded.id,
         what_changed: "Another drop in the ocean of knowledge"
       }).then( function (article) {
         res.json({
@@ -107,16 +108,17 @@ module.exports =  function(app){
         Articles.forge({id: req.body.id})
           .save({
             title: req.body.title,
-            body: req.body.body,
+            body: sanitizeBody(req.body.body),
             topic_id: req.body.topic_id,
             what_changed: req.body.what_changed,
-            user_id: req.body.user_id
+            // Keep the original author; never trust a client-supplied user_id.
+            user_id: article.attributes.user_id
           })
           .then(function() {
               Archives.forge().save({
                 article_id: req.body.id,
                 title: article.attributes.title,
-                body: article.attributes.body,
+                body: sanitizeBody(article.attributes.body),
                 what_changed: article.attributes.what_changed,
                 user_id: article.attributes.user_id
               })
